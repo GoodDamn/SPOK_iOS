@@ -25,11 +25,16 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     private var h:CGFloat = 1.24;
     private var hCard:CGFloat = 0.0;
     
+    private func showData() {
+        self.manager?.news = self.collections[0].trs;
+        self.colsTable.dataSource = self;
+        self.colsTable.delegate = self;
+        self.colsTable.reloadData();
+    }
+    
     private func downloadCollection(current: Int, refs: [StorageReference]) {
         if current >= refs.count {
-            self.colsTable.dataSource = self;
-            self.colsTable.delegate = self;
-            self.colsTable.reloadData();
+            showData();
             return;
         }
         
@@ -85,9 +90,7 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
                                                     name: fileSCS.title ?? ""));
             }
             
-            self.colsTable.dataSource = self;
-            self.colsTable.delegate = self;
-            self.colsTable.reloadData();
+            showData();
             
             return;
         }
@@ -106,61 +109,6 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
                                    refs: files);
                 
             }
-        
-        /*
-        let ref = Database.database().reference();
-        ref.observeSingleEvent(of: .value, with: {
-            snapshot in
-            print(self.tag, "getting data", ref);
-            let snap = snapshot.childSnapshot(forPath: "ctime");
-            if let t = snap.value as? TimeInterval{
-                let userPathPrem = "Users/"+(UserDefaults().string(forKey: Utils.userRef) ?? "a")+"/p";
-                if let premiumPayload = snapshot.childSnapshot(forPath: userPathPrem).value as? String{
-                    var payload = ([UInt8])(premiumPayload.data(using: .ascii)!);
-                    print(payload[14], payload[13], payload[12]);
-                    let nonce = Array(Utils.nonces[Int(payload[14])]);
-                    var decrypted:String = "";
-                    for i in payload[0...9]{
-                        decrypted.append(nonce[Int(i)]);
-                    }
-                    
-                    if Int(TimeInterval(t/1000)-(TimeInterval(decrypted) ?? 0)) < ((Int(payload[12]) * 32 + Int(payload[13])) * 86400){
-                        self.manager?.isPremiumUser = true;
-                    } else {
-                        if nonce[Int(payload[10])] == "1"{ // isPremium
-                            payload[10] = UInt8(nonce.firstIndex(of: "0")!);
-                            ref.child(userPathPrem).setValue(String(data: Data(payload), encoding: .ascii));
-                            print("sub is expired");
-                        } else {
-                            self.manager?.freeTrialState = UInt8(nonce[Int(payload[11])].description) ?? 2;
-                        }
-                    }
-                }
-            }
-            
-            
-            let topicsSnap = snapshot.childSnapshot(forPath: "Trainings");
-            
-            let newsSt = snapshot.childSnapshot(forPath: "novelties2"+code).value;
-            
-            let news:[UInt16] = Crypt.decryptString(newsSt as? String ?? "");
-            
-            print(self.tag, "NEWS:" ,news,newsSt);
-            
-            self.collections.append(Collection(trs: news, name: Utils.getLocalizedString("news")));
-            
-            self.manager?.news = news;
-            
-            let childrs = snapshot.childSnapshot(forPath: "Collection").children.allObjects as! [DataSnapshot];
-            for snap in childrs{
-                let list = snap.childSnapshot(forPath: "trs"+code).value as? String ?? "";
-                let array = Crypt.decryptString(list);
-                print("HomeView:",list,array,list.count);
-                self.collections.append(Collection(
-                    trs:array,
-                    name: snap.childSnapshot(forPath: "Name"+code).value as? String ?? "Some name"));
-            }
-        });*/
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -19,7 +19,6 @@ class ManagerViewController: UIViewController{
     @IBOutlet weak var pageContainer: UIView!;
     @IBOutlet weak var snackBarRating: UIView!;
     let language = Utils.getLanguageCode();
-    //var inTopicRect:CGRect = CGRect();
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
     var news: [UInt16] = [];
     var history: [UInt16] = []{

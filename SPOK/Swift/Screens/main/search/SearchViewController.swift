@@ -91,25 +91,6 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
                 self.downloadCategory(current: current+1,
                                       categories: categories);
             }
-        /*
-        guard let httpSCS = snapCat.childSnapshot(forPath: "scs"+mLang).value
-                as? String else {
-            return;
-        }
-        
-        Utils.downloadFile(http: httpSCS,
-            background: { data in
-            let fileSCS = Utils.Exten.getSCSFile(data);
-            
-            StorageApp.Category.save(name: name,
-                                     data:data);
-            
-            DispatchQueue.main.async {
-                self.configCategory(current: current, fileSCS: fileSCS);
-                self.downloadCategory(current: current+1,
-                                      category: category);
-            }
-        });*/
     }
     
     
@@ -214,7 +195,7 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         
         self.configCategory(current: 0,
                             fileSCS: FileSCS(title: "",
-                                            topics: [3,4,5,6,10,11],
+                                            topics: [3,47,5,6,10,11],
                                             image: starImage))
         
         if filePaths != nil {
