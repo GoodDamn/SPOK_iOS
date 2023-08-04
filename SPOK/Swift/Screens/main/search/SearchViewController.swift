@@ -39,6 +39,9 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         self.pageController?.setViewControllers([self.categoriesVC.first!], direction: .forward, animated: true, completion: nil);
         UIView.animate(withDuration: 0.4, animations: {
             self.deformView.alpha = 1.0;
+        }, completion: {
+            _ in
+            self.updateScrollPosition(0);
         });
     }
     
@@ -195,7 +198,7 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         
         self.configCategory(current: 0,
                             fileSCS: FileSCS(title: "",
-                                            topics: [3,47,5,6,10,11],
+                                            topics: [3,41,5,6,14,11],
                                             image: starImage))
         
         if filePaths != nil {
@@ -228,13 +231,6 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
                 self.downloadCategory(current: 0,
                                       categories: listResult.items);
             }
-        
-        /*
-        let ref: DatabaseReference = Database.database().reference(withPath: "Categories");
-        ref.observeSingleEvent(of: .value, with: {
-            snapshot in
-            self.downloadCategory(current: 0, category: snapshot.children);
-        });*/
     }
     
     
