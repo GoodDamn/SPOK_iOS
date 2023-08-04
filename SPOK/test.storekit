@@ -1,0 +1,49 @@
+{
+  "identifier" : "1220F6E8",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "E8222F70",
+      "localizations" : [
+
+      ],
+      "name" : "Sub",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "6.99",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "79421061",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Allow access to a locked topics",
+              "displayName" : "1 month subscription",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "spoklab.spok.sub.",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "spoklab.spok.sub",
+          "subscriptionGroupID" : "E8222F70",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

@@ -1,0 +1,165 @@
+
+/* Class = "UITextField"; placeholder = "SSTG27"; ObjectID = "11B-WP-Npo"; */
+"11B-WP-Npo.placeholder" = "SSTG27";
+
+/* Class = "UITextView"; text = "Terms of Use & Privacy Policy"; ObjectID = "1sk-sc-lHq"; */
+"1sk-sc-lHq.text" = "Terms of Use & Privacy Policy";
+
+/* Class = "UILabel"; text = "Unlock\nUnlimited Access"; ObjectID = "4gB-kh-6cZ"; */
+"4gB-kh-6cZ.text" = "Unlock\nUnlimited Access";
+
+/* Class = "UILabel"; text = "Some text"; ObjectID = "5b7-7f-b7m"; */
+"5b7-7f-b7m.text" = "Some text";
+
+/* Class = "UITextView"; text = "Noto Emoji by Google\nApacheLicense Version 2.0\n\n\nCopyright Google Inc. \n\nLicensed under the Apache License, Version 2.0 (the License);\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an AS IS BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License."; ObjectID = "5lv-iz-Oxo"; */
+"5lv-iz-Oxo.text" = "Noto Emoji by Google\nApacheLicense Version 2.0\n\n\nCopyright Google Inc. \n\nLicensed under the Apache License, Version 2.0 (the License);\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an AS IS BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.";
+
+/* Class = "UIButton"; normalTitle = "See all history"; ObjectID = "80Y-iY-Fc3"; */
+"80Y-iY-Fc3.normalTitle" = "See all history";
+
+/* Class = "UILabel"; text = "Thanks for your\nassessment!"; ObjectID = "BsQ-uK-DmE"; */
+"BsQ-uK-DmE.text" = "Thanks for your\nassessment!";
+
+/* Class = "UILabel"; text = "Fresh, new and interesting topics every week"; ObjectID = "DOp-SH-sAw"; */
+"DOp-SH-sAw.text" = "Fresh, new and interesting topics every week";
+
+/* Class = "UILabel"; text = "a self-development app, with a\nunique type of content"; ObjectID = "Dan-X9-XcC"; */
+"Dan-X9-XcC.text" = "a self-development app, with a\nunique type of content";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "F4B-am-WTT"; */
+"F4B-am-WTT.title" = "Settings";
+
+/* Class = "UILabel"; text = "Full access to absolutely all content with no limitations"; ObjectID = "GRw-nB-Pzr"; */
+"GRw-nB-Pzr.text" = "Full access to absolutely all content with no limitations";
+
+/* Class = "UITextView"; text = "Terms of Service & Privacy Policy"; ObjectID = "GY6-j4-VZX"; */
+"GY6-j4-VZX.text" = "Terms of Service & Privacy Policy";
+
+/* Class = "UIButton"; normalTitle = "GO FOR IT!"; ObjectID = "JIY-RU-9yM"; */
+"JIY-RU-9yM.normalTitle" = "GO FOR IT!";
+
+/* Class = "UILabel"; text = "Pass any topic, and it will appear in the history"; ObjectID = "K2l-Kx-D18"; */
+"K2l-Kx-D18.text" = "Pass any topic, and it will appear in the history";
+
+/* Class = "UILabel"; text = "to incredible experiences and self-improvement for every day"; ObjectID = "KzC-0h-AyZ"; */
+"KzC-0h-AyZ.text" = "to incredible experiences and self-improvement for every day";
+
+/* Class = "UITextView"; text = "Don't limit yourself\nBe on the top of the world"; ObjectID = "Lon-fP-6Ll"; */
+"Lon-fP-6Ll.text" = "Don't limit yourself\nBe on the top of the world";
+
+/* Class = "UITextView"; text = "For your convenience, your subscription fee will be automatically charged every month. Unsubscribe is available at any time"; ObjectID = "Nd5-AX-0yE"; */
+"Nd5-AX-0yE.text" = "For your convenience, your subscription fee will be automatically charged every month. Unsubscribe is available at any time";
+
+/* Class = "UILabel"; text = "Liked"; ObjectID = "OeX-2P-gt6"; */
+"OeX-2P-gt6.text" = "Liked";
+
+/* Class = "UINavigationItem"; title = "Enter a promo code"; ObjectID = "OnW-9C-luL"; */
+"OnW-9C-luL.title" = "Enter a promo code";
+
+/* Class = "UILabel"; text = "Double-click any card to add it here"; ObjectID = "S3k-dE-Ycf"; */
+"S3k-dE-Ycf.text" = "Double-click any card to add it here";
+
+/* Class = "UIBarButtonItem"; title = "  "; ObjectID = "U9X-eW-3B1"; */
+"U9X-eW-3B1.title" = "  ";
+
+/* Class = "UILabel"; text = "Nothing here yet"; ObjectID = "UFb-aQ-QhJ"; */
+"UFb-aQ-QhJ.text" = "Nothing here yet";
+
+/* Class = "UILabel"; text = "Recent"; ObjectID = "UIZ-vE-acc"; */
+"UIZ-vE-acc.text" = "Recent";
+
+/* Class = "UINavigationItem"; title = "New"; ObjectID = "VlX-7v-Soo"; */
+"VlX-7v-Soo.title" = "New";
+
+/* Class = "UIButton"; normalTitle = "LEET'S GO!"; ObjectID = "WYe-8B-Z80"; */
+"WYe-8B-Z80.normalTitle" = "LEET'S GO!";
+
+/* Class = "UILabel"; text = "Tell us more about your experience.\nWhat do you like and dislike about \nSPOK?"; ObjectID = "Wb4-9G-9rb"; */
+"Wb4-9G-9rb.text" = "Tell us more about your experience.\nWhat do you like and dislike about \nSPOK?";
+
+/* Class = "UILabel"; text = "Special for you"; ObjectID = "Wx0-Vm-aF6"; */
+"Wx0-Vm-aF6.text" = "Special for you";
+
+/* Class = "UILabel"; text = "Nothing here yet"; ObjectID = "YO6-Fu-O9G"; */
+"YO6-Fu-O9G.text" = "Nothing here yet";
+
+/* Class = "UITextView"; text = "The following music, distributed under a Creative Commons license, is used in the app:\n\n • “Stars in her skies” by Scott Buckley   \n    – www.scottbuckley.com.au\n\n • “Wanderlust” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Monomyth” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Growing up” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Hiraeth” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “The Miracle of Flight” by Scott Buckley – www.scottbuckley.com.au\n\n • “The Long Way Home“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Hymn“ by Scott Buckley \n    - www.scottbuckley.com.au\n\n • “Borealis“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Life is“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Firefly“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Tears in rain“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “She moved mountains“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Midsommar“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Undertow“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Rainbows“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Yellow“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Reverie“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Sleep“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Felicity“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Journeys“ - the exodus“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Wonderful“ - the exodus“ by Scott Buckley - www.scottbuckley.com.au\n\n • “I walk with ghosts“ by Scott Buckley    \n    - www.scottbuckley.com.au\n\n • “Affirmations“ by Scott Buckley - www.scottbuckley.com.au"; ObjectID = "bVo-fH-cFI"; */
+"bVo-fH-cFI.text" = "The following music, distributed under a Creative Commons license, is used in the app:\n\n • “Stars in her skies” by Scott Buckley   \n    – www.scottbuckley.com.au\n\n • “Wanderlust” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Monomyth” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Growing up” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “Hiraeth” by Scott Buckley – \n    www.scottbuckley.com.au\n\n • “The Miracle of Flight” by Scott Buckley – www.scottbuckley.com.au\n\n • “The Long Way Home“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Hymn“ by Scott Buckley \n    - www.scottbuckley.com.au\n\n • “Borealis“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Life is“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Firefly“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Tears in rain“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “She moved mountains“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Midsommar“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Undertow“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Rainbows“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Yellow“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Reverie“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Sleep“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Felicity“ by Scott Buckley - \n    www.scottbuckley.com.au\n\n • “Journeys“ - the exodus“ by Scott Buckley - www.scottbuckley.com.au\n\n • “Wonderful“ - the exodus“ by Scott Buckley - www.scottbuckley.com.au\n\n • “I walk with ghosts“ by Scott Buckley    \n    - www.scottbuckley.com.au\n\n • “Affirmations“ by Scott Buckley - www.scottbuckley.com.au";
+
+/* Class = "UITextField"; placeholder = "For instance, new year"; ObjectID = "elI-Mk-CAw"; */
+"elI-Mk-CAw.placeholder" = "For instance, new year";
+
+/* Class = "UILabel"; text = "6.99 USD / month"; ObjectID = "fnr-Fp-CcF"; */
+"fnr-Fp-CcF.text" = "6.99 USD / month";
+
+/* Class = "UIButton"; normalTitle = "All   "; ObjectID = "fpe-8y-jXn"; */
+"fpe-8y-jXn.normalTitle" = "All   ";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "hfN-9N-fac"; */
+"hfN-9N-fac.text" = "Notifications";
+
+/* Class = "UILabel"; text = "Let's help to make SPOK\nbetter"; ObjectID = "jhO-9M-TLE"; */
+"jhO-9M-TLE.text" = "Let's help to make SPOK\nbetter";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "lYH-XM-BHh"; */
+"lYH-XM-BHh.title" = "Profile";
+
+/* Class = "UITextView"; text = "Do it your way\n\nChange the background and font to your liking. Be unique!"; ObjectID = "oYr-Ih-WV3"; */
+"oYr-Ih-WV3.text" = "Do it your way\n\nChange the background and font to your liking. Be unique!";
+
+/* Class = "UIButton"; normalTitle = "Get a subscription"; ObjectID = "osP-wh-sb8"; */
+"osP-wh-sb8.normalTitle" = "Get a subscription";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "puu-xo-0bv"; */
+"puu-xo-0bv.title" = "";
+
+/* Class = "UILabel"; text = "Some text"; ObjectID = "q6W-aU-owS"; */
+"q6W-aU-owS.text" = "Some text";
+
+/* Class = "UIBarButtonItem"; title = "    "; ObjectID = "qUm-EJ-NUT"; */
+"qUm-EJ-NUT.title" = "    ";
+
+/* Class = "UINavigationItem"; title = "Discover"; ObjectID = "qtT-GO-CFu"; */
+"qtT-GO-CFu.title" = "Discover";
+
+/* Class = "UITextView"; text = "(For example)\nThis is a great app, but I would have done something better in it. First..."; ObjectID = "rR9-xQ-ABh"; */
+"rR9-xQ-ABh.text" = "(For example)\nThis is a great app, but I would have done something better in it. First...";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "rbD-mJ-7W9"; */
+"rbD-mJ-7W9.title" = "";
+
+/* Class = "UITextView"; text = "The app uses images distributed under the Apache License Version 2.0"; ObjectID = "rjD-h0-lVH"; */
+"rjD-h0-lVH.text" = "The app uses images distributed under the Apache License Version 2.0";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "rqm-qV-nyr"; */
+"rqm-qV-nyr.title" = "";
+
+/* Class = "UITextView"; text = "Get full access to all the content and customization options!"; ObjectID = "rwf-bV-3M4"; */
+"rwf-bV-3M4.text" = "Get full access to all the content and customization options!";
+
+/* Class = "UIButton"; normalTitle = "CONTINUE!"; ObjectID = "thc-vl-NJ0"; */
+"thc-vl-NJ0.normalTitle" = "CONTINUE!";
+
+/* Class = "UIButton"; normalTitle = "GO FOR IT!"; ObjectID = "uIM-ND-wQT"; */
+"uIM-ND-wQT.normalTitle" = "GO FOR IT!";
+
+/* Class = "UILabel"; text = "We mixed two things - the tactile sensation of touching the screen, the pleasant music, and the little inspiring pieces of text that are so easy to read.\n\nJust enjoy it!"; ObjectID = "wCf-2A-VSz"; */
+"wCf-2A-VSz.text" = "We mixed two things - the tactile sensation of touching the screen, the pleasant music, and the little inspiring pieces of text that are so easy to read.\n\nJust enjoy it!";
+
+/* Class = "UILabel"; text = "Welcome to SPOK"; ObjectID = "yPl-fr-sl5"; */
+"yPl-fr-sl5.text" = "Welcome to SPOK";
+
+/*Class = "UIButton" */
+"Lw0-lz-OJ0.normalTitle"="Delete an account";
+
+// Class = UILabel
+"ajH-Vr-oZp.text"="Tell us more about your emotions from what you've read >>>";
+
+// Class = UILabel
+"RD8-WP-YJa.text"="Please share your opinion!"
+
+// Class = UILabel
+"FQX-NL-6jc.text"="Did you like this topic?";
+
+// Class = UILabel
+"nHO-lW-Id1.text"="No internet connection";

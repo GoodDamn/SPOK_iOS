@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "    Sign in with Apple"; ObjectID = "C2W-01-A7e"; */
+"C2W-01-A7e.normalTitle" = "Войти с помощью Apple";
+
+/* Class = "UIButton"; normalTitle = "    Sign in with Facebook"; ObjectID = "MNy-N7-Cmx"; */
+"MNy-N7-Cmx.normalTitle" = "Войти с помощью Facebook";
+
+/* Class = "UITextView"; text = "By continuing, you agree with SPOK's\nTerms of Use & Privacy Policy"; ObjectID = "dcR-wT-5Af"; */
+"dcR-wT-5Af.text" = "Продолжая, ты соглашаешься с \nУсловиями использования & Политикой конфиденциальности";
+
+/* Class = "UILabel"; text = "Welcome to SPOK"; ObjectID = "jEK-Hq-WkK"; */
+"jEK-Hq-WkK.text" = "Добро пожаловать в SPOK";
