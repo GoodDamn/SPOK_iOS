@@ -7,7 +7,8 @@
 
 import UIKit;
 
-class TabBarController : UITabBarController, UITabBarControllerDelegate{
+class TabBarController : UITabBarController,
+                         UITabBarControllerDelegate {
     
     var manager: ManagerViewController? = nil;
     var prevIndex: Int = 0;

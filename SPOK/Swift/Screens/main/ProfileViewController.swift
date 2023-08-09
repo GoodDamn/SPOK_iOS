@@ -10,6 +10,8 @@ import MetalKit;
 
 class ProfileViewController:UIViewController {
     
+    private let tag = "ProfileVC:";
+    
     //@IBOutlet weak var b_get_sub: UIButton!;
     @IBOutlet weak var b_see_all: UIButton!;
     @IBOutlet weak var b_all_liked: UIButton!;
@@ -40,7 +42,19 @@ class ProfileViewController:UIViewController {
     private let lang = Utils.getLanguageCode();
     private let manager = Utils.getManager();
     
-    private let tag = "ProfileVC:";
+    
+    
+    private let pointsStart:[CGPoint] = [
+        CGPoint(x: 0, y: 0),
+        CGPoint(x: 0.5, y: 0),
+        CGPoint(x: 1, y: 0)];
+    private let pointsEnd:[CGPoint] = [
+        CGPoint(x: 1, y: 1),
+        CGPoint(x: 0.5, y: 1),
+        CGPoint(x: 0, y: 1)];
+    
+    private var gradients:[CAGradientLayer] = [CAGradientLayer(), CAGradientLayer(), CAGradientLayer()];
+    
     
     func updateLikes() {
         if cv_liked == nil{
@@ -77,92 +91,6 @@ class ProfileViewController:UIViewController {
         }
         
         cv.reloadData();
-    }
-    
-    
-    private func shadow(_ v:CALayer)->Void{
-        v.shadowColor = UIColor(named: "AccentColor")?.cgColor;
-        v.shadowRadius = 5;
-        v.shadowOpacity = 0.4;
-        v.shadowOffset = .zero;
-        v.shouldRasterize = true;
-        v.rasterizationScale = UIScreen.main.scale;
-    }
-    
-    private func drawClock(_ bounds:CGRect, color:CGColor)->CALayer{
-        let w = bounds.width/2;
-        
-        let l = CAShapeLayer();
-        l.path = UIBezierPath(arcCenter: CGPoint(x:w , y: bounds.height/2), radius: w-15, startAngle: .pi * 2/3 , endAngle: .pi, clockwise: false).cgPath;
-        l.strokeColor = color;
-        l.lineJoin = .round;
-        l.lineCap = .round;
-        l.lineWidth = 9;
-        l.fillColor = nil;
-        
-        let path = UIBezierPath();
-    
-        path.move(to: CGPoint(x: 5, y: w));
-        path.addLine(to: CGPoint(x: 27, y: w));
-        path.addLine(to: CGPoint(x: 16, y: w+8));
-        path.addLine(to: CGPoint(x: 5, y: w));
-        
-        path.move(to: CGPoint(x: w, y: w-12));
-        path.addLine(to: CGPoint(x: w, y: w));
-        path.addLine(to: CGPoint(x: 53, y: 52));
-        
-        let l2 = CAShapeLayer();
-        l2.path = path.cgPath;
-        l2.lineWidth = 6;
-        l2.strokeColor = color;
-        l2.fillColor = nil;
-        l2.lineJoin = .round;
-        l2.lineCap = .round;
-        
-        let layer = CALayer();
-        layer.addSublayer(l);
-        layer.addSublayer(l2);
-        
-        return layer;
-    }
-    
-    private func corners(_ l:CALayer, _ v:CGFloat)->Void{
-        l.cornerRadius = l.bounds.height/v;
-    }
-    
-    private let pointsStart:[CGPoint] = [
-        CGPoint(x: 0, y: 0),
-        CGPoint(x: 0.5, y: 0),
-        CGPoint(x: 1, y: 0)];
-    private let pointsEnd:[CGPoint] = [
-        CGPoint(x: 1, y: 1),
-        CGPoint(x: 0.5, y: 1),
-        CGPoint(x: 0, y: 1)];
-    
-    private var gradients:[CAGradientLayer] = [CAGradientLayer(), CAGradientLayer(), CAGradientLayer()];
-    
-    private func createGradient(_ v:UIView, _ i: Int)->Void{
-        if (gradients[i].name != "") {
-            gradients[i] = CAGradientLayer(layer: v.layer);
-            gradients[i].frame = v.bounds;
-            gradients[i].type = .axial;
-            let r = Int.random(in: 0..<pointsStart.count);
-            gradients[i].startPoint = pointsStart[r];
-            gradients[i].endPoint = pointsEnd[r];
-            corners(gradients[i], 15);
-            gradients[i].name = String(i);
-            v.layer.addSublayer(gradients[i]);
-        }
-        gradients[i].colors = [UIColor(red: rand(), green: rand(), blue: rand(), alpha: 1.0).cgColor, UIColor(red: rand(), green: rand(), blue: rand(), alpha: 1.0).cgColor];
-    }
-    
-    private func rand()->CGFloat{
-        return CGFloat.random(in: 0...255)/255;
-    }
-    
-    private func rasterization(_ v:UIView)->Void{
-        v.layer.rasterizationScale = UIScreen.main.scale;
-        v.layer.shouldRasterize = true;
     }
     
     override func viewDidLoad() {
@@ -306,9 +234,9 @@ class ProfileViewController:UIViewController {
         updateHistory();
         updateLikes();
         
-        let tapGest = UITapGestureRecognizer(target: self, action: #selector(updateGradients(_:)));
-        tapGest.numberOfTouchesRequired = 1;
-        v_grad2.addGestureRecognizer(tapGest);
+        v_grad2.addGestureRecognizer(newGestureGradient());
+        v_grad.addGestureRecognizer(newGestureGradient());
+        v_grad3.addGestureRecognizer(newGestureGradient());
         
         let attrStr = NSAttributedString(string: Utils.getLocalizedString("spokBeta_"),
                                          attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue,
@@ -329,7 +257,7 @@ class ProfileViewController:UIViewController {
     }
     
     @objc func updateGradients(_ sender: UITapGestureRecognizer) {
-        Toast.init(text: Utils.getLocalizedString("somethingSoon"), duration: 1.5).show();
+        manager?.showSubScreen();
         createGradient(v_grad,0);
         createGradient(v_grad2,1);
         createGradient(v_grad3,2);
@@ -364,5 +292,91 @@ class ProfileViewController:UIViewController {
         c.delegate.insetSections = UIEdgeInsets(top: 15, left: 0, bottom: 50, right: 0);
         
         navigationController?.pushViewController(c, animated: true);
+    }
+    
+    
+    private func newGestureGradient()->UITapGestureRecognizer {
+        return newGesture(#selector(updateGradients(_:)));
+    }
+    
+    private func newGesture(_ s: Selector)->UITapGestureRecognizer {
+        let tapGest = UITapGestureRecognizer(target: self, action: s);
+        tapGest.numberOfTouchesRequired = 1;
+        return tapGest;
+    }
+    
+    private func shadow(_ v:CALayer)->Void{
+        v.shadowColor = UIColor(named: "AccentColor")?.cgColor;
+        v.shadowRadius = 5;
+        v.shadowOpacity = 0.4;
+        v.shadowOffset = .zero;
+        v.shouldRasterize = true;
+        v.rasterizationScale = UIScreen.main.scale;
+    }
+    
+    private func drawClock(_ bounds:CGRect, color:CGColor)->CALayer{
+        let w = bounds.width/2;
+        
+        let l = CAShapeLayer();
+        l.path = UIBezierPath(arcCenter: CGPoint(x:w , y: bounds.height/2), radius: w-15, startAngle: .pi * 2/3 , endAngle: .pi, clockwise: false).cgPath;
+        l.strokeColor = color;
+        l.lineJoin = .round;
+        l.lineCap = .round;
+        l.lineWidth = 9;
+        l.fillColor = nil;
+        
+        let path = UIBezierPath();
+    
+        path.move(to: CGPoint(x: 5, y: w));
+        path.addLine(to: CGPoint(x: 27, y: w));
+        path.addLine(to: CGPoint(x: 16, y: w+8));
+        path.addLine(to: CGPoint(x: 5, y: w));
+        
+        path.move(to: CGPoint(x: w, y: w-12));
+        path.addLine(to: CGPoint(x: w, y: w));
+        path.addLine(to: CGPoint(x: 53, y: 52));
+        
+        let l2 = CAShapeLayer();
+        l2.path = path.cgPath;
+        l2.lineWidth = 6;
+        l2.strokeColor = color;
+        l2.fillColor = nil;
+        l2.lineJoin = .round;
+        l2.lineCap = .round;
+        
+        let layer = CALayer();
+        layer.addSublayer(l);
+        layer.addSublayer(l2);
+        
+        return layer;
+    }
+    
+    private func corners(_ l:CALayer, _ v:CGFloat)->Void{
+        l.cornerRadius = l.bounds.height/v;
+    }
+    
+    
+    private func createGradient(_ v:UIView, _ i: Int)->Void{
+        if (gradients[i].name != "") {
+            gradients[i] = CAGradientLayer(layer: v.layer);
+            gradients[i].frame = v.bounds;
+            gradients[i].type = .axial;
+            let r = Int.random(in: 0..<pointsStart.count);
+            gradients[i].startPoint = pointsStart[r];
+            gradients[i].endPoint = pointsEnd[r];
+            corners(gradients[i], 15);
+            gradients[i].name = String(i);
+            v.layer.addSublayer(gradients[i]);
+        }
+        gradients[i].colors = [UIColor(red: rand(), green: rand(), blue: rand(), alpha: 1.0).cgColor, UIColor(red: rand(), green: rand(), blue: rand(), alpha: 1.0).cgColor];
+    }
+    
+    private func rand()->CGFloat{
+        return CGFloat.random(in: 0...255)/255;
+    }
+    
+    private func rasterization(_ v:UIView)->Void{
+        v.layer.rasterizationScale = UIScreen.main.scale;
+        v.layer.shouldRasterize = true;
     }
 }
