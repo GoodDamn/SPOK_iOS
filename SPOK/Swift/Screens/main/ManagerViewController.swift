@@ -210,6 +210,40 @@ class ManagerViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let b = UIScreen.main.bounds.size;
+        
+        let hBar:CGFloat = 50;
+        let imageSize = CGSize(width: 35, height: 35);
+        
+        let navBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
+        navBar.backgroundColor = .red;
+        
+        view.addSubview(navBar);
+        
+        let iv = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
+        iv.image = UIImage(systemName: "house"); // person.fill | house
+        iv.tintColor = .green;
+        iv.backgroundColor = .systemBlue;
+        navBar.addTab(iv);
+        
+        let iv1 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
+        iv1.image = UIImage(systemName: "magnifyingglass"); // person.fill | house
+        iv1.tintColor = .green;
+        iv1.backgroundColor = .systemBlue;
+        navBar.addTab(iv1);
+        
+        let iv2 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
+        iv2.image = UIImage(systemName: "person.fill"); // person.fill | house
+        iv2.tintColor = .green;
+        iv2.backgroundColor = .systemBlue;
+        navBar.addTab(iv2);
+        
+        navBar.center_vertical();
+        navBar.center_horizontal();
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         
