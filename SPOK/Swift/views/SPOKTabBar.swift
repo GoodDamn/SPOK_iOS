@@ -11,6 +11,8 @@ class BottomNavigationBar: UIView {
     
     private let TAG = "BottomNavigationBar";
     
+    public var offset: CGFloat = 25.0;
+    
     public func center_horizontal() {
         
         let c = subviews.count;
@@ -20,8 +22,8 @@ class BottomNavigationBar: UIView {
         
         let midX = frame.width / 2;
         
-        var leftOffset = offsetH;
-        var rightOffset = offsetH;
+        var leftOffset = offsetH+offset;
+        var rightOffset = offsetH+offset;
         
         let b = subviews[middle].frame;
         

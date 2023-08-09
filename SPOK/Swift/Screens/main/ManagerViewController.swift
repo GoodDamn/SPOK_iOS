@@ -215,29 +215,30 @@ class ManagerViewController: UIViewController{
         let b = UIScreen.main.bounds.size;
         
         let hBar:CGFloat = 50;
-        let imageSize = CGSize(width: 35, height: 35);
+        let imageSize = CGSize(width: 27, height: 25);
         
         let navBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
-        navBar.backgroundColor = .red;
+        navBar.backgroundColor = UIColor(named: "background");
+        navBar.offset = 70;
         
         view.addSubview(navBar);
         
         let iv = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
         iv.image = UIImage(systemName: "house"); // person.fill | house
-        iv.tintColor = .green;
-        iv.backgroundColor = .systemBlue;
+        iv.tintColor = UIColor(named: "AccentColor");
+        iv.backgroundColor = .clear;
         navBar.addTab(iv);
         
         let iv1 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
         iv1.image = UIImage(systemName: "magnifyingglass"); // person.fill | house
-        iv1.tintColor = .green;
-        iv1.backgroundColor = .systemBlue;
+        iv1.tintColor = .lightGray;
+        iv1.backgroundColor = .clear;
         navBar.addTab(iv1);
         
         let iv2 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
         iv2.image = UIImage(systemName: "person.fill"); // person.fill | house
-        iv2.tintColor = .green;
-        iv2.backgroundColor = .systemBlue;
+        iv2.tintColor = .lightGray;
+        iv2.backgroundColor = .clear;
         navBar.addTab(iv2);
         
         navBar.center_vertical();
