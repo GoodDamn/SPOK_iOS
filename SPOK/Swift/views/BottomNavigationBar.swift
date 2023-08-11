@@ -75,6 +75,11 @@ class BottomNavigationBar: UIView {
     
     
     @objc func selectTab(_ sender: UIButton) {
+        
+        if sender.tag == mCurrentIndex {
+            return;
+        }
+        
         print(self.TAG, "selectTab:",sender.tag);
         subviews[mCurrentIndex].tintColor = .lightGray;
         mCurrentIndex = sender.tag;
