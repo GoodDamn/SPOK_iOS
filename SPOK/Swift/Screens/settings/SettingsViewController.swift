@@ -157,16 +157,22 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
     }
     
     override func willMove(toParent parent: UIViewController?) {
-        if parent == nil{
-            let manager = Utils.getManager()!;
-            manager.bottomInset.constant = 49;
-            UIView.animate(withDuration: 0.25, animations: {
-                manager.view.layoutIfNeeded();
-            }, completion: {
-                b in
-                manager.tabController?.tabBar.isUserInteractionEnabled = true;
-            });
+        if parent != nil{
+            return;
         }
+        
+        guard let manager = Utils.getManager() else {
+            return;
+        }
+        
+        manager.bottomInset.constant = 49;
+        UIView.animate(withDuration: 0.25, animations: {
+            manager.view.layoutIfNeeded();
+            manager.mNavBar.transform = CGAffineTransform(translationX: 0, y: 0);
+        }, completion: {
+            b in
+            manager.mNavBar.isUserInteractionEnabled = true;
+        });
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

@@ -23,11 +23,10 @@ class ManagerViewController: UIViewController{
     @IBOutlet weak var pageContainer: UIView!;
     @IBOutlet weak var snackBarRating: UIView!;
     
-    private var mNavBar: BottomNavigationBar!;
-    
     private var mPrevIndex:Int = 0;
     
     let language = Utils.getLanguageCode();
+    var mNavBar: BottomNavigationBar!;
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
     var news: [UInt16] = [];
     var history: [UInt16] = []{
@@ -52,7 +51,6 @@ class ManagerViewController: UIViewController{
     var isConnected: Bool = false;
     var isLoadMetaData: Bool = false;
     var pageViewController: MainPageViewController? = nil;
-    var tabController: TabBarController? = nil;
     var ratingSnackBar: RatingSnackbar? = nil;
     var viewControllersPages:[UIViewController] = [];
     let userDefaults: UserDefaults = UserDefaults();
@@ -173,11 +171,6 @@ class ManagerViewController: UIViewController{
             pageViewController = segue.destination as? MainPageViewController;
             print(tag, "segue.identifier: mainPage True", pageViewController);
             pageViewController?.setup();
-            return;
-        }
-        
-        if segue.identifier == "tab"{
-            tabController = segue.destination as? TabBarController;
             return;
         }
         

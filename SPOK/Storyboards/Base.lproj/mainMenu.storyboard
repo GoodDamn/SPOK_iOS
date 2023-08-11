@@ -32,6 +32,7 @@
         <!--Navigation Controller-->
         <scene sceneID="flh-yd-YEW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dN-cM-r9W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController extendedLayoutIncludesOpaqueBars="YES" navigationBarHidden="YES" id="pTW-cq-JeQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="rbD-mJ-7W9">
                         <inset key="imageInsets" minX="0.0" minY="15" maxX="0.0" maxY="-15"/>
@@ -44,13 +45,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7dN-cM-r9W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1612" y="-1611"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lh1-Lh-yXs">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hcK-bs-amM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="6ms-c4-0wl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="puu-xo-0bv">
                         <color key="badgeColor" name="AccentColor"/>
@@ -59,7 +60,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hcK-bs-amM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1288" y="-907"/>
         </scene>
@@ -466,6 +466,7 @@
         <!--Navigation Controller-->
         <scene sceneID="tFm-T5-DUr">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="09X-2Z-e62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="afv-Fp-1vn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="rqm-qV-nyr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0Oi-nv-LQr">
@@ -481,7 +482,6 @@
                         </textAttributes>
                     </navigationBar>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="09X-2Z-e62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1287" y="-226"/>
         </scene>
@@ -2079,12 +2079,6 @@ This is a great app, but I would have done something better in it. First...</str
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTK-MC-7mq" userLabel="mainView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <connections>
-                                    <segue destination="WUX-yh-nbx" kind="embed" identifier="tab" id="aCt-HU-vOg"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oyc-Nx-pj5" userLabel="page">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <connections>
@@ -2120,18 +2114,14 @@ This is a great app, but I would have done something better in it. First...</str
                         <constraints>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="trailing" secondItem="tZo-Qw-L91" secondAttribute="trailing" id="0m0-cI-2ZT"/>
                             <constraint firstItem="J7J-Qc-8lG" firstAttribute="top" secondItem="3wA-t9-b2d" secondAttribute="top" id="4QL-g8-JhR"/>
-                            <constraint firstItem="aTK-MC-7mq" firstAttribute="leading" secondItem="qV2-lt-Z0s" secondAttribute="leading" id="4rK-py-Nnu"/>
-                            <constraint firstItem="Oyc-Nx-pj5" firstAttribute="top" secondItem="aTK-MC-7mq" secondAttribute="top" id="9CK-RQ-264"/>
-                            <constraint firstItem="qV2-lt-Z0s" firstAttribute="trailing" secondItem="aTK-MC-7mq" secondAttribute="trailing" id="Cmr-Q5-esH"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="trailing" secondItem="J7J-Qc-8lG" secondAttribute="trailing" id="EOa-vo-gER"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="bottom" secondItem="rAu-xQ-2hb" secondAttribute="bottom" constant="49" id="Emd-eo-vDg"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="bottom" secondItem="J7J-Qc-8lG" secondAttribute="bottom" id="HKA-st-zXd"/>
                             <constraint firstItem="tZo-Qw-L91" firstAttribute="leading" secondItem="qV2-lt-Z0s" secondAttribute="leading" id="Pcr-bV-dq7"/>
-                            <constraint firstItem="aTK-MC-7mq" firstAttribute="top" secondItem="3wA-t9-b2d" secondAttribute="top" id="RFB-vh-m8L"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="trailing" secondItem="rAu-xQ-2hb" secondAttribute="trailing" id="VyS-0G-6VR"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="trailing" secondItem="Oyc-Nx-pj5" secondAttribute="trailing" id="ZTf-8B-Qvl"/>
                             <constraint firstItem="Oyc-Nx-pj5" firstAttribute="leading" secondItem="qV2-lt-Z0s" secondAttribute="leading" id="gbi-bD-D1s"/>
-                            <constraint firstAttribute="bottom" secondItem="aTK-MC-7mq" secondAttribute="bottom" id="oaD-Uq-H35"/>
+                            <constraint firstItem="Oyc-Nx-pj5" firstAttribute="top" secondItem="3wA-t9-b2d" secondAttribute="top" id="jVT-N3-yqd"/>
                             <constraint firstItem="J7J-Qc-8lG" firstAttribute="leading" secondItem="qV2-lt-Z0s" secondAttribute="leading" id="t8G-Qq-YhX"/>
                             <constraint firstItem="qV2-lt-Z0s" firstAttribute="bottom" secondItem="tZo-Qw-L91" secondAttribute="bottom" id="wKg-en-Xie"/>
                             <constraint firstItem="Oyc-Nx-pj5" firstAttribute="bottom" secondItem="rAu-xQ-2hb" secondAttribute="bottom" id="xvR-uz-cdk"/>
@@ -2146,7 +2136,6 @@ This is a great app, but I would have done something better in it. First...</str
                         <outlet property="heightSnackbar" destination="cgp-42-yI8" id="JZj-sJ-KFr"/>
                         <outlet property="pageContainer" destination="Oyc-Nx-pj5" id="bxr-7M-ghv"/>
                         <outlet property="snackBarRating" destination="tZo-Qw-L91" id="Nq9-go-gzf"/>
-                        <outlet property="tabBarContainer" destination="aTK-MC-7mq" id="awq-fR-PBw"/>
                         <outlet property="trainingContainer" destination="J7J-Qc-8lG" id="w2A-M0-Ya3"/>
                     </connections>
                 </viewController>
@@ -2165,6 +2154,7 @@ This is a great app, but I would have done something better in it. First...</str
         <!--Tab Bar Controller-->
         <scene sceneID="F9K-ds-XSA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iyt-zz-nKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="tabBar" id="WUX-yh-nbx" customClass="TabBarController" customModule="SPOK" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" itemWidth="0.0" id="kOa-oW-YDb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -2180,7 +2170,6 @@ This is a great app, but I would have done something better in it. First...</str
                         <segue destination="afv-Fp-1vn" kind="relationship" relationship="viewControllers" id="5Qx-v8-gqi"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iyt-zz-nKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="188" y="-1489"/>
         </scene>

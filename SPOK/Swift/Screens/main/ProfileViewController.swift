@@ -268,11 +268,16 @@ class ProfileViewController:UIViewController {
     }
     
     @IBAction func showSettings(_ sender: UIButton) {
-        manager!.bottomInset.constant = 0;
+        guard let manager = manager else {
+            return;
+        }
+        manager.bottomInset.constant = 0;
+        manager.mNavBar.isUserInteractionEnabled = false;
+        
         UIView.animate(withDuration: 0.25, animations: {
-            self.manager!.view.layoutIfNeeded();
+            manager.view.layoutIfNeeded();
+            manager.mNavBar.transform = CGAffineTransform(translationX: 0, y: manager.mNavBar.frame.size.height)
         });
-        manager?.tabController?.tabBar.isUserInteractionEnabled = false;
         navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main).instantiateViewController(withIdentifier: "settings"), animated: true);
         
     }
