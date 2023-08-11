@@ -17,7 +17,7 @@ class BannerViewController: UIViewController {
     @IBOutlet weak var mLabelFeature3: UILabel!;
     @IBOutlet weak var mLabelfixTech: UILabel!;
     
-    @IBOutlet weak var mTextViewNotify: SpanTextView!;
+    @IBOutlet weak var mTextViewNotify: UITextView!;
     
     private func stat(property: String) {
         let ref = Database.database().reference(withPath: "Stats/iOS/"+property);
@@ -37,14 +37,6 @@ class BannerViewController: UIViewController {
     @IBAction func popViewControllerButton(_ sender: Any) {
         stat(property: "goBtn");
         navigationController?.popViewController(animated: true);
-    }
-    
-    @objc func notifyUs(_ sender: UITapGestureRecognizer) {
-    
-        stat(property: "banner");
-        print("notifyUs:");
-        Toast.init(text: Utils.getLocalizedString("letUsKnow"), duration: 1.8).show();
-        popViewController(sender);
     }
     
     override func viewDidLoad() {
@@ -71,15 +63,43 @@ class BannerViewController: UIViewController {
         
         let st = Utils.getLocalizedString("asd");
         
-        mTextViewNotify.addSpan(from: l-st.count,
-                                to: l,
-                                action: #selector(notifyUs(_:)),
-                                target: self,
-                                attrs:  [NSAttributedString.Key.font: mTextViewNotify.font,
-                                         NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue,
-                                         NSAttributedString.Key.underlineColor: textColor,
-                                         NSAttributedString.Key.foregroundColor: textColor,
-                                         NSAttributedString.Key.backgroundColor: UIColor.clear]);
+        let attr = NSMutableAttributedString(string: mTextViewNotify.text!);
+        
+        let styleCenteredText = NSMutableParagraphStyle();
+        styleCenteredText.alignment = .center;
+        
+        attr.addAttributes([
+                NSAttributedString.Key.foregroundColor: mTextViewNotify.textColor!,
+                NSAttributedString.Key.font: UIFont(name: "OpenSans-Regular", size: mTextViewNotify.font!.pointSize)!,
+                NSAttributedString.Key.paragraphStyle: styleCenteredText],
+                range: NSRange(location: 0, length: l));
+        
+        attr.addAttribute(.link, value: "c", range: NSRange(location: l-st.count, length: st.count));
+        
+        mTextViewNotify.attributedText = attr;
+        mTextViewNotify.linkTextAttributes = [NSAttributedString.Key.font:UIFont(name: "OpenSans-SemiBold", size: mTextViewNotify.font!.pointSize)!,
+                                              NSAttributedString.Key.foregroundColor: mTextViewNotify.textColor!,
+                                              NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue];
+        
+        mTextViewNotify.delegate = self;
+    }
+    
+}
+
+extension BannerViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        if (url.absoluteString != "c") {
+            return false;
+        }
+        
+        stat(property: "banner");
+        print("notifyUs:");
+        Toast.init(text: Utils.getLocalizedString("letUsKnow"), duration: 1.8).show();
+        navigationController?.popViewController(animated: true);
+        
+        return true;
     }
     
 }

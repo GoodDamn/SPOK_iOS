@@ -45,7 +45,7 @@ class AboutAppVController:UIViewController, UITextViewDelegate{
         tv_tracks.text = Utils.getLocalizedString("theFollow");
         tv_terms.text = Utils.getLocalizedString("terms");
         
-        let text=tv_apache.text!;
+        let text = tv_apache.text!;
         
         let locate = text.distance(from: text.startIndex, to: text.firstIndex(of: "A")!);
         

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2501D36D2A836CF1002FC348 /* SPOKTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501D36C2A836CF1002FC348 /* SPOKTabBar.swift */; };
+		2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */; };
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
@@ -111,7 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2501D36C2A836CF1002FC348 /* SPOKTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKTabBar.swift; sourceTree = "<group>"; };
+		2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 			children = (
 				25D5E5632A6A82A200A3126B /* SpanTextView.swift */,
 				25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */,
-				2501D36C2A836CF1002FC348 /* SPOKTabBar.swift */,
+				2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -749,7 +749,7 @@
 				2B7C289D2897CF8900C2EC07 /* MainPageViewController.swift in Sources */,
 				3819936D28854D8A005E1367 /* TwoCardRowCollectionViewDelegate.swift in Sources */,
 				2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */,
-				2501D36D2A836CF1002FC348 /* SPOKTabBar.swift in Sources */,
+				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,
 				2B3DE5B9290BAC7600B00528 /* SIgnInWithAppleDelegate.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				2B93CF8F277635C100219690 /* EditText.swift in Sources */,
