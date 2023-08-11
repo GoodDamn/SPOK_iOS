@@ -11,7 +11,10 @@ class BottomNavigationBar: UIView {
     
     private let TAG = "BottomNavigationBar";
     
+    public var tintColorSelected = UIColor(named: "AccentColor");
     public var offset: CGFloat = 25.0;
+    
+    private var mCurrentIndex:Int = 0;
     
     public func center_horizontal() {
         
@@ -61,8 +64,18 @@ class BottomNavigationBar: UIView {
         }
     }
     
-    public func addTab(_ tab: UIImageView) {
+    public func addTab(_ tab: UIButton) {
+        tab.tag = subviews.count;
+        tab.isUserInteractionEnabled = true;
+        tab.addTarget(self, action: #selector(selectTab(_:)), for: .touchUpInside);
         addSubview(tab);
     }
     
+    
+    @objc func selectTab(_ sender: UIButton) {
+        print(self.TAG, "selectTab:",sender.tag);
+        subviews[mCurrentIndex].tintColor = .lightGray;
+        mCurrentIndex = sender.tag;
+        sender.tintColor = tintColorSelected;
+    }
 }

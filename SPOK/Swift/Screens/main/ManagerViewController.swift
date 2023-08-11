@@ -14,10 +14,17 @@ class ManagerViewController: UIViewController{
     
     private let tag = "ManagerViewController:";
     
+    @IBOutlet weak var heightSnackbar: NSLayoutConstraint!;
+    @IBOutlet weak var heightSnackBarRating: NSLayoutConstraint!;
+    @IBOutlet weak var bottomInset: NSLayoutConstraint!;
+    
     @IBOutlet weak var trainingContainer: UIView!;
     @IBOutlet weak var tabBarContainer: UIView!;
     @IBOutlet weak var pageContainer: UIView!;
     @IBOutlet weak var snackBarRating: UIView!;
+    
+    private var mNavBar: BottomNavigationBar!;
+    
     let language = Utils.getLanguageCode();
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
     var news: [UInt16] = [];
@@ -47,18 +54,6 @@ class ManagerViewController: UIViewController{
     var ratingSnackBar: RatingSnackbar? = nil;
     var viewControllersPages:[UIViewController] = [];
     let userDefaults: UserDefaults = UserDefaults();
-    
-    @IBOutlet weak var heightSnackbar: NSLayoutConstraint!;
-    @IBOutlet weak var heightSnackBarRating: NSLayoutConstraint!;
-    @IBOutlet weak var bottomInset: NSLayoutConstraint!;
-    
-    private func blur() {
-        blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial));
-        blurView.alpha = 0.0;
-        view.insertSubview(blurView, at: 2);
-        blurView.frame = view.frame;
-        trainingContainer.isHidden = false;
-    }
     
     func closeFragment() {
         trainingContainer.isHidden = true;
@@ -208,41 +203,25 @@ class ManagerViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
         let b = UIScreen.main.bounds.size;
         
         let hBar:CGFloat = 50;
-        let imageSize = CGSize(width: 27, height: 25);
+        let imageSize = CGSize(width: 60, height: 50);
         
-        let navBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
-        navBar.backgroundColor = UIColor(named: "background");
-        navBar.offset = 70;
+        mNavBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
+        mNavBar.backgroundColor = UIColor(named: "background");
+        mNavBar.offset = 30;
         
-        view.addSubview(navBar);
+        view.addSubview(mNavBar);
         
-        let iv = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
-        iv.image = UIImage(systemName: "house"); // person.fill | house
-        iv.tintColor = UIColor(named: "AccentColor");
-        iv.backgroundColor = .clear;
-        navBar.addTab(iv);
+        createTab(systemNameImage: "house", imageSize: imageSize);
+        createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);
+        createTab(systemNameImage: "person.fill", imageSize: imageSize);
         
-        let iv1 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
-        iv1.image = UIImage(systemName: "magnifyingglass"); // person.fill | house
-        iv1.tintColor = .lightGray;
-        iv1.backgroundColor = .clear;
-        navBar.addTab(iv1);
+        mNavBar.subviews[0].tintColor = UIColor(named: "AccentColor");
         
-        let iv2 = UIImageView(frame: CGRect(origin: .zero, size: imageSize));
-        iv2.image = UIImage(systemName: "person.fill"); // person.fill | house
-        iv2.tintColor = .lightGray;
-        iv2.backgroundColor = .clear;
-        navBar.addTab(iv2);
-        
-        navBar.center_vertical();
-        navBar.center_horizontal();
+        mNavBar.center_vertical();
+        mNavBar.center_horizontal();
     }
     
     override func viewDidLoad() {
@@ -303,4 +282,21 @@ class ManagerViewController: UIViewController{
         monitor.start(queue: DispatchQueue(label:"Network"));
         
      }
+    
+    
+    private func blur() {
+        blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial));
+        blurView.alpha = 0.0;
+        view.insertSubview(blurView, at: 2);
+        blurView.frame = view.frame;
+        trainingContainer.isHidden = false;
+    }
+    
+    private func createTab(systemNameImage: String, imageSize: CGSize) {
+        let iv = UIButton(frame: CGRect(origin: .zero, size: imageSize));
+        iv.setImage(UIImage(systemName: systemNameImage), for: .normal); // person.fill | house
+        iv.tintColor = .lightGray;
+        iv.backgroundColor = .clear;
+        mNavBar.addTab(iv);
+    }
 }
