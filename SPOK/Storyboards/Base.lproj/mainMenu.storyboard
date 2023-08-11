@@ -29,40 +29,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="flh-yd-YEW">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7dN-cM-r9W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController extendedLayoutIncludesOpaqueBars="YES" navigationBarHidden="YES" id="pTW-cq-JeQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="rbD-mJ-7W9">
-                        <inset key="imageInsets" minX="0.0" minY="15" maxX="0.0" maxY="-15"/>
-                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
-                        <color key="badgeColor" name="AccentColor"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="CG1-3M-lxR">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="1612" y="-1611"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Lh1-Lh-yXs">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hcK-bs-amM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController navigationBarHidden="YES" id="6ms-c4-0wl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="magnifyingglass" catalog="system" id="puu-xo-0bv">
-                        <color key="badgeColor" name="AccentColor"/>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="MBX-sh-Ood">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="1288" y="-907"/>
-        </scene>
         <!--Discover-->
         <scene sceneID="dyw-WC-zeD">
             <objects>
@@ -462,28 +428,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="35U-3d-WSd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3269.5652173913045" y="-1623.2142857142856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="tFm-T5-DUr">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="09X-2Z-e62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController id="afv-Fp-1vn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="person.fill" catalog="system" id="rqm-qV-nyr"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0Oi-nv-LQr">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="background"/>
-                        <color key="tintColor" name="AccentColor"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" name="AccentColor"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" name="AccentColor"/>
-                        </textAttributes>
-                    </navigationBar>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="1287" y="-226"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Sw2-Sr-7bC">
@@ -2151,28 +2095,6 @@ This is a great app, but I would have done something better in it. First...</str
             </objects>
             <point key="canvasLocation" x="51" y="-778"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="F9K-ds-XSA">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iyt-zz-nKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tabBarController storyboardIdentifier="tabBar" id="WUX-yh-nbx" customClass="TabBarController" customModule="SPOK" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" itemWidth="0.0" id="kOa-oW-YDb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="background"/>
-                        <color key="tintColor" name="AccentColor"/>
-                        <color key="barTintColor" name="background"/>
-                        <color key="selectedImageTintColor" name="AccentColor"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="pTW-cq-JeQ" kind="relationship" relationship="viewControllers" id="pn6-Et-ceU"/>
-                        <segue destination="6ms-c4-0wl" kind="relationship" relationship="viewControllers" id="pLA-fe-rgC"/>
-                        <segue destination="afv-Fp-1vn" kind="relationship" relationship="viewControllers" id="5Qx-v8-gqi"/>
-                    </connections>
-                </tabBarController>
-            </objects>
-            <point key="canvasLocation" x="188" y="-1489"/>
-        </scene>
         <!--List Of Topics View Controller-->
         <scene sceneID="xa7-NA-xLk">
             <objects>
@@ -3628,7 +3550,6 @@ Change the topic's theme and font to your liking. Be unique!</string>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="icon" width="120" height="121"/>
         <image name="lock.fill" catalog="system" width="125" height="128"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="marsh_meditate" width="273" height="228"/>
         <image name="marshmallowMagic" width="215" height="226"/>
         <image name="mountain" width="139" height="109.5"/>
@@ -3636,7 +3557,6 @@ Change the topic's theme and font to your liking. Be unique!</string>
         <image name="mountain3" width="184.5" height="149.5"/>
         <image name="music.note" catalog="system" width="96" height="128"/>
         <image name="musicNote" width="25" height="25"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="prem" width="855" height="983"/>
         <image name="sky" width="293.5" height="68.5"/>
         <image name="tag.fill" catalog="system" width="128" height="118"/>
