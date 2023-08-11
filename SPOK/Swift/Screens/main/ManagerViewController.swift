@@ -25,6 +25,8 @@ class ManagerViewController: UIViewController{
     
     private var mNavBar: BottomNavigationBar!;
     
+    private var mPrevIndex:Int = 0;
+    
     let language = Utils.getLanguageCode();
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
     var news: [UInt16] = [];
@@ -210,7 +212,24 @@ class ManagerViewController: UIViewController{
         
         mNavBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
         mNavBar.backgroundColor = UIColor(named: "background");
-        mNavBar.offset = 30;
+        mNavBar.mOffset = 30;
+        mNavBar.mTintColorSelected = UIColor(named:"AccentColor");
+        mNavBar.mOnSelectTab = { index in
+            self.pageViewController?
+                .setViewControllers(
+                    [self.viewControllersPages[index]],
+                    direction: index > self.mPrevIndex ? .forward : .reverse,
+                    animated: true,
+                    completion: { b in
+                        if index == 2 {
+                            let profile = (self.viewControllersPages[2] as! UINavigationController)
+                                .viewControllers.first as? ProfileViewController;
+                            profile?.updateHistory();
+                            profile?.updateLikes();
+                        }
+                        self.mPrevIndex = index;
+                    });
+        }
         
         view.addSubview(mNavBar);
         
@@ -294,9 +313,14 @@ class ManagerViewController: UIViewController{
     
     private func createTab(systemNameImage: String, imageSize: CGSize) {
         let iv = UIButton(frame: CGRect(origin: .zero, size: imageSize));
-        iv.setImage(UIImage(systemName: systemNameImage), for: .normal); // person.fill | house
+        
+        let config = UIImage.SymbolConfiguration(pointSize: imageSize.height*0.42,
+                                                 weight: .regular,
+                                                 scale: .medium);
+        iv.setImage(UIImage(systemName: systemNameImage, withConfiguration: config), for: .normal); // person.fill | house
         iv.tintColor = .lightGray;
         iv.backgroundColor = .clear;
+        
         mNavBar.addTab(iv);
     }
 }

@@ -11,8 +11,10 @@ class BottomNavigationBar: UIView {
     
     private let TAG = "BottomNavigationBar";
     
-    public var tintColorSelected = UIColor(named: "AccentColor");
-    public var offset: CGFloat = 25.0;
+    public var mTintColorSelected:UIColor? = .systemBlue;
+    public var mOffset: CGFloat = 25.0;
+    
+    public var mOnSelectTab:((Int)->Void)? = nil;
     
     private var mCurrentIndex:Int = 0;
     
@@ -25,8 +27,8 @@ class BottomNavigationBar: UIView {
         
         let midX = frame.width / 2;
         
-        var leftOffset = offsetH+offset;
-        var rightOffset = offsetH+offset;
+        var leftOffset = offsetH+mOffset;
+        var rightOffset = offsetH+mOffset;
         
         let b = subviews[middle].frame;
         
@@ -76,6 +78,8 @@ class BottomNavigationBar: UIView {
         print(self.TAG, "selectTab:",sender.tag);
         subviews[mCurrentIndex].tintColor = .lightGray;
         mCurrentIndex = sender.tag;
-        sender.tintColor = tintColorSelected;
+        sender.tintColor = mTintColorSelected;
+        
+        mOnSelectTab?(mCurrentIndex);
     }
 }
