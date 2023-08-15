@@ -30,15 +30,14 @@ class Intro2ViewController: UIViewController{
     @IBAction func openSignIn(_ sender: UIButton) {
         b_open.isEnabled = false;
         let window = UIApplication.shared.windows[0];
-        let vc = UIStoryboard(name: "mainMenu", bundle: Bundle.main)
-            .instantiateViewController(withIdentifier: "mainNav") as! MainNavigationController;
-        //let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignIn") as! SignInViewController;
-        window.rootViewController = vc;
-        //UIView.transition(from: view, to: vc.view, duration: 1.0, options: [.transitionCrossDissolve], completion: {
-        //    (b) in
-        //    window.rootViewController = vc;
+        //let vc = UIStoryboard(name: "mainMenu", bundle: Bundle.main)
+        //    .instantiateViewController(withIdentifier: "mainNav") as! MainNavigationController;
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignIn") as! SignInViewController;
+        UIView.transition(from: view, to: vc.view, duration: 1.0, options: [.transitionCrossDissolve], completion: {
+            (b) in
+            window.rootViewController = vc;
             UserDefaults().setValue(true, forKey: "intro");
-        //});
+        });
     }
     
     private func boldText(_ label:UILabel)->Void{

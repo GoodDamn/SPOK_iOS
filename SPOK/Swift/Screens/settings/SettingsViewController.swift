@@ -51,13 +51,16 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         });
     }
     
-    private func moveToSignIn()->Void{
+    private func moveToSignIn(withDeletingData:Bool = true)->Void{
         let userDef = UserDefaults();
         userDef.removeObject(forKey: Utils.userRef);
         userDef.removeObject(forKey: Utils.givenName);
-        userDef.removeObject(forKey: StorageApp.likesKey);
-        userDef.removeObject(forKey: StorageApp.historyKey);
-        userDef.removeObject(forKey: StorageApp.recommendsKey);
+        
+        if (withDeletingData) {
+            userDef.removeObject(forKey: StorageApp.likesKey);
+            userDef.removeObject(forKey: StorageApp.historyKey);
+            userDef.removeObject(forKey: StorageApp.recommendsKey);
+        }
         Utils.moveToAnotherViewController(UIStoryboard(name: "Main", bundle: nil) .instantiateViewController  (withIdentifier: "SignIn") as!  SignInViewController, animation: .transitionCurlDown);
     }
     
@@ -82,7 +85,7 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
             text: Utils.getLocalizedString("signApple"),
             isHiddenArrow: true,
             clickHandler: {
-                self.moveToSignIn();
+                self.moveToSignIn(withDeletingData: false);
             });
         
         let _aboutApp = Option(
