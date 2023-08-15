@@ -184,7 +184,7 @@ class ManagerViewController: UIViewController{
     }
     
     @objc func onPause(){
-        print(tag, "onPause()");
+        print(tag, "onPause();");
         DispatchQueue.global(qos: .userInitiated).async {
             let userRef = self.userDefaults.string(forKey: Utils.userRef);
             if userRef != nil && self.isConnected && self.isLoadMetaData{
@@ -197,7 +197,14 @@ class ManagerViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print(self.tag, "viewWillAppear();");
+        
+        if view.subviews[1] is BottomNavigationBar {
+            return;
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
+        
         let b = UIScreen.main.bounds.size;
         
         let hBar:CGFloat = 50;

@@ -272,12 +272,13 @@ class ProfileViewController:UIViewController {
         guard let manager = manager else {
             return;
         }
+       
         manager.bottomInset.constant = 0;
-        //manager.pageViewController?.isUserInteractionEnabled = false;
+        manager.mNavBar.isUserInteractionEnabled = false;
         
         UIView.animate(withDuration: 0.25, animations: {
             manager.view.layoutIfNeeded();
-            manager.mNavBar.transform = CGAffineTransform(translationX: 0, y: manager.mNavBar.frame.size.height)
+            manager.mNavBar.frame.origin.y = UIScreen.main.bounds.height;
         });
         navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main).instantiateViewController(withIdentifier: "settings"), animated: true);
         
