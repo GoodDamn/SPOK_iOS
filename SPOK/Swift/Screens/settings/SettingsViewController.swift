@@ -26,6 +26,7 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
     
     @IBOutlet weak var tableView_options: UITableView!;
     @IBOutlet weak var switcherNotification: UISwitch!;
+    @IBOutlet weak var mBtnDeleteAcc: UIButton!;
     
     var signInWithApple: SignInWithAppleDelegate? = nil;
     private let notificationCenter: UNUserNotificationCenter = UNUserNotificationCenter.current();
@@ -75,62 +76,61 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
             self.navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "promoCodes"), animated: true);
         });*/
         
-        let _aboutApp = Option(img: UIImage(systemName: "info.circle.fill"), text: Utils.getLocalizedString("aboutApp"), clickHandler: {
-            self.navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "aboutApp"), animated: true);
-        });
         
-        let _rateUs = Option(img: UIImage(systemName: "star.fill"), text: Utils.getLocalizedString("rateUs"),clickHandler: {
-            self.navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "rateUs"), animated: true);
-        });
+        let _SignIn = Option(
+            img: UIImage(systemName: "applelogo"),
+            text: Utils.getLocalizedString("signApple"),
+            isHiddenArrow: true,
+            clickHandler: {
+                self.moveToSignIn();
+            });
         
-        let _contactUs = Option(img: UIImage(systemName: "text.bubble.fill"), text: Utils.getLocalizedString("contactUs"), isHiddenArrow: true, clickHandler: {
-            guard MFMailComposeViewController.canSendMail() else{
-                self.showAlertDialog(title: "Contact us", message: "You can't send mail now, please try again later", preferredStyle: .alert, actions: {
-                    alert in
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil));
-                });
-                return;
-            };
-            
-            let composer:MFMailComposeViewController = MFMailComposeViewController();
-            
-            composer.mailComposeDelegate = self;
-            composer.setToRecipients(["spok.app.community@gmail.com"]);
-            composer.setSubject("Review");
-            self.present(composer, animated: true, completion: nil);
+        let _aboutApp = Option(
+            img: UIImage(systemName: "info.circle.fill"),
+            text: Utils.getLocalizedString("aboutApp"),
+            clickHandler: {
+                self.navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "aboutApp"), animated: true);
+            });
+        
+        let _rateUs = Option(
+            img: UIImage(systemName: "star.fill"),
+            text: Utils.getLocalizedString("rateUs"),
+            clickHandler: {
+                self.navigationController?
+                    .pushViewController(UIStoryboard(name: "mainMenu", bundle: nil)
+                        .instantiateViewController(withIdentifier: "rateUs"), animated: true);
+            });
+        
+        let _contactUs = Option(
+            img: UIImage(systemName: "text.bubble.fill"),
+            text: Utils.getLocalizedString("contactUs"),
+            isHiddenArrow: true,
+            clickHandler: {
+                guard MFMailComposeViewController.canSendMail() else{
+                    self.showAlertDialog(title: "Contact us", message: "You can't send mail now, please try again later", preferredStyle: .alert, actions: {
+                        alert in
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil));
+                    });
+                    return;
+                };
+                
+                let composer:MFMailComposeViewController = MFMailComposeViewController();
+                
+                composer.mailComposeDelegate = self;
+                composer.setToRecipients(["spok.app.community@gmail.com"]);
+                composer.setSubject("Review");
+                self.present(composer, animated: true, completion: nil);
         });
         
         let _logOut = Option(img: UIImage(named:"logOut"), text: Utils.getLocalizedString("logOut"), color: UIColor(red: 1.0, green: 0.35, blue: 0.254, alpha: 1.0), isHiddenArrow: true, clickHandler: {
-            /*if let token = AccessToken.current,
-               !token.isExpired{
-                LoginManager().logOut();
-            }*/
             do {
                 try Auth.auth().signOut();
                 self.moveToSignIn();
-                
-                /*if (navigationController!.isBeingPresented){
-                    navigationController!.dismiss(animated: true, completion: nil);
-                } else {
-                    
-                    
-                    present(viewController, animated: true,     completion: nil);
-                }*/
-                
-                
             } catch{
                 print("Settings: ", "Sign out with error: ", error);
             }
         });
-        
-        options = [_aboutApp,
-            _rateUs,
-            _contactUs,
-            _logOut];
-        
-        tableView_options.delegate = self;
-        tableView_options.dataSource = self;
-        
+                
         notificationCenter.getPendingNotificationRequests(completionHandler: {
             requests in
             DispatchQueue.main.async {
@@ -146,6 +146,22 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         title = Utils.getLocalizedString("settings");
         navigationController?.view.backgroundColor = .clear;
         Utils.Design.barButton(navigationController, Utils.getLocalizedString("profile"));
+        
+        if (Auth.auth().currentUser == nil) {
+            options = [_aboutApp,
+                _SignIn];
+            mBtnDeleteAcc.isHidden = true;
+            mBtnDeleteAcc.isEnabled = false;
+        } else {
+            options = [_aboutApp,
+                _rateUs,
+                _contactUs,
+                _logOut];
+        }
+        
+        tableView_options.delegate = self;
+        tableView_options.dataSource = self;
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
