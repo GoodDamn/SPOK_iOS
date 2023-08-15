@@ -72,7 +72,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 userDefaults.setValue(lastVersion, forKey: "version");
                 print(tag, url);
                 print(tag, "ATTACHING SignInViewController")
-                self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignIn") as! SignInViewController);
+                self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main)
+                    .instantiateViewController(withIdentifier: "SignIn")
+                    as! SignInViewController);
                 return;
             }
             
@@ -83,18 +85,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !userDefaults.bool(forKey: "intro") {
             print("Time for intro!")
             attachViewController(UIStoryboard(name: "intro", bundle: Bundle.main)
-                .instantiateViewController(withIdentifier: "introNav") as! IntroNavigationController);
+                .instantiateViewController(withIdentifier: "introNav")
+                as! IntroNavigationController);
             return;
         }
         print("Intro is completed");
         let u = Auth.auth().currentUser;
         print(self,u);
-        //if u != nil {
+        if u != nil {
             self.attachViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main)
-                .instantiateViewController(withIdentifier: "mainNav") as! MainNavigationController);
-        //    return;
-        //}
-        //self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignIn") as! SignInViewController);
+                .instantiateViewController(withIdentifier: "mainNav")
+                as! MainNavigationController);
+            return;
+        }
+        self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "SignIn")
+            as! SignInViewController);
         
     }
 

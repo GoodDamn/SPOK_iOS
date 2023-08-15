@@ -167,7 +167,9 @@ class ProfileViewController:UIViewController {
         attr = NSMutableAttributedString();
         attr.append(NSAttributedString(attachment: attachment));
         let a = NSMutableAttributedString(string: l_recent.text!);
-        a.addAttributes([NSAttributedString.Key.font:UIFont(name: "OpenSans-SemiBold", size: 14)!, NSAttributedString.Key.foregroundColor:UIColor(named: "nothing_here")!], range: NSRange(location: 0, length: l_recent.text!.count));
+        a.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-SemiBold", size: 14)!,
+                         NSAttributedString.Key.foregroundColor:UIColor(named: "nothing_here")!],
+                         range: NSRange(location: 0, length: l_recent.text!.count));
         attr.append(a);
         l_recent.attributedText = attr;
         
@@ -284,7 +286,7 @@ class ProfileViewController:UIViewController {
     @IBAction func showHistory(_ sender: UIButton){
         let c = UIStoryboard(name: "mainMenu", bundle: nil)
             .instantiateViewController(withIdentifier: "listOfTrainings")
-            as! ListOfTopicsViewController;
+        as! ListOfTopicsViewController;
         
         c.title = Utils.getLocalizedString("liked");
         

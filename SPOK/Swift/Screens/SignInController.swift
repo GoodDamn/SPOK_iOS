@@ -18,6 +18,9 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
     @IBOutlet weak var b_facebook: UIButton!;
     @IBOutlet weak var l_privacy: UITextView!;
     
+    fileprivate var currentNonce: String?;
+    var signInWithApple: SignInWithAppleDelegate? = nil;
+    
     private var shapes:[UIView]!;
     var paths:[UIBezierPath]!;
     private var s:CGFloat = 50;
@@ -162,9 +165,7 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
             let view = UIView(frame: CGRect(x: 0, y: 0, width: s, height: s));
             let layer = Shape();
             configShape(path: paths[Int.random(in: 0..<3)], layer: layer);
-            //let layer2 = Shape();
-            //configShape(path: paths[Int.random(in: 0...2)], layer: layer2);
-            //layer2.strokeEnd = 0.0;
+
             view.layer.addSublayer(layer);
             self.view.addSubview(view);
             self.view.sendSubviewToBack(view);
@@ -173,46 +174,37 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
             view.transform = CGAffineTransform(rotationAngle: CGFloat.random(in: 0...360));
             
             shapes.append(view);
-            //startAnimation.delegate = AnimationDelegate(layer: layer, paths:paths);
-            
-            //layer.add(startAnimation, forKey: "anim");
+
         }
+        
+        let btnClose = UIButton(frame: CGRect(x: widthScreen-50, // 70 = 20(offset) + 50(width)
+                                              y: 20,
+                                              width: 50,
+                                              height: 50));
+        
+        btnClose.tintColor = UIColor(named: "close");
+        
+        btnClose.setImage(UIImage(systemName: "xmark",
+                                  withConfiguration: UIImage.SymbolConfiguration(weight: .bold)),
+                          for: .normal);
+        btnClose.addTarget(self,
+                           action: #selector(closeScreen(_:)),
+                           for: .touchUpInside);
+        view.addSubview(btnClose);
         
     }
     
-    @IBAction func loginFacebook(_ sender: UIButton) {
-        /*let loginManager = LoginManager();
-        loginManager.logIn(permissions: ["public_profile", "email"], from: self){
-            [weak self] (result,error) in
-            if (error != nil){
-                print("123456: "+error!.localizedDescription);
-            } else if (result != nil && !result!.isCancelled){
-                Profile.loadCurrentProfile{
-                    (profile, error) in
-                    if (error != nil){
-                        print("Load profile from Facebook API error: "+error!.localizedDescription);
-                    }else{
-                        let firstName = profile?.firstName;
-                        
-                        Toast.init(text:"Hello, "+firstName!, duration: 2.0).show();
-                        
-                        UserDefaults().setValue(firstName!, forKey: "name");
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now()+2.0, execute: {
-                            let window = UIApplication.shared.windows[0] as UIWindow;
-                            UIView.transition(from: window.rootViewController!.view, to: self!.navigation.view, duration: 0.65, options: .transitionCurlDown, completion: {_ in
-                                window.rootViewController = self!.navigation.viewControllers[0];
-                            });
-                            
-                        });
-                    }
-                };
-            }
-        };*/
+    @objc func closeScreen(_ v: UIButton) {
+        Utils.moveToAnotherViewController(
+            UIStoryboard(name: "mainMenu", bundle: Bundle.main)
+                .instantiateViewController(withIdentifier: "mainNav")
+                as! MainNavigationController,
+            animation: .transitionCurlUp);
     }
     
-    fileprivate var currentNonce: String?;
-    var signInWithApple: SignInWithAppleDelegate? = nil;
+    @IBAction func loginFacebook(_ sender: UIButton) {
+        
+    }
     
     @IBAction func loginApple(_ sender: UIButton) {
         print("Apple auth is started");
@@ -227,7 +219,11 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         signInWithApple?.completeSignIn(didCompleteWithAuthorization: authorization, errorTrig: nil, completionSignIn: {
-            Utils.moveToAnotherViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main).instantiateViewController(withIdentifier: "mainNav") as! MainNavigationController, animation: .transitionCurlUp);
+            Utils.moveToAnotherViewController(
+                UIStoryboard(name: "mainMenu", bundle: Bundle.main)
+                    .instantiateViewController(withIdentifier: "mainNav")
+                    as! MainNavigationController,
+                animation: .transitionCurlUp);
             // Local notification test
             Utils.configNotifications();
             //window.rootViewController = v;
