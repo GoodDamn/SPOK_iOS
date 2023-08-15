@@ -203,7 +203,9 @@ class ManagerViewController: UIViewController{
         let hBar:CGFloat = 50;
         let imageSize = CGSize(width: 60, height: 50);
         
-        mNavBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar, width: b.width, height: hBar));
+        var bottomPadding = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0;
+        
+        mNavBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar-bottomPadding, width: b.width, height: hBar));
         mNavBar.backgroundColor = UIColor(named: "background");
         mNavBar.mOffset = 30;
         mNavBar.mTintColorSelected = UIColor(named:"AccentColor");
@@ -224,7 +226,7 @@ class ManagerViewController: UIViewController{
                     });
         }
         
-        view.addSubview(mNavBar);
+        view.insertSubview(mNavBar, at: 1);
         
         createTab(systemNameImage: "house", imageSize: imageSize);
         createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);

@@ -143,22 +143,6 @@ class SCellCollectionView: UICollectionViewCell{
                     }
                 }
             }
-        
-        /*let ref = Database.database().reference(withPath: "Trainings/"+id.description);
-        
-        ref.observeSingleEvent(of: .value,
-            with: {
-                snapshot in
-            
-            guard let httpSPC = snapshot.childSnapshot(forPath: "preview"+lang+type).value as? String else {
-                return;
-            }
-            
-            Utils.downloadFile(http: httpSPC,
-                background: { data in
-                
-            });
-        });*/
     }
     
     

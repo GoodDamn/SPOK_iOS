@@ -43,7 +43,6 @@ class ProfileViewController:UIViewController {
     private let manager = Utils.getManager();
     
     
-    
     private let pointsStart:[CGPoint] = [
         CGPoint(x: 0, y: 0),
         CGPoint(x: 0.5, y: 0),
@@ -272,7 +271,7 @@ class ProfileViewController:UIViewController {
             return;
         }
         manager.bottomInset.constant = 0;
-        manager.mNavBar.isUserInteractionEnabled = false;
+        //manager.pageViewController?.isUserInteractionEnabled = false;
         
         UIView.animate(withDuration: 0.25, animations: {
             manager.view.layoutIfNeeded();
@@ -283,7 +282,9 @@ class ProfileViewController:UIViewController {
     }
     
     @IBAction func showHistory(_ sender: UIButton){
-        let c = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "listOfTrainings") as! ListOfTopicsViewController;
+        let c = UIStoryboard(name: "mainMenu", bundle: nil)
+            .instantiateViewController(withIdentifier: "listOfTrainings")
+            as! ListOfTopicsViewController;
         
         c.title = Utils.getLocalizedString("liked");
         
