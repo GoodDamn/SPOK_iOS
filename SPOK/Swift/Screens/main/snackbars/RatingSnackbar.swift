@@ -58,7 +58,6 @@ class RatingSnackbar: UIViewController{
             self.reviewView.isHidden = true;
             self.reviewView.frame.origin.x = UIScreen.main.bounds.width;
             self.isRated = false;
-            self.grade = 0;
             for star in self.stars{
                 star.progress = 0;
             }
@@ -81,6 +80,7 @@ class RatingSnackbar: UIViewController{
     @objc func rate(_ gesture: UITapGestureRecognizer){
         isRated = true;
         let r = Int(gesture.name!)!;
+        grade = UInt8(r);
         for i in 0..<r{
             UIView.animate(withDuration: 0.4, animations: {
                 self.stars[i].transform = CGAffineTransform(scaleX: 1.35, y: 1.35);
@@ -94,7 +94,6 @@ class RatingSnackbar: UIViewController{
             });
         }
         
-        grade = UInt8(r);
         
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(r)*0.5, execute: {
             self.reviewView.isHidden = false;

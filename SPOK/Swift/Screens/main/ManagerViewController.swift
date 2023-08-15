@@ -8,6 +8,7 @@
 import UIKit;
 import Network;
 import FirebaseDatabase;
+import FirebaseAuth;
 import UserNotifications;
 
 class ManagerViewController: UIViewController{
@@ -47,6 +48,7 @@ class ManagerViewController: UIViewController{
         }
     }
     var isPremiumUser: Bool = false;
+    var isAuthUser: Bool = false;
     var freeTrialState: UInt8 = 0; // 0 - no free trial, 1 - is active, 2 - expired
     var isConnected: Bool = false;
     var isLoadMetaData: Bool = false;
@@ -98,6 +100,12 @@ class ManagerViewController: UIViewController{
         if (endOfTopic == nil){
             endOfTopic = {
                 id in
+                
+                if !self.isAuthUser {
+                    return;
+                }
+                
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.heightSnackBarRating.constant = 110;
                     UIView.animate(withDuration: 0.3, animations: {
@@ -247,6 +255,8 @@ class ManagerViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        isAuthUser = Auth.auth().currentUser != nil;
         
         modalPresentationStyle = .overFullScreen;
         

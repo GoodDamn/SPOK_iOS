@@ -9,6 +9,8 @@ import UIKit;
 import FirebaseDatabase;
 
 class FeedBackViewController: UIViewController {
+
+    private let tag = "FeedBackViewController";
     
     @IBOutlet weak var b_continue: UIButton!;
     @IBOutlet weak var tf_assess: UITextView!;
@@ -23,7 +25,6 @@ class FeedBackViewController: UIViewController {
     var pathToAssess:String = "assess/";
     var desc:String? = nil;
     
-    private let tag = "FeedBackViewController";
     
     @IBAction func close(){
         navigationController?.popViewController(animated: true);
@@ -34,7 +35,10 @@ class FeedBackViewController: UIViewController {
     }
     
     @objc func sendAsses(_ sender: UIButton){
-        if (b_continue.alpha < 1.0) {
+        
+        print(self.tag, "sendAsses:",tf_assess.text);
+        
+        if (tf_assess.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
             Toast.init(text: Utils.getLocalizedString("write"), duration: 1.2).show();
             return;
         }
