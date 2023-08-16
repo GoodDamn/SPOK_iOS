@@ -47,7 +47,7 @@ class ManagerViewController: UIViewController{
             userDefaults.setValue(recommends, forKey: StorageApp.recommendsKey);
         }
     }
-    var isPremiumUser: Bool = false;
+    var isPremiumUser: Bool = true;
     var isAuthUser: Bool = false;
     var freeTrialState: UInt8 = 0; // 0 - no free trial, 1 - is active, 2 - expired
     var isConnected: Bool = false;

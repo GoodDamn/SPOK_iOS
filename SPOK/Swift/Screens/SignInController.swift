@@ -110,11 +110,11 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
         
         if (isBelongs){
             generatePosition(view: view, wid: wid, hei: hei);
-        } else {
-            view.layer.frame.origin.x = w;
-            view.layer.frame.origin.y = h;
+            return;
         }
         
+        view.layer.frame.origin.x = w;
+        view.layer.frame.origin.y = h;
     }
     
     override func viewDidLoad() {

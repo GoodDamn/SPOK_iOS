@@ -116,10 +116,10 @@ class Utils{
         let manager = Utils.getManager()!;
         print(Utils.tag, "single tap");
         
-        if (cell.isPremium) {
+        /*if (cell.isPremium) {
             manager.showSubScreen();
             return;
-        }
+        }*/
         
         if (manager.isConnected) {
             manager.startTraining(cell:cell, id:cell.id,startFrame: CGRect(origin: origin, size: CGSize(width: cell.frame.size.width*1.075, height: cell.frame.size.height*1.075)));

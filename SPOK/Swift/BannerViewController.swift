@@ -19,6 +19,10 @@ class BannerViewController: UIViewController {
     
     @IBOutlet weak var mTextViewNotify: UITextView!;
     
+    override var prefersStatusBarHidden: Bool {
+        return true;
+    }
+    
     private func stat(property: String) {
         let ref = Database.database().reference(withPath: "Stats/iOS/"+property);
         
@@ -41,6 +45,8 @@ class BannerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        modalPresentationStyle = .fullScreen;
         
         stat(property: "enter");
         

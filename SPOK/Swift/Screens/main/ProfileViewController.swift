@@ -258,7 +258,7 @@ class ProfileViewController:UIViewController {
     }
     
     @objc func updateGradients(_ sender: UITapGestureRecognizer) {
-        manager?.showSubScreen();
+        //manager?.showSubScreen();
         createGradient(v_grad,0);
         createGradient(v_grad2,1);
         createGradient(v_grad3,2);
