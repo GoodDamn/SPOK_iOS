@@ -187,7 +187,7 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         manager.bottomInset.constant = 49;
         UIView.animate(withDuration: 0.25, animations: {
             manager.view.layoutIfNeeded();
-            manager.mNavBar.frame.origin.y = UIScreen.main.bounds.height - manager.mNavBar.frame.size.height;
+            manager.mNavBar.transform = CGAffineTransform(translationX: 0, y: 0);
         }, completion: {
             b in
             manager.mNavBar.isUserInteractionEnabled = true;

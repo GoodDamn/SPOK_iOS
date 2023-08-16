@@ -2358,23 +2358,6 @@ This is a great app, but I would have done something better in it. First...</str
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dGQ-Xx-eNd">
-                                <rect key="frame" x="182" y="343" width="50" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="GrB-Xt-Cps"/>
-                                    <constraint firstAttribute="height" constant="50" id="VZe-gr-I0o"/>
-                                </constraints>
-                            </activityIndicatorView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headphones" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Eko-Vj-TS5">
-                                <rect key="frame" x="182" y="343.33333333333331" width="50" height="49.666666666666686"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="AccentColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CgI-Fs-A0c"/>
-                                    <constraint firstAttribute="width" constant="50" id="b21-LW-GuF"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music.note" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-VQ-J6f">
                                 <rect key="frame" x="179" y="802.66666666666663" width="28" height="19"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2388,22 +2371,15 @@ This is a great app, but I would have done something better in it. First...</str
                         <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="bEf-U7-qPr" firstAttribute="centerX" secondItem="wOR-5K-jkG" secondAttribute="centerX" id="BGI-hK-O0k"/>
-                            <constraint firstItem="dGQ-Xx-eNd" firstAttribute="centerX" secondItem="wSL-uI-uZ5" secondAttribute="centerX" id="FZa-Te-DKB"/>
                             <constraint firstItem="bEf-U7-qPr" firstAttribute="leading" secondItem="mMd-VQ-J6f" secondAttribute="trailing" id="HhU-EE-XK0"/>
                             <constraint firstItem="mMd-VQ-J6f" firstAttribute="bottom" secondItem="bEf-U7-qPr" secondAttribute="bottom" id="Ku1-08-lSn"/>
                             <constraint firstItem="7Eh-nu-wRi" firstAttribute="centerX" secondItem="wSL-uI-uZ5" secondAttribute="centerX" id="S4L-r0-hGj"/>
-                            <constraint firstItem="Eko-Vj-TS5" firstAttribute="bottom" secondItem="dGQ-Xx-eNd" secondAttribute="bottom" id="cNM-LQ-8gV"/>
                             <constraint firstItem="bEf-U7-qPr" firstAttribute="top" secondItem="7Eh-nu-wRi" secondAttribute="bottom" constant="18" id="f8a-vM-hs6"/>
                             <constraint firstItem="mMd-VQ-J6f" firstAttribute="top" secondItem="bEf-U7-qPr" secondAttribute="top" id="h8Y-QU-Utm"/>
                             <constraint firstItem="wOR-5K-jkG" firstAttribute="bottom" secondItem="bEf-U7-qPr" secondAttribute="bottom" constant="40" id="qlT-tB-xr3"/>
-                            <constraint firstItem="dGQ-Xx-eNd" firstAttribute="centerY" secondItem="wOR-5K-jkG" secondAttribute="centerY" constant="-85" id="rHT-uG-V4S"/>
-                            <constraint firstItem="Eko-Vj-TS5" firstAttribute="leading" secondItem="dGQ-Xx-eNd" secondAttribute="leading" id="zve-RC-PjR"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="dGQ-Xx-eNd" id="ESs-zI-1d9"/>
-                        <outlet property="iconBottomMargin" destination="rHT-uG-V4S" id="eo4-WM-p4p"/>
-                        <outlet property="iv_headphones" destination="Eko-Vj-TS5" id="321-aS-UGj"/>
                         <outlet property="iv_note" destination="mMd-VQ-J6f" id="bGK-ZW-hFR"/>
                         <outlet property="l_nameTraining" destination="7Eh-nu-wRi" id="F89-7E-lwE"/>
                         <outlet property="l_trackName" destination="bEf-U7-qPr" id="AlC-G8-JjF"/>
@@ -3545,7 +3521,6 @@ Change the topic's theme and font to your liking. Be unique!</string>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="gear" width="300" height="300"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
-        <image name="headphones" catalog="system" width="128" height="121"/>
         <image name="heart" width="28" height="25"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>

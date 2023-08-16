@@ -278,9 +278,12 @@ class ProfileViewController:UIViewController {
         
         UIView.animate(withDuration: 0.25, animations: {
             manager.view.layoutIfNeeded();
-            manager.mNavBar.frame.origin.y = UIScreen.main.bounds.height;
+            manager.mNavBar.transform = CGAffineTransform(translationX: 0, y: 100);
         });
-        navigationController?.pushViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main).instantiateViewController(withIdentifier: "settings"), animated: true);
+        
+        navigationController?
+            .pushViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "settings"), animated: true);
         
     }
     

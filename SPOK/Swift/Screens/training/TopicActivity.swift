@@ -11,12 +11,13 @@ import FirebaseDatabase;
 import FirebaseStorage;
 
 class TopicActivity: UIViewController{
+    
     @IBOutlet weak var l_nameTraining: UILabel!;
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!;
-    @IBOutlet weak var iv_headphones: UIImageView!;
     @IBOutlet weak var iv_note: UIImageView!;
     @IBOutlet weak var l_trackName: UILabel!;
-    @IBOutlet weak var iconBottomMargin: NSLayoutConstraint!;
+    
+    private var mActivityIndicator: UIActivityIndicatorView!;
+    private var mImageViewHeadphones: UIImageView!;
     
     private var audioPlayer: AVAudioPlayer?;
     private var currentPhrase:Int = 0;
@@ -44,6 +45,170 @@ class TopicActivity: UIViewController{
     
     public var toExitX:CGFloat = 0;
     
+    @objc func onStart(){
+        if currentPhrase != 0 {
+            audioPlayer?.play();
+            audioPlayer?.setVolume(1.0, fadeDuration: 0.8);
+        }
+    }
+    
+    @objc func onPause(){
+        if currentPhrase != 0 {
+            audioPlayer?.pause();
+            audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(onStart), name: UIApplication.didBecomeActiveNotification, object: nil);
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self);
+        audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
+        print(tag, "will disappear");
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        // headphones
+        let screen = UIScreen.main.bounds;
+        
+        view.layer.shadowColor = UIColor(named: "settings_title")?.cgColor;
+        view.layer.shadowRadius = 7.5 * UIScreen.main.scale;
+        view.layer.shadowOpacity = 0.45;
+        view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5);
+        view.layer.rasterizationScale = UIScreen.main.nativeScale;
+        view.layer.shouldRasterize = true;
+        
+        manager = Utils.getManager()!;
+        let blurView = manager!.blurView;
+        toExitX = UIScreen.main.bounds.width * 0.25;
+        
+        v_tap = TouchView(frame: CGRect(x: 0.0, y: 0.0, width: screen.width, height: screen.height));
+        v_tap.isUserInteractionEnabled = false;
+        v_tap.onTriggered = {
+            if (self.v_tap.isTriggered) {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.view.layer.cornerRadius = 7.5 * UIScreen.main.scale;
+                });
+            }
+        }
+        
+        v_tap.onTouchMoves = {
+            (currentPos, beginPos, originScaled) in
+            if self.v_tap.isTriggered {
+                self.view.frame.origin.x += currentPos.x - beginPos.x;
+                let diff = abs(self.view.frame.origin.x-originScaled);
+                
+                blurView.alpha = 1.7 - diff/self.toExitX;
+                self.audioPlayer?.setVolume(Float(blurView.alpha), fadeDuration: 0.0);
+            }
+        }
+        
+        let screenBounds = UIScreen.main.bounds;
+        
+        let sWidth = screenBounds.size.width;
+        let sHeight = screenBounds.size.height;
+        let paddingX = sWidth * 0.11;
+        
+        let iSize = CGSize(width: 40, height: 40);
+        let offset:CGFloat = 60;
+        
+        mActivityIndicator = UIActivityIndicatorView(frame: CGRect(x: (sWidth - iSize.width) * 0.5,
+                                                                   y: sHeight * 0.5 - offset - iSize.height,
+                                                                   width: iSize.width,
+                                                                   height: iSize.height));
+        view.addSubview(mActivityIndicator);
+        mActivityIndicator.startAnimating();
+        
+        mImageViewHeadphones = UIImageView(frame: mActivityIndicator.frame);
+        mImageViewHeadphones.image = UIImage(systemName: "headphones");
+        mImageViewHeadphones.tintColor = UIColor(named: "AccentColor");
+        
+        spawnPoint.x = paddingX;
+        spawnPoint.y = sHeight * 0.5 - offset * 0.9;
+        spawnSize = CGSize(width: sWidth-paddingX-paddingX,
+                           height: screenBounds.size.height-spawnPoint.y);
+        
+        print("TopicActivity: ",spawnPoint, spawnSize, screenBounds);
+        
+        fieldToFade = spawnPoint.y * 0.35;
+        
+        currentTextView = createTextView(Utils.getLocalizedString("topicLoad"));
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.currentTextView.alpha = 1.0;
+        });
+        
+        v_tap.onTouchEnd = { [self] in
+            if (v_tap.isTriggered) {
+                if (view.frame.origin.x > toExitX) {
+                    audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
+                    stopSession(0.3, anim: {
+                        self.view.frame = self.startFramePreview;
+                        self.preview.alpha = 1.0;
+                    });
+                    return;
+                }
+                
+                UIView.animate(withDuration: 0.23 , animations: {
+                    self.view.layer.cornerRadius = 0;
+                    self.view.frame.origin.x = 0.0;
+                });
+                return;
+            }
+            
+            if (currentPhrase == phrases.count) { // End of session
+                v_tap.isUserInteractionEnabled = false;
+                let comp:((Bool)->Void) = {
+                    b in
+                    self.audioPlayer?.stop();
+                    self.endOfSession?(id);
+                    self.stopSession(0.3, anim: {
+                        self.view.frame = startFramePreview;
+                        self.preview.alpha = 1.0;
+                    });
+                }
+                
+                audioPlayer?.setVolume(0.0, fadeDuration: 1.3);
+                UIView.animate(withDuration: 1.3, animations: {
+                    self.currentTextView.alpha = 0.0;
+                }, completion: comp);
+                
+                return;
+            }
+            if (currentPhrase == 0){
+                UIView.animate(withDuration: 0.55,  animations: {
+                    self.mImageViewHeadphones.transform = CGAffineTransform(scaleX: 3.0, y: 3.0);
+                    self.mImageViewHeadphones.alpha = 0.0;
+                    
+                    self.l_nameTraining.alpha = 0.0;
+                    self.l_trackName.alpha = 0.0;
+                    self.iv_note.alpha = 0.0;
+                    
+                    self.audioPlayer?.setVolume(0.0, fadeDuration: 0);
+                    self.audioPlayer?.play();
+                    self.audioPlayer?.setVolume(1.0, fadeDuration: 1.5);
+                    self.audioPlayer?.numberOfLoops = -1;
+                }, completion: {
+                    (b) in
+                    self.mImageViewHeadphones.removeFromSuperview();
+                    self.l_nameTraining.removeFromSuperview();
+                });
+                
+            }
+            
+            nextPhrase(phrases[self.currentPhrase]);
+            
+            self.currentPhrase+=1;
+        };
+        
+        view.addSubview(v_tap);
+    }
+    
     func prepareSession(with fileSKC1: FileSKC1) {
         do {
             try AVAudioSession.sharedInstance().setMode(.default);
@@ -55,23 +220,29 @@ class TopicActivity: UIViewController{
             print(self.tag,error);
         }
         
-        self.phrases = fileSKC1.content;
-        self.l_trackName.text = fileSKC1.artistSong;
+        phrases = fileSKC1.content;
+        l_trackName.text = fileSKC1.artistSong;
         
-        self.iv_headphones.transform = CGAffineTransform(scaleX: 3.0, y: 3.0);
+        mImageViewHeadphones.transform = CGAffineTransform(scaleX: 3.0, y: 3.0);
+        mImageViewHeadphones.alpha = 0.0;
+        
+        view.addSubview(mImageViewHeadphones);
         
         nextPhrase(Utils.getLocalizedString("putHeadphones"));
         
         UIView.animate(withDuration: 0.65, animations: {
-            self.activityIndicator.alpha = 0.0;
-            self.iv_headphones.alpha = 1.0;
-            self.iv_headphones.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
+            self.mActivityIndicator.alpha = 0.0;
+            
+            self.mImageViewHeadphones.alpha = 1.0;
+            self.mImageViewHeadphones.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
+            
             self.l_nameTraining.alpha = 1.0;
             self.l_trackName.alpha = 1.0;
             self.iv_note.alpha = 1.0;
         }, completion: {
             (b) in
-            self.activityIndicator.stopAnimating();
+            self.mActivityIndicator.stopAnimating();
+            self.mActivityIndicator.removeFromSuperview()
             self.v_tap.isUserInteractionEnabled = true;
             if self.phrases.last?.isEmpty ?? false{
                 self.phrases.popLast();
@@ -170,155 +341,6 @@ class TopicActivity: UIViewController{
         textView.initial(t: text);
         view.insertSubview(textView, at: 0);
         return textView;
-    }
-    
-    @objc func onStart(){
-        if currentPhrase != 0 {
-            audioPlayer?.play();
-            audioPlayer?.setVolume(1.0, fadeDuration: 0.8);
-        }
-    }
-    
-    @objc func onPause(){
-        if currentPhrase != 0 {
-            audioPlayer?.pause();
-            audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(onStart), name: UIApplication.didBecomeActiveNotification, object: nil);
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self);
-        audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
-        print(tag, "will disappear");
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad();
-        
-        let screen = UIScreen.main.bounds;
-        
-        view.layer.shadowColor = UIColor(named: "settings_title")?.cgColor;
-        view.layer.shadowRadius = 7.5 * UIScreen.main.scale;
-        view.layer.shadowOpacity = 0.45;
-        view.layer.shadowOffset = CGSize(width: 0.5, height: 0.5);
-        view.layer.rasterizationScale = UIScreen.main.nativeScale;
-        view.layer.shouldRasterize = true;
-        
-        manager = Utils.getManager()!;
-        let blurView = manager!.blurView;
-        toExitX = UIScreen.main.bounds.width * 0.25;
-        
-        v_tap = TouchView(frame: CGRect(x: 0.0, y: 0.0, width: screen.width, height: screen.height));
-        v_tap.isUserInteractionEnabled = false;
-        v_tap.onTriggered = {
-            if (self.v_tap.isTriggered) {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.view.layer.cornerRadius = 7.5 * UIScreen.main.scale;
-                });
-            }
-        }
-        
-        v_tap.onTouchMoves = {
-            (currentPos, beginPos, originScaled) in
-            if self.v_tap.isTriggered {
-                self.view.frame.origin.x += currentPos.x - beginPos.x;
-                let diff = abs(self.view.frame.origin.x-originScaled);
-                
-                blurView.alpha = 1.7 - diff/self.toExitX;
-                self.audioPlayer?.setVolume(Float(blurView.alpha), fadeDuration: 0.0);
-            }
-        }
-        
-        let screenBounds = UIScreen.main.bounds;
-        print(screenBounds, activityIndicator.frame)
-        
-        let width = screenBounds.size.width;
-        let paddingX = width * 0.11;
-        
-        spawnPoint.x = paddingX;
-        spawnPoint.y = screenBounds.height * 0.5 + iconBottomMargin.constant*0.7;
-        spawnSize = CGSize(width: width-paddingX-paddingX,
-                           height: screenBounds.size.height-spawnPoint.y);
-        
-        print("TopicActivity: ",spawnPoint, spawnSize, screenBounds, iconBottomMargin.constant);
-        
-        fieldToFade = spawnPoint.y * 0.35;
-        
-        currentTextView = createTextView(Utils.getLocalizedString("topicLoad"));
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.currentTextView.alpha = 1.0;
-        });
-        
-        v_tap.onTouchEnd = { [self] in
-            if (v_tap.isTriggered) {
-                if (view.frame.origin.x > toExitX) {
-                    audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
-                    stopSession(0.3, anim: {
-                        self.view.frame = self.startFramePreview;
-                        self.preview.alpha = 1.0;
-                    });
-                    return;
-                }
-                
-                UIView.animate(withDuration: 0.23 , animations: {
-                    self.view.layer.cornerRadius = 0;
-                    self.view.frame.origin.x = 0.0;
-                });
-                return;
-            }
-            
-            if (currentPhrase == phrases.count) { // End of session
-                v_tap.isUserInteractionEnabled = false;
-                let comp:((Bool)->Void) = {
-                    b in
-                    self.audioPlayer?.stop();
-                    self.endOfSession?(id);
-                    self.stopSession(0.3, anim: {
-                        self.view.frame = startFramePreview;
-                        self.preview.alpha = 1.0;
-                    });
-                }
-                
-                audioPlayer?.setVolume(0.0, fadeDuration: 1.3);
-                UIView.animate(withDuration: 1.3, animations: {
-                    self.currentTextView.alpha = 0.0;
-                }, completion: comp);
-            
-                return;
-            }
-            if (currentPhrase == 0){
-                UIView.animate(withDuration: 0.55,  animations: {
-                    self.iv_headphones.transform = CGAffineTransform(scaleX: 3.0, y: 3.0);
-                    self.iv_headphones.alpha = 0.0;
-                    self.l_nameTraining.alpha = 0.0;
-                    self.l_trackName.alpha = 0.0;
-                    self.iv_note.alpha = 0.0;
-                    self.audioPlayer?.setVolume(0.0, fadeDuration: 0);
-                    self.audioPlayer?.play();
-                    self.audioPlayer?.setVolume(1.0, fadeDuration: 1.5);
-                    self.audioPlayer?.numberOfLoops = -1;
-                }, completion: {
-                    (b) in
-                    self.iv_headphones.removeFromSuperview();
-                    self.l_nameTraining.removeFromSuperview();
-                    self.activityIndicator.removeFromSuperview();
-                });
-                
-            }
-            
-            nextPhrase(phrases[self.currentPhrase]);
-            
-            self.currentPhrase+=1;
-        };
-        
-        view.addSubview(v_tap);
     }
 }
 
