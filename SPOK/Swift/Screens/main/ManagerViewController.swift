@@ -92,11 +92,7 @@ class ManagerViewController: UIViewController{
     }
     
     func startTraining(cell:SCellCollectionView,
-                       id:Int,
                        startFrame:CGRect,
-                       typeTopic:String = "Trainings/",
-                       musicChild:String = "m",
-                       contentChild:String = "text"+Utils.getLanguageCode(),
                        endOfSession:((Int)->Void)? = nil)->Void{
         
         var endOfTopic = endOfSession;
@@ -124,18 +120,24 @@ class ManagerViewController: UIViewController{
             }
         }
         
-                        
+        let id = cell.mID;
         let name:String? = cell.nameTraining.text;
+        
         print("startTraining", id, name)
-        if cell.id == 0 || name == nil{
+        if id == 0 || name == nil{
             return;
         }
         blur();
+        
+        var statsTopic = id.description+"_";
+        var statsCategory = cell.mFileSPC.categoryID.description + "_";
         
         if (id > 0){
             let uint16ID = UInt16(id);
             let indexExists = history.firstIndex(of: uint16ID);
             if indexExists != nil {
+                statsTopic += "R_";
+                statsCategory += "R_";
                 history.remove(at: indexExists!);
             }
             history.append(uint16ID);
@@ -144,15 +146,14 @@ class ManagerViewController: UIViewController{
         
         let controller = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "training") as! TopicActivity;
         controller.id = id;
+        controller.endOfSession = endOfTopic;
+        controller.mFileSPC = cell.mFileSPC;
+        controller.mStatsTopic = statsTopic;
+        controller.mStatsCategory = statsCategory;
         controller.view.frame = startFrame;
         controller.view.layer.masksToBounds = true;
         print("ManagerVC:", controller.view);
         controller.view.layer.cornerRadius = 17*1.15;
-        controller.typeTopic = typeTopic;
-        controller.musicChild = musicChild;
-        controller.contentChild = contentChild;
-        print("TopicActivity: ",controller.typeTopic, typeTopic)
-        controller.endOfSession = endOfTopic;
         cell.clipsToBounds = true;
         controller.putPreviewImage(cell: cell,startFrame: startFrame);
         cell.clipsToBounds = false;
@@ -199,7 +200,10 @@ class ManagerViewController: UIViewController{
         print(tag, "onPause();");
         DispatchQueue.global(qos: .userInitiated).async {
             let userRef = self.userDefaults.string(forKey: Utils.userRef);
-            if userRef != nil && self.isConnected && self.isLoadMetaData{
+            if userRef != nil
+                && self.isConnected
+                && self.isLoadMetaData
+                && self.isAuthUser {
                 let dataRef = Database.database().reference(withPath: "Users/"+userRef!);
                 dataRef.child("his2").setValue(Crypt.encryptString(self.history));
                 dataRef.child("like2").setValue(Crypt.encryptString(self.likes));
@@ -260,7 +264,7 @@ class ManagerViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        mDatabaseStats = mDatabase.reference(withPath: "Stats");
+        mDatabaseStats = mDatabase.reference(withPath: "Stats/iOS");
         
         isAuthUser = Auth.auth().currentUser != nil;
         

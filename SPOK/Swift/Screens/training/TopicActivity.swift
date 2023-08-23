@@ -29,11 +29,13 @@ class TopicActivity: UIViewController{
     private let to:CGAffineTransform = CGAffineTransform(translationX: 0.0, y: 150.0),
                 zero = CGAffineTransform(translationX: 0.0, y: 0.0);
     
-    var v_tap: TouchView!;
+    var mStatsTopic = "NULL";
+    var mStatsCategory = "NULL";
+    
+    var memTime:TimeInterval = .zero;
     var id:Int!;
-    var typeTopic:String = "Trainings/";
-    var musicChild:String = "M";
-    var contentChild:String = "text";
+    var v_tap: TouchView!;
+    var mFileSPC: FileSPC!;
     var endOfSession:((Int)->Void)? = nil;
     
     var phrases:[String] = [];
@@ -163,12 +165,22 @@ class TopicActivity: UIViewController{
             
             if (currentPhrase == phrases.count) { // End of session
                 v_tap.isUserInteractionEnabled = false;
+                collectStat("_END");
+                
+                let curTime = NSDate().timeIntervalSince1970;
+                let deltaTime = NSNumber(value: Int(curTime - self.memTime));
+                
+                print(tag, "TIME_INFO:",memTime," -> ", curTime);
+                print(tag, "TIME ELAPSED:", deltaTime);
+                
+                collectStat("_TIME", increment: deltaTime);
+                
                 let comp:((Bool)->Void) = {
                     b in
                     self.audioPlayer?.stop();
-                    self.endOfSession?(id);
+                    self.endOfSession?(self.id);
                     self.stopSession(0.3, anim: {
-                        self.view.frame = startFramePreview;
+                        self.view.frame = self.startFramePreview;
                         self.preview.alpha = 1.0;
                     });
                 }
@@ -180,7 +192,7 @@ class TopicActivity: UIViewController{
                 
                 return;
             }
-            if (currentPhrase == 0){
+            if (currentPhrase == 0) {
                 UIView.animate(withDuration: 0.55,  animations: {
                     self.mImageViewHeadphones.transform = CGAffineTransform(scaleX: 3.0, y: 3.0);
                     self.mImageViewHeadphones.alpha = 0.0;
@@ -198,8 +210,9 @@ class TopicActivity: UIViewController{
                     self.mImageViewHeadphones.removeFromSuperview();
                     self.l_nameTraining.removeFromSuperview();
                 });
-                
+                memTime = NSDate().timeIntervalSince1970;
             }
+            
             
             nextPhrase(phrases[self.currentPhrase]);
             
@@ -207,6 +220,21 @@ class TopicActivity: UIViewController{
         };
         
         view.addSubview(v_tap);
+    }
+    
+    func collectStat(_ ch: String, increment: NSNumber = 1) {
+        guard let m = self.manager else {
+            return;
+        }
+        
+        if m.isConnected {
+            m.mDatabaseStats?
+                .child("Trainings/" + mStatsTopic + m.language + ch)
+                .setValue(ServerValue.increment(increment));
+            m.mDatabaseStats?
+                .child("Category/" + mStatsCategory + m.language + ch)
+                .setValue(ServerValue.increment(increment));
+        }
     }
     
     func prepareSession(with fileSKC1: FileSKC1) {
@@ -251,9 +279,8 @@ class TopicActivity: UIViewController{
     }
     
     func loadData() {
-        print("TopicActivity: ", typeTopic, contentChild, musicChild);
         
-        let id = abs(self.id);
+        collectStat("_BEG");
         
         let localSKC1 = StorageApp.Topic.content(id: id);
         
@@ -281,7 +308,7 @@ class TopicActivity: UIViewController{
                 return;
             }
             
-            StorageApp.Topic.Save.content(id: id, data: data);
+            StorageApp.Topic.Save.content(id: self.id, data: data);
             self.prepareSession(with: fileSKC1!);
         }
     }

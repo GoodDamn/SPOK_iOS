@@ -10,6 +10,8 @@ import FirebaseDatabase;
 
 class Utils{
     
+    private static let tag = "Utils:";
+    
     public static let givenName:String = "name",
                       userRef:String = "userID";
     
@@ -110,19 +112,26 @@ class Utils{
         return Locale.current.languageCode?.replacingOccurrences(of: "ru", with: "").uppercased() ?? "";
     }
     
-    private static let tag = "Tap123456:";
     
-    static func singleTap(_ cell:SCellCollectionView, origin:CGPoint){
+    static func singleTap(_ cell:SCellCollectionView,
+                          origin:CGPoint) {
+        
         let manager = Utils.getManager()!;
         print(Utils.tag, "single tap");
         
-        if (cell.isPremium) {
+        if (cell.mFileSPC.isPremium) {
             manager.showSubScreen();
             return;
         }
         
         if (manager.isConnected) {
-            manager.startTraining(cell:cell, id:cell.id,startFrame: CGRect(origin: origin, size: CGSize(width: cell.frame.size.width*1.075, height: cell.frame.size.height*1.075)));
+            manager.startTraining(
+                cell:cell,
+                startFrame: CGRect(
+                            origin: origin,
+                            size: CGSize(
+                                  width: cell.frame.size.width*1.075,
+                                  height: cell.frame.size.height*1.075)));
             return;
         }
         

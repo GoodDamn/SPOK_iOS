@@ -13,11 +13,11 @@ class SCellCollectionView: UICollectionViewCell{
     @IBOutlet weak var imageViewTraining: UIImageView!;
     @IBOutlet weak var nameTraining: UILabel!;
     
-    private static let TAG = "SCellCollectionView";
+    private static let TAG = "SCellCollectionView:";
     private var viewController:UIViewController!;
     
-    var isPremium = false;
-    var id:Int = -1;
+    var mID: Int = Int.min;
+    var mFileSPC: FileSPC!;
     var collectionView: UICollectionView? = nil;
     var touch:UITouch!;
     var handlerDoubleTap:(()->Void)? = nil;
@@ -40,7 +40,10 @@ class SCellCollectionView: UICollectionViewCell{
         let screenLoc = sender.location(in: self.viewController.view);
         cardLoc.x = cardLoc.x*1.15;
         cardLoc.y = cardLoc.y*1.15;
-        Utils.singleTap(self, origin: CGPoint(x: screenLoc.x-cardLoc.x, y: screenLoc.y-cardLoc.y));
+        Utils.singleTap(self,
+                        origin: CGPoint(
+                            x: screenLoc.x-cardLoc.x,
+                            y: screenLoc.y-cardLoc.y));
     }
     
     @objc func doubleTap(_ sender: UITapGestureRecognizer) {
@@ -80,10 +83,10 @@ class SCellCollectionView: UICollectionViewCell{
         
         self.contentView.alpha = 0;
         
-        self.imageViewTraining.image = nil;
-        self.nameTraining.text = nil;
+        imageViewTraining.image = nil;
+        nameTraining.text = nil;
         
-        self.id = id;
+        mID = id;
         self.viewController = viewController;
 
         let name = lang+type+id.description;
@@ -93,8 +96,8 @@ class SCellCollectionView: UICollectionViewCell{
             DispatchQueue.global(qos: .background).async {
                 print("SCELL_COLLECTION_VIEW: GETTING PREVIEW FROM STORAGE:", id);
                 
-                let fileSPC = StorageApp.Topic.preview(name: name)!;
-                self.isPremium = fileSPC.isPremium;
+                let fileSPC = StorageApp.Topic.preview(name: name) ?? FileSPC();
+                self.mFileSPC = fileSPC;
                 
                 DispatchQueue.main.async {
                     self.nameTraining.text = fileSPC.title;
@@ -118,7 +121,7 @@ class SCellCollectionView: UICollectionViewCell{
                 
                 DispatchQueue.global(qos: .background).async {
                     let fileSPC = Utils.Exten.getSPCFile(data!);
-                    self.isPremium = fileSPC.isPremium;
+                    self.mFileSPC = fileSPC;
                     var img: UIImage? = fileSPC.image;
                     
                     if (self as? MCellCollectionView == nil) {
