@@ -20,13 +20,15 @@ class ManagerViewController: UIViewController{
     @IBOutlet weak var bottomInset: NSLayoutConstraint!;
     
     @IBOutlet weak var trainingContainer: UIView!;
-    @IBOutlet weak var tabBarContainer: UIView!;
     @IBOutlet weak var pageContainer: UIView!;
     @IBOutlet weak var snackBarRating: UIView!;
     
     private var mPrevIndex:Int = 0;
     
     let language = Utils.getLanguageCode();
+    let userDefaults: UserDefaults = UserDefaults();
+    let mDatabase = Database.database();
+    
     var mNavBar: BottomNavigationBar!;
     var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
     var news: [UInt16] = [];
@@ -47,7 +49,7 @@ class ManagerViewController: UIViewController{
             userDefaults.setValue(recommends, forKey: StorageApp.recommendsKey);
         }
     }
-    var isPremiumUser: Bool = true;
+    var isPremiumUser: Bool = false;
     var isAuthUser: Bool = false;
     var freeTrialState: UInt8 = 0; // 0 - no free trial, 1 - is active, 2 - expired
     var isConnected: Bool = false;
@@ -55,7 +57,9 @@ class ManagerViewController: UIViewController{
     var pageViewController: MainPageViewController? = nil;
     var ratingSnackBar: RatingSnackbar? = nil;
     var viewControllersPages:[UIViewController] = [];
-    let userDefaults: UserDefaults = UserDefaults();
+    
+    var mDatabaseStats: DatabaseReference? = nil;
+    var mDatabaseUser: DatabaseReference? = nil;
     
     func closeFragment() {
         trainingContainer.isHidden = true;
@@ -256,6 +260,8 @@ class ManagerViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        mDatabaseStats = mDatabase.reference(withPath: "Stats");
+        
         isAuthUser = Auth.auth().currentUser != nil;
         
         modalPresentationStyle = .overFullScreen;
@@ -266,36 +272,18 @@ class ManagerViewController: UIViewController{
         likes = userDefaults.array(forKey: StorageApp.likesKey) as? [UInt16] ?? [];
         recommends = userDefaults.array(forKey: StorageApp.recommendsKey) as? [UInt16] ?? [];
         
-        let ref = Database.database().reference();
+        let ref = mDatabase.reference();
+        
+        let buildNumber = Int(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "25") ?? 25;
+        print(self.tag, "BUILD NUMBER:",buildNumber);
         
         let monitor = NWPathMonitor();
         monitor.pathUpdateHandler = {
             path in
             self.isConnected = path.status == .satisfied;
-            if self.isConnected {
-                print("Manager", self.heightSnackbar.constant);
+            if !self.isConnected {
                 DispatchQueue.main.async {
-                    self.heightSnackbar.constant = 0;
-                    ref.observeSingleEvent(of: .value, with: { [self]
-                        snapshot in
-                        if ((snapshot.childSnapshot(forPath: "state").value as? Int) == 0){
-                            if (!vc.isViewLoaded){
-                                self.navigationController?.pushViewController(vc, animated: true);
-                            }
-                        }
-                        
-                        let userSnap = snapshot.childSnapshot(forPath: "Users/"+(userDefaults.string(forKey: Utils.userRef) ?? "null"));
-                        if history.isEmpty{
-                            history = Crypt.decryptString(userSnap.childSnapshot(forPath: "his2").value as? String ?? "");
-                        }
-                        if likes.isEmpty{
-                            likes = Crypt.decryptString(userSnap.childSnapshot(forPath: "like2").value as? String ?? "");
-                        }
-                        if recommends.isEmpty{
-                            recommends = Crypt.decryptString(userSnap.childSnapshot(forPath: "rec2").value as? String ?? "");
-                        }
-                        self.isLoadMetaData = true;
-                    });
+                    self.heightSnackbar.constant = 24;
                     UIView.animate(withDuration: 0.23, animations: {
                         self.view.layoutIfNeeded();
                     });
@@ -303,8 +291,49 @@ class ManagerViewController: UIViewController{
                 return;
             }
             
+            
+            print("Manager", self.heightSnackbar.constant);
             DispatchQueue.main.async {
-                self.heightSnackbar.constant = 24;
+                self.heightSnackbar.constant = 0;
+                
+                // check server's state
+                
+                ref.child("opt")
+                    .observeSingleEvent(of: .value,
+                                        with: { snap in
+                        if ((snap.childSnapshot(forPath: "state").value as? Int) == 0){
+                            if (!vc.isViewLoaded){
+                                self.navigationController?.pushViewController(vc, animated: true);
+                            }
+                            return;
+                        }
+                        
+                        if ((snap.childSnapshot(forPath: "versi").value as? Int) ?? 25) > buildNumber {
+                            Toast.init(text: "The new app version is available", duration: 3.5).show();
+                            return;
+                        }
+                        
+                        if !self.isAuthUser {
+                            self.isLoadMetaData = true;
+                            return;
+                        }
+                        
+                        ref.child("Users/"+(self.userDefaults.string(forKey: Utils.userRef) ?? "null"))
+                            .observeSingleEvent(of: .value,
+                                                with: { userSnap in
+                                if self.history.isEmpty{
+                                    self.history = Crypt.decryptString(userSnap.childSnapshot(forPath: "his2").value as? String ?? "");
+                                }
+                                if self.likes.isEmpty{
+                                    self.likes = Crypt.decryptString(userSnap.childSnapshot(forPath: "like2").value as? String ?? "");
+                                }
+                                if self.recommends.isEmpty{
+                                    self.recommends = Crypt.decryptString(userSnap.childSnapshot(forPath: "rec2").value as? String ?? "");
+                                }
+                                self.isLoadMetaData = true;
+                            })
+                       
+                    });
                 UIView.animate(withDuration: 0.23, animations: {
                     self.view.layoutIfNeeded();
                 });

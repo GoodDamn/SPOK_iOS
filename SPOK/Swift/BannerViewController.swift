@@ -24,14 +24,10 @@ class BannerViewController: UIViewController {
     }
     
     private func stat(property: String) {
-        let ref = Database.database().reference(withPath: "Stats/iOS/"+property);
-        
-        ref.observeSingleEvent(of: .value, with: {
-            snapshot in
-            var val = snapshot.value as? Int ?? 0;
-            val += 1;
-            ref.setValue(val);
-        });
+        Database
+            .database()
+            .reference(withPath: "Stats/iOS/"+property)
+            .setValue(ServerValue.increment(1));
     }
     
     @IBAction func popViewController(_ sender: Any) {
