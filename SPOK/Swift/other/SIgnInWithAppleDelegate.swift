@@ -42,31 +42,31 @@ class SignInWithAppleDelegate{
     func completeSignIn(didCompleteWithAuthorization authorization: ASAuthorization, errorTrig: (()->Void)?, completionSignIn: @escaping (()->Void)) -> Void {
         print(self, authorization.credential);
         switch authorization.credential {
-        case let appleID as ASAuthorizationAppleIDCredential:
-            let idApple = appleID.user;
-            let fullName = appleID.fullName;
-            print(self, ": Apple ID credentials: ", idApple, fullName);
-            let userDef = UserDefaults();
-            let token = String(data: appleID.identityToken!, encoding: .utf8)!;
-            userDef.setValue(fullName?.givenName, forKey: Utils.givenName);
-            
-            let auth = Auth.auth();
-            auth.signIn(with: OAuthProvider.credential(withProviderID: "apple.com", idToken: token, rawNonce: nonce), completion: {
-                (authResult, error) in
-                if error != nil{
-                    print(self, error);
-                    errorTrig?();
-                    return;
-                }
+            case let appleID as ASAuthorizationAppleIDCredential:
+                let idApple = appleID.user;
+                let fullName = appleID.fullName;
+                print(self, ": Apple ID credentials: ", idApple, fullName);
+                let userDef = UserDefaults();
+                let token = String(data: appleID.identityToken!, encoding: .utf8)!;
+                userDef.setValue(fullName?.givenName, forKey: Utils.givenName);
                 
-                if let id = auth.currentUser?.uid{
-                    userDef.setValue(id, forKey: Utils.userRef);
-                    completionSignIn();
-                }
-            });
-            
-        default:
-            break
+                let auth = Auth.auth();
+                auth.signIn(with: OAuthProvider.credential(withProviderID: "apple.com", idToken: token, rawNonce: nonce), completion: {
+                    (authResult, error) in
+                    if error != nil{
+                        print(self, error);
+                        errorTrig?();
+                        return;
+                    }
+                    
+                    if let id = auth.currentUser?.uid{
+                        userDef.setValue(id, forKey: Utils.userRef);
+                        completionSignIn();
+                    }
+                });
+                
+            default:
+                break
         }
     }
 }

@@ -99,7 +99,7 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
         Storage.storage()
             .reference(withPath: "Collection/"+ll)
             .listAll { listResult, error in
-                if error != nil {
+                guard let listResult = listResult, error == nil else {
                     return;
                 }
                 

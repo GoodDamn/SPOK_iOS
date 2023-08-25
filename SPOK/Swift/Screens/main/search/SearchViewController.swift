@@ -224,10 +224,12 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         Storage.storage()
             .reference(withPath: "Categories/"+ll)
             .listAll { listResult, error in
-                if error != nil {
+                
+                guard let listResult = listResult, error == nil else {
                     return;
                 }
-                print(self.tag, "CATEGORIES_COUNT:",listResult.items.count);
+                
+                print(self.tag, "CATEGORIES_COUNT:", listResult.items.count);
                 self.downloadCategory(current: 0,
                                       categories: listResult.items);
             }

@@ -64,6 +64,15 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         Utils.moveToAnotherViewController(UIStoryboard(name: "Main", bundle: nil) .instantiateViewController  (withIdentifier: "SignIn") as!  SignInViewController, animation: .transitionCurlDown);
     }
     
+    private func showError(_ adv: String = "") {
+        showAlertDialog(
+            title: Utils.getLocalizedString("actionUna") + adv,
+            message: Utils.getLocalizedString("cannotDelAcc"),
+            preferredStyle: .alert,
+            actions: { alert in
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil));
+        });
+    }
     
     private func showAlertDialog(title:String, message:String?, preferredStyle: UIAlertController.Style,actions: ((UIAlertController)->Void)?) -> Void{
         let alertDialog = UIAlertController(title: title, message: message, preferredStyle: preferredStyle);
@@ -200,19 +209,41 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        signInWithApple?.completeSignIn(didCompleteWithAuthorization: authorization, errorTrig: {
-            self.showAlertDialog(title: "Error", message: Utils.getLocalizedString("errAuth"),preferredStyle: .alert, actions: {alert in alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))});
-        }, completionSignIn: {
-            
-            if let userID = Utils.getManager()?.userDefaults.string(forKey: Utils.userRef){
-                Database.database().reference(withPath: "Users/"+userID).removeValue();
-                Auth.auth().currentUser?.delete(completion: {
+        signInWithApple?.completeSignIn(
+            didCompleteWithAuthorization: authorization,
+            errorTrig: {
+                self.showAlertDialog(title: "Error", message: Utils.getLocalizedString("errAuth"),preferredStyle: .alert, actions: {alert in alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))});
+            }, completionSignIn: {
+                guard let userID = Utils.getManager()?.userDefaults.string(forKey: Utils.userRef) else {
+                    self.showError();
+                    return;
+                }
+                
+                guard let credentials = authorization.credential as? ASAuthorizationAppleIDCredential else {
+                    self.showError(":CREDENTIALS");
+                    return;
+                }
+                
+                guard let authCode = credentials.authorizationCode else {
+                    self.showError("::AUTH_CODE");
+                    return;
+                }
+                
+                guard let authCodeString = String(data: authCode, encoding: .utf8) else {
+                    self.showError(":::AUTH_CODE_ST")
+                    return;
+                }
+                
+                Database.database()
+                    .reference(withPath: "Users/"+userID)
+                    .removeValue();
+                
+                let auth = Auth.auth();
+                auth.revokeToken(withAuthorizationCode: authCodeString);
+                auth.currentUser?.delete(completion: {
                     error in
                     if let error = error{
-                        self.showAlertDialog(title: Utils.getLocalizedString("actionUna"), message: Utils.getLocalizedString("cannotDelAcc"), preferredStyle: .alert, actions: {
-                            alert in
-                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil));
-                        });
+                        self.showError(":USER_DELETE");
                         print("Delete an account: Error: ", error);
                         return;
                     }
@@ -221,10 +252,13 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
                         self.moveToSignIn();
                     });
                     
-                    self.showAlertDialog(title: Utils.getLocalizedString("success"), message: Utils.getLocalizedString("delAccSuc"), preferredStyle: .alert, actions:nil);
+                    self.showAlertDialog(
+                        title: Utils.getLocalizedString("success"),
+                        message: Utils.getLocalizedString("delAccSuc"),
+                        preferredStyle: .alert,
+                        actions:nil);
                 });
-            }
-        });
+            });
     }
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
