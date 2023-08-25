@@ -67,13 +67,17 @@ class RateAppViewController:UIViewController{
                 self.navigationController?.setNavigationBarHidden(false, animated: true);
             }
             navigationController?.pushViewController(feedBack, animated: true);
-        } else if (!isEnabled){
-            toast.show();
-        } else{
-            let vc = SKStoreProductViewController();
-            vc.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: NSNumber(value: 1)], completionBlock: nil);
-            present(vc, animated: true, completion: nil);
+            return;
         }
+        
+        if (!isEnabled){
+            toast.show();
+            return;
+        }
+        
+        let vc = SKStoreProductViewController();
+        vc.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: NSNumber(value: 6443976042)], completionBlock: nil);
+        present(vc, animated: true, completion: nil);
     }
     
     @IBAction func valueChanged(_ sender: UISlider) {

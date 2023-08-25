@@ -149,6 +149,10 @@ class TopicActivity: UIViewController{
             if (v_tap.isTriggered) {
                 if (view.frame.origin.x > toExitX) {
                     audioPlayer?.setVolume(0.0, fadeDuration: 1.5);
+                    if memTime > 100 {
+                        collectStat("TIME_DISM",increment: calcDeltaTime());
+                        collectStat("DISM", increment: 1);
+                    }
                     stopSession(0.3, anim: {
                         self.view.frame = self.startFramePreview;
                         self.preview.alpha = 1.0;
@@ -165,15 +169,8 @@ class TopicActivity: UIViewController{
             
             if (currentPhrase == phrases.count) { // End of session
                 v_tap.isUserInteractionEnabled = false;
-                collectStat("_END");
-                
-                let curTime = NSDate().timeIntervalSince1970;
-                let deltaTime = NSNumber(value: Int(curTime - self.memTime));
-                
-                print(tag, "TIME_INFO:",memTime," -> ", curTime);
-                print(tag, "TIME ELAPSED:", deltaTime);
-                
-                collectStat("_TIME", increment: deltaTime);
+                collectStat("END");
+                collectStat("TIME", increment: calcDeltaTime());
                 
                 let comp:((Bool)->Void) = {
                     b in
@@ -229,10 +226,10 @@ class TopicActivity: UIViewController{
         
         if m.isConnected {
             m.mDatabaseStats?
-                .child("Trainings/" + mStatsTopic + m.language + ch)
+                .child("Trainings/" + mStatsTopic + ch)
                 .setValue(ServerValue.increment(increment));
             m.mDatabaseStats?
-                .child("Category/" + mStatsCategory + m.language + ch)
+                .child("Category/" + mStatsCategory + ch)
                 .setValue(ServerValue.increment(increment));
         }
     }
@@ -280,7 +277,7 @@ class TopicActivity: UIViewController{
     
     func loadData() {
         
-        collectStat("_BEG");
+        collectStat("BEG");
         
         let localSKC1 = StorageApp.Topic.content(id: id);
         
@@ -327,6 +324,15 @@ class TopicActivity: UIViewController{
             self.preview.alpha = 0.0;
         });
         cell.isHidden = true;
+    }
+    
+    private func calcDeltaTime() -> NSNumber {
+        let curTime = NSDate().timeIntervalSince1970;
+        let deltaTime = NSNumber(value: Int(curTime - self.memTime));
+        
+        print(tag, "TIME_INFO:",memTime," -> ", curTime);
+        print(tag, "TIME ELAPSED:", deltaTime);
+        return deltaTime;
     }
     
     private func throwError(_ text:String) {

@@ -21,12 +21,14 @@ class RatingSnackbar: UIViewController{
 
     @IBOutlet weak var reviewView: UIView!;
     
+    private let mPathToRate = "assessTrs/iOS/";
+    
     var id:UInt16 = 0;
     
     @IBAction func close(_ sender:UIButton){
-        self.manager?.hideRateSnackBar();
-        Database.database().reference(withPath: "assessTrs/"+self.id.description+"/"+(UserDefaults().string(forKey: Utils.userRef) ?? "nil")).setValue(self.grade);
-        self.reset();
+        manager?.hideRateSnackBar();
+        rateToSend();
+        reset();
     }
     
     var stars:[Star]!;
@@ -72,7 +74,7 @@ class RatingSnackbar: UIViewController{
         v.placeholder = Utils.getLocalizedString("assExample2");
         v.titleButton = Utils.getLocalizedString("sendFeedback");
         v.title = Utils.getLocalizedString("thanksForYourTime");
-        v.pathToAssess = "assessTrs/"+id.description+"/";
+        v.pathToAssess = mPathToRate+id.description+"/";
         v.desc = Utils.getLocalizedString("assDesc2");
         Utils.getManager()?.navigationController?.pushViewController(v, animated: true);
     }
@@ -106,12 +108,27 @@ class RatingSnackbar: UIViewController{
             
             self.timer {
                 if !self.isRated{
-                    Database.database().reference(withPath: "assessTrs/"+self.id.description+"/"+(UserDefaults().string(forKey: Utils.userRef) ?? "nil")).setValue(self.grade);
+                    self.rateToSend();
                 }
                 self.manager?.hideRateSnackBar();
                 self.reset();
             }
         });
+    }
+    
+    private func rateToSend() {
+        
+        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? "nil";
+        let userID = UserDefaults().string(forKey: Utils.userRef) ?? uuid;
+        
+        print("RatingSnackbar: USER_ID:",userID);
+        
+        let path = mPathToRate+id.description+"/"+userID;
+        
+        Database
+            .database()
+            .reference(withPath: path)
+            .setValue(grade);
     }
     
     private func assignRate(_ star: Star, grade: Int){

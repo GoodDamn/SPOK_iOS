@@ -152,6 +152,7 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         
         if (Auth.auth().currentUser == nil) {
             options = [_aboutApp,
+                _rateUs,
                 _SignIn];
             mBtnDeleteAcc.isHidden = true;
             mBtnDeleteAcc.isEnabled = false;

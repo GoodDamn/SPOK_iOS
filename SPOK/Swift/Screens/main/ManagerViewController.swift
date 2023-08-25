@@ -101,11 +101,6 @@ class ManagerViewController: UIViewController{
             endOfTopic = {
                 id in
                 
-                if !self.isAuthUser {
-                    return;
-                }
-                
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.heightSnackBarRating.constant = 110;
                     UIView.animate(withDuration: 0.3, animations: {
@@ -129,8 +124,10 @@ class ManagerViewController: UIViewController{
         }
         blur();
         
-        var statsTopic = id.description+"_";
-        var statsCategory = cell.mFileSPC.categoryID.description + "_";
+        let lang = language.isEmpty ? "RU" : language;
+        
+        var statsTopic = id.description + "/\(lang)/";
+        var statsCategory = cell.mFileSPC.categoryID.description + "/\(lang)/";
         
         if (id > 0){
             let uint16ID = UInt16(id);

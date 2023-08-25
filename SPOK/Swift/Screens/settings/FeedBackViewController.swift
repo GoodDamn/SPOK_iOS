@@ -22,9 +22,8 @@ class FeedBackViewController: UIViewController {
     var onViewDisappear:(()->Void)? = nil;
     var placeholder:String = Utils.getLocalizedString("assExample");
     var titleButton:String = Utils.getLocalizedString("continue");
-    var pathToAssess:String = "assess/";
+    var pathToAssess:String = "assess/iOS/";
     var desc:String? = nil;
-    
     
     @IBAction func close(){
         navigationController?.popViewController(animated: true);
@@ -43,12 +42,11 @@ class FeedBackViewController: UIViewController {
             return;
         }
         
-        if let keyID = UserDefaults().string(forKey: Utils.userRef), !keyID.isEmpty {
-            Database.database().reference(withPath: pathToAssess+keyID).setValue(grade.description + " " + tf_assess.text);
-            Toast.init(text: Utils.getLocalizedString("thankYou"), duration: 1.2).show();
-            onViewDisappear?();
-            navigationController?.popToRootViewController(animated: true);
-        }
+        feedBack(" " + tf_assess.text);
+        Toast.init(text: Utils.getLocalizedString("thankYou"), duration: 1.2).show();
+        onViewDisappear?();
+        navigationController?.popToRootViewController(animated: true);
+    
     }
     
     private func checkText(_ textView:UITextView) {
@@ -100,6 +98,16 @@ class FeedBackViewController: UIViewController {
         return true;
     }
      
+    
+    private func feedBack(_ feedback:String = "") {
+        let uuID = UIDevice.current.identifierForVendor?.uuidString ?? "NULL";
+        let userID = UserDefaults().string(forKey: Utils.userRef) ?? uuID;
+        
+        Database
+            .database()
+            .reference(withPath: pathToAssess+userID)
+            .setValue(grade.description + feedback);
+    }
     
 }
 

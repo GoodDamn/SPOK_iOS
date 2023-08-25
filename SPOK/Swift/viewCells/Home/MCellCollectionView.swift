@@ -30,12 +30,18 @@ class MCellCollectionView: SCellCollectionView{
             let index = manager.likes.firstIndex(of: id16);
             if index != nil {
                 manager.likes.remove(at: index!);
+                /*manager.mDatabaseStats?
+                    .child("Likes/"+id16.description)
+                    .setValue(ServerValue.increment(-1));*/
                 UIView.animate(withDuration: 0.23, animations: {
                     self.heart.alpha = 0.0;
                     self.heart.transform = CGAffineTransform(scaleX: 0.01, y: 0.01);
                 });
             } else {
                 manager.likes.append(id16);
+                /*manager.mDatabaseStats?
+                    .child("Likes/"+id16.description)
+                    .setValue(ServerValue.increment(1));*/
                 self.heart.transform = CGAffineTransform(scaleX: 1.3, y: 1.3);
                 self.heartScaling.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
                 self.heartScaling.alpha = 1.0;
