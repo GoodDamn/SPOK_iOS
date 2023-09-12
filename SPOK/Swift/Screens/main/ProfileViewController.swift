@@ -25,6 +25,8 @@ class ProfileViewController:UIViewController {
     @IBOutlet weak var v_clock: UIView!;
     @IBOutlet weak var v_nothing: UIView!;
     
+    @IBOutlet weak var mChecklist: UIView!;
+    
     @IBOutlet weak var tv_doIt: UITextView!;
     @IBOutlet weak var mBtnLearnMore: UIButton!;
     //@IBOutlet weak var tv_getFullAccess: UITextView!;
@@ -247,6 +249,54 @@ class ProfileViewController:UIViewController {
         mBtnLearnMore.setAttributedTitle(attrStr, for: .normal);
         
         mBtnLearnMore.addTarget(self, action: #selector(showBanner(_:)), for: .touchUpInside);
+        
+        let s = mChecklist.bounds;
+        
+        let tt = UILabel(frame: CGRect(x: s.width*0.04,
+                                       y: 0,
+                                       width: s.width*0.62, height: s.height));
+        tt.text = "Read anything what you want and get a gift: a checklist for dealing with self-criticism ⚡️";
+        tt.textColor = UIColor(named: "AccentColor");
+        tt.backgroundColor = .clear;
+        tt.numberOfLines = 0;
+        tt.font = UIFont(name: "OpenSans-SemiBold", size: 12.5);
+        
+        let lineOffsetY = s.height * 0.2;
+        
+        let line = UIView(frame: CGRect(x: tt.frame.width + tt.frame.origin.x*1.5,
+                                        y: lineOffsetY,
+                                        width: 2,
+                                        height: s.height - lineOffsetY*2));
+        line.layer.cornerRadius = 1.0;
+        line.clipsToBounds = true;
+        line.backgroundColor = UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 0.15);
+        
+        
+        let counter = UILabel(frame: CGRect(x: line.frame.origin.x,
+                                            y: 0,
+                                            width: s.width * 0.2,
+                                            height: s.height));
+        
+        counter.numberOfLines = 2;
+        counter.textColor = tt.textColor;
+        counter.font = UIFont(name: "OpenSans-Bold", size: 25.0);
+        
+        let countStr = NSMutableAttributedString(string: "0/3\nCARDS");
+        
+        countStr.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 9),
+                               NSAttributedString.Key.foregroundColor: tt.textColor.withAlphaComponent(0.6)],
+                              range: NSRange(location: 4, length: countStr.length-4));
+        
+        /*let p = NSMutableParagraphStyle();
+        p.alignment = .center;
+        
+        countStr.addAttribute(.paragraphStyle, value: p, range: NSRange(location: 0, length: countStr.length));
+        */
+        counter.textAlignment = .center;
+        counter.attributedText = countStr;
+        mChecklist.addSubview(tt);
+        mChecklist.addSubview(line);
+        mChecklist.addSubview(counter);
     }
     
     override func viewWillAppear(_ animated: Bool) {
