@@ -3403,7 +3403,7 @@ Change the topic's theme and font to your liking. Be unique!</string>
                                                     <color key="baseForegroundColor" red="0.49411764705882355" green="0.77647058823529413" blue="1" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
                                                 </buttonConfiguration>
                                             </button>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkL-23-mtv">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkL-23-mtv" customClass="UIButton">
                                                 <rect key="frame" x="25" y="277" width="364" height="85"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <constraints>

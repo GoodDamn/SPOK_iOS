@@ -8,7 +8,7 @@
 import UIKit;
 import MetalKit;
 
-class ProfileViewController:UIViewController {
+class ProfileViewController: UIViewController {
     
     private let tag = "ProfileVC:";
     
@@ -25,7 +25,7 @@ class ProfileViewController:UIViewController {
     @IBOutlet weak var v_clock: UIView!;
     @IBOutlet weak var v_nothing: UIView!;
     
-    @IBOutlet weak var mChecklist: UIView!;
+    @IBOutlet weak var mChecklist: UIButton!;
     
     @IBOutlet weak var tv_doIt: UITextView!;
     @IBOutlet weak var mBtnLearnMore: UIButton!;
@@ -255,11 +255,24 @@ class ProfileViewController:UIViewController {
         let tt = UILabel(frame: CGRect(x: s.width*0.04,
                                        y: 0,
                                        width: s.width*0.62, height: s.height));
-        tt.text = "Read anything what you want and get a gift: a checklist for dealing with self-criticism ⚡️";
         tt.textColor = UIColor(named: "AccentColor");
         tt.backgroundColor = .clear;
         tt.numberOfLines = 0;
         tt.font = UIFont(name: "OpenSans-SemiBold", size: 12.5);
+        
+        let stList = "Read anything what you want and get a gift: a checklist for dealing with self-criticism ⚡️";
+        
+        let ats = NSMutableAttributedString(string: stList);
+        let beg = stList.distance(from: stList.startIndex,
+                                  to: stList.firstIndex(of: ":")!);
+        let rang = NSRange(location: beg,
+                           length: stList.count-1-beg);
+        
+        ats.addAttribute(.foregroundColor,
+                         value: tt.textColor.withAlphaComponent(0.7),
+                         range: rang);
+        
+        tt.attributedText = ats;
         
         let lineOffsetY = s.height * 0.2;
         
@@ -271,11 +284,12 @@ class ProfileViewController:UIViewController {
         line.clipsToBounds = true;
         line.backgroundColor = UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 0.15);
         
+        let f = CGRect(x: line.frame.origin.x,
+                       y: 0,
+                       width: s.width * 0.2,
+                       height: s.height);
         
-        let counter = UILabel(frame: CGRect(x: line.frame.origin.x,
-                                            y: 0,
-                                            width: s.width * 0.2,
-                                            height: s.height));
+        /*let counter = UILabel(frame: f);
         
         counter.numberOfLines = 2;
         counter.textColor = tt.textColor;
@@ -287,20 +301,32 @@ class ProfileViewController:UIViewController {
                                NSAttributedString.Key.foregroundColor: tt.textColor.withAlphaComponent(0.6)],
                               range: NSRange(location: 4, length: countStr.length-4));
         
-        /*let p = NSMutableParagraphStyle();
-        p.alignment = .center;
-        
-        countStr.addAttribute(.paragraphStyle, value: p, range: NSRange(location: 0, length: countStr.length));
-        */
         counter.textAlignment = .center;
         counter.attributedText = countStr;
+        
+        mChecklist.addTarget(self, action: #selector(showChecklist(_:)), for: .touchUpInside);*/
+        
+        let ivDone = UIImageView(frame: f);
+        ivDone.image = UIImage(systemName: "checkmark.circle")?
+            .withRenderingMode(.alwaysTemplate);
+        ivDone.contentMode = .scaleAspectFit;
+        ivDone.tintColor = UIColor(red: 0,
+                                   green: 0.74,
+                                   blue: 0,
+                                   alpha: 1.0);
+        
         mChecklist.addSubview(tt);
         mChecklist.addSubview(line);
-        mChecklist.addSubview(counter);
+        mChecklist.addSubview(ivDone);
+        //mChecklist.addSubview(counter);
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 30) ?? UIFont.systemFont(ofSize: 30)];
+    }
+    
+    @objc func showChecklist(_ sender: UIButton) {
+        navigationController?.pushViewController(ChecklistViewController(), animated: true);
     }
     
     @objc func showBanner(_ sender: UITapGestureRecognizer) {
