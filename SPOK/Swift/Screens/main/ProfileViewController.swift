@@ -289,36 +289,19 @@ class ProfileViewController: UIViewController {
                        width: s.width * 0.2,
                        height: s.height);
         
-        /*let counter = UILabel(frame: f);
+        let counter = UILabel(frame: f);
         
         counter.numberOfLines = 2;
         counter.textColor = tt.textColor;
         counter.font = UIFont(name: "OpenSans-Bold", size: 25.0);
-        
-        let countStr = NSMutableAttributedString(string: "0/3\nCARDS");
-        
-        countStr.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 9),
-                               NSAttributedString.Key.foregroundColor: tt.textColor.withAlphaComponent(0.6)],
-                              range: NSRange(location: 4, length: countStr.length-4));
-        
         counter.textAlignment = .center;
-        counter.attributedText = countStr;
+        updateCounter(0,counter);
         
-        mChecklist.addTarget(self, action: #selector(showChecklist(_:)), for: .touchUpInside);*/
-        
-        let ivDone = UIImageView(frame: f);
-        ivDone.image = UIImage(systemName: "checkmark.circle")?
-            .withRenderingMode(.alwaysTemplate);
-        ivDone.contentMode = .scaleAspectFit;
-        ivDone.tintColor = UIColor(red: 0,
-                                   green: 0.74,
-                                   blue: 0,
-                                   alpha: 1.0);
+        mChecklist.addTarget(self, action: #selector(showChecklist(_:)), for: .touchUpInside);
         
         mChecklist.addSubview(tt);
         mChecklist.addSubview(line);
-        mChecklist.addSubview(ivDone);
-        //mChecklist.addSubview(counter);
+        mChecklist.addSubview(counter);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -382,6 +365,34 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(c, animated: true);
     }
     
+    
+    private func updateCounter(_ c: Int, _ counter: UILabel) {
+        let countStr = NSMutableAttributedString(string: c.description+"/3\nCARDS");
+        
+        countStr.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 9),
+                               NSAttributedString.Key.foregroundColor: counter.textColor.withAlphaComponent(0.6)],
+                              range: NSRange(location: 4, length: countStr.length-4));
+        
+        counter.attributedText = countStr;
+    }
+    
+    private func doneChecklist(lastViewFrame f: CGRect) {
+        let s = mChecklist.frame;
+        
+        let wi = s.height * 0.5;
+        
+        let ivDone = UIImageView(frame: CGRect(x: f.origin.x + (f.width-wi)/2,
+                                               y: (s.height - wi) / 2,
+                                               width: wi,
+                                               height: wi));
+        ivDone.image = UIImage(systemName: "checkmark.circle")?
+            .withRenderingMode(.alwaysTemplate);
+        ivDone.tintColor = UIColor(red: 0,
+                                   green: 0.74,
+                                   blue: 0,
+                                   alpha: 1.0);
+        mChecklist.addSubview(ivDone);
+    }
     
     private func newGestureGradient()->UITapGestureRecognizer {
         return newGesture(#selector(updateGradients(_:)));
