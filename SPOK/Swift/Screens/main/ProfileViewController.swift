@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var v_nothing: UIView!;
     
     private var mlCounter: UILabel? = nil;
+    private var mlChecklistDesc: UILabel? = nil
     
     @IBOutlet weak var mChecklist: UIButton!;
     
@@ -283,28 +284,20 @@ class ProfileViewController: UIViewController {
         
         let s = mChecklist.bounds;
         
-        let tt = UILabel(frame: CGRect(x: s.width*0.04,
+        mlChecklistDesc = UILabel(frame: CGRect(x: s.width*0.04,
                                        y: 0,
                                        width: s.width*0.62,
                                        height: s.height));
+        guard let tt = mlChecklistDesc else {
+            return;
+        }
+        
         tt.textColor = UIColor(named: "AccentColor");
         tt.backgroundColor = .clear;
         tt.numberOfLines = 0;
         tt.font = UIFont(name: "OpenSans-SemiBold", size: 12.5);
         
-        let stList = "Read anything what you want and get a gift: a checklist for dealing with self-criticism ⚡️";
-        
-        let ats = NSMutableAttributedString(string: stList);
-        let beg = stList.distance(from: stList.startIndex,
-                                  to: stList.firstIndex(of: ":")!);
-        let rang = NSRange(location: beg,
-                           length: stList.count-1-beg);
-        
-        ats.addAttribute(.foregroundColor,
-                         value: tt.textColor.withAlphaComponent(0.7),
-                         range: rang);
-        
-        tt.attributedText = ats;
+        setChecklistDesc("Read anything what you want and get a gift");
         
         let lineOffsetY = s.height * 0.2;
         
@@ -416,6 +409,22 @@ class ProfileViewController: UIViewController {
         mlCounter!.attributedText = countStr;
     }
     
+    private func setChecklistDesc(_ m: String) {
+        let stList = m + ": a checklist for dealing with self-criticism ⚡️";
+        
+        let ats = NSMutableAttributedString(string: stList);
+        let beg = stList.distance(from: stList.startIndex,
+                                  to: stList.firstIndex(of: ":")!);
+        let rang = NSRange(location: beg,
+                           length: stList.count-1-beg);
+        
+        ats.addAttribute(.foregroundColor,
+                         value: mlChecklistDesc!.textColor.withAlphaComponent(0.7),
+                         range: rang);
+        
+        mlChecklistDesc!.attributedText = ats;
+    }
+    
     private func doneChecklist(lastViewFrame f: CGRect) {
         let s = mChecklist.frame;
         
@@ -431,9 +440,10 @@ class ProfileViewController: UIViewController {
                                    green: 0.74,
                                    blue: 0,
                                    alpha: 1.0);
+        setChecklistDesc("Cheers! A gift is now available to you")
+        
         mChecklist.addSubview(ivDone);
-        mChecklist.addTarget(self,
-                             action: #selector(showChecklist(_:)),
+        mChecklist.addTarget(self,action: #selector(showChecklist(_:)),
                              for: .touchUpInside);
     }
     
