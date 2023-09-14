@@ -12,6 +12,7 @@
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
 		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
+		251DE3322AB36F9100EF30C2 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 251DE3312AB36F9100EF30C2 /* checklist.storyboard */; };
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
@@ -115,6 +116,7 @@
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
+		251DE3312AB36F9100EF30C2 /* checklist.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = checklist.storyboard; sourceTree = "<group>"; };
 		2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				2BB4FA4227E2032100574FDA /* mainMenu.storyboard */,
 				2BB4FA4B27E204B300574FDA /* Main.storyboard */,
 				2BE3533B27E7AB9700D2D239 /* intro.storyboard */,
+				251DE3312AB36F9100EF30C2 /* checklist.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -700,6 +703,7 @@
 				2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */,
 				2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */,
 				2BCC4909290E346100A5F4F4 /* LaunchScreen.storyboard in Resources */,
+				251DE3322AB36F9100EF30C2 /* checklist.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -119,8 +119,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        StorageApp.mUserDef.removeObject(forKey: Utils.mKEY_CHECKLIST_COUNT);
-        
         cv_liked.mCellIdentifier = "likedCollectionViewCell";
         cv_history.mCellIdentifier = "historyCollectionViewCell";
         
@@ -337,7 +335,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func showChecklist(_ sender: UIButton) {
-        navigationController?.pushViewController(ChecklistViewController(), animated: true);
+        
+        if let vc = UIStoryboard(name: "checklist",
+                              bundle: nil)
+            .instantiateViewController(withIdentifier: "checklist") as? ChecklistViewController {
+            manager?.navigationController?.pushViewController(vc, animated: true);
+        }
     }
     
     @objc func showBanner(_ sender: UITapGestureRecognizer) {
@@ -440,7 +443,7 @@ class ProfileViewController: UIViewController {
                                    green: 0.74,
                                    blue: 0,
                                    alpha: 1.0);
-        setChecklistDesc("Cheers! A gift is now available to you")
+        setChecklistDesc("Cheers! A gift is now available to you");
         
         mChecklist.addSubview(ivDone);
         mChecklist.addTarget(self,action: #selector(showChecklist(_:)),
