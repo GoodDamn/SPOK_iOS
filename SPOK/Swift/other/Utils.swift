@@ -12,6 +12,9 @@ class Utils{
     
     private static let tag = "Utils:";
     
+    public static let mKEY_CHECKLIST_COUNT = "cl";
+    public static let mKEY_GOT_CHECKLIST = "gl";
+    
     public static let givenName:String = "name",
                       userRef:String = "userID";
     

@@ -26,7 +26,6 @@ class ManagerViewController: UIViewController{
     private var mPrevIndex:Int = 0;
     
     let language = Utils.getLanguageCode();
-    let userDefaults: UserDefaults = UserDefaults();
     let mDatabase = Database.database();
     
     var mNavBar: BottomNavigationBar!;
@@ -34,19 +33,20 @@ class ManagerViewController: UIViewController{
     var news: [UInt16] = [];
     var history: [UInt16] = []{
         didSet{
-            userDefaults.setValue(history, forKey: StorageApp.historyKey);
+            StorageApp.mUserDef
+                .setValue(history, forKey: StorageApp.historyKey);
         }
         
     }
     
     var likes: [UInt16] = []{
         didSet{
-            userDefaults.setValue(likes, forKey: StorageApp.likesKey);
+            StorageApp.mUserDef.setValue(likes, forKey: StorageApp.likesKey);
         }
     }
     var recommends: [UInt16] = []{
         didSet{
-            userDefaults.setValue(recommends, forKey: StorageApp.recommendsKey);
+            StorageApp.mUserDef.setValue(recommends, forKey: StorageApp.recommendsKey);
         }
     }
     var isPremiumUser: Bool = false;
@@ -100,6 +100,19 @@ class ManagerViewController: UIViewController{
         if (endOfTopic == nil){
             endOfTopic = {
                 id in
+                
+                var c = StorageApp.mUserDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
+                
+                if (c < 3) {
+                    let profile = (self.viewControllersPages[2] as! UINavigationController)
+                        .viewControllers.first as? ProfileViewController;
+                    
+                    c += 1;
+                    
+                    StorageApp.mUserDef.setValue(c, forKey: Utils.mKEY_CHECKLIST_COUNT);
+                    profile?.updateChecklistCounter(c);
+                    
+                }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.heightSnackBarRating.constant = 110;
@@ -196,7 +209,7 @@ class ManagerViewController: UIViewController{
     @objc func onPause(){
         print(tag, "onPause();");
         DispatchQueue.global(qos: .userInitiated).async {
-            let userRef = self.userDefaults.string(forKey: Utils.userRef);
+            let userRef = StorageApp.mUserDef.string(forKey: Utils.userRef);
             if userRef != nil
                 && self.isConnected
                 && self.isLoadMetaData
@@ -239,8 +252,7 @@ class ManagerViewController: UIViewController{
                         if index == 2 {
                             let profile = (self.viewControllersPages[2] as! UINavigationController)
                                 .viewControllers.first as? ProfileViewController;
-                            profile?.updateHistory();
-                            profile?.updateLikes();
+                            profile?.update();
                         }
                         self.mPrevIndex = index;
                     });
@@ -269,9 +281,9 @@ class ManagerViewController: UIViewController{
         
         let vc = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "techWorks") as! TechWorksViewController;
         
-        history = userDefaults.array(forKey: StorageApp.historyKey) as? [UInt16] ?? [];
-        likes = userDefaults.array(forKey: StorageApp.likesKey) as? [UInt16] ?? [];
-        recommends = userDefaults.array(forKey: StorageApp.recommendsKey) as? [UInt16] ?? [];
+        history = StorageApp.mUserDef.array(forKey: StorageApp.historyKey) as? [UInt16] ?? [];
+        likes = StorageApp.mUserDef.array(forKey: StorageApp.likesKey) as? [UInt16] ?? [];
+        recommends = StorageApp.mUserDef.array(forKey: StorageApp.recommendsKey) as? [UInt16] ?? [];
         
         let ref = mDatabase.reference();
         
@@ -319,7 +331,7 @@ class ManagerViewController: UIViewController{
                             return;
                         }
                         
-                        ref.child("Users/"+(self.userDefaults.string(forKey: Utils.userRef) ?? "null"))
+                        ref.child("Users/"+(StorageApp.mUserDef.string(forKey: Utils.userRef) ?? "null"))
                             .observeSingleEvent(of: .value,
                                                 with: { userSnap in
                                 if self.history.isEmpty{

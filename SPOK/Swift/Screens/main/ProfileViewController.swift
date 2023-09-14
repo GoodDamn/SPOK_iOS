@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var v_clock: UIView!;
     @IBOutlet weak var v_nothing: UIView!;
     
+    private var mlCounter: UILabel? = nil;
+    
     @IBOutlet weak var mChecklist: UIButton!;
     
     @IBOutlet weak var tv_doIt: UITextView!;
@@ -56,15 +58,23 @@ class ProfileViewController: UIViewController {
     
     private var gradients:[CAGradientLayer] = [CAGradientLayer(), CAGradientLayer(), CAGradientLayer()];
     
+    func updateChecklistCounter(_ c: Int) {
+        updateCounter(c);
+    }
     
-    func updateLikes() {
+    func update() {
+        updateLikes();
+        updateHistory();
+    }
+    
+    private func updateLikes() {
         if cv_liked == nil{
             return;
         }
         updateCollection(cv_liked, seeAll: b_all_liked, nothing: v_nothing_liked, arr: manager?.likes);
     }
     
-    func updateHistory() {
+    private func updateHistory() {
         if cv_history == nil {
             return;
         }
@@ -137,7 +147,7 @@ class ProfileViewController: UIViewController {
         
         var attr = NSMutableAttributedString(string: t);
         attr.addAttribute(.font, value: UIFont(name: "OpenSans-Bold", size: 21)!, range: NSRange(location: 0, length: br));
-
+        
         attr.addAttribute(.font, value: UIFont(name: "OpenSans-SemiBold", size: 15)!, range: NSRange(location: br, length: t.count-br))
         
         let par = NSMutableParagraphStyle();
@@ -171,7 +181,7 @@ class ProfileViewController: UIViewController {
         let a = NSMutableAttributedString(string: l_recent.text!);
         a.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-SemiBold", size: 14)!,
                          NSAttributedString.Key.foregroundColor:UIColor(named: "nothing_here")!],
-                         range: NSRange(location: 0, length: l_recent.text!.count));
+                        range: NSRange(location: 0, length: l_recent.text!.count));
         attr.append(a);
         l_recent.attributedText = attr;
         
@@ -250,11 +260,20 @@ class ProfileViewController: UIViewController {
         
         mBtnLearnMore.addTarget(self, action: #selector(showBanner(_:)), for: .touchUpInside);
         
+        let userDef = StorageApp.mUserDef;
+        
+        let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
+        
+        if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
+            return;
+        }
+        
         let s = mChecklist.bounds;
         
         let tt = UILabel(frame: CGRect(x: s.width*0.04,
                                        y: 0,
-                                       width: s.width*0.62, height: s.height));
+                                       width: s.width*0.62,
+                                       height: s.height));
         tt.textColor = UIColor(named: "AccentColor");
         tt.backgroundColor = .clear;
         tt.numberOfLines = 0;
@@ -289,19 +308,24 @@ class ProfileViewController: UIViewController {
                        width: s.width * 0.2,
                        height: s.height);
         
-        let counter = UILabel(frame: f);
-        
-        counter.numberOfLines = 2;
-        counter.textColor = tt.textColor;
-        counter.font = UIFont(name: "OpenSans-Bold", size: 25.0);
-        counter.textAlignment = .center;
-        updateCounter(0,counter);
-        
         mChecklist.addTarget(self, action: #selector(showChecklist(_:)), for: .touchUpInside);
         
         mChecklist.addSubview(tt);
         mChecklist.addSubview(line);
-        mChecklist.addSubview(counter);
+        
+        if (countCl < 3) {
+            mlCounter = UILabel(frame: f);
+            
+            mlCounter!.numberOfLines = 2;
+            mlCounter!.textColor = tt.textColor;
+            mlCounter!.font = UIFont(name: "OpenSans-Bold", size: 25.0);
+            mlCounter!.textAlignment = .center;
+            updateCounter(countCl);
+            mChecklist.addSubview(mlCounter!);
+            return;
+        }
+        
+        doneChecklist(lastViewFrame: f);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -366,14 +390,19 @@ class ProfileViewController: UIViewController {
     }
     
     
-    private func updateCounter(_ c: Int, _ counter: UILabel) {
+    private func updateCounter(_ c: Int) {
+        
+        if (mlCounter == nil) {
+            return;
+        }
+        
         let countStr = NSMutableAttributedString(string: c.description+"/3\nCARDS");
         
         countStr.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 9),
-                               NSAttributedString.Key.foregroundColor: counter.textColor.withAlphaComponent(0.6)],
+                               NSAttributedString.Key.foregroundColor: mlCounter!.textColor.withAlphaComponent(0.6)],
                               range: NSRange(location: 4, length: countStr.length-4));
         
-        counter.attributedText = countStr;
+        mlCounter!.attributedText = countStr;
     }
     
     private func doneChecklist(lastViewFrame f: CGRect) {

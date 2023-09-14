@@ -13,6 +13,8 @@ class StorageApp{
     
     private static let debugTag: String = "SPOkStorage: ";
     
+    public static let mUserDef = UserDefaults();
+    
     static let historyKey = "history",
         likesKey = "like",
         recommendsKey = "recoms";

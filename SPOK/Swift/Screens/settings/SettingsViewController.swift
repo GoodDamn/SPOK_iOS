@@ -214,7 +214,7 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
             errorTrig: {
                 self.showAlertDialog(title: "Error", message: Utils.getLocalizedString("errAuth"),preferredStyle: .alert, actions: {alert in alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))});
             }, completionSignIn: {
-                guard let userID = Utils.getManager()?.userDefaults.string(forKey: Utils.userRef) else {
+                guard let userID = StorageApp.mUserDef.string(forKey: Utils.userRef) else {
                     self.showError();
                     return;
                 }
