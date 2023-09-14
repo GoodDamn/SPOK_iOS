@@ -59,6 +59,17 @@ class ProfileViewController: UIViewController {
     private var gradients:[CAGradientLayer] = [CAGradientLayer(), CAGradientLayer(), CAGradientLayer()];
     
     func updateChecklistCounter(_ c: Int) {
+        
+        if (c >= 3) {
+            let s = mChecklist.frame;
+            mlCounter?.removeFromSuperview();
+            doneChecklist(lastViewFrame: CGRect(x: mChecklist.subviews[1].frame.origin.x,
+                                                y: 0,
+                                                width: s.width * 0.2,
+                                                height: s.height))
+            return;
+        }
+        
         updateCounter(c);
     }
     
@@ -106,6 +117,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        StorageApp.mUserDef.removeObject(forKey: Utils.mKEY_CHECKLIST_COUNT);
         
         cv_liked.mCellIdentifier = "likedCollectionViewCell";
         cv_history.mCellIdentifier = "historyCollectionViewCell";
@@ -308,8 +321,6 @@ class ProfileViewController: UIViewController {
                        width: s.width * 0.2,
                        height: s.height);
         
-        mChecklist.addTarget(self, action: #selector(showChecklist(_:)), for: .touchUpInside);
-        
         mChecklist.addSubview(tt);
         mChecklist.addSubview(line);
         
@@ -421,6 +432,9 @@ class ProfileViewController: UIViewController {
                                    blue: 0,
                                    alpha: 1.0);
         mChecklist.addSubview(ivDone);
+        mChecklist.addTarget(self,
+                             action: #selector(showChecklist(_:)),
+                             for: .touchUpInside);
     }
     
     private func newGestureGradient()->UITapGestureRecognizer {

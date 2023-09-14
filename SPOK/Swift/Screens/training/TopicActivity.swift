@@ -224,7 +224,7 @@ class TopicActivity: UIViewController{
             return;
         }
         
-        if m.isConnected {
+        if Utils.mSTATS && m.isConnected {
             m.mDatabaseStats?
                 .child("Trainings/" + mStatsTopic + ch)
                 .setValue(ServerValue.increment(increment));
