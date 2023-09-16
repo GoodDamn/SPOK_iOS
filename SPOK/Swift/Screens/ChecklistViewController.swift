@@ -43,6 +43,10 @@ class ChecklistViewController: UIViewController {
         builder.header.subject = "Subject";
         builder.htmlBody = "Subject html body";
         
+        let pdf = MCOAttachment(data: (Data)([1,1,2,3]), filename: "checklist.pdf");
+        
+        builder.addAttachment(pdf);
+        
         session.sendOperation(with: builder.data())
             .start { error in
                 if let error = error {
