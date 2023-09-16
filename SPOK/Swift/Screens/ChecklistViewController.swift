@@ -6,6 +6,7 @@
 //
 
 import UIKit;
+import MailCore;
 
 class ChecklistViewController: UIViewController {
     
@@ -20,7 +21,36 @@ class ChecklistViewController: UIViewController {
     
     @IBAction func sendChecklist(_ sender: UIButton) {
         
-    
+        if mTFEmail.text?.isEmpty ?? true {
+            return;
+        }
         
+        let session = MCOSMTPSession();
+        let email = "spok.app.community@gmail.com";
+        session.hostname = "smtp.gmail.com";
+        session.port = 465;
+        session.username = email;
+        session.password = "jqngjoawfosetuqm";
+        session.connectionType = .TLS;
+        session.authType = .saslPlain;
+        session.timeout = 60;
+        session.isCheckCertificateEnabled = false;
+        
+        
+        let builder = MCOMessageBuilder();
+        builder.header.from = MCOAddress(displayName: "SPOK", mailbox: email);
+        builder.header.to = [MCOAddress(mailbox: mTFEmail.text)];
+        builder.header.subject = "Subject";
+        builder.htmlBody = "Subject html body";
+        
+        session.sendOperation(with: builder.data())
+            .start { error in
+                if let error = error {
+                    print("ERROR WHILE SENDING EMAIL:",error);
+                    return;
+                }
+                
+                print("EMAIL SENT!");
+            }
     }
 }

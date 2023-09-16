@@ -13,6 +13,7 @@
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
 		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
 		251DE3322AB36F9100EF30C2 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 251DE3312AB36F9100EF30C2 /* checklist.storyboard */; };
+		251DE3352AB56AA000EF30C2 /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = 251DE3342AB56AA000EF30C2 /* MailCore2 */; };
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
@@ -225,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2598FAB62A44394600230574 /* RevenueCat in Frameworks */,
+				251DE3352AB56AA000EF30C2 /* MailCore2 in Frameworks */,
 				2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */,
 				253E298E2A44493700304958 /* StoreKit.framework in Frameworks */,
 				2B4B3887290EDEAA0013D198 /* FirebaseAuth in Frameworks */,
@@ -569,6 +571,7 @@
 				2B4B3888290EDEAA0013D198 /* FirebaseDatabase */,
 				2598FAB52A44394600230574 /* RevenueCat */,
 				25063EB32A77E4A7001C1CCE /* FirebaseStorage */,
+				251DE3342AB56AA000EF30C2 /* MailCore2 */,
 			);
 			productName = SPOK;
 			productReference = 2BA101C92763EFC900EB5B8C /* SPOK.app */;
@@ -648,6 +651,7 @@
 			packageReferences = (
 				2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				251DE3332AB56AA000EF30C2 /* XCRemoteSwiftPackageReference "mailcore2" */,
 			);
 			productRefGroup = 2BA101CA2763EFC900EB5B8C /* Products */;
 			projectDirPath = "";
@@ -1224,6 +1228,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		251DE3332AB56AA000EF30C2 /* XCRemoteSwiftPackageReference "mailcore2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MailCore/mailcore2";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1247,6 +1259,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		251DE3342AB56AA000EF30C2 /* MailCore2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 251DE3332AB56AA000EF30C2 /* XCRemoteSwiftPackageReference "mailcore2" */;
+			productName = MailCore2;
 		};
 		2598FAB52A44394600230574 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
