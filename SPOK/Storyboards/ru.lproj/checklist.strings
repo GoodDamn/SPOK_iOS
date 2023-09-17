@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Will be useful to you if sometimes you feel that you scold yourself for not archieving and doing enough, not having a great appearance or doing something wrong. We'll send the file to your email so you can print out the checklist and hang it in your room."; ObjectID = "7dT-15-03t"; */
+"7dT-15-03t.text" = "Будет полезен тебе, если порой ты чувствуешь, что ругаешь себя за то, что мало чего достиг и сделал, не обладаешь замечательной внешностью или делаешь что-то не так. Отправим файл тебе на почту, чтобы ты мог распечатать чек-лист и повесить у себя в комнате.";
+
+/* Class = "UILabel"; text = "Checklist for dealing with self-criticism"; ObjectID = "Gzv-gX-rny"; */
+"Gzv-gX-rny.text" = "Чек-лист для работы с самокритикой";
+
+/* Class = "UITextView"; text = "Terms of Service & Privacy Policy"; ObjectID = "JGG-NF-3WM"; */
+"JGG-NF-3WM.text" = "Правила пользования & Политика конфиденциальности";
+
+/* Class = "UILabel"; text = "Your gift for improving your mental health with SPOK."; ObjectID = "UZR-Tm-8ce"; */
+"UZR-Tm-8ce.text" = "Твой подарок за то, что ты улучшаешь своё ментальное здоровье вместе со SPOK.";
+
+/* Class = "UITextView"; text = "By clicking on the button you agree to the privacy policy and terms of use , and agree to be sent useful materials from SPOK."; ObjectID = "ZIO-Bb-SXw"; */
+"ZIO-Bb-SXw.text" = "Нажимая на кнопку, ты соглашаешься с политикой конфиденциальности и условиями пользования, а также соглашаешься с рассылкой материалов от SPOK";
+
+/* Class = "UIButton"; normalTitle = "LEET'S GO!"; ObjectID = "mIu-0p-5Np"; */
+"mIu-0p-5Np.normalTitle" = "LEET'S GO!";
+
+/* Class = "UITextField"; placeholder = "example@gmail.com"; ObjectID = "u5o-HZ-nY5"; */
+"u5o-HZ-nY5.placeholder" = "example@gmail.com";

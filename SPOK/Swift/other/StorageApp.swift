@@ -23,6 +23,19 @@ class StorageApp{
     static let mCardChild = "M",
                bCardChild = "B";
     
+    public static func bundleFile(r: String?, exten: String?)-> Data? {
+        guard let fileUrl = Bundle.main.url(forResource: r, withExtension: exten) else {
+            return nil;
+        }
+        
+        do {
+            return try Data(contentsOf: fileUrl);
+        } catch {
+            print(StorageApp.debugTag,error);
+            return nil;
+        }
+    }
+    
     static func mkdir(path:String) -> Void{
         let fileManager = FileManager.default;
         if !fileManager.fileExists(atPath: path) {
