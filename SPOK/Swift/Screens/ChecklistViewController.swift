@@ -54,7 +54,9 @@ class ChecklistViewController: UIViewController {
                     return;
                 }
                 
+                Toast.init(text: "Email sent", duration: 1.5).show();
                 print("EMAIL SENT!");
+                self.navigationController?.popViewController(animated: true);
             }
     }
 }
