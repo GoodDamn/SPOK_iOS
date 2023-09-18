@@ -185,6 +185,7 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
             .appendingPathComponent(mDirCache, isDirectory: true);
         let pathCat = urlCat.path;
         let filePaths = try? fileManager.contentsOfDirectory(atPath: pathCat);
+        let time = StorageApp.modifTIme(path: pathCat, fileManager);
         
         var starImage = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate);
         let color = UIColor(red: 1.0, green: 0.9, blue: 0.21, alpha: 1.0);
@@ -201,7 +202,7 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
                                             topics: [3,41,5,6,14,11],
                                             image: starImage))
         
-        if filePaths != nil {
+        if filePaths != nil && Utils.mDate.timeIntervalSince1970 - time < 86400 {
             print(self.tag, "LOAD CATEGORIES FROM LOCAL STORAGE:");
             for i in 0..<filePaths!.count {
                 let data = StorageApp.getFile(path: pathCat+"/"+filePaths![i], fileManager);

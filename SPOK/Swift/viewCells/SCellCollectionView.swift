@@ -91,7 +91,11 @@ class SCellCollectionView: UICollectionViewCell{
 
         let name = lang+type+id.description;
         
-        if StorageApp.Topic.fileExist(cachePath: name+".spc") {
+        
+        
+        if StorageApp.Topic.isValid(cachePath: name+".spc") {
+            
+            
             
             DispatchQueue.global(qos: .background).async {
                 print("SCELL_COLLECTION_VIEW: GETTING PREVIEW FROM STORAGE:", id);
@@ -108,6 +112,7 @@ class SCellCollectionView: UICollectionViewCell{
                     Utils.showCard(self);
                 }
             }
+            
             return;
         }
         

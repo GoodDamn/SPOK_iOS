@@ -36,6 +36,10 @@ class StorageApp{
         }
     }
     
+    public static func modifTIme(path:String, _ manager:FileManager)->Double{
+        return (try? manager.attributesOfItem(atPath: path)[FileAttributeKey.modificationDate] as? Date)?.timeIntervalSince1970 ?? 0;
+    }
+    
     static func mkdir(path:String) -> Void{
         let fileManager = FileManager.default;
         if !fileManager.fileExists(atPath: path) {
@@ -95,11 +99,17 @@ class StorageApp{
             return name;
         }
         
-        private static func getBool(p:String)->Bool{
+        private static func exists(p:String, time:Double=86400.0)->Bool{
             var b: Bool = false;
             fileManipulation(path: p, action: {
                 manager, path in
                 b = manager.fileExists(atPath: path);
+                if b {
+                    let r = StorageApp.modifTIme(path: path, manager);
+                    let delta = Utils.mDate.timeIntervalSince1970 - r;
+                    print("EXISTS: MODIFICATION_DELTA_TIME: ", delta, time);
+                    b = b && delta < time;
+                }
             });
             return b;
         }
@@ -132,8 +142,9 @@ class StorageApp{
             return Utils.Exten.getSKC1File(data);
         }
         
-        public static func fileExist(cachePath: String)->Bool{
-            return getBool(p: cachePath);
+        public static func isValid(cachePath: String,
+                                   time:Int = 86400) -> Bool{
+            return exists(p: cachePath);
         }
         
         
