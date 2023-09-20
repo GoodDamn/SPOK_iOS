@@ -170,6 +170,17 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         
         heightTabLayout.constant = 66+edges.top*0.75;
         
+        /*let m = FileManager.default;
+        
+        let urld = NSSearchPathForDirectoriesInDomains(.downloadsDirectory,
+                                                       .userDomainMask,
+                                                       true)[0];
+        let url = URL(string: urld)?.appendingPathComponent("checklist.jpeg");
+        
+        try? StorageApp.bundleFile(r: "checklist", exten: ".jpeg")?.write(to: url!)
+        
+        print(tag, "URL_DOWNLOADS:",url,try? m.contentsOfDirectory(atPath: urld));*/
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -195,7 +206,6 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
         starImage?.draw(in: CGRect(origin: .zero, size: starImage!.size));
         starImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        
         
         self.configCategory(current: 0,
                             fileSCS: FileSCS(title: "",
@@ -255,5 +265,6 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         updateScrollPosition((pageViewController.viewControllers?.first as? ListOfTopicsViewController)?.index ?? 0)
     }
+    
     
 }
