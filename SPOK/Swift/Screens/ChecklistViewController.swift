@@ -6,7 +6,9 @@
 //
 
 import UIKit;
-import MailCore;
+import FirebaseDatabase;
+import FirebaseStorage;
+//import MailCore;
 
 class ChecklistViewController: UIViewController {
     
@@ -14,6 +16,8 @@ class ChecklistViewController: UIViewController {
     
     @IBOutlet weak var mTVPrivacy: UITextView!;
     @IBOutlet weak var mTFEmail: UITextField!;
+    
+    private let manager = Utils.getManager();
     
     override func viewDidLoad() {
         
@@ -23,60 +27,52 @@ class ChecklistViewController: UIViewController {
     
     @IBAction func sendChecklist(_ sender: UIButton) {
         
-        if mTFEmail.text?.isEmpty ?? true {
+        let emt = mTFEmail.text ?? "";
+        
+        if emt.isEmpty {
+            Toast.init(text: "Text field is empty", duration: 1.0)
+                .show();
             return;
         }
         
+        if emt.range(of: #"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"#,
+                     options: .regularExpression) == nil {
+            Toast.init(text: "Not matches", duration: 1.0)
+                .show();
+            return;
+        }
+        
+        if !(manager?.isConnected ?? true){
+            Toast.init(text: "No internet", duration: 1.0)
+                .show();
+        }
+        
+        Database.database()
+            .reference(withPath: "checklistEmails/iOS")
+            .childByAutoId()
+            .setValue(emt);
+        
         sender.isEnabled = false;
         
-        let data = StorageApp.bundleFile(r: "checklist", exten: ".jpeg");
-        
-        let session = MCOSMTPSession();
-        let email = "spok.app.community@gmail.com";
-        session.hostname = "smtp.gmail.com";
-        session.port = 465;
-        session.username = email;
-        session.password = "jqngjoawfosetuqm";
-        session.connectionType = .TLS;
-        session.authType = .saslPlain;
-        session.timeout = 60;
-        session.isCheckCertificateEnabled = false;
-        
-        let builder = MCOMessageBuilder();
-        builder.header.from = MCOAddress(displayName: "SPOK", mailbox: email);
-        builder.header.to = [MCOAddress(mailbox: mTFEmail.text)];
-        builder.header.subject = "Subject";
-        builder.htmlBody = "Subject html body";
-        
-        let pdf = MCOAttachment(data: data, filename: "checklist.jpeg");
-        
-        builder.addAttachment(pdf);
-        
-        session.connectionLogger = {
-            connectionID, connectType, data in
-            if data == nil {
-                return;
-            }
-            
-            if let st = String(data: data!, encoding: .utf8) {
-                print(self.mTag, connectionID, connectType ,st);
-            }
-        };
-        
-        Toast.init(text: "Processing... Wait a 1 minute", duration: 1.5).show();
-        
-        session.sendOperation(with: builder.data())
-            .start { error in
-                if let error = error {
-                    print("ERROR WHILE SENDING EMAIL:",error);
-                    Toast.init(text: "Something went wrong", duration: 1.5).show();
-                    sender.isEnabled = true;
+        Storage.storage()
+            .reference(withPath: "advance/checklist.pdf")
+            .getData(maxSize: 3*1024*1024) { data, error in
+                if error != nil {
+                    print(self.mTag, error);
                     return;
                 }
                 
-                Toast.init(text: "Email sent", duration: 1.5).show();
-                print(self.mTag,"EMAIL SENT!");
-                self.navigationController?.popViewController(animated: true);
+                guard let data = data else {
+                    print(self.mTag, "DATA IS NIL");
+                    return;
+                }
+                
+                let url = FileManager.default.urls(for: .documentDirectory,
+                                                   in: .userDomainMask)[0]
+                    .appendingPathComponent("checklistFromUrl.pdf");
+                try? data.write(to: url);
+                
             }
+        
     }
 }
