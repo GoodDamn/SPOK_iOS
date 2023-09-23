@@ -25,6 +25,10 @@ class ChecklistViewController: UIViewController {
                                  textColour: UIColor(named: "privacy_color")!)
     }
     
+    @IBAction func closeScreen(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true);
+    }
+    
     @IBAction func sendChecklist(_ sender: UIButton) {
         
         let emt = mTFEmail.text ?? "";
