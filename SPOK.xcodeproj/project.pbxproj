@@ -15,7 +15,6 @@
 		251DE3352AB56AA000EF30C2 /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = 251DE3342AB56AA000EF30C2 /* MailCore2 */; };
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
-		257984812AB6C52A008F17A8 /* checklist.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 257984802AB6C52A008F17A8 /* checklist.jpeg */; };
 		257984892AB6FBF6008F17A8 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579848B2AB6FBF6008F17A8 /* checklist.storyboard */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
@@ -120,7 +119,6 @@
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
 		2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		257984802AB6C52A008F17A8 /* checklist.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = checklist.jpeg; path = "../../../../../../Volumes/VMware Shared Folders/SHARED_FOLDER/checklist.jpeg"; sourceTree = "<group>"; };
 		2579848A2AB6FBF6008F17A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/checklist.storyboard; sourceTree = "<group>"; };
 		2579848D2AB6FBFD008F17A8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/checklist.strings; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
@@ -255,14 +253,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2579847F2AB6C4EC008F17A8 /* raw */ = {
-			isa = PBXGroup;
-			children = (
-				257984802AB6C52A008F17A8 /* checklist.jpeg */,
-			);
-			path = raw;
-			sourceTree = "<group>";
-		};
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,7 +326,6 @@
 		2BA101CB2763EFC900EB5B8C /* SPOK */ = {
 			isa = PBXGroup;
 			children = (
-				2579847F2AB6C4EC008F17A8 /* raw */,
 				2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */,
 				2B29CAFC2892BC3D006FE018 /* SPOK.entitlements */,
 				383AF7A82875806000859090 /* OpenSans-Bold.ttf */,
@@ -703,7 +692,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				257984812AB6C52A008F17A8 /* checklist.jpeg in Resources */,
 				257984892AB6FBF6008F17A8 /* checklist.storyboard in Resources */,
 				2BCC497E290E614400A5F4F4 /* AdvancedLabel.xib in Resources */,
 				2BCC497D290E613B00A5F4F4 /* ArcProgressBar.xib in Resources */,
