@@ -3513,6 +3513,8 @@ Change the topic's theme and font to your liking. Be unique!</string>
                         <outlet property="l_recent" destination="hxU-eh-PsK" id="wfg-ho-fza"/>
                         <outlet property="mBtnLearnMore" destination="HYS-Cg-6um" id="IZE-GW-cNi"/>
                         <outlet property="mChecklist" destination="TkL-23-mtv" id="mpV-oj-Nbh"/>
+                        <outlet property="mChecklistHeight" destination="dDY-Bg-G3n" id="03c-Fw-cwW"/>
+                        <outlet property="mTopTitleSPOKFree" destination="dbh-vc-SC1" id="pRc-an-aYQ"/>
                         <outlet property="scrollView" destination="CVY-eP-0wm" id="TJY-7d-If4"/>
                         <outlet property="svHeight" destination="BLN-oP-4Bw" id="aK9-hi-ZQZ"/>
                         <outlet property="tv_doIt" destination="yLV-dF-1N2" id="Rya-dQ-i1h"/>
@@ -3555,7 +3557,7 @@ Change the topic's theme and font to your liking. Be unique!</string>
         <image name="wifi.slash" catalog="system" width="128" height="101"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
-            <color red="0.031372549019607843" green="0.098039215686274508" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

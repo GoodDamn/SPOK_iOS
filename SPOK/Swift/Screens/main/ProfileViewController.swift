@@ -44,6 +44,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var svHeight: NSLayoutConstraint!;
     
+    @IBOutlet weak var mChecklistHeight: NSLayoutConstraint!;
+    @IBOutlet weak var mTopTitleSPOKFree: NSLayoutConstraint!;
+    
     private let lang = Utils.getLanguageCode();
     private let manager = Utils.getManager();
     
@@ -274,11 +277,13 @@ class ProfileViewController: UIViewController {
         
         let userDef = StorageApp.mUserDef;
         
-        let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
-        
         if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
+            mChecklistHeight.constant = 0;
+            mTopTitleSPOKFree.constant = 20;
             return;
         }
+        
+        let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
         
         let s = mChecklist.bounds;
         

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */; };
 		25041E032ABF64A100E19FEB /* checklist.png in Resources */ = {isa = PBXBuildFile; fileRef = 25041E022ABF64A100E19FEB /* checklist.png */; };
+		25041E072ABF6DC700E19FEB /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25041E062ABF6DC700E19FEB /* PDFViewController.swift */; };
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
@@ -117,6 +118,7 @@
 		2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
 		25041E022ABF64A100E19FEB /* checklist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checklist.png; path = "../../../../../../Volumes/VMware Shared Folders/SHARED_FOLDER/checklist.png"; sourceTree = "<group>"; };
 		25041E052ABF699C00E19FEB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/checklist.strings; sourceTree = "<group>"; };
+		25041E062ABF6DC700E19FEB /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				2BA101CC2763EFC900EB5B8C /* AppDelegate.swift */,
 				2BA101CE2763EFC900EB5B8C /* SceneDelegate.swift */,
 				25BD93142A691883002C7017 /* BannerViewController.swift */,
+				25041E062ABF6DC700E19FEB /* PDFViewController.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				2B1CBB2827D16D4C00CCB102 /* AdvancedLabel.swift in Sources */,
 				2BF06BF628E7953B00A2ACFF /* SPOKTopic.swift in Sources */,
 				2B4C74A528E9BDA20097CDE7 /* SPOKNotify.swift in Sources */,
+				25041E072ABF6DC700E19FEB /* PDFViewController.swift in Sources */,
 				2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

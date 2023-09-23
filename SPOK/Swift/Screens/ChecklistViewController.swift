@@ -75,8 +75,17 @@ class ChecklistViewController: UIViewController {
                 
                 let url = FileManager.default.urls(for: .documentDirectory,
                                                    in: .userDomainMask)[0]
-                    .appendingPathComponent("checklistFromUrl.pdf");
+                    .appendingPathComponent("checklist.pdf");
                 try? data.write(to: url);
+                
+                let pdfViewer = PDFViewController();
+                pdfViewer.urlPdf = url;
+                
+                self.present(pdfViewer,
+                             animated: true) {
+                    StorageApp.mUserDef
+                        .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
+                };
                 
             }
         

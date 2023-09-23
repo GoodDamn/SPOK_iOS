@@ -200,7 +200,7 @@ class SearchViewController:UIViewController, UIPageViewControllerDelegate, UIPag
                                             topics: [3,41,5,6,14,11],
                                             image: starImage))
         
-        if filePaths != nil && Utils.mDate.timeIntervalSince1970 - time < 86400 {
+        if filePaths != nil {
             print(self.tag, "LOAD CATEGORIES FROM LOCAL STORAGE:");
             for i in 0..<filePaths!.count {
                 let data = StorageApp.getFile(path: pathCat+"/"+filePaths![i], fileManager);
