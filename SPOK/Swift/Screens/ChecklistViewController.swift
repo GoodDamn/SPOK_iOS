@@ -21,6 +21,8 @@ class ChecklistViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        mTVPrivacy.text = Utils.getLocalizedString("terms");
+        
         Utils.setPrivacyAndTerms(tv_terms: mTVPrivacy,
                                  textColour: UIColor(named: "privacy_color")!)
     }
