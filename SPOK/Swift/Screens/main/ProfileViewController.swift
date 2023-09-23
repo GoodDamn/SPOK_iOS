@@ -277,7 +277,7 @@ class ProfileViewController: UIViewController {
         
         let userDef = StorageApp.mUserDef;
         
-        if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
+        if (!userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
             mChecklistHeight.constant = 0;
             mTopTitleSPOKFree.constant = 20;
             return;
@@ -300,7 +300,7 @@ class ProfileViewController: UIViewController {
         tt.numberOfLines = 0;
         tt.font = UIFont(name: "OpenSans-SemiBold", size: 12.5);
         
-        setChecklistDesc("Read anything what you want and get a gift");
+        setChecklistDesc(Utils.getLocalizedString("check1"));
         
         let lineOffsetY = s.height * 0.2;
         
@@ -408,7 +408,7 @@ class ProfileViewController: UIViewController {
             return;
         }
         
-        let countStr = NSMutableAttributedString(string: c.description+"/3\nCARDS");
+        let countStr = NSMutableAttributedString(string: c.description+"/3\n"+Utils.getLocalizedString("cards"));
         
         countStr.addAttributes([NSAttributedString.Key.font: UIFont(name: "OpenSans-Bold", size: 9),
                                NSAttributedString.Key.foregroundColor: mlCounter!.textColor.withAlphaComponent(0.6)],
@@ -418,7 +418,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func setChecklistDesc(_ m: String) {
-        let stList = m + ": a checklist for dealing with self-criticism ⚡️";
+        let stList = m + Utils.getLocalizedString("check2");
         
         let ats = NSMutableAttributedString(string: stList);
         let beg = stList.distance(from: stList.startIndex,
@@ -448,7 +448,7 @@ class ProfileViewController: UIViewController {
                                    green: 0.74,
                                    blue: 0,
                                    alpha: 1.0);
-        setChecklistDesc("Cheers! A gift is now available to you");
+        setChecklistDesc(Utils.getLocalizedString("check3"));
         
         mChecklist.addSubview(ivDone);
         mChecklist.addTarget(self,action: #selector(showChecklist(_:)),
