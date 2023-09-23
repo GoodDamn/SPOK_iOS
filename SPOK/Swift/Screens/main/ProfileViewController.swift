@@ -277,7 +277,7 @@ class ProfileViewController: UIViewController {
         
         let userDef = StorageApp.mUserDef;
         
-        if (!userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
+        if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
             mChecklistHeight.constant = 0;
             mTopTitleSPOKFree.constant = 20;
             return;
@@ -344,6 +344,16 @@ class ProfileViewController: UIViewController {
         if let vc = UIStoryboard(name: "checklist",
                               bundle: nil)
             .instantiateViewController(withIdentifier: "checklist") as? ChecklistViewController {
+            
+            vc.completionChecklist = {
+                for sub in self.mChecklist.subviews {
+                    sub.removeFromSuperview();
+                }
+                
+                self.mChecklistHeight.constant = 0;
+                self.mTopTitleSPOKFree.constant = 20;
+            }
+            
             manager?.navigationController?.pushViewController(vc, animated: true);
         }
     }

@@ -14,6 +14,8 @@ class ChecklistViewController: UIViewController {
     
     private let mTag = "ChecklistViewContoller:";
     
+    var completionChecklist: (()->Void)? = nil;
+    
     @IBOutlet weak var mTVPrivacy: UITextView!;
     @IBOutlet weak var mTFEmail: UITextField!;
     
@@ -76,16 +78,21 @@ class ChecklistViewController: UIViewController {
                 let url = FileManager.default.urls(for: .documentDirectory,
                                                    in: .userDomainMask)[0]
                     .appendingPathComponent("checklist.pdf");
-                try? data.write(to: url);
-                
-                let pdfViewer = PDFViewController();
-                pdfViewer.urlPdf = url;
-                
-                self.present(pdfViewer,
-                             animated: true) {
-                    StorageApp.mUserDef
-                        .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
-                };
+                do {
+                    try data.write(to: url);
+                    
+                    let pdfViewer = PDFViewController();
+                    pdfViewer.urlPdf = url;
+                    self.completionChecklist?();
+                    
+                    self.present(pdfViewer,
+                                 animated: true) {
+                        StorageApp.mUserDef
+                            .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
+                    };
+                } catch {
+                    print(self.mTag, error);
+                }
                 
             }
         
