@@ -76,7 +76,7 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         let path = urlColl.path;
         let filePaths = try? fileManager.contentsOfDirectory(atPath: path);
-        if filePaths != nil {
+        if filePaths != nil && !StorageApp.canUpdate(path: path) {
             for fileName in filePaths! {
                 let data = StorageApp.getFile(path: path+"/"+fileName,fileManager);
                 print(self.tag, "LOAD FROM STORAGE:",data);

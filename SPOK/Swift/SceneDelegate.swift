@@ -58,15 +58,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first;
                 
                 do {
-                    let content = try? fileManager.contentsOfDirectory(atPath: url?.path ?? "");
+                    let dirContent = try fileManager.contentsOfDirectory(at: url!,
+                                                                     includingPropertiesForKeys: nil,
+                                                                     options: []);
+                    print(tag, "DIR_CONTENT:",dirContent);
+                    for ff in dirContent {
+                        do {
+                            try fileManager.removeItem(at: ff);
+                        } catch {
+                            print(tag, "DELETING_FILE_ERROR:",error);
+                        }
+                        
+                    }
                     
-                    try? fileManager.removeItem(at: url!.appendingPathComponent("categories"));
-                    
-                    try? fileManager.removeItem(at: url!.appendingPathComponent("topics"))
-                    
-                    print(tag, "Content of directory:",content);
                 } catch {
-                    print(tag, "error with getting content of directory");
+                    print(tag, "DELETE_CACHE_EXCEPTION:",error);
                 }
                 
                 userDefaults.setValue(lastVersion, forKey: "version");

@@ -96,7 +96,7 @@ extension BannerViewController: UITextViewDelegate {
             return false;
         }
         
-        stat(property: "banner");
+        stat(property: "clickMe");
         print("notifyUs:");
         Toast.init(text: Utils.getLocalizedString("letUsKnow"), duration: 1.8).show();
         navigationController?.popViewController(animated: true);

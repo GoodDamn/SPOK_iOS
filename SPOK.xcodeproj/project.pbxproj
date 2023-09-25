@@ -14,7 +14,6 @@
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
 		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
-		251DE3352AB56AA000EF30C2 /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = 251DE3342AB56AA000EF30C2 /* MailCore2 */; };
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
 		257984892AB6FBF6008F17A8 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579848B2AB6FBF6008F17A8 /* checklist.storyboard */; };
@@ -231,7 +230,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2598FAB62A44394600230574 /* RevenueCat in Frameworks */,
-				251DE3352AB56AA000EF30C2 /* MailCore2 in Frameworks */,
 				2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */,
 				253E298E2A44493700304958 /* StoreKit.framework in Frameworks */,
 				2B4B3887290EDEAA0013D198 /* FirebaseAuth in Frameworks */,
@@ -586,7 +584,6 @@
 				2B4B3888290EDEAA0013D198 /* FirebaseDatabase */,
 				2598FAB52A44394600230574 /* RevenueCat */,
 				25063EB32A77E4A7001C1CCE /* FirebaseStorage */,
-				251DE3342AB56AA000EF30C2 /* MailCore2 */,
 			);
 			productName = SPOK;
 			productReference = 2BA101C92763EFC900EB5B8C /* SPOK.app */;
@@ -1068,7 +1065,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1079,7 +1076,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.11;
+				MARKETING_VERSION = 0.2.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1099,7 +1096,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1110,7 +1107,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.11;
+				MARKETING_VERSION = 0.2.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1286,11 +1283,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		251DE3342AB56AA000EF30C2 /* MailCore2 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 251DE3332AB56AA000EF30C2 /* XCRemoteSwiftPackageReference "mailcore2" */;
-			productName = MailCore2;
 		};
 		2598FAB52A44394600230574 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;

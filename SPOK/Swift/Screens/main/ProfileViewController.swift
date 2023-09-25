@@ -283,9 +283,12 @@ class ProfileViewController: UIViewController {
             return;
         }
         
-        let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
-        
         let s = mChecklist.bounds;
+        
+        print(tag, "CHECKLIST_BOUNDS: ", mChecklist.bounds, mChecklist.frame, UIScreen.main.bounds);
+        
+        
+        let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
         
         mlChecklistDesc = UILabel(frame: CGRect(x: s.width*0.04,
                                        y: 0,
@@ -322,7 +325,6 @@ class ProfileViewController: UIViewController {
         
         if (countCl < 3) {
             mlCounter = UILabel(frame: f);
-            
             mlCounter!.numberOfLines = 2;
             mlCounter!.textColor = tt.textColor;
             mlCounter!.font = UIFont(name: "OpenSans-Bold", size: 25.0);

@@ -36,6 +36,29 @@ class StorageApp{
         }
     }
     
+    public static func canUpdate(path: String,_ time:Double = 86400) -> Bool {
+        
+        let m = FileManager.default;
+        
+        if (!m.fileExists(atPath: path)) {
+            return true;
+        }
+        
+        let r = StorageApp.modifTIme(path: path, m);
+        let delta = Utils.mDate.timeIntervalSince1970 - r;
+        print("canUpdate: MODIFICATION_DELTA_TIME: ", delta, time);
+        
+        if delta > time {
+            
+            try? m.setAttributes([FileAttributeKey.modificationDate: Utils.mDate],
+                            ofItemAtPath: path);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
     public static func modifTIme(path:String, _ manager:FileManager)->Double{
         return (try? manager.attributesOfItem(atPath: path)[FileAttributeKey.modificationDate] as? Date)?.timeIntervalSince1970 ?? 0;
     }
@@ -99,17 +122,11 @@ class StorageApp{
             return name;
         }
         
-        private static func exists(p:String, time:Double=86400.0)->Bool{
+        private static func exists(p:String)->Bool{
             var b: Bool = false;
             fileManipulation(path: p, action: {
                 manager, path in
                 b = manager.fileExists(atPath: path);
-                if b {
-                    let r = StorageApp.modifTIme(path: path, manager);
-                    let delta = Utils.mDate.timeIntervalSince1970 - r;
-                    print("EXISTS: MODIFICATION_DELTA_TIME: ", delta, time);
-                    b = b && delta < time;
-                }
             });
             return b;
         }

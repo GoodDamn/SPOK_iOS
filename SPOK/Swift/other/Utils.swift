@@ -13,12 +13,8 @@ class Utils{
     private static let tag = "Utils:";
     
     public static let mDate = Date();
-    
-#if DEBUG
-    public static let mSTATS = false;
-    #else
+
     public static let mSTATS = true;
-#endif
     
     public static let mKEY_CHECKLIST_COUNT = "cl";
     public static let mKEY_GOT_CHECKLIST = "gl";
