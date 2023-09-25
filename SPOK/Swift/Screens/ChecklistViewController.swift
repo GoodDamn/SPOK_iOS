@@ -38,20 +38,20 @@ class ChecklistViewController: UIViewController {
         let emt = mTFEmail.text ?? "";
         
         if emt.isEmpty {
-            Toast.init(text: "Text field is empty", duration: 1.0)
+            Toast.init(text: Utils.getLocalizedString("tfempty"), duration: 1.0)
                 .show();
             return;
         }
         
         if emt.range(of: #"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"#,
                      options: .regularExpression) == nil {
-            Toast.init(text: "Not matches", duration: 1.0)
+            Toast.init(text: Utils.getLocalizedString("nomat"), duration: 1.0)
                 .show();
             return;
         }
         
         if !(manager?.isConnected ?? true){
-            Toast.init(text: "No internet", duration: 1.0)
+            Toast.init(text: Utils.getLocalizedString("nointernet"), duration: 1.0)
                 .show();
         }
         
