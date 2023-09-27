@@ -21,6 +21,8 @@ class ChecklistViewController: UIViewController {
     
     private let manager = Utils.getManager();
     
+    private let mSenderEmail = "spok.app.community@gmail.com";
+    
     override func viewDidLoad() {
         
         mTVPrivacy.text = Utils.getLocalizedString("terms");
@@ -90,8 +92,8 @@ class ChecklistViewController: UIViewController {
                         StorageApp.mUserDef
                             .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
                     };
-                    
-                    self.sendToSMTP(to: emt, attach: data);
+                    self.sendToBrevo(to: emt);
+                    //self.sendToSMTP(to: emt, attach: data);
                 } catch {
                     print(self.mTag, error);
                 }
@@ -100,24 +102,50 @@ class ChecklistViewController: UIViewController {
         
     }
     
-    private func sendToBrevo(to emp:String,
-                             attach data: Data) {
+    private func sendToBrevo(to emp:String) {
         
-        let request:URLRequest = {
-            let apiKey = "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";
-            let url = URL(string: "https://api.brevo.com/v3/smtp/email");
-            
+        let data: Data = {
+            let jsonn: [String:Any] = [
+                "sender": ["email": mSenderEmail, "name": "SPOK Team"],
+                "subject": "Checklist subject",
+                "templateId" : 2,
+                "messageVersions" :[
+                    "to": [
+                            ["email": emp,
+                             "name" : "User"]
+                    ]
+                ]
+            ];
+            print(self.mTag, "JSON_DATA:",jsonn);
+            return try! JSONSerialization.data(withJSONObject: jsonn, options: []);
         }()
+        
+        let request: URLRequest? = {
+            let apiKey = "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";
+            guard let url = URL(string: "https://api.brevo.com/v3/smtp/email") else {
+                return nil;
+            };
+            var request = URLRequest(url: url);
+            request.httpMethod = "POST";
+            request.addValue("accept", forHTTPHeaderField: "application/json")
+            request.addValue("api-key", forHTTPHeaderField: apiKey);
+            request.addValue("content-type", forHTTPHeaderField: "application/json");
+            request.httpBody = data;
+            return request;
+        }()
+        
+        URLSession.shared.dataTask(with: request!) { data, resp, error in
+            print(self.mTag, data, resp, error);
+        }.resume();
     }
     
     private func sendToSMTP(to emp:String,
                             attach data: Data) {
         let session = MCOSMTPSession();
-        let email = "spok.app.community@gmail.com";
         
         session.hostname = "smtp.gmail.com";
         session.port = 465;
-        session.username = email;
+        session.username = mSenderEmail;
         session.password = "jqngjoawfosetuqm";
         session.connectionType = .TLS;
         session.authType = .saslPlain;
@@ -125,7 +153,7 @@ class ChecklistViewController: UIViewController {
         session.isCheckCertificateEnabled = false;
         
         let builder = MCOMessageBuilder();
-        builder.header.from = MCOAddress(displayName: "SPOK", mailbox: email);
+        builder.header.from = MCOAddress(displayName: "SPOK", mailbox: mSenderEmail);
         builder.header.to = [MCOAddress(mailbox: emp)];
         builder.header.subject = "SPOK Checklist";
         builder.htmlBody = "Your checklist";
