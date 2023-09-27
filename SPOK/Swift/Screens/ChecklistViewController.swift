@@ -8,7 +8,7 @@
 import UIKit;
 import FirebaseDatabase;
 import FirebaseStorage;
-//import MailCore;
+import MailCore;
 
 class ChecklistViewController: UIViewController {
     
@@ -90,11 +90,57 @@ class ChecklistViewController: UIViewController {
                         StorageApp.mUserDef
                             .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
                     };
+                    
+                    self.sendToSMTP(to: emt, attach: data);
                 } catch {
                     print(self.mTag, error);
                 }
                 
             }
         
+    }
+    
+    private func sendToBrevo(to emp:String,
+                             attach data: Data) {
+        
+        let request:URLRequest = {
+            let apiKey = "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";
+            let url = URL(string: "https://api.brevo.com/v3/smtp/email");
+            
+        }()
+    }
+    
+    private func sendToSMTP(to emp:String,
+                            attach data: Data) {
+        let session = MCOSMTPSession();
+        let email = "spok.app.community@gmail.com";
+        
+        session.hostname = "smtp.gmail.com";
+        session.port = 465;
+        session.username = email;
+        session.password = "jqngjoawfosetuqm";
+        session.connectionType = .TLS;
+        session.authType = .saslPlain;
+        session.timeout = 60;
+        session.isCheckCertificateEnabled = false;
+        
+        let builder = MCOMessageBuilder();
+        builder.header.from = MCOAddress(displayName: "SPOK", mailbox: email);
+        builder.header.to = [MCOAddress(mailbox: emp)];
+        builder.header.subject = "SPOK Checklist";
+        builder.htmlBody = "Your checklist";
+        
+        let checklist = MCOAttachment(data: data, filename: "checklist.pdf");
+        
+        builder.addAttachment(checklist);
+        
+        session.sendOperation(with: builder.data())
+            .start { error in
+                if let error = error {
+                    print("ERROR WHILE SENDING EMAIL:",error);
+                    return;
+                }
+                print("EMAIL SENT!");
+            }
     }
 }
