@@ -8,7 +8,7 @@
 import UIKit;
 import FirebaseDatabase;
 import FirebaseStorage;
-import MailCore;
+//import MailCore;
 
 class ChecklistViewController: UIViewController {
     
@@ -66,9 +66,7 @@ class ChecklistViewController: UIViewController {
         
         self.sendToBrevo(to: emt);
         
-        return;
-        
-        Storage.storage()
+        /*Storage.storage()
             .reference(withPath: "advance/checklist.pdf")
             .getData(maxSize: 3*1024*1024) { data, error in
                 if error != nil {
@@ -102,7 +100,7 @@ class ChecklistViewController: UIViewController {
                 }
                 
             }
-        
+        */
     }
     
     private func sendToBrevo(to emp:String) {
@@ -137,11 +135,20 @@ class ChecklistViewController: UIViewController {
         }()
         
         URLSession.shared.dataTask(with: request!) { data, resp, error in
-            print(self.mTag, String(data: data!, encoding: .utf8), error);
+            if resp == nil {
+                return;
+            }
+            
+            DispatchQueue.main.async {
+                StorageApp.mUserDef
+                    .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
+                self.completionChecklist?();
+                self.navigationController?.popViewController(animated: true);
+            }
         }.resume();
     }
     
-    private func sendToSMTP(to emp:String,
+    /*private func sendToSMTP(to emp:String,
                             attach data: Data) {
         let session = MCOSMTPSession();
         
@@ -172,5 +179,5 @@ class ChecklistViewController: UIViewController {
                 }
                 print("EMAIL SENT!");
             }
-    }
+    }*/
 }

@@ -21,7 +21,6 @@
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
 		25CEA89F2A6CFC4E00D9D44C /* CollectionView8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */; };
 		25D5E5642A6A82A200A3126B /* SpanTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5E5632A6A82A200A3126B /* SpanTextView.swift */; };
-		25F534292AC476FD00EEE557 /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = 25F534282AC476FD00EEE557 /* MailCore2 */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */; };
 		2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */; };
@@ -231,7 +230,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2598FAB62A44394600230574 /* RevenueCat in Frameworks */,
-				25F534292AC476FD00EEE557 /* MailCore2 in Frameworks */,
 				2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */,
 				253E298E2A44493700304958 /* StoreKit.framework in Frameworks */,
 				2B4B3887290EDEAA0013D198 /* FirebaseAuth in Frameworks */,
@@ -586,7 +584,6 @@
 				2B4B3888290EDEAA0013D198 /* FirebaseDatabase */,
 				2598FAB52A44394600230574 /* RevenueCat */,
 				25063EB32A77E4A7001C1CCE /* FirebaseStorage */,
-				25F534282AC476FD00EEE557 /* MailCore2 */,
 			);
 			productName = SPOK;
 			productReference = 2BA101C92763EFC900EB5B8C /* SPOK.app */;
@@ -1291,11 +1288,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
-		};
-		25F534282AC476FD00EEE557 /* MailCore2 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 25F534272AC476FD00EEE557 /* XCRemoteSwiftPackageReference "mailcore2" */;
-			productName = MailCore2;
 		};
 		2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
