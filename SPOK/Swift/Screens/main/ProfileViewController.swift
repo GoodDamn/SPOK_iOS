@@ -277,11 +277,11 @@ class ProfileViewController: UIViewController {
         
         let userDef = StorageApp.mUserDef;
         
-        /*if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
+        if (userDef.bool(forKey: Utils.mKEY_GOT_CHECKLIST)) {
             mChecklistHeight.constant = 0;
             mTopTitleSPOKFree.constant = 20;
             return;
-        }*/
+        }
         
         let s = mChecklist.bounds;
         
