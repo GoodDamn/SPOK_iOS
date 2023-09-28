@@ -64,6 +64,10 @@ class ChecklistViewController: UIViewController {
         
         sender.isEnabled = false;
         
+        self.sendToBrevo(to: emt);
+        
+        return;
+        
         Storage.storage()
             .reference(withPath: "advance/checklist.pdf")
             .getData(maxSize: 3*1024*1024) { data, error in
@@ -92,7 +96,6 @@ class ChecklistViewController: UIViewController {
                         StorageApp.mUserDef
                             .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
                     };
-                    self.sendToBrevo(to: emt);
                     //self.sendToSMTP(to: emt, attach: data);
                 } catch {
                     print(self.mTag, error);
@@ -106,36 +109,35 @@ class ChecklistViewController: UIViewController {
         
         let data: Data = {
             let jsonn: [String:Any] = [
-                "sender": ["email": mSenderEmail, "name": "SPOK Team"],
-                "subject": "Checklist subject",
                 "templateId" : 2,
+                "subject": "⚡️" + Utils.getLocalizedString("check3"),
                 "messageVersions" :[
-                    "to": [
-                            ["email": emp,
-                             "name" : "User"]
+                    [
+                        "to": [
+                            ["email": emp]
+                        ]
                     ]
                 ]
             ];
-            print(self.mTag, "JSON_DATA:",jsonn);
             return try! JSONSerialization.data(withJSONObject: jsonn, options: []);
         }()
         
         let request: URLRequest? = {
-            let apiKey = "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";
+            let apiKey = "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";
             guard let url = URL(string: "https://api.brevo.com/v3/smtp/email") else {
                 return nil;
             };
             var request = URLRequest(url: url);
             request.httpMethod = "POST";
-            request.addValue("accept", forHTTPHeaderField: "application/json")
-            request.addValue("api-key", forHTTPHeaderField: apiKey);
-            request.addValue("content-type", forHTTPHeaderField: "application/json");
+            request.addValue("application/json", forHTTPHeaderField: "accept")
+            request.addValue(apiKey, forHTTPHeaderField: "api-key");
+            request.addValue("application/json", forHTTPHeaderField: "content-type");
             request.httpBody = data;
             return request;
         }()
         
         URLSession.shared.dataTask(with: request!) { data, resp, error in
-            print(self.mTag, data, resp, error);
+            print(self.mTag, String(data: data!, encoding: .utf8), error);
         }.resume();
     }
     

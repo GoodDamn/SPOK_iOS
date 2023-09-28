@@ -430,7 +430,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func setChecklistDesc(_ m: String) {
-        let stList = m + Utils.getLocalizedString("check2");
+        let stList = m + ": " + Utils.getLocalizedString("check2") + "⚡️";
         
         let ats = NSMutableAttributedString(string: stList);
         let beg = stList.distance(from: stList.startIndex,
