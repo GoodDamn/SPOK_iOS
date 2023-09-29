@@ -55,12 +55,12 @@ class ChecklistViewController: UIViewController {
         if !(manager?.isConnected ?? true){
             Toast.init(text: Utils.getLocalizedString("nointernet"), duration: 1.0)
                 .show();
+            return;
         }
         
-        Database.database()
-            .reference(withPath: "checklistEmails/iOS")
-            .childByAutoId()
-            .setValue(emt);
+        sendInfo("checklistEmails/iOS",
+                 data: emt,
+                 withErrorMsg: false);
         
         sender.isEnabled = false;
         
@@ -103,6 +103,23 @@ class ChecklistViewController: UIViewController {
         */
     }
     
+    private func sendInfo(_ path: String,
+                          data: String,
+                          withErrorMsg: Bool = true
+    ) {
+        DispatchQueue.main.async {
+            Database.database()
+                .reference(withPath: path)
+                .childByAutoId()
+                .setValue(data);
+            
+            if withErrorMsg {
+                Toast.init(text: Utils.getLocalizedString("error"), duration: 1.5)
+                    .show();
+            }
+        }
+    }
+    
     private func sendToBrevo(to emp:String) {
         
         let data: Data = {
@@ -135,11 +152,37 @@ class ChecklistViewController: UIViewController {
         }()
         
         URLSession.shared.dataTask(with: request!) { data, resp, error in
-            if resp == nil {
+            
+            let e = error?.localizedDescription ?? "";
+            
+            if error != nil {
+                self.sendInfo(Utils.mEChild, data: self.mTag + e);
                 return;
             }
             
+            guard let resp = resp as? HTTPURLResponse else {
+                self.sendInfo(Utils.mEChild, data: self.mTag + e);
+                return;
+            }
+            
+            let s = resp.statusCode;
+            if 200 > s || s >= 300 {
+                guard let data = data else {
+                    self.sendInfo(Utils.mEChild, data: self.mTag + "DATA_IS_NIL_" + e);
+                    return;
+                }
+                let d = String(data: data, encoding: .utf8) ?? "";
+                self.sendInfo(Utils.mEChild, data: self.mTag + "RESPONSE_CODE: " + s.description + " " + d);
+                return;
+            }
+            
+            print(self.mTag, resp);
+            
+            self.sendInfo(Utils.mEChild, data: self.mTag + "I'm ready for sending errors");
+            
             DispatchQueue.main.async {
+                Toast.init(text: Utils.getLocalizedString("sent"), duration: 1.5)
+                    .show();
                 StorageApp.mUserDef
                     .setValue(true,forKey: Utils.mKEY_GOT_CHECKLIST);
                 self.completionChecklist?();
