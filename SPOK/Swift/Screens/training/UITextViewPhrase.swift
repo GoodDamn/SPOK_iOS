@@ -21,13 +21,14 @@ class UITextViewPhrase: UITextView{
     }
     
     public func show() {
-        UIView.animate(withDuration: TimeInterval.random(in: 0.3..<1.0), animations: {
+        UIView.animate(withDuration: TimeInterval.random(in: 0.3..<1.0),delay: 0.35,animations: {
             self.alpha = 1.0;
         });
     }
     
     public func hide(_ maxValY: CGFloat) {
         let y = contentSize.height + CGFloat.random(in: 0..<maxValY);
+        
         UIView.animate(withDuration: Double(y)/80, animations: {
             self.transform = CGAffineTransform(translationX: 0, y: y);
             self.alpha = 0.0;

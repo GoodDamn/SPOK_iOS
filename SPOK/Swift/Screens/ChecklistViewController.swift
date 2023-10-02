@@ -178,8 +178,6 @@ class ChecklistViewController: UIViewController {
             
             print(self.mTag, resp);
             
-            self.sendInfo(Utils.mEChild, data: self.mTag + "I'm ready for sending errors");
-            
             DispatchQueue.main.async {
                 Toast.init(text: Utils.getLocalizedString("sent"), duration: 1.5)
                     .show();

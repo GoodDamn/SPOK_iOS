@@ -55,12 +55,24 @@ class Utils{
                     content.title = Utils.getLocalizedString("edn"+i.description);
                     content.body = Utils.getLocalizedString("ednb"+i.description);
                     
-                    center.add(UNNotificationRequest(identifier: ("daily"+i.description), content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 86400 * Double(i+3), repeats: true)), withCompletionHandler: {
-                        error in
-                        print(self.tag,error);
+                    center.add(UNNotificationRequest(
+                        identifier: ("daily"+i.description),
+                        content: content,
+                        trigger: UNTimeIntervalNotificationTrigger(
+                            timeInterval: 86400 * Double(i+3),
+                            repeats: true)),
+                        withCompletionHandler: {
+                            error in
+                            print(self.tag,error);
                     });
                     // Short-fired notification on the first 4 days.
-                    center.add(UNNotificationRequest(identifier: ("dailyTest"+i.description), content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 86400 * Double(i), repeats: true)), withCompletionHandler: {
+                    center.add(
+                        UNNotificationRequest(identifier: ("dailyTest"+i.description),
+                        content: content,
+                        trigger: UNTimeIntervalNotificationTrigger(
+                            timeInterval: 86400 * Double(i),
+                            repeats: true)),
+                        withCompletionHandler: {
                         error in
                         print(self.tag,error);
                     })

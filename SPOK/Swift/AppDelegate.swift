@@ -9,6 +9,7 @@ import UIKit;
 //import FBSDKCoreKit;
 import FirebaseCore;
 import FirebaseDatabase;
+import FirebaseMessaging;
 import RevenueCat;
 import AuthenticationServices;
 import UserNotifications;
@@ -17,6 +18,8 @@ import UserNotifications;
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?;
+    
+    let messaging = Messaging.messaging();
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -33,6 +36,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotifications.notify(notification: "event", center: center);
         PushNotifications.notify(notification: "new", center: center);*/
         
+        let center = UNUserNotificationCenter.current();
+        center.delegate = self;
+        center.requestAuthorization(options: [.alert, .badge, .sound],completionHandler: { _, _ in});
+        
+        messaging.delegate = self;
+        messaging.token {
+            token, error in
+            
+            if error != nil {
+                print("APP:ERROR_WHILE_DELIVERING_TOKEN_PUSH:",error?.localizedDescription);
+                return;
+            }
+            
+            guard let token = token else {
+                print("APP:TOKEN_IS_NIL");
+                return;
+            }
+            
+            print("APP::TOKEN::",token);
+        }
+        
+        messaging.isAutoInitEnabled = true;
+        
+        application.registerForRemoteNotifications();
         
         return true;
     }
@@ -65,6 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        messaging.apnsToken = deviceToken;
+    }
+    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate{
@@ -72,4 +103,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         print(self, "The notification is to be presented", notification.request.identifier);
         completionHandler([.alert]);
     }
+}
+
+extension AppDelegate: MessagingDelegate {
+    
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        
+        print("APP:messaging(didReceiveRegistrationToken): ",fcmToken?.description);
+        
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: ["token": fcmToken ?? ""]
+        )
+    }
+    
 }

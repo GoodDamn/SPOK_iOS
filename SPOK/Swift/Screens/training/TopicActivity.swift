@@ -358,6 +358,7 @@ class TopicActivity: UIViewController{
             anim();
         }, completion: {
             (b) in
+            
             UIView.animate(withDuration: 0.14,
                            animations: {
                 self.cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);

@@ -279,7 +279,9 @@ class ManagerViewController: UIViewController{
         
         modalPresentationStyle = .overFullScreen;
         
-        let vc = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "techWorks") as! TechWorksViewController;
+        let vc = UIStoryboard(name: "mainMenu", bundle: nil)
+            .instantiateViewController(withIdentifier: "techWorks")
+            as! TechWorksViewController;
         
         history = StorageApp.mUserDef.array(forKey: StorageApp.historyKey) as? [UInt16] ?? [];
         likes = StorageApp.mUserDef.array(forKey: StorageApp.likesKey) as? [UInt16] ?? [];
