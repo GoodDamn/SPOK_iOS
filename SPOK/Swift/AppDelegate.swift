@@ -16,12 +16,14 @@ import UserNotifications;
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?;
     
-    let messaging = Messaging.messaging();
+    var messaging: Messaging? = nil;
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        print("APP::application launching with options")
         
         //Networking.shared.startMonitoring();
         FirebaseApp.configure();
@@ -31,16 +33,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions:launchOptions);
         /*let center = UNUserNotificationCenter.current();
-        center.delegate = self;
-        
-        PushNotifications.notify(notification: "event", center: center);
-        PushNotifications.notify(notification: "new", center: center);*/
+         center.delegate = self;
+         
+         PushNotifications.notify(notification: "event", center: center);
+         PushNotifications.notify(notification: "new", center: center);*/
         
         let center = UNUserNotificationCenter.current();
         center.delegate = self;
         center.requestAuthorization(options: [.alert, .badge, .sound],completionHandler: { _, _ in});
         
-        messaging.delegate = self;
+        application.registerForRemoteNotifications();
+        
+        messaging = Messaging.messaging();
+        
+        messaging?.delegate = self;
+        messaging?.isAutoInitEnabled = true;
+        
+        sendDebug("IM READY")
+        
+        return true;
+    }
+    
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        
+        /*ApplicationDelegate.shared.application(
+         app,
+         open: url,
+         sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+         annotation: options[UIApplication.OpenURLOptionsKey.annotation]);*/
+        return true;
+        
+    }
+    
+    // MARK: UISceneSession Lifecycle
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("APP: DEVICE_TOKEN:",String(data: deviceToken, encoding: .utf8));
+        messaging?.apnsToken = deviceToken;
+        sendDebug("DEVICE_TOKEN: "+deviceToken.map { String(format: "%02.2hhx", $0) }.joined());
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("APP::FAIL_REGISTER_REMOTE_NOTIFICATION:",error);
+    }
+    
+    private func sendDebug(_ m: String) {
+        Database.database()
+            .reference(withPath: "DEBUG_APNS")
+            .childByAutoId()
+            .setValue(m)
+    }
+    
+}
+
+extension AppDelegate: MessagingDelegate {
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("APP:messaging(didReceiveRegistrationToken): ",fcmToken?.description);
+        
+        sendDebug("FCM_TOKEN: " + (fcmToken ?? ""))
+        
         messaging.token {
             token, error in
             
@@ -57,43 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("APP::TOKEN::",token);
         }
         
-        messaging.isAutoInitEnabled = true;
-        
-        application.registerForRemoteNotifications();
-        
-        return true;
-    }
-
-    func application(
-            _ app: UIApplication,
-            open url: URL,
-            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-        ) -> Bool {
-
-            /*ApplicationDelegate.shared.application(
-                app,
-                open: url,
-                sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                annotation: options[UIApplication.OpenURLOptionsKey.annotation]);*/
-                return true;
-            
-        }
-    
-    // MARK: UISceneSession Lifecycle
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        messaging.apnsToken = deviceToken;
+        /*NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: ["token": fcmToken ?? ""]
+        )*/
     }
     
 }
@@ -103,20 +138,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate{
         print(self, "The notification is to be presented", notification.request.identifier);
         completionHandler([.alert]);
     }
-}
-
-extension AppDelegate: MessagingDelegate {
-    
-    
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        
-        print("APP:messaging(didReceiveRegistrationToken): ",fcmToken?.description);
-        
-        NotificationCenter.default.post(
-            name: Notification.Name("FCMToken"),
-            object: nil,
-            userInfo: ["token": fcmToken ?? ""]
-        )
-    }
-    
 }
