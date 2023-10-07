@@ -283,10 +283,17 @@ class ProfileViewController: UIViewController {
             return;
         }
         
-        let s = mChecklist.bounds;
+        let chb = mChecklist.frame;
         
-        print(tag, "CHECKLIST_BOUNDS: ", mChecklist.bounds, mChecklist.frame, UIScreen.main.bounds);
+        let offCX = chb.origin.x;
+        let screen = UIScreen.main.bounds;
         
+        let s = CGRect(x: CGFloat(offCX),
+                       y: 0,
+                       width: screen.width - offCX*2,
+                       height: chb.height);
+        
+        print(tag, "CHECKLIST_BOUNDS: ", mChecklist.bounds, s, screen);
         
         let countCl = userDef.integer(forKey: Utils.mKEY_CHECKLIST_COUNT);
         
@@ -315,10 +322,15 @@ class ProfileViewController: UIViewController {
         line.clipsToBounds = true;
         line.backgroundColor = UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 0.15);
         
+        let lPos = s.width-line.frame.origin.x;
+        
         let f = CGRect(x: line.frame.origin.x,
                        y: 0,
-                       width: s.width * 0.2,
+                       width: lPos,
                        height: s.height);
+        
+        
+        print("BOUNDS_CHECKING:", screen.width, s.width, f.width, f.origin.x, lPos);
         
         mChecklist.addSubview(tt);
         mChecklist.addSubview(line);

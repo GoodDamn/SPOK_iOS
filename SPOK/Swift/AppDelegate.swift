@@ -49,8 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messaging?.delegate = self;
         messaging?.isAutoInitEnabled = true;
         
-        sendDebug("IM READY")
-        
         return true;
     }
     
@@ -83,20 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APP: DEVICE_TOKEN:",String(data: deviceToken, encoding: .utf8));
         messaging?.apnsToken = deviceToken;
-        sendDebug("DEVICE_TOKEN: "+deviceToken.map { String(format: "%02.2hhx", $0) }.joined());
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("APP::FAIL_REGISTER_REMOTE_NOTIFICATION:",error);
-    }
-    
-    private func sendDebug(_ m: String) {
-        Database.database()
-            .reference(withPath: "DEBUG_APNS")
-            .childByAutoId()
-            .setValue(m)
     }
     
 }
@@ -105,30 +94,6 @@ extension AppDelegate: MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("APP:messaging(didReceiveRegistrationToken): ",fcmToken?.description);
-        
-        sendDebug("FCM_TOKEN: " + (fcmToken ?? ""))
-        
-        messaging.token {
-            token, error in
-            
-            if error != nil {
-                print("APP:ERROR_WHILE_DELIVERING_TOKEN_PUSH:",error?.localizedDescription);
-                return;
-            }
-            
-            guard let token = token else {
-                print("APP:TOKEN_IS_NIL");
-                return;
-            }
-            
-            print("APP::TOKEN::",token);
-        }
-        
-        /*NotificationCenter.default.post(
-            name: Notification.Name("FCMToken"),
-            object: nil,
-            userInfo: ["token": fcmToken ?? ""]
-        )*/
     }
     
 }
