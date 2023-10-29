@@ -229,7 +229,12 @@ class ManagerViewController: UIViewController{
             return;
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onPause), name: UIApplication.willResignActiveNotification, object: nil);
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: #selector(onPause),
+                         name: UIApplication.willResignActiveNotification,
+                         object: nil);
         
         let b = UIScreen.main.bounds.size;
         

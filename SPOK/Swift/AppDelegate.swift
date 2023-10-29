@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var messaging: Messaging? = nil;
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("APP::application launching with options")
         
@@ -33,14 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions:launchOptions);
         /*let center = UNUserNotificationCenter.current();
-         center.delegate = self;
-         
-         PushNotifications.notify(notification: "event", center: center);
-         PushNotifications.notify(notification: "new", center: center);*/
-        
-        let center = UNUserNotificationCenter.current();
         center.delegate = self;
-        center.requestAuthorization(options: [.alert, .badge, .sound],completionHandler: { _, _ in});
+         
+        PushNotifications.notify(notification: "event", center: center);
+        PushNotifications.notify(notification: "new", center: center);*/
+        
+        let center = UNUserNotificationCenter
+            .current();
+        center.delegate = self;
+        center.requestAuthorization(options: [.alert, .badge, .sound],
+                                    completionHandler: { _, _ in});
         
         application.registerForRemoteNotifications();
         
