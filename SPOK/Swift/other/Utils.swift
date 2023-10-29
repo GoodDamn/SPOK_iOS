@@ -50,22 +50,45 @@ class Utils{
                 
                 center.removeAllPendingNotificationRequests();
                 
-                for i in 1...4{
-                    let content = UNMutableNotificationContent();
-                    content.title = Utils.getLocalizedString("edn"+i.description);
-                    content.body = Utils.getLocalizedString("ednb"+i.description);
+                let dailyContentSize:UInt8 = 4;
+                
+                var dateComponents = DateComponents();
+                dateComponents.calendar = Calendar.current;
+                
+                let content = UNMutableNotificationContent();
+                
+                for day in 1...7 {
                     
-                    // Short-fired notification on the first 4 days.
-                    center.add(
-                        UNNotificationRequest(identifier: ("daily"+i.description),
+                    var dd = UInt8.random(in: 1...dailyContentSize);
+                    
+                    content.title = Utils.getLocalizedString("edn\(dd)");
+                    content.body = Utils.getLocalizedString("ednb\(dd)");
+                    
+                    dateComponents.weekday = day;
+                    dateComponents.minute = 0
+                    dateComponents.hour = 7
+                    
+                    center.add(UNNotificationRequest(
+                        identifier: ("SPOK7\(day)\(dd)"),
                         content: content,
-                        trigger: UNTimeIntervalNotificationTrigger(
-                            timeInterval: 86400 * Double(i),
-                            repeats: true)),
-                        withCompletionHandler: {
-                        error in
-                        print(self.tag,error);
-                    })
+                        trigger: UNCalendarNotificationTrigger(
+                            dateMatching: dateComponents,
+                            repeats: true)))
+                    
+                    dateComponents.hour = 18;
+                    
+                    dd = UInt8.random(in: 1...dailyContentSize);
+                    
+                    content.title = Utils.getLocalizedString("edn\(dd)");
+                    content.body = Utils.getLocalizedString("ednb\(dd)");
+                    
+                    center.add(UNNotificationRequest(
+                        identifier: "SPOK18\(day)\(dd)",
+                        content: content,
+                        trigger: UNCalendarNotificationTrigger(
+                            dateMatching: dateComponents,
+                            repeats: true)))
+                    
                 }
             }
             

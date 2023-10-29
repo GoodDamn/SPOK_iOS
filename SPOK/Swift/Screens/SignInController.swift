@@ -224,7 +224,6 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
                     .instantiateViewController(withIdentifier: "mainNav")
                     as! MainNavigationController,
                 animation: .transitionCurlUp);
-            // Local notification test
             Utils.configNotifications();
             //window.rootViewController = v;
         });
