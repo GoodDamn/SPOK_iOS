@@ -29,7 +29,12 @@ class ManagerViewController: UIViewController{
     let mDatabase = Database.database();
     
     var mNavBar: BottomNavigationBar!;
-    var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial));
+    
+    var blurView = UIVisualEffectView(
+        effect: UIBlurEffect(
+            style: .systemChromeMaterial)
+    );
+    
     var news: [UInt16] = [];
     var history: [UInt16] = []{
         didSet{
@@ -61,6 +66,231 @@ class ManagerViewController: UIViewController{
     var mDatabaseStats: DatabaseReference? = nil;
     var mDatabaseUser: DatabaseReference? = nil;
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(tag, "segue.identifier: ",segue.identifier);
+        if (segue.identifier == "mainPage"){
+            let storyboard = UIStoryboard(name: "mainMenu", bundle: nil);
+            viewControllersPages = [
+                storyboard.instantiateViewController(withIdentifier: "home")
+                //storyboard.instantiateViewController(withIdentifier: "search"),
+                //storyboard.instantiateViewController(withIdentifier: "profile")
+            ];
+            pageViewController = segue.destination as? MainPageViewController;
+            print(tag, "segue.identifier: mainPage True", pageViewController);
+            pageViewController?.setup();
+            return;
+        }
+        
+        if segue.identifier == "rate"{
+            ratingSnackBar = segue.destination as? RatingSnackbar;
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool{
+        return true;
+    }
+    
+    @objc func onPause(){
+        print(tag, "onPause();");
+        DispatchQueue.global(qos: .userInitiated).async {
+            let userRef = StorageApp.mUserDef.string(forKey: Utils.userRef);
+            if userRef != nil
+                && self.isConnected
+                && self.isLoadMetaData
+                && self.isAuthUser {
+                let dataRef = Database.database().reference(withPath: "Users/"+userRef!);
+                dataRef.child("his2").setValue(Crypt.encryptString(self.history));
+                dataRef.child("like2").setValue(Crypt.encryptString(self.likes));
+                dataRef.child("rec2").setValue(Crypt.encryptString(self.recommends));
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(self.tag, "viewWillAppear();");
+        
+        if view.subviews[1] is BottomNavigationBar {
+            return;
+        }
+        
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: #selector(onPause),
+                         name: UIApplication.willResignActiveNotification,
+                         object: nil);
+        
+        let b = UIScreen.main.bounds.size;
+        
+        let hBar:CGFloat = 50;
+        let imageSize = CGSize(
+            width: 60,
+            height: 50
+        );
+        
+        var bottomPadding = UIApplication.shared
+            .windows
+            .first?
+            .safeAreaInsets
+            .bottom ?? 0;
+        
+        mNavBar = BottomNavigationBar(
+            frame: CGRect(
+                x: 0,
+                y: b.height-hBar-bottomPadding,
+                width: b.width,
+                height: hBar)
+        );
+        mNavBar.backgroundColor = UIColor(
+            named: "background"
+        );
+        
+        mNavBar.mOffset = 30;
+        mNavBar.mTintColorSelected = UIColor(
+            named:"AccentColor"
+        );
+        
+        mNavBar.mOnSelectTab = { index in
+            self.pageViewController?
+                .setViewControllers(
+                    [self.viewControllersPages[index]],
+                    direction: index > self.mPrevIndex ? .forward : .reverse,
+                    animated: true,
+                    completion: { b in
+                        if index == 2 {
+                            let profile = (self.viewControllersPages[2] as! UINavigationController)
+                                .viewControllers.first as? ProfileViewController;
+                            profile?.update();
+                        }
+                        self.mPrevIndex = index;
+                    });
+        }
+        
+        //view.insertSubview(mNavBar, at: 1);
+        
+        createTab(systemNameImage: "house", imageSize: imageSize);
+        createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);
+        createTab(systemNameImage: "person.fill", imageSize: imageSize);
+        
+        mNavBar.subviews[0]
+            .tintColor = UIColor(
+                named: "AccentColor"
+            );
+        
+        mNavBar.center_vertical();
+        mNavBar.center_horizontal();
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        
+        mDatabaseStats = mDatabase.reference(withPath: "Stats/iOS");
+        
+        isAuthUser = Auth.auth().currentUser != nil;
+        
+        modalPresentationStyle = .overFullScreen;
+        
+        let vc = UIStoryboard(
+            name: "mainMenu",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "techWorks"
+        ) as! TechWorksViewController;
+        
+        history = StorageApp
+            .mUserDef
+            .array(
+                forKey: StorageApp.historyKey
+            ) as? [UInt16] ?? [];
+        
+        likes = StorageApp
+            .mUserDef
+            .array(
+                forKey: StorageApp.likesKey
+            ) as? [UInt16] ?? [];
+        
+        recommends = StorageApp
+            .mUserDef
+            .array(
+                forKey: StorageApp.recommendsKey
+            ) as? [UInt16] ?? [];
+        
+        let ref = mDatabase.reference();
+        
+        let buildNumber = Int(Bundle
+            .main
+            .infoDictionary?["CFBundleVersion"]
+                as? String ?? "25"
+        ) ?? 25;
+        
+        print(self.tag, "BUILD NUMBER:",buildNumber);
+        
+        let monitor = NWPathMonitor();
+        monitor.pathUpdateHandler = {
+            path in
+            self.isConnected = path.status == .satisfied;
+            if !self.isConnected {
+                DispatchQueue.main.async {
+                    self.heightSnackbar.constant = 24;
+                    UIView.animate(withDuration: 0.23, animations: {
+                        self.view.layoutIfNeeded();
+                    });
+                }
+                return;
+            }
+            
+            
+            print("Manager", self.heightSnackbar.constant);
+            DispatchQueue.main.async {
+                self.heightSnackbar.constant = 0;
+                
+                // check server's state
+                
+                ref.child("opt")
+                    .observeSingleEvent(of: .value,
+                                        with: { snap in
+                        if ((snap.childSnapshot(forPath: "state").value as? Int) == 0){
+                            if (!vc.isViewLoaded){
+                                self.navigationController?.pushViewController(vc, animated: true);
+                            }
+                            return;
+                        }
+                        
+                        if ((snap.childSnapshot(forPath: "versi").value as? Int) ?? 25) > buildNumber {
+                            Toast.init(text: "The new app version is available", duration: 3.5).show();
+                            return;
+                        }
+                        
+                        if !self.isAuthUser {
+                            self.isLoadMetaData = true;
+                            return;
+                        }
+                        
+                        ref.child("Users/"+(StorageApp.mUserDef.string(forKey: Utils.userRef) ?? "null"))
+                            .observeSingleEvent(of: .value,
+                                                with: { userSnap in
+                                if self.history.isEmpty{
+                                    self.history = Crypt.decryptString(userSnap.childSnapshot(forPath: "his2").value as? String ?? "");
+                                }
+                                if self.likes.isEmpty{
+                                    self.likes = Crypt.decryptString(userSnap.childSnapshot(forPath: "like2").value as? String ?? "");
+                                }
+                                if self.recommends.isEmpty{
+                                    self.recommends = Crypt.decryptString(userSnap.childSnapshot(forPath: "rec2").value as? String ?? "");
+                                }
+                                self.isLoadMetaData = true;
+                            })
+                       
+                    });
+                UIView.animate(withDuration: 0.23, animations: {
+                    self.view.layoutIfNeeded();
+                });
+            }
+        }
+        monitor.start(queue: DispatchQueue(label:"Network"));
+        
+     }
+    
     func closeFragment() {
         trainingContainer.isHidden = true;
         trainingContainer.subviews[0].removeFromSuperview();
@@ -75,14 +305,27 @@ class ManagerViewController: UIViewController{
         });
     }
     
-    func showNoInternet(cell: SCellCollectionView) {
-        let v = UIStoryboard(name:"mainMenu", bundle: nil).instantiateViewController(withIdentifier: "noInternet") as! NoInternetViewController;
+    func showNoInternet(
+        cell: SCellCollectionView
+    ) {
+        let v = UIStoryboard(
+            name:"mainMenu",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "noInternet"
+        ) as! NoInternetViewController;
+        
         v.cell = cell;
+        
         blur();
+        
         showFragment(v.view);
     }
     
-    func showFragment(_ v: UIView, completion: ((Bool)->Void)? = nil){
+    func showFragment(
+        _ v: UIView,
+        completion: ((Bool)->Void)? = nil
+    ) {
         trainingContainer.addSubview(v);
         UIView.animate(withDuration: 0.6, animations: {
             v.frame = UIScreen.main.bounds;
@@ -91,10 +334,11 @@ class ManagerViewController: UIViewController{
         }, completion: completion);
     }
     
-    func startTraining(cell:SCellCollectionView,
-                       startFrame:CGRect,
-                       endOfSession:((Int)->Void)? = nil)->Void{
-        
+    func startTraining(
+        cell:SCellCollectionView,
+        startFrame:CGRect,
+        endOfSession:((Int)->Void)? = nil
+    ) {
         var endOfTopic = endOfSession;
         
         if (endOfTopic == nil){
@@ -176,193 +420,20 @@ class ManagerViewController: UIViewController{
     
     
     func showSubScreen()->Void {
-        let v = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "banner") as! BannerViewController;
-        navigationController?.pushViewController(v, animated: true);
+        let v = UIStoryboard(
+            name: "mainMenu",
+            bundle: nil)
+            .instantiateViewController(
+                withIdentifier: "banner"
+            ) as! BannerViewController;
+        
+        navigationController?.pushViewController(
+            v,
+            animated: true
+        );
         //let v = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "sub") as! SubscriptionViewController;
         //navigationController?.pushViewController(v, animated: true);
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(tag, "segue.identifier: ",segue.identifier);
-        if (segue.identifier == "mainPage"){
-            let storyboard = UIStoryboard(name: "mainMenu", bundle: nil);
-            viewControllersPages = [
-                storyboard.instantiateViewController(withIdentifier: "home"),
-                storyboard.instantiateViewController(withIdentifier: "search"),
-                storyboard.instantiateViewController(withIdentifier: "profile")
-            ];
-            pageViewController = segue.destination as? MainPageViewController;
-            print(tag, "segue.identifier: mainPage True", pageViewController);
-            pageViewController?.setup();
-            return;
-        }
-        
-        if segue.identifier == "rate"{
-            ratingSnackBar = segue.destination as? RatingSnackbar;
-        }
-    }
-    
-    override var prefersStatusBarHidden: Bool{
-        return true;
-    }
-    
-    @objc func onPause(){
-        print(tag, "onPause();");
-        DispatchQueue.global(qos: .userInitiated).async {
-            let userRef = StorageApp.mUserDef.string(forKey: Utils.userRef);
-            if userRef != nil
-                && self.isConnected
-                && self.isLoadMetaData
-                && self.isAuthUser {
-                let dataRef = Database.database().reference(withPath: "Users/"+userRef!);
-                dataRef.child("his2").setValue(Crypt.encryptString(self.history));
-                dataRef.child("like2").setValue(Crypt.encryptString(self.likes));
-                dataRef.child("rec2").setValue(Crypt.encryptString(self.recommends));
-            }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print(self.tag, "viewWillAppear();");
-        
-        if view.subviews[1] is BottomNavigationBar {
-            return;
-        }
-        
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: #selector(onPause),
-                         name: UIApplication.willResignActiveNotification,
-                         object: nil);
-        
-        let b = UIScreen.main.bounds.size;
-        
-        let hBar:CGFloat = 50;
-        let imageSize = CGSize(width: 60, height: 50);
-        
-        var bottomPadding = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0;
-        
-        mNavBar = BottomNavigationBar(frame: CGRect(x: 0, y: b.height-hBar-bottomPadding, width: b.width, height: hBar));
-        mNavBar.backgroundColor = UIColor(named: "background");
-        mNavBar.mOffset = 30;
-        mNavBar.mTintColorSelected = UIColor(named:"AccentColor");
-        mNavBar.mOnSelectTab = { index in
-            self.pageViewController?
-                .setViewControllers(
-                    [self.viewControllersPages[index]],
-                    direction: index > self.mPrevIndex ? .forward : .reverse,
-                    animated: true,
-                    completion: { b in
-                        if index == 2 {
-                            let profile = (self.viewControllersPages[2] as! UINavigationController)
-                                .viewControllers.first as? ProfileViewController;
-                            profile?.update();
-                        }
-                        self.mPrevIndex = index;
-                    });
-        }
-        
-        view.insertSubview(mNavBar, at: 1);
-        
-        createTab(systemNameImage: "house", imageSize: imageSize);
-        createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);
-        createTab(systemNameImage: "person.fill", imageSize: imageSize);
-        
-        mNavBar.subviews[0].tintColor = UIColor(named: "AccentColor");
-        
-        mNavBar.center_vertical();
-        mNavBar.center_horizontal();
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad();
-        
-        mDatabaseStats = mDatabase.reference(withPath: "Stats/iOS");
-        
-        isAuthUser = Auth.auth().currentUser != nil;
-        
-        modalPresentationStyle = .overFullScreen;
-        
-        let vc = UIStoryboard(name: "mainMenu", bundle: nil)
-            .instantiateViewController(withIdentifier: "techWorks")
-            as! TechWorksViewController;
-        
-        history = StorageApp.mUserDef.array(forKey: StorageApp.historyKey) as? [UInt16] ?? [];
-        likes = StorageApp.mUserDef.array(forKey: StorageApp.likesKey) as? [UInt16] ?? [];
-        recommends = StorageApp.mUserDef.array(forKey: StorageApp.recommendsKey) as? [UInt16] ?? [];
-        
-        let ref = mDatabase.reference();
-        
-        let buildNumber = Int(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "25") ?? 25;
-        print(self.tag, "BUILD NUMBER:",buildNumber);
-        
-        let monitor = NWPathMonitor();
-        monitor.pathUpdateHandler = {
-            path in
-            self.isConnected = path.status == .satisfied;
-            if !self.isConnected {
-                DispatchQueue.main.async {
-                    self.heightSnackbar.constant = 24;
-                    UIView.animate(withDuration: 0.23, animations: {
-                        self.view.layoutIfNeeded();
-                    });
-                }
-                return;
-            }
-            
-            
-            print("Manager", self.heightSnackbar.constant);
-            DispatchQueue.main.async {
-                self.heightSnackbar.constant = 0;
-                
-                // check server's state
-                
-                ref.child("opt")
-                    .observeSingleEvent(of: .value,
-                                        with: { snap in
-                        if ((snap.childSnapshot(forPath: "state").value as? Int) == 0){
-                            if (!vc.isViewLoaded){
-                                self.navigationController?.pushViewController(vc, animated: true);
-                            }
-                            return;
-                        }
-                        
-                        if ((snap.childSnapshot(forPath: "versi").value as? Int) ?? 25) > buildNumber {
-                            Toast.init(text: "The new app version is available", duration: 3.5).show();
-                            return;
-                        }
-                        
-                        if !self.isAuthUser {
-                            self.isLoadMetaData = true;
-                            return;
-                        }
-                        
-                        ref.child("Users/"+(StorageApp.mUserDef.string(forKey: Utils.userRef) ?? "null"))
-                            .observeSingleEvent(of: .value,
-                                                with: { userSnap in
-                                if self.history.isEmpty{
-                                    self.history = Crypt.decryptString(userSnap.childSnapshot(forPath: "his2").value as? String ?? "");
-                                }
-                                if self.likes.isEmpty{
-                                    self.likes = Crypt.decryptString(userSnap.childSnapshot(forPath: "like2").value as? String ?? "");
-                                }
-                                if self.recommends.isEmpty{
-                                    self.recommends = Crypt.decryptString(userSnap.childSnapshot(forPath: "rec2").value as? String ?? "");
-                                }
-                                self.isLoadMetaData = true;
-                            })
-                       
-                    });
-                UIView.animate(withDuration: 0.23, animations: {
-                    self.view.layoutIfNeeded();
-                });
-            }
-        }
-        monitor.start(queue: DispatchQueue(label:"Network"));
-        
-     }
-    
     
     private func blur() {
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial));

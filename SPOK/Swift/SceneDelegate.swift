@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func attachViewController(_ c:UIViewController){
         let window = UIWindow(windowScene: scene!);
+        window.overrideUserInterfaceStyle = .dark
         window.rootViewController = c;
         self.window = window;
         window.makeKeyAndVisible();

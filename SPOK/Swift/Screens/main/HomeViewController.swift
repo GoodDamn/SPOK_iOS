@@ -57,7 +57,7 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad();
-
+        
         manager = Utils.getManager();
         
         h = w*1.24;

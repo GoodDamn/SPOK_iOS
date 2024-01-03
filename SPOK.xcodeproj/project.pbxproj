@@ -14,6 +14,7 @@
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
 		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
+		2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2CE2B45D45C00656C0B /* ByteUtils.swift */; };
 		2515639E2ACBBF96009EAA2F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2515639D2ACBBF96009EAA2F /* FirebaseFirestore */; };
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
@@ -123,6 +124,8 @@
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
+		2507D2CC2B45CB8200656C0B /* SPOKContentEngine */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SPOKContentEngine; sourceTree = "<group>"; };
+		2507D2CE2B45D45C00656C0B /* ByteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteUtils.swift; sourceTree = "<group>"; };
 		2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2579848A2AB6FBF6008F17A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/checklist.storyboard; sourceTree = "<group>"; };
@@ -267,6 +270,14 @@
 			path = raw;
 			sourceTree = "<group>";
 		};
+		2507D2CD2B45D43200656C0B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				2507D2CE2B45D45C00656C0B /* ByteUtils.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +329,7 @@
 		2BA101C02763EFC900EB5B8C = {
 			isa = PBXGroup;
 			children = (
-				3819936C28854D8A005E1367 /* TwoCardRowCollectionViewDelegate.swift */,
+				2507D2CC2B45CB8200656C0B /* SPOKContentEngine */,
 				2BA101CB2763EFC900EB5B8C /* SPOK */,
 				2BA101E22763EFCB00EB5B8C /* SPOKTests */,
 				2BA101CA2763EFC900EB5B8C /* Products */,
@@ -340,6 +351,7 @@
 		2BA101CB2763EFC900EB5B8C /* SPOK */ = {
 			isa = PBXGroup;
 			children = (
+				3819936C28854D8A005E1367 /* TwoCardRowCollectionViewDelegate.swift */,
 				25041E012ABF649300E19FEB /* raw */,
 				2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */,
 				2B29CAFC2892BC3D006FE018 /* SPOK.entitlements */,
@@ -393,6 +405,7 @@
 		2BA1025B276A5FFD00EB5B8C /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				2507D2CD2B45D43200656C0B /* utils */,
 				25D5E4A72A69A47800A3126B /* views */,
 				2BCE07C127AD2EDE00170B4A /* viewCells */,
 				2BA1025D276A603100EB5B8C /* other */,
@@ -769,6 +782,7 @@
 				2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */,
 				2BC1218827772C1C00729BA4 /* PromoCodeVController.swift in Sources */,
 				2B43B7872891D129000A8B17 /* PushNotificaions.swift in Sources */,
+				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
 				2BC121792777283E00729BA4 /* SettingsViewController.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				2BC1218327772B5900729BA4 /* AboutAppVController.swift in Sources */,
@@ -1069,9 +1083,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SPOK/SPOK.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1082,11 +1096,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.16;
+				MARKETING_VERSION = 0.2.17;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DEV PROFILE";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DSTR NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1102,7 +1116,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1113,11 +1127,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.16;
+				MARKETING_VERSION = 0.2.17;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DISTR A/S PROFILE";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DSTR NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
