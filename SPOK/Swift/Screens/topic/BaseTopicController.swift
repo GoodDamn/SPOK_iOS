@@ -18,14 +18,23 @@ class BaseTopicController
     
     private var mScriptReader: ScriptReader? = nil
     
+    private var mPrevTextView: UITextViewPhrase? = nil
+    
     private let mEngine =
         SPOKContentEngine()
+    
+    @objc func onTouch(
+        _ sender: UIButton
+    ) {
+        mScriptReader!.next()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         view.backgroundColor = UIColor(
             named: "background")
+        
         
         let fm = FileManager.default
         
@@ -60,7 +69,7 @@ class BaseTopicController
             
             print(self.TAG, "END_SCRIPT:", scriptText.spannableString)
             
-            /*let v = self.view
+            let v = self.view
             
             let f = v!.frame
             
@@ -72,10 +81,19 @@ class BaseTopicController
                     height: f.height)
             )
             
-            textView.text = scriptText.spannableString
+            textView.initial(
+                t: scriptText.spannableString
+            )
             
-            textView.textColor = .white*/
+            textView.show()
+
+            v!.insertSubview(
+                textView,
+                at: 0)
             
+            self.mPrevTextView?.hide(350)
+            
+            self.mPrevTextView = textView
         }
         
         mScriptReader = ScriptReader(
@@ -87,6 +105,13 @@ class BaseTopicController
             self
         )
         
+        let btnNext = UIButton(frame: view.frame)
+        btnNext.addTarget(
+            self,
+            action: #selector(onTouch(_:)),
+            for: .touchUpInside)
+        
+        view.addSubview(btnNext)
         
         mScriptReader!.next()
     }
