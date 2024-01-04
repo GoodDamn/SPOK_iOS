@@ -97,7 +97,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return;
         }
         print("Intro is completed");
-        let u = Auth.auth().currentUser;
+        
+        let sMain = UIStoryboard(
+            name: "mainMenu",
+            bundle: Bundle.main
+        )
+        let controller = sMain
+            .instantiateViewController(
+                withIdentifier: "mainNav"
+            ) as! MainNavigationController
+        
+        attachViewController(
+            controller
+        );
+        /*let u = Auth.auth().currentUser;
         print(self,u);
         if u != nil {
             self.attachViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main)
@@ -107,7 +120,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main)
             .instantiateViewController(withIdentifier: "SignIn")
-            as! SignInViewController);
+            as! SignInViewController);*/
         
     }
 

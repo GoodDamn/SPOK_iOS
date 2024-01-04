@@ -1,13 +1,13 @@
 //
-//  File.swift
-//  
+//  ScriptResourceFile.swift
+//  SPOK
 //
 //  Created by GoodDamn on 03/01/2024.
 //
 
 import Foundation
 
-public class ScriptResourceFile {
+public class ScriptResource {
     public var resID: Int8;
     
     init(

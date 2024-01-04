@@ -23,6 +23,25 @@ class SPOKTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    func testConvert32() throws {
+        
+        let inp:[UInt8] = [0, 22, 144, 4]
+        
+        let val2 = Int(
+            bigEndian: Data(bytes:inp)
+                .withUnsafeBytes {$0.pointee}
+        )
+        
+        let val = ByteUtils
+            .int(ArraySlice(inp))
+        
+        XCTAssert(
+            val == val2,
+            "\(val) \(val2)"
+        )
+        
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

@@ -397,8 +397,14 @@ class ManagerViewController: UIViewController{
             history.append(uint16ID);
         }
         
+        let controller = BaseTopicController()
         
-        let controller = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "training") as! TopicActivity;
+        navigationController?
+            .pushViewController(
+                controller,
+                animated: true)
+        
+        /*let controller = UIStoryboard(name: "mainMenu", bundle: nil).instantiateViewController(withIdentifier: "training") as! TopicActivity;
         controller.id = id;
         controller.endOfSession = endOfTopic;
         controller.mFileSPC = cell.mFileSPC;
@@ -415,7 +421,7 @@ class ManagerViewController: UIViewController{
                      completion: { _ in
             controller.loadData();
         });
-        controller.l_nameTraining.text = name;
+        controller.l_nameTraining.text = name;*/
     }
     
     

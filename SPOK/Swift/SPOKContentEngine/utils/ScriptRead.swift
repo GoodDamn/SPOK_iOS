@@ -1,49 +1,49 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by GoodDamn on 03/01/2024.
 //
 
 import Foundation
 
-class ScriptRead {
-    
+public class ScriptRead {
     
     public static func textSize(
-        chunk: [Int8],
+        chunk: [UInt8],
         offset: Int,
         argSize: Int,
-        textConfig: ScriptTextConfig
+        textConfig: ScriptText
     ) {
+        var offset = offset
         let textSize = ByteUtils
             .short(
-                data: chunk,
-                off: offset+1
+                chunk,
+                offset+1
             ) / 1000
         
         offset += 3
         
-        let s = nil
-        
         if (argSize == 4) { // 1 args
-            textConfig.textSize = textSize
+            textConfig.textSize = Float(textSize)
             return
         }
     }
     
     public static func font(
-        chunk: [Int8],
+        chunk: [UInt8],
         offset: Int,
         argSize: Int,
-        textConfig: ScriptTextConfig
+        textConfig: ScriptText
     ) {
-        let style = chunk[offset+1]
+        var offset = offset
+        var argSize = argSize
+        let style = Int(chunk[offset+1])
         
         var isColorSpan = false
         var color = 0
         
-        offfset += 2
+        offset += 2
         
         switch (offset) {
         case 0: // underline
@@ -60,15 +60,17 @@ class ScriptRead {
             let green = chunk[offset+2] & 0xff
             let blue = chunk[offset+3] & 0xff
             
-            color = alpha << 24 |
-                    red << 16 |
-                    green << 8 |
-                    blue
+            color = Int(alpha << 24 |
+                        red << 16 |
+                        green << 8 |
+                        blue)
             
             offset += 4
             argSize -= 4
             
             isColorSpan = true
+            break
+        default:
             break
         }
         
@@ -97,9 +99,9 @@ class ScriptRead {
     }
     
     public static func sfx(
-        chunk: [Int8],
-        offset: Int,
-    ) -> ScriptResourceFile? {
+        chunk: [UInt8],
+        offset: Int
+    ) -> ScriptResource? {
         return resource(
             chunk,
             offset
@@ -108,9 +110,9 @@ class ScriptRead {
     
     
     public static func ambient(
-        chunk: [Int8],
-        offset: Int,
-    ) -> ScriptResourceFile? {
+        chunk: [UInt8],
+        offset: Int
+    ) -> ScriptResource? {
         return resource(
             chunk,
             offset
@@ -119,18 +121,19 @@ class ScriptRead {
     
     
     private static func resource(
-        _ chunk: [Int8],
-        _ offset: Int,
-    ) -> ScriptResourceFile? {
+        _ chunk: [UInt8],
+        _ offset: Int
+    ) -> ScriptResource? {
+        var offset = offset
         offset += 1
         
-        let resID = chunk[offset]
+        let resID = Int8(chunk[offset])
         
         if (resID <= -1) {
             return nil
         }
         
-        return ScriptResourceFile(resID)
+        return ScriptResource(resID)
     }
     
 }
