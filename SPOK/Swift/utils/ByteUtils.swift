@@ -15,19 +15,19 @@ class ByteUtils {
         _ off: Int
     ) -> Int {
         return Int(
-            data[off] << 8 |
-            data[off+1]
+            Int(data[off]) << 8 |
+            Int(data[off+1])
         )
     }
     
     public static func int(
-        _ data: ArraySlice<UInt8>
+        _ data: [UInt8]
     ) -> Int {
         return int(data,0)
     }
     
     public static func int(
-        _ data: ArraySlice<UInt8>,
+        _ data: [UInt8],
         _ off: Int
     ) -> Int {
         
@@ -36,18 +36,6 @@ class ByteUtils {
             Int(data[off+2])<<8 |
             Int(data[off+3])
         
-    }
-    
-    public static func int(
-        _ data: [UInt8],
-        _ off: Int
-    ) -> Int {
-        return Int(
-            data[off]<<24 |
-            data[off+1]<<16 |
-            data[off+2]<<8 |
-            data[off+3]
-        )
     }
     
 }

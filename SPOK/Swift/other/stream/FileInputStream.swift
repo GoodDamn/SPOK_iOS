@@ -30,14 +30,14 @@ public class FileInputStream {
     
     public func read(
         _ n: Int
-    ) -> ArraySlice<UInt8> {
+    ) -> [UInt8] {
         return read(0,n)
     }
     
     public func read(
         _ offset: Int,
         _ n: Int
-    ) -> ArraySlice<UInt8> {
+    ) -> [UInt8] {
         mIndex += offset
         
         let start = mIndex
@@ -52,7 +52,7 @@ public class FileInputStream {
             mData.count
         )
         
-        return mData[start..<end]
+        return Array(mData[start..<end])
         
     }
     
@@ -70,8 +70,12 @@ public class FileInputStream {
         mIndex += n
     }
     
+    public func position() -> Int {
+        return mIndex
+    }
+    
     public func close() {
-        mData.removeAll()
+        //mData.removeAll()
         mIndex = 0
     }
     
