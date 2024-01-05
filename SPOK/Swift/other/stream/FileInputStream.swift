@@ -75,7 +75,7 @@ public class FileInputStream {
     }
     
     public func close() {
-        //mData.removeAll()
+        mData.removeAll()
         mIndex = 0
     }
     

@@ -35,6 +35,12 @@ class BaseTopicController
         view.backgroundColor = UIColor(
             named: "background")
         
+        let viewFrame = view.frame
+        
+        let mSpanPointX = viewFrame.width * 0.1
+        let mSpanPointY = viewFrame.height * 0.4
+        
+        let mHideOffsetY = viewFrame.height * 0.3
         
         let fm = FileManager.default
         
@@ -67,18 +73,15 @@ class BaseTopicController
         mEngine.setOnEndScriptListener {
             scriptText in
             
-            print(self.TAG, "END_SCRIPT:", scriptText.spannableString)
-            
-            let v = self.view
-            
-            let f = v!.frame
+            let h = viewFrame.height - mSpanPointY
+            let w = viewFrame.width - 2*mSpanPointX
             
             let textView = UITextViewPhrase(
                 frame: CGRect(
-                    x: 0,
-                    y: 0,
-                    width: f.width,
-                    height: f.height)
+                    x: mSpanPointX,
+                    y: mSpanPointY,
+                    width: w,
+                    height: h)
             )
             
             textView.initial(
@@ -87,11 +90,13 @@ class BaseTopicController
             
             textView.show()
 
-            v!.insertSubview(
-                textView,
-                at: 0)
+            self.view
+                .insertSubview(
+                    textView,
+                    at: 0)
             
-            self.mPrevTextView?.hide(350)
+            self.mPrevTextView?
+                .hide(mHideOffsetY)
             
             self.mPrevTextView = textView
         }
@@ -117,22 +122,23 @@ class BaseTopicController
     }
     
     func onAmbient(
-        _ player: AVAudioPlayer
+        _ player: AVAudioPlayer?
     ) {
-        
+        print(TAG, "onAmbient", player)
+        player?.play()
     }
     
     func onSFX(
-        _ sfxId: Int,
-        _ soundPool: [AVAudioPlayer]
+        _ sfxId: Int?,
+        _ soundPool: [AVAudioPlayer?]
     ) {
-        
+        print(TAG, "onSFX")
     }
     
     func onError(
         _ errorMsg: String
     ) {
-        
+        print(TAG, "onError:",errorMsg)
     }
     
     func onFinish() {

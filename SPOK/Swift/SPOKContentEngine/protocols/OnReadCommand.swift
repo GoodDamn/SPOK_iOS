@@ -10,12 +10,12 @@ import AVFoundation
 
 public protocol OnReadCommand {
     func onAmbient(
-        _ player: AVAudioPlayer
+        _ player: AVAudioPlayer?
     )
     
     func onSFX(
-        _ sfxId: Int,
-        _ soundPool: [AVAudioPlayer]
+        _ sfxId: Int?,
+        _ soundPool: [AVAudioPlayer?]
     )
     
     func onError(
