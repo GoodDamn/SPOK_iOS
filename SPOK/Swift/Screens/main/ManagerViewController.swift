@@ -339,7 +339,7 @@ class ManagerViewController: UIViewController{
         startFrame:CGRect,
         endOfSession:((Int)->Void)? = nil
     ) {
-        var endOfTopic = endOfSession;
+        /*var endOfTopic = endOfSession;
         
         if (endOfTopic == nil){
             endOfTopic = {
@@ -370,7 +370,7 @@ class ManagerViewController: UIViewController{
                     });
                 });
             }
-        }
+        }*/
         
         let id = cell.mID;
         let name:String? = cell.nameTraining.text;
@@ -379,7 +379,7 @@ class ManagerViewController: UIViewController{
         if id == 0 || name == nil{
             return;
         }
-        blur();
+        //blur();
         
         let lang = language.isEmpty ? "RU" : language;
         
@@ -398,6 +398,10 @@ class ManagerViewController: UIViewController{
         }
         
         let controller = BaseTopicController()
+        
+        controller.setID(
+            id
+        )
         
         navigationController?
             .pushViewController(

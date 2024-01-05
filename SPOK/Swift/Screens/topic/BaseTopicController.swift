@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import UIKit
+import FirebaseStorage
 
 class BaseTopicController
     : UIViewController,
@@ -16,9 +17,17 @@ class BaseTopicController
     
     private final let TAG = "BaseTopicController:"
     
+    private var mBtnNext: UIButton!
+    
     private var mScriptReader: ScriptReader? = nil
     
     private var mPrevTextView: UITextViewPhrase? = nil
+    
+    private var mCurrentPlayer: AVAudioPlayer? = nil
+    
+    private var mId = Int.min
+    
+    private var mNetworkUrl = ""
     
     private let mEngine =
         SPOKContentEngine()
@@ -32,6 +41,18 @@ class BaseTopicController
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        modalPresentationStyle = .overFullScreen
+        
+        mBtnNext = UIButton(frame: view.frame)
+        mBtnNext.addTarget(
+            self,
+            action: #selector(onTouch(_:)),
+            for: .touchUpInside)
+        
+        mBtnNext.isEnabled = false
+        
+        view.addSubview(mBtnNext)
+        
         view.backgroundColor = UIColor(
             named: "background")
         
@@ -42,29 +63,7 @@ class BaseTopicController
         
         let mHideOffsetY = viewFrame.height * 0.3
         
-        let fm = FileManager.default
-        
-        let url = fm
-            .urls(
-                for: .cachesDirectory,
-                in: .userDomainMask)[0]
-        
-        let urlSkc = url
-            .appendingPathComponent(
-                "14.skc"
-            )
-        
-        print(TAG, "PATH_SKC:",urlSkc)
-        
-        guard let data = fm.contents(
-            atPath: urlSkc.path
-        ) else {
-            print(TAG, "INVALID_PATH_SKC")
-            return
-        }
-        
-        mEngine.loadResources(
-            dataSKC: [UInt8](data))
+        initEngine()
         
         mEngine.setOnReadCommandListener(
             self
@@ -101,24 +100,6 @@ class BaseTopicController
             self.mPrevTextView = textView
         }
         
-        mScriptReader = ScriptReader(
-            engine: mEngine,
-            dataSKC: [UInt8](data)
-        )
-        
-        mScriptReader!.setOnReadScriptListener(
-            self
-        )
-        
-        let btnNext = UIButton(frame: view.frame)
-        btnNext.addTarget(
-            self,
-            action: #selector(onTouch(_:)),
-            for: .touchUpInside)
-        
-        view.addSubview(btnNext)
-        
-        mScriptReader!.next()
     }
     
     func onAmbient(
@@ -126,6 +107,26 @@ class BaseTopicController
     ) {
         print(TAG, "onAmbient", player)
         player?.play()
+        player?.setVolume(
+            1.0,
+            fadeDuration: 1.5
+        )
+        
+        guard let prevP = mCurrentPlayer else {
+            mCurrentPlayer = player
+            return
+        }
+        
+        prevP.setVolume(
+            0.0,
+            fadeDuration: 1.5)
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + 1.5
+        ) {
+            prevP.stop()
+            self.mCurrentPlayer = player
+        }
     }
     
     func onSFX(
@@ -143,6 +144,171 @@ class BaseTopicController
     
     func onFinish() {
         
+        mBtnNext.isEnabled = false
+        
+        if let player = mCurrentPlayer {
+            player.setVolume(
+                0.0,
+                fadeDuration: 2.5
+            )
+            
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + 2.5
+            ) {
+                player.stop()
+            }
+        }
+        
+        
+        if mPrevTextView == nil {
+            navigationController?
+                .popViewController(
+                    animated: true
+                )
+            return
+        }
+        
+        UIView.animate(
+            withDuration: 3.5,
+            animations: {
+                self.mPrevTextView!.alpha = 0.0
+            },
+            completion: { b in
+                self.navigationController?
+                    .popViewController(
+                        animated: true
+                    )
+            }
+        )
     }
+    
+    public func setID(
+        _ id: Int
+    ) {
+        mId = id
+        mNetworkUrl = "content/skc/\(id).skc"
+    }
+    
+    private func initEngine() {
+        downloadSKC(
+            path: mNetworkUrl
+        ) {
+            DispatchQueue.global(
+                qos: .background
+            ).async {
+                
+                let TAG = self.TAG
+                let engine = self.mEngine
+                
+                let fm = FileManager.default
+                
+                let urlSkc = self.getSkcPath()
+                
+                print(TAG, "PATH_SKC:",urlSkc)
+                
+                guard let data = fm.contents(
+                    atPath: urlSkc
+                ) else {
+                    print(TAG, "INVALID_PATH_SKC")
+                    return
+                }
+                
+                engine.loadResources(
+                    dataSKC: [UInt8](data))
+                
+                self.mScriptReader = ScriptReader(
+                    engine: engine,
+                    dataSKC: [UInt8](data)
+                )
+                
+                DispatchQueue.main.async {
+                    guard let r = self.mScriptReader else {
+                        return
+                    }
+                    
+                    r.setOnReadScriptListener(
+                        self
+                    )
+                    
+                    r.next()
+                    
+                    self.mBtnNext.isEnabled = true
+                }
+                
+            }
+        }
+    }
+    
+    private func downloadSKC(
+        path: String,
+        completion: @escaping ()->Void
+    ) {
+        
+        let fm = FileManager
+            .default
+        
+        if fm.fileExists(
+            atPath: getSkcPath()
+        ) {
+            completion()
+            return
+        }
+        
+        Storage
+            .storage()
+            .reference(
+                withPath: path
+            ).getData(
+                maxSize: 10*1024*1024
+            ) { data, error in
+                guard let data = data,
+                      error == nil else {
+                    self.nothing()
+                    return
+                }
+                
+                if data.count == 0 {
+                    self.nothing()
+                    return
+                }
+                
+                self.saveSkc(data)
+                completion()
+            }
+    }
+    
+    private func getSkcPath() -> String {
+        let fm = FileManager.default
+        
+        let cacheUrl = fm.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask)[0]
+        
+        let skc = cacheUrl
+            .appendingPathComponent(
+                "\(mId).skc"
+            )
+        
+        return skc.path
+    }
+    
+    private func saveSkc(
+        _ data: Data
+    ) {
+        FileManager
+            .default
+            .createFile(
+                atPath: getSkcPath(),
+                contents: data
+        )
+    }
+    
+    private func nothing() {
+        Toast.init(
+            text: "Nothing found",
+            duration: 1.8
+        ).show()
+    }
+    
     
 }

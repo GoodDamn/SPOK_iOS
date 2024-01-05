@@ -97,16 +97,33 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
         
         Storage.storage()
-            .reference(withPath: "Collection/"+ll)
+            .reference(
+                withPath: "Sleep/"+ll
+            )
             .listAll { listResult, error in
-                guard let listResult = listResult, error == nil else {
+                guard let listResult = listResult,
+                      error == nil else {
+                    Toast.init(
+                        text: "Nothing found",
+                        duration: 1.8
+                    ).show()
                     return;
                 }
                 
                 let files = listResult.items;
                 
-                self.downloadCollection(current: 0,
-                                   refs: files);
+                if files.count == 0 {
+                    Toast.init(
+                        text: "Nothing found",
+                        duration: 1.8
+                    ).show()
+                    return
+                }
+                
+                self.downloadCollection(
+                    current: 0,
+                    refs: files
+                );
                 
             }
     }
@@ -146,7 +163,9 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as! collectionsCellTableView).collectionView.reloadData();
+        (cell as! collectionsCellTableView)
+            .collectionView
+            .reloadData();
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

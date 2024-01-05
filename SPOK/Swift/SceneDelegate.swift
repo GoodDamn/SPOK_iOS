@@ -35,8 +35,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.scene = scene as? UIWindowScene;
         if self.scene == nil {return;}
-                
-        let userDefaults = UserDefaults();
+        
+        let sMain = UIStoryboard(
+            name: "mainMenu",
+            bundle: Bundle.main
+        )
+        let controller = sMain
+            .instantiateViewController(
+                withIdentifier: "mainNav"
+            ) as! MainNavigationController
+        
+        attachViewController(
+            controller
+        );
+        
+        /*let userDefaults = UserDefaults();
         
         let lastVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
         print(tag,lastVersion);
@@ -110,7 +123,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         attachViewController(
             controller
         );
-        /*let u = Auth.auth().currentUser;
+        let u = Auth.auth().currentUser;
         print(self,u);
         if u != nil {
             self.attachViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main)

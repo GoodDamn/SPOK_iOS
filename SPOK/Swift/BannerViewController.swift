@@ -44,6 +44,14 @@ class BannerViewController: UIViewController {
         
         modalPresentationStyle = .fullScreen;
         
+        let color = UIColor(
+            named: "background"
+        )
+        
+        view.subviews[0]
+            .subviews[0]
+            .backgroundColor = color
+        
         stat(property: "enter");
         
         mTextViewNotify.text = Utils.getLocalizedString("notifyUs");
@@ -63,15 +71,20 @@ class BannerViewController: UIViewController {
                 .withAlphaComponent(0.6)
                 .cgColor;
         
-        let st = Utils.getLocalizedString("asd");
+        let st = Utils
+            .getLocalizedString("asd");
         
-        let attr = NSMutableAttributedString(string: mTextViewNotify.text!);
+        let attr = NSMutableAttributedString(
+            string: mTextViewNotify
+                .text!
+        );
         
         let styleCenteredText = NSMutableParagraphStyle();
         styleCenteredText.alignment = .center;
         
         attr.addAttributes([
-                NSAttributedString.Key.foregroundColor: mTextViewNotify.textColor!,
+                NSAttributedString
+                    .Key.foregroundColor: mTextViewNotify.textColor!,
                 NSAttributedString.Key.font: UIFont(name: "OpenSans-Regular", size: mTextViewNotify.font!.pointSize)!,
                 NSAttributedString.Key.paragraphStyle: styleCenteredText],
                 range: NSRange(location: 0, length: l));
@@ -79,9 +92,25 @@ class BannerViewController: UIViewController {
         attr.addAttribute(.link, value: "c", range: NSRange(location: l-st.count, length: st.count));
         
         mTextViewNotify.attributedText = attr;
-        mTextViewNotify.linkTextAttributes = [NSAttributedString.Key.font:UIFont(name: "OpenSans-SemiBold", size: mTextViewNotify.font!.pointSize)!,
-                                              NSAttributedString.Key.foregroundColor: mTextViewNotify.textColor!,
-                                              NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue];
+        mTextViewNotify.linkTextAttributes = [
+            NSAttributedString
+                .Key
+                .font: UIFont(
+                    name: "OpenSans-SemiBold",
+                    size: mTextViewNotify
+                        .font!
+                        .pointSize
+                )!,
+            NSAttributedString
+                .Key.foregroundColor:
+                    mTextViewNotify
+                    .textColor!,
+             NSAttributedString
+                .Key
+                .underlineStyle: NSUnderlineStyle
+                    .single
+                    .rawValue
+        ];
         
         mTextViewNotify.delegate = self;
     }
