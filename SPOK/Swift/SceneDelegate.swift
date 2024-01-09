@@ -36,22 +36,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.scene = scene as? UIWindowScene;
         if self.scene == nil {return;}
         
-        let sMain = UIStoryboard(
-            name: "mainNav",
-            bundle: Bundle.main
-        )
-        let controller = sMain
-            .instantiateViewController(
-                withIdentifier: "mainNav"
-            ) as! MainNavigationController
+        let userDefaults = UserDefaults();
         
-        attachViewController(
-            controller
-        );
-        
-        /*let userDefaults = UserDefaults();
-        
-        let lastVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
+        /*let lastVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
         print(tag,lastVersion);
         if let currentVersion = userDefaults.string(forKey: "version") {
             // Clear all cache if a new update
@@ -100,19 +87,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         } else {
             userDefaults.setValue(lastVersion, forKey: "version");
-        }
+        }*/
         
         if !userDefaults.bool(forKey: "intro") {
             print("Time for intro!")
-            attachViewController(UIStoryboard(name: "intro", bundle: Bundle.main)
-                .instantiateViewController(withIdentifier: "introNav")
-                as! IntroNavigationController);
+            attachViewController(
+                IntroSleepViewController()
+            );
             return;
         }
         print("Intro is completed");
         
         let sMain = UIStoryboard(
-            name: "mainMenu",
+            name: "mainNav",
             bundle: Bundle.main
         )
         let controller = sMain
@@ -123,18 +110,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         attachViewController(
             controller
         );
-        let u = Auth.auth().currentUser;
-        print(self,u);
-        if u != nil {
-            self.attachViewController(UIStoryboard(name: "mainMenu", bundle: Bundle.main)
-                .instantiateViewController(withIdentifier: "mainNav")
-                as! MainNavigationController);
-            return;
-        }
-        self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main)
-            .instantiateViewController(withIdentifier: "SignIn")
-            as! SignInViewController);*/
-        
+    
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

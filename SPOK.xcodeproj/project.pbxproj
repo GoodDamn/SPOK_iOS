@@ -12,6 +12,7 @@
 		25041E072ABF6DC700E19FEB /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25041E062ABF6DC700E19FEB /* PDFViewController.swift */; };
 		2506226D2B4D6AB900FCD636 /* mainNav.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2506226C2B4D6AB900FCD636 /* mainNav.storyboard */; };
 		250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506226F2B4D6EEB00FCD636 /* ProfileNewViewController.swift */; };
+		250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */; };
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
@@ -134,6 +135,7 @@
 		25041E062ABF6DC700E19FEB /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		2506226C2B4D6AB900FCD636 /* mainNav.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainNav.storyboard; sourceTree = "<group>"; };
 		2506226F2B4D6EEB00FCD636 /* ProfileNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNewViewController.swift; sourceTree = "<group>"; };
+		250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleepViewController.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
@@ -296,6 +298,14 @@
 			children = (
 			);
 			path = newMain;
+			sourceTree = "<group>";
+		};
+		250622712B4DAA6B00FCD636 /* newIntro */ = {
+			isa = PBXGroup;
+			children = (
+				250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */,
+			);
+			path = newIntro;
 			sourceTree = "<group>";
 		};
 		2507D2CD2B45D43200656C0B /* utils */ = {
@@ -495,6 +505,7 @@
 		2BA1025C276A602300EB5B8C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				250622712B4DAA6B00FCD636 /* newIntro */,
 				2506226E2B4D6B6700FCD636 /* newMain */,
 				2BF92C9C284A1F8100EE0CEC /* topic */,
 				2B558A3927E87BAC0038DBDA /* intro */,
@@ -861,6 +872,7 @@
 				2507D2EB2B471A0E00656C0B /* ScriptReader.swift in Sources */,
 				2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */,
 				2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */,
+				250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */,
 				2BEB9A4327CF57810024989F /* SubscriptionViewController.swift in Sources */,
 				2B049DEE277A2173009D636D /* RateAppViewController.swift in Sources */,
 				2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */,
