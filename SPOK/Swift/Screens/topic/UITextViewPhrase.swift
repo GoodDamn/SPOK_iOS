@@ -16,6 +16,7 @@ class UITextViewPhrase: UITextView{
         backgroundColor = .clear;
         isEditable = false;
         isSelectable = false;
+        isUserInteractionEnabled = false
         textAlignment = .center;
         alpha = 0.0;
     }

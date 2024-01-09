@@ -61,10 +61,30 @@ class IntroSleepViewController
         
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
+        
+        DispatchQueue
+            .main
+            .asyncAfter(
+                deadline: .now() + 2.0
+            ) {
+                self.moveToNextController()
+            }
     }
  
+    private func moveToNextController() {
+        
+        let intro2 = IntroSleep2ViewController()
+        
+        UIView.transition(
+            from: view,
+            to: intro2.view,
+            duration: 2.0,
+            options: [.curveEaseIn]
+        )
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+ 
 }
