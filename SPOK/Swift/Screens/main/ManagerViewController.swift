@@ -66,17 +66,18 @@ class ManagerViewController: UIViewController{
     var mDatabaseStats: DatabaseReference? = nil;
     var mDatabaseUser: DatabaseReference? = nil;
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(tag, "segue.identifier: ",segue.identifier);
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?
+    ) {
         if (segue.identifier == "mainPage"){
-            let storyboard = UIStoryboard(name: "mainMenu", bundle: nil);
+            let storyboard = UIStoryboard(name: "mainNav", bundle: nil);
             viewControllersPages = [
-                storyboard.instantiateViewController(withIdentifier: "home")
+                storyboard.instantiateViewController(withIdentifier: "home"),
                 //storyboard.instantiateViewController(withIdentifier: "search"),
-                //storyboard.instantiateViewController(withIdentifier: "profile")
+                storyboard.instantiateViewController(withIdentifier: "profile")
             ];
             pageViewController = segue.destination as? MainPageViewController;
-            print(tag, "segue.identifier: mainPage True", pageViewController);
             pageViewController?.setup();
             return;
         }
@@ -93,7 +94,14 @@ class ManagerViewController: UIViewController{
     @objc func onPause(){
         print(tag, "onPause();");
         DispatchQueue.global(qos: .userInitiated).async {
-            let userRef = StorageApp.mUserDef.string(forKey: Utils.userRef);
+            
+            let userRef = StorageApp
+                .mUserDef
+                .string(
+                    forKey: Utils
+                        .userRef
+                );
+            
             if userRef != nil
                 && self.isConnected
                 && self.isLoadMetaData
@@ -166,10 +174,10 @@ class ManagerViewController: UIViewController{
                     });
         }
         
-        //view.insertSubview(mNavBar, at: 1);
+        view.insertSubview(mNavBar, at: 1);
         
         createTab(systemNameImage: "house", imageSize: imageSize);
-        createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);
+        /*createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);*/
         createTab(systemNameImage: "person.fill", imageSize: imageSize);
         
         mNavBar.subviews[0]
@@ -240,7 +248,6 @@ class ManagerViewController: UIViewController{
             }
             
             
-            print("Manager", self.heightSnackbar.constant);
             DispatchQueue.main.async {
                 self.heightSnackbar.constant = 0;
                 

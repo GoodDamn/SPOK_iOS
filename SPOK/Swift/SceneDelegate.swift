@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if self.scene == nil {return;}
         
         let sMain = UIStoryboard(
-            name: "mainMenu",
+            name: "mainNav",
             bundle: Bundle.main
         )
         let controller = sMain

@@ -26,13 +26,17 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     private var hCard:CGFloat = 0.0;
     
     private func showData() {
-        self.manager?.news = self.collections[0].trs;
-        self.colsTable.dataSource = self;
-        self.colsTable.delegate = self;
-        self.colsTable.reloadData();
+        manager?.news = []
+        //self.manager?.news = self.collections[0].trs;
+        colsTable.dataSource = self;
+        colsTable.delegate = self;
+        colsTable.reloadData();
     }
     
-    private func downloadCollection(current: Int, refs: [StorageReference]) {
+    private func downloadCollection(
+        current: Int,
+        refs: [StorageReference]
+    ) {
         if current >= refs.count {
             showData();
             return;
@@ -63,31 +67,56 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
         h = w*1.24;
         hCard = h/207;
         
-        colsTable.contentInset = UIEdgeInsets(top: topConstraint.constant, left: 0, bottom: 25, right: 0);
+        colsTable.contentInset = UIEdgeInsets(
+            top: 35,
+            left: 0,
+            bottom: 25,
+            right: 0
+        );
         
         let code = self.manager?.language ?? "";
-        let ll = code.isEmpty ? "RU" : "EN";
-        
+        let ll = "RU" //code.isEmpty ? "RU" : "EN";
         
         let fileManager = FileManager.default;
-        let urlColl = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+        let urlColl = fileManager
+            .urls(
+                for: .cachesDirectory,
+                in: .userDomainMask)
             .first!
-            .appendingPathComponent(mDirCache, isDirectory: true);
+            .appendingPathComponent(
+                mDirCache,
+                isDirectory: true
+            );
         
         let path = urlColl.path;
-        let filePaths = try? fileManager.contentsOfDirectory(atPath: path);
-        if filePaths != nil && !StorageApp.canUpdate(path: path) {
+        let filePaths = try? fileManager
+            .contentsOfDirectory(
+                atPath: path
+            );
+        
+        if filePaths != nil && !StorageApp.canUpdate(
+            path: path
+        ) {
+            
             for fileName in filePaths! {
-                let data = StorageApp.getFile(path: path+"/"+fileName,fileManager);
-                print(self.tag, "LOAD FROM STORAGE:",data);
+                let data = StorageApp
+                    .getFile(
+                        path: path+"/"+fileName,
+                        fileManager);
+                
                 if data == nil {
                     continue;
                 }
                 
-                let fileSCS = Utils.Exten.getSCSFile(data!);
+                let fileSCS = Utils.Exten
+                    .getSCSFile(data!);
                 
-                self.collections.append(Collection( trs: fileSCS.topics ?? [],
-                                                    name: fileSCS.title ?? ""));
+                self.collections.append(
+                    Collection(
+                        trs: fileSCS.topics ?? [],
+                        name: fileSCS.title ?? ""
+                    )
+                );
             }
             
             showData();
@@ -101,6 +130,7 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
                 withPath: "Sleep/"+ll
             )
             .listAll { listResult, error in
+                
                 guard let listResult = listResult,
                       error == nil else {
                     Toast.init(
@@ -128,22 +158,35 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
             }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         return CGSize(width: collectionView.tag == 0 ? h*1.70 : w, height: h);
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return collections[collectionView.tag].trs.count;
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
-        let id = collections[collectionView.tag].trs[indexPath.row];
+        let id = collections[collectionView.tag]
+            .trs[indexPath.row];
+        
         let intID = Int(id);
+        
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCell", for: indexPath) as! MCellCollectionView;
         cell.collectionView = collectionView;
         
-        if (collectionView.tag == 0){ // is New collection
+        if collectionView.tag == 0 { // is New collection
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bCell", for: indexPath) as! BCellCollectionView;
             (cell as? BCellCollectionView)?.load(view: manager!,id: intID, self, manager: manager!, lang: manager!.language);
             return cell;

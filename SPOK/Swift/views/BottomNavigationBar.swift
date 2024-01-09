@@ -21,9 +21,51 @@ class BottomNavigationBar: UIView {
     public func center_horizontal() {
         
         let c = subviews.count;
+        
         let middle = c / 2;
         
-        let offsetH = c % 2 == 0 ? 0 : subviews[middle].frame.width / 2;
+        if c % 2 == 0 {
+            let midx = frame.width / 2
+            // left
+            var ll = midx - mOffset
+            for i in 0..<middle {
+                let r = subviews[i]
+                    .frame
+                
+                subviews[i]
+                    .frame = CGRect(
+                        x: ll - r.width,
+                        y: r.origin.y,
+                        width: r.width,
+                        height: r.height
+                    )
+                ll += mOffset
+            }
+            
+            // right
+            var rr = mOffset
+            for i in middle..<c {
+                let r = subviews[i]
+                    .frame
+                
+                subviews[i]
+                    .frame = CGRect(
+                        x: midx+rr,
+                        y: r.origin.y,
+                        width: r.width,
+                        height: r.height
+                    )
+                
+                rr += r.width + mOffset
+            }
+            
+            return
+        }
+        
+        
+        let offsetH = subviews[middle]
+            .frame
+            .width / 2;
         
         let midX = frame.width / 2;
         
@@ -32,9 +74,13 @@ class BottomNavigationBar: UIView {
         
         let b = subviews[middle].frame;
         
-        subviews[middle].frame = CGRect(origin: CGPoint(x: midX-offsetH,
-                                                        y: b.origin.y),
-                                        size: b.size);
+        subviews[middle].frame = CGRect(
+            origin: CGPoint(
+                x: midX-offsetH,
+                y: b.origin.y),
+            size: b.size);
+        
+        print(TAG, "MIDDLE:",middle)
         
         for i in 1...middle {
             
@@ -44,12 +90,21 @@ class BottomNavigationBar: UIView {
             let bl = vl.frame;
             let br = vr.frame;
             
-            vl.frame = CGRect(origin: CGPoint(x: midX-bl.size.width-leftOffset,
-                                              y: bl.origin.y),
-                              size: bl.size) // left side
-            vr.frame = CGRect(origin: CGPoint(x: midX+rightOffset,
-                                              y: br.origin.y),
-                              size: br.size); // right side
+            vl.frame = CGRect(
+                origin: CGPoint(
+                    x:midX-bl.size.width-leftOffset,
+                    y: bl.origin.y
+                ),
+                size: bl.size
+            ) // left side
+            
+            vr.frame = CGRect(
+                origin: CGPoint(
+                    x: midX+rightOffset,
+                    y: br.origin.y
+                ),
+                size: br.size
+            ); // right side
             
             leftOffset += bl.size.width;
             rightOffset += br.size.width;
@@ -61,8 +116,11 @@ class BottomNavigationBar: UIView {
             let b = view.bounds;
             let insetV = (frame.height - view.frame.height) / 2;
             print(TAG,"center_vertical:",b,"navFrame:",frame,"viewFrame:",view.frame);
-            view.frame = CGRect(origin: CGPoint(x: view.frame.origin.x, y: insetV),
-                                 size: b.size);
+            view.frame = CGRect(
+                origin: CGPoint(
+                    x: view.frame.origin.x,
+                    y: insetV
+                ), size: b.size);
         }
     }
     
