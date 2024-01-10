@@ -75,12 +75,18 @@ class IntroSleepViewController
         
         let intro2 = IntroSleep2ViewController()
         
+        let window = UIApplication
+            .shared
+            .windows[0]
+        
         UIView.transition(
             from: view,
             to: intro2.view,
             duration: 2.0,
             options: [.curveEaseIn]
-        )
+        ) { b in
+            window.rootViewController = intro2
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
