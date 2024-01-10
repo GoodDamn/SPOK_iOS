@@ -11,7 +11,24 @@ import UIKit
 class SimplePageViewController
     : UIPageViewController {
     
-    var source: [UIViewController] = []
+    private final let TAG = "SimplePageViewController"
+    
+    var source: [UIViewController] = [] {
+        didSet {
+            
+            var i = 0
+            
+            for vc in source {
+                
+                vc.view.tag = i
+                
+                i += 1
+            }
+            
+        }
+    }
+    
+    var onNewPage: ((Int)->Void)? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +43,7 @@ class SimplePageViewController
 extension SimplePageViewController
     : UIPageViewControllerDelegate {
     
+    
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
@@ -35,6 +53,8 @@ extension SimplePageViewController
         ), i > 0 else {
             return nil
         }
+        
+        print(TAG,"viewControllerBefore",i)
         
         let before = i - 1
         
@@ -51,8 +71,25 @@ extension SimplePageViewController
             return nil
         }
         
+        print(TAG,"viewControllerAfter",i)
+        
         let after = i + 1
         return source[after]
+    }
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool) {
+        
+        onNewPage?(pageViewController
+            .viewControllers!
+            .first!
+            .view
+            .tag
+        )
+            
     }
     
 }

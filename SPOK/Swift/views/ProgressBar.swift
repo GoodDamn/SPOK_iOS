@@ -78,13 +78,11 @@ class ProgressBar
         path.close()
         
         mLayerBack.fillColor = nil
-        mLayerBack.strokeColor = UIColor.gray.cgColor
         mLayerBack.lineWidth = wline
         mLayerBack.lineCap = .round
         mLayerBack.path = path.cgPath
         
         mLayerProgress.fillColor = nil
-        mLayerProgress.strokeColor = UIColor.orange.cgColor
         mLayerProgress.lineWidth = wline
         mLayerProgress.lineCap = .round
         mLayerProgress.path = path.cgPath

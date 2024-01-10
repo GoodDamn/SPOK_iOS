@@ -54,6 +54,29 @@ class IntroSleep3ViewController
             animated: true
         )
         
+        
+        let pageBar = PageBar(
+            frame: CGRect(
+                x: w * 0.374,
+                y: h * 0.831,
+                width: w * 0.241,
+                height: h * 0.016
+            )
+        )
+        
+        view.addSubview(pageBar)
+        
+        pageBar.maxPages = 2
+        pageBar.mColorBack = .white
+            .withAlphaComponent(0.2)
+        
+        pageBar.mColorCurrent = .white
+        
+        //pageBar.mCurrentPage = 1
+        
+        pageController.onNewPage = { i in
+            pageBar.mCurrentPage = i
+        }
     }
     
     private static func createHeader(

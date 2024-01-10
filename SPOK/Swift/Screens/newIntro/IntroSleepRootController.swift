@@ -26,8 +26,8 @@ class IntroSleepRootController
         let intro2 = IntroSleep2ViewController()
         let intro3 = IntroSleep3ViewController()
         
-        addChild(intro1)
-        view.addSubview(intro1.view)
+        addChild(intro3)
+        view.addSubview(intro3.view)
         
         intro1.onEndTimer = {
             intro1.hide()
@@ -57,10 +57,10 @@ class IntroSleepRootController
             }
         }
         
-        intro1.show()
-        intro1.startTimer(
+        intro3.show()
+        /*intro1.startTimer(
             duration: 3.0
-        )
+        )*/
     }
     
     
