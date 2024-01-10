@@ -14,7 +14,14 @@ class MainPageViewController: UIPageViewController{
     func setup(){
         manager = Utils.getManager();
         //manager?.pageViewController?.dataSource = self;
-        setViewControllers([manager!.viewControllersPages[0]], direction: .forward, animated: true, completion: nil);
+        setViewControllers(
+            [manager!
+                .viewControllersPages[0]
+            ],
+            direction: .forward,
+            animated: true,
+            completion: nil
+        );
     }
     
     override func viewDidLoad(){

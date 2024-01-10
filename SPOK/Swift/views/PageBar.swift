@@ -13,7 +13,15 @@ class PageBar
     
     private final let TAG = "PageBar:"
     
-    private var mPages:[CGPoint] = []
+    private var mPages:[Line] = []
+    
+    public var mInterval: CGFloat = 0.05 {
+        didSet {
+            mInterval = mInterval * frame.width
+            let m = maxPages
+            maxPages = m
+        }
+    }
     
     public var mColorCurrent: UIColor = .blue {
         didSet {
@@ -38,23 +46,39 @@ class PageBar
             let wl = frame.height / 2
             
             let intervalPoints = CGFloat(maxPages - 1)
-            let interval = 0.05 * frame.width
             
-            let fillInter = interval * intervalPoints
+            let fillInter = mInterval * intervalPoints
             
-            let fillPage = frame.width - fillInter
+            let w = frame.width - wl
+            
+            let fillPage = w - fillInter
             
             let wpage = fillPage / CGFloat(maxPages)
             
-            var x = wl
-            for i in 0..<maxPages {
-                print(TAG, "CALC:", x, wl, wpage,interval, fillPage, fillInter)
-                mPages.append(CGPoint(
-                    x: x,
-                    y: wl)
+            var x:CGFloat = 0
+            
+            var prevPoint = CGPoint(
+                x: x,
+                y: wl
+            )
+            
+            for _ in 0..<maxPages {
+                
+                let point = CGPoint(
+                    x: x + wpage,
+                    y: wl
                 )
                 
-                x += wpage
+                mPages.append(Line(
+                    from: prevPoint,
+                    to: point)
+                )
+                
+                print(TAG, "POINTS:", prevPoint, point)
+                
+                x += wpage + wl + mInterval
+                
+                prevPoint.x = x
                 
             }
             
@@ -69,16 +93,10 @@ class PageBar
             }
             
             let p = mPages[mCurrentPage]
-            var limit = frame.width
             
-            let interval = 0.09 * frame.width
+            mLayerCurrent.strokeStart = p.from.x / frame.width
+            mLayerCurrent.strokeEnd = p.to.x / frame.width
             
-            if mCurrentPage+1 < maxPages {
-                limit = mPages[mCurrentPage+1].x + interval
-            }
-            
-            mLayerCurrent.strokeStart = (p.x+interval) / frame.width / 2
-            mLayerCurrent.strokeEnd = limit / frame.width / 2
             setNeedsDisplay()
         }
     }
@@ -110,38 +128,14 @@ class PageBar
         let wline = rect.height / 2
         let path = UIBezierPath()
         
-        var prevPoint = mPages[0]
-        
-        let interval = 0.09 * frame.width
-        
-        for i in 1..<mPages.count {
-            var point = mPages[i]
-            print(TAG,
-                  "DRAW_POINT:",
-                  prevPoint,
-                  point)
-            
-            path.move(to: prevPoint)
-            path.addLine(to: point)
-            
-            point.x += interval
-            prevPoint = point
+        for l in mPages {
+            path.move(to: l.from)
+            path.addLine(to: l.to)
         }
         
-        let lastp = CGPoint(
-            x: rect.width,
-            y: prevPoint.y
-        )
-        
-        path.move(to: prevPoint)
-        path.addLine(to: lastp)
-        
-        print(TAG,
-              "DRAW_POINT:",
-              prevPoint,
-              lastp)
-        
-        path.close()
+        print(TAG, "PATH:",path.bounds)
+        print(TAG, "VIEW:",bounds)
+        print(TAG, "RECTL",rect)
         
         mLayerBack.fillColor = nil
         mLayerBack.lineWidth = wline
@@ -152,6 +146,14 @@ class PageBar
         mLayerCurrent.lineWidth = wline
         mLayerCurrent.lineCap = .round
         mLayerCurrent.path = path.cgPath
+        
+        print(TAG, mLayerCurrent.strokeStart, mLayerCurrent.strokeEnd)
+        
+    }
+    
+    private struct Line {
+        var from: CGPoint
+        var to: CGPoint
     }
     
 }
