@@ -47,7 +47,15 @@ class ArcProgressBar:UIView{
         let startAngle = Float.pi * (startAngle+180) / 180;
         let endAngle = Float.pi * (endAngle+180) / 180;
         
-        let arcPath:CGPath = UIBezierPath(arcCenter: CGPoint(x: bounds.width/2,y:bounds.height-arcWidth), radius: bounds.height-2*arcWidth, startAngle: CGFloat(startAngle), endAngle:CGFloat(endAngle), clockwise: true).cgPath;
+        let arcPath:CGPath = UIBezierPath(
+            arcCenter: CGPoint(
+                x: bounds.width/2,
+                y:bounds.height-arcWidth
+            ),
+            radius: bounds.height-2*arcWidth,
+            startAngle: CGFloat(startAngle),
+            endAngle:CGFloat(endAngle),
+            clockwise: true).cgPath;
                 
         backgroundLayer.path = arcPath;
         backgroundLayer.lineCap = .round;

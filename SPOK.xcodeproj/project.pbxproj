@@ -19,6 +19,7 @@
 		2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227A2B4E6AE900FCD636 /* IntroSleepRootController.swift */; };
 		2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227C2B4E6E0300FCD636 /* DelegateViewController.swift */; };
 		2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227E2B4E70FA00FCD636 /* OneShotViewController.swift */; };
+		250622812B4E891900FCD636 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622802B4E891900FCD636 /* ProgressBar.swift */; };
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
@@ -148,6 +149,7 @@
 		2506227A2B4E6AE900FCD636 /* IntroSleepRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleepRootController.swift; sourceTree = "<group>"; };
 		2506227C2B4E6E0300FCD636 /* DelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateViewController.swift; sourceTree = "<group>"; };
 		2506227E2B4E70FA00FCD636 /* OneShotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneShotViewController.swift; sourceTree = "<group>"; };
+		250622802B4E891900FCD636 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				25D5E5632A6A82A200A3126B /* SpanTextView.swift */,
 				25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */,
 				2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */,
+				250622802B4E891900FCD636 /* ProgressBar.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -904,6 +907,7 @@
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				2BC1218327772B5900729BA4 /* AboutAppVController.swift in Sources */,
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
+				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* ManagerViewController.swift in Sources */,
 				2B7C289D2897CF8900C2EC07 /* MainPageViewController.swift in Sources */,
 				2507D2D82B46867B00656C0B /* SPOKContentEngine.swift in Sources */,

@@ -59,7 +59,7 @@ class IntroSleepRootController
         
         intro1.show()
         intro1.startTimer(
-            duration: 3.5
+            duration: 3.0
         )
     }
     
