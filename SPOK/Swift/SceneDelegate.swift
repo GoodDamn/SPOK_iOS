@@ -92,7 +92,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !userDefaults.bool(forKey: "intro") {
             print("Time for intro!")
             attachViewController(
-                IntroSleepViewController()
+                IntroSleepRootController()
             );
             return;
         }

@@ -27,16 +27,24 @@ class UITextViewPhrase: UITextView{
         });
     }
     
-    public func hide(_ maxValY: CGFloat) {
+    public func hide(
+        _ maxValY: CGFloat,
+        _ completion: (()->Void)? = nil
+    ) {
         let y = contentSize.height + CGFloat.random(in: 0..<maxValY);
         
-        UIView.animate(withDuration: Double(y)/80, animations: {
-            self.transform = CGAffineTransform(translationX: 0, y: y);
-            self.alpha = 0.0;
-        }, completion: {
-            b in
+        UIView.animate(
+            withDuration: 2.0,
+            animations: {
+                self.transform = CGAffineTransform(
+                    translationX: 0,
+                    y: y
+                );
+                self.alpha = 0.0;
+        }) { b in
             self.removeFromSuperview();
-        });
+            completion?()
+        }
     }
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {

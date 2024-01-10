@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class IntroSleep2ViewController
-    : UIViewController {
+    : DelegateViewController {
     
     private final let TAG = "IntroSleep2ViewController"
     
@@ -60,21 +60,29 @@ class IntroSleep2ViewController
         view.addGestureRecognizer(
             gesture
         )
-        
-        next(gesture)
     }
     
     @objc func next(
         _ sender: UITapGestureRecognizer
     ) {
-        
+        nextPiece()
+    }
+    
+    func startTopic() {
+        nextPiece()
+    }
+    
+    private func nextPiece() {
         print(TAG, "onNext:", mCurrent, mPieces.count)
         
         if mCurrent >= mPieces.count {
-            sender.isEnabled = false
             view.isUserInteractionEnabled = false
             // Move to another controller
             
+            mPrevTextView?.hide(300) {
+                
+                self.onHide?()
+            }
             return
         }
         

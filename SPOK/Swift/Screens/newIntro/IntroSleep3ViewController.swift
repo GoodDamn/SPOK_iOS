@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class IntroSleep3ViewController
-    : UIViewController {
+    : DelegateViewController {
     
     private static var mExtraBold: UIFont? = nil
     private static var mSemiBold: UIFont? = nil
@@ -25,32 +25,34 @@ class IntroSleep3ViewController
         
         IntroSleep3ViewController
             .mExtraBold = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: sizeTitle
-        )
+                name: "OpenSans-ExtraBold",
+                size: sizeTitle
+            )
         
         IntroSleep3ViewController
             .mSemiBold = UIFont(
-            name: "OpenSans-SemiBold",
-            size: sizeSubtitle
-        )
-        
+                name: "OpenSans-SemiBold",
+                size: sizeSubtitle
+            )
         
         let pageController = SimplePageViewController(
-            transitionStyle: .pageCurl,
+            transitionStyle: .scroll,
             navigationOrientation: .horizontal
         )
         
+        addChild(pageController)
+        view.addSubview(pageController.view)
+            
         pageController.source = [
             Page1(),
             Page2()
         ]
         
         pageController.setViewControllers(
-            [Page1()],
+            [pageController.source[0]],
             direction: .forward,
-            animated: true)
-        
+            animated: true
+        )
         
     }
     
@@ -71,33 +73,40 @@ class IntroSleep3ViewController
         let w = f.width
         let h = f.height
         
+        let marginLeft = w * 0.094
+        
+        let ww = w - marginLeft
+        
         let lTitle = UILabel(
             frame: CGRect(
-                x: w*0.01,
+                x: marginLeft,
                 y: h*0.05,
-                width: w,
+                width: ww,
                 height: extraBold?.pointSize ?? 36
             )
         )
-        
-        let orig = lTitle.frame.origin
+    
+        let fr = lTitle.frame
+        let or = fr.origin
         
         let lSubtitle = UILabel(
             frame: CGRect(
-                x: orig.x,
-                y: orig.y + lTitle.frame.height,
-                width: w,
-                height: semiBold?.pointSize ?? 70
+                x: or.x,
+                y: fr.height + or.y + w * 0.05,
+                width: ww,
+                height: (semiBold?.pointSize ?? 35) * 3
             )
         )
         
         lTitle.text = title
         lTitle.textColor = .white
         lTitle.font = extraBold
+        lTitle.numberOfLines = 0
         
         lSubtitle.text = subtitle
         lSubtitle.textColor = .white
         lSubtitle.font = semiBold
+        lSubtitle.numberOfLines = 0
         
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
@@ -112,7 +121,7 @@ class IntroSleep3ViewController
             IntroSleep3ViewController.createHeader(
                     in:view,
                     title: "Засыпайки",
-                    subtitle: "Всего пару минут, чтобы настроиться на сон."
+                    subtitle: "Всего пару минут,\nчтобы настроиться на сон."
                 )
         }
         
@@ -126,7 +135,7 @@ class IntroSleep3ViewController
             IntroSleep3ViewController.createHeader(
                     in:view,
                     title: "Истории на ночь",
-                    subtitle: "Расслабляйся, читая невероятные рассказы"
+                    subtitle: "Расслабляйся, читая\nневероятные рассказы"
                 )
         }
         

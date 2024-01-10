@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class IntroSleepViewController
-    : UIViewController {
+    : OneShotViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,31 +62,6 @@ class IntroSleepViewController
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
         
-        DispatchQueue
-            .main
-            .asyncAfter(
-                deadline: .now() + 2.0
-            ) {
-                self.moveToNextController()
-            }
-    }
- 
-    private func moveToNextController() {
-        
-        let intro2 = IntroSleep2ViewController()
-        
-        let window = UIApplication
-            .shared
-            .windows[0]
-        
-        UIView.transition(
-            from: view,
-            to: intro2.view,
-            duration: 2.0,
-            options: [.curveEaseIn]
-        ) { b in
-            window.rootViewController = intro2
-        }
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -16,6 +16,9 @@
 		250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622742B4DB20500FCD636 /* IntroSleep2ViewController.swift */; };
 		250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622762B4E53F900FCD636 /* IntroSleep3ViewController.swift */; };
 		250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622782B4E5E5700FCD636 /* SimplePageViewController.swift */; };
+		2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227A2B4E6AE900FCD636 /* IntroSleepRootController.swift */; };
+		2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227C2B4E6E0300FCD636 /* DelegateViewController.swift */; };
+		2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506227E2B4E70FA00FCD636 /* OneShotViewController.swift */; };
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
@@ -142,6 +145,9 @@
 		250622742B4DB20500FCD636 /* IntroSleep2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleep2ViewController.swift; sourceTree = "<group>"; };
 		250622762B4E53F900FCD636 /* IntroSleep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleep3ViewController.swift; sourceTree = "<group>"; };
 		250622782B4E5E5700FCD636 /* SimplePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePageViewController.swift; sourceTree = "<group>"; };
+		2506227A2B4E6AE900FCD636 /* IntroSleepRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleepRootController.swift; sourceTree = "<group>"; };
+		2506227C2B4E6E0300FCD636 /* DelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateViewController.swift; sourceTree = "<group>"; };
+		2506227E2B4E70FA00FCD636 /* OneShotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneShotViewController.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
@@ -312,6 +318,9 @@
 				250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */,
 				250622742B4DB20500FCD636 /* IntroSleep2ViewController.swift */,
 				250622762B4E53F900FCD636 /* IntroSleep3ViewController.swift */,
+				2506227A2B4E6AE900FCD636 /* IntroSleepRootController.swift */,
+				2506227C2B4E6E0300FCD636 /* DelegateViewController.swift */,
+				2506227E2B4E70FA00FCD636 /* OneShotViewController.swift */,
 			);
 			path = newIntro;
 			sourceTree = "<group>";
@@ -859,9 +868,11 @@
 			files = (
 				2BA101D12763EFC900EB5B8C /* SignInController.swift in Sources */,
 				2B558A4027E87C0B0038DBDA /* IntroViewController.swift in Sources */,
+				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
 				2BD64C4D295C36DB00169416 /* SettingsTableViewCell.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2B5DBFC029321C8300FF5199 /* RatingSnackbar.swift in Sources */,
+				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */,
@@ -915,6 +926,7 @@
 				2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */,
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,
 				2BA101CF2763EFC900EB5B8C /* SceneDelegate.swift in Sources */,
+				2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */,
 				3819936F288575B4005E1367 /* NoInternetViewController.swift in Sources */,
 				2B93CF822775064200219690 /* ProfileViewController.swift in Sources */,
 				2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */,
