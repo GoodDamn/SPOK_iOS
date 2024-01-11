@@ -230,8 +230,18 @@ class Utils{
         label.font = UIFont(name: label.font.fontName, size: label.font.pointSize * UIScreen.main.nativeScale/3 + UIScreen.main.nativeScale + increaseSize);
     }
     
-    public static func getManager()->ManagerViewController? {
-        return ((UIApplication.shared.windows.first!.rootViewController as? MainNavigationController)?.viewControllers.first as? ManagerViewController);
+    public static func getManagerNav() -> MainNavigationController? {
+        return UIApplication
+            .shared
+            .windows
+            .first!
+            .rootViewController as? MainNavigationController
+    }
+    
+    public static func getManager() -> ManagerViewController? {
+        return getManagerNav()?
+            .viewControllers
+            .first as? ManagerViewController
     }
     
     public static func isNewTraining(_ id:Int)->Bool{

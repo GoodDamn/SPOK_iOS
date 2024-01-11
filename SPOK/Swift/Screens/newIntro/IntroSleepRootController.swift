@@ -11,6 +11,8 @@ import UIKit
 class IntroSleepRootController
     : UIViewController {
     
+    private final let TAG = "IntroSleepRootController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -28,6 +30,11 @@ class IntroSleepRootController
         
         intro3.onHide = {
             
+            UserDefaults()
+                .setValue(
+                    true,
+                    forKey: "intro");
+            
             let window = UIApplication
                 .shared
                 .windows[0]
@@ -38,24 +45,28 @@ class IntroSleepRootController
             )
             
             let mainNav = board.instantiateViewController(
-                withIdentifier: "manager"
-            ) as! ManagerViewController
+                withIdentifier: "mainNav"
+            ) as! MainNavigationController
         
-            window.rootViewController = mainNav
-            
             UIView.transition(
                 from: self.view,
                 to: mainNav.view,
                 duration: 2.0,
                 options: [.curveLinear]
             ) { b in
+                window.rootViewController = mainNav
+                
+                Utils
+                    .getManager()?
+                    .pageViewController?
+                    .setup()
                 
             }
             
         }
         
-        addChild(intro3)
-        view.addSubview(intro3.view)
+        addChild(intro1)
+        view.addSubview(intro1.view)
         
         intro1.onEndTimer = {
             intro1.hide()
@@ -85,10 +96,10 @@ class IntroSleepRootController
             }
         }
         
-        intro3.show()
-        /*intro1.startTimer(
+        intro1.show()
+        intro1.startTimer(
             duration: 3.0
-        )*/
+        )
     }
     
     

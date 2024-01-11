@@ -14,9 +14,7 @@ class MainNavigationController: UINavigationController{
     }
     
     override func viewDidLoad() {
-        //self.navigationController?.setNavigationBarHidden(true, animated: false);
         self.navigationController?.title = "";
-        //self.navigationController?.navigationBar.isTranslucent = true;
         modalPresentationStyle = .overFullScreen;
         super.viewDidLoad();
     }

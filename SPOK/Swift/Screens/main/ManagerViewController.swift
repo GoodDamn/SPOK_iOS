@@ -70,7 +70,7 @@ class ManagerViewController: UIViewController{
         for segue: UIStoryboardSegue,
         sender: Any?
     ) {
-        if (segue.identifier == "mainPage"){
+        if (segue.identifier == "mainPage") {
             let storyboard = UIStoryboard(name: "mainNav", bundle: nil);
             viewControllersPages = [
                 storyboard.instantiateViewController(withIdentifier: "home"),
@@ -78,7 +78,7 @@ class ManagerViewController: UIViewController{
                 storyboard.instantiateViewController(withIdentifier: "profile")
             ];
             pageViewController = segue.destination as? MainPageViewController;
-            pageViewController?.setup();
+            pageViewController?.setup()
             return;
         }
         

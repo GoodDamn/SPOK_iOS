@@ -58,44 +58,12 @@ class IntroSleep3ViewController
         
         page2.mOnLoadView = { v in
             
-            let view = self.view!
-            
-            let w = view.frame.width
-            let h = view.frame.height
-            
-            let wbtn = w * 0.702
-            
-            let btnStart = UIButton(
-                frame: CGRect(
-                    x: (w - wbtn) * 0.5,
-                    y: h * 0.873,
-                    width: wbtn,
-                    height: h * 0.05
+            let btnStart = ViewUtils
+                .button(
+                    text: "Начать приключение",
+                    y: 0.873,
+                    self.view
                 )
-            )
-            
-            let bold = UIFont(
-                name: "OpenSans-Bold",
-                size: 0.26 * btnStart.frame.height
-            )
-            
-            btnStart.backgroundColor = UIColor(
-                named: "btnBack"
-            )
-            
-            btnStart
-                .layer
-                .cornerRadius = 0.17 * btnStart.frame.height
-            
-            btnStart.titleLabel?.font = bold
-            btnStart.setTitleColor(
-                .white,
-                for: .normal
-            )
-            
-            btnStart.setTitle(
-                "Начать приключение",
-                for: .normal)
             
             btnStart.addTarget(
                 self,
@@ -104,7 +72,6 @@ class IntroSleep3ViewController
                 ),
                 for: .touchUpInside
             )
-            
             v.addSubview(btnStart)
             
         }
@@ -157,7 +124,7 @@ class IntroSleep3ViewController
         in view: UIView,
         title: String,
         subtitle: String
-    ) -> [UILabel] {
+    ) {
         
         let f = view.frame
         
@@ -207,8 +174,6 @@ class IntroSleep3ViewController
         
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
-        
-        return [lTitle, lSubtitle]
     }
     
 }

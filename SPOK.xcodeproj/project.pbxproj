@@ -41,6 +41,7 @@
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
+		255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F82B504BB5006D9FD0 /* ViewUtils.swift */; };
 		257984892AB6FBF6008F17A8 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579848B2AB6FBF6008F17A8 /* checklist.storyboard */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
@@ -171,6 +172,7 @@
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		255C04F82B504BB5006D9FD0 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		2579848A2AB6FBF6008F17A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/checklist.storyboard; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView8.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				383AF7AE2875B17400859090 /* StorageApp.swift */,
 				2B3DE5B8290BAC7600B00528 /* SIgnInWithAppleDelegate.swift */,
 				2BF3566D293136BF00ECA142 /* Crypt.swift */,
+				255C04F82B504BB5006D9FD0 /* ViewUtils.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				2B558A3B27E87BC50038DBDA /* Intro2ViewController.swift in Sources */,
 				2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */,
 				2B29A7DD279F573400367372 /* Apache.swift in Sources */,
+				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */,
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
 				2BF0AF4627E1DBC800F20B9D /* Networking.swift in Sources */,

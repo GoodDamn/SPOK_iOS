@@ -14,6 +14,10 @@ class MainPageViewController: UIPageViewController{
     func setup(){
         manager = Utils.getManager();
         //manager?.pageViewController?.dataSource = self;
+        if manager == nil {
+            return
+        }
+        
         setViewControllers(
             [manager!
                 .viewControllersPages[0]
