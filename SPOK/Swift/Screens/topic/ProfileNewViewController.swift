@@ -35,7 +35,7 @@ class ProfileNewViewController
             size: 15
         )
         
-        let marginTop = h * 0.08
+        let marginTop = h * 0.04
         let marginLeft = w * 0.05
         
         let lTitle = UILabel(
@@ -50,7 +50,7 @@ class ProfileNewViewController
         let lTitleHead = UILabel(
             frame: CGRect(
                 x: 0,
-                y: h * 0.18,
+                y: h * 0.12,
                 width: w,
                 height: 0.05 * w
             )
@@ -61,11 +61,12 @@ class ProfileNewViewController
         let lSubtitleHead = UILabel(
             frame: CGRect(
                 x: marginLeftSub,
-                y: h * 0.22,
+                y: h * 0.165,
                 width: w-marginLeftSub,
                 height: 0.032 * w
             )
         )
+        
         
         lTitle.text = "Профиль"
         lTitle.textColor = .white
@@ -87,6 +88,59 @@ class ProfileNewViewController
         
         lSubtitleHead.sizeToFit()
         
+        
+        let himage2 = w * 0.434
+        
+        let imageView2 = UIImageView(
+            frame: CGRect(
+                x: w * 0.297,
+                y: lSubtitleHead
+                    .frame
+                    .origin
+                    .y + lSubtitleHead
+                    .frame.height + h*0.03,
+                width: himage2,
+                height: himage2
+            )
+        )
+        
+        imageView2.image = UIImage(
+            named: "i"
+        )
+        
+        let himage1 = w * 0.352
+        let offset = w * 0.14
+        let ximg13 = lSubtitleHead
+            .frame
+            .origin
+            .y + lSubtitleHead
+            .frame.height + h*0.06
+        
+        let imageView1 = UIImageView(
+            frame: CGRect(
+                x: w-(himage1-offset),
+                y: ximg13,
+                width: himage1,
+                height: himage1
+            )
+        )
+        
+        imageView1.image = UIImage(
+            named: "o"
+        )
+        
+        let imageView3 = UIImageView(
+            frame: CGRect(
+                x: -offset,
+                y: ximg13,
+                width: himage1,
+                height: himage1
+            )
+        )
+        
+        imageView3.image = UIImage(
+            named: "j"
+        )
         
         let btnOpen = ViewUtils
             .button(
@@ -145,6 +199,11 @@ class ProfileNewViewController
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
         view.addSubview(lSubtitleHead)
+        
+        view.addSubview(imageView1)
+        view.addSubview(imageView2)
+        view.addSubview(imageView3)
+        
         view.addSubview(btnOpen)
         view.addSubview(shareView)
         
