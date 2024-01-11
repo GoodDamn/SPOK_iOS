@@ -46,6 +46,69 @@ class IntroSleep3ViewController
         let page = Page()
         let page2 = Page()
         
+        page.setHeader(
+            title: "Засыпайки",
+            subtitle: "Всего пару минут,\nчтобы настроиться на сон."
+        )
+        
+        page2.setHeader(
+            title: "Истории на ночь",
+            subtitle: "Расслабляйся, читая\nневероятные рассказы"
+        )
+        
+        page2.mOnLoadView = { v in
+            
+            let view = self.view!
+            
+            let w = view.frame.width
+            let h = view.frame.height
+            
+            let wbtn = w * 0.702
+            
+            let btnStart = UIButton(
+                frame: CGRect(
+                    x: (w - wbtn) * 0.5,
+                    y: h * 0.873,
+                    width: wbtn,
+                    height: h * 0.05
+                )
+            )
+            
+            let bold = UIFont(
+                name: "OpenSans-Bold",
+                size: 0.26 * btnStart.frame.height
+            )
+            
+            btnStart.backgroundColor = UIColor(
+                named: "btnBack"
+            )
+            
+            btnStart
+                .layer
+                .cornerRadius = 0.17 * btnStart.frame.height
+            
+            btnStart.titleLabel?.font = bold
+            btnStart.setTitleColor(
+                .white,
+                for: .normal
+            )
+            
+            btnStart.setTitle(
+                "Начать приключение",
+                for: .normal)
+            
+            btnStart.addTarget(
+                self,
+                action: #selector(
+                    self.onClickBtnStart(_:)
+                ),
+                for: .touchUpInside
+            )
+            
+            v.addSubview(btnStart)
+            
+        }
+        
         pageController.source = [
             page,
             page2
@@ -80,20 +143,21 @@ class IntroSleep3ViewController
             pageBar.mCurrentPage = i
         }
         
-        /*page2.onClickStart = { btn in
-            btn.isEnabled = false
-            self.hide()
-        }*/
-        
         view.addSubview(pageBar)
     }
     
+    @objc func onClickBtnStart(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        self.hide()
+    }
     
     public static func createHeader(
         in view: UIView,
         title: String,
         subtitle: String
-    ) {
+    ) -> [UILabel] {
         
         let f = view.frame
         
@@ -143,29 +207,31 @@ class IntroSleep3ViewController
         
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
+        
+        return [lTitle, lSubtitle]
     }
     
 }
 
 private class Page
-    : UIViewController/*,
-      UICollectionViewDelegate,
-      UICollectionViewDataSource,
-      UICollectionViewDelegateFlowLayout*/ {
+    : UIViewController {
     
     private final let TAG = "Page:"
     
-    private var mCellSize: CGSize = .zero
-    private var mType = "b"
+    public var mOnLoadView: ((UIView)->Void)? = nil
+    
+    private var mTitle = ""
+    private var mSubtitle = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        IntroSleep3ViewController.createHeader(
-            in:view,
-            title: "Засыпайки",
-            subtitle: "Всего пару минут,\nчтобы настроиться на сон."
-        )
+        IntroSleep3ViewController
+            .createHeader(
+                in:view,
+                title: mTitle,
+                subtitle: mSubtitle
+            )
         
         let w = view.frame.width
         let h = view.frame.height
@@ -210,79 +276,16 @@ private class Page
         
         view.addSubview(carouselView)
         
+        mOnLoadView?(view)
+        
         carouselView.start()
     }
  
-    
-}
-
-/*
-private class Page2: UIViewController {
-    
-    public var onClickStart: ((UIButton)->Void)? = nil
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        IntroSleep3ViewController.createHeader(
-                in:view,
-                title: "Истории на ночь",
-                subtitle: "Расслабляйся, читая\nневероятные рассказы"
-            )
-        
-        let w = view.frame.width
-        let h = view.frame.height
-        
-        let wbtn = w * 0.702
-        
-        let btnStart = UIButton(
-            frame: CGRect(
-                x: (w - wbtn) * 0.5,
-                y: h * 0.873,
-                width: wbtn,
-                height: h * 0.05
-            )
-        )
-        
-        let bold = UIFont(
-            name: "OpenSans-Bold",
-            size: 0.26 * btnStart.frame.height
-        )
-        
-        btnStart.backgroundColor = UIColor(
-            named: "btnBack"
-        )
-        
-        btnStart
-            .layer
-            .cornerRadius = 0.17 * btnStart.frame.height
-        
-        btnStart.titleLabel?.font = bold
-        btnStart.setTitleColor(
-            .white,
-            for: .normal
-        )
-        
-        btnStart.setTitle(
-            "Начать приключение",
-            for: .normal)
-        
-        btnStart.addTarget(
-            self,
-            action: #selector(
-                onClickBtnStart(_:)
-            ),
-            for: .touchUpInside
-        )
-        
-        view.addSubview(btnStart)
-    }
-    
-    @objc func onClickBtnStart(
-        _ sender: UIButton
+    public func setHeader(
+        title: String,
+        subtitle: String
     ) {
-        onClickStart?(sender)
+        mTitle = title
+        mSubtitle = subtitle
     }
-    
 }
-*/

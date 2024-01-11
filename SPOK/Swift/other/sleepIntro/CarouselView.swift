@@ -61,7 +61,6 @@ class CarouselView
                     width: w+hmargin*2,
                     height: c.cellSize.height
                 )
-                
             )
                         
             cv.setContentOffset(
