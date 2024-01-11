@@ -39,6 +39,8 @@
 		2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */; };
 		253E298E2A44493700304958 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253E298D2A44493700304958 /* StoreKit.framework */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
+		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
+		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
 		257984892AB6FBF6008F17A8 /* checklist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2579848B2AB6FBF6008F17A8 /* checklist.storyboard */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
@@ -167,6 +169,8 @@
 		2507D2EF2B47216000656C0B /* OnReadScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnReadScript.swift; sourceTree = "<group>"; };
 		2530C94E2AB0DA0600E79848 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
+		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		2579848A2AB6FBF6008F17A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/checklist.storyboard; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
 		25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView8.swift; sourceTree = "<group>"; };
@@ -383,6 +387,15 @@
 			path = protocols;
 			sourceTree = "<group>";
 		};
+		255C04F32B4FA398006D9FD0 /* sleepIntro */ = {
+			isa = PBXGroup;
+			children = (
+				255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */,
+				255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */,
+			);
+			path = sleepIntro;
+			sourceTree = "<group>";
+		};
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +559,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				255C04F32B4FA398006D9FD0 /* sleepIntro */,
 				2507D2E52B46B9A900656C0B /* stream */,
 				3819936C28854D8A005E1367 /* TwoCardRowCollectionViewDelegate.swift */,
 				2BF06BF428E7951F00A2ACFF /* Extensions */,
@@ -891,6 +905,7 @@
 				2BF0AF4627E1DBC800F20B9D /* Networking.swift in Sources */,
 				383AF7AF2875B17400859090 /* StorageApp.swift in Sources */,
 				2BA51AC0281011080035262A /* CategoryView.swift in Sources */,
+				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
 				2B37A5D7278C0FEA00B990F9 /* FeedBackViewController.swift in Sources */,
 				25CEA89F2A6CFC4E00D9D44C /* CollectionView8.swift in Sources */,
 				2B93CF7D277505CF00219690 /* SearchViewController.swift in Sources */,
@@ -919,6 +934,7 @@
 				2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,
+				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,
 				2B3DE5B9290BAC7600B00528 /* SIgnInWithAppleDelegate.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				2B93CF8F277635C100219690 /* EditText.swift in Sources */,

@@ -7,10 +7,8 @@
 
 import UIKit;
 
-class CollectionView8: UICollectionView,
-                       UICollectionViewDelegate,
-                       UICollectionViewDataSource,
-                       UICollectionViewDelegateFlowLayout {
+class CollectionView8
+    : UICollectionView {
     
     private let mLang = Utils.getLanguageCode();
     
@@ -24,27 +22,53 @@ class CollectionView8: UICollectionView,
     var mContext:UIViewController? = nil;
     
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: layout);
+    override init(
+        frame: CGRect,
+        collectionViewLayout layout: UICollectionViewLayout
+    ) {
+        super.init(
+            frame: frame,
+            collectionViewLayout: layout
+        );
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder);
+    required init?(
+        coder: NSCoder
+    ) {
+        super.init(
+            coder: coder
+        );
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150);
-    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func start() {
+        delegate = self;
+        dataSource = self;
+    }
+}
+
+
+extension CollectionView8
+    : UICollectionViewDataSource {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        
         print("CollectionView8: SIZE:",mIDs.count);
+        
         if (mIDs.count > 8) {
             return 8;
         }
+        
         return mIDs.count;
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         guard let mCellIdentifier = mCellIdentifier else {
             return UICollectionViewCell();
@@ -66,8 +90,18 @@ class CollectionView8: UICollectionView,
         return cell;
     }
     
-    func start() {
-        delegate = self;
-        dataSource = self;
+}
+
+
+extension CollectionView8
+    : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: 150, height: 150);
     }
+    
 }

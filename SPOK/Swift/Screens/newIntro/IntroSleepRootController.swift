@@ -26,6 +26,34 @@ class IntroSleepRootController
         let intro2 = IntroSleep2ViewController()
         let intro3 = IntroSleep3ViewController()
         
+        intro3.onHide = {
+            
+            let window = UIApplication
+                .shared
+                .windows[0]
+            
+            let board = UIStoryboard(
+                name: "mainNav",
+                bundle: Bundle.main
+            )
+            
+            let mainNav = board.instantiateViewController(
+                withIdentifier: "manager"
+            ) as! ManagerViewController
+        
+            window.rootViewController = mainNav
+            
+            UIView.transition(
+                from: self.view,
+                to: mainNav.view,
+                duration: 2.0,
+                options: [.curveLinear]
+            ) { b in
+                
+            }
+            
+        }
+        
         addChild(intro3)
         view.addSubview(intro3.view)
         
@@ -58,33 +86,6 @@ class IntroSleepRootController
         }
         
         intro3.show()
-        intro3.onHide = {
-            
-            let window = UIApplication
-                .shared
-                .windows[0]
-            
-            let board = UIStoryboard(
-                name: "mainNav",
-                bundle: Bundle.main
-            )
-            
-            let mainNav = board.instantiateViewController(
-                withIdentifier: "manager"
-            ) as! ManagerViewController
-        
-            window.rootViewController = mainNav
-            
-            UIView.transition(
-                from: self.view,
-                to: mainNav.view,
-                duration: 2.0,
-                options: [.curveLinear]
-            ) { b in
-                
-            }
-            
-        }
         /*intro1.startTimer(
             duration: 3.0
         )*/

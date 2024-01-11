@@ -47,6 +47,22 @@ class IntroSleepViewController
             )
         )
         
+        let wimage = 0.683 * w
+        let himage = 0.802 * wimage
+        
+        let imageView = UIImageView(
+            frame: CGRect(
+                x: (w - wimage) * 0.5,
+                y: (h - himage) * 0.5,
+                width: wimage,
+                height: himage
+            )
+        )
+        
+        imageView.image = UIImage(
+            named: "meditate"
+        )
+        
         lTitle.text = "Добро\nпожаловать в\nSPOK.Сон"
         lTitle.font = extraBold
         lTitle.textColor = .white
@@ -59,7 +75,9 @@ class IntroSleepViewController
         lSubtitle.textAlignment = .center
         lSubtitle.numberOfLines = 0
         
+        
         view.addSubview(lTitle)
+        view.addSubview(imageView)
         view.addSubview(lSubtitle)
         
     }
