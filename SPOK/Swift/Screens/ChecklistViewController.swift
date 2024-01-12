@@ -19,8 +19,6 @@ class ChecklistViewController: UIViewController {
     @IBOutlet weak var mTVPrivacy: UITextView!;
     @IBOutlet weak var mTFEmail: UITextField!;
     
-    private let manager = Utils.getManager();
-    
     private let mSenderEmail = "spok.app.community@gmail.com";
     
     override func viewDidLoad() {
@@ -52,11 +50,11 @@ class ChecklistViewController: UIViewController {
             return;
         }
         
-        if !(manager?.isConnected ?? true){
+        /*if !(manager?.isConnected ?? true){
             Toast.init(text: Utils.getLocalizedString("nointernet"), duration: 1.0)
                 .show();
             return;
-        }
+        }*/
         
         sendInfo("checklistEmails/iOS",
                  data: emt,

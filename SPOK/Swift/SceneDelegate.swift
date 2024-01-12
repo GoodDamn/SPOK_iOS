@@ -36,8 +36,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.scene = scene as? UIWindowScene;
         if self.scene == nil {return;}
         
-        let userDefaults = UserDefaults();
-        
         /*let lastVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
         print(tag,lastVersion);
         if let currentVersion = userDefaults.string(forKey: "version") {
@@ -89,27 +87,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             userDefaults.setValue(lastVersion, forKey: "version");
         }*/
         
-        if !userDefaults.bool(forKey: "intro") {
-            print("Time for intro!")
-            attachViewController(
-                IntroSleepRootController()
-            );
-            return;
-        }
-        print("Intro is completed");
-        
-        let sMain = UIStoryboard(
-            name: "mainNav",
-            bundle: Bundle.main
-        )
-        let controller = sMain
-            .instantiateViewController(
-                withIdentifier: "mainNav"
-            ) as! MainNavigationController
-        
         attachViewController(
-            controller
-        );
+            MainNavigationController(
+                rootViewController: MainViewController()
+            )
+        )
     
     }
 

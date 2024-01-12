@@ -8,11 +8,13 @@
 import UIKit;
 import FirebaseDatabase;
 
-class TwoCardRowCollectionViewDelegate: NSObject,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+class TwoCardRowCollectionViewDelegate
+    : NSObject,
+      UICollectionViewDataSource,
+      UICollectionViewDelegate,
+      UICollectionViewDelegateFlowLayout {
     
     private let tag:String = "TwoCardDelegate:";
-    
-    private let manager: ManagerViewController? = Utils.getManager();
     
     var singleTap:Selector? = nil;
     var doubleTap:Selector? = nil;
@@ -40,15 +42,31 @@ class TwoCardRowCollectionViewDelegate: NSObject,UICollectionViewDataSource, UIC
         return CGSize(width: w, height: w*1.24);
     }
 
-    private func setup(_ cell: MCellCollectionView, indexPath: IndexPath, _ collectionView: UICollectionView){
+    private func setup(
+        _ cell: MCellCollectionView,
+        indexPath: IndexPath,
+        _ collectionView: UICollectionView
+    ) {
         let id = ids[ids.count-indexPath.row-1];
-        cell.load(id: Int(id), controller: controller!, manager: manager!, lang: manager!.language, nameSize: 15.0, descSize: 8.65);
+        cell.load(
+            id: Int(id),
+            lang: Utils.getLanguageCode(),
+            nameSize: 15.0,
+            descSize: 8.65
+        );
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         
         if doShowButtonNothing && indexPath.row == ids.count-1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nothing", for: indexPath);
+            let cell = collectionView
+                .dequeueReusableCell(
+                    withReuseIdentifier: "nothing",
+                    for: indexPath
+                );
             cell.layer.cornerRadius = cell.bounds.height/2;
             cell.layer.borderWidth = 2.8;
             cell.layer.borderColor = UIColor(named: "nothing")?.cgColor;
@@ -60,7 +78,6 @@ class TwoCardRowCollectionViewDelegate: NSObject,UICollectionViewDataSource, UIC
         cell.imageViewTraining.layer.cornerRadius = 15;
         cell.imageViewTraining.clipsToBounds = true;
         
-        print(tag, manager?.isConnected);
         self.setup(cell, indexPath: indexPath, collectionView);
 
         return cell;

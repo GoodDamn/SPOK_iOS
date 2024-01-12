@@ -9,12 +9,13 @@ import UIKit;
 import FirebaseDatabase;
 import FirebaseStorage;
 
-class SCellCollectionView: UICollectionViewCell{
+class SCellCollectionView
+ : UICollectionViewCell {
+    
     @IBOutlet weak var imageViewTraining: UIImageView!;
     @IBOutlet weak var nameTraining: UILabel!;
     
     private static let TAG = "SCellCollectionView:";
-    private var viewController:UIViewController!;
     
     var mID: Int = Int.min;
     var mFileSPC: FileSPC!;
@@ -34,16 +35,25 @@ class SCellCollectionView: UICollectionViewCell{
         });
     }
     
-    @objc func singleTap(_ sender: UITapGestureRecognizer) {
+    @objc func singleTap(
+        _ sender: UITapGestureRecognizer
+    ) {
         print("SCellCollectionView: single Tap");
-        var cardLoc = sender.location(in: self);
-        let screenLoc = sender.location(in: self.viewController.view);
+        /*var cardLoc = sender.location(
+            in: self
+        );
+        let screenLoc = sender.location(
+            in: self.viewController.view
+        );
         cardLoc.x = cardLoc.x*1.15;
         cardLoc.y = cardLoc.y*1.15;
-        Utils.singleTap(self,
-                        origin: CGPoint(
-                            x: screenLoc.x-cardLoc.x,
-                            y: screenLoc.y-cardLoc.y));
+        Utils.singleTap(
+            self,
+            origin: CGPoint(
+                x: screenLoc.x-cardLoc.x,
+                y: screenLoc.y-cardLoc.y
+            )
+        );*/
     }
     
     @objc func doubleTap(_ sender: UITapGestureRecognizer) {
@@ -70,16 +80,13 @@ class SCellCollectionView: UICollectionViewCell{
         single.require(toFail: doubleTouch);
     }
     
-    func load(id: Int,
-              nameSize: CGFloat,
-              viewController:UIViewController?,
-              etc: ((FileSPC)->Void)? = nil,
-              type: String = StorageApp.mCardChild,
-              lang:String = "") {
-        
-        guard let viewController = viewController else {
-            return;
-        }
+    func load(
+        id: Int,
+        nameSize: CGFloat,
+        etc: ((FileSPC)->Void)? = nil,
+        type: String = StorageApp.mCardChild,
+        lang:String = ""
+    ) {
         
         self.contentView.alpha = 0;
         
@@ -87,15 +94,10 @@ class SCellCollectionView: UICollectionViewCell{
         nameTraining.text = nil;
         
         mID = id;
-        self.viewController = viewController;
 
         let name = lang+type+id.description;
         
-        
-        
         if StorageApp.Topic.isValid(cachePath: name+".spc") {
-            
-            
             
             DispatchQueue.global(qos: .background).async {
                 print("SCELL_COLLECTION_VIEW: GETTING PREVIEW FROM STORAGE:", id);

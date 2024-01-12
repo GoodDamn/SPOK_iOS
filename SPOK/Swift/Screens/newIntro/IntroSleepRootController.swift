@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 class IntroSleepRootController
-    : UIViewController {
+    : StackViewController {
     
     private final let TAG = "IntroSleepRootController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        modalPresentationStyle = .fullScreen
+        modalPresentationStyle = .overFullScreen
         
         let bgColor = UIColor(
             named: "background"
@@ -46,23 +46,18 @@ class IntroSleepRootController
             
             let mainNav = board.instantiateViewController(
                 withIdentifier: "mainNav"
-            ) as! MainNavigationController
-        
-            UIView.transition(
-                from: self.view,
-                to: mainNav.view,
-                duration: 2.0,
-                options: [.curveLinear]
-            ) { b in
-                window.rootViewController = mainNav
-                
-                Utils
-                    .getManager()?
-                    .pageViewController?
-                    .setup()
-                
-            }
+            ) as! MainContentViewController
             
+            self.pusht(
+                mainNav,
+                animDuration: 2.0,
+                options: [.curveLinear]
+            ) { _ in
+                // previous view controller
+                self.pop(
+                    at: 0
+                )
+            }
         }
         
         addChild(intro1)

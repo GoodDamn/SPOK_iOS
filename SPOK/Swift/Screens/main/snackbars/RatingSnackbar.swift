@@ -26,7 +26,7 @@ class RatingSnackbar: UIViewController{
     var id:UInt16 = 0;
     
     @IBAction func close(_ sender:UIButton){
-        manager?.hideRateSnackBar();
+        //manager?.hideRateSnackBar();
         rateToSend();
         reset();
     }
@@ -36,7 +36,6 @@ class RatingSnackbar: UIViewController{
     let maxProgress = UIScreen.main.bounds.width/2;
     var isRated: Bool = false;
     var grade: UInt8 = 0;
-    private let manager = Utils.getManager();
     
     private func zeroTimer(){
         leadingProgress.constant = 0;
@@ -76,7 +75,7 @@ class RatingSnackbar: UIViewController{
         v.title = Utils.getLocalizedString("thanksForYourTime");
         v.pathToAssess = mPathToRate+id.description+"/";
         v.desc = Utils.getLocalizedString("assDesc2");
-        Utils.getManager()?.navigationController?.pushViewController(v, animated: true);
+        /*Utils.getManager()?.navigationController?.pushViewController(v, animated: true);*/
     }
     
     @objc func rate(_ gesture: UITapGestureRecognizer){
@@ -110,7 +109,7 @@ class RatingSnackbar: UIViewController{
                 if !self.isRated{
                     self.rateToSend();
                 }
-                self.manager?.hideRateSnackBar();
+                /*self.manager?.hideRateSnackBar();*/
                 self.reset();
             }
         });
@@ -153,7 +152,7 @@ class RatingSnackbar: UIViewController{
         
         timer({
             if !self.isRated{
-                self.manager?.hideRateSnackBar();
+               /* self.manager?.hideRateSnackBar();*/
                 self.reset();
                 return;
             }

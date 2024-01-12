@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ProfileNewViewController
-    : UIViewController {
+    : StackViewController {
     
     
     override func viewDidLoad() {
@@ -259,5 +259,44 @@ class ProfileNewViewController
         
         shareView.addSubview(lShare)
         view.addSubview(btnShare)
+        
+        
+        btnOpen.addTarget(
+            self,
+            action: #selector(
+                btnOpenFullAccess(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        btnShare.addTarget(
+            self,
+            action: #selector(
+                btnShareImpression(_:)
+            ),
+            for: .touchUpInside
+        )
+        
     }
+    
+    @objc func btnOpenFullAccess(
+        _ sender: UIButton
+    ) {
+        let c = PayPageViewController()
+        c.view.alpha = 0
+        
+        push(
+            c,
+            animDuration: 2.0
+        ) {
+            c.view.alpha = 1.0
+        }
+    }
+    
+    @objc func btnShareImpression(
+        _ sender: UIButton
+    ) {
+        
+    }
+    
 }

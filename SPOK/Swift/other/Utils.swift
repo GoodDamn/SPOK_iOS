@@ -36,6 +36,20 @@ class Utils{
         UIView.transition(with: window, duration: 0.65, options: animation, animations: nil, completion: nil);
     }
     
+    public static func mainNav() -> MainNavigationController {
+        return UIApplication
+            .shared
+            .windows[0]
+            .rootViewController
+            as! MainNavigationController
+    }
+    
+    public static func main() -> MainViewController {
+        return mainNav()
+            .viewControllers[0]
+            as! MainViewController
+    }
+    
     public static func configNotifications(center: UNUserNotificationCenter = UNUserNotificationCenter.current()){
         center.requestAuthorization(options: [.sound, .alert], completionHandler: {
             (granted, error) in
@@ -147,12 +161,12 @@ class Utils{
     
     
     static func singleTap(_ cell:SCellCollectionView,
-                          origin:CGPoint) {
+        origin:CGPoint
+    ) {
         
-        let manager = Utils.getManager()!;
         print(Utils.tag, "single tap");
         
-        if (cell.mFileSPC.isPremium) {
+        /*if (cell.mFileSPC.isPremium) {
             manager.showSubScreen();
             return;
         }
@@ -161,14 +175,19 @@ class Utils{
             manager.startTraining(
                 cell:cell,
                 startFrame: CGRect(
-                            origin: origin,
-                            size: CGSize(
-                                  width: cell.frame.size.width*1.075,
-                                  height: cell.frame.size.height*1.075)));
+                    origin: origin,
+                    size: CGSize(
+                        width: cell.frame
+                            .size.width*1.075,
+                        height: cell.frame
+                            .size.height*1.075
+                    )
+                )
+            );
             return;
         }
         
-        manager.showNoInternet(cell: cell);
+        manager.showNoInternet(cell: cell);*/
     }
     
     
@@ -230,26 +249,15 @@ class Utils{
         label.font = UIFont(name: label.font.fontName, size: label.font.pointSize * UIScreen.main.nativeScale/3 + UIScreen.main.nativeScale + increaseSize);
     }
     
-    public static func getManagerNav() -> MainNavigationController? {
-        return UIApplication
-            .shared
-            .windows
-            .first!
-            .rootViewController as? MainNavigationController
-    }
-    
-    public static func getManager() -> ManagerViewController? {
-        return getManagerNav()?
-            .viewControllers
-            .first as? ManagerViewController
-    }
-    
-    public static func isNewTraining(_ id:Int)->Bool{
-        return getManager()?.news.contains(UInt16(id)) ?? false;
-    }
-    
-    public static func convertHex(_ s:String)->UIColor{
-        let hex: String = s.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines);
+    public static func convertHex(
+        _ s:String
+    ) -> UIColor {
+        
+        let hex: String = s
+            .trimmingCharacters(
+                in: CharacterSet
+                    .whitespacesAndNewlines
+            );
         let scanner = Scanner(string: hex);
         scanner.scanLocation = 1;
         

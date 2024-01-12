@@ -14,11 +14,9 @@ class NoInternetViewController: UIViewController{
     
     public var cell:SCellCollectionView? = nil;
     
-    
-    
     private func hide(){
         print("123456NoInternet: pressed");
-        let manager = Utils.getManager();
+        /*let manager = Utils.getManager();
         UIView.animate(withDuration: 0.23, animations: {
             self.v.transform = CGAffineTransform(scaleX: 0.0, y: 0.0);
             manager?.blurView.alpha = 0.0;
@@ -30,7 +28,7 @@ class NoInternetViewController: UIViewController{
                 self.cell?.layer.shadowOpacity = 0.0;
             });
             manager?.closeFragment();
-        });
+        });*/
     }
     
     @IBAction func close(_ sender: UIButton){

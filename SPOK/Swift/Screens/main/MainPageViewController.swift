@@ -7,29 +7,33 @@
 
 import UIKit;
 
-class MainPageViewController: UIPageViewController{
+public class MainPageViewController
+    : UIPageViewController {
        
-    var manager: ManagerViewController? = nil;
+    private var mPrevIndex = 0
     
-    func setup(){
-        manager = Utils.getManager();
-        //manager?.pageViewController?.dataSource = self;
-        if manager == nil {
-            return
+    public var mPages: [UIViewController] = [] {
+        didSet {
+            setViewControllers(
+                [mPages[0]],
+                direction: .forward,
+                animated: true,
+                completion: nil
+            );
         }
-        
-        setViewControllers(
-            [manager!
-                .viewControllersPages[0]
-            ],
-            direction: .forward,
-            animated: true,
-            completion: nil
-        );
     }
     
-    override func viewDidLoad(){
-        super.viewDidLoad();
-        
+    public var mIndex: Int = 0 {
+        didSet {
+            setViewControllers(
+                [mPages[mIndex]],
+                direction: mIndex > mPrevIndex ? .forward
+                  : .reverse,
+                animated: true
+            ) { b in
+                self.mPrevIndex = self.mIndex
+            }
+        }
     }
+    
 }

@@ -20,14 +20,15 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     private let mDirCache = "collection"+Utils.getLanguageCode();
     
     private var isDoubleTapped: Bool = false;
-    private var manager: ManagerViewController? = nil;
     private var w:CGFloat = UIScreen.main.bounds.width/2.0-32;
     private var h:CGFloat = 1.24;
     private var hCard:CGFloat = 0.0;
     
+    private var mLanguage = ""
+    
     private func showData() {
-        manager?.news = []
-        //self.manager?.news = self.collections[0].trs;
+        /*manager?.news = []
+        self.manager?.news = self.collections[0].trs;*/
         colsTable.dataSource = self;
         colsTable.delegate = self;
         colsTable.reloadData();
@@ -62,8 +63,6 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        manager = Utils.getManager();
-        
         h = w*1.24;
         hCard = h/207;
         
@@ -74,7 +73,8 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
             right: 0
         );
         
-        let code = self.manager?.language ?? "";
+        mLanguage = Utils.getLanguageCode()
+        
         let ll = "RU" //code.isEmpty ? "RU" : "EN";
         
         let fileManager = FileManager.default;
@@ -188,11 +188,19 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         if collectionView.tag == 0 { // is New collection
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bCell", for: indexPath) as! BCellCollectionView;
-            (cell as? BCellCollectionView)?.load(view: manager!,id: intID, self, manager: manager!, lang: manager!.language);
+            (cell as? BCellCollectionView)?.load(
+                id: intID,
+                lang: mLanguage
+            );
             return cell;
         }
         
-        cell.load(id: intID, controller: self, manager: manager!, lang: manager!.language, nameSize: 15.0, descSize: 8.65);
+        cell.load(
+            id: intID,
+            lang: mLanguage,
+            nameSize: 15.0,
+            descSize: 8.65
+        );
         
         return cell;
     }

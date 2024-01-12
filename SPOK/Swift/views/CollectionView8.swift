@@ -79,11 +79,12 @@ extension CollectionView8
         
         cell.collectionView = collectionView;
         cell.tag = Int(id);
-        cell.load(id: cell.tag,
-                  nameSize: 15.0,
-                  viewController: mContext,
-                  type: StorageApp.mCardChild,
-                  lang: mLang);
+        cell.load(
+            id: cell.tag,
+            nameSize: 15.0,
+            type: StorageApp.mCardChild,
+            lang: mLang
+        );
         cell.imageViewTraining.contentMode = .scaleAspectFill;
         cell.layer.cornerRadius = 15;
         print(self, "CELL LOADING", cell.nameTraining.text, id)
