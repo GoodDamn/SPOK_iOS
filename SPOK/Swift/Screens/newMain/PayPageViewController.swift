@@ -101,6 +101,38 @@ class PayPageViewController
         view.addSubview(btnBuy)
         
         
+        btnExit.addTarget(
+            self,
+            action: #selector(
+                btnExitClick(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        btnBuy.addTarget(
+            self,
+            action: #selector(
+                btnExitClick(_:)
+            ), for: .touchUpInside
+        )
+    }
+    
+    @objc func btnBuyClick(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+    }
+    
+    @objc func btnExitClick(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        pop(
+            at: 1,
+            duration: 0.5
+        ) {
+            self.view.alpha = 0
+        }
     }
     
 }

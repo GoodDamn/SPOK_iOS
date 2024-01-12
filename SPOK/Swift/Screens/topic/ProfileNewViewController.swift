@@ -287,7 +287,7 @@ class ProfileNewViewController
         
         push(
             c,
-            animDuration: 2.0
+            animDuration: 0.5
         ) {
             c.view.alpha = 1.0
         }

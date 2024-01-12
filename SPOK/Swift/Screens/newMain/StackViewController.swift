@@ -53,10 +53,14 @@ class StackViewController
     }
     
     open func pop(
-        at: Int
+        at: Int,
+        duration: TimeInterval? = nil,
+        animate: (() -> Void)? = nil
     ) {
         main.pop(
-            at: at
+            at: at,
+            duration: duration,
+            animate: animate
         )
     }
     

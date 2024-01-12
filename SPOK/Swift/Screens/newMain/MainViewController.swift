@@ -127,6 +127,30 @@ class MainViewController
     }
     
     public func pop(
+        at: Int,
+        duration: TimeInterval?,
+        animate: (()->Void)?
+    ) {
+        if animate == nil
+            || duration == nil
+        {
+            removeController(
+                at: at
+            )
+            return
+        }
+        
+        UIView.animate(
+            withDuration: duration!,
+            animations: animate!
+        ) { _ in
+            self.removeController(
+                at: at
+            )
+        }
+    }
+    
+    private func removeController(
         at: Int
     ) {
         let c = mControllers[at]
@@ -134,7 +158,6 @@ class MainViewController
         c.removeFromParent()
         mControllers.remove(at: at)
     }
-    
     
     private func appendController(
         _ c: StackViewController
