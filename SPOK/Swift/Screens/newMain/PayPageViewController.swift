@@ -14,19 +14,93 @@ class PayPageViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .clear
-        
         let blurView = UIVisualEffectView(
             frame: view.frame
         )
         
+        blurView.alpha = 0.4
+        
         blurView.effect = UIBlurEffect(
-            style: .systemUltraThinMaterial
+            style: .extraLight
         )
         
-        blurView.alpha = 1.0
+        let w = view.frame.width
+        let h = view.frame.height
+        
+        let sizeBtnExit = 0.084 * w
+        
+        let btnExitConfig = UIImage
+            .SymbolConfiguration(
+                pointSize: sizeBtnExit * 0.5,
+                weight: .medium,
+                scale: .medium
+            )
+        
+        let btnExit = UIButton(
+            frame: CGRect(
+                x: w-sizeBtnExit-w*0.06,
+                y: h * 0.04,
+                width: sizeBtnExit,
+                height: sizeBtnExit
+            )
+        )
+        
+        btnExit.backgroundColor = .clear
+        btnExit.tintColor = UIColor(
+            red: 197.0 / 255,
+            green: 197 / 255,
+            blue: 197 / 255,
+            alpha: 1.0
+        )
+        
+        btnExit.setBackgroundImage(
+            UIImage(
+                systemName: "xmark",
+                withConfiguration: btnExitConfig
+            ),
+            for: .normal)
+        
+        let marginTitle = w * 0.18
+        let lTitle = UILabel(
+            frame: CGRect(
+                x: marginTitle,
+                y: h * 0.4,
+                width: 0,
+                height: 0
+            )
+        )
+        
+        lTitle.textAlignment = .center
+        lTitle.numberOfLines = 0
+        lTitle.font = UIFont(
+            name: "OpenSans-ExtraBold",
+            size: w * 0.053
+        )
+        lTitle.textColor = .white
+        lTitle.text = "Перейти на\nстраницу оплаты?"
+        lTitle.sizeToFit()
+        
+        let f = lTitle.frame
+        
+        lTitle.frame.origin.x = (w-f.size.width) * 0.5
+        
+        let btnBuy = ViewUtils
+            .button(
+                text: "Оплатить 125 RUB",
+                y: 0.55,
+                textSize: 0.3,
+                view
+            )
+        
+        btnBuy.frame.origin.y = lTitle.frame.origin.y + lTitle.frame.height + h * 0.03
         
         view.addSubview(blurView)
+        view.addSubview(btnExit)
+        
+        view.addSubview(lTitle)
+        view.addSubview(btnBuy)
+        
+        
     }
     
 }
