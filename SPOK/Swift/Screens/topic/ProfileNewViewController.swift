@@ -142,10 +142,57 @@ class ProfileNewViewController
             named: "j"
         )
         
+        let ivf = imageView2.frame
+        let lPrice = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: ivf.origin.y + ivf.height + h * 0.04,
+                width: w,
+                height: h * 0.028
+            )
+        )
+        
+        let a = NSMutableAttributedString(
+            string: "249 RUB 125 RUB"
+        )
+        
+        let strikeColor = UIColor
+            .white
+            .withAlphaComponent(
+                0.7
+            )
+        
+        a.addAttributes([
+            NSAttributedString.Key
+                .font: bold?
+                    .withSize(lPrice
+                        .frame.height * 0.6
+            ),
+            NSAttributedString.Key
+                .foregroundColor: strikeColor,
+            NSAttributedString.Key
+                .strikethroughStyle: NSUnderlineStyle
+                .single
+                .rawValue,
+            NSAttributedString.Key
+                .strikethroughColor:
+                    strikeColor
+        ],range: NSRange(
+            location: 0,
+            length: 7)
+        )
+        
+        lPrice.textColor = .white
+        lPrice.textAlignment = .center
+        lPrice.font = bold?
+            .withSize(lPrice.frame.height)
+        lPrice.attributedText = a
+        
         let btnOpen = ViewUtils
             .button(
                 text: "Открыть полный доступ",
-                y: 0.55,
+                y: 0.61,
+                textSize: 0.35,
                 view
             )
         
@@ -155,7 +202,7 @@ class ProfileNewViewController
         let shareView = UIView(
             frame: CGRect(
                 x: shareLeft,
-                y: h * 0.65,
+                y: h * 0.68,
                 width: wshare,
                 height: hshare
             )
@@ -192,7 +239,8 @@ class ProfileNewViewController
         let btnShare = ViewUtils
             .button(
                 text: "Поделиться впечатлением",
-                y: 0.82,
+                y: 0.85,
+                textSize: 0.35,
                 view
             )
         
@@ -203,6 +251,8 @@ class ProfileNewViewController
         view.addSubview(imageView1)
         view.addSubview(imageView2)
         view.addSubview(imageView3)
+        
+        view.addSubview(lPrice)
         
         view.addSubview(btnOpen)
         view.addSubview(shareView)

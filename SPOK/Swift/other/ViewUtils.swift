@@ -12,7 +12,8 @@ public class ViewUtils {
     
     public static func button(
         text: String,
-         y: CGFloat,
+        y: CGFloat,
+        textSize: CGFloat = 0.26,
         _ view: UIView
     ) -> UIButton {
         
@@ -32,7 +33,7 @@ public class ViewUtils {
         
         let bold = UIFont(
             name: "OpenSans-Bold",
-            size: 0.26 * btnStart.frame.height
+            size: textSize * btnStart.frame.height
         )
         
         btnStart.backgroundColor = UIColor(
