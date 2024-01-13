@@ -11,6 +11,8 @@ import UIKit
 class PayPageViewController
     : StackViewController {
     
+    private let TAG = "PayPageViewController:"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,7 +114,7 @@ class PayPageViewController
         btnBuy.addTarget(
             self,
             action: #selector(
-                btnExitClick(_:)
+                btnBuyClick(_:)
             ), for: .touchUpInside
         )
     }
@@ -121,6 +123,54 @@ class PayPageViewController
         _ sender: UIButton
     ) {
         sender.isEnabled = false
+        
+        let alert = UIAlertController(
+            title: "Ошибка.",
+            message: "Проблемы с произведением оплаты. Попробуйте позже.",
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "Вернуться",
+            style: .default
+        ) { action in
+            // Analytics
+            print(self.TAG, "ALERT_ACTION")
+        }
+        
+        alert.addAction(action)
+        
+        let alertProcess = UIAlertController(
+            title: "Минутку...",
+            message: "Обрабатываю запрос приложения",
+            preferredStyle: .alert)
+        
+        self.present(
+            alertProcess,
+            animated: true
+        )
+        
+        DispatchQueue
+            .main
+            .asyncAfter(
+                deadline: .now() + 2.5
+            ) {                alertProcess.dismiss(
+                    animated: true
+                ) {
+                    self.navigationController?.present(
+                        alert,
+                        animated: true
+                    )
+                    
+                    self.pop(
+                        at: 1,
+                        duration: 0.5
+                    ) {
+                        self.view.alpha = 0
+                    }
+                }
+                
+            }
     }
     
     @objc func btnExitClick(

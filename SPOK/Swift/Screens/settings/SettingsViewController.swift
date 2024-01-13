@@ -74,7 +74,12 @@ class SettingsVController:UIViewController, ASAuthorizationControllerPresentatio
         });
     }
     
-    private func showAlertDialog(title:String, message:String?, preferredStyle: UIAlertController.Style,actions: ((UIAlertController)->Void)?) -> Void{
+    private func showAlertDialog(
+        title:String,
+        message:String?,
+        preferredStyle: UIAlertController.Style,
+        actions: ((UIAlertController)->Void)?
+    ) -> Void {
         let alertDialog = UIAlertController(title: title, message: message, preferredStyle: preferredStyle);
         actions?(alertDialog);
         self.present(alertDialog, animated: true, completion: nil);
