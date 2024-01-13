@@ -55,8 +55,6 @@ class MainViewController
         let userDefaults = UserDefaults();
         
         if !userDefaults.bool(forKey: "intro") {
-            
-            
             print("Time for intro!")
             let c = IntroSleepRootController()
             c.view.alpha = 0
@@ -71,26 +69,42 @@ class MainViewController
             return;
         }
         
-        
         print("Intro is completed");
         
-        let sMain = UIStoryboard(
-            name: "mainNav",
-            bundle: Bundle.main
-        )
-        let controller = sMain
-            .instantiateViewController(
-                withIdentifier: "mainNav"
-            ) as! MainContentViewController
-        
-        controller.view.alpha = 0
+        let splash = SplashViewController()
+        splash.view.alpha = 0
         push(
-            controller,
-            animDuration: 2.0
+            splash,
+            animDuration: 1.0
         ) {
-            controller.view.alpha = 1.0
+            splash.view.alpha = 1.0
         }
         
+        
+        DispatchQueue
+            .main
+            .asyncAfter(
+                deadline: .now() + 2.5
+            ) {
+                let sMain = UIStoryboard(
+                    name: "mainNav",
+                    bundle: Bundle.main
+                )
+                let controller = sMain
+                    .instantiateViewController(
+                        withIdentifier: "mainNav"
+                    ) as! MainContentViewController
+                
+                self.pusht(
+                    controller,
+                    animDuration: 1.0,
+                    options: [
+                        .transitionCrossDissolve
+                    ]
+                ) { b in
+                    self.pop(at: 0)
+                }
+            }
     }
     
     public func pusht(
@@ -128,8 +142,8 @@ class MainViewController
     
     public func pop(
         at: Int,
-        duration: TimeInterval?,
-        animate: (()->Void)?
+        duration: TimeInterval? = nil,
+        animate: (()->Void)? = nil
     ) {
         if animate == nil
             || duration == nil

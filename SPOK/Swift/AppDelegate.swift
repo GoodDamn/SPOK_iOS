@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotifications.notify(notification: "event", center: center);
         PushNotifications.notify(notification: "new", center: center);*/
         
-        let center = UNUserNotificationCenter
+        /*let center = UNUserNotificationCenter
             .current();
         center.delegate = self;
         center.requestAuthorization(options: [.alert, .badge, .sound],
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messaging = Messaging.messaging();
         
         messaging?.delegate = self;
-        messaging?.isAutoInitEnabled = true;
+        messaging?.isAutoInitEnabled = true;*/
         
         return true;
     }

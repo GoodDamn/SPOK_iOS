@@ -51,7 +51,9 @@ class IntroSleepRootController
             self.pusht(
                 mainNav,
                 animDuration: 2.0,
-                options: [.curveLinear]
+                options: [
+                    .transitionCrossDissolve
+                ]
             ) { _ in
                 // previous view controller
                 self.pop(
