@@ -13,6 +13,9 @@ class PayPageViewController
     
     private let TAG = "PayPageViewController:"
     
+    public var mOnStats: ((String)->Void)? = nil
+    public var mOnBack: (()->Void)? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,7 +138,8 @@ class PayPageViewController
             style: .default
         ) { action in
             // Analytics
-            print(self.TAG, "ALERT_ACTION")
+            self.mOnStats?("payPageBack")
+            self.mOnBack?()
         }
         
         alert.addAction(action)
@@ -177,6 +181,7 @@ class PayPageViewController
         _ sender: UIButton
     ) {
         sender.isEnabled = false
+        mOnStats?("payPageExit")
         pop(
             at: 1,
             duration: 0.5
@@ -184,5 +189,5 @@ class PayPageViewController
             self.view.alpha = 0
         }
     }
-    
+ 
 }

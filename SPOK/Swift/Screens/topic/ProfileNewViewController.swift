@@ -7,10 +7,18 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 
 class ProfileNewViewController
     : StackViewController {
     
+    private let mDatabase = Database
+        .database()
+        .reference(
+            withPath: "Stats/iOS"
+        )
+    
+    private var mCurrentStreak = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -285,6 +293,16 @@ class ProfileNewViewController
         let c = PayPageViewController()
         c.view.alpha = 0
         
+        c.mOnStats = { child in
+            self.addStat(child)
+        }
+        
+        c.mOnBack = {
+            self.mCurrentStreak += 1
+        }
+        
+        addStat("payPage")
+        
         push(
             c,
             animDuration: 0.5
@@ -299,4 +317,13 @@ class ProfileNewViewController
         
     }
     
+    private func addStat(
+        _ child: String
+    ) {
+        mDatabase
+            .child("\(mCurrentStreak)_\(child)")
+            .setValue(ServerValue
+                .increment(1)
+            )
+    }
 }
