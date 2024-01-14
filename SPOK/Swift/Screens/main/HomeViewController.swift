@@ -9,168 +9,141 @@ import UIKit;
 import FirebaseDatabase;
 import FirebaseStorage;
 
-class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout {
+class HomeViewController
+    : UIViewController,
+      CollectionListener {
+    
+    private let TAG = "HomeViewController:";
+    
+    private var mCollections:[Collection] = [];
+    
+    private var mSizeb: CGSize = .zero
     
     @IBOutlet weak var colsTable: UITableView!;
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!;
     
-    private var collections:[Collection] = [];
-    private let tag = "Home:";
-    private let mDirCache = "collection"+Utils.getLanguageCode();
-    
-    private var isDoubleTapped: Bool = false;
-    private var w:CGFloat = UIScreen.main.bounds.width/2.0-32;
-    private var h:CGFloat = 1.24;
-    private var hCard:CGFloat = 0.0;
-    
-    private var mLanguage = ""
-    
-    private func showData() {
-        /*manager?.news = []
-        self.manager?.news = self.collections[0].trs;*/
-        colsTable.dataSource = self;
-        colsTable.delegate = self;
-        colsTable.reloadData();
-    }
-    
-    private func downloadCollection(
-        current: Int,
-        refs: [StorageReference]
-    ) {
-        if current >= refs.count {
-            showData();
-            return;
-        }
-        
-        refs[current].getData(maxSize: 1024*1024) { data, error in
-            if error != nil {
-                return;
-            }
-            
-            let fileSCS = Utils.Exten.getSCSFile(data!);
-            
-            StorageApp.Collection.save(self.mDirCache, name: current.description, data: data);
-            
-            self.collections.append(Collection( trs: fileSCS.topics ?? [],
-                                               name: fileSCS.title ?? ""));
-            
-            self.downloadCollection(current: current+1,
-                                    refs: refs);
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad();
+    
+        let w = view.frame.width
+        let h = view.frame.height
         
-        h = w*1.24;
-        hCard = h/207;
+        mSizeb = CGSize(
+            width: w * 0.847,
+            height: h * 0.226
+        )
         
         colsTable.contentInset = UIEdgeInsets(
-            top: 35,
+            top: 0,
             left: 0,
             bottom: 25,
             right: 0
         );
         
-        mLanguage = Utils.getLanguageCode()
         
-        let ll = "RU" //code.isEmpty ? "RU" : "EN";
+        let down = CollectionDowloader(
+            dir: "sleep",
+            child: "Sleep"
+        )
+        down.delegate = self
         
-        let fileManager = FileManager.default;
-        let urlColl = fileManager
-            .urls(
-                for: .cachesDirectory,
-                in: .userDomainMask)
-            .first!
-            .appendingPathComponent(
-                mDirCache,
-                isDirectory: true
-            );
-        
-        let path = urlColl.path;
-        let filePaths = try? fileManager
-            .contentsOfDirectory(
-                atPath: path
-            );
-        
-        if filePaths != nil && !StorageApp.canUpdate(
-            path: path
-        ) {
-            
-            for fileName in filePaths! {
-                let data = StorageApp
-                    .getFile(
-                        path: path+"/"+fileName,
-                        fileManager);
-                
-                if data == nil {
-                    continue;
-                }
-                
-                let fileSCS = Utils.Exten
-                    .getSCSFile(data!);
-                
-                self.collections.append(
-                    Collection(
-                        trs: fileSCS.topics ?? [],
-                        name: fileSCS.title ?? ""
-                    )
-                );
-            }
-            
-            showData();
-            
-            return;
-        }
-    
-        
-        Storage.storage()
-            .reference(
-                withPath: "Sleep/"+ll
-            )
-            .listAll { listResult, error in
-                
-                guard let listResult = listResult,
-                      error == nil else {
-                    Toast.init(
-                        text: "Nothing found",
-                        duration: 1.8
-                    ).show()
-                    return;
-                }
-                
-                let files = listResult.items;
-                
-                if files.count == 0 {
-                    Toast.init(
-                        text: "Nothing found",
-                        duration: 1.8
-                    ).show()
-                    return
-                }
-                
-                self.downloadCollection(
-                    current: 0,
-                    refs: files
-                );
-                
-            }
+        down.start()
     }
+    
+    func onFirstCollection(
+        c: [Collection]
+    ) {
+        
+    }
+    
+    func onAdd(i: Int) {
+        
+    }
+    
+    func onUpdate(i: Int) {
+        
+    }
+    
+    func onRemove(i: Int) {
+        
+    }
+    
+}
+
+
+extension HomeViewController
+: UITableViewDataSource {
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        return tableView.rowHeight;
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return mCollections.count;
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        (cell as! collectionsCellTableView)
+            .collectionView
+            .reloadData();
+    }
+    
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "collections",
+            for: indexPath)
+            as! collectionsCellTableView;
+        
+        cell.selectionStyle = .none;
+        cell.nameCollection.text = mCollections[
+            indexPath.row
+        ].title;
+        
+        UIView.animate(withDuration: 0.15, animations: {
+            cell.nameCollection.alpha = 1.0;
+        });
+        
+        return cell;
+    }
+}
+
+extension HomeViewController
+: UICollectionViewDelegateFlowLayout {
     
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return CGSize(width: collectionView.tag == 0 ? h*1.70 : w, height: h);
+        return mSizeb;
     }
+    
+    
+}
+
+/*extension HomeViewController
+: UICollectionViewDataSource {
     
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return collections[collectionView.tag].trs.count;
+        return mCollecti
     }
     
     func collectionView(
@@ -183,65 +156,31 @@ class HomeViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         let intID = Int(id);
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCell", for: indexPath) as! MCellCollectionView;
-        cell.collectionView = collectionView;
         
         if collectionView.tag == 0 { // is New collection
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bCell", for: indexPath) as! BCellCollectionView;
-            (cell as? BCellCollectionView)?.load(
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bCell", for: indexPath) as! BCellCollectionView;
+            cell.collectionView = collectionView;
+            cell.load(
                 id: intID,
-                lang: mLanguage
+                lang: ""
             );
             return cell;
         }
         
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "mCell",
+            for: indexPath)
+            as! MCellCollectionView;
+        cell.collectionView = collectionView;
+        
         cell.load(
             id: intID,
-            lang: mLanguage,
+            lang: "",
             nameSize: 15.0,
             descSize: 8.65
         );
         
         return cell;
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.rowHeight*hCard;
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return collections.count;
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as! collectionsCellTableView)
-            .collectionView
-            .reloadData();
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "collections", for: indexPath) as! collectionsCellTableView;
-        cell.selectionStyle = .none;
-        cell.nameCollection.text = collections[indexPath.row].name;
-        if (indexPath.row == 0){
-            cell.nameCollection.font = UIFont(name: "OpenSans-Bold", size: 30);
-        }
-     
-        UIView.animate(withDuration: 0.15, animations: {
-            cell.nameCollection.alpha = 1.0;
-        });
-        
-        cell.collectionView.dataSource = self;
-        cell.collectionView.delegate = self;
-        cell.collectionView.tag = indexPath.row;
-        
-        return cell;
-    }
-    
-    struct Collection {
-        var trs:[UInt16];
-        var name: String;
-    }
-    
 }
-
+*/

@@ -51,6 +51,9 @@
 		25CEA89F2A6CFC4E00D9D44C /* CollectionView8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */; };
 		25D5E5642A6A82A200A3126B /* SpanTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5E5632A6A82A200A3126B /* SpanTextView.swift */; };
 		25DB9A722B52BE9200B5359F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A712B52BE9200B5359F /* SplashViewController.swift */; };
+		25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */; };
+		25DB9A782B53BD4900B5359F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A772B53BD4900B5359F /* Collection.swift */; };
+		25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */; };
 		2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */; };
@@ -178,6 +181,9 @@
 		25CEA89E2A6CFC4E00D9D44C /* CollectionView8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView8.swift; sourceTree = "<group>"; };
 		25D5E5632A6A82A200A3126B /* SpanTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanTextView.swift; sourceTree = "<group>"; };
 		25DB9A712B52BE9200B5359F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDownloader.swift; sourceTree = "<group>"; };
+		25DB9A772B53BD4900B5359F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListener.swift; sourceTree = "<group>"; };
 		2B0103D227DCA08F00C73D73 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCellCollectionView.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionsCellTableView.swift; sourceTree = "<group>"; };
@@ -410,6 +416,31 @@
 			path = splash;
 			sourceTree = "<group>";
 		};
+		25DB9A732B53AC6700B5359F /* downloaders */ = {
+			isa = PBXGroup;
+			children = (
+				25DB9A792B53C43A00B5359F /* protocols */,
+				25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */,
+			);
+			path = downloaders;
+			sourceTree = "<group>";
+		};
+		25DB9A762B53BD3D00B5359F /* models */ = {
+			isa = PBXGroup;
+			children = (
+				25DB9A772B53BD4900B5359F /* Collection.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		25DB9A792B53C43A00B5359F /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		2B558A3927E87BAC0038DBDA /* intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +590,8 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				25DB9A762B53BD3D00B5359F /* models */,
+				25DB9A732B53AC6700B5359F /* downloaders */,
 				255C04F32B4FA398006D9FD0 /* sleepIntro */,
 				2507D2E52B46B9A900656C0B /* stream */,
 				3819936C28854D8A005E1367 /* TwoCardRowCollectionViewDelegate.swift */,
@@ -916,10 +949,12 @@
 				2BC1218827772C1C00729BA4 /* PromoCodeVController.swift in Sources */,
 				2B43B7872891D129000A8B17 /* PushNotificaions.swift in Sources */,
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
+				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
 				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
 				2BC121792777283E00729BA4 /* SettingsViewController.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				2BC1218327772B5900729BA4 /* AboutAppVController.swift in Sources */,
+				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
@@ -944,6 +979,7 @@
 				250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */,
 				25D5E5642A6A82A200A3126B /* SpanTextView.swift in Sources */,
 				250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */,
+				25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */,
 				2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */,
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,
 				2BA101CF2763EFC900EB5B8C /* SceneDelegate.swift in Sources */,

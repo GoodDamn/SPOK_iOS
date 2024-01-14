@@ -298,7 +298,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="colsTable" destination="B77-qM-P6p" id="Yvf-Ad-2XU"/>
-                        <outlet property="topConstraint" destination="5ub-gI-kkY" id="DdF-59-KhR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJs-EF-v4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
