@@ -10,7 +10,7 @@ import Foundation
 public class ScriptRead {
     
     public static func textSize(
-        chunk: [UInt8],
+        chunk: inout [UInt8],
         offset: Int,
         argSize: Int,
         textConfig: ScriptText
@@ -18,7 +18,7 @@ public class ScriptRead {
         var offset = offset
         let textSize = ByteUtils
             .short(
-                chunk,
+                &chunk,
                 offset+1
             ) / 1000
         
@@ -31,7 +31,7 @@ public class ScriptRead {
     }
     
     public static func font(
-        chunk: [UInt8],
+        chunk: inout [UInt8],
         offset: Int,
         argSize: Int,
         textConfig: ScriptText
@@ -99,29 +99,29 @@ public class ScriptRead {
     }
     
     public static func sfx(
-        chunk: [UInt8],
+        chunk: inout [UInt8],
         offset: Int
     ) -> ScriptResource? {
         return resource(
-            chunk,
+            &chunk,
             offset
         )
     }
     
     
     public static func ambient(
-        chunk: [UInt8],
+        chunk: inout [UInt8],
         offset: Int
     ) -> ScriptResource? {
         return resource(
-            chunk,
+            &chunk,
             offset
         )
     }
     
     
     private static func resource(
-        _ chunk: [UInt8],
+        _ chunk: inout [UInt8],
         _ offset: Int
     ) -> ScriptResource? {
         var offset = offset

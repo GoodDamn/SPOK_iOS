@@ -438,7 +438,8 @@ class Utils{
             let topicsLen = Byte.uint32(data.subdata(in: pos..<(pos+4)));
             pos += 4;
             var topics:[UInt16] = [];
-            let dataTopics = ([UInt8]) (data.subdata(in: pos..<(pos+Int(topicsLen))));
+            let dataTopics = ([UInt8]) (data
+                .subdata(in: pos..<(pos+Int(topicsLen))));
             
             var i:Int = 0;
             while i < topicsLen {

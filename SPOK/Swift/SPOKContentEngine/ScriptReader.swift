@@ -28,11 +28,11 @@ public class ScriptReader {
             data: dataSKC
         )
         // deny resource length
-        let resLenByte = mStream.read(4)
+        var resLenByte = mStream.read(4)
 
         mFileLen = dataSKC.count
         mChunkLen = mFileLen - ByteUtils
-            .int(resLenByte)
+            .int(&resLenByte)
         
         print(
             TAG,
@@ -51,10 +51,10 @@ public class ScriptReader {
             return
         }
         
-        let chunkLenBytes = mStream.read(4)
+        var chunkLenBytes = mStream.read(4)
         
         let chunkLen = ByteUtils
-            .int(chunkLenBytes)
+            .int(&chunkLenBytes)
         
         print(
             TAG,
@@ -63,11 +63,11 @@ public class ScriptReader {
             "BYTES:",
             chunkLenBytes
         )
-        let chunkBytes = mStream
+        var chunkBytes = mStream
             .read(chunkLen+2)
         
         mEngine.read(
-            chunk: chunkBytes
+            chunk: &chunkBytes
         )
         
     }

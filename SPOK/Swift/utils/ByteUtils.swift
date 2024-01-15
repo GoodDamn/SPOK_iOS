@@ -11,7 +11,7 @@ class ByteUtils {
     private static let TAG = "ByteUtils"
     
     public static func short(
-        _ data: [UInt8],
+        _ data: inout [UInt8],
         _ off: Int
     ) -> Int {
         return Int(
@@ -21,13 +21,13 @@ class ByteUtils {
     }
     
     public static func int(
-        _ data: [UInt8]
+        _ data: inout [UInt8]
     ) -> Int {
-        return int(data,0)
+        return int(&data,0)
     }
     
     public static func int(
-        _ data: [UInt8],
+        _ data: inout [UInt8],
         _ off: Int
     ) -> Int {
         
