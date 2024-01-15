@@ -13,7 +13,7 @@ class CollectionDowloader {
     private final let TAG = "CollectionDownloader"
     
     // It calls once
-    public var delegate: CollectionListener? = nil
+    public weak var delegate: CollectionListener?
     
     private var mfm: FileManager
     private var mDirPath: String
@@ -22,10 +22,13 @@ class CollectionDowloader {
     
     private var mStorage: StorageReference
     
+    private var mCollections: [Collection] = []
+    
     init(
         dir: String,
         child: String
     ) {
+        
         mChild = child
         mStorage = Storage
             .storage()
@@ -43,6 +46,26 @@ class CollectionDowloader {
         mDirPath = url
             .append(dir)
             .pathh()
+        
+        if mfm.fileExists(
+            atPath: mDirPath
+        ) {
+            return
+        }
+        
+        do {
+            try mfm.createDirectory(
+                atPath: mDirPath,
+                withIntermediateDirectories: false
+            )
+        } catch {
+            print(TAG, "ERROR_DIR:",error)
+        }
+        
+    }
+    
+    deinit {
+        print(TAG, "deinit()")
     }
     
     public func start() {
@@ -50,16 +73,21 @@ class CollectionDowloader {
         let timelist = mStorage
             .child("RU.st")
         
-        timelist.getMetadata {
+        timelist.getMetadata { [weak self]
             meta, error in
             
-            guard let meta = meta,
-                  error == nil else {
-                print(self.TAG, "ERROR: ", error)
+            guard let s = self else {
+                print("CollectionDownloader: getMetadata: garbage collected")
                 return
             }
             
-            self.checkTime(
+            guard let meta = meta,
+                  error == nil else {
+                print(s.TAG, "ERROR: ", error)
+                return
+            }
+            
+            s.checkTime(
                 meta
             )
             
@@ -79,71 +107,180 @@ class CollectionDowloader {
             .updated?
             .timeIntervalSince1970 ?? 0
         
-        if time != 0 { // Folder not found
-            loadCache()
-        }
+        loadCache()
         
-        print(TAG, "TIME:",
-              currentTime,
+        print(TAG, "CURRENT:",
+              currentTime, "PREV:",
               time
         )
         
-        if currentTime < time {
+        if currentTime <= time {
+            delegate?.onFinish()
             return
         }
         
-        listc.listAll { list, error in
+        let attr = [
+            FileAttributeKey
+                .creationDate: Date(
+            timeIntervalSince1970: currentTime
+                )
+        ]
+        do {
+            try mfm.setAttributes(
+                attr,
+                ofItemAtPath: mDirPath
+            )
+        } catch {
+            print(TAG, "ERROR:", error)
+        }
+        
+        listc.listAll { [weak self]
+            list, error in
             
-            guard let list = list,
-                  error == nil else {
-                print(self.TAG, "ERROR_LIST:",error)
+            guard let s = self else {
+                print("CollectionDownloader: listAll: ARC collected")
                 return
             }
             
-            self.refreshData(list
+            guard let list = list,
+                  error == nil else {
+                print(s.TAG, "ERROR_LIST:",error)
+                return
+            }
+            
+            s.refreshData(list
                 .items
             )
-            
         }
     }
     
     private func refreshData(
         _ items: [StorageReference]
     ) {
-        
-    }
-    
-    private func download(
-        _ item: StorageReference
-    ) {
-        item.getData(
-            maxSize: 1024*1024
-        ) { data, error in
+        download(Iterator(items)) {[weak self] in
             
-            guard let data = data,
-                  error == nil else {
-                print(self.TAG, "ERROR_COL:",error)
+            guard let s = self else {
+                print("CollectionDownloader: download: self is garbage collected")
                 return
             }
             
+            if s.delegate == nil {
+                return
+            }
+            
+            s.delegate!
+                .onFirstCollection(
+                    c: s.mCollections
+                )
+            s.delegate!
+                .onFinish()
+        }
+    }
+    
+    private func download(
+        _ items: Iterator<StorageReference>,
+        completion: (()->Void)?
+    ) {
+        
+        let a = items.next()
+        
+        if a == nil {
+            completion?()
+            return
+        }
+        
+        a!.getData(
+            maxSize: 1024*1024
+        ) { [weak self] data, error in
+            
+            guard let s = self else {
+                print("CollectionDownloader: getData:", items.index(), " self is garbage collected")
+                return
+            }
+            
+            guard let data = data,
+                  error == nil else {
+                print(s.TAG, "ERROR_COL:",error)
+                return
+            }
+         
+            s.addCollection(
+                data
+            )
+            
+            s.writeScs(
+                items.index(),
+                data
+            )
+            
+            s.download(
+                items,
+                completion: completion
+            )
         }
         
     }
     
     private func loadCache() {
-        
         if !mfm.fileExists(
             atPath: mDirPath
         ) {
             return
         }
         
-        let files = try? mfm
+        guard let fileUrls = try? mfm
             .contentsOfDirectory(
                 atPath: mDirPath
-            )
+            ) else {
+            print(TAG, "NO_CONTENT_IN_DIR")
+            return
+        }
         
-        print(TAG, files)
+        for s in fileUrls {
+            print(TAG, "FILE:",s)
+            
+            guard let d = mfm.contents(
+                atPath: "\(mDirPath)/\(s)"
+            ) else {
+                print(TAG, "ERROR WITH",s)
+                continue
+            }
+            
+            addCollection(d)
+        }
+        
+        delegate?.onFirstCollection(
+            c: mCollections
+        )
+        
+    }
+    
+    private func addCollection(
+        _ data: Data
+    ) {
+        let col = Utils.Exten
+            .getSCSFile(data)
+        
+        mCollections.append(
+            Collection(
+                topicsIDs: col.topics ?? [],
+                title: col.title ?? "",
+                size: CGSize(
+                    width: 352,
+                    height: 207
+                )
+            )
+        )
+    }
+    
+    private func writeScs(
+        _ index: Int,
+        _ data: Data
+    ) {
+        mfm.createFile(
+            atPath: mDirPath+"/\(index).scs",
+            contents: data
+        )
     }
     
     private func getUpdateTime() -> Double {

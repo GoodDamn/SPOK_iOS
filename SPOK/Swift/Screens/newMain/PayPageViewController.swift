@@ -23,10 +23,10 @@ class PayPageViewController
             frame: view.frame
         )
         
-        blurView.alpha = 0.4
+        blurView.alpha = 1.0
         
         blurView.effect = UIBlurEffect(
-            style: .extraLight
+            style: .systemChromeMaterialDark
         )
         
         let w = view.frame.width

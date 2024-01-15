@@ -7,7 +7,8 @@
 
 import Foundation
 
-public protocol CollectionListener {
+public protocol CollectionListener
+    : AnyObject {
     
     func onFirstCollection(
         c: [Collection]
@@ -24,5 +25,7 @@ public protocol CollectionListener {
     func onRemove(
         i: Int
     )
+    
+    func onFinish()
     
 }

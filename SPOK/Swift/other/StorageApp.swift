@@ -46,7 +46,7 @@ class StorageApp{
                 atPath: path
             ) [
                 FileAttributeKey
-                    .modificationDate
+                    .creationDate
             ] as? Date)?
             .timeIntervalSince1970 ?? 0;
     }
@@ -74,7 +74,9 @@ class StorageApp{
         fileManager.createFile(atPath: path, contents: data);
     }
     
-    public static func getFile(path:String,_ manager: FileManager)->Data?{
+    public static func getFile(
+        path:String,_ manager: FileManager
+    ) -> Data? {
         return manager.contents(atPath: path);
     }
     

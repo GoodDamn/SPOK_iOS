@@ -423,7 +423,10 @@ class Utils{
                            image: image);
         }
         
-        static func getSCSFile(_ data: Data, scale: CGFloat = 2.0) -> FileSCS {
+        static func getSCSFile(
+            _ data: Data,
+            scale: CGFloat = 2.0
+        ) -> FileSCS {
                         
             let titleLen = Int((UInt8) (data[0]));
             let titleData = data.subdata(in: 1..<(titleLen+1));

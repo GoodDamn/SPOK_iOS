@@ -15,12 +15,14 @@ class HomeViewController
     
     private let TAG = "HomeViewController:";
     
-    private var mCollections:[Collection] = [];
-    
-    private var mSizeb: CGSize = .zero
-    
     @IBOutlet weak var colsTable: UITableView!;
     
+    private var mDownloader: CollectionDowloader? = nil
+    
+    private var mCollections:[Collection] = [];
+    private var mColDelegate = CollectionDelegate()
+    
+    private var mSizeb: CGSize = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -40,32 +42,61 @@ class HomeViewController
             right: 0
         );
         
-        
-        let down = CollectionDowloader(
+        mDownloader = CollectionDowloader(
             dir: "sleep",
             child: "Sleep"
         )
-        down.delegate = self
+        mDownloader!.delegate = self
         
-        down.start()
+        mDownloader!.start()
     }
     
     func onFirstCollection(
         c: [Collection]
     ) {
-        
+        print(TAG, "onFirstCollection")
+        mCollections = c
+        mColDelegate.setCollections(c)
+        colsTable.dataSource = self
+        colsTable.reloadData()
     }
     
     func onAdd(i: Int) {
-        
+        colsTable.insertRows(
+            at: [
+                IndexPath(
+                    row: i,
+                    section: 0
+                )
+            ],
+            with: .left)
     }
     
     func onUpdate(i: Int) {
-        
+        colsTable.reloadRows(
+            at: [
+                IndexPath(
+                    row: i,
+                    section: 0
+                )
+            ],
+            with: .fade)
     }
     
     func onRemove(i: Int) {
-        
+        colsTable.deleteRows(
+            at: [
+                IndexPath(
+                    row: i,
+                    section: 0
+                )
+            ],
+            with: .fade
+        )
+    }
+    
+    func onFinish() {
+        mDownloader = nil
     }
     
 }
@@ -78,7 +109,7 @@ extension HomeViewController
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        return tableView.rowHeight;
+        return 300;
     }
     
     func tableView(
@@ -109,13 +140,19 @@ extension HomeViewController
             for: indexPath)
             as! collectionsCellTableView;
         
-        cell.selectionStyle = .none;
-        cell.nameCollection.text = mCollections[
-            indexPath.row
-        ].title;
+        let col = mCollections[indexPath.row]
         
-        UIView.animate(withDuration: 0.15, animations: {
-            cell.nameCollection.alpha = 1.0;
+        cell.selectionStyle = .none;
+        cell.nameCollection.text = col.title;
+        
+        cell.collectionView.dataSource = mColDelegate
+        cell.collectionView.reloadData()
+        
+        UIView.animate(
+            withDuration: 0.15,
+            animations: {
+                cell.nameCollection
+                    .alpha = 1.0;
         });
         
         return cell;
@@ -133,54 +170,4 @@ extension HomeViewController
         return mSizeb;
     }
     
-    
 }
-
-/*extension HomeViewController
-: UICollectionViewDataSource {
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        return mCollecti
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        
-        let id = collections[collectionView.tag]
-            .trs[indexPath.row];
-        
-        let intID = Int(id);
-        
-        
-        if collectionView.tag == 0 { // is New collection
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bCell", for: indexPath) as! BCellCollectionView;
-            cell.collectionView = collectionView;
-            cell.load(
-                id: intID,
-                lang: ""
-            );
-            return cell;
-        }
-        
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "mCell",
-            for: indexPath)
-            as! MCellCollectionView;
-        cell.collectionView = collectionView;
-        
-        cell.load(
-            id: intID,
-            lang: "",
-            nameSize: 15.0,
-            descSize: 8.65
-        );
-        
-        return cell;
-    }
-}
-*/
