@@ -52,7 +52,7 @@ class HomeViewController
     }
     
     func onFirstCollection(
-        c: [Collection]
+        c: inout [Collection]
     ) {
         print(TAG, "onFirstCollection")
         mCollections = c

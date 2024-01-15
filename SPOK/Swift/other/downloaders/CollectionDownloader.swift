@@ -22,7 +22,8 @@ class CollectionDowloader {
     
     private var mStorage: StorageReference
     
-    private var mCollections: [Collection] = []
+    private var mCacheCollections: [Collection] = []
+    private var mNetCollections: [Collection] = []
     
     init(
         dir: String,
@@ -168,10 +169,37 @@ class CollectionDowloader {
                 return
             }
             
-            s.delegate!
-                .onFirstCollection(
-                    c: s.mCollections
-                )
+            if s.mCacheCollections
+                .isEmpty {
+                s.delegate!
+                    .onFirstCollection(
+                        c: &s
+                        .mNetCollections
+                    )
+                s.delegate!
+                    .onFinish()
+                return
+            }
+            
+            let a = s.mCacheCollections.count
+            let b = s.mNetCollections.count
+            
+            for i in b..<a {
+                s.delegate!.onRemove(i: i)
+            }
+            
+            for i in a..<b {
+                s.delegate!.onAdd(i: i)
+            }
+            
+            for i in s
+                .mCacheCollections
+                .indices {
+                s.mCacheCollections[i] = s.mNetCollections[i]
+                
+                s.delegate!.onUpdate(i:i)
+            }
+            
             s.delegate!
                 .onFinish()
         }
@@ -205,7 +233,8 @@ class CollectionDowloader {
             }
          
             s.addCollection(
-                data
+                data,
+                &s.mNetCollections
             )
             
             s.writeScs(
@@ -246,22 +275,26 @@ class CollectionDowloader {
                 continue
             }
             
-            addCollection(d)
+            addCollection(
+                d,
+                &mCacheCollections
+            )
         }
         
         delegate?.onFirstCollection(
-            c: mCollections
+            c: &mCacheCollections
         )
         
     }
     
     private func addCollection(
-        _ data: Data
+        _ data: Data,
+        _ c: inout [Collection]
     ) {
         let col = Utils.Exten
             .getSCSFile(data)
         
-        mCollections.append(
+        c.append(
             Collection(
                 topicsIDs: col.topics ?? [],
                 title: col.title ?? "",
