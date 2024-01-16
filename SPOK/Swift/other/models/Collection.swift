@@ -9,5 +9,7 @@ import Foundation
 public struct Collection {
     let topicsIDs: [UInt16]
     let title: String
-    let size: CGSize
+    let titleSize: CGFloat
+    let cardSize: CGSize
+    let height: CGFloat
 }

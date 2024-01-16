@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseStorage
+import UIKit
 
 class CollectionDowloader {
     
@@ -14,6 +15,11 @@ class CollectionDowloader {
     
     // It calls once
     public weak var delegate: CollectionListener?
+    
+    private var mScreen: CGSize
+    
+    private var mCardSizeB: CGSize
+    private var mCardSizeM: CGSize
     
     private var mfm: FileManager
     private var mDirPath: String
@@ -29,6 +35,21 @@ class CollectionDowloader {
         dir: String,
         child: String
     ) {
+        
+        mScreen = UIScreen
+            .main
+            .bounds
+            .size
+        
+        mCardSizeB = CGSize(
+            width: mScreen.width * 0.847,
+            height: mScreen.width * 0.5
+        )
+        
+        mCardSizeM = CGSize(
+            width: mScreen.width * 0.4,
+            height: mCardSizeB.height
+        )
         
         mChild = child
         mStorage = Storage
@@ -184,12 +205,17 @@ class CollectionDowloader {
             let a = s.mCacheCollections.count
             let b = s.mNetCollections.count
             
-            for i in b..<a {
+            var i = b
+            while i < a {
                 s.delegate!.onRemove(i: i)
+                i += 1
             }
             
-            for i in a..<b {
+            i = a
+            
+            while i < b {
                 s.delegate!.onAdd(i: i)
+                i += 1
             }
             
             for i in s
@@ -294,14 +320,19 @@ class CollectionDowloader {
         let col = Utils.Exten
             .getSCSFile(data)
         
+        let titleSize = mScreen.width * 0.067
+        
+        let height = mCardSizeB.height + titleSize
+        
+        print(TAG, "addCollection:",col.title, col.topics)
+        
         c.append(
             Collection(
                 topicsIDs: col.topics ?? [],
                 title: col.title ?? "",
-                size: CGSize(
-                    width: 352,
-                    height: 207
-                )
+                titleSize: titleSize,
+                cardSize: mCardSizeB,
+                height: height
             )
         )
     }

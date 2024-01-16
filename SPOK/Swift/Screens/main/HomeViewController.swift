@@ -21,19 +21,13 @@ class HomeViewController
     
     private var mCollections:[Collection] = [];
     private var mColDelegate = CollectionDelegate()
-    
-    private var mSizeb: CGSize = .zero
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad();
     
         let w = view.frame.width
         let h = view.frame.height
         
-        mSizeb = CGSize(
-            width: w * 0.847,
-            height: h * 0.226
-        )
         
         colsTable.contentInset = UIEdgeInsets(
             top: 0,
@@ -58,6 +52,7 @@ class HomeViewController
         mCollections = c
         mColDelegate.setCollections(c)
         colsTable.dataSource = self
+        colsTable.delegate = self
         colsTable.reloadData()
     }
     
@@ -109,7 +104,18 @@ extension HomeViewController
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        return 300;
+        
+        let c = mCollections[
+            indexPath.row
+        ]
+        
+        let a = c.height +
+            c.cardSize.height * 0.193 +
+            c.cardSize.height * 0.124
+        
+        print(TAG, "heightForRowAt:",c.height, a)
+        
+        return a;
     }
     
     func tableView(
@@ -140,13 +146,28 @@ extension HomeViewController
             for: indexPath)
             as! collectionsCellTableView;
         
+        
         let col = mCollections[indexPath.row]
         
-        cell.selectionStyle = .none;
-        cell.nameCollection.text = col.title;
+        let label = cell.nameCollection!
+        let colview = cell.collectionView!
         
-        cell.collectionView.dataSource = mColDelegate
-        cell.collectionView.reloadData()
+        colview.tag = indexPath.row
+        
+        cell.selectionStyle = .none;
+        label.text = col.title;
+        label.font = label.font
+            .withSize(
+                col.titleSize
+            )
+        
+        //cell.backgroundColor = .blue
+        //colview.backgroundColor = .black
+        //label.backgroundColor = .green
+        
+        colview.dataSource = mColDelegate
+        colview.delegate = mColDelegate
+        colview.reloadData()
         
         UIView.animate(
             withDuration: 0.15,
@@ -160,14 +181,6 @@ extension HomeViewController
 }
 
 extension HomeViewController
-: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        return mSizeb;
-    }
-    
+    : UITableViewDelegate {
+    // For flow layout
 }

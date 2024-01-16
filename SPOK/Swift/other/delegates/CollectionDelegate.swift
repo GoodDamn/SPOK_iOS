@@ -14,7 +14,7 @@ public class CollectionDelegate
     private final let TAG = "CollectionDelegate"
     
     private var mCollections: [Collection]!
-    
+        
     public func setCollections(
         _ m: [Collection]
     ) {
@@ -63,16 +63,15 @@ extension CollectionDelegate
         
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "cell",
-            for: indexPath)
-            as! MCellCollectionView;
-        cell.collectionView = collectionView;
+            for: indexPath
+        ) as! PreviewCell;
+        
+        cell.contentView.alpha = 0
         
         cell.load(
-            id: intID,
-            lang: "",
-            nameSize: 15.0,
-            descSize: 8.65
-        );
+            type: "B",
+            id: intID
+        )
         
         return cell;
     }
@@ -93,9 +92,9 @@ extension CollectionDelegate
         ]
         
         print(TAG, "sizeForItemAt",
-              col.size)
+              col.cardSize)
         
-        return col.size
+        return col.cardSize
     }
     
 }

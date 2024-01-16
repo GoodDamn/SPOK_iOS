@@ -97,7 +97,8 @@ class SCellCollectionView
 
         let name = lang+type+id.description;
         
-        if StorageApp.Topic.isValid(cachePath: name+".spc") {
+        if StorageApp.Topic.isValid(
+            cachePath: name+".spc") {
             
             DispatchQueue.global(qos: .background).async {
                 print("SCELL_COLLECTION_VIEW: GETTING PREVIEW FROM STORAGE:", id);
@@ -111,7 +112,7 @@ class SCellCollectionView
                     self.nameTraining.textColor = fileSPC.color;
                     
                     etc?(fileSPC);
-                    Utils.showCard(self);
+                    //Utils.showCard(self);
                 }
             }
             
@@ -149,7 +150,7 @@ class SCellCollectionView
                         self.nameTraining.text = fileSPC.title;
                         self.nameTraining.textColor = fileSPC.color;
                         etc?(fileSPC);
-                        Utils.showCard(self);
+                        //Utils.showCard(self);
                     }
                 }
             }

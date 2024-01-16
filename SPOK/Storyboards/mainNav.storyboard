@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -37,7 +36,7 @@
                                     <constraint firstAttribute="height" constant="196" id="wDZ-th-IcF"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="313" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B77-qM-P6p">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="313" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="B77-qM-P6p">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
@@ -59,17 +58,17 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fBR-7F-tih">
                                                     <rect key="frame" x="0.0" y="35.666666666666657" width="393" height="266.33333333333337"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="jyI-Xs-3kG">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="jyI-Xs-3kG">
                                                         <size key="itemSize" width="167" height="207"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="15" minY="0.0" maxX="27" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS" customClass="MCellCollectionView" customModule="SPOK" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS" customClass="PreviewCell" customModule="SPOK" customModuleProvider="target">
                                                             <rect key="frame" x="15" y="29.666666666666668" width="167" height="207"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqu-KT-MgQ">
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqu-KT-MgQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="167" height="207"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
@@ -89,77 +88,29 @@
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSp-Bx-CTy">
-                                                                        <rect key="frame" x="10" y="12" width="50" height="26"/>
-                                                                        <color key="backgroundColor" name="new"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="26" id="Cpu-ZJ-Fs0"/>
-                                                                            <constraint firstAttribute="width" constant="50" id="mKR-vs-dD3"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.64999997615814209" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zLd-7I-B64">
-                                                                        <rect key="frame" x="122" y="12.999999999999998" width="30" height="29.333333333333329"/>
-                                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="30" id="R5Q-jo-Qeh"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eub-Ew-YXi">
-                                                                        <rect key="frame" x="125.33333333333333" y="45" width="26.666666666666671" height="24.333333333333329"/>
-                                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <imageReference key="image" image="heart" renderingMode="template"/>
-                                                                    </imageView>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="20a-0E-tkH">
-                                                                        <rect key="frame" x="68.666666666666671" y="88.666666666666671" width="30" height="30"/>
-                                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="30" id="UkD-h3-34K"/>
-                                                                            <constraint firstAttribute="width" constant="30" id="ZrM-Tb-Ctg"/>
-                                                                        </constraints>
-                                                                        <imageReference key="image" image="heart" renderingMode="template"/>
-                                                                    </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="16x-Bf-MY3" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" id="0uT-kX-oA7"/>
-                                                                    <constraint firstItem="mSp-Bx-CTy" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" constant="12" id="2b0-GR-Pwn"/>
-                                                                    <constraint firstItem="Eub-Ew-YXi" firstAttribute="width" secondItem="16x-Bf-MY3" secondAttribute="width" multiplier="0.158752" id="5gZ-2P-byx"/>
-                                                                    <constraint firstItem="zLd-7I-B64" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" constant="12" id="6Go-XQ-gBA"/>
-                                                                    <constraint firstItem="Eub-Ew-YXi" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" constant="45" id="6bY-xj-QQq"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="zLd-7I-B64" secondAttribute="trailing" constant="15" id="BSq-tQ-rYi"/>
-                                                                    <constraint firstItem="20a-0E-tkH" firstAttribute="centerY" secondItem="16x-Bf-MY3" secondAttribute="centerY" id="DBu-0h-kyY"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Eub-Ew-YXi" secondAttribute="trailing" constant="15" id="HwZ-KU-H4e"/>
                                                                     <constraint firstItem="16x-Bf-MY3" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" id="IBM-4X-XOl"/>
                                                                     <constraint firstAttribute="bottom" secondItem="16x-Bf-MY3" secondAttribute="bottom" id="L54-Pw-g31"/>
                                                                     <constraint firstAttribute="trailing" secondItem="6E9-8p-pyb" secondAttribute="trailing" constant="8" id="Lnj-2u-raS"/>
                                                                     <constraint firstItem="16x-Bf-MY3" firstAttribute="leading" secondItem="Mqu-KT-MgQ" secondAttribute="leading" id="PRt-Uo-8Ar"/>
                                                                     <constraint firstItem="YRC-if-MLq" firstAttribute="top" secondItem="6E9-8p-pyb" secondAttribute="bottom" constant="2" id="QfX-Be-xF3"/>
-                                                                    <constraint firstItem="20a-0E-tkH" firstAttribute="centerX" secondItem="16x-Bf-MY3" secondAttribute="centerX" id="Sdd-Qg-0E3"/>
                                                                     <constraint firstAttribute="trailing" secondItem="YRC-if-MLq" secondAttribute="trailing" constant="8" id="UCT-ml-3aL"/>
-                                                                    <constraint firstItem="zLd-7I-B64" firstAttribute="height" secondItem="mSp-Bx-CTy" secondAttribute="height" multiplier="1.2" id="aUU-58-Bbz"/>
                                                                     <constraint firstItem="6E9-8p-pyb" firstAttribute="leading" secondItem="YRC-if-MLq" secondAttribute="leading" id="anQ-DH-3H0"/>
                                                                     <constraint firstAttribute="bottom" secondItem="16x-Bf-MY3" secondAttribute="bottom" id="f0g-RD-Sr9"/>
                                                                     <constraint firstAttribute="bottom" secondItem="YRC-if-MLq" secondAttribute="bottom" constant="13" id="gEu-Ec-jje"/>
                                                                     <constraint firstItem="16x-Bf-MY3" firstAttribute="leading" secondItem="Mqu-KT-MgQ" secondAttribute="leading" id="jsP-Fo-hVr"/>
                                                                     <constraint firstAttribute="trailing" secondItem="16x-Bf-MY3" secondAttribute="trailing" id="qR6-3O-b6b"/>
-                                                                    <constraint firstItem="Eub-Ew-YXi" firstAttribute="height" secondItem="16x-Bf-MY3" secondAttribute="height" multiplier="0.118229" id="tTZ-Xc-umh"/>
                                                                     <constraint firstItem="YRC-if-MLq" firstAttribute="leading" secondItem="16x-Bf-MY3" secondAttribute="leading" constant="10" id="xGf-Z1-1iB"/>
-                                                                    <constraint firstItem="mSp-Bx-CTy" firstAttribute="leading" secondItem="Mqu-KT-MgQ" secondAttribute="leading" constant="10" id="yLO-J2-U9H"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <connections>
-                                                                <outlet property="descriptionTr" destination="YRC-if-MLq" id="Jlv-Rc-ZfE"/>
-                                                                <outlet property="heart" destination="Eub-Ew-YXi" id="0E4-ay-In2"/>
-                                                                <outlet property="heartScaling" destination="20a-0E-tkH" id="I9Y-SY-ls1"/>
-                                                                <outlet property="heartTop" destination="6bY-xj-QQq" id="BCI-zR-G5W"/>
-                                                                <outlet property="imageViewTraining" destination="16x-Bf-MY3" id="Nqs-P9-fOv"/>
-                                                                <outlet property="l_new" destination="mSp-Bx-CTy" id="HLy-3X-Pn3"/>
-                                                                <outlet property="nameTraining" destination="6E9-8p-pyb" id="pw1-iX-M4t"/>
-                                                                <outlet property="padlock" destination="zLd-7I-B64" id="oFZ-MT-c0t"/>
+                                                                <outlet property="mDesc" destination="YRC-if-MLq" id="Rvp-W5-S4y"/>
+                                                                <outlet property="mImageView" destination="16x-Bf-MY3" id="mWz-wz-IWn"/>
+                                                                <outlet property="mTitle" destination="6E9-8p-pyb" id="2rh-DX-3Qh"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -302,18 +253,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" width="28" height="25"/>
         <image name="house" catalog="system" width="128" height="104"/>
-        <image name="lock.fill" catalog="system" width="125" height="128"/>
         <image name="moon" width="217" height="153"/>
         <namedColor name="AccentColor">
             <color red="0.031372549019607843" green="0.098039215686274508" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="new">
-            <color red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

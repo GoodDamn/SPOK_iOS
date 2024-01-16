@@ -239,12 +239,6 @@ class Utils{
         downloadFile(http: http, asyncExec: completion, onError: onError);
     }
     
-    static func showCard(_ cell: UICollectionViewCell){
-        UIView.animate(withDuration: 0.35, animations: {
-            cell.contentView.alpha = 1.0;
-        });
-    }
-    
     public static func scaleFont(_ label:UILabel, increaseSize:CGFloat = 0.0)->Void{
         label.font = UIFont(name: label.font.fontName, size: label.font.pointSize * UIScreen.main.nativeScale/3 + UIScreen.main.nativeScale + increaseSize);
     }
@@ -284,7 +278,11 @@ class Utils{
         return UIImage(cgImage: croppedimg!);
     }
     
-    public static func changeSizeOfImage(_ s:CGSize, image: UIImage)->UIImage{
+    public static func changeSizeOfImage(
+        _ s:CGSize,
+        image: UIImage
+    ) -> UIImage{
+        
         var i = image;
         UIGraphicsBeginImageContext(s);
         i.draw(in: CGRect(origin: .zero, size: s));

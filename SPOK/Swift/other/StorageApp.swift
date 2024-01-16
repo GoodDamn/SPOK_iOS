@@ -178,8 +178,14 @@ class StorageApp{
                                   data: data);
             }
             
-            public static func preview(name:String, data:Data?) {
-                saveFile(p: name + ".spc", data: data);
+            public static func preview(
+                name:String,
+                data:Data?
+            ) {
+                saveFile(
+                    p:"\(name).spc",
+                    data: data
+                )
             }
             
         }
