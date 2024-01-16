@@ -7,38 +7,54 @@
 
 import UIKit;
 
-class UITextViewPhrase: UITextView{
+class UITextViewPhrase
+    : UILabel {
     
-    public func initial(t:String?){
-        text = t;
-        font = UIFont(name: "RoundedMplus1c-Light", size: 19.0);
-        textColor = UIColor(named: "text_topic");
+    init(
+        frame: CGRect,
+        _ text: String
+    ) {
+        super.init(frame: frame);
+        self.text = text;
         backgroundColor = .clear;
-        isEditable = false;
-        isSelectable = false;
         isUserInteractionEnabled = false
         textAlignment = .center;
         alpha = 0.0;
     }
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder);
+    }
+    
+    deinit{
+        print("UITextViewPhrase: deinit()")
+    }
+    
     public func show() {
-        UIView.animate(withDuration: TimeInterval.random(in: 0.3..<1.0),delay: 0.35,animations: {
-            self.alpha = 1.0;
-        });
+        let w = frame.width
+        sizeToFit()
+        
+        frame.origin.x = (w-frame.width) * 0.5
+        
+        UIView.animate(
+            withDuration: TimeInterval
+                .random(in: 0.3..<1.0),
+            delay: 0.35
+        ) {
+            self.alpha = 1.0
+        }
     }
     
     public func hide(
         _ maxValY: CGFloat,
         _ completion: (()->Void)? = nil
     ) {
-        let y = contentSize.height + CGFloat.random(in: 0..<maxValY);
-        
         UIView.animate(
             withDuration: 2.0,
             animations: {
                 self.transform = CGAffineTransform(
                     translationX: 0,
-                    y: y
+                    y: maxValY
                 );
                 self.alpha = 0.0;
         }) { b in
@@ -47,11 +63,17 @@ class UITextViewPhrase: UITextView{
         }
     }
     
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame,textContainer: textContainer);
-    }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder);
-    }
+    /*public func initial(t:String?){
+        
+        font = UIFont(
+            name: "RoundedMplus1c-Light",
+            size: frame.height * 0.5
+        );
+        textColor = UIColor(
+            named: "text_topic"
+        );
+        
+    }*/
+    
 }

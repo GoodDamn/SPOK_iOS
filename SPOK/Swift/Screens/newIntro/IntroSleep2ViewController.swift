@@ -122,11 +122,7 @@ class IntroSleep2ViewController
                 y: y,
                 width: f.width,
                 height: f.height - y
-            )
-        )
-        
-        t.initial(
-            t: mPieces[mCurrent]
+            ), mPieces[mCurrent]
         )
         
         t.font = mFont

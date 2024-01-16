@@ -80,11 +80,8 @@ class BaseTopicController
                     x: mSpanPointX,
                     y: mSpanPointY,
                     width: w,
-                    height: h)
-            )
-            
-            textView.initial(
-                t: scriptText.spannableString
+                    height: h),
+                scriptText.spannableString
             )
             
             textView.show()
