@@ -52,6 +52,17 @@ class MainViewController
         monitor.start(queue: DispatchQueue(label:"Network")
         );*/
         
+        let c = SheepCounterViewController()
+        c.view.alpha = 0
+        push(
+            c,
+            animDuration: 0.5
+        ) {
+            c.view.alpha = 1.0
+        }
+        
+        return
+        
         let userDefaults = UserDefaults();
         
         if !userDefaults.bool(forKey: "intro") {

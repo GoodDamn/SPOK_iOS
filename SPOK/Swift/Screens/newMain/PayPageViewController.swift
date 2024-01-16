@@ -32,38 +32,11 @@ class PayPageViewController
         let w = view.frame.width
         let h = view.frame.height
         
-        let sizeBtnExit = 0.084 * w
-        
-        let btnExitConfig = UIImage
-            .SymbolConfiguration(
-                pointSize: sizeBtnExit * 0.5,
-                weight: .medium,
-                scale: .medium
+        let btnExit = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.084
             )
-        
-        let btnExit = UIButton(
-            frame: CGRect(
-                x: w-sizeBtnExit-w*0.06,
-                y: h * 0.04,
-                width: sizeBtnExit,
-                height: sizeBtnExit
-            )
-        )
-        
-        btnExit.backgroundColor = .clear
-        btnExit.tintColor = UIColor(
-            red: 197.0 / 255,
-            green: 197 / 255,
-            blue: 197 / 255,
-            alpha: 1.0
-        )
-        
-        btnExit.setBackgroundImage(
-            UIImage(
-                systemName: "xmark",
-                withConfiguration: btnExitConfig
-            ),
-            for: .normal)
         
         let marginTitle = w * 0.18
         let lTitle = UILabel(
