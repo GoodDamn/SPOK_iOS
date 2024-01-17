@@ -59,9 +59,10 @@
 		25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */; };
 		25DB9AC62B57945300B5359F /* CollectionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC52B57945300B5359F /* CollectionTopic.swift */; };
 		25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */; };
+		25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */; };
-		2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */; };
+		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
 		2B049DEE277A2173009D636D /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049DED277A2173009D636D /* RateAppViewController.swift */; };
 		2B0E204F277BBA630082FF75 /* ArcProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E204E277BBA630082FF75 /* ArcProgressBar.swift */; };
 		2B1CBB2827D16D4C00CCB102 /* AdvancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1CBB2727D16D4C00CCB102 /* AdvancedLabel.swift */; };
@@ -193,9 +194,10 @@
 		25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepViewCell.swift; sourceTree = "<group>"; };
 		25DB9AC52B57945300B5359F /* CollectionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTopic.swift; sourceTree = "<group>"; };
 		25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutUtils.swift; sourceTree = "<group>"; };
+		25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		2B0103D227DCA08F00C73D73 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCellCollectionView.swift; sourceTree = "<group>"; };
-		2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionsCellTableView.swift; sourceTree = "<group>"; };
+		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2B049DED277A2173009D636D /* RateAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
 		2B0E204E277BBA630082FF75 /* ArcProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcProgressBar.swift; sourceTree = "<group>"; };
 		2B1CBB2727D16D4C00CCB102 /* AdvancedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedLabel.swift; sourceTree = "<group>"; };
@@ -648,9 +650,10 @@
 			isa = PBXGroup;
 			children = (
 				2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */,
-				2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */,
+				2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */,
 				2B2199EC2921008800F4505C /* BCellCollectionView.swift */,
 				25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */,
+				25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */,
 				2BA51AA9280FF8530035262A /* CategoriesCell.swift in Sources */,
 				2B558A4527E88D360038DBDA /* IntroNavigationController.swift in Sources */,
+				25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */,
 				2507D2EB2B471A0E00656C0B /* ScriptReader.swift in Sources */,
 				2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */,
 				25DB9AC62B57945300B5359F /* CollectionTopic.swift in Sources */,
@@ -978,7 +982,7 @@
 				250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */,
 				2BEB9A4327CF57810024989F /* SubscriptionViewController.swift in Sources */,
 				2B049DEE277A2173009D636D /* RateAppViewController.swift in Sources */,
-				2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */,
+				2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */,
 				2BC1218827772C1C00729BA4 /* PromoCodeVController.swift in Sources */,
 				2B43B7872891D129000A8B17 /* PushNotificaions.swift in Sources */,
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,

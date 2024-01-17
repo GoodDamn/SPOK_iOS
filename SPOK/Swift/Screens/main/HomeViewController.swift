@@ -156,9 +156,6 @@ extension HomeViewController
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        (cell as? collectionsCellTableView)?
-            .collectionView
-            .reloadData();
     }
     
     
@@ -168,19 +165,17 @@ extension HomeViewController
     ) -> UITableViewCell {
         
         let r = indexPath.row
-        
-        print(TAG,
-              "ROW_HEIGHT:",
-              tableView.rowHeight
-        )
-        
+                
         if r == mCollections.count {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: SheepViewCell.id
             ) as! SheepViewCell
             
-            cell.backgroundColor = .gray
+            cell.backgroundColor = .clear
             
+            cell.mTitle?.text = "Счетчик овечек"
+            
+            cell.mTitle?.sizeToFit()
             cell.mBtnBegin?
                 .addTarget(
                     self,
@@ -198,13 +193,13 @@ extension HomeViewController
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "collections",
             for: indexPath)
-            as! collectionsCellTableView;
+            as! CollectionTableViewCell;
         
         
         let col = mCollections[indexPath.row]
             as! CollectionTopic
         
-        let label = cell.nameCollection!
+        let label = cell.mTitle!
         let colview = cell.collectionView!
         
         colview.tag = indexPath.row
@@ -216,6 +211,10 @@ extension HomeViewController
                 col.titleSize
             )
         
+        label.sizeToFit()
+        
+        print(TAG,"LFRAME:",label.frame)
+        
         colview.dataSource = mColDelegate
         colview.delegate = mColDelegate
         colview.reloadData()
@@ -223,8 +222,7 @@ extension HomeViewController
         UIView.animate(
             withDuration: 0.15,
             animations: {
-                cell.nameCollection
-                    .alpha = 1.0;
+                label.alpha = 1.0;
         });
         
         return cell;

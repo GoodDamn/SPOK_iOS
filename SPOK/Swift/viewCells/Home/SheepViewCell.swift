@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SheepViewCell
-    : UITableViewCell {
+    : TitleTableViewCell {
     
     private static let TAG = "SheepViewCell:"
     public static let id = "sheep"
@@ -44,6 +44,7 @@ class SheepViewCell
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         
         LayoutUtils.button(
             for: mBtnBegin,
