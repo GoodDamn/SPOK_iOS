@@ -6,8 +6,10 @@
 //
 
 import UIKit;
-class CollectionTableViewCell
+public class CollectionTableViewCell
 : TitleTableViewCell {
+    
+    public static let id = "collections"
     
     @IBOutlet weak var collectionView: UICollectionView!;
     

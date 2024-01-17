@@ -140,7 +140,7 @@ class SheepCounterViewController
         let sheep = createSheep()
         
         sheep.jump(
-            onX: -f.width
+            onX: -f.width - sheep.frame.width*2
         )
         
         view.addSubview(sheep)
@@ -179,7 +179,7 @@ class SheepCounterViewController
     private func createSheep() -> Sheep {
         
         let f = view.frame
-        let sizeSheep = f.width * 0.25
+        let sizeSheep = f.width * 0.396
         
         return Sheep(
             frame: CGRect(

@@ -193,7 +193,9 @@ class StorageApp{
     
     class Collection {
         
-        private static func collectionURL(_ dir:String)->URL {
+        private static func collectionURL(
+            _ dir:String
+        ) ->URL {
             return StorageApp.getURL(dir: dir);
         }
         

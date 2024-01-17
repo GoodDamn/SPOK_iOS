@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
-class SheepViewCell
+public class SheepViewCell
     : TitleTableViewCell {
     
     private static let TAG = "SheepViewCell:"
     public static let id = "sheep"
     
     public weak var mBtnBegin: UIButton?
+    private var mSheep: Sheep?
+    private var moon: UIImageView?
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -32,8 +34,22 @@ class SheepViewCell
                 text: "НАЧАТЬ"
             )
         
+        moon = UIImageView()
+        moon!.image = UIImage(
+            named: "moon 1"
+        )
+        moon!.backgroundColor = .clear
+        
+        mSheep = Sheep(
+            frame: .zero
+        )
+        
         contentView
             .addSubview(mBtnBegin!)
+        contentView
+            .addSubview(mSheep!)
+        contentView
+            .addSubview(moon!)
     }
     
     required init?(coder: NSCoder) {
@@ -42,18 +58,38 @@ class SheepViewCell
         )
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
+        let w = frame.width
+        let h = frame.height
+        
+        let mb = w * 0.135
+        let off = w * 0.07
+        
+        moon?.frame = CGRect(
+            x: w-mb-off,
+            y: off,
+            width: mb,
+            height: mb
+        )
+        
+        let b = 0.345 * w
+        mSheep?.frame = CGRect(
+            x: (w-b) * 0.5,
+            y: (h-b) * 0.5 - h * 0.1,
+            width: b,
+            height: b
+        )
         
         LayoutUtils.button(
             for: mBtnBegin,
             frame,
             y: 0.7,
-            width: 0.5,
-            height: 0.1,
+            width: 0.62,
+            height: 0.15,
             cornerRadius: 0.5,
-            textSize: 0.3
+            textSize: 0.4
         )
         
         

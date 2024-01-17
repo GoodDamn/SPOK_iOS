@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TitleTableViewCell
+public class TitleTableViewCell
     : UITableViewCell {
     
     public var mTitle: UILabel? = nil
@@ -48,7 +48,7 @@ class TitleTableViewCell
         ini()
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
         print("TitleTableViewCell: layoutSubviews()")

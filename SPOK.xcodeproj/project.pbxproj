@@ -60,6 +60,7 @@
 		25DB9AC62B57945300B5359F /* CollectionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC52B57945300B5359F /* CollectionTopic.swift */; };
 		25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */; };
 		25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */; };
+		25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */; };
 		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
@@ -195,6 +196,7 @@
 		25DB9AC52B57945300B5359F /* CollectionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTopic.swift; sourceTree = "<group>"; };
 		25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutUtils.swift; sourceTree = "<group>"; };
 		25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
 		2B0103D227DCA08F00C73D73 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCellCollectionView.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -431,9 +433,8 @@
 		25DB9A762B53BD3D00B5359F /* models */ = {
 			isa = PBXGroup;
 			children = (
-				25DB9A772B53BD4900B5359F /* Collection.swift */,
+				25DB9ACF2B57EC3800B5359F /* collection */,
 				25DB9ABF2B55A73900B5359F /* PreviewCell.swift */,
-				25DB9AC52B57945300B5359F /* CollectionTopic.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -469,6 +470,26 @@
 				25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		25DB9ACC2B57EB9E00B5359F /* collections */ = {
+			isa = PBXGroup;
+			children = (
+				2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */,
+				25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */,
+				25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */,
+			);
+			path = collections;
+			sourceTree = "<group>";
+		};
+		25DB9ACF2B57EC3800B5359F /* collection */ = {
+			isa = PBXGroup;
+			children = (
+				25DB9A772B53BD4900B5359F /* Collection.swift */,
+				25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */,
+				25DB9AC52B57945300B5359F /* CollectionTopic.swift */,
+			);
+			path = collection;
 			sourceTree = "<group>";
 		};
 		2B558A3927E87BAC0038DBDA /* intro */ = {
@@ -649,11 +670,9 @@
 		2BA51A9F280FF7F60035262A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				25DB9ACC2B57EB9E00B5359F /* collections */,
 				2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */,
-				2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */,
 				2B2199EC2921008800F4505C /* BCellCollectionView.swift */,
-				25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */,
-				25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -948,6 +967,7 @@
 				2B558A4027E87C0B0038DBDA /* IntroViewController.swift in Sources */,
 				25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */,
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
+				25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */,
 				25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */,
 				2BD64C4D295C36DB00169416 /* SettingsTableViewCell.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,

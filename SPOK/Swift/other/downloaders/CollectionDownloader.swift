@@ -322,7 +322,9 @@ class CollectionDowloader {
         
         let titleSize = mScreen.width * 0.067
         
-        let height = mCardSizeB.height + titleSize
+        let cs = mCardSizeB.height
+        
+        let height = cs + titleSize + cs * 0.193 + cs * 0.124
         
         print(TAG, "addCollection:",col.title, col.topics)
         

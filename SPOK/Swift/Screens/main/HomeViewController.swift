@@ -95,6 +95,52 @@ class HomeViewController
     
     func onFinish() {
         mDownloader = nil
+        
+        let last = mCollections[
+            mCollections.count - 1
+        ]
+        
+        let viewCell = CollectionRowView(
+            title: "Счетчик овечек",
+            titleSize: last.titleSize,
+            height: last.height,
+            idCell: SheepViewCell.id
+        ) { [weak self] cel in
+            
+            guard let s = self else {
+                print("HomeViewController: viewCell Sheep: GC")
+                return
+            }
+            
+            let cell = cel as! SheepViewCell
+            cell.backgroundColor = .clear
+            
+            cell.mBtnBegin?
+                .addTarget(
+                    self,
+                    action: #selector(
+                        s.onClickBtnBegin(
+                            _:
+                        )
+                    ),
+                    for: .touchUpInside
+                )
+            
+            print(s.TAG, "SheepViewCell:", cell.subviews.count)
+        }
+        
+        mCollections.append(
+            viewCell
+        )
+        
+        colsTable.insertRows(
+            at: [
+                IndexPath(
+                    row: mCollections.count-1,
+                    section: 0
+                )
+            ],
+            with: .left)
     }
     
     
@@ -126,92 +172,64 @@ extension HomeViewController
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        
-        if indexPath.row >= mCollections.count {
-            return 300
-        }
-        
         let c = mCollections[
             indexPath.row
-        ] as! CollectionTopic
+        ]
         
-        let a = c.height +
-            c.cardSize.height * 0.193 +
-            c.cardSize.height * 0.124
-        
-        print(TAG, "heightForRowAt:",c.height, a)
-        
-        return a;
+        return c.height;
     }
     
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return mCollections.count + 1;
+        return mCollections.count;
     }
     
     func tableView(
         _ tableView: UITableView,
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
-    ) {
-    }
+    ) {}
     
     
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        
         let r = indexPath.row
                 
-        if r == mCollections.count {
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: SheepViewCell.id
-            ) as! SheepViewCell
-            
-            cell.backgroundColor = .clear
-            
-            cell.mTitle?.text = "Счетчик овечек"
-            
-            cell.mTitle?.sizeToFit()
-            cell.mBtnBegin?
-                .addTarget(
-                    self,
-                    action: #selector(
-                        onClickBtnBegin(_:)
-                    ),
-                    for: .touchUpInside
-                )
-            
-            print(TAG, "SheepViewCell:", cell.subviews.count)
-            
-            return cell
+        let c = mCollections[r]
+        
+        guard let cel = tableView.dequeueReusableCell(
+            withIdentifier: c.idCell
+        ) as? TitleTableViewCell else {
+            return UITableViewCell()
         }
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "collections",
-            for: indexPath)
-            as! CollectionTableViewCell;
-        
-        
-        let col = mCollections[indexPath.row]
-            as! CollectionTopic
-        
-        let label = cell.mTitle!
-        let colview = cell.collectionView!
-        
-        colview.tag = indexPath.row
-        
-        cell.selectionStyle = .none;
-        label.text = col.title;
+        let label = cel.mTitle!
+        label.text = c.title;
         label.font = label.font
             .withSize(
-                col.titleSize
+                c.titleSize
             )
         
         label.sizeToFit()
+        
+        if cel as? SheepViewCell != nil {
+            (c as! CollectionRowView)
+                .setupView(cel)
+            return cel
+        }
+        
+        let cell = cel as!
+            CollectionTableViewCell
+        
+        let colview = cell.collectionView!
+        
+        colview.tag = r
+        
+        cell.selectionStyle = .none;
         
         print(TAG,"LFRAME:",label.frame)
         
