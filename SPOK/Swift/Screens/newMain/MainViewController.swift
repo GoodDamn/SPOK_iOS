@@ -13,6 +13,8 @@ class MainViewController
     
     private var mControllers: [UIViewController] = []
     
+    private var mCurrentIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,16 +54,6 @@ class MainViewController
         monitor.start(queue: DispatchQueue(label:"Network")
         );*/
         
-        let c = SheepCounterViewController()
-        c.view.alpha = 0
-        push(
-            c,
-            animDuration: 0.5
-        ) {
-            c.view.alpha = 1.0
-        }
-        
-        return
         
         let userDefaults = UserDefaults();
         
@@ -143,6 +135,7 @@ class MainViewController
         animDuration: TimeInterval,
         animate: @escaping () -> Void
     ) {
+        mCurrentIndex += 1
         appendController(c)
         
         UIView.animate(
@@ -152,10 +145,23 @@ class MainViewController
     }
     
     public func pop(
+        duration: TimeInterval? = nil,
+        animate: (()->Void)? = nil
+    ) {
+        pop(
+            at: mCurrentIndex,
+            duration: duration,
+            animate: animate
+        )
+    }
+    
+    public func pop(
         at: Int,
         duration: TimeInterval? = nil,
         animate: (()->Void)? = nil
     ) {
+        mCurrentIndex -= 1
+        
         if animate == nil
             || duration == nil
         {

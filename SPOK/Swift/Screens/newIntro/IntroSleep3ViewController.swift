@@ -44,10 +44,14 @@ class IntroSleep3ViewController
             
             let btnStart = ViewUtils
                 .button(
-                    text: "Начать приключение",
-                    y: 0.873,
-                    self.view
+                    text: "Начать приключение"
                 )
+            
+            LayoutUtils.button(
+                for: btnStart,
+                self.view.frame,
+                y: 0.873
+            )
             
             btnStart.addTarget(
                 self,

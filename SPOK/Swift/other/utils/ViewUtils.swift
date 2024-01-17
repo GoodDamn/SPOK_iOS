@@ -11,38 +11,19 @@ import UIKit
 public class ViewUtils {
     
     public static func button(
-        text: String,
-        y: CGFloat,
-        textSize: CGFloat = 0.26,
-        _ view: UIView
+        text: String
     ) -> UIButton {
         
-        let w = view.frame.width
-        let h = view.frame.height
-        
-        let wbtn = w * 0.702
-        
-        let btnStart = UIButton(
-            frame: CGRect(
-                x: (w - wbtn) * 0.5,
-                y: h * y,
-                width: wbtn,
-                height: h * 0.05
-            )
-        )
+        let btnStart = UIButton()
         
         let bold = UIFont(
             name: "OpenSans-Bold",
-            size: textSize * btnStart.frame.height
+            size: 18
         )
         
         btnStart.backgroundColor = UIColor(
             named: "btnBack"
         )
-        
-        btnStart
-            .layer
-            .cornerRadius = 0.17 * btnStart.frame.height
         
         btnStart.titleLabel?.font = bold
         btnStart.setTitleColor(

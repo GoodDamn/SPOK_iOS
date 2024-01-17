@@ -327,11 +327,11 @@ class CollectionDowloader {
         print(TAG, "addCollection:",col.title, col.topics)
         
         c.append(
-            Collection(
+            CollectionTopic(
                 topicsIDs: col.topics ?? [],
-                title: col.title ?? "",
                 titleSize: titleSize,
                 cardSize: mCardSizeB,
+                title: col.title ?? "",
                 height: height
             )
         )

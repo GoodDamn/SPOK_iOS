@@ -191,7 +191,10 @@ class MainContentViewController
         
         createTab(systemNameImage: "house", imageSize: imageSize);
         /*createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);*/
-        createTab(systemNameImage: "person.fill", imageSize: imageSize);
+        createTab(
+            systemNameImage: "person.fill",
+            imageSize: imageSize
+        );
         
         mNavBar.subviews[0]
             .tintColor = UIColor(
@@ -251,13 +254,30 @@ class MainContentViewController
     func showSubScreen()->Void {
     }
     
-    private func createTab(systemNameImage: String, imageSize: CGSize) {
-        let iv = UIButton(frame: CGRect(origin: .zero, size: imageSize));
+    private func createTab(
+        systemNameImage: String,
+        imageSize: CGSize
+    ) {
         
-        let config = UIImage.SymbolConfiguration(pointSize: imageSize.height*0.42,
-                                                 weight: .regular,
-                                                 scale: .medium);
-        iv.setImage(UIImage(systemName: systemNameImage, withConfiguration: config), for: .normal); // person.fill | house
+        let iv = UIButton(
+            frame: CGRect(
+                origin: .zero,
+                size: imageSize
+            )
+        )
+        
+        let config = UIImage.SymbolConfiguration(
+            pointSize: imageSize.height*0.42,
+            weight: .regular,
+            scale: .medium
+        )
+        iv.setImage(
+            UIImage(
+                systemName: systemNameImage,
+                withConfiguration: config
+            ),
+            for: .normal
+        )// person.fill | house
         iv.tintColor = .lightGray;
         iv.backgroundColor = .clear;
         

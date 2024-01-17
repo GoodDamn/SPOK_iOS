@@ -6,10 +6,15 @@
 //
 
 import Foundation
-public struct Collection {
-    let topicsIDs: [UInt16]
+public class Collection {
     let title: String
-    let titleSize: CGFloat
-    let cardSize: CGSize
     let height: CGFloat
+    
+    init(
+        title: String,
+        height: CGFloat
+    ) {
+        self.title = title
+        self.height = height
+    }
 }

@@ -198,11 +198,15 @@ class ProfileNewViewController
         
         let btnOpen = ViewUtils
             .button(
-                text: "Открыть полный доступ",
-                y: 0.61,
-                textSize: 0.35,
-                view
+                text: "Открыть полный доступ"
             )
+        
+        LayoutUtils.button(
+            for: btnOpen,
+            view.frame,
+            y: 0.61,
+            textSize: 0.35
+        )
         
         let hshare = h * 0.25
         let shareLeft = w * 0.1
@@ -246,11 +250,15 @@ class ProfileNewViewController
         
         let btnShare = ViewUtils
             .button(
-                text: "Поделиться впечатлением",
-                y: 0.85,
-                textSize: 0.35,
-                view
+                text: "Поделиться впечатлением"
             )
+        
+        LayoutUtils.button(
+            for: btnShare,
+            view.frame,
+            y: 0.85,
+            textSize: 0.35
+        )
         
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)

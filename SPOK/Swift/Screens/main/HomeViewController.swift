@@ -10,7 +10,7 @@ import FirebaseDatabase;
 import FirebaseStorage;
 
 class HomeViewController
-    : UIViewController,
+    : StackViewController,
       CollectionListener {
     
     private let TAG = "HomeViewController:";
@@ -28,6 +28,9 @@ class HomeViewController
         let w = view.frame.width
         let h = view.frame.height
         
+        colsTable.register(
+            SheepViewCell.self,
+            forCellReuseIdentifier: SheepViewCell.id)
         
         colsTable.contentInset = UIEdgeInsets(
             top: 0,
@@ -94,6 +97,25 @@ class HomeViewController
         mDownloader = nil
     }
     
+    
+    @objc func onClickBtnBegin(
+        _ sender: UIButton
+    ) {
+        print(
+            TAG,
+            "onClickBtnBegin:"
+        )
+        let c = SheepCounterViewController()
+        c.view.alpha = 0
+        
+        push(
+            c,
+            animDuration: 0.5
+        ) {
+            c.view.alpha = 1.0
+        }
+    }
+    
 }
 
 
@@ -105,9 +127,13 @@ extension HomeViewController
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         
+        if indexPath.row >= mCollections.count {
+            return 300
+        }
+        
         let c = mCollections[
             indexPath.row
-        ]
+        ] as! CollectionTopic
         
         let a = c.height +
             c.cardSize.height * 0.193 +
@@ -122,7 +148,7 @@ extension HomeViewController
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return mCollections.count;
+        return mCollections.count + 1;
     }
     
     func tableView(
@@ -130,7 +156,7 @@ extension HomeViewController
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        (cell as! collectionsCellTableView)
+        (cell as? collectionsCellTableView)?
             .collectionView
             .reloadData();
     }
@@ -141,6 +167,34 @@ extension HomeViewController
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         
+        let r = indexPath.row
+        
+        print(TAG,
+              "ROW_HEIGHT:",
+              tableView.rowHeight
+        )
+        
+        if r == mCollections.count {
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: SheepViewCell.id
+            ) as! SheepViewCell
+            
+            cell.backgroundColor = .gray
+            
+            cell.mBtnBegin?
+                .addTarget(
+                    self,
+                    action: #selector(
+                        onClickBtnBegin(_:)
+                    ),
+                    for: .touchUpInside
+                )
+            
+            print(TAG, "SheepViewCell:", cell.subviews.count)
+            
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "collections",
             for: indexPath)
@@ -148,6 +202,7 @@ extension HomeViewController
         
         
         let col = mCollections[indexPath.row]
+            as! CollectionTopic
         
         let label = cell.nameCollection!
         let colview = cell.collectionView!
@@ -160,10 +215,6 @@ extension HomeViewController
             .withSize(
                 col.titleSize
             )
-        
-        //cell.backgroundColor = .blue
-        //colview.backgroundColor = .black
-        //label.backgroundColor = .green
         
         colview.dataSource = mColDelegate
         colview.delegate = mColDelegate

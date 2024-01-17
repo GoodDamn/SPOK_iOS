@@ -19,8 +19,16 @@ class SheepCounterViewController
     
     private weak var mPrevc: UITextViewPhrase? = nil
     
+    deinit {
+        print("SheepCounterViewController: deinit()")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(
+            named: "background"
+        )
         
         let w = view.frame.width
         let h = view.frame.height
@@ -84,6 +92,24 @@ class SheepCounterViewController
         view.addGestureRecognizer(
             g
         )
+        
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnExit(_:)
+            ),
+            for: .touchUpInside
+        )
+    }
+    
+    @objc func onClickBtnExit(
+        _ sender: UIButton
+    ) {
+        pop(
+            duration: 0.5
+        ) {
+            self.view.alpha = 0
+        }
     }
     
     @objc func onTap(
@@ -153,10 +179,9 @@ class SheepCounterViewController
     private func createSheep() -> Sheep {
         
         let f = view.frame
-        
         let sizeSheep = f.width * 0.25
         
-        let sheep = Sheep(
+        return Sheep(
             frame: CGRect(
                 x: (f.width - sizeSheep) * 0.5,
                 y: (f.height - sizeSheep) * 0.5,
@@ -164,12 +189,6 @@ class SheepCounterViewController
                 height: sizeSheep
             )
         )
-        
-        sheep.image = UIImage(
-            named: "sheep"
-        )
-        
-        return sheep
     }
     
 }
@@ -191,6 +210,9 @@ class Sheep
         mAmp = frame.height * -1.5
         mAngle = -25/180 * .pi
         super.init(frame: frame)
+        image = UIImage(
+            named: "sheep"
+        )
     }
     
     required init?(coder: NSCoder) {

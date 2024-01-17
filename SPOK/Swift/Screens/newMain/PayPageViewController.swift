@@ -64,11 +64,15 @@ class PayPageViewController
         
         let btnBuy = ViewUtils
             .button(
-                text: "Оплатить 125 RUB",
-                y: 0.55,
-                textSize: 0.3,
-                view
+                text: "Оплатить 125 RUB"
             )
+        
+        LayoutUtils.button(
+            for: btnBuy,
+            view.frame,
+            y: 0.55,
+            textSize: 0.3
+        )
         
         btnBuy.frame.origin.y = lTitle.frame.origin.y + lTitle.frame.height + h * 0.03
         
@@ -140,7 +144,6 @@ class PayPageViewController
                     )
                     
                     self.pop(
-                        at: 1,
                         duration: 0.5
                     ) {
                         self.view.alpha = 0
@@ -156,7 +159,6 @@ class PayPageViewController
         sender.isEnabled = false
         mOnStats?("payPageExit")
         pop(
-            at: 1,
             duration: 0.5
         ) {
             self.view.alpha = 0

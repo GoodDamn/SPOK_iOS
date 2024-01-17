@@ -56,6 +56,9 @@
 		25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */; };
 		25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ABF2B55A73900B5359F /* PreviewCell.swift */; };
 		25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC12B565AC600B5359F /* SheepCounterViewController.swift */; };
+		25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */; };
+		25DB9AC62B57945300B5359F /* CollectionTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC52B57945300B5359F /* CollectionTopic.swift */; };
+		25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B044935280C02DF00ADA8B5 /* MCellCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */; };
 		2B04493A280C03AF00ADA8B5 /* collectionsCellTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */; };
@@ -187,6 +190,9 @@
 		25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		25DB9ABF2B55A73900B5359F /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		25DB9AC12B565AC600B5359F /* SheepCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepCounterViewController.swift; sourceTree = "<group>"; };
+		25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepViewCell.swift; sourceTree = "<group>"; };
+		25DB9AC52B57945300B5359F /* CollectionTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTopic.swift; sourceTree = "<group>"; };
+		25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutUtils.swift; sourceTree = "<group>"; };
 		2B0103D227DCA08F00C73D73 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCellCollectionView.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionsCellTableView.swift; sourceTree = "<group>"; };
@@ -425,6 +431,7 @@
 			children = (
 				25DB9A772B53BD4900B5359F /* Collection.swift */,
 				25DB9ABF2B55A73900B5359F /* PreviewCell.swift */,
+				25DB9AC52B57945300B5359F /* CollectionTopic.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -451,6 +458,15 @@
 				25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */,
 			);
 			path = delegates;
+			sourceTree = "<group>";
+		};
+		25DB9AC72B57B5DB00B5359F /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				255C04F82B504BB5006D9FD0 /* ViewUtils.swift */,
+				25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 		2B558A3927E87BAC0038DBDA /* intro */ = {
@@ -601,6 +617,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				25DB9AC72B57B5DB00B5359F /* utils */,
 				25DB9ABC2B54E32700B5359F /* delegates */,
 				25DB9AB82B53E60E00B5359F /* iterators */,
 				25DB9A762B53BD3D00B5359F /* models */,
@@ -623,7 +640,6 @@
 				383AF7AE2875B17400859090 /* StorageApp.swift */,
 				2B3DE5B8290BAC7600B00528 /* SIgnInWithAppleDelegate.swift */,
 				2BF3566D293136BF00ECA142 /* Crypt.swift */,
-				255C04F82B504BB5006D9FD0 /* ViewUtils.swift */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -634,6 +650,7 @@
 				2B044934280C02DF00ADA8B5 /* MCellCollectionView.swift */,
 				2B044939280C03AF00ADA8B5 /* collectionsCellTableView.swift */,
 				2B2199EC2921008800F4505C /* BCellCollectionView.swift */,
+				25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -939,6 +956,7 @@
 				2B558A3B27E87BC50038DBDA /* Intro2ViewController.swift in Sources */,
 				2530C94F2AB0DA0600E79848 /* ChecklistViewController.swift in Sources */,
 				2B29A7DD279F573400367372 /* Apache.swift in Sources */,
+				25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */,
 				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */,
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
@@ -954,6 +972,7 @@
 				2B558A4527E88D360038DBDA /* IntroNavigationController.swift in Sources */,
 				2507D2EB2B471A0E00656C0B /* ScriptReader.swift in Sources */,
 				2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */,
+				25DB9AC62B57945300B5359F /* CollectionTopic.swift in Sources */,
 				2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */,
 				25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */,
 				250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */,
@@ -965,6 +984,7 @@
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
 				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
 				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
+				25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */,
 				2BC121792777283E00729BA4 /* SettingsViewController.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				2BC1218327772B5900729BA4 /* AboutAppVController.swift in Sources */,

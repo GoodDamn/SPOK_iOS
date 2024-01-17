@@ -33,7 +33,7 @@ extension CollectionDelegate
         
         let a = mCollections[
             collectionView.tag
-        ]
+        ] as! CollectionTopic
     
         let c = a
             .topicsIDs
@@ -50,7 +50,7 @@ extension CollectionDelegate
         
         let collection = mCollections[
             collectionView.tag
-        ]
+        ] as! CollectionTopic
         
         let id = collection
             .topicsIDs[
@@ -89,7 +89,7 @@ extension CollectionDelegate
         
         let col = mCollections[
             collectionView.tag
-        ]
+        ] as! CollectionTopic
         
         print(TAG, "sizeForItemAt",
               col.cardSize)
