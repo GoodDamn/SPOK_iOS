@@ -69,20 +69,7 @@ class CollectionDowloader {
             .append(dir)
             .pathh()
         
-        if mfm.fileExists(
-            atPath: mDirPath
-        ) {
-            return
-        }
-        
-        do {
-            try mfm.createDirectory(
-                atPath: mDirPath,
-                withIntermediateDirectories: false
-            )
-        } catch {
-            print(TAG, "ERROR_DIR:",error)
-        }
+        print(TAG, mDirPath)
         
     }
     
@@ -147,11 +134,27 @@ class CollectionDowloader {
             timeIntervalSince1970: currentTime
                 )
         ]
+        
         do {
-            try mfm.setAttributes(
-                attr,
-                ofItemAtPath: mDirPath
-            )
+            
+            if mfm.fileExists(
+                atPath: mDirPath
+            ) {
+                
+                try mfm.setAttributes(
+                    attr,
+                    ofItemAtPath: mDirPath
+                )
+                
+            } else {
+                
+                try mfm.createDirectory(
+                    atPath: mDirPath,
+                    withIntermediateDirectories: false
+                )
+               
+            }
+            
         } catch {
             print(TAG, "ERROR:", error)
         }
@@ -179,7 +182,8 @@ class CollectionDowloader {
     private func refreshData(
         _ items: [StorageReference]
     ) {
-        download(Iterator(items)) {[weak self] in
+        download(Iterator(items)) {
+            [weak self] in
             
             guard let s = self else {
                 print("CollectionDownloader: download: self is garbage collected")

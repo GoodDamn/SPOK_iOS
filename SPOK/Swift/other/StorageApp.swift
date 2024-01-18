@@ -121,15 +121,27 @@ class StorageApp{
             return b;
         }
         
-        public static func preview(name:String)->FileSPC? {
+        public static func preview(
+            name:String
+        ) -> FileSPC? {
             var preview: FileSPC? = nil;
-            fileManipulation(path: name+".spc",
-               action: {
-                manager, path in
-                print("preview:",path);
-                if manager.fileExists(atPath: path) {
-                    preview = Utils.Exten.getSPCFile(StorageApp.getFile(path: path, manager)!);
-                }
+            fileManipulation(
+                path: name+".spc",
+                action: {
+                    manager, path in
+                    print("preview:",path);
+                    if manager.fileExists(
+                        atPath: path
+                    ) {
+                        preview = Utils.Exten
+                            .getSPCFile(
+                        StorageApp
+                            .getFile(
+                                path: path,
+                                manager
+                            )!
+                        )
+                    }
             });
             
             return preview;

@@ -95,7 +95,6 @@ class HomeViewController
     
     func onFinish() {
         mDownloader = nil
-        
         let last = mCollections[
             mCollections.count - 1
         ]

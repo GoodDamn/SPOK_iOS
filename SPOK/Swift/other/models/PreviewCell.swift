@@ -18,6 +18,8 @@ class PreviewCell
     @IBOutlet weak var mTitle: UILabel!;
     @IBOutlet weak var mDesc: UILabel!;
     
+    public var mParticles: Particles? = nil
+    
     private var mId: Int = Int.min
     
     deinit {
@@ -27,11 +29,57 @@ class PreviewCell
         )
     }
     
+    private func ini() {
+        mParticles = Particles(
+            frame: frame
+        )
+        
+        mParticles!.backgroundColor = .black
+            .withAlphaComponent(0.4)
+        
+        contentView
+            .addSubview(mParticles!)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(
+            frame: frame
+        )
+        ini()
+        
+        print(PreviewCell.TAG, "init(frame:)")
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print(PreviewCell.TAG, "init(coder:)")
+        ini()
+    }
+    
+    override func layoutSubviews() {
+        print(PreviewCell.TAG, "layoutSubviews()")
+        
+        if mParticles == nil {
+            return
+        }
+        
+        mParticles!.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: frame.width,
+            height: frame.height
+        )
+        mParticles!.mRadius = 0.02
+        mParticles!.generate()
+        mParticles!.start()
+    }
+    
     public func load(
         type: String,
         id: Int
     ) {
         mId = id
+                
         let s = Storage
             .storage()
             .reference(
