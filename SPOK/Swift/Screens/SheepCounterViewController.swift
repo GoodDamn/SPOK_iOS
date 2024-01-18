@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class SheepCounterViewController
     : StackViewController {
@@ -17,6 +18,8 @@ class SheepCounterViewController
     
     private var mNextSheep: Sheep? = nil
     
+    private var mPlayer: AVAudioPlayer? = nil
+    
     private weak var mPrevc: UITextViewPhrase? = nil
     
     deinit {
@@ -25,6 +28,20 @@ class SheepCounterViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let url = Bundle.main.url(
+            forResource: "sheep_m",
+            withExtension: ".mp3"
+        )
+        
+        mPlayer = try? AVAudioPlayer(
+            contentsOf: url!,
+            fileTypeHint: AVFileType.mp3.rawValue
+        )
+        
+        mPlayer?.prepareToPlay()
+        
+        
         
         view.backgroundColor = UIColor(
             named: "background"
@@ -133,6 +150,14 @@ class SheepCounterViewController
                 s[1].removeFromSuperview()
                 s[4].removeFromSuperview()
             }
+            
+            let inst = AVAudioSession
+                .sharedInstance()
+            try? inst.setActive(true)
+            try? inst
+                .setCategory(.playback, mode: .default)
+            
+            mPlayer?.play()
         }
         
         let f = view.frame
