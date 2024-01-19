@@ -9,21 +9,24 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
-class StorageApp{
+class StorageApp {
     
-    private static let debugTag: String = "SPOkStorage: ";
+    private static let debugTag: String = "StorageApp:";
     
     public static let mUserDef = UserDefaults();
     
     static let historyKey = "history",
-        likesKey = "like",
-        recommendsKey = "recoms";
+               likesKey = "like",
+               recommendsKey = "recoms";
     
-    // Children
-    static let mCardChild = "M",
-               bCardChild = "B";
+    public static let mDirCollection = "collection"
+    public static let mDirPreviews = "preview"
+    public static let mDirContent = "content"
     
-    public static func bundleFile(r: String?, exten: String?)-> Data? {
+    
+    public static func bundleFile(
+        r: String?, exten: String?
+    ) -> Data? {
         guard let fileUrl = Bundle.main.url(forResource: r, withExtension: exten) else {
             return nil;
         }
@@ -37,195 +40,275 @@ class StorageApp{
     }
     
     
-    public static func modifTIme(
-        path:String,
-        _ manager:FileManager
+    public static func modifTime(
+        path: String,
+        time: Double
+    ) {
+        let d = Date(
+            timeIntervalSince1970: time
+        )
+        
+        let attr = [
+            FileAttributeKey
+                .creationDate: d
+        ]
+        
+        try? FileManager
+            .default
+            .setAttributes(
+                attr,
+                ofItemAtPath: path
+            )
+    }
+    
+    public static func modifTime(
+        path:String
     ) -> Double {
-        return (try? manager
+        
+        let fm = FileManager
+            .default
+        
+        let a = try? fm
             .attributesOfItem(
                 atPath: path
             ) [
                 FileAttributeKey
                     .creationDate
-            ] as? Date)?
+            ]
+        
+        return (a as? Date)?
             .timeIntervalSince1970 ?? 0;
     }
     
-    static func mkdir(path:String) -> Void{
-        let fileManager = FileManager.default;
-        if !fileManager.fileExists(atPath: path) {
-            do {
-                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true);
-            } catch {
-                print(debugTag, error);
-            }
+    public static func preview(
+        id: Int,
+        lang: String = ""
+    ) -> FileSPC? {
+        
+        guard let d = StorageApp.load(
+            file: "\(id)\(lang).spc",
+            root: mDirPreviews
+        ) else {
+            return nil
+        }
+        
+        return Utils
+            .Exten
+            .getSPCFile(d)
+        
+    }
+    
+    public static func content(
+        id:Int,
+        lang: String = "",
+        data:Data?
+    ) {
+        StorageApp.save(
+            file: "\(id)\(lang).skc",
+            root: mDirContent,
+            data: data
+        )
+    }
+    
+    public static func preview(
+        id: Int,
+        lang: String = "",
+        data: Data?
+    ) {
+        StorageApp.save(
+            file: "\(id)\(lang).spc",
+            root: mDirPreviews,
+            data: data
+        )
+        
+    }
+    
+    public static func collection(
+        _ dir: String,
+        fileName: String
+    ) -> FileSCS? {
+        guard let d = StorageApp
+            .load(
+                file: fileName,
+                root: "\(mDirCollection)/\(dir)"
+            ) else {
+            return nil
+        }
+        
+        return Utils
+            .Exten
+            .getSCSFile(d)
+    }
+    
+    public static func collection(
+        _ dir:String,
+        id: Int,
+        lang: String = ""
+    ) -> FileSCS? {
+        return collection(
+            dir,
+            fileName: "\(id)\(lang).scs"
+        )
+    }
+    
+    public static func collection(
+        _ dir: String,
+        id: Int,
+        lang: String = "",
+        data: Data?
+    ) {
+        save(
+            file: "\(id)\(lang).scs",
+            root: "\(mDirCollection)/\(dir)",
+            data: data
+        )
+    }
+    
+    
+    public static func mkdir(
+        path: String
+    ) {
+        let fm = FileManager.default;
+        
+        if fm.fileExists(
+            atPath: path
+        ) {
+            return
+        }
+        
+        do {
+            try fm.createDirectory(
+                atPath: path,
+                withIntermediateDirectories: true
+            )
+        } catch {
+            print(debugTag, error)
         }
     }
     
-    public static func mkfile(path:String, data:Data?)-> Void{
-        let fileManager = FileManager.default;
-        if fileManager.fileExists(atPath: path) {
-            return;
+    public static func urlContent(
+        at path: String,
+        onEachName: (String) -> Void
+    ) {
+        
+        guard let d = try? FileManager
+            .default
+            .contentsOfDirectory(
+                atPath: path
+            ) else {
+            return
         }
+        
+        for fileName in d {
+            onEachName(fileName)
+        }
+    }
+    
+    public static func rootPath(
+        append path: String
+    ) -> URL {
+        return FileManager
+            .default
+            .urls (
+                for: .cachesDirectory,
+                in: .userDomainMask
+            )[0].append(path)
+    }
+    
+    public static func exists(
+        at path: String
+    ) -> Bool {
+        return FileManager
+            .default
+            .fileExists(
+                atPath: path
+            )
+    }
+    
+    private static func mkfile(
+        path:String,
+        data:Data?
+    ) {
+        let fm = FileManager.default;
+        
+        if fm.fileExists(
+            atPath: path
+        ) {
+            return
+        }
+        
         guard let data = data else {
-            return;
+            return
         }
-        print("mkfile:",path,fileManager.fileExists(atPath: path));
-        fileManager.createFile(atPath: path, contents: data);
+        
+        fm.createFile(
+            atPath: path,
+            contents: data
+        )
     }
     
-    public static func getFile(
-        path:String,_ manager: FileManager
+    private static func getFile(
+        path: String
     ) -> Data? {
-        return manager.contents(atPath: path);
+        return FileManager
+            .default
+            .contents(
+                atPath: path
+            );
     }
     
-    static func getURL(dir: String)-> URL {
-        let dirPath = FileManager.default
-            .urls(for: .cachesDirectory, in: .userDomainMask)
-            .first!
-            .appendingPathComponent(dir, isDirectory: true);
-        StorageApp.mkdir(path: dirPath.path);
-        return dirPath;
+    private static func save(
+        file: String,
+        root: String,
+        data: Data?
+    ) {
+        let r =  StorageApp.rootPath(
+            append: root
+        )
+        
+        StorageApp.mkdir(
+            path: r.pathh()
+        )
+        
+        let f = r.append(
+            file
+        )
+        
+        StorageApp.mkfile(
+            path: f.pathh(),
+            data: data
+        )
     }
     
-    class Topic {
+    private static func load(
+        file: String,
+        root: String
+    ) -> Data? {
         
-        static func getTopicsURL()->URL {
-            return getURL(dir: "topics");
+        print(debugTag, root, file)
+        
+        let f = StorageApp.rootPath(
+            append: root
+        ).append(
+            file
+        )
+        
+        let fpath = f.pathh()
+        
+        if !StorageApp.exists(
+            at: fpath
+        ) {
+            return nil
         }
         
-        static func fileManipulation(path:String,action:((FileManager, String)->Void))->Void{
-            let manager = FileManager.default;
-            let url = getTopicsURL().appendingPathComponent(path, isDirectory: false);
-            action(manager,url.path);
+        guard let d = StorageApp
+            .getFile(
+                path: f.pathh()
+            ) else {
+            return nil
         }
         
-        private static func getString(p:String)->String?{
-            var name: String? = nil;
-            fileManipulation(path: p, action: {
-                manager, url in
-                if manager.fileExists(atPath: url){
-                    name = String(data: StorageApp.getFile(path: url, manager)!, encoding: .utf8);
-                }
-            });
-            return name;
-        }
-        
-        private static func exists(p:String)->Bool{
-            var b: Bool = false;
-            fileManipulation(path: p, action: {
-                manager, path in
-                b = manager.fileExists(atPath: path);
-            });
-            return b;
-        }
-        
-        public static func preview(
-            name:String
-        ) -> FileSPC? {
-            var preview: FileSPC? = nil;
-            fileManipulation(
-                path: name+".spc",
-                action: {
-                    manager, path in
-                    print("preview:",path);
-                    if manager.fileExists(
-                        atPath: path
-                    ) {
-                        preview = Utils.Exten
-                            .getSPCFile(
-                        StorageApp
-                            .getFile(
-                                path: path,
-                                manager
-                            )!
-                        )
-                    }
-            });
-            
-            return preview;
-        }
-        
-        public static func content(id:Int)->FileSKC1? {
-            let manager = FileManager.default;
-            let path = manager.urls(for: .cachesDirectory, in: .userDomainMask)
-                .first!.appendingPathComponent("content/"+id.description+".skc1",
-                                               isDirectory: false).path;
-            print("content: LOCAL_PATH:",path, "EXISTS:",manager.fileExists(atPath: path))
-            if (!manager.fileExists(atPath: path)) {
-                return nil;
-            }
-            
-            let data = manager.contents(atPath: path)!;
-            return Utils.Exten.getSKC1File(data);
-        }
-        
-        public static func isValid(cachePath: String,
-                                   time:Int = 86400) -> Bool{
-            return exists(p: cachePath);
-        }
-        
-        
-        class Save {
-            private static func saveFile(p:String, data:Data?){
-                StorageApp.Topic.fileManipulation(path: p, action: {
-                    manager, fullPath in
-                    print("spokTopic:",fullPath);
-                    StorageApp.mkfile(path: fullPath, data: data);
-                });
-            }
-            
-            private static func getPath(id:Int, t:String)->String{
-                return id.description+"/"+t;
-            }
-
-            public static func content(id:Int, data:Data?) {
-                let manager = FileManager.default;
-                let path = manager.urls(for: .cachesDirectory, in: .userDomainMask)
-                    .first!.appendingPathComponent("content/", isDirectory: true).path;
-                
-                StorageApp.mkdir(path: path);
-                StorageApp.mkfile(path: path+"/"+id.description+".skc1",
-                                  data: data);
-            }
-            
-            public static func preview(
-                name:String,
-                data:Data?
-            ) {
-                saveFile(
-                    p:"\(name).spc",
-                    data: data
-                )
-            }
-            
-        }
+        return d
     }
     
-    class Collection {
-        
-        private static func collectionURL(
-            _ dir:String
-        ) ->URL {
-            return StorageApp.getURL(dir: dir);
-        }
-        
-        public static func save(_ dir:String,name: String, data: Data?) {
-            let url = collectionURL(dir);
-            StorageApp.mkdir(path: url.path);
-            StorageApp.mkfile(path: url.appendingPathComponent(name+".scs", isDirectory: false).path,
-                              data: data);
-        }
-        
-        public static func collection(_ dir:String,name:String) -> FileSCS? {
-            let url = collectionURL(dir);
-            let data = StorageApp.getFile(path: url.appendingPathComponent(name+".scs", isDirectory: false).path, FileManager.default);
-            if (data == nil) {
-                return nil;
-            }
-            
-            return Utils.Exten.getSCSFile(data!);
-        }
-    }
 }

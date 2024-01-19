@@ -160,37 +160,6 @@ class Utils{
     }
     
     
-    static func singleTap(_ cell:SCellCollectionView,
-        origin:CGPoint
-    ) {
-        
-        print(Utils.tag, "single tap");
-        
-        /*if (cell.mFileSPC.isPremium) {
-            manager.showSubScreen();
-            return;
-        }
-        
-        if (manager.isConnected) {
-            manager.startTraining(
-                cell:cell,
-                startFrame: CGRect(
-                    origin: origin,
-                    size: CGSize(
-                        width: cell.frame
-                            .size.width*1.075,
-                        height: cell.frame
-                            .size.height*1.075
-                    )
-                )
-            );
-            return;
-        }
-        
-        manager.showNoInternet(cell: cell);*/
-    }
-    
-    
     static func configLikes(_ controller: UIViewController,_ cell:UICollectionViewCell, id:Int, selectors:[Selector]) {
         let gesture = UITapGestureRecognizer(target: controller, action: selectors[0]);
         gesture.numberOfTapsRequired = 1;

@@ -21,8 +21,8 @@ class CollectionDowloader {
     private var mCardSizeB: CGSize
     private var mCardSizeM: CGSize
     
-    private var mfm: FileManager
     private var mDirPath: String
+    private var mRootName: String
     
     private var mChild: String
     
@@ -58,16 +58,13 @@ class CollectionDowloader {
                 withPath: mChild
             )
         
-        mfm = FileManager.default
+        mRootName = dir
         
-        let url = mfm.urls(
-            for: .cachesDirectory,
-            in: .userDomainMask
-        )[0]
-        
-        mDirPath = url
-            .append(dir)
-            .pathh()
+        mDirPath = StorageApp.rootPath(
+            append: StorageApp.mDirCollection
+        )
+        .append(mRootName)
+        .pathh()
         
         print(TAG, mDirPath)
         
@@ -111,53 +108,37 @@ class CollectionDowloader {
         let listc = mStorage
             .child("RU")
         
-        let time = getUpdateTime()
-        let currentTime = meta
+        let time = StorageApp
+            .modifTime(
+                path: mDirPath
+            )
+        
+        let netTime = meta
             .updated?
             .timeIntervalSince1970 ?? 0
         
         loadCache()
         
         print(TAG, "CURRENT:",
-              currentTime, "PREV:",
+              netTime, "PREV:",
               time
         )
         
-        if currentTime <= time {
+        if netTime <= time {
             delegate?.onFinish()
             return
         }
         
-        let attr = [
-            FileAttributeKey
-                .creationDate: Date(
-            timeIntervalSince1970: currentTime
-                )
-        ]
+        StorageApp.mkdir(
+            path: mDirPath
+        )
         
-        do {
-            
-            if mfm.fileExists(
-                atPath: mDirPath
-            ) {
-                
-                try mfm.setAttributes(
-                    attr,
-                    ofItemAtPath: mDirPath
-                )
-                
-            } else {
-                
-                try mfm.createDirectory(
-                    atPath: mDirPath,
-                    withIntermediateDirectories: false
-                )
-               
-            }
-            
-        } catch {
-            print(TAG, "ERROR:", error)
-        }
+        StorageApp
+            .modifTime(
+                path: mDirPath,
+                time: netTime
+            )
+        
         
         listc.listAll { [weak self]
             list, error in
@@ -261,15 +242,18 @@ class CollectionDowloader {
                 print(s.TAG, "ERROR_COL:",error)
                 return
             }
-         
+            
             s.addCollection(
-                data,
+                Utils.Exten.getSCSFile(
+                    data
+                ),
                 &s.mNetCollections
             )
             
-            s.writeScs(
-                items.index(),
-                data
+            StorageApp.collection(
+                s.mRootName,
+                id: items.index(),
+                data: data
             )
             
             s.download(
@@ -281,34 +265,29 @@ class CollectionDowloader {
     }
     
     private func loadCache() {
-        if !mfm.fileExists(
-            atPath: mDirPath
+        print(TAG, "loadCache:",mDirPath)
+        if !StorageApp.exists(
+            at: mDirPath
         ) {
+            print(TAG, "loadCache: not exists")
             return
         }
         
-        guard let fileUrls = try? mfm
-            .contentsOfDirectory(
-                atPath: mDirPath
+        StorageApp.urlContent(
+            at: mDirPath
+        ) { fileName in
+            guard let d = StorageApp.collection(
+                mRootName,
+                fileName: fileName
             ) else {
-            print(TAG, "NO_CONTENT_IN_DIR")
-            return
-        }
-        
-        for s in fileUrls {
-            print(TAG, "FILE:",s)
-            
-            guard let d = mfm.contents(
-                atPath: "\(mDirPath)/\(s)"
-            ) else {
-                print(TAG, "ERROR WITH",s)
-                continue
+                print(TAG, "loadCache: data_nil:",fileName)
+                return
             }
-            
             addCollection(
                 d,
                 &mCacheCollections
             )
+            
         }
         
         delegate?.onFirstCollection(
@@ -318,11 +297,12 @@ class CollectionDowloader {
     }
     
     private func addCollection(
-        _ data: Data,
+        _ col: FileSCS?,
         _ c: inout [Collection]
     ) {
-        let col = Utils.Exten
-            .getSCSFile(data)
+        guard let col = col else {
+            return
+        }
         
         let titleSize = mScreen.width * 0.067
         
@@ -343,29 +323,7 @@ class CollectionDowloader {
         )
     }
     
-    private func writeScs(
-        _ index: Int,
-        _ data: Data
-    ) {
-        mfm.createFile(
-            atPath: mDirPath+"/\(index).scs",
-            contents: data
-        )
-    }
     
-    private func getUpdateTime() -> Double {
-        
-        if mfm.fileExists(
-            atPath: mDirPath
-        ) {
-            return StorageApp
-                .modifTIme(
-                    path: mDirPath, mfm
-                )
-        }
-        
-        return 0
-    }
 }
 
 extension URL {

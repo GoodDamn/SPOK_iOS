@@ -12,6 +12,8 @@ import AVFoundation
 class SheepCounterViewController
     : StackViewController {
     
+    private let TAG = "SheepCounterViewController:"
+    
     private var mCounter = 1
     
     private var mExtrabold: UIFont? = nil
@@ -24,6 +26,20 @@ class SheepCounterViewController
     
     deinit {
         print("SheepCounterViewController: deinit()")
+    }
+    
+    override func viewDidAppear(
+        _ animated: Bool
+    ) {
+        print(TAG, "viewDidAppear")
+        mPlayer?.play()
+    }
+    
+    override func viewDidDisappear(
+        _ animated: Bool
+    ) {
+        print(TAG, "viewDidDisappear")
+        mPlayer?.stop()
     }
     
     override func viewDidLoad() {

@@ -37,8 +37,8 @@ class PreviewCell
         mParticles!.backgroundColor = .black
             .withAlphaComponent(0.4)
         
-        contentView
-            .addSubview(mParticles!)
+        /*contentView
+            .addSubview(mParticles!)*/
     }
     
     override init(frame: CGRect) {
@@ -59,7 +59,7 @@ class PreviewCell
     override func layoutSubviews() {
         print(PreviewCell.TAG, "layoutSubviews()")
         
-        if mParticles == nil {
+        /*if mParticles == nil {
             return
         }
         
@@ -71,7 +71,7 @@ class PreviewCell
         )
         mParticles!.mRadius = 0.02
         mParticles!.generate()
-        mParticles!.start()
+        mParticles!.start()*/
     }
     
     public func load(
@@ -79,7 +79,16 @@ class PreviewCell
         id: Int
     ) {
         mId = id
-                
+        
+        let d = StorageApp
+            .preview(
+                id: id
+            )
+        print(PreviewCell.TAG, "PREVIEW:",d)
+        if d != nil {
+            show(d!)
+        }
+        return
         let s = Storage
             .storage()
             .reference(
@@ -96,7 +105,10 @@ class PreviewCell
                 
             guard let data = data,
                     error == nil else {
-                print(PreviewCell.TAG,"ERROR:",error)
+                print(
+                    PreviewCell.TAG,
+                    "ERROR:",
+                    error)
                 return
             }
             
@@ -126,9 +138,9 @@ class PreviewCell
             let fileSPC = Utils.Exten
                     .getSPCFile(data);
                         
-            StorageApp.Topic.Save
+            StorageApp
                 .preview(
-                    name: "\(s.mId)",
+                    id: s.mId,
                     data: data
                 );
             

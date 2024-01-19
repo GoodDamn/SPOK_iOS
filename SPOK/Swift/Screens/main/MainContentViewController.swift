@@ -207,40 +207,15 @@ class MainContentViewController
      }
     
     func startTraining(
-        cell:SCellCollectionView,
         startFrame:CGRect,
         endOfSession:((Int)->Void)? = nil
     ) {
         
-        let id = cell.mID;
-        let name:String? = cell.nameTraining.text;
-        
-        print("startTraining", id, name)
-        if id == 0 || name == nil{
-            return;
-        }
-        
-        let lang = language.isEmpty ? "RU" : language;
-        
-        var statsTopic = id.description + "/\(lang)/";
-        var statsCategory = cell.mFileSPC.categoryID.description + "/\(lang)/";
-        
-        if (id > 0){
-            let uint16ID = UInt16(id);
-            let indexExists = history.firstIndex(of: uint16ID);
-            if indexExists != nil {
-                statsTopic += "R_";
-                statsCategory += "R_";
-                history.remove(at: indexExists!);
-            }
-            history.append(uint16ID);
-        }
-        
         let controller = BaseTopicController()
         
-        controller.setID(
+        /*controller.setID(
             id
-        )
+        )*/
         
         navigationController?
             .pushViewController(
