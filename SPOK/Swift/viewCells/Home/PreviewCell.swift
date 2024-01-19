@@ -88,14 +88,60 @@ class PreviewCell
         if d != nil {
             show(d!)
         }
-        return
-        let s = Storage
+        
+        let st = Storage
             .storage()
             .reference(
                 withPath: "Trainings/\(id)/\(type).spc"
             )
         
-        s.getData(maxSize: 3*1024*1024) {
+        st.getMetadata { [weak self]
+            meta, error in
+            
+            guard let s = self else {
+                print(PreviewCell.TAG,"getMetadata: garbage collected")
+                return
+            }
+            
+            guard let meta = meta, error == nil else {
+                print(PreviewCell.TAG, "ERROR_META:",error)
+                return
+            }
+            
+            s.processMetadata(
+                meta,
+                file: st
+            )
+            
+        }
+        
+    }
+    
+    private func processMetadata(
+        _ meta: StorageMetadata,
+        file: StorageReference
+    ) {
+       
+        let p = StorageApp.rootPath(
+            append: StorageApp.mDirPreviews
+        ).append(
+            StorageApp.tospc(
+                id: mId
+            )
+        )
+
+        let t = StorageApp.modifTime(
+            path: p.pathh()
+        )
+        
+        let nett = meta.updated?.timeIntervalSince1970 ?? 0
+        
+        print(PreviewCell.TAG, "meta:",t,nett)
+        if t >= nett {
+            return
+        }
+        
+        file.getData(maxSize: 3*1024*1024) {
             [weak self] data,error in
                 
             guard let s = self else {
@@ -118,9 +164,7 @@ class PreviewCell
             
         }
         
-        
     }
-    
     
     private func extractSpc(
         from data: Data

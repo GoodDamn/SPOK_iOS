@@ -204,6 +204,13 @@ class StorageApp {
         }
     }
     
+    public static func tospc(
+        id: Int,
+        lang: String = ""
+    ) -> String {
+        return "\(id)\(lang).spc"
+    }
+    
     public static func rootPath(
         append path: String
     ) -> URL {
