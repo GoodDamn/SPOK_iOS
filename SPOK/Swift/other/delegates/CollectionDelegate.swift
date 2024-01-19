@@ -14,7 +14,8 @@ public class CollectionDelegate
     private final let TAG = "CollectionDelegate"
     
     private var mCollections: [Collection]!
-        
+    private var mCacheSize: CGSize!
+    
     public func setCollections(
         _ m: [Collection]
     ) {
@@ -25,6 +26,14 @@ public class CollectionDelegate
 
 extension CollectionDelegate
     : UICollectionViewDataSource {
+    
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplaying cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        
+    }
     
     public func collectionView(
         _ collectionView: UICollectionView,
@@ -73,6 +82,11 @@ extension CollectionDelegate
             id: intID
         )
         
+        cell.calculateBounds(
+            with: mCacheSize
+        )
+        
+        
         return cell;
     }
     
@@ -90,6 +104,8 @@ extension CollectionDelegate
         let col = mCollections[
             collectionView.tag
         ] as! CollectionTopic
+        
+        mCacheSize = col.cardSize
         
         print(TAG, "sizeForItemAt",
               col.cardSize)

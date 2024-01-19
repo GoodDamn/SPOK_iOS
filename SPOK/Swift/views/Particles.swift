@@ -18,7 +18,7 @@ class Particles
     
     // 100 particles = 5 * 20
     
-    private var mInterrupted = false
+    private var mTimer: Timer? = nil
     
     private var mParticles: [Particle] = []
     
@@ -68,14 +68,16 @@ class Particles
         ini()
     }
 
+    public func stop() {
+        mTimer?.invalidate()
+    }
+    
     public func start() {
-        
-        mInterrupted = false
         
         var prevTime = Date()
             .timeIntervalSince1970
         
-        Timer.scheduledTimer(
+        mTimer = Timer.scheduledTimer(
             withTimeInterval: 0.01,
             repeats: true
         ) { _ in
@@ -101,9 +103,6 @@ class Particles
         
     }
     
-    public func stop() {
-        mInterrupted = true
-    }
     
     private func mainThread(
         _ p: @escaping () -> Void

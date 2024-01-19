@@ -54,7 +54,7 @@ public class TitleTableViewCell
         print("TitleTableViewCell: layoutSubviews()")
         
         let w = frame.width
-        let s = 0.1 * w
+        let s = 0.053 * w
         
         mTitle?.frame = CGRect(
             x: s,

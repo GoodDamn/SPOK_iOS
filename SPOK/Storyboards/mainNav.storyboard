@@ -10,11 +10,6 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="OpenSans-Bold.ttf">
-            <string>OpenSans-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--New-->
         <scene sceneID="i5e-C9-197">
@@ -56,53 +51,15 @@
                                                         <inset key="sectionInset" minX="15" minY="0.0" maxX="27" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS" customClass="PreviewCell" customModule="SPOK" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS" customClass="PreviewCell" customModule="SPOK" customModuleProvider="target">
                                                             <rect key="frame" x="15" y="47.666666666666664" width="167" height="207"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqu-KT-MgQ">
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqu-KT-MgQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="167" height="207"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16x-Bf-MY3">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="167" height="207"/>
-                                                                        <color key="backgroundColor" systemColor="systemGray3Color"/>
-                                                                    </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-8p-pyb">
-                                                                        <rect key="frame" x="10" y="153.66666666666666" width="149" height="23.333333333333343"/>
-                                                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="17"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRC-if-MLq">
-                                                                        <rect key="frame" x="10" y="179" width="149" height="15"/>
-                                                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="16x-Bf-MY3" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" id="0uT-kX-oA7"/>
-                                                                    <constraint firstItem="16x-Bf-MY3" firstAttribute="top" secondItem="Mqu-KT-MgQ" secondAttribute="top" id="IBM-4X-XOl"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="16x-Bf-MY3" secondAttribute="bottom" id="L54-Pw-g31"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="6E9-8p-pyb" secondAttribute="trailing" constant="8" id="Lnj-2u-raS"/>
-                                                                    <constraint firstItem="16x-Bf-MY3" firstAttribute="leading" secondItem="Mqu-KT-MgQ" secondAttribute="leading" id="PRt-Uo-8Ar"/>
-                                                                    <constraint firstItem="YRC-if-MLq" firstAttribute="top" secondItem="6E9-8p-pyb" secondAttribute="bottom" constant="2" id="QfX-Be-xF3"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="YRC-if-MLq" secondAttribute="trailing" constant="8" id="UCT-ml-3aL"/>
-                                                                    <constraint firstItem="6E9-8p-pyb" firstAttribute="leading" secondItem="YRC-if-MLq" secondAttribute="leading" id="anQ-DH-3H0"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="16x-Bf-MY3" secondAttribute="bottom" id="f0g-RD-Sr9"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="YRC-if-MLq" secondAttribute="bottom" constant="13" id="gEu-Ec-jje"/>
-                                                                    <constraint firstItem="16x-Bf-MY3" firstAttribute="leading" secondItem="Mqu-KT-MgQ" secondAttribute="leading" id="jsP-Fo-hVr"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="16x-Bf-MY3" secondAttribute="trailing" id="qR6-3O-b6b"/>
-                                                                    <constraint firstItem="YRC-if-MLq" firstAttribute="leading" secondItem="16x-Bf-MY3" secondAttribute="leading" constant="10" id="xGf-Z1-1iB"/>
-                                                                </constraints>
                                                             </collectionViewCellContentView>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <connections>
-                                                                <outlet property="mDesc" destination="YRC-if-MLq" id="Rvp-W5-S4y"/>
-                                                                <outlet property="mImageView" destination="16x-Bf-MY3" id="mWz-wz-IWn"/>
-                                                                <outlet property="mTitle" destination="6E9-8p-pyb" id="2rh-DX-3Qh"/>
-                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -250,9 +207,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

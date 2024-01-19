@@ -28,13 +28,6 @@ class SheepCounterViewController
         print("SheepCounterViewController: deinit()")
     }
     
-    override func viewDidAppear(
-        _ animated: Bool
-    ) {
-        print(TAG, "viewDidAppear")
-        mPlayer?.play()
-    }
-    
     override func viewDidDisappear(
         _ animated: Bool
     ) {
@@ -56,8 +49,6 @@ class SheepCounterViewController
         )
         
         mPlayer?.prepareToPlay()
-        
-        
         
         view.backgroundColor = UIColor(
             named: "background"
@@ -84,8 +75,7 @@ class SheepCounterViewController
                 sizeSquare: 0.084
             )
         
-        
-        
+
         let ofx = w * 0.217
         let lTap = UILabel(
             frame: CGRect(

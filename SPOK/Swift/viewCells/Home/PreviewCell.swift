@@ -14,11 +14,10 @@ class PreviewCell
     
     private static let TAG = "PreviewCell:"
     
-    @IBOutlet weak var mImageView: UIImageView!;
-    @IBOutlet weak var mTitle: UILabel!;
-    @IBOutlet weak var mDesc: UILabel!;
-    
-    public var mParticles: Particles? = nil
+    public var mImageView: UIImageView!
+    public var mTitle: UILabel!
+    public var mDesc: UILabel!
+    public var mParticles: Particles!
     
     private var mId: Int = Int.min
     
@@ -30,15 +29,45 @@ class PreviewCell
     }
     
     private func ini() {
-        mParticles = Particles(
-            frame: frame
+        print(PreviewCell.TAG,
+              "ini:",
+              frame
         )
         
-        mParticles!.backgroundColor = .black
+        mParticles = Particles()
+        
+        mParticles.backgroundColor = .black
             .withAlphaComponent(0.4)
         
-        /*contentView
-            .addSubview(mParticles!)*/
+        
+        mImageView = UIImageView()
+        mImageView.backgroundColor = .darkGray
+        
+        let bold = UIFont(
+            name: "OpenSans-Bold",
+            size: 18
+        )
+        
+        mTitle = UILabel()
+        mTitle.font = bold
+        mTitle.numberOfLines = 0
+        mTitle.textColor = .white
+        mTitle.backgroundColor = .clear
+        
+        mDesc = UILabel()
+        mDesc.font = bold
+        mDesc.numberOfLines = 0
+        mDesc.textColor = .white
+        mDesc.backgroundColor = .clear
+        
+        contentView
+            .addSubview(mImageView)
+        contentView
+            .addSubview(mTitle)
+        contentView
+            .addSubview(mDesc)
+        contentView
+            .addSubview(mParticles)
     }
     
     override init(frame: CGRect) {
@@ -56,22 +85,72 @@ class PreviewCell
         ini()
     }
     
-    override func layoutSubviews() {
-        print(PreviewCell.TAG, "layoutSubviews()")
+    public func calculateBounds(
+        with size: CGSize
+    ) {
+        let w = size.width
+        let h = size.height
         
-        /*if mParticles == nil {
-            return
-        }
-        
-        mParticles!.frame = CGRect(
+        mImageView.frame = CGRect(
             x: 0,
             y: 0,
-            width: frame.width,
-            height: frame.height
+            width: w,
+            height: h
         )
-        mParticles!.mRadius = 0.02
-        mParticles!.generate()
-        mParticles!.start()*/
+        
+        contentView.frame = mImageView.frame
+        
+        let wtext = 0.867 * w
+        
+        let ltext = (w - wtext) * 0.5
+        
+        mTitle.font = mTitle.font
+            .withSize(0.096 * h)
+        
+        mDesc.font = mDesc.font
+            .withSize(0.053 * h)
+        
+        mTitle.frame = CGRect(
+            x: ltext,
+            y: 0,
+            width: wtext,
+            height: mTitle.textHeight(
+                width: wtext
+            )
+        )
+        mTitle.backgroundColor = .blue
+        mDesc.backgroundColor = .gray
+        
+        mDesc.frame = CGRect(
+            x: ltext,
+            y: h,
+            width: wtext,
+            height: mDesc.textHeight(
+                width: wtext
+            )
+        )
+        
+        let ht = mTitle.frame.height
+        let hd = mDesc.frame.height
+        
+        mTitle.frame.origin.y = h - ht - hd
+        mTitle.frame.size.height = ht
+        
+        mDesc.frame.origin.y = h - ht
+        mDesc.frame.size.height = hd
+        
+        print(PreviewCell.TAG,
+              "FRAME:",
+              mTitle.frame,
+              mDesc.frame
+        )
+        
+        mParticles.frame = mImageView.frame
+        mParticles.mRadius = 0.02
+        mParticles.generate()
+    
+        mTitle.setNeedsDisplay()
+        mDesc.setNeedsDisplay()
     }
     
     public func load(
@@ -179,9 +258,9 @@ class PreviewCell
                 return
             }
                 
-            let fileSPC = Utils.Exten
+            var fileSPC = Utils.Exten
                     .getSPCFile(data);
-                        
+            
             StorageApp
                 .preview(
                     id: s.mId,
@@ -210,7 +289,7 @@ class PreviewCell
                         s.frame.size,
                         image: fileSPC.image!
                     )
-            
+                
                 s.mImageView.image = img
             
                 let sa = s.contentView.layer.bounds
@@ -237,7 +316,48 @@ class PreviewCell
                 s.mDesc.text = fileSPC
                     .description
                 s.mDesc.textColor = fileSPC.color
+                
+                guard let part = s.mParticles else {
+                    return
+                }
+
+                part.isHidden = true
+                part.stop()
+                
+                if Bool.random() {
+                    part.isHidden = false
+                    part.start()
+                }
+                
         }
+    }
+    
+}
+
+
+extension UILabel {
+    
+    func textHeight() -> CGFloat {
+        return textHeight(
+            width: frame.width
+        )
+    }
+    
+    func textHeight(
+        width: CGFloat
+    ) -> CGFloat {
+        return systemLayoutSizeFitting(
+            CGSize(
+                width: frame.width,
+                height: UIView
+                    .layoutFittingCompressedSize
+                    .height
+            ),
+            withHorizontalFittingPriority:
+                    .required,
+            verticalFittingPriority:
+                    .fittingSizeLevel
+        ).height
     }
     
 }

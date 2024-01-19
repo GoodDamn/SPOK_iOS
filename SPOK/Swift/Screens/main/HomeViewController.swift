@@ -206,6 +206,7 @@ extension HomeViewController
             return UITableViewCell()
         }
         
+        
         let label = cel.mTitle!
         label.text = c.title;
         label.font = label.font
@@ -225,6 +226,13 @@ extension HomeViewController
             CollectionTableViewCell
         
         let colview = cell.collectionView!
+        
+        colview.contentInset = UIEdgeInsets(
+            top: 0.5*label.frame.height,
+            left: label.frame.origin.x,
+            bottom: 0,
+            right: 0
+        )
         
         colview.tag = r
         
