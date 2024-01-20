@@ -68,10 +68,10 @@ class Particles
 
     public func stop() {
         mTimer?.invalidate()
+        mTimer = nil
     }
     
     public func start() {
-        return
         var prevTime = Date()
             .timeIntervalSince1970
         
@@ -80,16 +80,6 @@ class Particles
             repeats: true
         ) { _ in
             
-            /*let current = Date()
-                .timeIntervalSince1970
-            
-            self.mElapsedTime = Float(
-                current - prevTime
-            ) * 1000
-            
-            
-            prevTime = current
-            */
             let m = self.mParticles
             
             for i in m.indices {
@@ -115,7 +105,9 @@ class Particles
         
         if l.opacity < 0.01 {
             mParticles[index] = generateParticle()
-            l.opacity = 1.0
+            l.opacity = Float.random(
+                in: 0.5..<1.0
+            )
         }
     }
     
