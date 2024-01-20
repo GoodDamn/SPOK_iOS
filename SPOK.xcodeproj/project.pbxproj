@@ -44,6 +44,7 @@
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
+		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
 		25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */; };
 		25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5F2B510E0100C9A73E /* StackViewController.swift */; };
 		25D5E5642A6A82A200A3126B /* SpanTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D5E5632A6A82A200A3126B /* SpanTextView.swift */; };
@@ -175,6 +176,7 @@
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
 		25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		25C8BB5F2B510E0100C9A73E /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		25D5E5632A6A82A200A3126B /* SpanTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanTextView.swift; sourceTree = "<group>"; };
@@ -389,6 +391,14 @@
 				255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */,
 			);
 			path = sleepIntro;
+			sourceTree = "<group>";
+		};
+		25C455C62B5BF8D400AF54B1 /* cacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				25C455C72B5BF90400AF54B1 /* CacheFile.swift */,
+			);
+			path = cacheManager;
 			sourceTree = "<group>";
 		};
 		25D5E4A72A69A47800A3126B /* views */ = {
@@ -637,6 +647,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				25C455C62B5BF8D400AF54B1 /* cacheManager */,
 				25DB9AC72B57B5DB00B5359F /* utils */,
 				25DB9ABC2B54E32700B5359F /* delegates */,
 				25DB9AB82B53E60E00B5359F /* iterators */,
@@ -1005,6 +1016,7 @@
 				2BC121792777283E00729BA4 /* SettingsViewController.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				2BC1218327772B5900729BA4 /* AboutAppVController.swift in Sources */,
+				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
 				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,

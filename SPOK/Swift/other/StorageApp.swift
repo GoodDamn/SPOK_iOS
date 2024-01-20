@@ -99,6 +99,16 @@ class StorageApp {
     }
     
     public static func content(
+        id: Int,
+        lang: String = ""
+    ) -> Data? {
+        return load(
+            file: "\(id)\(lang).skc",
+            root: mDirContent
+        )
+    }
+    
+    public static func content(
         id:Int,
         lang: String = "",
         data:Data?

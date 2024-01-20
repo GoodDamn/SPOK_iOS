@@ -16,7 +16,7 @@ public class FileInputStream {
     private var mIndex: Int
     
     init(
-        data: [UInt8]
+        data: inout [UInt8]
     ) {
        mData = data
        mIndex = 0

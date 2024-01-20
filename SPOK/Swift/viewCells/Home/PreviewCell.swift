@@ -100,10 +100,8 @@ class PreviewCell
     @objc func onTap(
         _ sender: UITapGestureRecognizer
     ) {
-        sender.isEnabled = false
-        
         let t = BaseTopicController()
-        t.setID(4)
+        t.setID(mId)
         t.view.alpha = 0.0
         
         Utils.main()

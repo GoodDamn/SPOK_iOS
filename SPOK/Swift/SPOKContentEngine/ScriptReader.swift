@@ -20,12 +20,12 @@ public class ScriptReader {
     
     public init(
         engine: SPOKContentEngine,
-        dataSKC: [UInt8]
+        dataSKC: inout [UInt8]
     ) {
         mEngine = engine
         
         mStream = FileInputStream(
-            data: dataSKC
+            data: &dataSKC
         )
         // deny resource length
         var resLenByte = mStream.read(4)

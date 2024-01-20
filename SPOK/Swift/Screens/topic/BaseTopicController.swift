@@ -17,8 +17,6 @@ class BaseTopicController
     
     private final let TAG = "BaseTopicController:"
     
-    private var mBtnNext: UIButton!
-    
     private var mScriptReader: ScriptReader? = nil
     
     private var mPrevTextView: UITextViewPhrase? = nil
@@ -33,7 +31,7 @@ class BaseTopicController
         SPOKContentEngine()
     
     @objc func onTouch(
-        _ sender: UIButton
+        _ sender: UITapGestureRecognizer
     ) {
         mScriptReader!.next()
     }
@@ -43,15 +41,28 @@ class BaseTopicController
     
         modalPresentationStyle = .overFullScreen
         
-        mBtnNext = UIButton(frame: view.frame)
-        mBtnNext.addTarget(
-            self,
-            action: #selector(onTouch(_:)),
-            for: .touchUpInside)
+        let mFont = UIFont(
+            name: "RoundedMplus1c-Light",
+            size: view.frame.width * 0.057
+        )
         
-        mBtnNext.isEnabled = false
+        let mTextColor = UIColor(
+            named: "text_topic"
+        )
         
-        view.addSubview(mBtnNext)
+        let gestureTap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                onTouch(_:)
+            )
+        )
+        
+        gestureTap.numberOfTapsRequired = 1
+        
+        view.isUserInteractionEnabled = false
+        view.addGestureRecognizer(
+            gestureTap
+        )
         
         view.backgroundColor = UIColor(
             named: "background")
@@ -72,18 +83,17 @@ class BaseTopicController
         mEngine.setOnEndScriptListener {
             scriptText in
             
-            let h = viewFrame.height - mSpanPointY
-            let w = viewFrame.width - 2*mSpanPointX
-            
             let textView = UITextViewPhrase(
                 frame: CGRect(
                     x: mSpanPointX,
                     y: mSpanPointY,
-                    width: w,
-                    height: h),
+                    width: viewFrame.width - mSpanPointX*2,
+                    height: 0),
                 scriptText.spannableString
             )
             
+            textView.font = mFont
+            textView.textColor = mTextColor
             textView.show()
 
             self.view
@@ -102,7 +112,17 @@ class BaseTopicController
     func onAmbient(
         _ player: AVAudioPlayer?
     ) {
-        print(TAG, "onAmbient", player)
+        
+        print(TAG, "onAmbient",player?.data)
+        let ses = AVAudioSession
+            .sharedInstance()
+        do {
+            try ses
+                .setCategory(.playback)
+            try ses.setActive(true)
+        } catch {
+            print(TAG, "onAmbient: ERROR::SESSION",error)
+        }
         player?.play()
         player?.setVolume(
             1.0,
@@ -114,12 +134,14 @@ class BaseTopicController
             return
         }
         
+        let f = 1.5
+        
         prevP.setVolume(
             0.0,
-            fadeDuration: 1.5)
+            fadeDuration: f)
         
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + 1.5
+            deadline: .now() + f
         ) {
             prevP.stop()
             self.mCurrentPlayer = player
@@ -141,16 +163,18 @@ class BaseTopicController
     
     func onFinish() {
         
-        mBtnNext.isEnabled = false
+        view.gestureRecognizers?[0].isEnabled = false
+        view.isUserInteractionEnabled = false
         
         if let player = mCurrentPlayer {
+            let dur = 2.5
             player.setVolume(
                 0.0,
-                fadeDuration: 2.5
+                fadeDuration: dur
             )
             
             DispatchQueue.main.asyncAfter(
-                deadline: .now() + 2.5
+                deadline: .now() + dur
             ) {
                 player.stop()
             }
@@ -167,7 +191,7 @@ class BaseTopicController
         }
         
         UIView.animate(
-            withDuration: 3.5,
+            withDuration: 2.5,
             animations: {
                 self.mPrevTextView!.alpha = 0.0
             },
@@ -191,47 +215,42 @@ class BaseTopicController
     private func initEngine() {
         downloadSKC(
             path: mNetworkUrl
-        ) {
+        ) { data in
+            
             DispatchQueue.global(
                 qos: .background
-            ).async {
+            ).async { [weak self] in
                 
-                let TAG = self.TAG
-                let engine = self.mEngine
-                
-                let fm = FileManager.default
-                
-                let urlSkc = self.getSkcPath()
-                
-                print(TAG, "PATH_SKC:",urlSkc)
-                
-                guard let data = fm.contents(
-                    atPath: urlSkc
-                ) else {
-                    print(TAG, "INVALID_PATH_SKC")
+                guard let s = self else {
+                    print("BaseTopicController:downloadSKC:GC")
                     return
                 }
                 
-                engine.loadResources(
-                    dataSKC: [UInt8](data))
+                let TAG = s.TAG
+                let engine = s.mEngine
                 
-                self.mScriptReader = ScriptReader(
+                var d = ([UInt8])(data)
+                
+                engine.loadResources(
+                    dataSKC: &d)
+                
+                s.mScriptReader = ScriptReader(
                     engine: engine,
-                    dataSKC: [UInt8](data)
+                    dataSKC: &d
                 )
                 
                 DispatchQueue.main.async {
-                    guard let r = self.mScriptReader else {
+                    guard let r = s.mScriptReader else {
                         return
                     }
                     
                     r.setOnReadScriptListener(
-                        self
+                        s
                     )
                     
                     r.next()
                     
-                    self.mBtnNext.isEnabled = true
+                    s.view.isUserInteractionEnabled = true
                 }
                 
             }
@@ -240,16 +259,14 @@ class BaseTopicController
     
     private func downloadSKC(
         path: String,
-        completion: @escaping ()->Void
+        completion: @escaping (Data)->Void
     ) {
         
-        let fm = FileManager
-            .default
+        let d = StorageApp
+            .content(id: mId)
         
-        if fm.fileExists(
-            atPath: getSkcPath()
-        ) {
-            completion()
+        if d != nil {
+            completion(d!)
             return
         }
         
@@ -271,42 +288,27 @@ class BaseTopicController
                     return
                 }
                 
-                self.saveSkc(data)
-                completion()
+                StorageApp.content(
+                    id: self.mId,
+                    data: data
+                )
+                completion(data)
             }
     }
     
-    private func getSkcPath() -> String {
-        let fm = FileManager.default
-        
-        let cacheUrl = fm.urls(
-            for: .cachesDirectory,
-            in: .userDomainMask)[0]
-        
-        let skc = cacheUrl
-            .appendingPathComponent(
-                "\(mId).skc"
-            )
-        
-        return skc.path
-    }
-    
-    private func saveSkc(
-        _ data: Data
-    ) {
-        FileManager
-            .default
-            .createFile(
-                atPath: getSkcPath(),
-                contents: data
-        )
-    }
     
     private func nothing() {
         Toast.init(
             text: "Nothing found",
             duration: 1.8
         ).show()
+        
+        pop(
+            duration: 0.3
+        ) {
+            self.view.alpha = 0
+        }
+        
     }
     
     

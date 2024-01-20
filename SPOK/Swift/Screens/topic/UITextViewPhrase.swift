@@ -19,6 +19,7 @@ class UITextViewPhrase
         backgroundColor = .clear;
         isUserInteractionEnabled = false
         textAlignment = .center;
+        numberOfLines = 0
         alpha = 0.0;
     }
     
@@ -31,10 +32,15 @@ class UITextViewPhrase
     }
     
     public func show() {
-        let w = frame.width
-        sizeToFit()
+        let h = sizeThatFits(
+            CGSize(
+                width: frame.width,
+                height: CGFloat
+                    .greatestFiniteMagnitude
+            )
+        ).height
         
-        frame.origin.x = (w-frame.width) * 0.5
+        frame.size.height = h
         
         UIView.animate(
             withDuration: TimeInterval
@@ -62,18 +68,5 @@ class UITextViewPhrase
             completion?()
         }
     }
-    
-    
-    /*public func initial(t:String?){
-        
-        font = UIFont(
-            name: "RoundedMplus1c-Light",
-            size: frame.height * 0.5
-        );
-        textColor = UIColor(
-            named: "text_topic"
-        );
-        
-    }*/
     
 }

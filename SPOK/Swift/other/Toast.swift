@@ -20,12 +20,16 @@ class Toast{
         isShowing = false;
     }
     
-    public func setText(text:String)->Toast{
+    public func setText(
+        text:String
+    ) -> Toast{
         self.text = text;
         return self;
     }
     
-    public func setDuration(duration:Double)->Toast{
+    public func setDuration(
+        duration: Double
+    )->Toast{
         self.duration = duration;
         return self;
     }
