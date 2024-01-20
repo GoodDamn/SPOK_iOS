@@ -14,12 +14,20 @@ public class CollectionDelegate
     private final let TAG = "CollectionDelegate"
     
     private var mCollections: [Collection]!
-    private var mCacheSize: CGSize!
     
     public func setCollections(
         _ m: [Collection]
     ) {
         mCollections = m
+    }
+ 
+    public func registerCells(
+        for colview: UICollectionView
+    ) {
+        colview.register(
+            PreviewCell.self,
+            forCellWithReuseIdentifier: PreviewCell.ID
+        )
     }
     
 }
@@ -71,7 +79,7 @@ extension CollectionDelegate
         let intID = Int(id);
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "cell",
+            withReuseIdentifier: PreviewCell.ID,
             for: indexPath
         ) as! PreviewCell;
         
@@ -82,13 +90,9 @@ extension CollectionDelegate
             id: intID
         )
         
-        cell.calculateBounds(
-            with: mCacheSize
-        )
-        
-        
         return cell;
     }
+    
     
 }
 
@@ -104,8 +108,6 @@ extension CollectionDelegate
         let col = mCollections[
             collectionView.tag
         ] as! CollectionTopic
-        
-        mCacheSize = col.cardSize
         
         print(TAG, "sizeForItemAt",
               col.cardSize)

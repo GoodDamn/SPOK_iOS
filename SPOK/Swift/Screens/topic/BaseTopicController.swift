@@ -11,7 +11,7 @@ import UIKit
 import FirebaseStorage
 
 class BaseTopicController
-    : UIViewController,
+    : StackViewController,
       OnReadCommand,
       OnReadScript {
     
@@ -158,10 +158,11 @@ class BaseTopicController
         
         
         if mPrevTextView == nil {
-            navigationController?
-                .popViewController(
-                    animated: true
-                )
+            self.pop(
+                duration: 0.2
+            ) {
+                self.view.alpha = 0
+            }
             return
         }
         
@@ -171,10 +172,11 @@ class BaseTopicController
                 self.mPrevTextView!.alpha = 0.0
             },
             completion: { b in
-                self.navigationController?
-                    .popViewController(
-                        animated: true
-                    )
+                self.pop(
+                    duration: 0.2
+                ) {
+                    self.view.alpha = 0
+                }
             }
         )
     }

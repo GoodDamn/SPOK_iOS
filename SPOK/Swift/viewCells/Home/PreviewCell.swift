@@ -13,6 +13,7 @@ class PreviewCell
     : UICollectionViewCell {
     
     private static let TAG = "PreviewCell:"
+    public static let ID = "cell"
     
     public var mImageView: UIImageView!
     public var mTitle: UILabel!
@@ -34,13 +35,25 @@ class PreviewCell
               frame
         )
         
-        mParticles = Particles()
+        let f = CGRect(
+            x: 0,
+            y: 0,
+            width: frame.width,
+            height: frame.height
+        )
+        
+        mParticles = Particles(
+            frame: f,
+            radius: 0.01
+        )
         
         mParticles.backgroundColor = .black
             .withAlphaComponent(0.4)
         
         
-        mImageView = UIImageView()
+        mImageView = UIImageView(
+            frame: f
+        )
         mImageView.backgroundColor = .darkGray
         
         let bold = UIFont(
@@ -68,6 +81,39 @@ class PreviewCell
             .addSubview(mDesc)
         contentView
             .addSubview(mParticles)
+        
+        let g = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                onTap(_:)
+            )
+        )
+        
+        g.numberOfTapsRequired = 1
+        
+        contentView.addGestureRecognizer(
+            g
+        )
+        
+    }
+    
+    @objc func onTap(
+        _ sender: UITapGestureRecognizer
+    ) {
+        sender.isEnabled = false
+        
+        let t = BaseTopicController()
+        t.setID(4)
+        t.view.alpha = 0.0
+        
+        Utils.main()
+            .push(
+                t,
+                animDuration: 0.3
+            ) {
+                t.view.alpha = 1.0
+            }
+        
     }
     
     override init(frame: CGRect) {
@@ -82,75 +128,64 @@ class PreviewCell
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         print(PreviewCell.TAG, "init(coder:)")
-        ini()
     }
     
-    public func calculateBounds(
-        with size: CGSize
-    ) {
-        let w = size.width
-        let h = size.height
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        mImageView.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: w,
-            height: h
-        )
+        print(PreviewCell.TAG, "prepareForReuse", mTitle.bounds.height)
+    }
+    
+    public func calculateBounds() {
         
-        contentView.frame = mImageView.frame
+        let w = frame.width
+        let h = frame.height
         
         let wtext = 0.867 * w
         
         let ltext = (w - wtext) * 0.5
         
         mTitle.font = mTitle.font
-            .withSize(0.096 * h)
+            .withSize(0.111 * h) // 0.096M
         
         mDesc.font = mDesc.font
-            .withSize(0.053 * h)
+            .withSize(0.062 * h) // 0.053M
         
         mTitle.frame = CGRect(
             x: ltext,
             y: 0,
             width: wtext,
-            height: mTitle.textHeight(
-                width: wtext
-            )
-        )
-        mTitle.backgroundColor = .blue
-        mDesc.backgroundColor = .gray
-        
-        mDesc.frame = CGRect(
-            x: ltext,
-            y: h,
-            width: wtext,
-            height: mDesc.textHeight(
-                width: wtext
-            )
+            height: 1
         )
         
+        mDesc.frame = mTitle.frame
+        
+        mTitle.sizeToFit()
+        mDesc.sizeToFit()
+                
         let ht = mTitle.frame.height
         let hd = mDesc.frame.height
         
-        mTitle.frame.origin.y = h - ht - hd
-        mTitle.frame.size.height = ht
+        let bottom = 0.104 * h
+        let between = 0.02 * h
+        let y2 = h - hd - bottom
+        let y1 = y2 - ht - between
         
-        mDesc.frame.origin.y = h - ht
-        mDesc.frame.size.height = hd
+        mDesc.frame.origin.y = y2
+        mTitle.frame.origin.y = y1
         
         print(PreviewCell.TAG,
-              "FRAME:",
-              mTitle.frame,
-              mDesc.frame
+              "FRAMES_TEXT: TITLE",
+              ht,
+              mTitle.font.pointSize
         )
         
-        mParticles.frame = mImageView.frame
-        mParticles.mRadius = 0.02
-        mParticles.generate()
-    
-        mTitle.setNeedsDisplay()
-        mDesc.setNeedsDisplay()
+        print(PreviewCell.TAG,
+              "FRAMES_TEXT: DESC",
+              hd,
+              mDesc.font.pointSize
+        )
+        
     }
     
     public func load(
@@ -300,12 +335,6 @@ class PreviewCell
                 
                 layer.masksToBounds = true
                 
-                UIView.animate(
-                    withDuration: 0.75
-                ) {
-                    s.contentView.alpha = 1.0
-                }
-                
                 guard let title = s.mTitle else {
                     return
                 }
@@ -316,6 +345,14 @@ class PreviewCell
                 s.mDesc.text = fileSPC
                     .description
                 s.mDesc.textColor = fileSPC.color
+
+                s.calculateBounds()
+                
+                UIView.animate(
+                    withDuration: 0.75
+                ) {
+                    s.contentView.alpha = 1.0
+                }
                 
                 guard let part = s.mParticles else {
                     return

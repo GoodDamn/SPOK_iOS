@@ -52,19 +52,17 @@ class Particles
         }
     }
     
-    override init(frame: CGRect) {
+    init(
+        frame: CGRect,
+        radius: CGFloat
+    ) {
+        mRadius = radius
         super.init(frame: frame)
+        ini()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    public func generate() {
-        if mParticles.count == mLayers {
-            return
-        }
-        
         ini()
     }
 
@@ -73,16 +71,16 @@ class Particles
     }
     
     public func start() {
-        
+        return
         var prevTime = Date()
             .timeIntervalSince1970
         
         mTimer = Timer.scheduledTimer(
-            withTimeInterval: 0.01,
+            withTimeInterval: 1.0,
             repeats: true
         ) { _ in
             
-            let current = Date()
+            /*let current = Date()
                 .timeIntervalSince1970
             
             self.mElapsedTime = Float(
@@ -91,7 +89,7 @@ class Particles
             
             
             prevTime = current
-            
+            */
             let m = self.mParticles
             
             for i in m.indices {
@@ -103,36 +101,22 @@ class Particles
         
     }
     
-    
-    private func mainThread(
-        _ p: @escaping () -> Void
-    ) {
-        DispatchQueue
-            .main
-            .async(
-                execute: p
-            )
-    }
-    
     private func dOpacity(
         index: Int
     ) {
-        //mainThread { [self] in
-            
-            let par = mParticles[index]
-            
-            let l = layer
-                .sublayers![index]
-                as! CAShapeLayer
-            
-            l.opacity -= mElapsedTime / Float(par.lifeTime)
-            
-            
-            if l.opacity < 0.0 {
-                mParticles[index] = generateParticle()
-                l.opacity = 1.0
-            }
-        //}
+        let par = mParticles[index]
+        
+        let l = layer
+            .sublayers![index]
+        as! CAShapeLayer
+        
+        l.opacity -= 0.25
+        
+        
+        if l.opacity < 0.01 {
+            mParticles[index] = generateParticle()
+            l.opacity = 1.0
+        }
     }
     
     private func generateParticle() -> Particle {

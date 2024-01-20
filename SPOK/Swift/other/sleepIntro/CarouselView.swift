@@ -19,6 +19,7 @@ class CarouselView
     private var mCarousels: [Carousel] = []
     private var mCollectionViews: [CarouselCollectionView] = []
     
+    private var mTimer: Timer? = nil
     
     init(
         carousels: [Carousel],
@@ -28,6 +29,7 @@ class CarouselView
         super.init(
             frame: frame
         )
+        
         
         let w = frame.width
         let htable = frame.height
@@ -51,7 +53,7 @@ class CarouselView
             let c = mCarousels[i]
             
             mCarousels[i].from = c.cellSize.width * 5 * c.from
-            
+        
             let cv = CarouselCollectionView(
                 type: c.type,
                 cellSize: c.cellSize,
@@ -95,36 +97,39 @@ class CarouselView
         
     }
     
+    public func stop() {
+        mTimer?.invalidate()
+        mTimer = nil
+    }
+    
     public func start() {
-        
         var p = CGPoint(
             x:0,
             y:0
         )
         
-        Timer.scheduledTimer(
+        mTimer = Timer.scheduledTimer(
             withTimeInterval: 0.01,
-            repeats: true) { _ in
+            repeats: true
+        ) { _ in
+            
+            for i in 0..<self.mCarousels.count {
                 
-                for i in 0..<self.mCarousels.count {
-                    
-                    let c = self
-                        .mCarousels[i]
-                    
-                    p.x = c.from
-                    
-                    self.mCarousels[i]
-                        .from += c.delta
-                    
-                    self.mCollectionViews[i].setContentOffset(
-                        p,
-                        animated: false
-                    )
-                }
+                let c = self
+                    .mCarousels[i]
                 
+                p.x = c.from
                 
+                self.mCarousels[i]
+                    .from += c.delta
+                
+                self.mCollectionViews[i].setContentOffset(
+                    p,
+                    animated: false
+                )
             }
-        
+            
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -161,15 +166,12 @@ extension CarouselView
         
         let i = indexPath.row
         
-        print(TAG, "cellForItemAt:",i)
-        
-        let t = (collectionView as! CarouselCollectionView).mType
-        
         let cell = collectionView
             .dequeueReusableCell(
-                withReuseIdentifier: t,
+                withReuseIdentifier: ImageViewCell.id,
                 for: indexPath
-        )
+        ) as! ImageViewCell
+        
         
         cell.backgroundColor = .gray
         cell.layer.cornerRadius = cell.frame.height * 0.12

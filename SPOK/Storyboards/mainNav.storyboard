@@ -51,7 +51,7 @@
                                                         <inset key="sectionInset" minX="15" minY="0.0" maxX="27" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS" customClass="PreviewCell" customModule="SPOK" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="lrz-8S-YeS">
                                                             <rect key="frame" x="15" y="47.666666666666664" width="167" height="207"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqu-KT-MgQ">

@@ -120,6 +120,8 @@ private class Page
     private var mTitle = ""
     private var mSubtitle = ""
     
+    private var mCarouselView: CarouselView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -138,7 +140,7 @@ private class Page
         
         let hcv = 0.496 * h
         
-        let carouselView = CarouselView(
+        mCarouselView = CarouselView(
             carousels: [
                 CarouselView.Carousel(
                     cellSize: CGSize(
@@ -170,13 +172,24 @@ private class Page
         )
         
         
-        view.addSubview(carouselView)
+        view.addSubview(mCarouselView!)
         
         mOnLoadView?(view)
-        
-        carouselView.start()
     }
  
+    override func viewDidAppear(
+        _ animated: Bool
+    ) {
+        mCarouselView?.start()
+    }
+    
+    override func viewDidDisappear(
+        _ animated: Bool
+    ) {
+        print(TAG, "viewDidDisappear")
+        mCarouselView?.stop()
+    }
+    
     public func setHeader(
         title: String,
         subtitle: String

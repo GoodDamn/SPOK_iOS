@@ -240,8 +240,13 @@ extension HomeViewController
         
         print(TAG,"LFRAME:",label.frame)
         
+        mColDelegate.registerCells(
+            for: colview
+        )
+        
         colview.dataSource = mColDelegate
         colview.delegate = mColDelegate
+        
         colview.reloadData()
         
         UIView.animate(

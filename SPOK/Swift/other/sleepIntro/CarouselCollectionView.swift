@@ -17,6 +17,8 @@ class CarouselCollectionView
     public var mType: String =
         CarouselView.mTYPE_M
     
+    private var mPosition = 0
+    
     private var mPos: CGPoint = .zero
     
     init(
@@ -34,6 +36,11 @@ class CarouselCollectionView
             frame: frame,
             collectionViewLayout: layout
         )
+                
+        register(
+            ImageViewCell.self,
+            forCellWithReuseIdentifier: ImageViewCell.id
+        )
         
         backgroundColor = .clear
         
@@ -44,13 +51,6 @@ class CarouselCollectionView
         isUserInteractionEnabled = false
     }
     
-    public func invalidatePos() {
-        mPos.x += 0.1
-        setContentOffset(
-            mPos,
-            animated: false
-        )
-    }
     
     required init?(
         coder: NSCoder
@@ -58,6 +58,57 @@ class CarouselCollectionView
         super.init(
             coder: coder
         )
+    }
+    
+}
+
+class ImageViewCell
+    : UICollectionViewCell {
+    
+    public static let id = "iv"
+    
+    public var mImageView: UIImageView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        mImageView = UIImageView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: frame.width,
+                height: frame.height
+            )
+        )
+        
+        let s = UInt8.random(in: 1...3)
+        
+        let w = UIScreen
+            .main
+            .bounds
+            .width
+        
+        let type = frame.width > w * 0.8 ? 1 : 2
+        
+        mImageView.image = UIImage(named:
+            "\(type)\(s)"
+        )
+        
+        print("CarouselCollectionView:",frame)
+        
+        contentView.addSubview(
+            mImageView
+        )
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        //contentView.frame = mImageView.frame
+        print("CarouselCollectionView: layoutSubviews()")
+        
     }
     
 }
