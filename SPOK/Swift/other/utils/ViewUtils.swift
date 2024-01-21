@@ -53,6 +53,13 @@ public class ViewUtils {
         let w = f.width
         let h = f.height
         
+        let window = UIApplication
+            .shared
+            .windows
+            .first
+        let topInset = window?
+            .safeAreaInsets.top ?? h*0.05
+        
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",
             size: w * titleSize
@@ -70,7 +77,7 @@ public class ViewUtils {
         let lTitle = UILabel(
             frame: CGRect(
                 x: marginLeft,
-                y: h*0.05,
+                y: topInset,
                 width: ww,
                 height: 0
             )

@@ -26,7 +26,7 @@ class ProfileNewViewController
         modalPresentationStyle = .fullScreen
         
         let w = view.frame.width
-        let h = view.frame.height
+        let h = view.frame.height - mTopOffset
         
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",
@@ -49,7 +49,7 @@ class ProfileNewViewController
         let lTitle = UILabel(
             frame: CGRect(
                 x: marginLeft,
-                y: marginTop,
+                y: mTopOffset == 0 ? marginTop : mTopOffset,
                 width: w-marginLeft,
                 height: w * 0.06
             )
@@ -58,7 +58,8 @@ class ProfileNewViewController
         let lTitleHead = UILabel(
             frame: CGRect(
                 x: 0,
-                y: h * 0.12,
+                y: lTitle
+                    .frame.bottom() + h * 0.05,
                 width: w,
                 height: 0.05 * w
             )
@@ -69,7 +70,7 @@ class ProfileNewViewController
         let lSubtitleHead = UILabel(
             frame: CGRect(
                 x: marginLeftSub,
-                y: h * 0.165,
+                y: lTitleHead.frame.bottom() + h*0.02,
                 width: w-marginLeftSub,
                 height: 0.032 * w
             )
@@ -80,6 +81,8 @@ class ProfileNewViewController
         lTitle.textColor = .white
         lTitle.font = extraBold?
             .withSize(lTitle.frame.height)
+        
+        lTitle.sizeToFit()
         
         lTitleHead.textAlignment = .center
         lTitleHead.text = "Теперь можно все"
@@ -104,9 +107,7 @@ class ProfileNewViewController
                 x: w * 0.297,
                 y: lSubtitleHead
                     .frame
-                    .origin
-                    .y + lSubtitleHead
-                    .frame.height + h*0.03,
+                    .bottom() + h*0.03,
                 width: himage2,
                 height: himage2
             )
@@ -118,11 +119,7 @@ class ProfileNewViewController
         
         let himage1 = w * 0.352
         let offset = w * 0.14
-        let ximg13 = lSubtitleHead
-            .frame
-            .origin
-            .y + lSubtitleHead
-            .frame.height + h*0.06
+        let ximg13 = lSubtitleHead.frame.bottom() + h*0.06
         
         let imageView1 = UIImageView(
             frame: CGRect(
@@ -150,11 +147,10 @@ class ProfileNewViewController
             named: "j"
         )
         
-        let ivf = imageView2.frame
         let lPrice = UILabel(
             frame: CGRect(
                 x: 0,
-                y: ivf.origin.y + ivf.height + h * 0.04,
+                y: imageView2.frame.bottom() + h * 0.02,
                 width: w,
                 height: h * 0.028
             )
@@ -204,9 +200,11 @@ class ProfileNewViewController
         LayoutUtils.button(
             for: btnOpen,
             view.frame,
-            y: 0.61,
+            y: 0.85,
             textSize: 0.35
         )
+        
+        btnOpen.frame.origin.y = lPrice.frame.bottom() + h * 0.03
         
         let hshare = h * 0.25
         let shareLeft = w * 0.1
@@ -256,9 +254,11 @@ class ProfileNewViewController
         LayoutUtils.button(
             for: btnShare,
             view.frame,
-            y: 0.85,
+            y: 0.6,
             textSize: 0.35
         )
+        
+        btnShare.frame.origin.y = shareView.frame.bottom() - btnShare.frame.height - shareView.frame.height * 0.1
         
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
@@ -322,7 +322,21 @@ class ProfileNewViewController
     @objc func btnShareImpression(
         _ sender: UIButton
     ) {
+        guard let enc = "https://forms.yandex.ru/cloud/659e823af47e735258a77960/".addingPercentEncoding(
+            withAllowedCharacters: .urlHostAllowed
+        ) else {
+            print("ProfileNewViewController:", "ERROR_ENCODE:")
+            return
+        }
         
+        let app = UIApplication.shared
+        
+        guard let url = URL(string: enc) else {
+            print("ProfileNewViewController", "URL_ERROR:")
+            return
+        }
+        
+        app.open(url)
     }
     
     private func addStat(
@@ -334,4 +348,12 @@ class ProfileNewViewController
                 .increment(1)
             )
     }
+}
+
+extension CGRect {
+    
+    func bottom() -> CGFloat {
+        return height + origin.y
+    }
+    
 }

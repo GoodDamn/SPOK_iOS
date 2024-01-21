@@ -13,6 +13,16 @@ class StackViewController
     
     private final let TAG = "StackViewController"
     
+    public final let mTopOffset = {
+        let w = UIApplication
+            .shared
+            .windows
+            .first
+        
+        return w?.safeAreaInsets
+            .top ?? 0
+    }()
+    
     private var main: MainViewController!
     
     override func viewDidAppear(
@@ -21,6 +31,20 @@ class StackViewController
         super.viewDidAppear(animated)
         
         main = Utils.main()
+    }
+    
+    public func framee(
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        height: CGFloat
+    ) -> CGRect {
+        return CGRect(
+            x: x,
+            y: y+mTopOffset,
+            width: width,
+            height: height
+        )
     }
     
     open func push(

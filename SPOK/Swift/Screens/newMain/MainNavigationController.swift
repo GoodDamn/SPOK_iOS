@@ -16,4 +16,9 @@ class MainNavigationController
         modalPresentationStyle = .overFullScreen;
     }
     
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 }
