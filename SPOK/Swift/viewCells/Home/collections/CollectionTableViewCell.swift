@@ -11,22 +11,59 @@ public class CollectionTableViewCell
     
     public static let id = "collections"
     
-    @IBOutlet weak var collectionView: UICollectionView!;
+    public var collectionView: UICollectionView!
     
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
-        print("CollectionTableViewCell: init()")
         super.init(
             style: style,
             reuseIdentifier: reuseIdentifier
+        )
+        print("CollectionTableViewCell: init()",frame)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        collectionView = UICollectionView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: frame.width,
+                height: frame.height
+            ),
+            collectionViewLayout: layout
+        )
+        
+        contentView.backgroundColor = .clear
+        
+        collectionView.backgroundColor = .clear
+        
+        collectionView.showsVerticalScrollIndicator = false
+        
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        collectionView.register(
+            PreviewCell.self,
+            forCellWithReuseIdentifier: PreviewCell.ID
+        )
+        
+        contentView.addSubview(
+            collectionView
         )
     }
     
     required init?(coder: NSCoder) {
         print("CollectionTableViewCell: init(CODER)")
         super.init(coder:coder)
+    }
+    
+    public override func layoutSubviews() {
+        
+        collectionView.frame = frame
+        
+        super.layoutSubviews()
     }
     
 }

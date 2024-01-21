@@ -15,7 +15,7 @@ class HomeViewController
     
     private let TAG = "HomeViewController:";
     
-    @IBOutlet weak var colsTable: UITableView!;
+    private var mTableView: UITableView!
     
     private var mDownloader: CollectionDowloader? = nil
     
@@ -25,19 +25,32 @@ class HomeViewController
     override func viewDidLoad() {
         super.viewDidLoad();
     
-        let w = view.frame.width
-        let h = view.frame.height
+        mTableView = UITableView(
+            frame: view.frame
+        )
         
-        colsTable.register(
+        mTableView.register(
+            CollectionTableViewCell.self,
+            forCellReuseIdentifier: CollectionTableViewCell.id
+        )
+        
+        mTableView.register(
             SheepViewCell.self,
             forCellReuseIdentifier: SheepViewCell.id)
         
-        colsTable.contentInset = UIEdgeInsets(
+        mTableView.contentInset = UIEdgeInsets(
             top: 0,
             left: 0,
             bottom: 25,
             right: 0
         );
+        
+        mTableView.backgroundColor = .clear
+        mTableView.showsHorizontalScrollIndicator = false
+        
+        mTableView.showsVerticalScrollIndicator = false
+        
+        view.addSubview(mTableView)
         
         mDownloader = CollectionDowloader(
             dir: "sleep",
@@ -54,13 +67,13 @@ class HomeViewController
         print(TAG, "onFirstCollection")
         mCollections = c
         mColDelegate.setCollections(c)
-        colsTable.dataSource = self
-        colsTable.delegate = self
-        colsTable.reloadData()
+        mTableView.dataSource = self
+        mTableView.delegate = self
+        mTableView.reloadData()
     }
     
     func onAdd(i: Int) {
-        colsTable.insertRows(
+        mTableView.insertRows(
             at: [
                 IndexPath(
                     row: i,
@@ -71,7 +84,7 @@ class HomeViewController
     }
     
     func onUpdate(i: Int) {
-        colsTable.reloadRows(
+        mTableView.reloadRows(
             at: [
                 IndexPath(
                     row: i,
@@ -82,7 +95,7 @@ class HomeViewController
     }
     
     func onRemove(i: Int) {
-        colsTable.deleteRows(
+        mTableView.deleteRows(
             at: [
                 IndexPath(
                     row: i,
@@ -132,7 +145,7 @@ class HomeViewController
             viewCell
         )
         
-        colsTable.insertRows(
+        mTableView.insertRows(
             at: [
                 IndexPath(
                     row: mCollections.count-1,
@@ -187,18 +200,13 @@ extension HomeViewController
     
     func tableView(
         _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {}
-    
-    
-    func tableView(
-        _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         let r = indexPath.row
                 
         let c = mCollections[r]
+        
+        print(TAG, "ID_CELL:",c.idCell)
         
         guard let cel = tableView.dequeueReusableCell(
             withIdentifier: c.idCell
@@ -226,14 +234,7 @@ extension HomeViewController
             CollectionTableViewCell
         
         let colview = cell.collectionView!
-        
-        colview.contentInset = UIEdgeInsets(
-            top: 0.5*label.frame.height,
-            left: label.frame.origin.x,
-            bottom: 0,
-            right: 0
-        )
-        
+        colview.backgroundColor = .blue
         colview.tag = r
         
         cell.selectionStyle = .none;
