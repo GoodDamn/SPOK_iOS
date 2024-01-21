@@ -25,7 +25,6 @@
 		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
 		2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2CE2B45D45C00656C0B /* ByteUtils.swift */; };
 		2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2D02B46707A00656C0B /* BaseTopicController.swift */; };
-		2507D2D82B46867B00656C0B /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2D72B46867B00656C0B /* SPOKContentEngine.swift */; };
 		2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2DE2B469C1D00656C0B /* ScriptRead.swift */; };
 		2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2E12B469C5400656C0B /* ScriptText.swift */; };
 		2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2E32B469CA000656C0B /* ScriptResource.swift */; };
@@ -40,6 +39,8 @@
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
 		255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F82B504BB5006D9FD0 /* ViewUtils.swift */; };
+		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
+		259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 259185372B5D8649001CFD7A /* sheep_m.mp3 */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
@@ -62,7 +63,6 @@
 		25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */; };
 		25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
-		25F770DA2B59A73100C62071 /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 25F770D92B59A73100C62071 /* sheep_m.mp3 */; };
 		2B0103D327DCA08F00C73D73 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0103D227DCA08F00C73D73 /* Bubble.swift */; };
 		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
 		2B049DEE277A2173009D636D /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049DED277A2173009D636D /* RateAppViewController.swift */; };
@@ -160,7 +160,6 @@
 		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
 		2507D2CE2B45D45C00656C0B /* ByteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteUtils.swift; sourceTree = "<group>"; };
 		2507D2D02B46707A00656C0B /* BaseTopicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTopicController.swift; sourceTree = "<group>"; };
-		2507D2D72B46867B00656C0B /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPOKContentEngine.swift; path = "../../../../SPOK_iOS-main/SPOKContentEngine/Sources/SPOKContentEngine/SPOKContentEngine.swift"; sourceTree = "<group>"; };
 		2507D2DE2B469C1D00656C0B /* ScriptRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRead.swift; sourceTree = "<group>"; };
 		2507D2E12B469C5400656C0B /* ScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptText.swift; sourceTree = "<group>"; };
 		2507D2E32B469CA000656C0B /* ScriptResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptResource.swift; sourceTree = "<group>"; };
@@ -173,6 +172,8 @@
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		255C04F82B504BB5006D9FD0 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
+		259185372B5D8649001CFD7A /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sheep_m.mp3; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +195,6 @@
 		25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
-		25F770D92B59A73100C62071 /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sheep_m.mp3; path = "../../../../../../Volumes/VMware Shared Folders/SHARED_FOLDER/sheep_m.mp3"; sourceTree = "<group>"; };
 		2B0103D227DCA08F00C73D73 /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2B049DED277A2173009D636D /* RateAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
@@ -341,10 +341,10 @@
 		2507D2D42B467EBE00656C0B /* SPOKContentEngine */ = {
 			isa = PBXGroup;
 			children = (
+				259185352B5D488B001CFD7A /* SPOKContentEngine.swift */,
 				2507D2EC2B4720E000656C0B /* protocols */,
 				2507D2E02B469C3F00656C0B /* models */,
 				2507D2DD2B469C0800656C0B /* utils */,
-				2507D2D72B46867B00656C0B /* SPOKContentEngine.swift */,
 				2507D2EA2B471A0E00656C0B /* ScriptReader.swift */,
 			);
 			path = SPOKContentEngine;
@@ -494,7 +494,7 @@
 		25F770D82B59A71D00C62071 /* raw */ = {
 			isa = PBXGroup;
 			children = (
-				25F770D92B59A73100C62071 /* sheep_m.mp3 */,
+				259185372B5D8649001CFD7A /* sheep_m.mp3 */,
 			);
 			path = raw;
 			sourceTree = "<group>";
@@ -945,10 +945,10 @@
 				2BCC4910290E347B00A5F4F4 /* SeekBar.xib in Resources */,
 				2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */,
 				2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */,
-				25F770DA2B59A73100C62071 /* sheep_m.mp3 in Resources */,
 				2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */,
 				2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */,
 				2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */,
+				259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */,
 				2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */,
 				2BCC4909290E346100A5F4F4 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -1012,6 +1012,7 @@
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
 				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
 				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
+				259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */,
 				25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */,
 				2BC121792777283E00729BA4 /* SettingsViewController.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
@@ -1022,7 +1023,6 @@
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
 				2B7C289D2897CF8900C2EC07 /* MainPageViewController.swift in Sources */,
-				2507D2D82B46867B00656C0B /* SPOKContentEngine.swift in Sources */,
 				25DB9A722B52BE9200B5359F /* SplashViewController.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,

@@ -16,8 +16,8 @@ class LayoutUtils {
         y: CGFloat,
         width: CGFloat = 0.702,
         height: CGFloat = 0.05,
-        cornerRadius: CGFloat = 0.17,
-        textSize: CGFloat = 0.26
+        cornerRadius: CGFloat = 0.2,
+        textSize: CGFloat = 0.29
     ) {
         
         guard let b = b else {

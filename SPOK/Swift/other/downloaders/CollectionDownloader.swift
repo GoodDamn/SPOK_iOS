@@ -16,13 +16,10 @@ class CollectionDowloader {
     // It calls once
     public weak var delegate: CollectionListener?
     
-    private var mScreen: CGSize
-    
-    private var mCardSizeB: CGSize
-    private var mCardSizeM: CGSize
-    
     private var mDirPath: String
     private var mRootName: String
+    
+    private var mScreen: CGSize
     
     private var mChild: String
     
@@ -36,21 +33,6 @@ class CollectionDowloader {
         child: String
     ) {
         
-        mScreen = UIScreen
-            .main
-            .bounds
-            .size
-        
-        mCardSizeB = CGSize(
-            width: mScreen.width * 0.847,
-            height: mScreen.width * 0.5
-        )
-        
-        mCardSizeM = CGSize(
-            width: mScreen.width * 0.4,
-            height: mCardSizeB.height
-        )
-        
         mChild = child
         mStorage = Storage
             .storage()
@@ -59,6 +41,11 @@ class CollectionDowloader {
             )
         
         mRootName = dir
+        
+        mScreen = UIScreen
+            .main
+            .bounds
+            .size
         
         mDirPath = StorageApp.rootPath(
             append: StorageApp.mDirCollection
@@ -305,6 +292,9 @@ class CollectionDowloader {
         }
         
         let titleSize = mScreen.width * 0.067
+        
+        let mCardSizeB = MainViewController
+            .mCardSizeB!
         
         let cs = mCardSizeB.height
         

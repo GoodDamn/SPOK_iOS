@@ -11,6 +11,9 @@ import UIKit
 class MainViewController
     : UIViewController {
     
+    public static var mCardSizeB: CGSize!
+    public static var mCardSizeM: CGSize!
+    
     private var mControllers: [UIViewController] = []
     
     private var mCurrentIndex = 0
@@ -22,6 +25,23 @@ class MainViewController
         
         view.backgroundColor = UIColor(
             named: "background"
+        )
+        
+        let mScreen = UIScreen
+            .main
+            .bounds
+            .size
+        
+        let hb = mScreen.width * 0.5
+        
+        MainViewController.mCardSizeB = CGSize(
+            width: mScreen.width * 0.847,
+            height: hb
+        )
+        
+        MainViewController.mCardSizeM = CGSize(
+            width: mScreen.width * 0.4,
+            height: hb
         )
         
         /*

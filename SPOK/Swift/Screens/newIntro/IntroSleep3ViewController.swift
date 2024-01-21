@@ -27,6 +27,15 @@ class IntroSleep3ViewController
         addChild(pageController)
         view.addSubview(pageController.view)
             
+        let pageBar = PageBar(
+            frame: CGRect(
+                x: w * 0.374,
+                y: h * 0.831,
+                width: w * 0.241,
+                height: h * 0.03
+            )
+        )
+        
         let page = Page()
         let page2 = Page()
         
@@ -50,8 +59,10 @@ class IntroSleep3ViewController
             LayoutUtils.button(
                 for: btnStart,
                 self.view.frame,
-                y: 0.873
+                y: 0
             )
+            
+            btnStart.frame.origin.y = pageBar.frame.bottom() + h * 0.019
             
             btnStart.addTarget(
                 self,
@@ -73,15 +84,6 @@ class IntroSleep3ViewController
             [pageController.source[0]],
             direction: .forward,
             animated: true
-        )
-        
-        let pageBar = PageBar(
-            frame: CGRect(
-                x: w * 0.374,
-                y: h * 0.831,
-                width: w * 0.241,
-                height: h * 0.016
-            )
         )
         
         pageBar.maxPages = 2
@@ -111,7 +113,7 @@ class IntroSleep3ViewController
 }
 
 private class Page
-    : UIViewController {
+    : StackViewController {
     
     private final let TAG = "Page:"
     
@@ -143,20 +145,16 @@ private class Page
         mCarouselView = CarouselView(
             carousels: [
                 CarouselView.Carousel(
-                    cellSize: CGSize(
-                        width: 0.828,
-                        height: 0.5
-                    ),
+                    cellSize: MainViewController
+                        .mCardSizeB,
                     type: CarouselView
                         .mTYPE_B,
                     from: 0.0,
                     delta: 0.1
                 ),
                 CarouselView.Carousel(
-                    cellSize: CGSize(
-                        width: 0.4,
-                        height: 0.5
-                    ),
+                    cellSize: MainViewController
+                        .mCardSizeM,
                     type: CarouselView
                         .mTYPE_M,
                     from: 1.0,
@@ -165,7 +163,7 @@ private class Page
             ],
             frame: CGRect(
                 x: 0,
-                y: h * 0.256,
+                y: h * 0.256+mTopOffset*0.3,
                 width: w,
                 height: hcv
             )

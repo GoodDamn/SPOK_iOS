@@ -126,6 +126,25 @@ class PageBar
         }
         
         let wline = rect.height / 2
+        
+        let p = UIBezierPath()
+        p.move(to: CGPoint(
+                x: 0,
+                y: wline
+            )
+        )
+        p.addLine(to: CGPoint(
+                x: frame.width,
+                y: wline
+            )
+        )
+        
+        mLayerCurrent.fillColor = nil
+        mLayerCurrent.lineWidth = wline
+        mLayerCurrent.lineCap = .round
+        mLayerCurrent.path = p.cgPath
+        
+        
         let path = UIBezierPath()
         
         for l in mPages {
@@ -141,11 +160,6 @@ class PageBar
         mLayerBack.lineWidth = wline
         mLayerBack.lineCap = .round
         mLayerBack.path = path.cgPath
-        
-        mLayerCurrent.fillColor = nil
-        mLayerCurrent.lineWidth = wline
-        mLayerCurrent.lineCap = .round
-        mLayerCurrent.path = path.cgPath
         
         print(TAG, mLayerCurrent.strokeStart, mLayerCurrent.strokeEnd)
         

@@ -19,6 +19,8 @@ class CarouselView
     private var mCarousels: [Carousel] = []
     private var mCollectionViews: [CarouselCollectionView] = []
     
+    private var mSpacing: CGFloat = 0
+    
     private var mTimer: Timer? = nil
     
     init(
@@ -33,8 +35,7 @@ class CarouselView
         
         let w = frame.width
         let htable = frame.height
-        let hcell = 0.455 * htable
-        let interval = 0.08 * htable
+        mSpacing = 0.05 * w
         
         let hmargin = 0.1 * w
         
@@ -42,16 +43,7 @@ class CarouselView
         
         for i in 0..<mCarousels.count {
             
-            let cc = mCarousels[i].cellSize
-            
-            mCarousels[i].cellSize = CGSize(
-                width: w * cc.width,
-                height: htable * cc.height
-            )
-            
-            
             let c = mCarousels[i]
-            
             mCarousels[i].from = c.cellSize.width * 5 * c.from
         
             let cv = CarouselCollectionView(
@@ -91,7 +83,7 @@ class CarouselView
             
             mCollectionViews.append(cv)
             
-            y += hcell + interval
+            y += c.cellSize.height + mSpacing
             
         }
         
@@ -194,6 +186,22 @@ extension CarouselView
         
         print(TAG, "cell size:", s)
         return s
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return mSpacing
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return mSpacing
     }
     
 }
