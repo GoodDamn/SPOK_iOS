@@ -37,7 +37,6 @@ public class CollectionTableViewCell
         )
         
         contentView.backgroundColor = .clear
-        
         collectionView.backgroundColor = .clear
         
         collectionView.showsVerticalScrollIndicator = false
@@ -57,13 +56,6 @@ public class CollectionTableViewCell
     required init?(coder: NSCoder) {
         print("CollectionTableViewCell: init(CODER)")
         super.init(coder:coder)
-    }
-    
-    public override func layoutSubviews() {
-        
-        collectionView.frame = frame
-        
-        super.layoutSubviews()
     }
     
 }

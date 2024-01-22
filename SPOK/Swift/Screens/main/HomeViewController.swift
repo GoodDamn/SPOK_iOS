@@ -19,8 +19,8 @@ class HomeViewController
     
     private var mDownloader: CollectionDowloader? = nil
     
-    private var mCollections:[Collection] = [];
-    private var mColDelegate = CollectionDelegate()
+    private var mCollections: [Collection] = [];
+    private var mColDelegates: [CollectionDelegate] = []
         
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -31,12 +31,15 @@ class HomeViewController
         
         mTableView.register(
             CollectionTableViewCell.self,
-            forCellReuseIdentifier: CollectionTableViewCell.id
+            forCellReuseIdentifier:
+                CollectionTableViewCell.id
         )
         
         mTableView.register(
             SheepViewCell.self,
-            forCellReuseIdentifier: SheepViewCell.id)
+            forCellReuseIdentifier:
+                SheepViewCell.id
+        )
         
         mTableView.contentInset = UIEdgeInsets(
             top: 0,
@@ -66,13 +69,24 @@ class HomeViewController
     ) {
         print(TAG, "onFirstCollection")
         mCollections = c
-        mColDelegate.setCollections(c)
+        for i in mCollections.indices {
+            mColDelegates.append(
+                CollectionDelegate(
+                    collection: c[i] as! CollectionTopic
+                )
+            )
+        }
         mTableView.dataSource = self
         mTableView.delegate = self
         mTableView.reloadData()
     }
     
     func onAdd(i: Int) {
+        mColDelegates.append(
+            CollectionDelegate(
+                collection: mCollections[i] as! CollectionTopic
+            )
+        )
         mTableView.insertRows(
             at: [
                 IndexPath(
@@ -95,6 +109,9 @@ class HomeViewController
     }
     
     func onRemove(i: Int) {
+        mColDelegates.remove(
+            at: i
+        )
         mTableView.deleteRows(
             at: [
                 IndexPath(
@@ -187,7 +204,10 @@ extension HomeViewController
         let c = mCollections[
             indexPath.row
         ]
-        
+        print(TAG,
+              "heightForRowAt:",
+              c.height
+        )
         return c.height;
     }
     
@@ -205,8 +225,6 @@ extension HomeViewController
         let r = indexPath.row
                 
         let c = mCollections[r]
-        
-        print(TAG, "ID_CELL:",c.idCell)
         
         guard let cel = tableView.dequeueReusableCell(
             withIdentifier: c.idCell
@@ -234,21 +252,36 @@ extension HomeViewController
             CollectionTableViewCell
         
         let colview = cell.collectionView!
-        colview.backgroundColor = .blue
-        colview.tag = r
+        
+        let coll = c as! CollectionTopic
         
         cell.selectionStyle = .none;
         
-        print(TAG,"LFRAME:",label.frame)
+        let del = mColDelegates[r]
         
-        mColDelegate.registerCells(
-            for: colview
-        )
-        
-        colview.dataSource = mColDelegate
-        colview.delegate = mColDelegate
-        
-        colview.reloadData()
+        if colview.delegate == nil {
+            colview.contentInset = UIEdgeInsets(
+                top: 0,
+                left: label.frame.origin.x,
+                bottom: 0,
+                right: 0
+            )
+            
+            colview.frame.origin.y = label.frame.bottom() + coll.cardSize.height * 0.124
+            
+            colview.frame.size = CGSize(
+                width: view.frame.width,
+                height: coll.cardSize.height
+            )
+            
+            del.registerCells(
+                for: colview
+            )
+            
+            colview.dataSource = del
+            colview.delegate = del
+        }
+        //colview.reloadData()
         
         UIView.animate(
             withDuration: 0.15,

@@ -13,12 +13,12 @@ public class CollectionDelegate
     
     private final let TAG = "CollectionDelegate"
     
-    private var mCollections: [Collection]!
+    private weak var mCollection: CollectionTopic!
     
-    public func setCollections(
-        _ m: [Collection]
+    init(
+        collection: CollectionTopic
     ) {
-        mCollections = m
+        mCollection = collection
     }
  
     public func registerCells(
@@ -48,11 +48,7 @@ extension CollectionDelegate
         numberOfItemsInSection section: Int
     ) -> Int {
         
-        let a = mCollections[
-            collectionView.tag
-        ] as! CollectionTopic
-    
-        let c = a
+        let c = mCollection
             .topicsIDs
             .count
         
@@ -65,11 +61,7 @@ extension CollectionDelegate
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         
-        let collection = mCollections[
-            collectionView.tag
-        ] as! CollectionTopic
-        
-        let id = collection
+        let id = mCollection
             .topicsIDs[
                 indexPath.row
             ]
@@ -105,14 +97,10 @@ extension CollectionDelegate
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         
-        let col = mCollections[
-            collectionView.tag
-        ] as! CollectionTopic
-        
         print(TAG, "sizeForItemAt",
-              col.cardSize)
+              mCollection.cardSize)
         
-        return col.cardSize
+        return mCollection.cardSize
     }
     
 }
