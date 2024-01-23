@@ -11,21 +11,21 @@ import UIKit
 class IntroSleep3ViewController
     : DelegateViewController {
     
-    
+    private var mPageController: SimplePageViewController!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let w = view.frame.width
         let h = view.frame.height
         
-        
-        let pageController = SimplePageViewController(
+        mPageController = SimplePageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal
         )
         
-        addChild(pageController)
-        view.addSubview(pageController.view)
+        addChild(mPageController)
+        view.addSubview(mPageController.view)
             
         let pageBar = PageBar(
             frame: CGRect(
@@ -75,13 +75,15 @@ class IntroSleep3ViewController
             
         }
         
-        pageController.source = [
+        mPageController.source = [
             page,
             page2
         ]
         
-        pageController.setViewControllers(
-            [pageController.source[0]],
+        mPageController.withGesture = false
+        
+        mPageController.setViewControllers(
+            [mPageController.source[0]],
             direction: .forward,
             animated: true
         )
@@ -96,11 +98,31 @@ class IntroSleep3ViewController
         
         pageBar.mCurrentPage = 0
         
-        pageController.onNewPage = { i in
+        mPageController.onNewPage = { i in
             pageBar.mCurrentPage = i
         }
         
         view.addSubview(pageBar)
+        
+        let g = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                onTap(_:)
+            )
+        )
+        
+        g.numberOfTapsRequired = 1
+        
+        view.addGestureRecognizer(
+            g
+        )
+    }
+    
+    @objc func onTap(
+        _ sender: UITapGestureRecognizer
+    ) {
+        sender.isEnabled = false
+        mPageController.mIndex = 1
     }
     
     @objc func onClickBtnStart(
@@ -128,7 +150,7 @@ private class Page
         super.viewDidLoad()
         
         ViewUtils.createHeader(
-            in:view,
+            in: view,
             title: mTitle,
             subtitle: mSubtitle
         )

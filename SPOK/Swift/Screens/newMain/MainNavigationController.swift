@@ -14,6 +14,13 @@ class MainNavigationController
         super.viewDidLoad();
         navigationController?.title = "";
         modalPresentationStyle = .overFullScreen;
+        
+        navigationController?.setNavigationBarHidden(
+            true,
+            animated: false
+        )
+        
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     

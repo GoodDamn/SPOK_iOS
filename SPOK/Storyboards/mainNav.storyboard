@@ -127,10 +127,10 @@
             </objects>
             <point key="canvasLocation" x="-640" y="-1401"/>
         </scene>
-        <!--Main Page View Controller-->
+        <!--Simple Page View Controller-->
         <scene sceneID="rSF-mh-WSR">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Qip-09-Lzd" customClass="MainPageViewController" customModule="SPOK" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Qip-09-Lzd" customClass="SimplePageViewController" customModule="SPOK" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fBd-HG-EuO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="185" y="-1400"/>
@@ -140,7 +140,7 @@
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="moon" width="217" height="153"/>
         <namedColor name="AccentColor">
-            <color red="0.031372549019607843" green="0.098039215686274508" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <namedColor name="background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -21,7 +21,7 @@ class HomeViewController
     
     private var mCollections: [Collection] = [];
     private var mColDelegates: [CollectionDelegate] = []
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad();
     
@@ -44,7 +44,7 @@ class HomeViewController
         mTableView.contentInset = UIEdgeInsets(
             top: 0,
             left: 0,
-            bottom: 25,
+            bottom: 50,
             right: 0
         );
         
@@ -260,13 +260,7 @@ extension HomeViewController
         let del = mColDelegates[r]
         
         if colview.delegate == nil {
-            colview.contentInset = UIEdgeInsets(
-                top: 0,
-                left: label.frame.origin.x,
-                bottom: 0,
-                right: 0
-            )
-            
+
             colview.frame.origin.y = label.frame.bottom() + coll.cardSize.height * 0.124
             
             colview.frame.size = CGSize(

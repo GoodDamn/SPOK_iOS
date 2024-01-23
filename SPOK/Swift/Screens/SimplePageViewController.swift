@@ -8,29 +8,56 @@
 import Foundation
 import UIKit
 
-class SimplePageViewController
+public class SimplePageViewController
     : UIPageViewController {
     
     private final let TAG = "SimplePageViewController"
+    
+    private var mPrevIndex = 0
+    
+    var withGesture: Bool = true {
+        didSet {
+            dataSource = withGesture ?
+                self
+              : nil
+        }
+    }
     
     var source: [UIViewController] = [] {
         didSet {
             
             var i = 0
-            
             for vc in source {
-                
                 vc.view.tag = i
-                
                 i += 1
             }
             
+            setViewControllers(
+                [source[0]],
+                direction: .forward,
+                animated: true,
+                completion: nil
+            );
+        }
+    }
+    
+    public var mIndex: Int = 0 {
+        didSet {
+            setViewControllers(
+                [source[mIndex]],
+                direction: mIndex > mPrevIndex ? .forward
+                  : .reverse,
+                animated: true
+            ) { b in
+                self.mPrevIndex = self.mIndex
+            }
+            onNewPage?(mIndex)
         }
     }
     
     var onNewPage: ((Int)->Void)? = nil
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         delegate = self
@@ -44,7 +71,7 @@ extension SimplePageViewController
     : UIPageViewControllerDelegate {
     
     
-    func pageViewController(
+    public func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
@@ -61,7 +88,7 @@ extension SimplePageViewController
         return source[before]
     }
     
-    func pageViewController(
+    public func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
@@ -77,7 +104,7 @@ extension SimplePageViewController
         return source[after]
     }
     
-    func pageViewController(
+    public func pageViewController(
         _ pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
         previousViewControllers: [UIViewController],
@@ -96,7 +123,5 @@ extension SimplePageViewController
 
 extension SimplePageViewController
     : UIPageViewControllerDataSource {
-    
-    
     
 }

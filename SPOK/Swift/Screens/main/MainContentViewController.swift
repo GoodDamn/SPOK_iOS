@@ -52,7 +52,7 @@ class MainContentViewController
     var freeTrialState: UInt8 = 0; // 0 - no free trial, 1 - is active, 2 - expired
     var isConnected: Bool = false;
     var isLoadMetaData: Bool = false;
-    var pageViewController: MainPageViewController? = nil;
+    var pageViewController: SimplePageViewController? = nil;
     
     var mDatabaseStats: DatabaseReference? = nil;
     var mDatabaseUser: DatabaseReference? = nil;
@@ -63,8 +63,8 @@ class MainContentViewController
     ) {
         if (segue.identifier == "mainPage") {
             let storyboard = UIStoryboard(name: "mainNav", bundle: nil);
-            pageViewController = segue.destination as? MainPageViewController;
-            pageViewController?.mPages = [
+            pageViewController = segue.destination as? SimplePageViewController;
+            pageViewController?.source = [
                 storyboard.instantiateViewController(withIdentifier: "home"),
                 //storyboard.instantiateViewController(withIdentifier: "search"),
                 storyboard.instantiateViewController(withIdentifier: "profile")
@@ -148,7 +148,6 @@ class MainContentViewController
         
         let ref = mDatabase.reference();
         
-        
         let b = UIScreen
             .main
             .bounds
@@ -205,29 +204,6 @@ class MainContentViewController
         mNavBar.center_horizontal();
         
      }
-    
-    func startTraining(
-        startFrame:CGRect,
-        endOfSession:((Int)->Void)? = nil
-    ) {
-        
-        let controller = BaseTopicController()
-        
-        /*controller.setID(
-            id
-        )*/
-        
-        navigationController?
-            .pushViewController(
-                controller,
-                animated: true
-            )
-        
-    }
-    
-    
-    func showSubScreen()->Void {
-    }
     
     private func createTab(
         systemNameImage: String,

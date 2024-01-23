@@ -15,7 +15,7 @@ class LayoutUtils {
         _ viewFrame: CGRect,
         y: CGFloat,
         width: CGFloat = 0.702,
-        height: CGFloat = 0.05,
+        height: CGFloat = 0.051,
         cornerRadius: CGFloat = 0.2,
         textSize: CGFloat = 0.29
     ) {

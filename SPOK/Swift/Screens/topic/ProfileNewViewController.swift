@@ -65,17 +65,16 @@ class ProfileNewViewController
             )
         )
         
-        let marginLeftSub = w * 0.1
+        let marginLeftSub = w * 0.108
         
         let lSubtitleHead = UILabel(
             frame: CGRect(
                 x: marginLeftSub,
                 y: lTitleHead.frame.bottom() + h*0.02,
-                width: w-marginLeftSub,
+                width: w-marginLeftSub*2,
                 height: 0.032 * w
             )
         )
-        
         
         lTitle.text = "Профиль"
         lTitle.textColor = .white
@@ -98,7 +97,9 @@ class ProfileNewViewController
             .withSize(lSubtitleHead.frame.height)
         
         lSubtitleHead.sizeToFit()
-        
+        lSubtitleHead.frame.center(
+            targetWidth: w
+        )
         
         let himage2 = w * 0.434
         
@@ -192,6 +193,10 @@ class ProfileNewViewController
             .withSize(lPrice.frame.height)
         lPrice.attributedText = a
         
+        lPrice.frame.offsetX(
+            w * -0.065
+        )
+        
         let btnOpen = ViewUtils
             .button(
                 text: "Открыть полный доступ"
@@ -201,13 +206,14 @@ class ProfileNewViewController
             for: btnOpen,
             view.frame,
             y: 0.85,
-            textSize: 0.35
+            width: 0.702,
+            textSize: 0.3
         )
         
         btnOpen.frame.origin.y = lPrice.frame.bottom() + h * 0.03
         
         let hshare = h * 0.25
-        let shareLeft = w * 0.1
+        let shareLeft = w * 0.051
         let wshare = w-shareLeft*2
         let shareView = UIView(
             frame: CGRect(
@@ -226,7 +232,8 @@ class ProfileNewViewController
         )
         shareView
             .layer
-            .cornerRadius = hshare * 0.1
+            .cornerRadius = hshare * 0.083
+        
         
         let lShareLeft = wshare * 0.1
         let lShare = UILabel(
@@ -255,10 +262,11 @@ class ProfileNewViewController
             for: btnShare,
             view.frame,
             y: 0.6,
-            textSize: 0.35
+            width: 0.702,
+            textSize: 0.3
         )
         
-        btnShare.frame.origin.y = shareView.frame.bottom() - btnShare.frame.height - shareView.frame.height * 0.1
+        btnShare.frame.origin.y = shareView.frame.bottom() - btnShare.frame.height - shareView.frame.height * 0.155
         
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
@@ -354,6 +362,18 @@ extension CGRect {
     
     func bottom() -> CGFloat {
         return height + origin.y
+    }
+
+    mutating func center(
+        targetWidth: CGFloat
+    ) {
+        origin.x = (targetWidth - width) * 0.5
+    }
+    
+    mutating func offsetX(
+        _ offx: CGFloat
+    ) {
+        origin.x = origin.x + offx
     }
     
 }

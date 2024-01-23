@@ -7,7 +7,7 @@
 
 import UIKit;
 public class CollectionTableViewCell
-: TitleTableViewCell {
+    : TitleTableViewCell {
     
     public static let id = "collections"
     
@@ -35,7 +35,7 @@ public class CollectionTableViewCell
             ),
             collectionViewLayout: layout
         )
-        
+        backgroundColor = .clear
         contentView.backgroundColor = .clear
         collectionView.backgroundColor = .clear
         
@@ -56,6 +56,17 @@ public class CollectionTableViewCell
     required init?(coder: NSCoder) {
         print("CollectionTableViewCell: init(CODER)")
         super.init(coder:coder)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let a = mTitle?.frame.origin.x ?? 0
+        collectionView.contentInset = UIEdgeInsets(
+            top: 0,
+            left: a,
+            bottom: 0,
+            right: a
+        )
     }
     
 }

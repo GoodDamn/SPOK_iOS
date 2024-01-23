@@ -12,6 +12,7 @@ class DelegateViewController
     : UIViewController {
     
     var onHide: (()->Void)? = nil
+    var onWillHide: (()->Void)? = nil
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class DelegateViewController
     }
     
     public func hide() {
+        onWillHide?()
         UIView.animate(
             withDuration: 2.0,
             animations: {

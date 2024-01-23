@@ -11,6 +11,11 @@ import UIKit
 class Particles
     : UIView {
     
+    // This solution sucks (@Deprecated)
+    // It needs to use the OpenGL (Metal idk)
+    // with Perlin's noise
+    // It's more efficient
+    
     private let TAG = "Particles:"
     
     private let mLayers = 5
@@ -76,7 +81,7 @@ class Particles
             .timeIntervalSince1970
         
         mTimer = Timer.scheduledTimer(
-            withTimeInterval: 1.0,
+            withTimeInterval: 0.25,
             repeats: true
         ) { _ in
             
@@ -103,7 +108,7 @@ class Particles
         l.opacity -= 0.25
         
         
-        if l.opacity < 0.01 {
+        if l.opacity < 0.1 {
             mParticles[index] = generateParticle()
             l.opacity = Float.random(
                 in: 0.5..<1.0

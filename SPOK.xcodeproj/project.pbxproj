@@ -85,7 +85,6 @@
 		2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5684B028901882003F4F15 /* EveryDayNotification.swift */; };
 		2B5DBFC029321C8300FF5199 /* RatingSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DBFBF29321C8300FF5199 /* RatingSnackbar.swift */; };
 		2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */; };
-		2B7C289D2897CF8900C2EC07 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C289C2897CF8900C2EC07 /* MainPageViewController.swift */; };
 		2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B82F18B29603E73004414B9 /* UITextViewPhrase.swift */; };
 		2B85705C27D6A5EB000F5B8C /* TechWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B85705B27D6A5EA000F5B8C /* TechWorksViewController.swift */; };
 		2B93CF4E276F2E5000219690 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B93CF4D276F2E5000219690 /* HomeViewController.swift */; };
@@ -221,7 +220,6 @@
 		2B5DBFBF29321C8300FF5199 /* RatingSnackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSnackbar.swift; sourceTree = "<group>"; };
 		2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B7652D6277CAF5C008B4B40 /* ArcProgressBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArcProgressBar.xib; sourceTree = "<group>"; };
-		2B7C289C2897CF8900C2EC07 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		2B82F18B29603E73004414B9 /* UITextViewPhrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewPhrase.swift; sourceTree = "<group>"; };
 		2B85705B27D6A5EA000F5B8C /* TechWorksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechWorksViewController.swift; sourceTree = "<group>"; };
 		2B93CF4D276F2E5000219690 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -729,7 +727,6 @@
 				2B93CF4D276F2E5000219690 /* HomeViewController.swift */,
 				2BEB9A4227CF57810024989F /* SubscriptionViewController.swift */,
 				2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */,
-				2B7C289C2897CF8900C2EC07 /* MainPageViewController.swift */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -1022,7 +1019,6 @@
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
-				2B7C289D2897CF8900C2EC07 /* MainPageViewController.swift in Sources */,
 				25DB9A722B52BE9200B5359F /* SplashViewController.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,

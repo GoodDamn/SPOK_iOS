@@ -17,7 +17,6 @@ class ProgressBar
         didSet {
             mLayerProgress.strokeColor = mColorProgress
                 .cgColor
-            setNeedsDisplay()
         }
     }
     
@@ -25,23 +24,20 @@ class ProgressBar
         didSet {
             mLayerBack.strokeColor = mColorBack
                 .cgColor
-            setNeedsDisplay()
         }
     }
     
     public var maxProgress: CGFloat = 1.0 {
         didSet {
             print(TAG, "MAX:",maxProgress)
-            mLayerProgress.strokeEnd = mProgress / maxProgress * 0.5
-            setNeedsDisplay()
+            mLayerProgress.strokeEnd = mProgress / maxProgress
         }
     }
     
-    public var mProgress: CGFloat = 0.5 {
+    public var mProgress: CGFloat = 0.0 {
         didSet {
             print(TAG, "Prog:", mProgress, maxProgress)
             mLayerProgress.strokeEnd = mProgress / maxProgress * 0.5
-            setNeedsDisplay()
         }
     }
     
@@ -50,8 +46,6 @@ class ProgressBar
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        mLayerProgress.strokeStart = 0.0
         
         layer.addSublayer(mLayerBack)
         layer.addSublayer(mLayerProgress)
@@ -64,22 +58,23 @@ class ProgressBar
     override func draw(
         _ rect: CGRect
     ) {
+        super.draw(rect)
         print(TAG, "draw:",rect, mLayerProgress.strokeEnd)
-        let wline = rect.height / 2
+        let wline = rect.height * 0.5
         let path = UIBezierPath()
         path.move(to: CGPoint(
             x: wline,
             y: wline)
         )
         path.addLine(to: CGPoint(
-            x: rect.width-wline,
+            x: rect.width - wline,
             y: wline)
         )
         path.close()
         
         mLayerBack.fillColor = nil
         mLayerBack.lineWidth = wline
-        mLayerBack.lineCap = .round
+        mLayerBack.lineJoin = .round
         mLayerBack.path = path.cgPath
         
         mLayerProgress.fillColor = nil

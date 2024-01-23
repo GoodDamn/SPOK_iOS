@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class IntroSleepRootController
     : StackViewController {
@@ -18,6 +19,30 @@ class IntroSleepRootController
     
         modalPresentationStyle = .overFullScreen
         
+        var audio: AVAudioPlayer?
+        
+        if let url = Bundle.main.url(
+            forResource: "sheep_m",
+            withExtension: ".mp3"
+        ) {
+            audio = try? AVAudioPlayer(
+                contentsOf: url,
+                fileTypeHint: AVFileType.mp3
+                    .rawValue
+            )
+            audio?.numberOfLoops = -1
+            audio?.prepareToPlay()
+            audio?.setVolume(
+                0.0,
+                fadeDuration: 0
+            )
+            let i = AVAudioSession
+                .sharedInstance()
+            try? i.setCategory(.playback)
+            try? i.setActive(true)
+            
+        }
+        
         let bgColor = UIColor(
             named: "background"
         )
@@ -28,12 +53,19 @@ class IntroSleepRootController
         let intro2 = IntroSleep2ViewController()
         let intro3 = IntroSleep3ViewController()
         
-        intro3.onHide = {
-            
+        intro3.onWillHide = {
             UserDefaults()
                 .setValue(
                     true,
                     forKey: "intro");
+            
+            audio?.setVolume(
+                0.0,
+                fadeDuration: 2.0
+            )
+        }
+        
+        intro3.onHide = {
             
             let window = UIApplication
                 .shared
@@ -55,6 +87,7 @@ class IntroSleepRootController
                     .transitionCrossDissolve
                 ]
             ) { _ in
+                audio?.stop()
                 // previous view controller
                 self.pop(
                     at: 0
@@ -89,6 +122,11 @@ class IntroSleepRootController
             }
             
             intro2.show() {
+                audio?.play()
+                audio?.setVolume(
+                    1.0,
+                    fadeDuration: 2.0
+                )
                 intro2.startTopic()
             }
         }

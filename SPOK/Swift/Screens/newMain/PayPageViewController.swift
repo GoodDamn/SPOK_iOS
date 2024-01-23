@@ -123,7 +123,7 @@ class PayPageViewController
         
         let alertProcess = UIAlertController(
             title: "Минутку...",
-            message: "Обрабатываю запрос приложения",
+            message: "Обрабатываем запрос приложения",
             preferredStyle: .alert)
         
         self.present(
