@@ -121,12 +121,13 @@ public class ViewUtils {
         let h = view.frame.height
         
         let sizeBtnExit = si * w
+        let inset = sizeBtnExit * 0.5
         
         let btnExitConfig = UIImage
             .SymbolConfiguration(
-                pointSize: sizeBtnExit * 0.5,
-                weight: .medium,
-                scale: .medium
+                pointSize: 20,
+                weight: .bold,
+                scale: .small
             )
         
         let btnExit = UIButton(
@@ -137,6 +138,7 @@ public class ViewUtils {
                 height: sizeBtnExit
             )
         )
+        
         
         btnExit.backgroundColor = .clear
         btnExit.tintColor = UIColor(

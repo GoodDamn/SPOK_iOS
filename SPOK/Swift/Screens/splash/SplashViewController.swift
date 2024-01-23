@@ -60,8 +60,27 @@ class SplashViewController
         lTitle.textColor = .white
         lTitle.numberOfLines = 0
         
+        let splashLine = UIImageView(
+            frame: CGRect(
+                x: 0,
+                y: h * 0.703,
+                width: w * 1.023,
+                height: w * 0.4
+            )
+        )
+        
+        splashLine.frame
+            .center(
+                targetWidth: w
+            )
+        
+        splashLine.image = UIImage(
+            named: "splashline"
+        )
+        
         view.addSubview(lTitle)
         view.addSubview(imageView)
+        view.addSubview(splashLine)
     }
     
     

@@ -44,7 +44,7 @@ class HomeViewController
         mTableView.contentInset = UIEdgeInsets(
             top: 0,
             left: 0,
-            bottom: 50,
+            bottom: 85,
             right: 0
         );
         

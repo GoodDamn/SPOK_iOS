@@ -228,7 +228,7 @@ class SheepCounterViewController
 class Sheep
     : UIImageView {
     
-    private var mAmp: CGFloat = 0
+    private var mAmpJump: CGFloat = 0
     private var mAngle: CGFloat = 0
     
     deinit {
@@ -238,7 +238,7 @@ class Sheep
     override init(
         frame: CGRect
     ) {
-        mAmp = frame.height * -1.5
+        mAmpJump = frame.height * -0.8
         mAngle = -25/180 * .pi
         super.init(frame: frame)
         image = UIImage(
@@ -255,7 +255,7 @@ class Sheep
     ) {
         transform = CGAffineTransform(
             translationX: onX + frame.width,
-            y: mAmp
+            y: mAmpJump
         ).rotated(
             by: mAngle
         )

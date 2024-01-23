@@ -330,21 +330,21 @@ class ProfileNewViewController
     @objc func btnShareImpression(
         _ sender: UIButton
     ) {
-        guard let enc = "https://forms.yandex.ru/cloud/659e823af47e735258a77960/".addingPercentEncoding(
-            withAllowedCharacters: .urlHostAllowed
-        ) else {
-            print("ProfileNewViewController:", "ERROR_ENCODE:")
-            return
-        }
-        
         let app = UIApplication.shared
         
-        guard let url = URL(string: enc) else {
+        guard let url = URL(string: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
+        ) else {
             print("ProfileNewViewController", "URL_ERROR:")
             return
         }
         
-        app.open(url)
+        app.open(url) { success in
+            
+            if success {
+                print("SUCCESS")
+            }
+            
+        }
     }
     
     private func addStat(

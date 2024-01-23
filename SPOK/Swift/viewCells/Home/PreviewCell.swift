@@ -20,6 +20,8 @@ class PreviewCell
     public var mDesc: UILabel!
     public var mParticles: Particles!
     
+    private var mFileSpc: FileSPC? = nil
+    
     private var mId: Int = Int.min
     
     deinit {
@@ -103,6 +105,14 @@ class PreviewCell
         let t = BaseTopicController()
         t.setID(mId)
         t.view.alpha = 0.0
+        
+        guard let s = mFileSpc else {
+            return
+        }
+        
+        if s.isPremium {
+            return
+        }
         
         Utils.main()
             .push(
@@ -308,6 +318,7 @@ class PreviewCell
     private func show(
         _ fileSPC: FileSPC
     ) {
+        mFileSpc = fileSPC
         DispatchQueue
             .main
             .async { [weak self] in
@@ -359,7 +370,9 @@ class PreviewCell
                 part.isHidden = true
                 part.stop()
                 
-                if Bool.random() {
+                
+                
+                if fileSPC.isPremium {
                     part.isHidden = false
                     part.start()
                 }
