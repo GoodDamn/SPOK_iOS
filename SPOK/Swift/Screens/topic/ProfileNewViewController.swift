@@ -28,6 +28,10 @@ class ProfileNewViewController
         let w = view.frame.width
         let h = view.frame.height - mTopOffset
         
+        let paragMulti = NSMutableParagraphStyle()
+        paragMulti.lineHeightMultiple = 0.83
+        paragMulti.alignment = .center
+        
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",
             size: 15
@@ -89,13 +93,36 @@ class ProfileNewViewController
         lTitleHead.font = bold?
             .withSize(lTitleHead.frame.height)
         
-        lSubtitleHead.textAlignment = .center
-        lSubtitleHead.numberOfLines = 0
-        lSubtitleHead.text = "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
-        lSubtitleHead.textColor = .white
-        lSubtitleHead.font = semiBold?
-            .withSize(lSubtitleHead.frame.height)
+        let attrSub = NSMutableAttributedString(
+            string: "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
+        )
         
+        let subrange = NSRange(
+            location: 0,
+            length: attrSub.length
+        )
+        
+        attrSub.addAttribute(
+            .paragraphStyle,
+            value: paragMulti,
+            range: subrange
+        )
+        
+        attrSub.addAttribute(
+            .foregroundColor,
+            value: UIColor.white,
+            range: subrange
+        )
+        
+        attrSub.addAttribute(
+            .font,
+            value: semiBold?
+                .withSize(lSubtitleHead.frame.height),
+            range: subrange
+        )
+        
+        lSubtitleHead.numberOfLines = 0
+        lSubtitleHead.attributedText = attrSub
         lSubtitleHead.sizeToFit()
         lSubtitleHead.frame.center(
             targetWidth: w
@@ -245,12 +272,37 @@ class ProfileNewViewController
             )
         )
         
-        lShare.text = "Поделись своим впечатлением.\nСкажи, что тебе нравится и не нравится в приложении, а мы обещаем, что сделаем его лучше!"
-        lShare.textColor = .white
-        lShare.font = semiBold?
-            .withSize(hshare * 0.067)
+        
+        let attrShare = NSMutableAttributedString(
+            string: "Поделись своим впечатлением.\nСкажи, что тебе нравится и не нравится в приложении, а мы обещаем, что сделаем его лучше!"
+        )
+        
+        let range = NSRange(
+            location: 0,
+            length: attrShare.length
+        )
+
+        attrShare.addAttribute(
+            .paragraphStyle,
+            value: paragMulti,
+            range: range
+        )
+
+        attrShare.addAttribute(
+            .font,
+            value: semiBold?
+                .withSize(hshare * 0.067),
+            range: range
+        )
+        
+        attrShare.addAttribute(
+            .foregroundColor,
+            value: UIColor.white,
+            range: range
+        )
+        
+        lShare.attributedText = attrShare
         lShare.numberOfLines = 0
-        lShare.textAlignment = .center
         lShare.sizeToFit()
         
         let btnShare = ViewUtils
@@ -356,6 +408,30 @@ class ProfileNewViewController
                 .increment(1)
             )
     }
+}
+
+extension UILabel {
+    
+    func setParagraph(
+        string: String,
+        style: NSMutableParagraphStyle
+    ) {
+        let a = NSMutableAttributedString(
+            string: string
+        )
+        
+        a.addAttribute(
+            .paragraphStyle,
+            value: style,
+            range: NSRange(
+                location: 0,
+                length: string.count
+            )
+        )
+        text = ""
+        attributedText = a
+    }
+    
 }
 
 extension CGRect {
