@@ -39,6 +39,7 @@ public class CollectionTableViewCell
         contentView.backgroundColor = .clear
         collectionView.backgroundColor = .clear
         
+               
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.showsHorizontalScrollIndicator = false

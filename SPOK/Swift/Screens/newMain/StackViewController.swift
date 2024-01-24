@@ -13,14 +13,13 @@ class StackViewController
     
     private final let TAG = "StackViewController"
     
-    public final let mTopOffset = {
+    public final let mInsets = {
         let w = UIApplication
             .shared
             .windows
             .first
         
-        return w?.safeAreaInsets
-            .top ?? 0
+        return w?.safeAreaInsets ?? UIEdgeInsets.zero
     }()
     
     private var main: MainViewController!
@@ -41,7 +40,7 @@ class StackViewController
     ) -> CGRect {
         return CGRect(
             x: x,
-            y: y+mTopOffset,
+            y: y+mInsets.top,
             width: width,
             height: height
         )

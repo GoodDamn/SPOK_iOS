@@ -57,8 +57,13 @@ public class ViewUtils {
             .shared
             .windows
             .first
-        let topInset = window?
-            .safeAreaInsets.top ?? h*0.05
+        
+        var topInset = window?
+            .safeAreaInsets.top ?? 0
+        
+        if topInset == 0 {
+            topInset = h * 0.05
+        }
         
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",

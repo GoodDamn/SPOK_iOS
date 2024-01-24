@@ -25,9 +25,36 @@ class HomeViewController
     override func viewDidLoad() {
         super.viewDidLoad();
     
-        mTableView = UITableView(
-            frame: view.frame
+        let w = view.frame.width
+        let h = view.frame.height - mInsets.bottom - 50 // 50 - nav bar (MainContentViewController)
+        
+        let wmoon = 0.594 * w
+        let hmoon = 0.413 * w
+        
+        let ivMoon = UIImageView(
+            frame: CGRect(
+                x: w-wmoon+0.03*w,
+                y: h * -0.019,
+                width: wmoon,
+                height: hmoon
+            )
         )
+        
+        ivMoon.backgroundColor = .clear
+        ivMoon.image = UIImage(
+            named: "moon"
+        )
+        
+        mTableView = UITableView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: w,
+                height: h
+            )
+        )
+        
+        mTableView.separatorStyle = .none
         
         mTableView.register(
             CollectionTableViewCell.self,
@@ -44,7 +71,7 @@ class HomeViewController
         mTableView.contentInset = UIEdgeInsets(
             top: 0,
             left: 0,
-            bottom: 85,
+            bottom: 25,
             right: 0
         );
         
@@ -53,7 +80,13 @@ class HomeViewController
         
         mTableView.showsVerticalScrollIndicator = false
         
-        view.addSubview(mTableView)
+        view.addSubview(
+            ivMoon
+        )
+        
+        view.addSubview(
+            mTableView
+        )
         
         mDownloader = CollectionDowloader(
             dir: "sleep",

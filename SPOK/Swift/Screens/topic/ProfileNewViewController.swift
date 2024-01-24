@@ -23,10 +23,12 @@ class ProfileNewViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("MainContentViewController", "viewDidLoad:", mInsets)
+        
         modalPresentationStyle = .fullScreen
         
         let w = view.frame.width
-        let h = view.frame.height - mTopOffset
+        let h = view.frame.height - mInsets.top - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
         let paragMulti = NSMutableParagraphStyle()
         paragMulti.lineHeightMultiple = 0.83
@@ -49,6 +51,8 @@ class ProfileNewViewController
         
         let marginTop = h * 0.04
         let marginLeft = w * 0.05
+        
+        let mTopOffset = mInsets.top
         
         let lTitle = UILabel(
             frame: CGRect(
@@ -238,14 +242,16 @@ class ProfileNewViewController
         )
         
         btnOpen.frame.origin.y = lPrice.frame.bottom() + h * 0.03
+        print("ProfileNewViewController:", "FRAMES:",view.bounds.size,UIScreen.main.bounds.size)
+        let sharey = btnOpen.frame.bottom() + h * 0.03
         
-        let hshare = h * 0.25
+        let hshare = h - sharey
         let shareLeft = w * 0.051
         let wshare = w-shareLeft*2
         let shareView = UIView(
             frame: CGRect(
                 x: shareLeft,
-                y: h * 0.68,
+                y: sharey,
                 width: wshare,
                 height: hshare
             )
@@ -330,12 +336,12 @@ class ProfileNewViewController
         
         view.addSubview(lPrice)
         
-        view.addSubview(btnOpen)
         view.addSubview(shareView)
         
         shareView.addSubview(lShare)
         view.addSubview(btnShare)
         
+        view.addSubview(btnOpen)
         
         btnOpen.addTarget(
             self,

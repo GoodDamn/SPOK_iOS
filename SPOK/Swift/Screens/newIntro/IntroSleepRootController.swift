@@ -71,14 +71,7 @@ class IntroSleepRootController
                 .shared
                 .windows[0]
             
-            let board = UIStoryboard(
-                name: "mainNav",
-                bundle: Bundle.main
-            )
-            
-            let mainNav = board.instantiateViewController(
-                withIdentifier: "mainNav"
-            ) as! MainContentViewController
+            let mainNav = MainContentViewController()
             
             self.pusht(
                 mainNav,

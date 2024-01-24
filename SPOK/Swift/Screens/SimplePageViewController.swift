@@ -61,7 +61,6 @@ public class SimplePageViewController
         super.viewDidLoad()
         
         delegate = self
-        dataSource = self
     }
     
 }

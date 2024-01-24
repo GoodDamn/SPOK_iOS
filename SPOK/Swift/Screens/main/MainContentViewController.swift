@@ -16,8 +16,6 @@ class MainContentViewController
     
     private let tag = "MainContentViewController:";
     
-    @IBOutlet weak var pageContainer: UIView!;
-    
     let language = Utils.getLanguageCode();
     let mDatabase = Database.database();
     
@@ -57,23 +55,6 @@ class MainContentViewController
     var mDatabaseStats: DatabaseReference? = nil;
     var mDatabaseUser: DatabaseReference? = nil;
     
-    override func prepare(
-        for segue: UIStoryboardSegue,
-        sender: Any?
-    ) {
-        if (segue.identifier == "mainPage") {
-            let storyboard = UIStoryboard(name: "mainNav", bundle: nil);
-            pageViewController = segue.destination as? SimplePageViewController;
-            pageViewController?.source = [
-                storyboard.instantiateViewController(withIdentifier: "home"),
-                //storyboard.instantiateViewController(withIdentifier: "search"),
-                storyboard.instantiateViewController(withIdentifier: "profile")
-            ]
-            return;
-        }
-        
-    }
-    
     @objc func onPause(){
         print(tag, "onPause();");
         /*DispatchQueue.global(
@@ -98,7 +79,7 @@ class MainContentViewController
         }*/
     }
     
-    override func viewWillAppear(
+    /*override func viewWillAppear(
         _ animated: Bool
     ) {
         print(self.tag, "viewWillAppear()",view.subviews);
@@ -117,7 +98,7 @@ class MainContentViewController
                 ,object: nil
             );
         
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -186,8 +167,6 @@ class MainContentViewController
                 .mIndex = index
         }
         
-        view.addSubview(mNavBar);
-        
         createTab(systemNameImage: "house", imageSize: imageSize);
         /*createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);*/
         createTab(
@@ -203,7 +182,40 @@ class MainContentViewController
         mNavBar.center_vertical();
         mNavBar.center_horizontal();
         
+        pageViewController = SimplePageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal
+        )
+        
+        pageViewController?.source = [
+            HomeViewController(),
+            ProfileNewViewController()
+        ]
+        
+        addChild(
+            pageViewController!
+        )
+        
+        let cont = pageViewController!.view!
+        
+        view.addSubview(
+            cont
+        )
+        
+        view.addSubview(mNavBar);
      }
+    
+    override func viewDidLayoutSubviews() {
+        print("MainContentViewController", "viewDidLayout:")
+        pageViewController?.view.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.width,
+            height: view.frame.height - mNavBar.frame.height
+        )
+        
+        super.viewDidLayoutSubviews()
+    }
     
     private func createTab(
         systemNameImage: String,

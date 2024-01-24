@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */; };
-		2506226D2B4D6AB900FCD636 /* mainNav.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2506226C2B4D6AB900FCD636 /* mainNav.storyboard */; };
 		250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506226F2B4D6EEB00FCD636 /* ProfileNewViewController.swift */; };
 		250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */; };
 		250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622742B4DB20500FCD636 /* IntroSleep2ViewController.swift */; };
@@ -143,7 +142,6 @@
 
 /* Begin PBXFileReference section */
 		2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
-		2506226C2B4D6AB900FCD636 /* mainNav.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainNav.storyboard; sourceTree = "<group>"; };
 		2506226F2B4D6EEB00FCD636 /* ProfileNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNewViewController.swift; sourceTree = "<group>"; };
 		250622722B4DAA7E00FCD636 /* IntroSleepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleepViewController.swift; sourceTree = "<group>"; };
 		250622742B4DB20500FCD636 /* IntroSleep2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroSleep2ViewController.swift; sourceTree = "<group>"; };
@@ -601,7 +599,6 @@
 			children = (
 				2B7652DB277CAF97008B4B40 /* xib */,
 				2BA101D72763EFCA00EB5B8C /* LaunchScreen.storyboard */,
-				2506226C2B4D6AB900FCD636 /* mainNav.storyboard */,
 				25B35B142B51236B002704E1 /* Main.storyboard */,
 			);
 			path = Storyboards;
@@ -938,7 +935,6 @@
 				2BCC492A290E34A800A5F4F4 /* mplus_rounded1c_light.ttf in Resources */,
 				2BCC4925290E34A000A5F4F4 /* Localization.strings in Resources */,
 				25B35B152B51236B002704E1 /* Main.storyboard in Resources */,
-				2506226D2B4D6AB900FCD636 /* mainNav.storyboard in Resources */,
 				2BCC4910290E347B00A5F4F4 /* SeekBar.xib in Resources */,
 				2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */,
 				2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */,

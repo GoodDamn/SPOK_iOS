@@ -109,14 +109,7 @@ class MainViewController
             .asyncAfter(
                 deadline: .now() + 2.5
             ) {
-                let sMain = UIStoryboard(
-                    name: "mainNav",
-                    bundle: Bundle.main
-                )
-                let controller = sMain
-                    .instantiateViewController(
-                        withIdentifier: "mainNav"
-                    ) as! MainContentViewController
+                let controller =  MainContentViewController()
                 
                 self.pusht(
                     controller,

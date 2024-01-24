@@ -27,53 +27,95 @@ class IntroSleep3ViewController
         addChild(mPageController)
         view.addSubview(mPageController.view)
             
+        let btnStart = ViewUtils
+            .button(
+                text: "Начать приключение"
+            )
+        
+        LayoutUtils.button(
+            for: btnStart,
+            self.view.frame,
+            y: 0
+        )
+        
+        btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.019
+        
+        btnStart.addTarget(
+            self,
+            action: #selector(
+                self.onClickBtnStart(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        let bsf = btnStart.frame
+        
+        let hPageBar = h * 0.03
+        
         let pageBar = PageBar(
             frame: CGRect(
                 x: w * 0.374,
-                y: h * 0.831,
+                y: bsf.origin.y - hPageBar - h*0.03,
                 width: w * 0.241,
-                height: h * 0.03
+                height: hPageBar
             )
         )
         
+        let m = MainViewController
+            .mCardSizeM!
+        let b = MainViewController
+            .mCardSizeB!
+        
         let page = Page()
         let page2 = Page()
+        
+        page2.mOnLoadView = { v in
+            v.addSubview(btnStart)
+        }
         
         page.setHeader(
             title: "Засыпайки",
             subtitle: "Всего пару минут,\nчтобы настроиться на сон."
         )
         
+        page.setCarousels([
+            CarouselView.Carousel(
+                cellSize: b,
+                type: CarouselView
+                    .mTYPE_B,
+                from: 0.0,
+                delta: 0.1
+            ),
+            CarouselView.Carousel(
+                cellSize: m,
+                type: CarouselView
+                    .mTYPE_M,
+                from: 1.0,
+                delta: -0.1
+            )
+        ])
+        
         page2.setHeader(
             title: "Истории на ночь",
             subtitle: "Расслабляйся, читая\nневероятные рассказы"
         )
         
-        page2.mOnLoadView = { v in
-            
-            let btnStart = ViewUtils
-                .button(
-                    text: "Начать приключение"
-                )
-            
-            LayoutUtils.button(
-                for: btnStart,
-                self.view.frame,
-                y: 0
+        page2.setCarousels([
+            CarouselView.Carousel(
+                cellSize: b,
+                type: CarouselView
+                    .mTYPE_B,
+                from: 0.0,
+                delta: 0.1
+            ),
+            CarouselView.Carousel(
+                cellSize: b,
+                type: CarouselView
+                    .mTYPE_M,
+                from: 1.0,
+                delta: -0.1
             )
-            
-            btnStart.frame.origin.y = pageBar.frame.bottom() + h * 0.019
-            
-            btnStart.addTarget(
-                self,
-                action: #selector(
-                    self.onClickBtnStart(_:)
-                ),
-                for: .touchUpInside
-            )
-            v.addSubview(btnStart)
-            
-        }
+        ])
         
         mPageController.source = [
             page,
@@ -160,41 +202,6 @@ private class Page
         
         view.clipsToBounds = true
         
-        // 40 207 207
-        
-        let hcv = 0.496 * h
-        
-        mCarouselView = CarouselView(
-            carousels: [
-                CarouselView.Carousel(
-                    cellSize: MainViewController
-                        .mCardSizeB,
-                    type: CarouselView
-                        .mTYPE_B,
-                    from: 0.0,
-                    delta: 0.1
-                ),
-                CarouselView.Carousel(
-                    cellSize: MainViewController
-                        .mCardSizeM,
-                    type: CarouselView
-                        .mTYPE_M,
-                    from: 1.0,
-                    delta: -0.1
-                )
-            ],
-            frame: CGRect(
-                x: 0,
-                y: h * 0.256+mTopOffset*0.3,
-                width: w,
-                height: hcv
-            )
-        )
-        
-        
-        view.addSubview(mCarouselView!)
-        
-        mOnLoadView?(view)
     }
  
     override func viewDidAppear(
@@ -208,6 +215,34 @@ private class Page
     ) {
         print(TAG, "viewDidDisappear")
         mCarouselView?.stop()
+    }
+    
+    public func setCarousels(
+        _ carousels: [CarouselView.Carousel]
+    ) {
+        // 40 207 207
+        
+        let h = view.frame.height
+        let w = view.frame.width
+        
+        let hcv = 0.496 * h
+        
+        mCarouselView = CarouselView(
+            carousels: carousels,
+            frame: CGRect(
+                x: 0,
+                y: h * 0.256 + mInsets.top * 0.3,
+                width: w,
+                height: hcv
+            )
+        )
+        
+        view.addSubview(
+            mCarouselView!
+        )
+        
+        mOnLoadView?(view)
+        
     }
     
     public func setHeader(
