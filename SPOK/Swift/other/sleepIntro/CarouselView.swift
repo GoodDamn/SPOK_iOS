@@ -56,7 +56,9 @@ class CarouselView
                     height: c.cellSize.height
                 )
             )
-                        
+             
+            cv.tag = 1
+            
             cv.setContentOffset(
                 CGPoint(
                     x: c.from,
@@ -163,6 +165,27 @@ extension CarouselView
                 withReuseIdentifier: ImageViewCell.id,
                 for: indexPath
         ) as! ImageViewCell
+        
+        let imgid = collectionView.tag
+        collectionView.tag += 1
+        if collectionView.tag > 3 {
+            collectionView.tag = 1
+        }
+        
+       
+        let w = UIScreen
+            .main
+            .bounds
+            .width
+        
+        let type = cell.frame.width > w * 0.8 ? 1 : 2
+        
+        print(TAG, "TAG:",type,imgid,collectionView.tag)
+        
+        
+        cell.mImageView.image = UIImage(
+            named: "\(type)\(imgid)"
+        )
         
         cell.backgroundColor = .gray
         cell.layer.cornerRadius = cell.frame.height * 0.12

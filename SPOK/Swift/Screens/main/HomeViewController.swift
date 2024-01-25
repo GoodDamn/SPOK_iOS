@@ -140,6 +140,12 @@ class HomeViewController
     }
     
     func onUpdate(i: Int) {
+        print(TAG, "onUpdate",i)
+        mColDelegates[i]
+            .setCollection(
+                mCollections[i] as!
+                    CollectionTopic
+            )
         mTableView.reloadRows(
             at: [
                 IndexPath(

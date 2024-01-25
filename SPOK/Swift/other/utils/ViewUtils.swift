@@ -152,8 +152,7 @@ public class ViewUtils {
         
         btnExit.setBackgroundImage(
             UIImage(
-                systemName: "xmark",
-                withConfiguration: btnExitConfig
+                systemName: "xmark"
             ),
             for: .normal)
         

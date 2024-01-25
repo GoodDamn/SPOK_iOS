@@ -20,7 +20,13 @@ public class CollectionDelegate
     ) {
         mCollection = collection
     }
- 
+    
+    public func setCollection(
+        _ c: CollectionTopic
+    ) {
+        mCollection = c
+    }
+    
     public func registerCells(
         for colview: UICollectionView
     ) {

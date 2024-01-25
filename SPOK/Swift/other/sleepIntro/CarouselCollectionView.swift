@@ -80,19 +80,6 @@ class ImageViewCell
             )
         )
         
-        let s = UInt8.random(in: 1...3)
-        
-        let w = UIScreen
-            .main
-            .bounds
-            .width
-        
-        let type = frame.width > w * 0.8 ? 1 : 2
-        
-        mImageView.image = UIImage(named:
-            "\(type)\(s)"
-        )
-        
         print("CarouselCollectionView:",frame)
         
         contentView.addSubview(

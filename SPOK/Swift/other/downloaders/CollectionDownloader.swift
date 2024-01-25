@@ -193,6 +193,9 @@ class CollectionDowloader {
             for i in s
                 .mCacheCollections
                 .indices {
+                
+                print(s.TAG, "CACHE_NET:",i)
+                
                 s.mCacheCollections[i] = s.mNetCollections[i]
                 
                 s.delegate!.onUpdate(i:i)

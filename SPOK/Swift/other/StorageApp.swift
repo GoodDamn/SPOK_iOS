@@ -249,16 +249,18 @@ class StorageApp {
         path:String,
         data:Data?
     ) {
+        guard let data = data else {
+            return
+        }
+        
         let fm = FileManager.default;
         
         if fm.fileExists(
             atPath: path
         ) {
-            return
-        }
-        
-        guard let data = data else {
-            return
+            try? fm.removeItem(
+                atPath: path
+            )
         }
         
         fm.createFile(
@@ -305,7 +307,7 @@ class StorageApp {
         root: String
     ) -> Data? {
         
-        print(debugTag, root, file)
+        print(debugTag, "load:" ,root, file)
         
         let f = StorageApp.rootPath(
             append: root
