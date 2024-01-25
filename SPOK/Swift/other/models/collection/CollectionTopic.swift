@@ -10,19 +10,25 @@ import Foundation
 public class CollectionTopic
     : Collection {
     let topicsIDs: [UInt16]
-    let cardSize: CGSize
+    var cardSize: CGSize
+    var cardTextSize: CardTextSize
+    var cardType: CardType
     
     init(
-        topicsIDs: [UInt16],
+        topicsIDs: inout [UInt16],
         titleSize: CGFloat,
         cardSize: CGSize,
         title: String,
         height: CGFloat,
         idCell: String = CollectionTableViewCell
-            .id
+            .id,
+        cardTextSize: CardTextSize,
+        cardType: CardType
     ) {
+        self.cardTextSize = cardTextSize
         self.topicsIDs = topicsIDs
         self.cardSize = cardSize
+        self.cardType = cardType
         
         super.init(
             title: title,

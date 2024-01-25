@@ -28,7 +28,7 @@ class ProfileNewViewController
         modalPresentationStyle = .fullScreen
         
         let w = view.frame.width
-        let h = view.frame.height - mInsets.top - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
+        let h = view.frame.height - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
         let paragMulti = NSMutableParagraphStyle()
         paragMulti.lineHeightMultiple = 0.83
@@ -238,14 +238,18 @@ class ProfileNewViewController
             view.frame,
             y: 0.85,
             width: 0.702,
-            textSize: 0.3
+            textSize: 0.28
         )
         
         btnOpen.frame.origin.y = lPrice.frame.bottom() + h * 0.03
         print("ProfileNewViewController:", "FRAMES:",view.bounds.size,UIScreen.main.bounds.size)
         let sharey = btnOpen.frame.bottom() + h * 0.03
         
-        let hshare = h - sharey
+        let lastHeight = h - sharey
+        let hNeedShare = h * 0.25
+        let hshare = lastHeight < hNeedShare ?
+                lastHeight
+              : hNeedShare
         let shareLeft = w * 0.051
         let wshare = w-shareLeft*2
         let shareView = UIView(
@@ -268,7 +272,7 @@ class ProfileNewViewController
             .cornerRadius = hshare * 0.083
         
         
-        let lShareLeft = wshare * 0.1
+        let lShareLeft = wshare * 0.109
         let lShare = UILabel(
             frame: CGRect(
                 x: lShareLeft,
@@ -297,7 +301,7 @@ class ProfileNewViewController
         attrShare.addAttribute(
             .font,
             value: semiBold?
-                .withSize(hshare * 0.067),
+                .withSize(hshare * 0.068),
             range: range
         )
         
@@ -318,13 +322,32 @@ class ProfileNewViewController
         
         LayoutUtils.button(
             for: btnShare,
-            view.frame,
+            shareView.frame,
             y: 0.6,
-            width: 0.702,
-            textSize: 0.3
+            width: 0.782,
+            height: 0.242,
+            textSize: 0.28
         )
         
-        btnShare.frame.origin.y = shareView.frame.bottom() - btnShare.frame.height - shareView.frame.height * 0.155
+        btnShare.frame.origin.y =
+            shareView.frame.height -
+            btnShare.frame.height -
+            shareView.frame.height * 0.155
+        
+        shareView.frame.center(
+            targetHeight: lastHeight,
+            offset: sharey
+        )
+        
+        btnOpen.frame.center(
+            targetHeight: shareView.frame.origin.y - lPrice.frame.bottom(),
+            offset: lPrice.frame.bottom()
+        )
+        
+        lPrice.frame.center(
+            targetHeight: btnOpen.frame.origin.y - imageView2.frame.bottom(),
+            offset: imageView2.frame.bottom()
+        )
         
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
@@ -337,9 +360,8 @@ class ProfileNewViewController
         view.addSubview(lPrice)
         
         view.addSubview(shareView)
-        
         shareView.addSubview(lShare)
-        view.addSubview(btnShare)
+        shareView.addSubview(btnShare)
         
         view.addSubview(btnOpen)
         
@@ -446,6 +468,13 @@ extension CGRect {
         return height + origin.y
     }
 
+    mutating func center(
+        targetHeight: CGFloat,
+        offset: CGFloat = 0
+    ) {
+        origin.y = offset + (targetHeight - height) * 0.5
+    }
+    
     mutating func center(
         targetWidth: CGFloat
     ) {

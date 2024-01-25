@@ -41,6 +41,8 @@
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 259185372B5D8649001CFD7A /* sheep_m.mp3 */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
+		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
+		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25BD93152A691883002C7017 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BD93142A691883002C7017 /* BannerViewController.swift */; };
@@ -108,7 +110,6 @@
 		2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BA101D52763EFCA00EB5B8C /* Assets.xcassets */; };
 		2BCC4910290E347B00A5F4F4 /* SeekBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B41A073277E4B5C00F52976 /* SeekBar.xib */; };
 		2BCC4925290E34A000A5F4F4 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BB4FA5727E208D200574FDA /* Localization.strings */; };
-		2BCC492A290E34A800A5F4F4 /* mplus_rounded1c_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA10249276A484700EB5B8C /* mplus_rounded1c_light.ttf */; };
 		2BCC4978290E613400A5F4F4 /* CategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA51AC4281011190035262A /* CategoryView.xib */; };
 		2BCC497D290E613B00A5F4F4 /* ArcProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7652D6277CAF5C008B4B40 /* ArcProgressBar.xib */; };
 		2BCC497E290E614400A5F4F4 /* AdvancedLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B1CBB2C27D216F900CCB102 /* AdvancedLabel.xib */; };
@@ -171,6 +172,8 @@
 		255C04F82B504BB5006D9FD0 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259185372B5D8649001CFD7A /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sheep_m.mp3; sourceTree = "<group>"; };
+		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
+		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25BD93142A691883002C7017 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +239,6 @@
 		2BA101EE2763EFCB00EB5B8C /* SPOKUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKUITests.swift; sourceTree = "<group>"; };
 		2BA101F02763EFCB00EB5B8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA1023D276A11DE00EB5B8C /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
-		2BA10249276A484700EB5B8C /* mplus_rounded1c_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mplus_rounded1c_light.ttf; sourceTree = "<group>"; };
 		2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		2BA1024F276A487C00EB5B8C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -389,6 +391,14 @@
 			path = sleepIntro;
 			sourceTree = "<group>";
 		};
+		259FE6122B623DA400E237B7 /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				259FE6132B623DC800E237B7 /* CardType.swift */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
 		25C455C62B5BF8D400AF54B1 /* cacheManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				25DB9ACF2B57EC3800B5359F /* collection */,
+				259FE6102B62325D00E237B7 /* CardTextSize.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -564,7 +575,6 @@
 				2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */,
 				2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */,
 				2BA1024F276A487C00EB5B8C /* OpenSans-SemiBold.ttf */,
-				2BA10249276A484700EB5B8C /* mplus_rounded1c_light.ttf */,
 				2BA1025B276A5FFD00EB5B8C /* Swift */,
 				2BA10242276A41F000EB5B8C /* Storyboards */,
 				2BA101D52763EFCA00EB5B8C /* Assets.xcassets */,
@@ -642,6 +652,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				259FE6122B623DA400E237B7 /* enums */,
 				25C455C62B5BF8D400AF54B1 /* cacheManager */,
 				25DB9AC72B57B5DB00B5359F /* utils */,
 				25DB9ABC2B54E32700B5359F /* delegates */,
@@ -932,7 +943,6 @@
 				2BCC497E290E614400A5F4F4 /* AdvancedLabel.xib in Resources */,
 				2BCC497D290E613B00A5F4F4 /* ArcProgressBar.xib in Resources */,
 				2BCC4978290E613400A5F4F4 /* CategoryView.xib in Resources */,
-				2BCC492A290E34A800A5F4F4 /* mplus_rounded1c_light.ttf in Resources */,
 				2BCC4925290E34A000A5F4F4 /* Localization.strings in Resources */,
 				25B35B152B51236B002704E1 /* Main.storyboard in Resources */,
 				2BCC4910290E347B00A5F4F4 /* SeekBar.xib in Resources */,
@@ -968,6 +978,7 @@
 				25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */,
 				25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */,
 				2BD64C4D295C36DB00169416 /* SettingsTableViewCell.swift in Sources */,
+				259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2B5DBFC029321C8300FF5199 /* RatingSnackbar.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
@@ -998,6 +1009,7 @@
 				25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */,
 				250622732B4DAA7E00FCD636 /* IntroSleepViewController.swift in Sources */,
 				2BEB9A4327CF57810024989F /* SubscriptionViewController.swift in Sources */,
+				259FE6142B623DC800E237B7 /* CardType.swift in Sources */,
 				2B049DEE277A2173009D636D /* RateAppViewController.swift in Sources */,
 				2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */,
 				2BC1218827772C1C00729BA4 /* PromoCodeVController.swift in Sources */,
@@ -1276,7 +1288,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1287,7 +1299,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1307,7 +1319,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1318,7 +1330,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";

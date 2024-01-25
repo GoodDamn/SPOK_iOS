@@ -230,10 +230,12 @@ class CollectionDowloader {
                 return
             }
             
+            var d: FileSCS? = Utils.Exten.getSCSFile(
+                data
+            )
+            
             s.addCollection(
-                Utils.Exten.getSCSFile(
-                    data
-                ),
+                &d,
                 &s.mNetCollections
             )
             
@@ -263,15 +265,14 @@ class CollectionDowloader {
         StorageApp.urlContent(
             at: mDirPath
         ) { fileName in
-            guard let d = StorageApp.collection(
-                mRootName,
-                fileName: fileName
-            ) else {
-                print(TAG, "loadCache: data_nil:",fileName)
-                return
-            }
+            var d = StorageApp
+                .collection(
+                    mRootName,
+                    fileName: fileName
+                )
+            
             addCollection(
-                d,
+                &d,
                 &mCacheCollections
             )
             
@@ -284,10 +285,11 @@ class CollectionDowloader {
     }
     
     private func addCollection(
-        _ col: FileSCS?,
+        _ col: inout FileSCS?,
         _ c: inout [Collection]
     ) {
-        guard let col = col else {
+        guard var col = col else {
+            print(TAG, "data_nil: col: addCollection:")
             return
         }
         
@@ -304,11 +306,13 @@ class CollectionDowloader {
         
         c.append(
             CollectionTopic(
-                topicsIDs: col.topics ?? [],
+                topicsIDs: &col.topics!,
                 titleSize: titleSize,
                 cardSize: mCardSizeB,
                 title: col.title ?? "",
-                height: height
+                height: height,
+                cardTextSize: MainViewController.mCardTextSizeB,
+                cardType: .B
             )
         )
     }

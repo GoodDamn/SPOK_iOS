@@ -77,8 +77,10 @@ extension CollectionDelegate
         
         cell.contentView.alpha = 0
         
+        cell.mCardTextSize = mCollection.cardTextSize
+        
         cell.load(
-            type: "B",
+            type: mCollection.cardType,
             id: intID
         )
         

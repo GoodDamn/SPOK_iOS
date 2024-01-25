@@ -50,6 +50,14 @@ class Utils{
             as! MainViewController
     }
     
+    public static func insets() -> UIEdgeInsets {
+        return UIApplication
+            .shared
+            .windows
+            .first?
+            .safeAreaInsets ?? UIEdgeInsets.zero
+    }
+    
     public static func configNotifications(center: UNUserNotificationCenter = UNUserNotificationCenter.current()){
         center.requestAuthorization(options: [.sound, .alert], completionHandler: {
             (granted, error) in
@@ -339,55 +347,94 @@ class Utils{
             
             let tag = "getSKC1File:";
             
-            let artistSong = String(data: data.subdata(in: 1..<pos),
-                                    encoding: .utf8);
+            let artistSong = String(
+                data: data.subdata(in: 1..<pos),
+                encoding: .utf8
+            );
             
-            let contentLen = Int(Byte.uint16(data.subdata(in: pos..<(pos+2))));
+            let contentLen = Int(Byte.uint16(
+                data.subdata(
+                    in: pos..<(pos+2)
+                )
+            ));
             pos += 2;
-            let content = String(data: data.subdata(in: pos..<(pos+contentLen)),
-                                 encoding: .utf8);
-            let contentArr = content?.components(separatedBy: .newlines).filter{$0 != ""};
+            
+            let content = String(
+                data: data.subdata(
+                    in: pos..<(pos+contentLen)
+                ),
+                encoding: .utf8
+            );
+            
+            let contentArr = content?.components(
+                separatedBy: .newlines
+            ).filter{$0 != ""};
             pos += contentLen;
             
             if content == nil {
                 return nil;
             }
             
-            return FileSKC1(content: contentArr!,
-                            artistSong: artistSong,
-                            mp3Data: data.subdata(in: pos..<data.count));
+            return FileSKC1(
+                content: contentArr!,
+                artistSong: artistSong,
+                mp3Data: data.subdata(
+                    in: pos..<data.count)
+            );
         }
         
-        static func getSPCFile(_ data: Data, scale: CGFloat = 2.0) -> FileSPC {
+        static func getSPCFile(
+            _ data: Data,
+            scale: CGFloat = UIScreen.main.scale
+        ) -> FileSPC {
             let conf = (UInt8) (data[0]);
             let isPremium = (conf & 0xff) >> 6 == 1;
             let categoryID = conf & 0x3f;
             
-            let color = UIColor(red: CGFloat(data[2]) / 255,
-                                green: CGFloat(data[3]) / 255,
-                                blue: CGFloat(data[4]) / 255,
-                                alpha: CGFloat(data[1]) / 255);
+            let color = UIColor(
+                red: CGFloat(data[2]) / 255,
+                green: CGFloat(data[3]) / 255,
+                blue: CGFloat(data[4]) / 255,
+                alpha: CGFloat(data[1]) / 255
+            );
             
-            let descLen = Int(Byte.uint16(data.subdata(in: 5..<7)));
+            let descLen = Int(Byte.uint16(
+                data.subdata(in: 5..<7)
+            ));
+            
             var pos = 7 + descLen;
-            let description = String(data: data.subdata(in: 7..<pos),
-                                     encoding: .utf8);
+            let description = String(
+                data: data.subdata(in: 7..<pos),
+                encoding: .utf8
+            );
             
-            let titleLen = Int(Byte.uint16(data.subdata(in: pos..<(pos+2))));
+            let titleLen = Int(Byte.uint16(
+                data.subdata(in: pos..<(pos+2))
+            ));
             pos += 2;
-            let title = String(data: data.subdata(in: pos..<(titleLen+pos)),
-                               encoding: .utf8);
+            let title = String(
+                data: data.subdata(
+                    in: pos..<(titleLen+pos)
+                ),
+                encoding: .utf8
+            );
             
             pos += titleLen;
             
-            let image = UIImage(data: data.subdata(in: pos..<data.count), scale: scale);
+            let image = UIImage(
+                data: data.subdata(
+                    in: pos..<data.count),
+                scale: scale
+            );
             
-            return FileSPC(isPremium: isPremium,
-                           categoryID: categoryID,
-                           color: color,
-                           description: description,
-                           title: title,
-                           image: image);
+            return FileSPC(
+                isPremium: isPremium,
+                categoryID: categoryID,
+                color: color,
+                description: description,
+                title: title,
+                image: image
+            );
         }
         
         static func getSCSFile(

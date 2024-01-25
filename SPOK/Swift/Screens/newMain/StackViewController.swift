@@ -24,12 +24,15 @@ class StackViewController
     
     private var main: MainViewController!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        main = Utils.main()
+    }
+    
     override func viewDidAppear(
         _ animated: Bool
     ) {
         super.viewDidAppear(animated)
-        
-        main = Utils.main()
     }
     
     public func framee(

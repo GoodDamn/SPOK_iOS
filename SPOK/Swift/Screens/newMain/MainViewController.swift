@@ -13,6 +13,8 @@ class MainViewController
     
     public static var mCardSizeB: CGSize!
     public static var mCardSizeM: CGSize!
+    public static var mCardTextSizeB: CardTextSize!
+    public static var mCardTextSizeM: CardTextSize!
     
     private var mControllers: [UIViewController] = []
     
@@ -42,6 +44,16 @@ class MainViewController
         MainViewController.mCardSizeM = CGSize(
             width: mScreen.width * 0.4,
             height: hb
+        )
+        
+        MainViewController.mCardTextSizeB = CardTextSize(
+            title: 0.111 * hb,
+            desc: 0.062 * hb
+        )
+        
+        MainViewController.mCardTextSizeM = CardTextSize(
+            title: 0.096 * hb,
+            desc: 0.053 * hb
         )
         
         /*

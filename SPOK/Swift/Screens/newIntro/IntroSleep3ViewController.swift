@@ -38,7 +38,7 @@ class IntroSleep3ViewController
             y: 0
         )
         
-        btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.019
+        btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom
         
         btnStart.addTarget(
             self,
@@ -55,7 +55,7 @@ class IntroSleep3ViewController
         let pageBar = PageBar(
             frame: CGRect(
                 x: w * 0.374,
-                y: bsf.origin.y - hPageBar - h*0.03,
+                y: bsf.origin.y - hPageBar - h*0.019,
                 width: w * 0.241,
                 height: hPageBar
             )

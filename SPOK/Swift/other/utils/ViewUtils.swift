@@ -105,7 +105,6 @@ public class ViewUtils {
                 height: 0
             )
         )
-        
         lSubtitle.text = subtitle
         lSubtitle.textColor = .white
         lSubtitle.font = semiBold
@@ -126,13 +125,12 @@ public class ViewUtils {
         let h = view.frame.height
         
         let sizeBtnExit = si * w
-        let inset = sizeBtnExit * 0.5
         
         let btnExitConfig = UIImage
             .SymbolConfiguration(
-                pointSize: 20,
+                pointSize: sizeBtnExit,
                 weight: .bold,
-                scale: .small
+                scale: .default
             )
         
         let btnExit = UIButton(
@@ -143,7 +141,6 @@ public class ViewUtils {
                 height: sizeBtnExit
             )
         )
-        
         
         btnExit.backgroundColor = .clear
         btnExit.tintColor = UIColor(

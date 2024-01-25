@@ -164,7 +164,6 @@ extension CarouselView
                 for: indexPath
         ) as! ImageViewCell
         
-        
         cell.backgroundColor = .gray
         cell.layer.cornerRadius = cell.frame.height * 0.12
         

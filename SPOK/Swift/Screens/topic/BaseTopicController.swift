@@ -42,7 +42,7 @@ class BaseTopicController
         modalPresentationStyle = .overFullScreen
         
         let mFont = UIFont(
-            name: "RoundedMplus1c-Light",
+            name: "OpenSans-SemiBold",
             size: view.frame.width * 0.057
         )
         

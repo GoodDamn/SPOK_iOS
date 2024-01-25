@@ -20,9 +20,27 @@ class PreviewCell
     public var mDesc: UILabel!
     public var mParticles: Particles!
     
-    private var mFileSpc: FileSPC? = nil
+    public var mCardTextSize: CardTextSize! {
+        didSet {
+            if mCardTextSize.desc == mDesc.font.pointSize {
+                return
+            }
+            
+            mTitle.font = mTitle.font
+                .withSize(
+                    mCardTextSize.title
+                )
+            
+            mDesc.font = mDesc.font
+                .withSize(
+                    mCardTextSize.desc
+                )
+        }
+    }
     
+    private var mFileSpc: FileSPC? = nil
     private var mId: Int = Int.min
+    private var mType: CardType = .M
     
     deinit {
         print(
@@ -52,11 +70,13 @@ class PreviewCell
         mParticles.backgroundColor = .black
             .withAlphaComponent(0.4)
         
-        
         mImageView = UIImageView(
             frame: f
         )
-        mImageView.backgroundColor = .darkGray
+        
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        mImageView.backgroundColor = .clear
         
         let bold = UIFont(
             name: "OpenSans-Bold",
@@ -153,12 +173,6 @@ class PreviewCell
         
         let ltext = (w - wtext) * 0.5
         
-        mTitle.font = mTitle.font
-            .withSize(0.111 * h) // 0.096M
-        
-        mDesc.font = mDesc.font
-            .withSize(0.062 * h) // 0.053M
-        
         mTitle.frame = CGRect(
             x: ltext,
             y: 0,
@@ -197,18 +211,39 @@ class PreviewCell
     }
     
     public func load(
-        type: String,
+        type: CardType,
         id: Int
     ) {
         mId = id
+        mType = type
         
-        let d = StorageApp
-            .preview(
-                id: id
-            )
-        print(PreviewCell.TAG, "PREVIEW:",d)
-        if d != nil {
-            show(d!)
+        if mFileSpc == nil {
+            DispatchQueue
+                .global(
+                    qos: .background
+                ).async { [weak self] in
+                    
+                    guard let s = self else {
+                        return
+                    }
+                    
+                    s.mFileSpc = StorageApp
+                        .preview(
+                            id: id,
+                            type: type
+                        )
+                    if s.mFileSpc == nil {
+                        return
+                    }
+                    
+                    DispatchQueue
+                        .main
+                        .async {
+                            s.show(&s.mFileSpc!)
+                        }
+                }
+        } else {
+            show(&mFileSpc!)
         }
         
         let st = Storage
@@ -248,7 +283,8 @@ class PreviewCell
             append: StorageApp.mDirPreviews
         ).append(
             StorageApp.tospc(
-                id: mId
+                id: mId,
+                type: mType
             )
         )
 
@@ -291,7 +327,6 @@ class PreviewCell
     private func extractSpc(
         from data: Data
     ) {
-        
         DispatchQueue.global(
             qos: .background
         ).async { [weak self] in
@@ -301,83 +336,68 @@ class PreviewCell
                 return
             }
                 
-            var fileSPC = Utils.Exten
+            s.mFileSpc = Utils.Exten
                     .getSPCFile(data);
             
             StorageApp
                 .preview(
                     id: s.mId,
+                    type: s.mType,
                     data: data
                 );
             
-            s.show(fileSPC)
+            DispatchQueue
+                .main
+                .async {
+                    s.show(&s.mFileSpc!)
+                }
         }
         
     }
     
     private func show(
-        _ fileSPC: FileSPC
+        _ fileSPC: inout FileSPC
     ) {
-        mFileSpc = fileSPC
-        DispatchQueue
-            .main
-            .async { [weak self] in
-            
-                guard let s = self else {
-                    print("PreviewCell: mainAsync: GC")
-                    return
-                }
-                
-                let img = Utils
-                    .changeSizeOfImage(
-                        s.frame.size,
-                        image: fileSPC.image!
-                    )
-                
-                s.mImageView.image = img
-            
-                let sa = s.contentView.layer.bounds
-                                
-                let layer = s.contentView.layer
-                
-                layer.cornerRadius = sa.height * 0.1
-                
-                layer.masksToBounds = true
-                
-                guard let title = s.mTitle else {
-                    return
-                }
-                
-                title.text = fileSPC.title
-                title.textColor = fileSPC.color
-                
-                s.mDesc.text = fileSPC
-                    .description
-                s.mDesc.textColor = fileSPC.color
+        
+        let img = Utils
+            .changeSizeOfImage(
+                frame.size,
+                image: fileSPC.image!
+            )
+        
+        mImageView.image = img
+    
+        let sa = contentView.layer.bounds
+                        
+        let layer = contentView.layer
+        layer.cornerRadius = sa.height * 0.1
+        layer.masksToBounds = true
+        
+        mTitle.text = fileSPC.title
+        mTitle.textColor = fileSPC.color
+        
+        mDesc.text = fileSPC
+            .description
+        mDesc.textColor = fileSPC.color
 
-                s.calculateBounds()
-                
-                UIView.animate(
-                    withDuration: 0.75
-                ) {
-                    s.contentView.alpha = 1.0
-                }
-                
-                guard let part = s.mParticles else {
-                    return
-                }
-
-                part.isHidden = true
-                part.stop()
-                
-                
-                
-                if fileSPC.isPremium {
-                    part.isHidden = false
-                    part.start()
-                }
-                
+        calculateBounds()
+        
+        if let part = mParticles {
+            part.isHidden = true
+            part.stop()
+            
+            if fileSPC.isPremium {
+                part.isHidden = false
+                part.start()
+            }
         }
+        
+        UIView.animate(
+            withDuration: 0.75
+        ) {
+            self.contentView.alpha = 1.0
+        }
+        
     }
     
 }

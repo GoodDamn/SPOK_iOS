@@ -80,24 +80,6 @@ class StorageApp {
             .timeIntervalSince1970 ?? 0;
     }
     
-    public static func preview(
-        id: Int,
-        lang: String = ""
-    ) -> FileSPC? {
-        
-        guard let d = StorageApp.load(
-            file: "\(id)\(lang).spc",
-            root: mDirPreviews
-        ) else {
-            return nil
-        }
-        
-        return Utils
-            .Exten
-            .getSPCFile(d)
-        
-    }
-    
     public static func content(
         id: Int,
         lang: String = ""
@@ -122,11 +104,31 @@ class StorageApp {
     
     public static func preview(
         id: Int,
+        type: CardType,
+        lang: String = ""
+    ) -> FileSPC? {
+        
+        guard let d = StorageApp.load(
+            file: "\(id)\(type.rawValue)\(lang).spc",
+            root: mDirPreviews
+        ) else {
+            return nil
+        }
+        
+        return Utils
+            .Exten
+            .getSPCFile(d)
+        
+    }
+    
+    public static func preview(
+        id: Int,
         lang: String = "",
+        type: CardType,
         data: Data?
     ) {
         StorageApp.save(
-            file: "\(id)\(lang).spc",
+            file: "\(id)\(type.rawValue)\(lang).spc",
             root: mDirPreviews,
             data: data
         )
@@ -216,9 +218,10 @@ class StorageApp {
     
     public static func tospc(
         id: Int,
+        type: CardType,
         lang: String = ""
     ) -> String {
-        return "\(id)\(lang).spc"
+        return "\(id)\(type)\(lang).spc"
     }
     
     public static func rootPath(

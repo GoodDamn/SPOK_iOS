@@ -102,6 +102,14 @@ class HomeViewController
     ) {
         print(TAG, "onFirstCollection")
         mCollections = c
+        
+        let mid = (mCollections[1] as! CollectionTopic)
+        mid.cardSize = MainViewController
+            .mCardSizeM
+        mid.cardTextSize = MainViewController
+            .mCardTextSizeM
+        mid.cardType = .M
+        
         for i in mCollections.indices {
             mColDelegates.append(
                 CollectionDelegate(
@@ -109,6 +117,7 @@ class HomeViewController
                 )
             )
         }
+        
         mTableView.dataSource = self
         mTableView.delegate = self
         mTableView.reloadData()
@@ -308,7 +317,6 @@ extension HomeViewController
             colview.dataSource = del
             colview.delegate = del
         }
-        //colview.reloadData()
         
         UIView.animate(
             withDuration: 0.15,

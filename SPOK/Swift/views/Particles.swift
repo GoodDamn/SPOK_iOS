@@ -29,11 +29,7 @@ class Particles
     
     private var mElapsedTime: Float = 0
     
-    public var mRadius: CGFloat = 3 {
-        didSet {
-            mRadius = mRadius * frame.width
-        }
-    }
+    private var mRadius: CGFloat = 3
     
     private func ini() {
         
@@ -61,7 +57,7 @@ class Particles
         frame: CGRect,
         radius: CGFloat
     ) {
-        mRadius = radius
+        mRadius = radius * frame.height
         super.init(frame: frame)
         ini()
     }
@@ -77,43 +73,29 @@ class Particles
     }
     
     public func start() {
-        var prevTime = Date()
-            .timeIntervalSince1970
-        
         mTimer = Timer.scheduledTimer(
             withTimeInterval: 0.25,
             repeats: true
         ) { _ in
             
-            let m = self.mParticles
-            
-            for i in m.indices {
-                self.dOpacity(
-                    index: i
-                )
+            for index in self.mParticles.indices {
+                
+                let par = self.mParticles[index]
+                
+                let l = self.layer
+                    .sublayers![index]
+                as! CAShapeLayer
+                
+                l.opacity -= 0.25
+                
+                if l.opacity < 0.1 {
+                    l.opacity = Float.random(
+                        in: 0.5..<1.0
+                    )
+                }
             }
         }
         
-    }
-    
-    private func dOpacity(
-        index: Int
-    ) {
-        let par = mParticles[index]
-        
-        let l = layer
-            .sublayers![index]
-        as! CAShapeLayer
-        
-        l.opacity -= 0.25
-        
-        
-        if l.opacity < 0.1 {
-            mParticles[index] = generateParticle()
-            l.opacity = Float.random(
-                in: 0.5..<1.0
-            )
-        }
     }
     
     private func generateParticle() -> Particle {
@@ -126,7 +108,7 @@ class Particles
             )
             b.addArc(
                 withCenter: p,
-                radius: 3.0,
+                radius: mRadius,
                 startAngle: 0,
                 endAngle: 2 * .pi,
                 clockwise: true
