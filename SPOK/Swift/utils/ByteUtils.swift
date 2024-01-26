@@ -15,10 +15,9 @@ class ByteUtils {
         offset: Int = 0
     ) -> Int {
         let offset = offset + Int(inp.startIndex)
-        return Int(
-            inp[offset] << 8 |
-            inp[offset+1]
-        )
+        return Int(inp[offset]) << 8 |
+            Int(inp[offset+1])
+        
     }
     
     static func int(
@@ -26,12 +25,11 @@ class ByteUtils {
         offset: Int = 0
     ) -> Int {
         let offset = offset + Int(inp.startIndex)
-        return Int(
-            inp[offset] << 24   |
-            inp[offset+1] << 16 |
-            inp[offset+2] << 8  |
-            inp[offset+3]
-        );
+        return Int(inp[offset]) << 24   |
+            Int(inp[offset+1]) << 16 |
+            Int(inp[offset+2]) << 8  |
+            Int(inp[offset+3])
+        
     }
     
 }

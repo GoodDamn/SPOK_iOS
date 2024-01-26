@@ -25,19 +25,20 @@ public class SPOKContentEngine {
         chunk: inout Data
     ) {
         
-        var offset = 0
+        var offset = Int(chunk.startIndex)
         
         print(TAG, "LEN:",chunk[offset])
         
         var textLen = ByteUtils
             .short(
-                &chunk,
-                offset: offset
+                &chunk
             )
         
         offset += 2
         
-        let textBytes = chunk[offset..<(textLen+offset)]
+        let textBytes = chunk[
+            offset..<(textLen+offset)
+        ]
         
         let text = String(
             bytes: textBytes,
@@ -180,7 +181,7 @@ public class SPOKContentEngine {
         
         var resLenBytes = fis.read(4)
         
-        print(TAG,"RES_LEN_BYTES:",resLenBytes)
+        print(TAG,"RES_LEN_BYTES:",([UInt8])(resLenBytes))
         
         let resLen = ByteUtils
             .int(
@@ -195,7 +196,9 @@ public class SPOKContentEngine {
         
         fis.skip(resPos-1)
         
-        let resCount = Int(fis.read())
+        let resCount = Int(
+            fis.read()
+        )
 
         fis.skip(1)
         

@@ -25,6 +25,15 @@ public class FileInputStream {
     public func read(
     ) -> UInt8 {
         mIndex += 1
+        print(TAG,
+              "read: INDEX:",
+              mIndex,
+              "Indices:",
+              mData.startIndex,
+              mData.endIndex,
+              "DATA_COUNT:",
+              mData.count
+        )
         return mData[mIndex]
     }
     
