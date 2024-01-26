@@ -25,7 +25,8 @@ class CollectionDowloader {
     
     private var mStorage: StorageReference
     
-    private var mCacheCollections: [Collection] = []
+    private var mCacheCollections: ArrayList<Collection> = ArrayList()
+    
     private var mNetCollections: [Collection] = []
     
     init(
@@ -162,19 +163,22 @@ class CollectionDowloader {
                 return
             }
             
-            if s.mCacheCollections
+            if s.mCacheCollections.a
                 .isEmpty {
+                
+                s.mCacheCollections.a = s.mNetCollections
+                
                 s.delegate!
                     .onFirstCollection(
-                        c: &s
-                        .mNetCollections
+                        c: &s.mCacheCollections
                     )
+                
                 s.delegate!
                     .onFinish()
                 return
             }
             
-            let a = s.mCacheCollections.count
+            let a = s.mCacheCollections.a.count
             let b = s.mNetCollections.count
             
             var i = b
@@ -190,15 +194,15 @@ class CollectionDowloader {
                 i += 1
             }
             
-            for i in s
-                .mCacheCollections
+            for i in s.mCacheCollections
+                .a
                 .indices {
                 
-                print(s.TAG, "CACHE_NET:",i)
+                s.mCacheCollections.a[i] = s.mNetCollections[i]
                 
-                s.mCacheCollections[i] = s.mNetCollections[i]
-                
-                s.delegate!.onUpdate(i:i)
+                s.delegate!.onUpdate(
+                    i: i
+                )
             }
             
             s.delegate!
@@ -276,7 +280,7 @@ class CollectionDowloader {
             
             addCollection(
                 &d,
-                &mCacheCollections
+                &mCacheCollections.a
             )
             
         }

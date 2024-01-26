@@ -11,7 +11,7 @@ public protocol CollectionListener
     : AnyObject {
     
     func onFirstCollection(
-        c: inout [Collection]
+        c: inout ArrayList<Collection>
     )
     
     func onAdd(

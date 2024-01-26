@@ -75,7 +75,6 @@ class SheepCounterViewController
                 sizeSquare: 0.084
             )
         
-
         let ofx = w * 0.217
         let lTap = UILabel(
             frame: CGRect(

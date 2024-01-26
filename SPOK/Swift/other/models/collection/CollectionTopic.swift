@@ -9,7 +9,7 @@ import Foundation
 
 public class CollectionTopic
     : Collection {
-    let topicsIDs: [UInt16]
+    var topicsIDs: [UInt16]
     var cardSize: CGSize
     var cardTextSize: CardTextSize
     var cardType: CardType

@@ -19,7 +19,7 @@ class HomeViewController
     
     private var mDownloader: CollectionDowloader? = nil
     
-    private var mCollections: [Collection] = [];
+    private var mCollections: ArrayList<Collection> = ArrayList()
     private var mColDelegates: [CollectionDelegate] = []
     
     override func viewDidLoad() {
@@ -98,22 +98,23 @@ class HomeViewController
     }
     
     func onFirstCollection(
-        c: inout [Collection]
+        c: inout ArrayList<Collection>
     ) {
-        print(TAG, "onFirstCollection")
         mCollections = c
+
+        print(TAG, "onFirstCollection")
         
-        let mid = (mCollections[1] as! CollectionTopic)
+        let mid = (mCollections.a[1] as! CollectionTopic)
         mid.cardSize = MainViewController
             .mCardSizeM
         mid.cardTextSize = MainViewController
             .mCardTextSizeM
         mid.cardType = .M
         
-        for i in mCollections.indices {
+        for i in mCollections.a.indices {
             mColDelegates.append(
                 CollectionDelegate(
-                    collection: c[i] as! CollectionTopic
+                    collection: c.a[i] as! CollectionTopic
                 )
             )
         }
@@ -126,7 +127,7 @@ class HomeViewController
     func onAdd(i: Int) {
         mColDelegates.append(
             CollectionDelegate(
-                collection: mCollections[i] as! CollectionTopic
+                collection: mCollections.a[i] as! CollectionTopic
             )
         )
         mTableView.insertRows(
@@ -140,7 +141,7 @@ class HomeViewController
     }
     
     func onUpdate(i: Int) {
-        let c = mCollections[i] as! CollectionTopic
+        let c = mCollections.a[i] as! CollectionTopic
         print(TAG, "onUpdate",i, c.topicsIDs)
         mColDelegates[i]
             .setCollection(
@@ -175,8 +176,8 @@ class HomeViewController
     
     func onFinish() {
         mDownloader = nil
-        let last = mCollections[
-            mCollections.count - 1
+        let last = mCollections.a[
+            mCollections.a.count - 1
         ]
         
         let viewCell = CollectionRowView(
@@ -208,14 +209,16 @@ class HomeViewController
             print(s.TAG, "SheepViewCell:", cell.subviews.count)
         }
         
-        mCollections.append(
+        mCollections.a.append(
             viewCell
         )
         
         mTableView.insertRows(
             at: [
                 IndexPath(
-                    row: mCollections.count-1,
+                    row: mCollections
+                        .a
+                        .count-1,
                     section: 0
                 )
             ],
@@ -251,7 +254,7 @@ extension HomeViewController
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        let c = mCollections[
+        let c = mCollections.a[
             indexPath.row
         ]
         print(TAG,
@@ -265,7 +268,7 @@ extension HomeViewController
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return mCollections.count;
+        return mCollections.a.count;
     }
     
     func tableView(
@@ -274,7 +277,7 @@ extension HomeViewController
     ) -> UITableViewCell {
         let r = indexPath.row
                 
-        let c = mCollections[r]
+        let c = mCollections.a[r]
         
         guard let cel = tableView.dequeueReusableCell(
             withIdentifier: c.idCell
