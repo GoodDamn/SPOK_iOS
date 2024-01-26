@@ -23,6 +23,8 @@ class BaseTopicController
     
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
+    private var mProgressBar: ProgressBar!
+    
     private var mId = Int.min
     
     private var mNetworkUrl = ""
@@ -271,33 +273,123 @@ class BaseTopicController
             return
         }
         
-        Storage
+        let ref = Storage
             .storage()
             .reference(
                 withPath: path
-            ).getData(
-                maxSize: 10*1024*1024
-            ) { data, error in
-                
-                if data == nil || error != nil {
-                    print(self.TAG, "ERROR:DATA:",error)
-                    self.nothing()
-                    return
-                }
-                
-                var data = data
-                
-                if data!.count == 0 {
-                    self.nothing()
-                    return
-                }
-                
-                StorageApp.content(
-                    id: self.mId,
-                    data: &data
+            )
+        
+        let w = view.frame.width
+        let h = view.frame.height
+        
+        mProgressBar = ProgressBar(
+            frame: CGRect(
+                x: w * 0.35,
+                y: h * 0.8,
+                width: w * 0.3,
+                height: h * 0.03
+            )
+        )
+        
+        mProgressBar.mColorBack = .white
+            .withAlphaComponent(0.2)
+        
+        mProgressBar.mColorProgress = .white
+        mProgressBar.maxProgress = 100
+        mProgressBar.mProgress = 0
+        
+        view.addSubview(mProgressBar)
+        
+        let downloadTask = ref.write(
+            toFile: StorageApp
+                .contentUrl(
+                    id: mId
                 )
-                completion(data!)
+        ) { [weak self] url, error in
+
+            guard let url = url, error == nil else {
+                print(
+                    "BaseTopicController:URL_DOWNLOAD_ERROR::",
+                    error
+                )
+                return
             }
+            
+            guard let s = self else {
+                return
+            }
+            
+            print("BaseTopicController: DOWNLOAD COMPLETED!",url)
+            
+            UIView.animate(
+                withDuration: 1.2,
+                animations: {
+                    s.mProgressBar
+                        .alpha = 0
+                }
+            ) { _ in
+                s.mProgressBar.removeFromSuperview()
+            }
+            
+            guard let data = StorageApp
+                .content(
+                    id: s.mId
+                ) else {
+                return
+            }
+            
+            completion(data)
+            
+        }
+        
+        downloadTask.observe(
+            .progress
+        ) { [weak self] snapshot in
+            
+            guard let s = self else {
+                return
+            }
+            
+            guard let progress = snapshot
+                .progress else {
+                return
+            }
+            
+            let prog = 100 * Double(progress
+                .completedUnitCount
+            ) / Double(progress.totalUnitCount)
+            
+            s.mProgressBar.mProgress = prog
+        }
+        
+        downloadTask.observe(
+            .failure
+        ) { [weak self] snap in
+
+            guard let s = self else {
+                print("BaseTopicController: FAIL: GC")
+                return
+            }
+            
+            print(s.TAG, "FAIL:",snap.error)
+            
+            s.nothing()
+        }
+        
+        downloadTask.observe(
+            .success
+        ) { [weak self] snap in
+            
+            guard let s = self else {
+                print(
+                    "BaseTopicController:SUCCESS: GC"
+                )
+                return
+            }
+            
+            print(s.TAG, "SUCCESS DOWNLOAD!")
+            
+        }
     }
     
     

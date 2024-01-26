@@ -80,6 +80,15 @@ class StorageApp {
             .timeIntervalSince1970 ?? 0;
     }
     
+    public static func contentUrl(
+        id: Int,
+        lang: String = ""
+    ) -> URL {
+        return rootPath(
+            append: mDirContent
+        ).append("\(id)\(lang).skc")
+    }
+    
     public static func content(
         id: Int,
         lang: String = ""
