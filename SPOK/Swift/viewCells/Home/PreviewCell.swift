@@ -299,16 +299,17 @@ class PreviewCell
             return
         }
         
-        file.getData(maxSize: 3*1024*1024) {
-            [weak self] data,error in
+        file.getData(
+            maxSize: 3*1024*1024
+        ) { [weak self] data,error in
                 
             guard let s = self else {
                 print("PreviewCell: getData: garbage collected")
                 return
             }
                 
-            guard let data = data,
-                    error == nil else {
+            
+            if data == nil || error != nil {
                 print(
                     PreviewCell.TAG,
                     "ERROR:",
@@ -316,8 +317,10 @@ class PreviewCell
                 return
             }
             
+            var data = data
+            
             s.extractSpc(
-                from: data
+                from: &data
             )
             
         }
@@ -325,8 +328,9 @@ class PreviewCell
     }
     
     private func extractSpc(
-        from data: Data
+        from data: inout Data?
     ) {
+        var data = data
         DispatchQueue.global(
             qos: .default
         ).async { [weak self] in
@@ -336,14 +340,16 @@ class PreviewCell
                 return
             }
                 
-            s.mFileSpc = Utils.Exten
-                    .getSPCFile(data);
+            s.mFileSpc = Utils
+                .Exten
+                .getSPCFile(&data!);
+            
             
             StorageApp
                 .preview(
                     id: s.mId,
                     type: s.mType,
-                    data: data
+                    data: &data
                 );
             
             DispatchQueue

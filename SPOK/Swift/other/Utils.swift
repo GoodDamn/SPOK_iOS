@@ -311,83 +311,14 @@ class Utils{
         
         return arrow;
     }
- 
-    class Byte {
-        
-        static func uint16(_ inp: Data, offset: Int = 0) -> UInt16 {
-            return uint16(([UInt8])(inp), offset: offset);
-        }
-        
-        static func uint16(_ inp: [UInt8], offset: Int = 0) -> UInt16 {
-            let r = UInt16(inp[offset]);
-            let r1 = UInt16(inp[offset+1]);
-            return r << 8 | r1;
-        }
-        
-        static func uint32(_ inp: Data, offset: Int = 0) -> UInt32 {
-            return uint32(([UInt8])(inp), offset: offset);
-        }
-        
-        static func uint32(_ inp: [UInt8], offset: Int = 0) -> UInt32 {
-            print("uint32:INPUT:",inp[offset], inp[offset+1], inp[offset+2], inp[offset+3]);
-            print("uint32:RADIX_2:", String(inp[offset], radix: 2), String(inp[offset+1], radix: 2),String(inp[offset+2], radix: 2),String(inp[offset+3], radix: 2));
-            print("uint32:OUTPUT:", String(inp[offset] << 24, radix: 2),String(inp[offset+1] << 16, radix: 2),String(inp[offset+2] << 8, radix: 2),String(inp[offset+3], radix: 2));
-            return UInt32(inp[offset] << 24   |
-                          inp[offset+1] << 16 |
-                          inp[offset+2] << 8  |
-                          inp[offset+3]);
-        }
-    }
     
     class Exten {
         
-        static func getSKC1File(_ data: Data) -> FileSKC1? {
-            let trackLen = Int((UInt8) (data[0]));
-            var pos = trackLen + 1;
-            
-            let tag = "getSKC1File:";
-            
-            let artistSong = String(
-                data: data.subdata(in: 1..<pos),
-                encoding: .utf8
-            );
-            
-            let contentLen = Int(Byte.uint16(
-                data.subdata(
-                    in: pos..<(pos+2)
-                )
-            ));
-            pos += 2;
-            
-            let content = String(
-                data: data.subdata(
-                    in: pos..<(pos+contentLen)
-                ),
-                encoding: .utf8
-            );
-            
-            let contentArr = content?.components(
-                separatedBy: .newlines
-            ).filter{$0 != ""};
-            pos += contentLen;
-            
-            if content == nil {
-                return nil;
-            }
-            
-            return FileSKC1(
-                content: contentArr!,
-                artistSong: artistSong,
-                mp3Data: data.subdata(
-                    in: pos..<data.count)
-            );
-        }
-        
         static func getSPCFile(
-            _ data: Data,
+            _ data: inout Data,
             scale: CGFloat = UIScreen.main.scale
         ) -> FileSPC {
-            let conf = (UInt8) (data[0]);
+            let conf = data[0];
             let isPremium = (conf & 0xff) >> 6 == 1;
             let categoryID = conf & 0x3f;
             
@@ -398,32 +329,40 @@ class Utils{
                 alpha: CGFloat(data[1]) / 255
             );
             
-            let descLen = Int(Byte.uint16(
-                data.subdata(in: 5..<7)
-            ));
+            let descLen = Int(
+                ByteUtils.short(
+                    &data,
+                    offset: 5
+                )
+            )
             
             var pos = 7 + descLen;
             let description = String(
-                data: data.subdata(in: 7..<pos),
+                data: data[7..<pos],
                 encoding: .utf8
-            );
+            )
             
-            let titleLen = Int(Byte.uint16(
-                data.subdata(in: pos..<(pos+2))
-            ));
+            let titleLen = Int(
+                ByteUtils.short(
+                    &data,
+                    offset: pos
+                )
+            )
+            
             pos += 2;
             let title = String(
-                data: data.subdata(
-                    in: pos..<(titleLen+pos)
-                ),
+                data: data[
+                    pos..<(titleLen+pos)
+                ],
                 encoding: .utf8
             );
             
             pos += titleLen;
             
             let image = UIImage(
-                data: data.subdata(
-                    in: pos..<data.count),
+                data: data[
+                    pos..<data.count
+                ],
                 scale: scale
             );
             
@@ -438,43 +377,89 @@ class Utils{
         }
         
         static func getSCSFile(
-            _ data: Data,
-            scale: CGFloat = 2.0
-        ) -> FileSCS {
-                        
-            let titleLen = Int((UInt8) (data[0]));
-            let titleData = data.subdata(in: 1..<(titleLen+1));
+            _ data: inout Data?,
+            scale: CGFloat = UIScreen.main.scale
+        ) -> FileSCS? {
             
-            let title = String(data: titleData,
-                               encoding: .utf8);
-            var pos = 1+titleLen;
-            
-            let topicsLen = Byte.uint32(data.subdata(in: pos..<(pos+4)));
-            pos += 4;
-            var topics:[UInt16] = [];
-            let dataTopics = ([UInt8]) (data
-                .subdata(in: pos..<(pos+Int(topicsLen))));
-            
-            var i:Int = 0;
-            while i < topicsLen {
-                topics.append(Byte.uint16(dataTopics, offset: i));
-                i += 2;
+            guard var data = data else {
+                return nil
             }
             
-            pos += i;
+            var type: CardType
+            var cardSize: CGSize
+            
+            switch(data[0]) {
+            case 0:
+                cardSize = MainViewController
+                    .mCardSizeB
+                type = .B
+                break
+            case 1:
+                cardSize = MainViewController
+                    .mCardSizeM
+                type = .M
+                break
+            default:
+                type = .M
+                cardSize = .zero
+            }
+            
+            let titleLen = Int(data[1])
+            
+            let title = String(
+                data: data[
+                    2..<(titleLen+2)
+                ],
+                encoding: .utf8
+            )
+            
+            var pos = 2+titleLen;
+            
+            let topicsLen = ByteUtils
+                .int(
+                    &data,
+                    offset: pos
+                )
+            
+            pos += 4
+            var topics:[UInt16] = []
+            let b = pos + topicsLen
+            while pos < b {
+                topics.append(
+                    UInt16(
+                        ByteUtils.short(
+                            &data,
+                            offset: pos
+                        )
+                    )
+                )
+                pos += 2;
+            }
             
             if (pos >= data.count) {
-                return FileSCS(title: title,
-                               topics: topics,
-                               image: nil);
+                return FileSCS(
+                    title: title,
+                    topics: topics,
+                    image: nil,
+                    cardSize: cardSize,
+                    type: type
+                )
             }
             
-            let img = UIImage(data: data.subdata(in: pos..<(data.count)),
-                              scale: scale);
+            let img = UIImage(
+                data: data[
+                    pos..<(data.count)
+                ],
+                scale: scale
+            );
             
-            return FileSCS(title: title,
-                           topics: topics,
-                           image: img);
+            return FileSCS(
+                title: title,
+                topics: topics,
+                image: img,
+                cardSize: cardSize,
+                type: type
+            )
         }
     }
     

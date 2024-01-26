@@ -22,7 +22,7 @@ public class SPOKContentEngine {
     public init() {}
     
     public func read(
-        chunk: inout [UInt8]
+        chunk: inout Data
     ) {
         
         var offset = 0
@@ -32,7 +32,7 @@ public class SPOKContentEngine {
         var textLen = ByteUtils
             .short(
                 &chunk,
-                offset
+                offset: offset
             )
         
         offset += 2
@@ -167,7 +167,7 @@ public class SPOKContentEngine {
     
     
     public func loadResources(
-        dataSKC: inout [UInt8]
+        dataSKC: inout Data
     ) {
         
         let fis = FileInputStream(
@@ -195,7 +195,7 @@ public class SPOKContentEngine {
         
         fis.skip(resPos-1)
         
-        let resCount = Int(UInt8(fis.read()))
+        let resCount = Int(fis.read())
 
         fis.skip(1)
         
@@ -213,7 +213,7 @@ public class SPOKContentEngine {
         let fileSectionPos = resCount * 4
         
         var sfxID = 0
-        var file: [UInt8]
+        var file: Data
         
         for i in 0..<resCount {
             
@@ -235,7 +235,7 @@ public class SPOKContentEngine {
             
             // Read file content
             // Read header file
-            var h = Int(UInt8(fis.read()))
+            var h = Int(fis.read())
             fis.skip(-1)
             file = fis.read(fileLen)
             
@@ -253,7 +253,7 @@ public class SPOKContentEngine {
                 // MP3
                 guard let player = try?
                     AVAudioPlayer(
-                        data: Data(file),
+                        data: file,
                         fileTypeHint: AVFileType
                             .mp3
                             .rawValue

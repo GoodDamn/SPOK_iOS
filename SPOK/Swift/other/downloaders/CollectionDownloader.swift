@@ -231,15 +231,18 @@ class CollectionDowloader {
                 return
             }
             
-            guard let data = data,
-                  error == nil else {
-                print(s.TAG, "ERROR_COL:",error)
+            if data == nil || error != nil {
+                print(s.TAG, "ERROR:DATA:",error)
                 return
             }
             
-            var d: FileSCS? = Utils.Exten.getSCSFile(
-                data
-            )
+            var data = data
+            
+            var d: FileSCS? = Utils
+                .Exten
+                .getSCSFile(
+                    &data
+                )
             
             s.addCollection(
                 &d,
@@ -249,7 +252,7 @@ class CollectionDowloader {
             StorageApp.collection(
                 s.mRootName,
                 id: items.index(),
-                data: data
+                data: &data
             )
             
             s.download(
@@ -302,10 +305,7 @@ class CollectionDowloader {
         
         let titleSize = mScreen.width * 0.067
         
-        let mCardSizeB = MainViewController
-            .mCardSizeB!
-        
-        let cs = mCardSizeB.height
+        let cs = col.cardSize.height
         
         let height = cs + titleSize + cs * 0.193 + cs * 0.124
         
@@ -315,11 +315,11 @@ class CollectionDowloader {
             CollectionTopic(
                 topicsIDs: &col.topics!,
                 titleSize: titleSize,
-                cardSize: mCardSizeB,
+                cardSize: col.cardSize,
                 title: col.title ?? "",
                 height: height,
                 cardTextSize: MainViewController.mCardTextSizeB,
-                cardType: .B
+                cardType: col.type
             )
         )
     }

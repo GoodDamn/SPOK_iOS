@@ -218,7 +218,7 @@ class BaseTopicController
         ) { data in
             
             DispatchQueue.global(
-                qos: .background
+                qos: .default
             ).async { [weak self] in
                 
                 guard let s = self else {
@@ -229,14 +229,15 @@ class BaseTopicController
                 let TAG = s.TAG
                 let engine = s.mEngine
                 
-                var d = ([UInt8])(data)
+                var data = data
                 
                 engine.loadResources(
-                    dataSKC: &d)
+                    dataSKC: &data
+                )
                 
                 s.mScriptReader = ScriptReader(
                     engine: engine,
-                    dataSKC: &d
+                    dataSKC: &data
                 )
                 
                 DispatchQueue.main.async {
@@ -277,22 +278,25 @@ class BaseTopicController
             ).getData(
                 maxSize: 10*1024*1024
             ) { data, error in
-                guard let data = data,
-                      error == nil else {
+                
+                if data == nil || error != nil {
+                    print(self.TAG, "ERROR:DATA:",error)
                     self.nothing()
                     return
                 }
                 
-                if data.count == 0 {
+                var data = data
+                
+                if data!.count == 0 {
                     self.nothing()
                     return
                 }
                 
                 StorageApp.content(
                     id: self.mId,
-                    data: data
+                    data: &data
                 )
-                completion(data)
+                completion(data!)
             }
     }
     

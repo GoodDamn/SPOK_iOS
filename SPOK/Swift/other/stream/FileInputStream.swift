@@ -12,11 +12,11 @@ public class FileInputStream {
     
     private final let TAG = "FileInputStream"
     
-    private var mData: [UInt8] = []
+    private var mData: Data
     private var mIndex: Int
     
     init(
-        data: inout [UInt8]
+        data: inout Data
     ) {
        mData = data
        mIndex = 0
@@ -30,14 +30,14 @@ public class FileInputStream {
     
     public func read(
         _ n: Int
-    ) -> [UInt8] {
+    ) -> Data {
         return read(0,n)
     }
     
     public func read(
         _ offset: Int,
         _ n: Int
-    ) -> [UInt8] {
+    ) -> Data {
         mIndex += offset
         
         let start = mIndex
@@ -52,7 +52,7 @@ public class FileInputStream {
             mData.count
         )
         
-        return Array(mData[start..<end])
+        return mData[start..<end]
         
     }
     

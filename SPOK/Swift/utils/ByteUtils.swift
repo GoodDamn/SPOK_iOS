@@ -10,32 +10,28 @@ class ByteUtils {
     
     private static let TAG = "ByteUtils"
     
-    public static func short(
-        _ data: inout [UInt8],
-        _ off: Int
+    static func short(
+        _ inp: inout Data,
+        offset: Int = 0
     ) -> Int {
+        let offset = offset + Int(inp.startIndex)
         return Int(
-            Int(data[off]) << 8 |
-            Int(data[off+1])
+            inp[offset] << 8 |
+            inp[offset+1]
         )
     }
     
-    public static func int(
-        _ data: inout [UInt8]
+    static func int(
+        _ inp: inout Data,
+        offset: Int = 0
     ) -> Int {
-        return int(&data,0)
-    }
-    
-    public static func int(
-        _ data: inout [UInt8],
-        _ off: Int
-    ) -> Int {
-        
-        return Int(data[off])<<24 |
-            Int(data[off+1])<<16 |
-            Int(data[off+2])<<8 |
-            Int(data[off+3])
-        
+        let offset = offset + Int(inp.startIndex)
+        return Int(
+            inp[offset] << 24   |
+            inp[offset+1] << 16 |
+            inp[offset+2] << 8  |
+            inp[offset+3]
+        );
     }
     
 }

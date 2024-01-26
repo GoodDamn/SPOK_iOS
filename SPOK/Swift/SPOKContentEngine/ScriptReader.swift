@@ -20,7 +20,7 @@ public class ScriptReader {
     
     public init(
         engine: SPOKContentEngine,
-        dataSKC: inout [UInt8]
+        dataSKC: inout Data
     ) {
         mEngine = engine
         

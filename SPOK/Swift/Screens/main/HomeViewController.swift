@@ -29,7 +29,7 @@ class HomeViewController
         let h = view.frame.height - mInsets.bottom - 50 // 50 - nav bar (MainContentViewController)
         
         let wmoon = 0.594 * w
-        let hmoon = 0.413 * w
+        let hmoon = 0.533 * w
         
         let ivMoon = UIImageView(
             frame: CGRect(
@@ -103,14 +103,7 @@ class HomeViewController
         mCollections = c
 
         print(TAG, "onFirstCollection")
-        
-        let mid = (mCollections.a[1] as! CollectionTopic)
-        mid.cardSize = MainViewController
-            .mCardSizeM
-        mid.cardTextSize = MainViewController
-            .mCardTextSizeM
-        mid.cardType = .M
-        
+               
         for i in mCollections.a.indices {
             mColDelegates.append(
                 CollectionDelegate(

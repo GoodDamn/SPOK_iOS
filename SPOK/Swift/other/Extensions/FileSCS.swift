@@ -8,7 +8,9 @@
 import UIKit
 
 struct FileSCS {
-    var title:String?;
-    var topics: [UInt16]?;
-    var image: UIImage?;
+    var title:String?
+    var topics: [UInt16]?
+    var image: UIImage?
+    var cardSize: CGSize
+    var type: CardType = .B
 }

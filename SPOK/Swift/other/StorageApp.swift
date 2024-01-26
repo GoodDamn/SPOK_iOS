@@ -91,14 +91,14 @@ class StorageApp {
     }
     
     public static func content(
-        id:Int,
+        id: Int,
         lang: String = "",
-        data:Data?
+        data: inout Data?
     ) {
         StorageApp.save(
             file: "\(id)\(lang).skc",
             root: mDirContent,
-            data: data
+            data: &data
         )
     }
     
@@ -108,7 +108,7 @@ class StorageApp {
         lang: String = ""
     ) -> FileSPC? {
         
-        guard let d = StorageApp.load(
+        guard var d = StorageApp.load(
             file: "\(id)\(type.rawValue)\(lang).spc",
             root: mDirPreviews
         ) else {
@@ -117,7 +117,7 @@ class StorageApp {
         
         return Utils
             .Exten
-            .getSPCFile(d)
+            .getSPCFile(&d)
         
     }
     
@@ -125,12 +125,12 @@ class StorageApp {
         id: Int,
         lang: String = "",
         type: CardType,
-        data: Data?
+        data: inout Data?
     ) {
         StorageApp.save(
             file: "\(id)\(type.rawValue)\(lang).spc",
             root: mDirPreviews,
-            data: data
+            data: &data
         )
         
     }
@@ -139,17 +139,15 @@ class StorageApp {
         _ dir: String,
         fileName: String
     ) -> FileSCS? {
-        guard let d = StorageApp
+        var d = StorageApp
             .load(
                 file: fileName,
                 root: "\(mDirCollection)/\(dir)"
-            ) else {
-            return nil
-        }
+            )
         
         return Utils
             .Exten
-            .getSCSFile(d)
+            .getSCSFile(&d)
     }
     
     public static func collection(
@@ -167,12 +165,12 @@ class StorageApp {
         _ dir: String,
         id: Int,
         lang: String = "",
-        data: Data?
+        data: inout Data?
     ) {
         save(
             file: "\(id)\(lang).scs",
             root: "\(mDirCollection)/\(dir)",
-            data: data
+            data: &data
         )
     }
     
@@ -246,8 +244,8 @@ class StorageApp {
     }
     
     private static func mkfile(
-        path:String,
-        data:Data?
+        path: String,
+        data: inout Data?
     ) {
         guard let data = data else {
             return
@@ -282,9 +280,9 @@ class StorageApp {
     private static func save(
         file: String,
         root: String,
-        data: Data?
+        data: inout Data?
     ) {
-        let r =  StorageApp.rootPath(
+        let r = StorageApp.rootPath(
             append: root
         )
         
@@ -298,7 +296,7 @@ class StorageApp {
         
         StorageApp.mkfile(
             path: f.pathh(),
-            data: data
+            data: &data
         )
     }
     
