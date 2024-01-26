@@ -112,6 +112,8 @@ class SheepCounterViewController
         
         g.numberOfTapsRequired = 1
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         view.addGestureRecognizer(
             g
         )
@@ -128,6 +130,7 @@ class SheepCounterViewController
     @objc func onClickBtnExit(
         _ sender: UIButton
     ) {
+        sender.isEnabled = false
         pop(
             duration: 0.5
         ) {

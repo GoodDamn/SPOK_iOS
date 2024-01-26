@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController
-    : UIViewController {
+: UIViewController {
     
     public static var mCardSizeB: CGSize!
     public static var mCardSizeM: CGSize!
@@ -22,8 +22,6 @@ class MainViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        modalPresentationStyle = .overFullScreen
         
         view.backgroundColor = UIColor(
             named: "background"
@@ -57,34 +55,34 @@ class MainViewController
         )
         
         /*
-        
+         
          let buildNumber = Int(Bundle
-             .main
-             .infoDictionary?["CFBundleVersion"]
-                 as? String ?? "25"
+         .main
+         .infoDictionary?["CFBundleVersion"]
+         as? String ?? "25"
          ) ?? 25;
          
          print(self.tag, "BUILD NUMBER:",buildNumber);
          
          
-        let monitor = NWPathMonitor();
-        monitor.pathUpdateHandler = {
-            path in
-            self.isConnected = path.status == .satisfied;
-            if !self.isConnected {
-                DispatchQueue.main.async {
-                    self.heightSnackbar.constant = 24;
-                    UIView.animate(withDuration: 0.23, animations: {
-                        self.view.layoutIfNeeded();
-                    });
-                }
-                return;
-            }
-            
-        }
-        
-        monitor.start(queue: DispatchQueue(label:"Network")
-        );*/
+         let monitor = NWPathMonitor();
+         monitor.pathUpdateHandler = {
+         path in
+         self.isConnected = path.status == .satisfied;
+         if !self.isConnected {
+         DispatchQueue.main.async {
+         self.heightSnackbar.constant = 24;
+         UIView.animate(withDuration: 0.23, animations: {
+         self.view.layoutIfNeeded();
+         });
+         }
+         return;
+         }
+         
+         }
+         
+         monitor.start(queue: DispatchQueue(label:"Network")
+         );*/
         
         
         let userDefaults = UserDefaults();
@@ -222,9 +220,8 @@ class MainViewController
         addChild(c)
         view.addSubview(c.view)
     }
-    
+        
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
 }

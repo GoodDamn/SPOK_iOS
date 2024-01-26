@@ -12,15 +12,15 @@ class MainNavigationController
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        navigationController?.title = "";
+        title = "";
         modalPresentationStyle = .overFullScreen;
         
-        navigationController?.setNavigationBarHidden(
+        setNavigationBarHidden(
             true,
             animated: false
         )
         
-        navigationController?.navigationBar.isTranslucent = false
+        navigationBar.isTranslucent = false
     }
     
     

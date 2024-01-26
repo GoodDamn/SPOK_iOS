@@ -220,7 +220,7 @@ class PreviewCell
         if mFileSpc == nil {
             DispatchQueue
                 .global(
-                    qos: .background
+                    qos: .default
                 ).async { [weak self] in
                     
                     guard let s = self else {
@@ -328,7 +328,7 @@ class PreviewCell
         from data: Data
     ) {
         DispatchQueue.global(
-            qos: .background
+            qos: .default
         ).async { [weak self] in
 
             guard let s = self else {

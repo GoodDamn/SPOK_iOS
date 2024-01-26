@@ -112,6 +112,9 @@ public class ViewUtils {
         
         lSubtitle.sizeToFit()
         
+        lTitle.isUserInteractionEnabled = false
+        lSubtitle.isUserInteractionEnabled = false
+        
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
     }
@@ -150,11 +153,13 @@ public class ViewUtils {
             alpha: 1.0
         )
         
-        btnExit.setBackgroundImage(
+        btnExit.setImage(
             UIImage(
-                systemName: "xmark"
+                systemName: "xmark",
+                withConfiguration: btnExitConfig
             ),
-            for: .normal)
+            for: .normal
+        )
         
         return btnExit
     }

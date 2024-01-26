@@ -140,12 +140,14 @@ class HomeViewController
     }
     
     func onUpdate(i: Int) {
-        print(TAG, "onUpdate",i)
+        let c = mCollections[i] as! CollectionTopic
+        print(TAG, "onUpdate",i, c.topicsIDs)
         mColDelegates[i]
             .setCollection(
-                mCollections[i] as!
-                    CollectionTopic
+                c
             )
+        
+        
         mTableView.reloadRows(
             at: [
                 IndexPath(
