@@ -21,13 +21,14 @@ class BaseTopicController
     
     private var mPrevTextView: UITextViewPhrase? = nil
     
-    private var mCurrentPlayer: AVAudioPlayer? = nil
-    
     private var mProgressBar: ProgressBar!
     
-    private var mId = Int.min
+    private var mCurrentPlayer: AVAudioPlayer? = nil
     
+    private var mId = Int.min
     private var mNetworkUrl = ""
+    
+    private var mDownloadTask: StorageDownloadTask? = nil
     
     private let mEngine =
         SPOKContentEngine()
@@ -38,10 +39,42 @@ class BaseTopicController
         mScriptReader!.next()
     }
     
+    @objc func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        mDownloadTask?.cancel()
+        pop(
+            duration: 0.4
+        ) {
+            self.view.alpha = 0
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         modalPresentationStyle = .overFullScreen
+        
+        let btnClose = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.068
+            )
+        
+        btnClose.alpha = 0.11
+        
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        view.addSubview(
+            btnClose
+        )
         
         let mFont = UIFont(
             name: "OpenSans-SemiBold",
@@ -52,19 +85,7 @@ class BaseTopicController
             named: "text_topic"
         )
         
-        let gestureTap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(
-                onTouch(_:)
-            )
-        )
-        
-        gestureTap.numberOfTapsRequired = 1
-        
         view.isUserInteractionEnabled = false
-        view.addGestureRecognizer(
-            gestureTap
-        )
         
         view.backgroundColor = UIColor(
             named: "background")
@@ -164,9 +185,8 @@ class BaseTopicController
     }
     
     func onFinish() {
-        
-        view.gestureRecognizers?[0].isEnabled = false
         view.isUserInteractionEnabled = false
+        view.gestureRecognizers?.removeAll()
         
         if let player = mCurrentPlayer {
             let dur = 2.5
@@ -298,9 +318,11 @@ class BaseTopicController
         mProgressBar.maxProgress = 100
         mProgressBar.mProgress = 0
         
-        view.addSubview(mProgressBar)
+        view.addSubview(
+            mProgressBar
+        )
         
-        let downloadTask = ref.write(
+        mDownloadTask = ref.write(
             toFile: StorageApp
                 .contentUrl(
                     id: mId
@@ -342,7 +364,7 @@ class BaseTopicController
             
         }
         
-        downloadTask.observe(
+        mDownloadTask!.observe(
             .progress
         ) { [weak self] snapshot in
             
@@ -362,7 +384,7 @@ class BaseTopicController
             s.mProgressBar.mProgress = prog
         }
         
-        downloadTask.observe(
+        mDownloadTask!.observe(
             .failure
         ) { [weak self] snap in
 
@@ -376,7 +398,7 @@ class BaseTopicController
             s.nothing()
         }
         
-        downloadTask.observe(
+        mDownloadTask!.observe(
             .success
         ) { [weak self] snap in
             
@@ -406,6 +428,5 @@ class BaseTopicController
         }
         
     }
-    
     
 }

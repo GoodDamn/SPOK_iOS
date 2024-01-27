@@ -10,9 +10,10 @@ import UIKit
 import FirebaseStorage
 
 class PreviewCell
-    : UICollectionViewCell {
+    : UICollectionViewCell{
     
     private static let TAG = "PreviewCell:"
+    
     public static let ID = "cell"
     
     public var mImageView: UIImageView!
@@ -41,6 +42,8 @@ class PreviewCell
     private var mFileSpc: FileSPC? = nil
     private var mId: Int = Int.min
     private var mType: CardType = .M
+    
+    private var mCache: CacheFile? = nil
     
     deinit {
         print(
@@ -119,6 +122,20 @@ class PreviewCell
         
     }
     
+    override init(frame: CGRect) {
+        super.init(
+            frame: frame
+        )
+        ini()
+        
+        print(PreviewCell.TAG, "init(frame:)")
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print(PreviewCell.TAG, "init(coder:)")
+    }
+    
     @objc func onTap(
         _ sender: UITapGestureRecognizer
     ) {
@@ -142,26 +159,6 @@ class PreviewCell
                 t.view.alpha = 1.0
             }
         
-    }
-    
-    override init(frame: CGRect) {
-        super.init(
-            frame: frame
-        )
-        ini()
-        
-        print(PreviewCell.TAG, "init(frame:)")
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print(PreviewCell.TAG, "init(coder:)")
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        print(PreviewCell.TAG, "prepareForReuse", mTitle.bounds.height)
     }
     
     public func calculateBounds() {
@@ -217,149 +214,68 @@ class PreviewCell
         mId = id
         mType = type
         
-        if mFileSpc == nil {
-            DispatchQueue
-                .global(
-                    qos: .default
-                ).async { [weak self] in
-                    
-                    guard let s = self else {
-                        return
-                    }
-                    
-                    s.mFileSpc = StorageApp
-                        .preview(
-                            id: id,
-                            type: type
-                        )
-                    if s.mFileSpc == nil {
-                        return
-                    }
-                    
-                    DispatchQueue
-                        .main
-                        .async {
-                            s.show(&s.mFileSpc!)
-                        }
-                }
-        } else {
+        if mFileSpc != nil {
             show(&mFileSpc!)
-        }
-        
-        let st = Storage
-            .storage()
-            .reference(
-                withPath: "Trainings/\(id)/\(type).spc"
-            )
-        
-        st.getMetadata { [weak self]
-            meta, error in
-            
-            guard let s = self else {
-                print(PreviewCell.TAG,"getMetadata: garbage collected")
-                return
-            }
-            
-            guard let meta = meta, error == nil else {
-                print(PreviewCell.TAG, "ERROR_META:",error)
-                return
-            }
-            
-            s.processMetadata(
-                meta,
-                file: st
-            )
-            
-        }
-        
-    }
-    
-    private func processMetadata(
-        _ meta: StorageMetadata,
-        file: StorageReference
-    ) {
-       
-        let p = StorageApp.rootPath(
-            append: StorageApp.mDirPreviews
-        ).append(
-            StorageApp.tospc(
-                id: mId,
-                type: mType
-            )
-        )
-
-        let t = StorageApp.modifTime(
-            path: p.pathh()
-        )
-        
-        let nett = meta.updated?.timeIntervalSince1970 ?? 0
-        
-        print(PreviewCell.TAG, "meta:",t,nett)
-        if t >= nett {
             return
         }
         
-        file.getData(
-            maxSize: 3*1024*1024
-        ) { [weak self] data,error in
-                
-            guard let s = self else {
-                print("PreviewCell: getData: garbage collected")
-                return
-            }
-                
+        if mCache == nil {
             
-            if data == nil || error != nil {
-                print(
-                    PreviewCell.TAG,
-                    "ERROR:",
-                    error)
-                return
-            }
+            let localp = StorageApp
+                .previewUrl(
+                    id: mId,
+                    type: mType
+                )
             
-            var data = data
-            
-            s.extractSpc(
-                from: &data
+            mCache = CacheFile(
+                pathStorage: "Trainings/\(id)/\(type).spc",
+                localPath: localp.pathh()
             )
-            
+                
+            mCache!.delegate = self
         }
         
+        mCache?.load()
     }
     
-    private func extractSpc(
-        from data: inout Data?
-    ) {
-        var data = data
-        DispatchQueue.global(
-            qos: .default
-        ).async { [weak self] in
-
-            guard let s = self else {
-                print("PreviewCell: extractSpc: gc")
-                return
-            }
-                
-            s.mFileSpc = Utils
-                .Exten
-                .getSPCFile(&data!);
-            
-            
-            StorageApp
-                .preview(
-                    id: s.mId,
-                    type: s.mType,
-                    data: &data
-                );
-            
-            DispatchQueue
-                .main
-                .async {
-                    s.show(&s.mFileSpc!)
-                }
-        }
+    public func setText(
+        _ text: String,
+        color: UIColor?,
+        font: UIFont?
+    ) -> NSMutableAttributedString {
+        let attr = NSMutableAttributedString(
+            string: text
+        )
         
+        let parag = NSMutableParagraphStyle()
+        parag.lineHeightMultiple = 0.83
+        
+        let range = NSRange(
+            location: 0,
+            length: text.count
+        )
+        
+        attr.addAttribute(
+            .font,
+            value: font,
+            range: range
+        )
+        
+        attr.addAttribute(
+            .foregroundColor,
+            value: color,
+            range: range
+        )
+        
+        attr.addAttribute(
+            .paragraphStyle,
+            value: parag,
+            range: range
+        )
+        
+        return attr
     }
+    
     
     private func show(
         _ fileSPC: inout FileSPC
@@ -379,13 +295,18 @@ class PreviewCell
         layer.cornerRadius = sa.height * 0.1
         layer.masksToBounds = true
         
-        mTitle.text = fileSPC.title
-        mTitle.textColor = fileSPC.color
+        mTitle.attributedText = setText(
+            fileSPC.title ?? "",
+            color: fileSPC.color,
+            font: mTitle.font
+        )
         
-        mDesc.text = fileSPC
-            .description
-        mDesc.textColor = fileSPC.color
-
+        mDesc.attributedText = setText(
+            fileSPC.description ?? "",
+            color: fileSPC.color,
+            font: mDesc.font
+        )
+        
         calculateBounds()
         
         if let part = mParticles {
@@ -408,6 +329,52 @@ class PreviewCell
     
 }
 
+extension PreviewCell
+: CacheListener {
+    
+    // Background thread
+    func onFile(
+        data: inout Data?
+    ) {
+        if data == nil {
+            return
+        }
+        
+        mFileSpc = Utils
+            .Exten
+            .getSPCFile(
+                &data!
+            )
+        
+        DispatchQueue
+            .main
+            .async {
+                self.show(
+                    &self.mFileSpc!
+                )
+            }
+        
+    }
+    
+    // Background thread
+    func onNet(
+        data: inout Data?
+    ) {
+        // Save data
+        StorageApp
+            .preview(
+                id: mId,
+                type: mType,
+                data: &data
+            )
+        
+        onFile(
+            data: &data
+        )
+        
+    }
+    
+}
 
 extension UILabel {
     

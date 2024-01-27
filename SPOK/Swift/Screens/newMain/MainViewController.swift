@@ -51,7 +51,7 @@ class MainViewController
         
         MainViewController.mCardTextSizeM = CardTextSize(
             title: 0.096 * hb,
-            desc: 0.053 * hb
+            desc: 0.047 * hb // 0.053
         )
         
         /*

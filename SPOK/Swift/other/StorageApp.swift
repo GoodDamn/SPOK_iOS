@@ -94,8 +94,10 @@ class StorageApp {
         lang: String = ""
     ) -> Data? {
         return load(
-            file: "\(id)\(lang).skc",
-            root: mDirContent
+            path: contentUrl(
+                id: id,
+                lang: lang
+            )
         )
     }
     
@@ -111,6 +113,18 @@ class StorageApp {
         )
     }
     
+    public static func previewUrl(
+        id: Int,
+        type: CardType,
+        lang: String = ""
+    ) -> URL {
+        return rootPath(
+            append: mDirPreviews
+        ).append(
+            "\(id)\(type.rawValue)\(lang).spc"
+        )
+    }
+    
     public static func preview(
         id: Int,
         type: CardType,
@@ -118,8 +132,11 @@ class StorageApp {
     ) -> FileSPC? {
         
         guard var d = StorageApp.load(
-            file: "\(id)\(type.rawValue)\(lang).spc",
-            root: mDirPreviews
+            path: previewUrl(
+                id: id,
+                type: type,
+                lang: lang
+            )
         ) else {
             return nil
         }
@@ -144,14 +161,25 @@ class StorageApp {
         
     }
     
+    public static func collectionUrl(
+        _ dir: String,
+        fileName: String
+    ) -> URL {
+        return rootPath(
+            append: "\(mDirCollection)/\(dir)"
+        ).append(fileName)
+    }
+    
     public static func collection(
         _ dir: String,
         fileName: String
     ) -> FileSCS? {
         var d = StorageApp
             .load(
-                file: fileName,
-                root: "\(mDirCollection)/\(dir)"
+                path: collectionUrl(
+                    dir,
+                    fileName: fileName
+                )
             )
         
         return Utils
@@ -242,6 +270,16 @@ class StorageApp {
             )[0].append(path)
     }
     
+    public static func file(
+        path: String
+    ) -> Data? {
+        return FileManager
+            .default
+            .contents(
+                atPath: path
+            );
+    }
+    
     public static func exists(
         at path: String
     ) -> Bool {
@@ -276,16 +314,6 @@ class StorageApp {
         )
     }
     
-    private static func getFile(
-        path: String
-    ) -> Data? {
-        return FileManager
-            .default
-            .contents(
-                atPath: path
-            );
-    }
-    
     private static func save(
         file: String,
         root: String,
@@ -310,19 +338,11 @@ class StorageApp {
     }
     
     private static func load(
-        file: String,
-        root: String
+        path f: URL
     ) -> Data? {
         
-        print(debugTag, "load:" ,root, file)
-        
-        let f = StorageApp.rootPath(
-            append: root
-        ).append(
-            file
-        )
-        
         let fpath = f.pathh()
+        print(debugTag, "load:" ,fpath)
         
         if !StorageApp.exists(
             at: fpath
@@ -331,7 +351,7 @@ class StorageApp {
         }
         
         guard let d = StorageApp
-            .getFile(
+            .file(
                 path: f.pathh()
             ) else {
             return nil

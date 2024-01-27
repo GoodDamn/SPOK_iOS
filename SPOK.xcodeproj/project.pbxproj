@@ -39,6 +39,7 @@
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
 		255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F82B504BB5006D9FD0 /* ViewUtils.swift */; };
 		256940862B63B72E0005BFCC /* ArrayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940852B63B72E0005BFCC /* ArrayList.swift */; };
+		256940892B6571CD0005BFCC /* CacheListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940882B6571CD0005BFCC /* CacheListener.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 259185372B5D8649001CFD7A /* sheep_m.mp3 */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
@@ -172,6 +173,7 @@
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		255C04F82B504BB5006D9FD0 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		256940852B63B72E0005BFCC /* ArrayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayList.swift; sourceTree = "<group>"; };
+		256940882B6571CD0005BFCC /* CacheListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheListener.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259185372B5D8649001CFD7A /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sheep_m.mp3; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
@@ -393,6 +395,14 @@
 			path = sleepIntro;
 			sourceTree = "<group>";
 		};
+		256940872B6571B20005BFCC /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				256940882B6571CD0005BFCC /* CacheListener.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		259FE6122B623DA400E237B7 /* enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,12 +411,13 @@
 			path = enums;
 			sourceTree = "<group>";
 		};
-		25C455C62B5BF8D400AF54B1 /* cacheManager */ = {
+		25C455C62B5BF8D400AF54B1 /* cache */ = {
 			isa = PBXGroup;
 			children = (
+				256940872B6571B20005BFCC /* protocols */,
 				25C455C72B5BF90400AF54B1 /* CacheFile.swift */,
 			);
-			path = cacheManager;
+			path = cache;
 			sourceTree = "<group>";
 		};
 		25D5E4A72A69A47800A3126B /* views */ = {
@@ -656,7 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				259FE6122B623DA400E237B7 /* enums */,
-				25C455C62B5BF8D400AF54B1 /* cacheManager */,
+				25C455C62B5BF8D400AF54B1 /* cache */,
 				25DB9AC72B57B5DB00B5359F /* utils */,
 				25DB9ABC2B54E32700B5359F /* delegates */,
 				25DB9AB82B53E60E00B5359F /* iterators */,
@@ -1039,6 +1050,7 @@
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				2B93CF8F277635C100219690 /* EditText.swift in Sources */,
 				2B0E204F277BBA630082FF75 /* ArcProgressBar.swift in Sources */,
+				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,
 				38A0B332288A982800AD90A7 /* SnackbarViewController.swift in Sources */,
 				2B4D8F352806C33300D1281C /* AnimationsConstants.swift in Sources */,
@@ -1292,7 +1304,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1303,7 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.4;
+				MARKETING_VERSION = 0.3.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1323,7 +1335,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1334,7 +1346,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.4;
+				MARKETING_VERSION = 0.3.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
