@@ -8,11 +8,10 @@
 import Foundation
 import FirebaseStorage
 
-class CacheFile {
-    
-    private static let TAG = "CacheFile:"
+class CacheFile<T> {
     
     var delegate: CacheListener? = nil
+    var object: T? = nil
     
     private let mReference: StorageReference
     private let mPathToSave: String
@@ -63,7 +62,7 @@ class CacheFile {
             guard let meta = meta,
                   error == nil else {
                 print(
-                    CacheFile.TAG,
+                    "CacheFile:",
                     "ERROR_META:",
                     error
                 )
@@ -91,7 +90,7 @@ class CacheFile {
             .timeIntervalSince1970 ?? 0
         
         print(
-            CacheFile.TAG,
+            "CacheFile",
             "cacheTime:",
             localTime,
             netTime,
@@ -103,7 +102,7 @@ class CacheFile {
         }
         
         print(
-            CacheFile.TAG,
+            "CacheFile",
             "TIME TO CACHE UPDATE!"
         )
         // Update cache or create
@@ -115,7 +114,7 @@ class CacheFile {
             
             if error != nil {
                 print(
-                    CacheFile.TAG,
+                    "CacheFile",
                     "ERROR_DATA:",
                     error
                 )

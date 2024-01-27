@@ -39,11 +39,9 @@ class PreviewCell
         }
     }
     
-    private var mFileSpc: FileSPC? = nil
     private var mId: Int = Int.min
     private var mType: CardType = .M
-    
-    private var mCache: CacheFile? = nil
+    private var mCache: CacheFile<FileSPC>? = nil
     
     deinit {
         print(
@@ -127,7 +125,6 @@ class PreviewCell
             frame: frame
         )
         ini()
-        
         print(PreviewCell.TAG, "init(frame:)")
     }
     
@@ -143,7 +140,7 @@ class PreviewCell
         t.setID(mId)
         t.view.alpha = 0.0
         
-        guard let s = mFileSpc else {
+        guard let s = mCache?.object else {
             return
         }
         
@@ -214,8 +211,8 @@ class PreviewCell
         mId = id
         mType = type
         
-        if mFileSpc != nil {
-            show(&mFileSpc!)
+        if mCache?.object != nil {
+            show()
             return
         }
         
@@ -277,9 +274,11 @@ class PreviewCell
     }
     
     
-    private func show(
-        _ fileSPC: inout FileSPC
-    ) {
+    private func show() {
+        
+        guard let fileSPC = mCache?.object else {
+            return
+        }
         
         let img = Utils
             .changeSizeOfImage(
@@ -340,7 +339,7 @@ extension PreviewCell
             return
         }
         
-        mFileSpc = Utils
+        mCache!.object = Utils
             .Exten
             .getSPCFile(
                 &data!
@@ -349,9 +348,7 @@ extension PreviewCell
         DispatchQueue
             .main
             .async {
-                self.show(
-                    &self.mFileSpc!
-                )
+                self.show()
             }
         
     }
