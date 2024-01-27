@@ -69,7 +69,7 @@ class HomeViewController
         )
         
         mTableView.contentInset = UIEdgeInsets(
-            top: 0,
+            top: mInsets.top == 0 ? h * 0.1 : 0,
             left: 0,
             bottom: 25,
             right: 0
