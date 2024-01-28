@@ -387,20 +387,27 @@ class Utils{
             
             var type: CardType
             var cardSize: CGSize
+            var cardTextSize: CardTextSize
             
             switch(data[0]) {
             case 0:
                 cardSize = MainViewController
                     .mCardSizeB
                 type = .B
+                cardTextSize = MainViewController
+                    .mCardTextSizeB
                 break
             case 1:
                 cardSize = MainViewController
                     .mCardSizeM
                 type = .M
+                cardTextSize = MainViewController
+                    .mCardTextSizeM
                 break
             default:
                 type = .M
+                cardTextSize = MainViewController
+                    .mCardTextSizeM
                 cardSize = .zero
             }
             
@@ -442,6 +449,7 @@ class Utils{
                     topics: topics,
                     image: nil,
                     cardSize: cardSize,
+                    cardTextSize: cardTextSize,
                     type: type
                 )
             }
@@ -458,6 +466,7 @@ class Utils{
                 topics: topics,
                 image: img,
                 cardSize: cardSize,
+                cardTextSize: cardTextSize,
                 type: type
             )
         }

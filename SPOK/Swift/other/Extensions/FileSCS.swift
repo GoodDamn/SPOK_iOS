@@ -12,5 +12,6 @@ struct FileSCS {
     var topics: [UInt16]?
     var image: UIImage?
     var cardSize: CGSize
+    var cardTextSize: CardTextSize
     var type: CardType = .B
 }

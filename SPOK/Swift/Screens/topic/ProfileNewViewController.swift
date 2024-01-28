@@ -30,10 +30,6 @@ class ProfileNewViewController
         let w = view.frame.width
         let h = view.frame.height - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
-        let paragMulti = NSMutableParagraphStyle()
-        paragMulti.lineHeightMultiple = 0.83
-        paragMulti.alignment = .center
-        
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",
             size: 15
@@ -75,7 +71,7 @@ class ProfileNewViewController
         
         let marginLeftSub = w * 0.108
         
-        let lSubtitleHead = UILabel(
+        let lSubtitleHead = UILabela(
             frame: CGRect(
                 x: marginLeftSub,
                 y: lTitleHead.frame.bottom() + h*0.02,
@@ -97,36 +93,17 @@ class ProfileNewViewController
         lTitleHead.font = bold?
             .withSize(lTitleHead.frame.height)
         
-        let attrSub = NSMutableAttributedString(
-            string: "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
+        lSubtitleHead.text = "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
+        lSubtitleHead.lineHeight = 0.83
+        lSubtitleHead.textAlignment = .center
+        lSubtitleHead.textColor = .white
+        lSubtitleHead.font = semiBold?
+            .withSize(lSubtitleHead
+                .frame.height
         )
-        
-        let subrange = NSRange(
-            location: 0,
-            length: attrSub.length
-        )
-        
-        attrSub.addAttribute(
-            .paragraphStyle,
-            value: paragMulti,
-            range: subrange
-        )
-        
-        attrSub.addAttribute(
-            .foregroundColor,
-            value: UIColor.white,
-            range: subrange
-        )
-        
-        attrSub.addAttribute(
-            .font,
-            value: semiBold?
-                .withSize(lSubtitleHead.frame.height),
-            range: subrange
-        )
-        
         lSubtitleHead.numberOfLines = 0
-        lSubtitleHead.attributedText = attrSub
+        lSubtitleHead.attribute()
+        
         lSubtitleHead.sizeToFit()
         lSubtitleHead.frame.center(
             targetWidth: w
@@ -273,7 +250,7 @@ class ProfileNewViewController
         
         
         let lShareLeft = wshare * 0.109
-        let lShare = UILabel(
+        let lShare = UILabela(
             frame: CGRect(
                 x: lShareLeft,
                 y: hshare * 0.15,
@@ -282,37 +259,14 @@ class ProfileNewViewController
             )
         )
         
-        
-        let attrShare = NSMutableAttributedString(
-            string: "Поделись своим впечатлением.\nСкажи, что тебе нравится и не нравится в приложении, а мы обещаем, что сделаем его лучше!"
-        )
-        
-        let range = NSRange(
-            location: 0,
-            length: attrShare.length
-        )
-
-        attrShare.addAttribute(
-            .paragraphStyle,
-            value: paragMulti,
-            range: range
-        )
-
-        attrShare.addAttribute(
-            .font,
-            value: semiBold?
-                .withSize(hshare * 0.068),
-            range: range
-        )
-        
-        attrShare.addAttribute(
-            .foregroundColor,
-            value: UIColor.white,
-            range: range
-        )
-        
-        lShare.attributedText = attrShare
+        lShare.text = "Поделись своим впечатлением.\nСкажи, что тебе нравится и не нравится в приложении, а мы обещаем, что сделаем его лучше!"
+        lShare.textColor = .white
+        lShare.textAlignment = .center
+        lShare.font = semiBold?
+            .withSize(hshare * 0.068)
+        lShare.lineHeight = 0.83
         lShare.numberOfLines = 0
+        lShare.attribute()
         lShare.sizeToFit()
         
         let btnShare = ViewUtils

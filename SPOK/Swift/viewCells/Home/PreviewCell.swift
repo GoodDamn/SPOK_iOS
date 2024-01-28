@@ -17,12 +17,19 @@ class PreviewCell
     public static let ID = "cell"
     
     public var mImageView: UIImageView!
-    public var mTitle: UILabel!
-    public var mDesc: UILabel!
+    public var mTitle: UILabela!
+    public var mDesc: UILabela!
     public var mParticles: Particles!
     
     public var mCardTextSize: CardTextSize! {
         didSet {
+            print(
+                PreviewCell.TAG,
+                "CARD_TEXT_SIZE:",
+                mCardTextSize.title,
+                mCardTextSize.desc,
+                mDesc.font.pointSize
+            )
             if mCardTextSize.desc == mDesc.font.pointSize {
                 return
             }
@@ -41,7 +48,7 @@ class PreviewCell
     
     private var mId: Int = Int.min
     private var mType: CardType = .M
-    private var mCache: CacheFile<FileSPC>? = nil
+    private var mCache: CacheData<FileSPC>? = nil
     
     deinit {
         print(
@@ -84,17 +91,19 @@ class PreviewCell
             size: 18
         )
         
-        mTitle = UILabel()
+        mTitle = UILabela()
         mTitle.font = bold
         mTitle.numberOfLines = 0
         mTitle.textColor = .white
         mTitle.backgroundColor = .clear
+        mTitle.lineHeight = 0.83
         
-        mDesc = UILabel()
+        mDesc = UILabela()
         mDesc.font = bold
         mDesc.numberOfLines = 0
         mDesc.textColor = .white
         mDesc.backgroundColor = .clear
+        mDesc.lineHeight = 0.83
         
         contentView
             .addSubview(mImageView)
@@ -136,10 +145,6 @@ class PreviewCell
     @objc func onTap(
         _ sender: UITapGestureRecognizer
     ) {
-        let t = BaseTopicController()
-        t.setID(mId)
-        t.view.alpha = 0.0
-        
         guard let s = mCache?.object else {
             return
         }
@@ -147,6 +152,10 @@ class PreviewCell
         if s.isPremium {
             return
         }
+        
+        let t = BaseTopicController()
+        t.setID(mId)
+        t.view.alpha = 0.0
         
         Utils.main()
             .push(
@@ -163,9 +172,9 @@ class PreviewCell
         let w = frame.width
         let h = frame.height
         
-        let wtext = 0.867 * w
+        let ltext = w * 0.083
         
-        let ltext = (w - wtext) * 0.5
+        let wtext = w - ltext
         
         mTitle.frame = CGRect(
             x: ltext,
@@ -224,7 +233,7 @@ class PreviewCell
                     type: mType
                 )
             
-            mCache = CacheFile(
+            mCache = CacheData(
                 pathStorage: "Trainings/\(id)/\(type).spc",
                 localPath: localp
             )
@@ -234,45 +243,6 @@ class PreviewCell
         
         mCache?.load()
     }
-    
-    public func setText(
-        _ text: String,
-        color: UIColor?,
-        font: UIFont?
-    ) -> NSMutableAttributedString {
-        let attr = NSMutableAttributedString(
-            string: text
-        )
-        
-        let parag = NSMutableParagraphStyle()
-        parag.lineHeightMultiple = 0.83
-        
-        let range = NSRange(
-            location: 0,
-            length: text.count
-        )
-        
-        attr.addAttribute(
-            .font,
-            value: font,
-            range: range
-        )
-        
-        attr.addAttribute(
-            .foregroundColor,
-            value: color,
-            range: range
-        )
-        
-        attr.addAttribute(
-            .paragraphStyle,
-            value: parag,
-            range: range
-        )
-        
-        return attr
-    }
-    
     
     private func show() {
         
@@ -294,17 +264,11 @@ class PreviewCell
         layer.cornerRadius = sa.height * 0.1
         layer.masksToBounds = true
         
-        mTitle.attributedText = setText(
-            fileSPC.title ?? "",
-            color: fileSPC.color,
-            font: mTitle.font
-        )
+        mTitle.text = fileSPC.title
+        mDesc.text = fileSPC.description
         
-        mDesc.attributedText = setText(
-            fileSPC.description ?? "",
-            color: fileSPC.color,
-            font: mDesc.font
-        )
+        mTitle.attribute()
+        mDesc.attribute()
         
         calculateBounds()
         

@@ -318,7 +318,7 @@ class CollectionDowloader {
                 cardSize: col.cardSize,
                 title: col.title ?? "",
                 height: height,
-                cardTextSize: MainViewController.mCardTextSizeB,
+                cardTextSize: col.cardTextSize,
                 cardType: col.type
             )
         )

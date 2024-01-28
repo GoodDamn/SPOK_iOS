@@ -32,26 +32,34 @@ class MainViewController
             .bounds
             .size
         
-        let hb = mScreen.width * 0.5
+        let w = mScreen.width
+        
+        let wb = w * 0.847
+        let wm = w * 0.403
         
         MainViewController.mCardSizeB = CGSize(
-            width: mScreen.width * 0.847,
-            height: hb
+            width: wb,
+            height: w * 0.5
         )
         
         MainViewController.mCardSizeM = CGSize(
-            width: mScreen.width * 0.4,
-            height: hb
+            width: wm,
+            height: w * 0.503
         )
         
         MainViewController.mCardTextSizeB = CardTextSize(
-            title: 0.111 * hb,
-            desc: 0.062 * hb
+            title: 0.063 * wb,
+            desc: 0.037 * wb
         )
         
         MainViewController.mCardTextSizeM = CardTextSize(
-            title: 0.096 * hb,
-            desc: 0.047 * hb // 0.053
+            title: 0.12 * wm,
+            desc: 0.066 * wm // 0.066
+        )
+        
+        print("MainViewController::", "CARD_TEXT_SIZES:",
+              "B:", MainViewController.mCardTextSizeB,
+              "M:", MainViewController.mCardTextSizeM
         )
         
         /*
