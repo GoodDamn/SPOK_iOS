@@ -32,6 +32,8 @@ class BaseTopicController
     private let mEngine =
         SPOKContentEngine()
     
+    private var mBtnClose: UIButton!
+    
     @objc func onTouch(
         _ sender: UITapGestureRecognizer
     ) {
@@ -42,8 +44,7 @@ class BaseTopicController
         _ sender: UIButton
     ) {
         sender.isEnabled = false
-        mCacheFile.stopDownloading()
-        
+
         mCurrentPlayer?
             .stopFade(
                 duration: 0.39
@@ -59,17 +60,19 @@ class BaseTopicController
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        print(TAG, "viewDidLoad()")
+        
         modalPresentationStyle = .overFullScreen
         
-        let btnClose = ViewUtils
+        mBtnClose = ViewUtils
             .buttonClose(
                 in: view,
                 sizeSquare: 0.068
             )
         
-        btnClose.alpha = 0.11
+        mBtnClose.alpha = 0.11
         
-        btnClose.addTarget(
+        mBtnClose.addTarget(
             self,
             action: #selector(
                 onClickBtnClose(_:)
@@ -78,7 +81,7 @@ class BaseTopicController
         )
         
         view.addSubview(
-            btnClose
+            mBtnClose
         )
         
         let mFont = UIFont(
@@ -108,7 +111,7 @@ class BaseTopicController
                 .contentUrl(
                     id: mId
                 ),
-            withCache: true
+            backgroundLoad: true
         )
         
         mCacheFile.delegate = self
@@ -194,8 +197,9 @@ class BaseTopicController
     }
     
     func onFinish() {
-        view.isUserInteractionEnabled = false
-        view.gestureRecognizers?.removeAll()
+        view.gestureRecognizers?[0]
+            .isEnabled = false
+        mBtnClose.isEnabled = false
         
         mCurrentPlayer?.stopFade(
             duration: 2.4
@@ -240,14 +244,15 @@ class BaseTopicController
             return
         }
         
-        let engine = mEngine
-       
-        engine.loadResources(
+        print(TAG, "initEngine!!!LOAD_RES")
+        
+        mEngine.loadResources(
             dataSKC: &data
         )
         
+        print(TAG, "initEngine!!!SCRIPT_READER")
         mScriptReader = ScriptReader(
-            engine: engine,
+            engine: mEngine,
             dataSKC: &data
         )
         
@@ -265,6 +270,12 @@ class BaseTopicController
             guard let r = s.mScriptReader else {
                 return
             }
+            
+            print(s.TAG, "initEngine!!!GESTURES")
+            
+            s.view
+                .gestureRecognizers?
+                .removeAll()
             
             let g = UITapGestureRecognizer(
                 target: self,

@@ -7,7 +7,8 @@
 
 import Foundation
 
-public protocol CacheListener {
+public protocol CacheListener
+    : AnyObject {
     
     func onFile(
         data: inout Data?

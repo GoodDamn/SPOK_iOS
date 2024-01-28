@@ -19,18 +19,19 @@ class CacheProgress<T>
     
     override func onUpdateCache() {
         
-        var delegate = delegate as? CacheProgressListener
+        let delegate = delegate as? CacheProgressListener
         
-        delegate?.onPrepareDownload()
+        let pass = mBackgroundLoad && mFirstLoad
+        let notPass = !pass
+        
+        if pass {
+            delegate?.onPrepareDownload()
+        }
         
         mDownloadTask = mReference.write(
             toFile: mUrlToSave
         ) { [weak self] url, error in
 
-            guard let s = self else {
-                return
-            }
-            
             guard let _ = url, error == nil else {
                 print(
                     "CacheFile:",
@@ -44,13 +45,21 @@ class CacheProgress<T>
                 "CacheProgress:",
                 "SUCCESSFULLY WRITTEN TO STORAGE"
             )
-                        
+            
+            if notPass {
+                return
+            }
+            
             delegate?.onWrittenStorage()
         }
         
         mDownloadTask?.observe(
             .progress
         ) { snap in
+            
+            if notPass {
+                return
+            }
             
             guard let pr = snap.progress else {
                 return
@@ -75,6 +84,10 @@ class CacheProgress<T>
                 snap.error
             )
             
+            if notPass {
+                return
+            }
+            
             delegate?.onError()
             
         }
@@ -88,8 +101,11 @@ class CacheProgress<T>
                 "observe: SUCCESSFULLY DOWNLOADED"
             )
             
-            delegate?.onSuccess()
+            if notPass {
+                return
+            }
             
+            delegate?.onSuccess()
         }
         
     }

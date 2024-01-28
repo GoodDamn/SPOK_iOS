@@ -11,20 +11,28 @@ import FirebaseStorage
 class CacheFile<T>
     : CacheFileHandler {
     
-    var delegate: CacheListener? = nil
+    weak var delegate: CacheListener? = nil
     var object: T? = nil
     
     internal let mReference: StorageReference
     internal let mPathToSave: String
     internal let mUrlToSave: URL
     internal let mWithCache: Bool
+    internal let mBackgroundLoad: Bool
+    internal var mFirstLoad: Bool = true
+    
+    deinit {
+        print("CacheFile:deinit()")
+    }
     
     init(
         pathStorage: String,
         localPath: URL,
-        withCache: Bool = false
+        withCache: Bool = false,
+        backgroundLoad: Bool = false
     ) {
         mWithCache = withCache
+        mBackgroundLoad = backgroundLoad
         
         mReference = Storage
             .storage()
@@ -41,18 +49,9 @@ class CacheFile<T>
     }
     
     public func load() {
-        
         let networkAvailable = true
         
-        if mWithCache && !networkAvailable {
-            loadCache()
-            return
-        }
-        
-        if !mWithCache {
-            loadCache()
-        }
-        
+        loadCache()
         if !networkAvailable {
             return
         }
@@ -100,11 +99,6 @@ class CacheFile<T>
         )
         
         if localTime >= netTime {
-            
-            if mWithCache {
-                loadCache()
-            }
-            
             return
         }
         
@@ -118,26 +112,28 @@ class CacheFile<T>
     }
 
     private func loadCache() {
-        if StorageApp.exists(
+        let exists = StorageApp.exists(
             at: mPathToSave
-        ) {
-            
-            DispatchQueue
-                .global(
-                    qos: .default
-                )
-                .async {
-                    var cache = StorageApp
-                        .file(
-                            path: self
-                                .mPathToSave
-                        )
-                    
-                    self.delegate?.onFile(
-                        data: &cache
-                    )
-                }
+        )
+        
+        mFirstLoad = !exists
+        
+        if mFirstLoad {
+            return
         }
+        
+        DispatchQueue.global(
+            qos: .default
+        ).async {
+            var cache = StorageApp
+                .file(
+                    path: self.mPathToSave
+                )
+            self.delegate?.onFile(
+                data: &cache
+            )
+        }
+        
     }
     
     func onUpdateCache() {}
