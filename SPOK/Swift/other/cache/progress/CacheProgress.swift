@@ -8,14 +8,20 @@
 import Foundation
 import FirebaseStorage
 
-class CacheProgress<
-        T,
-        Delegate: CacheProgressListener
-> : CacheFile<T, Delegate> {
+class CacheProgress<T>
+    : CacheFile<T> {
     
     private var mDownloadTask: StorageDownloadTask? = nil
     
+    public func stopDownloading() {
+        mDownloadTask?.cancel()
+    }
+    
     override func onUpdateCache() {
+        
+        var delegate = delegate as? CacheProgressListener
+        
+        delegate?.onPrepareDownload()
         
         mDownloadTask = mReference.write(
             toFile: mUrlToSave
@@ -38,17 +44,13 @@ class CacheProgress<
                 "CacheProgress:",
                 "SUCCESSFULLY WRITTEN TO STORAGE"
             )
-            
-            s.delegate?.onWrittenStorage()
+                        
+            delegate?.onWrittenStorage()
         }
         
         mDownloadTask?.observe(
             .progress
-        ) { [weak self] snap in
-            
-            guard let s = self else {
-                return
-            }
+        ) { snap in
             
             guard let pr = snap.progress else {
                 return
@@ -58,14 +60,14 @@ class CacheProgress<
                 pr.completedUnitCount
             ) / Double(pr.totalUnitCount)
             
-            s.delegate?.onProgress(
+            delegate?.onProgress(
                 percent: percent
             )
         }
         
         mDownloadTask?.observe(
             .failure
-        ) { [weak self] snap in
+        ) {snap in
 
             print(
                 "CacheProgress:",
@@ -73,28 +75,20 @@ class CacheProgress<
                 snap.error
             )
             
-            guard let s = self else {
-                return
-            }
-            
-            s.delegate?.onError()
+            delegate?.onError()
             
         }
         
         mDownloadTask?.observe(
             .success
-        ) { [weak self] snap in
-           
-            guard let s = self else {
-                return
-            }
+        ) {snap in
             
             print(
                 "CacheProgress:",
                 "observe: SUCCESSFULLY DOWNLOADED"
             )
             
-            s.delegate?.onSuccess()
+            delegate?.onSuccess()
             
         }
         

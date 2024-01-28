@@ -226,7 +226,7 @@ class PreviewCell
             
             mCache = CacheFile(
                 pathStorage: "Trainings/\(id)/\(type).spc",
-                localPath: localp.pathh()
+                localPath: localp
             )
                 
             mCache!.delegate = self

@@ -28,8 +28,7 @@ class BaseTopicController
     private var mId = Int.min
     private var mNetworkUrl = ""
     
-    private var mDownloadTask: StorageDownloadTask? = nil
-    
+    private var mCacheFile: CacheProgress<Void>!
     private let mEngine =
         SPOKContentEngine()
     
@@ -43,7 +42,7 @@ class BaseTopicController
         _ sender: UIButton
     ) {
         sender.isEnabled = false
-        mDownloadTask?.cancel()
+        mCacheFile.stopDownloading()
         pop(
             duration: 0.4
         ) {
@@ -97,7 +96,18 @@ class BaseTopicController
         
         let mHideOffsetY = viewFrame.height * 0.3
         
-        initEngine()
+        mCacheFile = CacheProgress<Void>(
+            pathStorage: mNetworkUrl,
+            localPath: StorageApp
+                .contentUrl(
+                    id: mId
+                ),
+            withCache: true
+        )
+        
+        mCacheFile.delegate = self
+        
+        mCacheFile.load()
         
         mEngine.setOnReadCommandListener(
             self
@@ -141,7 +151,9 @@ class BaseTopicController
             .sharedInstance()
         do {
             try ses
-                .setCategory(.playback)
+                .setCategory(
+                    .playback
+                )
             try ses.setActive(true)
         } catch {
             print(TAG, "onAmbient: ERROR::SESSION",error)
@@ -234,71 +246,83 @@ class BaseTopicController
         mNetworkUrl = "content/skc/\(id).skc"
     }
     
-    private func initEngine() {
-        downloadSKC(
-            path: mNetworkUrl
-        ) { data in
-            
-            DispatchQueue.global(
-                qos: .default
-            ).async { [weak self] in
-                
-                guard let s = self else {
-                    print("BaseTopicController:downloadSKC:GC")
-                    return
-                }
-                
-                let TAG = s.TAG
-                let engine = s.mEngine
-                
-                var data = data
-                
-                engine.loadResources(
-                    dataSKC: &data
-                )
-                
-                s.mScriptReader = ScriptReader(
-                    engine: engine,
-                    dataSKC: &data
-                )
-                
-                DispatchQueue.main.async {
-                    guard let r = s.mScriptReader else {
-                        return
-                    }
-                    
-                    r.setOnReadScriptListener(
-                        s
-                    )
-                    
-                    r.next()
-                    
-                    s.view.isUserInteractionEnabled = true
-                }
-                
-            }
-        }
-    }
-    
-    private func downloadSKC(
-        path: String,
-        completion: @escaping (Data)->Void
+    // Better to load on background thread
+    private func initEngine(
+        _ data: inout Data?
     ) {
-        
-        let d = StorageApp
-            .content(id: mId)
-        
-        if d != nil {
-            completion(d!)
+        guard var data = data else {
             return
         }
         
-        let ref = Storage
-            .storage()
-            .reference(
-                withPath: path
-            )
+        let engine = mEngine
+       
+        engine.loadResources(
+            dataSKC: &data
+        )
         
+        mScriptReader = ScriptReader(
+            engine: engine,
+            dataSKC: &data
+        )
+        
+        DispatchQueue.main.async {
+            [weak self] in
+            
+            guard let s = self else {
+                print(
+                    "BaseTopicController:",
+                    "initEngine: GC"
+                )
+                return
+            }
+            
+            guard let r = s.mScriptReader else {
+                return
+            }
+            
+            let g = UITapGestureRecognizer(
+                target: self,
+                action: #selector(
+                    s.onTouch(_:)
+                )
+            )
+            
+            g.numberOfTapsRequired = 1
+            
+            s.view.addGestureRecognizer(
+                g
+            )
+            
+            r.setOnReadScriptListener(
+                self
+            )
+            
+            r.next()
+            
+            s.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    private func nothing() {
+        Toast.init(
+            text: "Nothing found",
+            duration: 1.8
+        ).show()
+        
+        pop(
+            duration: 0.3
+        ) {
+            self.view.alpha = 0
+        }
+        
+    }
+    
+}
+
+extension BaseTopicController
+    : CacheProgressListener {
+    
+    func onPrepareDownload() {
         let w = view.frame.width
         let h = view.frame.height
         
@@ -322,111 +346,62 @@ class BaseTopicController
             mProgressBar
         )
         
-        mDownloadTask = ref.write(
-            toFile: StorageApp
-                .contentUrl(
-                    id: mId
-                )
-        ) { [weak self] url, error in
-
-            guard let url = url, error == nil else {
-                print(
-                    "BaseTopicController:URL_DOWNLOAD_ERROR::",
-                    error
-                )
-                return
+    }
+    
+    func onWrittenStorage() {
+        UIView.animate(
+            withDuration: 1.2,
+            animations: { [weak self] in
+                self?.mProgressBar
+                    .alpha = 0
             }
+        ) { [weak self] _ in
+            self?.mProgressBar.removeFromSuperview()
+        }
+        
+        DispatchQueue.global(
+            qos: .default
+        ).async { [weak self] in
             
             guard let s = self else {
+                print(
+                    "BaseTopicController:",
+                    "onWrittenStorage: GC"
+                )
                 return
             }
             
-            print("BaseTopicController: DOWNLOAD COMPLETED!",url)
-            
-            UIView.animate(
-                withDuration: 1.2,
-                animations: {
-                    s.mProgressBar
-                        .alpha = 0
-                }
-            ) { _ in
-                s.mProgressBar.removeFromSuperview()
-            }
-            
-            guard let data = StorageApp
+            var data = StorageApp
                 .content(
                     id: s.mId
-                ) else {
-                return
-            }
-            
-            completion(data)
-            
-        }
-        
-        mDownloadTask!.observe(
-            .progress
-        ) { [weak self] snapshot in
-            
-            guard let s = self else {
-                return
-            }
-            
-            guard let progress = snapshot
-                .progress else {
-                return
-            }
-            
-            let prog = 100 * Double(progress
-                .completedUnitCount
-            ) / Double(progress.totalUnitCount)
-            
-            s.mProgressBar.mProgress = prog
-        }
-        
-        mDownloadTask!.observe(
-            .failure
-        ) { [weak self] snap in
-
-            guard let s = self else {
-                print("BaseTopicController: FAIL: GC")
-                return
-            }
-            
-            print(s.TAG, "FAIL:",snap.error)
-            
-            s.nothing()
-        }
-        
-        mDownloadTask!.observe(
-            .success
-        ) { [weak self] snap in
-            
-            guard let s = self else {
-                print(
-                    "BaseTopicController:SUCCESS: GC"
                 )
-                return
-            }
             
-            print(s.TAG, "SUCCESS DOWNLOAD!")
-            
+            s.initEngine(
+                &data
+            )
         }
     }
     
-    
-    private func nothing() {
-        Toast.init(
-            text: "Nothing found",
-            duration: 1.8
-        ).show()
-        
-        pop(
-            duration: 0.3
-        ) {
-            self.view.alpha = 0
-        }
-        
+    func onProgress(percent: Double) {
+        mProgressBar.mProgress = percent
     }
+    
+    func onSuccess() {}
+    
+    func onError() {
+        nothing()
+    }
+    
+    // Background thread
+    func onFile(
+        data: inout Data?
+    ) {
+        initEngine(
+            &data
+        )
+    }
+    
+    // Background thread
+    func onNet(data: inout Data?) {}
     
 }

@@ -7,8 +7,10 @@
 
 import Foundation
 
-protocol CacheProgressListener
+public protocol CacheProgressListener
     : CacheListener {
+    
+    func onPrepareDownload()
     
     func onWrittenStorage()
     

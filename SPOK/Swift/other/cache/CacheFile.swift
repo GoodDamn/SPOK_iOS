@@ -8,20 +8,23 @@
 import Foundation
 import FirebaseStorage
 
-class CacheFile<T, L: CacheListener>
+class CacheFile<T>
     : CacheFileHandler {
     
-    var delegate: L? = nil
+    var delegate: CacheListener? = nil
     var object: T? = nil
     
     internal let mReference: StorageReference
     internal let mPathToSave: String
     internal let mUrlToSave: URL
+    internal let mWithCache: Bool
     
     init(
         pathStorage: String,
-        localPath: String
+        localPath: URL,
+        withCache: Bool = false
     ) {
+        mWithCache = withCache
         
         mReference = Storage
             .storage()
@@ -29,37 +32,32 @@ class CacheFile<T, L: CacheListener>
                 withPath: pathStorage
             )
         
-        mPathToSave = localPath
-        mUrlToSave = URL(
-            string: mPathToSave
-        )!
+        mPathToSave = localPath.pathh()
+        mUrlToSave = localPath
+        print(
+            "CacheFile: URL_TO_SAVE:",
+            mUrlToSave
+        )
     }
     
     public func load() {
         
-        if StorageApp.exists(
-            at: mPathToSave
-        ) {
-            
-            DispatchQueue
-                .global(
-                    qos: .default
-                )
-                .async {
-                    var cache = StorageApp
-                        .file(
-                            path: self
-                                .mPathToSave
-                        )
-                    
-                    self.delegate?.onFile(
-                        data: &cache
-                    )
-                }
+        let networkAvailable = true
+        
+        if mWithCache && !networkAvailable {
+            loadCache()
+            return
+        }
+        
+        if !mWithCache {
+            loadCache()
+        }
+        
+        if !networkAvailable {
+            return
         }
         
         // Checking metadata first
-        
         mReference.getMetadata {
             meta, error in
             
@@ -102,6 +100,11 @@ class CacheFile<T, L: CacheListener>
         )
         
         if localTime >= netTime {
+            
+            if mWithCache {
+                loadCache()
+            }
+            
             return
         }
         
@@ -114,6 +117,29 @@ class CacheFile<T, L: CacheListener>
 
     }
 
+    private func loadCache() {
+        if StorageApp.exists(
+            at: mPathToSave
+        ) {
+            
+            DispatchQueue
+                .global(
+                    qos: .default
+                )
+                .async {
+                    var cache = StorageApp
+                        .file(
+                            path: self
+                                .mPathToSave
+                        )
+                    
+                    self.delegate?.onFile(
+                        data: &cache
+                    )
+                }
+        }
+    }
+    
     func onUpdateCache() {}
     
 }
