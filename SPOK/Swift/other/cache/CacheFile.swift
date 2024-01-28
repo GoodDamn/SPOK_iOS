@@ -8,14 +8,15 @@
 import Foundation
 import FirebaseStorage
 
-class CacheFile<T> {
+class CacheFile<T, L: CacheListener>
+    : CacheFileHandler {
     
-    var delegate: CacheListener? = nil
+    var delegate: L? = nil
     var object: T? = nil
     
-    private let mReference: StorageReference
-    private let mPathToSave: String
-    
+    internal let mReference: StorageReference
+    internal let mPathToSave: String
+    internal let mUrlToSave: URL
     
     init(
         pathStorage: String,
@@ -29,6 +30,9 @@ class CacheFile<T> {
             )
         
         mPathToSave = localPath
+        mUrlToSave = URL(
+            string: mPathToSave
+        )!
     }
     
     public func load() {
@@ -105,37 +109,11 @@ class CacheFile<T> {
             "CacheFile",
             "TIME TO CACHE UPDATE!"
         )
-        // Update cache or create
         
-        mReference.getData(
-            maxSize: 1024*1024
-        ) { data, error in
-            
-            
-            if error != nil {
-                print(
-                    "CacheFile",
-                    "ERROR_DATA:",
-                    error
-                )
-                return
-            }
-            
-            DispatchQueue
-                .global(
-                    qos: .default
-                )
-                .async {
-                    
-                    var data = data
-                    
-                    // Send new data
-                    self.delegate?.onNet(
-                        data: &data
-                    )
-                }
-        }
-        
+        onUpdateCache()
+
     }
+
+    func onUpdateCache() {}
     
 }
