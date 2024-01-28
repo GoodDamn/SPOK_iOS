@@ -43,6 +43,12 @@ class BaseTopicController
     ) {
         sender.isEnabled = false
         mCacheFile.stopDownloading()
+        
+        mCurrentPlayer?
+            .stopFade(
+                duration: 0.39
+            )
+        
         pop(
             duration: 0.4
         ) {
@@ -169,17 +175,8 @@ class BaseTopicController
             return
         }
         
-        let f = 1.5
-        
-        prevP.setVolume(
-            0.0,
-            fadeDuration: f)
-        
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + f
-        ) {
-            prevP.stop()
-            self.mCurrentPlayer = player
+        prevP.stopFade { [weak self] in
+            self?.mCurrentPlayer = prevP
         }
     }
     
@@ -200,20 +197,9 @@ class BaseTopicController
         view.isUserInteractionEnabled = false
         view.gestureRecognizers?.removeAll()
         
-        if let player = mCurrentPlayer {
-            let dur = 2.5
-            player.setVolume(
-                0.0,
-                fadeDuration: dur
-            )
-            
-            DispatchQueue.main.asyncAfter(
-                deadline: .now() + dur
-            ) {
-                player.stop()
-            }
-        }
-        
+        mCurrentPlayer?.stopFade(
+            duration: 2.4
+        )
         
         if mPrevTextView == nil {
             self.pop(
@@ -302,6 +288,7 @@ class BaseTopicController
             s.view.isUserInteractionEnabled = true
         }
     }
+    
     
     private func nothing() {
         Toast.init(
@@ -403,5 +390,25 @@ extension BaseTopicController
     
     // Background thread
     func onNet(data: inout Data?) {}
+    
+}
+
+extension AVAudioPlayer {
+    
+    func stopFade(
+        duration f: TimeInterval = 1.5,
+        completion: (()->Void)? = nil
+    ) {
+        setVolume(
+            0.0,
+            fadeDuration: f)
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + f
+        ) { [weak self] in
+            self?.stop()
+            completion?()
+        }
+    }
     
 }
