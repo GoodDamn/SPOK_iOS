@@ -33,6 +33,10 @@ class CacheProgress<T>
         ) { [weak self] url, error in
 
             guard let _ = url, error == nil else {
+                
+                self?.delegate?
+                    .onError()
+                
                 print(
                     "CacheFile:",
                     "DOWNLOAD_WRITE:ERROR",

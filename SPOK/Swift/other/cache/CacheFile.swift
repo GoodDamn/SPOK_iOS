@@ -57,11 +57,15 @@ class CacheFile<T>
         }
         
         // Checking metadata first
-        mReference.getMetadata {
+        mReference.getMetadata { [weak self]
             meta, error in
             
             guard let meta = meta,
                   error == nil else {
+                
+                self?.delegate?
+                    .onError()
+                
                 print(
                     "CacheFile:",
                     "ERROR_META:",
@@ -70,7 +74,7 @@ class CacheFile<T>
                 return
             }
             
-            self.processMeta(
+            self?.processMeta(
                 meta
             )
         }

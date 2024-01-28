@@ -210,7 +210,7 @@ class PreviewCell
     ) {
         mId = id
         mType = type
-        
+                
         if mCache?.object != nil {
             show()
             return
@@ -370,6 +370,8 @@ extension PreviewCell
         )
         
     }
+    
+    func onError() {}
     
 }
 

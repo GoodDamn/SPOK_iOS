@@ -20,6 +20,4 @@ public protocol CacheProgressListener
     
     func onSuccess()
     
-    func onError()
-    
 }

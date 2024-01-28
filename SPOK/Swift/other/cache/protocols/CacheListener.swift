@@ -10,6 +10,8 @@ import Foundation
 public protocol CacheListener
     : AnyObject {
     
+    func onError()
+    
     func onFile(
         data: inout Data?
     )

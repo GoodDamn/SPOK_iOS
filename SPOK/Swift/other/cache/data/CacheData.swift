@@ -15,9 +15,11 @@ class CacheData<T>
         // Update cache or create
         mReference.getData(
             maxSize: 1024*1024
-        ) { data, error in
+        ) { [weak self] data, error in
             
             if error != nil {
+                self?.delegate?
+                    .onError()
                 print(
                     "CacheFile",
                     "ERROR_DATA:",
@@ -35,7 +37,7 @@ class CacheData<T>
                     var data = data
                     
                     // Send new data
-                    self.delegate?.onNet(
+                    self?.delegate?.onNet(
                         data: &data
                     )
                 }
