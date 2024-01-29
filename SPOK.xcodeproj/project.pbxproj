@@ -46,6 +46,7 @@
 		256940942B6614160005BFCC /* CacheProgressListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940932B6614160005BFCC /* CacheProgressListener.swift */; };
 		256940962B6672620005BFCC /* UILabela.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940952B6672610005BFCC /* UILabela.swift */; };
 		256940982B676A040005BFCC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940972B676A040005BFCC /* Cache.swift */; };
+		2569409B2B6772B40005BFCC /* CacheDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569409A2B6772B40005BFCC /* CacheDir.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 259185372B5D8649001CFD7A /* sheep_m.mp3 */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
@@ -186,6 +187,7 @@
 		256940932B6614160005BFCC /* CacheProgressListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheProgressListener.swift; sourceTree = "<group>"; };
 		256940952B6672610005BFCC /* UILabela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabela.swift; sourceTree = "<group>"; };
 		256940972B676A040005BFCC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		2569409A2B6772B40005BFCC /* CacheDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDir.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259185372B5D8649001CFD7A /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sheep_m.mp3; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
@@ -441,6 +443,14 @@
 			path = protocols;
 			sourceTree = "<group>";
 		};
+		256940992B6772A30005BFCC /* dir */ = {
+			isa = PBXGroup;
+			children = (
+				2569409A2B6772B40005BFCC /* CacheDir.swift */,
+			);
+			path = dir;
+			sourceTree = "<group>";
+		};
 		259FE6122B623DA400E237B7 /* enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +462,7 @@
 		25C455C62B5BF8D400AF54B1 /* cache */ = {
 			isa = PBXGroup;
 			children = (
+				256940992B6772A30005BFCC /* dir */,
 				2569408F2B660ED00005BFCC /* data */,
 				2569408A2B660C840005BFCC /* progress */,
 				256940872B6571B20005BFCC /* protocols */,
@@ -1039,6 +1050,7 @@
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2B5DBFC029321C8300FF5199 /* RatingSnackbar.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
+				2569409B2B6772B40005BFCC /* CacheDir.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */,

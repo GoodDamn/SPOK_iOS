@@ -64,7 +64,7 @@ class CarouselView
                     x: c.from,
                     y: 0
                 ),
-                animated: false
+                animated: true
             )
             
             cv.backgroundColor = .clear

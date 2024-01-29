@@ -9,21 +9,17 @@ import Foundation
 import FirebaseStorage
 import UIKit
 
-class CollectionDowloader {
+class CollectionDowloader
+    : Cache<Void> {
     
     private final let TAG = "CollectionDownloader"
     
     // It calls once
-    public weak var delegate: CollectionListener?
+    public weak var delegateCollection: CollectionListener?
     
-    private var mDirPath: String
     private var mRootName: String
     
-    private var mScreen: CGSize
-    
-    private var mChild: String
-    
-    private var mStorage: StorageReference
+    private let mScreen: CGSize
     
     private var mCacheCollections: ArrayList<Collection> = ArrayList()
     
@@ -33,28 +29,23 @@ class CollectionDowloader {
         dir: String,
         child: String
     ) {
-        
-        mChild = child
-        mStorage = Storage
-            .storage()
-            .reference(
-                withPath: mChild
-            )
-        
         mRootName = dir
+        
+        let urlp = StorageApp.rootPath(
+            append: StorageApp.mDirCollection
+        ).append(mRootName)
+        
         
         mScreen = UIScreen
             .main
             .bounds
             .size
         
-        mDirPath = StorageApp.rootPath(
-            append: StorageApp.mDirCollection
+        super.init(
+            pathStorage: child,
+            localPath: urlp,
+            isDirectory: true
         )
-        .append(mRootName)
-        .pathh()
-        
-        print(TAG, mDirPath)
         
     }
     
@@ -62,90 +53,39 @@ class CollectionDowloader {
         print(TAG, "deinit()")
     }
     
-    public func start() {
-        
-        let timelist = mStorage
-            .child("RU.st")
-        
-        timelist.getMetadata { [weak self]
-            meta, error in
-            
-            guard let s = self else {
-                print("CollectionDownloader: getMetadata: garbage collected")
-                return
+    override func onUpdateCache() {
+        mReference
+            .child("RU")
+            .listAll { [weak self]
+                list, error in
+                
+                guard let s = self else {
+                    print("CollectionDownloader: listAll: ARC collected")
+                    return
+                }
+                
+                guard let list = list,
+                      error == nil else {
+                    print(s.TAG, "ERROR_LIST:",error)
+                    return
+                }
+                
+                s.refreshData(list
+                    .items
+                )
             }
-            
-            guard let meta = meta,
-                  error == nil else {
-                print(s.TAG, "ERROR: ", error)
-                return
-            }
-            
-            s.checkTime(
-                meta
-            )
-            
-        }
-        
     }
     
-    private func checkTime(
-        _ meta: StorageMetadata
-    ) {
-        
-        let listc = mStorage
-            .child("RU")
-        
-        let time = StorageApp
-            .modifTime(
-                path: mDirPath
-            )
-        
-        let netTime = meta
-            .updated?
-            .timeIntervalSince1970 ?? 0
-        
+    override func onCacheNotExpired() {
+        delegateCollection?
+            .onFinish()
+    }
+    
+    public func start() {
         loadCache()
-        
-        print(TAG, "CURRENT:",
-              netTime, "PREV:",
-              time
+        checkMeta(
+            childRef: "RU.st"
         )
-        
-        if netTime <= time {
-            delegate?.onFinish()
-            return
-        }
-        
-        StorageApp.mkdir(
-            path: mDirPath
-        )
-        
-        StorageApp
-            .modifTime(
-                path: mDirPath,
-                time: netTime
-            )
-        
-        
-        listc.listAll { [weak self]
-            list, error in
-            
-            guard let s = self else {
-                print("CollectionDownloader: listAll: ARC collected")
-                return
-            }
-            
-            guard let list = list,
-                  error == nil else {
-                print(s.TAG, "ERROR_LIST:",error)
-                return
-            }
-            
-            s.refreshData(list
-                .items
-            )
-        }
     }
     
     private func refreshData(
@@ -159,7 +99,7 @@ class CollectionDowloader {
                 return
             }
             
-            if s.delegate == nil {
+            if s.delegateCollection == nil {
                 return
             }
             
@@ -168,12 +108,12 @@ class CollectionDowloader {
                 
                 s.mCacheCollections.a = s.mNetCollections
                 
-                s.delegate!
+                s.delegateCollection!
                     .onFirstCollection(
                         c: &s.mCacheCollections
                     )
                 
-                s.delegate!
+                s.delegateCollection!
                     .onFinish()
                 return
             }
@@ -183,14 +123,19 @@ class CollectionDowloader {
             
             var i = b
             while i < a {
-                s.delegate!.onRemove(i: i)
+                s.delegateCollection!.onRemove(
+                    i: i
+                )
                 i += 1
             }
             
             i = a
             
             while i < b {
-                s.delegate!.onAdd(i: i)
+                s.delegateCollection!
+                    .onAdd(
+                        i: i
+                    )
                 i += 1
             }
             
@@ -200,12 +145,13 @@ class CollectionDowloader {
                 
                 s.mCacheCollections.a[i] = s.mNetCollections[i]
                 
-                s.delegate!.onUpdate(
-                    i: i
-                )
+                s.delegateCollection!
+                    .onUpdate(
+                        i: i
+                    )
             }
             
-            s.delegate!
+            s.delegateCollection!
                 .onFinish()
         }
     }
@@ -264,16 +210,20 @@ class CollectionDowloader {
     }
     
     private func loadCache() {
-        print(TAG, "loadCache:",mDirPath)
+        print(TAG,
+              "loadCache:",
+              mPathToSave
+        )
+        
         if !StorageApp.exists(
-            at: mDirPath
+            at: mPathToSave
         ) {
             print(TAG, "loadCache: not exists")
             return
         }
         
         StorageApp.urlContent(
-            at: mDirPath
+            at: mPathToSave
         ) { fileName in
             var d = StorageApp
                 .collection(
@@ -288,7 +238,7 @@ class CollectionDowloader {
             
         }
         
-        delegate?.onFirstCollection(
+        delegateCollection?.onFirstCollection(
             c: &mCacheCollections
         )
         

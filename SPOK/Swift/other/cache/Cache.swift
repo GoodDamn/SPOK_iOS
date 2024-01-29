@@ -39,29 +39,33 @@ class Cache<T> {
         )
     }
     
-    internal func checkMeta() {
+    internal func checkMeta(
+        childRef: String = ""
+    ) {
         // Checking metadata first
-        mReference.getMetadata { [weak self]
-            meta, error in
-            
-            guard let meta = meta,
-                  error == nil else {
+        mReference
+            .child(childRef)
+            .getMetadata { [weak self]
+                meta, error in
                 
-                self?.delegate?
-                    .onError()
+                guard let meta = meta,
+                      error == nil else {
+                    
+                    self?.delegate?
+                        .onError()
+                    
+                    print(
+                        "Cache:",
+                        "ERROR_META:",
+                        error
+                    )
+                    return
+                }
                 
-                print(
-                    "Cache:",
-                    "ERROR_META:",
-                    error
+                self?.processMeta(
+                    meta
                 )
-                return
             }
-            
-            self?.processMeta(
-                meta
-            )
-        }
     }
     
     private func processMeta(
@@ -86,6 +90,7 @@ class Cache<T> {
         )
         
         if localTime >= netTime {
+            onCacheNotExpired()
             return
         }
         
@@ -111,5 +116,5 @@ class Cache<T> {
     }
     
     func onUpdateCache() {}
-    
+    func onCacheNotExpired() {}
 }

@@ -92,7 +92,8 @@ class HomeViewController
             dir: "sleep",
             child: "Sleep"
         )
-        mDownloader!.delegate = self
+        mDownloader!
+            .delegateCollection = self
         
         mDownloader!.start()
     }
