@@ -37,13 +37,7 @@ class CacheFile<T>
     }
     
     public func load() {
-        let networkAvailable = true
-        
         loadCache()
-        if !networkAvailable {
-            return
-        }
-        
         checkMeta()
     }
     

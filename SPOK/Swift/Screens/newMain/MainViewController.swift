@@ -7,9 +7,12 @@
 
 import Foundation
 import UIKit
+import Network
 
 class MainViewController
 : UIViewController {
+    
+    public static var mIsConnected: Bool = false
     
     public static var mCardSizeB: CGSize!
     public static var mCardSizeM: CGSize!
@@ -72,25 +75,18 @@ class MainViewController
          
          print(self.tag, "BUILD NUMBER:",buildNumber);
          
-         
-         let monitor = NWPathMonitor();
-         monitor.pathUpdateHandler = {
-         path in
-         self.isConnected = path.status == .satisfied;
-         if !self.isConnected {
-         DispatchQueue.main.async {
-         self.heightSnackbar.constant = 24;
-         UIView.animate(withDuration: 0.23, animations: {
-         self.view.layoutIfNeeded();
-         });
-         }
-         return;
-         }
-         
-         }
-         
-         monitor.start(queue: DispatchQueue(label:"Network")
          );*/
+        
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = {
+            [weak self] path in
+            self?.networkUpdate(path)
+        }
+        monitor.start(
+            queue: DispatchQueue(
+                label: "Network"
+            )
+        )
         
         
         let userDefaults = UserDefaults();
@@ -229,6 +225,20 @@ class MainViewController
         view.addSubview(c.view)
     }
         
+    
+    // Network dispatch queue
+    private func networkUpdate(
+        _ path: NWPath
+    ) {
+        MainViewController.mIsConnected =
+            path.status == .satisfied
+        print(
+            "MainViewController: networkUpdate:",
+            MainViewController.mIsConnected
+        )
+        
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

@@ -42,6 +42,12 @@ class Cache<T> {
     internal func checkMeta(
         childRef: String = ""
     ) {
+        if !MainViewController
+            .mIsConnected {
+            onCacheNotExpired()
+            return
+        }
+        
         // Checking metadata first
         mReference
             .child(childRef)
