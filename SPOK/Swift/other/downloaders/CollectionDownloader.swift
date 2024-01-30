@@ -124,6 +124,11 @@ class CollectionDowloader
             var i = b
             while i < a {
                 
+                StorageApp
+                    .deleteCollection(
+                        s.mRootName,
+                        id: i
+                    )
                 
                 s.mCacheCollections
                     .a

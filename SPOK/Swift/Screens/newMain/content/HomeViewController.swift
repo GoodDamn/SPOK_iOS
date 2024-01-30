@@ -142,7 +142,6 @@ class HomeViewController
                 c
             )
         
-        
         mTableView.reloadRows(
             at: [
                 IndexPath(

@@ -80,11 +80,12 @@ class StorageApp {
     }
     
     public static func deleteCollection(
+        _ dir: String,
         id: Int,
         lang: String = ""
     ) {
         delete(
-            mDirCollection,
+            "\(mDirCollection)/\(dir)",
             toscs(
                 id: id,
                 lang: lang
