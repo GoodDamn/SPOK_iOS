@@ -49,6 +49,7 @@ class PreviewCell
     private var mId: Int = Int.min
     private var mType: CardType = .M
     private var mCache: CacheData<FileSPC>? = nil
+    private var mCalculated = false
     
     deinit {
         print(
@@ -169,6 +170,16 @@ class PreviewCell
     
     public func calculateBounds() {
         
+        print(
+            PreviewCell.TAG,
+            "calculated",
+            mCalculated
+        )
+        
+        if mCalculated {
+            return
+        }
+        
         let w = frame.width
         let h = frame.height
         
@@ -211,6 +222,7 @@ class PreviewCell
               mDesc.font.pointSize
         )
         
+        mCalculated = true
     }
     
     public func load(

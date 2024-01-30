@@ -13,6 +13,8 @@ public class TitleTableViewCell
     
     public var mTitle: UILabel? = nil
     
+    private var mIsCalculated = false
+    
     private func ini() {
         mTitle = UILabel()
        
@@ -51,6 +53,10 @@ public class TitleTableViewCell
     public override func layoutSubviews() {
         super.layoutSubviews()
         
+        if mIsCalculated {
+            return
+        }
+        
         print("TitleTableViewCell: layoutSubviews()")
         
         let w = frame.width
@@ -63,8 +69,12 @@ public class TitleTableViewCell
             height: mTitle?.frame.height ?? 15
         )
         
-        print("TitleTableViewCell","LFRAME:", mTitle?.frame)
-        
+        print(
+            "TitleTableViewCell",
+            "LFRAME:",
+            mTitle?.frame
+        )
+        mIsCalculated = true
     }
     
 }

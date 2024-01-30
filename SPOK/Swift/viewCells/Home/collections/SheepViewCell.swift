@@ -18,6 +18,8 @@ public class SheepViewCell
     private var mSheep: Sheep?
     private var moon: UIImageView?
     
+    private var mIsCalculated = false
+    
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
@@ -61,6 +63,12 @@ public class SheepViewCell
     public override func layoutSubviews() {
         super.layoutSubviews()
         
+        print("SheepViewCell: calculated:", mIsCalculated)
+        
+        if mIsCalculated {
+            return
+        }
+        
         let w = frame.width
         let h = frame.height
         
@@ -92,7 +100,7 @@ public class SheepViewCell
             textSize: 0.4
         )
         
-        
+        mIsCalculated = true
     }
     
 }

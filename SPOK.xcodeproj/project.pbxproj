@@ -126,7 +126,6 @@
 		2BD64C4D295C36DB00169416 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD64C4C295C36DB00169416 /* SettingsTableViewCell.swift */; };
 		2BEB9A4327CF57810024989F /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEB9A4227CF57810024989F /* SubscriptionViewController.swift */; };
 		2BF06BF628E7953B00A2ACFF /* SPOKTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */; };
-		2BF0AF4627E1DBC800F20B9D /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF0AF4527E1DBC800F20B9D /* Networking.swift */; };
 		2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3566D293136BF00ECA142 /* Crypt.swift */; };
 		383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383AF7AC28758BD300859090 /* MainNavigationController.swift */; };
 		383AF7AF2875B17400859090 /* StorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383AF7AE2875B17400859090 /* StorageApp.swift */; };
@@ -274,7 +273,6 @@
 		2BD64C4C295C36DB00169416 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		2BEB9A4227CF57810024989F /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKTopic.swift; sourceTree = "<group>"; };
-		2BF0AF4527E1DBC800F20B9D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		2BF3566D293136BF00ECA142 /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
 		383AF7A82875806000859090 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		383AF7AC28758BD300859090 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -737,7 +735,6 @@
 				2BD279BD279EFEAE00E6A1FD /* Utils.swift */,
 				2B1CBB2727D16D4C00CCB102 /* AdvancedLabel.swift */,
 				2B0103D227DCA08F00C73D73 /* Bubble.swift */,
-				2BF0AF4527E1DBC800F20B9D /* Networking.swift */,
 				2B4D8F342806C33300D1281C /* AnimationsConstants.swift */,
 				383AF7AE2875B17400859090 /* StorageApp.swift */,
 				2B3DE5B8290BAC7600B00528 /* SIgnInWithAppleDelegate.swift */,
@@ -1061,7 +1058,6 @@
 				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */,
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
-				2BF0AF4627E1DBC800F20B9D /* Networking.swift in Sources */,
 				383AF7AF2875B17400859090 /* StorageApp.swift in Sources */,
 				256940912B660EDE0005BFCC /* CacheData.swift in Sources */,
 				2BA51AC0281011080035262A /* CategoryView.swift in Sources */,
@@ -1362,9 +1358,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SPOK/SPOK.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1375,11 +1371,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.3.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DSTR NEW";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DEV PROFILE NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1393,9 +1389,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SPOK/SPOK.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1406,11 +1402,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.3.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DSTR NEW";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DEV PROFILE NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
