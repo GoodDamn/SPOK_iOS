@@ -92,7 +92,7 @@ class PopupNewsViewController
         view.addSubview(lDesc)
         view.addSubview(btnClose)
         
-        let def = UserDefaults()
+        let def = UserDefaults.standard
         def.setValue(
             msgID,
             forKey: KeyUtils.mIdNews

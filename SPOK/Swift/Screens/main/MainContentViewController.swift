@@ -254,7 +254,7 @@ class MainContentViewController
     
     private func checkPopupNews() {
         
-        let def = UserDefaults()
+        let def = UserDefaults.standard
         let lastId = def.integer(
             forKey: KeyUtils.mIdNews
         )

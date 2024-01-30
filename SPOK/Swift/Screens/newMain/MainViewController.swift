@@ -15,6 +15,7 @@ class MainViewController
     public static var mIsConnected = false
     
     public static var mBuildNumber = -1
+    public static var mBuildNumberOld = -2
     
     public static var mCardSizeB: CGSize!
     public static var mCardSizeM: CGSize!
@@ -38,6 +39,9 @@ class MainViewController
             .size
         
         let w = mScreen.width
+        
+        let def = UserDefaults
+            .standard
         
         let wb = w * 0.847
         let wm = w * 0.403
@@ -72,10 +76,29 @@ class MainViewController
             .infoDictionary?["CFBundleVersion"]
             as? String {
             
+            let buildNumber = Int(buildNum) ?? -1
+            
             MainViewController
-                .mBuildNumber = Int(buildNum) ?? -1
+                .mBuildNumber = buildNumber
+            
+            var oldbn = def.integer(
+                forKey: KeyUtils.mOldBuildNumber
+            )
+            
+            if buildNumber != oldbn  {
+                def.removeObject(
+                    forKey: KeyUtils
+                        .mIdNews
+                )
+                
+                def.setValue(
+                    buildNumber,
+                    forKey: KeyUtils
+                        .mOldBuildNumber
+                )
+            }
+            
         }
-         
         
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = {
@@ -88,10 +111,7 @@ class MainViewController
             )
         )
         
-        
-        let userDefaults = UserDefaults();
-        
-        if !userDefaults.bool(forKey: "intro") {
+        if !def.bool(forKey: "intro") {
             print("Time for intro!")
             let c = IntroSleepRootController()
             c.view.alpha = 0

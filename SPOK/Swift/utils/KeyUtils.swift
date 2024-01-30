@@ -10,5 +10,7 @@ import Foundation
 class KeyUtils {
     
     public static let mIdNews = "idNews"
+    public static let mOldBuildNumber = "oldbn"
+    public static let mUserDefComp = "comp"
     
 }
