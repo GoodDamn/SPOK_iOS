@@ -186,7 +186,10 @@ class HomeViewController
                 return
             }
             
-            let cell = cel as! SheepViewCell
+            guard let cell = cel as? SheepViewCell else {
+                return
+            }
+            
             cell.backgroundColor = .clear
             
             cell.mBtnBegin?
@@ -290,17 +293,23 @@ extension HomeViewController
         label.sizeToFit()
         
         if cel as? SheepViewCell != nil {
-            (c as! CollectionRowView)
+            (c as? CollectionRowView)?
                 .setupView(cel)
             return cel
         }
         
-        let cell = cel as!
-            CollectionTableViewCell
+        guard let cell = cel as?
+                CollectionTableViewCell else {
+            return UITableViewCell()
+        }
         
-        let colview = cell.collectionView!
+        guard let colview = cell.collectionView else {
+            return UITableViewCell()
+        }
         
-        let coll = c as! CollectionTopic
+        guard let coll = c as? CollectionTopic else {
+            return UITableViewCell()
+        }
         
         cell.selectionStyle = .none;
         

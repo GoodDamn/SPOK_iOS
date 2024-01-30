@@ -168,7 +168,38 @@ class PreviewCell
         
     }
     
-    public func calculateBounds() {
+    public func load(
+        type: CardType,
+        id: Int
+    ) {
+        mId = id
+        mType = type
+                
+        if mCache?.object != nil {
+            show()
+            return
+        }
+        
+        if mCache == nil {
+            
+            let localp = StorageApp
+                .previewUrl(
+                    id: mId,
+                    type: mType
+                )
+            
+            mCache = CacheData(
+                pathStorage: "Trainings/\(id)/\(type).spc",
+                localPath: localp
+            )
+                
+            mCache!.delegate = self
+        }
+        
+        mCache?.load()
+    }
+    
+    private func calculateBounds() {
         
         print(
             PreviewCell.TAG,
@@ -225,37 +256,6 @@ class PreviewCell
         mCalculated = true
     }
     
-    public func load(
-        type: CardType,
-        id: Int
-    ) {
-        mId = id
-        mType = type
-                
-        if mCache?.object != nil {
-            show()
-            return
-        }
-        
-        if mCache == nil {
-            
-            let localp = StorageApp
-                .previewUrl(
-                    id: mId,
-                    type: mType
-                )
-            
-            mCache = CacheData(
-                pathStorage: "Trainings/\(id)/\(type).spc",
-                localPath: localp
-            )
-                
-            mCache!.delegate = self
-        }
-        
-        mCache?.load()
-    }
-    
     private func show() {
         
         guard let fileSPC = mCache?.object else {
@@ -296,8 +296,8 @@ class PreviewCell
         
         UIView.animate(
             withDuration: 0.75
-        ) {
-            self.contentView.alpha = 1.0
+        ) { [weak self] in
+            self?.contentView.alpha = 1.0
         }
         
     }
@@ -323,8 +323,8 @@ extension PreviewCell
         
         DispatchQueue
             .main
-            .async {
-                self.show()
+            .async { [weak self] in
+                self?.show()
             }
         
     }
