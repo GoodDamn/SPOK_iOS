@@ -294,8 +294,13 @@ class MainContentViewController
             return
         }
         
+        let type = snap.childSnapshot(
+            forPath: "i"
+        ).value as? Int ?? 0
+        
         let popup = PopupNewsViewController()
         popup.title = title
+        popup.msgType = type
         popup.msgDescription = desc
         popup.msgID = currentId
         popup.view.alpha = 0

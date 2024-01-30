@@ -36,9 +36,7 @@ class PopupNewsViewController
             size: h * 0.02
         )
         
-        
-        let mLeft = 0.1 * w
-        let wcontent = w - mLeft*2
+        let mLeft = 0.08 * w
         
         let btnClose = ViewUtils
             .buttonClose(
@@ -58,7 +56,7 @@ class PopupNewsViewController
             frame: CGRect(
                 x: mLeft,
                 y: mInsets.top == 0 ?
-                    h * 0.03
+                    h * 0.07
                     : mInsets.top,
                 width: btnClose.frame.origin.x - mLeft,
                 height: 1
@@ -94,7 +92,7 @@ class PopupNewsViewController
         view.addSubview(lTitle)
         view.addSubview(lDesc)
         
-        let mBottom = h * 0.04
+        let mBottom = h * 0.04 + mInsets.bottom
         
         if msgType <= 1 {
             
