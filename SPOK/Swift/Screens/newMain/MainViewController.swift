@@ -122,7 +122,6 @@ class MainViewController
                 c.view.alpha = 1.0
             }
             
-            
             return;
         }
         

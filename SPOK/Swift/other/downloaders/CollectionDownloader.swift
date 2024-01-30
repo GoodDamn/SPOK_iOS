@@ -123,6 +123,13 @@ class CollectionDowloader
             
             var i = b
             while i < a {
+                
+                
+                s.mCacheCollections
+                    .a
+                    .remove(
+                        at: i
+                    )
                 s.delegateCollection!.onRemove(
                     i: i
                 )
@@ -132,6 +139,11 @@ class CollectionDowloader
             i = a
             
             while i < b {
+                s.mCacheCollections
+                    .a
+                    .append(
+                        s.mNetCollections[i]
+                    )
                 s.delegateCollection!
                     .onAdd(
                         i: i

@@ -23,7 +23,6 @@ class StorageApp {
     public static let mDirPreviews = "preview"
     public static let mDirContent = "content"
     
-    
     public static func bundleFile(
         r: String?, exten: String?
     ) -> Data? {
@@ -80,13 +79,31 @@ class StorageApp {
             .timeIntervalSince1970 ?? 0;
     }
     
+    public static func deleteCollection(
+        id: Int,
+        lang: String = ""
+    ) {
+        delete(
+            mDirCollection,
+            toscs(
+                id: id,
+                lang: lang
+            )
+        )
+    }
+    
     public static func contentUrl(
         id: Int,
         lang: String = ""
     ) -> URL {
         return rootPath(
             append: mDirContent
-        ).append("\(id)\(lang).skc")
+        ).append(
+            toskc(
+                id: id,
+                lang: lang
+            )
+        )
     }
     
     public static func content(
@@ -107,7 +124,10 @@ class StorageApp {
         data: inout Data?
     ) {
         StorageApp.save(
-            file: "\(id)\(lang).skc",
+            file: toskc(
+                id: id,
+                lang: lang
+            ),
             root: mDirContent,
             data: &data
         )
@@ -121,7 +141,11 @@ class StorageApp {
         return rootPath(
             append: mDirPreviews
         ).append(
-            "\(id)\(type.rawValue)\(lang).spc"
+            tospc(
+                id: id,
+                type: type,
+                lang: lang
+            )
         )
     }
     
@@ -154,7 +178,11 @@ class StorageApp {
         data: inout Data?
     ) {
         StorageApp.save(
-            file: "\(id)\(type.rawValue)\(lang).spc",
+            file: tospc(
+                id: id,
+                type: type,
+                lang: lang
+            ),
             root: mDirPreviews,
             data: &data
         )
@@ -194,7 +222,10 @@ class StorageApp {
     ) -> FileSCS? {
         return collection(
             dir,
-            fileName: "\(id)\(lang).scs"
+            fileName: toscs(
+                id: id,
+                lang: lang
+            )
         )
     }
     
@@ -205,7 +236,10 @@ class StorageApp {
         data: inout Data?
     ) {
         save(
-            file: "\(id)\(lang).scs",
+            file: toscs(
+                id: id,
+                lang: lang
+            ),
             root: "\(mDirCollection)/\(dir)",
             data: &data
         )
@@ -251,6 +285,20 @@ class StorageApp {
         }
     }
     
+    public static func toskc(
+        id: Int,
+        lang: String = ""
+    ) -> String {
+        return "\(id)\(lang).skc"
+    }
+    
+    public static func toscs(
+        id: Int,
+        lang: String = ""
+    ) -> String {
+        return "\(id)\(lang).scs"
+    }
+    
     public static func tospc(
         id: Int,
         type: CardType,
@@ -288,6 +336,19 @@ class StorageApp {
             .fileExists(
                 atPath: path
             )
+    }
+    
+    public static func delete(
+        _ dir: String,
+        _ file: String
+    ) {
+        let path = rootPath(
+            append: dir
+        ).append(file)
+        
+        try? FileManager
+            .default
+            .removeItem(at: path)
     }
     
     private static func mkfile(

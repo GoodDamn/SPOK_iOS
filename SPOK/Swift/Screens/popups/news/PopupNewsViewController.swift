@@ -11,6 +11,7 @@ import UIKit
 class PopupNewsViewController
     : StackViewController {
     
+    var msgType: Int = 1
     var msgID: Int = -1
     var msgDescription: String = ""
     
@@ -92,6 +93,63 @@ class PopupNewsViewController
         view.addSubview(lDesc)
         view.addSubview(btnClose)
         
+        
+        if msgType <= 1 {
+            let btnOk = ViewUtils
+                .button(
+                    text: "Хорошо"
+                )
+            LayoutUtils
+                .button(
+                    for: btnOk,
+                    view.frame,
+                    y: 0,
+                    width: 0.7,
+                    height: 0.1,
+                    textSize: 0.35
+                )
+            
+            view.addSubview(
+                btnOk
+            )
+        }
+        
+        if msgType >= 1 && msgType <= 2 {
+            let btnUpdate = ViewUtils
+                .button(
+                    text: "Обновить приложение"
+                )
+            
+            LayoutUtils
+                .button(
+                    for: btnUpdate,
+                    view.frame,
+                    y: 0,
+                    width: 0.7,
+                    height: 0.1,
+                    textSize: 0.3
+                )
+            
+            let v = view.subviews[ // >= 3
+                view.subviews.count - 1
+            ]
+            
+            let wb = (v as? UIButton)?.frame.height ?? 0
+            let mBottom = h * 0.04
+            
+            btnUpdate.frame.origin.y =
+                h - wb + mBottom + btnUpdate.frame.height
+            
+            view.addSubview(
+                btnUpdate
+            )
+        }
+        
+        
+    }
+    
+    
+    private func markAsRead() {
         let def = UserDefaults.standard
         def.setValue(
             msgID,
