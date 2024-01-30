@@ -38,11 +38,27 @@ class PopupNewsViewController
         let mLeft = 0.1 * w
         let wcontent = w - mLeft*2
         
+        let btnClose = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.08
+            )
+        
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
+        
         let lTitle = UILabela(
             frame: CGRect(
                 x: mLeft,
-                y: mInsets.top,
-                width: wcontent,
+                y: mInsets.top == 0 ?
+                    h * 0.03
+                    : mInsets.top,
+                width: btnClose.frame.origin.x - mLeft,
                 height: 1
             )
         )
@@ -61,7 +77,7 @@ class PopupNewsViewController
             frame: CGRect(
                 x: mLeft,
                 y: lTitle.frame.bottom(),
-                width: wcontent,
+                width: lTitle.frame.width,
                 height: h - lTitle.frame.bottom()
             )
         )
@@ -72,23 +88,14 @@ class PopupNewsViewController
         lDesc.textColor = .white
         lDesc.backgroundColor = .clear
         
-        
-        let btnClose = ViewUtils
-            .buttonClose(
-                in: view,
-                sizeSquare: 0.08
-            )
-        
-        btnClose.addTarget(
-            self,
-            action: #selector(
-                onClickBtnClose(_:)
-            ),
-            for: .touchUpInside
-        )
-        
         view.addSubview(lTitle)
         view.addSubview(lDesc)
         view.addSubview(btnClose)
+        
+        let def = UserDefaults()
+        def.setValue(
+            msgID,
+            forKey: KeyUtils.mIdNews
+        )
     }
 }

@@ -256,7 +256,7 @@ class MainContentViewController
         
         let def = UserDefaults()
         let lastId = def.integer(
-            forKey: "idNews"
+            forKey: KeyUtils.mIdNews
         )
         
         let currentId = lastId + 1
