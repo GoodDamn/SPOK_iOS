@@ -11,6 +11,7 @@ import UIKit
 class PopupNewsViewController
     : StackViewController {
     
+    var msgID: Int = -1
     var msgDescription: String = ""
     
     override func viewDidLoad() {
@@ -20,18 +21,19 @@ class PopupNewsViewController
             named: "background"
         )
         
+        let w = view.frame.width
+        let h = view.frame.height
+        
         let extraBold = UIFont(
             name: "OpenSans-ExtraBold",
-            size: 1
+            size: h * 0.05
         )
         
         let semiBold = UIFont(
             name: "OpenSans-SemiBold",
-            size: 1
+            size: h * 0.02
         )
         
-        let w = view.frame.width
-        let h = view.frame.height
         
         let mLeft = 0.1 * w
         let wcontent = w - mLeft*2
@@ -48,8 +50,9 @@ class PopupNewsViewController
         lTitle.text = title
         lTitle.font = extraBold
         lTitle.textColor = .white
-        lTitle.backgroundColor = .red
+        lTitle.backgroundColor = .clear
         lTitle.lineHeight = 0.83
+        lTitle.numberOfLines = 0
         lTitle.attribute()
         
         lTitle.sizeToFit()
@@ -67,10 +70,25 @@ class PopupNewsViewController
         lDesc.text = msgDescription
         lDesc.font = semiBold
         lDesc.textColor = .white
-        lDesc.backgroundColor = .gray
+        lDesc.backgroundColor = .clear
+        
+        
+        let btnClose = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.08
+            )
+        
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
         
         view.addSubview(lTitle)
         view.addSubview(lDesc)
+        view.addSubview(btnClose)
     }
-    
 }

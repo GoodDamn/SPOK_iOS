@@ -40,7 +40,7 @@ class BaseTopicController
         mScriptReader!.next()
     }
     
-    @objc func onClickBtnClose(
+    @objc override func onClickBtnClose(
         _ sender: UIButton
     ) {
         sender.isEnabled = false

@@ -101,7 +101,7 @@ class MainContentViewController
     }*/
     
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
         
         print(tag, "viewDidLoad()")
         
@@ -203,6 +203,9 @@ class MainContentViewController
         )
         
         view.addSubview(mNavBar);
+        
+        checkPopupNews()
+        
      }
     
     override func viewDidLayoutSubviews() {
@@ -234,16 +237,74 @@ class MainContentViewController
             weight: .regular,
             scale: .medium
         )
+        
         iv.setImage(
             UIImage(
                 systemName: systemNameImage,
                 withConfiguration: config
             ),
             for: .normal
-        )// person.fill | house
+        )
         iv.tintColor = .lightGray;
         iv.backgroundColor = .clear;
         
         mNavBar.addTab(iv);
     }
+    
+    
+    private func checkPopupNews() {
+        
+        let def = UserDefaults()
+        let lastId = def.integer(
+            forKey: "idNews"
+        )
+        
+        let currentId = lastId + 1
+        
+        let buildNumber = MainViewController
+            .mBuildNumber
+        
+        let ref = mDatabase
+            .reference(
+                withPath: "NEWS_NOTIFY/i/\(buildNumber)/\(currentId)"
+            )
+        
+        ref.observeSingleEvent(
+            of: .value
+        ) { [weak self] snap in
+            self?.checkNews(
+                snap,
+                currentId: currentId
+            )
+        }
+        
+    }
+    
+    private func checkNews(
+        _ snap: DataSnapshot,
+        currentId: Int
+    ) {
+        let title = snap.childSnapshot(
+            forPath: "t"
+        ).value as? String
+        
+        guard let desc = snap.childSnapshot(
+            forPath: "d"
+        ).value as? String else {
+            return
+        }
+        
+        let popup = PopupNewsViewController()
+        popup.title = title
+        popup.msgDescription = desc
+        popup.msgID = currentId
+        popup.view.alpha = 0
+        push(
+            popup,
+            animDuration: 0.4
+        ) {
+            popup.view.alpha = 1
+        }
+    }
+    
 }

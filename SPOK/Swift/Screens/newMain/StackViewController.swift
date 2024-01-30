@@ -88,6 +88,14 @@ class StackViewController
         )
     }
     
+    open func popBaseAnim() {
+        pop(
+            duration: 0.3
+        ) { [weak self] in
+            self?.view.alpha = 0
+        }
+    }
+    
     open func pop(
         at: Int,
         duration: TimeInterval? = nil,
@@ -98,6 +106,12 @@ class StackViewController
             duration: duration,
             animate: animate
         )
+    }
+    
+    @objc func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        popBaseAnim()
     }
     
 }

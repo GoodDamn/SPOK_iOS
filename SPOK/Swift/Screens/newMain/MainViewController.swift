@@ -12,7 +12,9 @@ import Network
 class MainViewController
 : UIViewController {
     
-    public static var mIsConnected: Bool = false
+    public static var mIsConnected = false
+    
+    public static var mBuildNumber = -1
     
     public static var mCardSizeB: CGSize!
     public static var mCardSizeM: CGSize!
@@ -65,17 +67,15 @@ class MainViewController
               "M:", MainViewController.mCardTextSizeM
         )
         
-        /*
+        if let buildNum = Bundle
+            .main
+            .infoDictionary?["CFBundleVersion"]
+            as? String {
+            
+            MainViewController
+                .mBuildNumber = Int(buildNum) ?? -1
+        }
          
-         let buildNumber = Int(Bundle
-         .main
-         .infoDictionary?["CFBundleVersion"]
-         as? String ?? "25"
-         ) ?? 25;
-         
-         print(self.tag, "BUILD NUMBER:",buildNumber);
-         
-         );*/
         
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = {
