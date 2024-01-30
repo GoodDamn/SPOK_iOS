@@ -111,6 +111,7 @@ class StackViewController
     @objc func onClickBtnClose(
         _ sender: UIButton
     ) {
+        sender.isEnabled = false
         popBaseAnim()
     }
     

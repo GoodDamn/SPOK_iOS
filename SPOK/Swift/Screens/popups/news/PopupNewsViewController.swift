@@ -7,11 +7,12 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 class PopupNewsViewController
     : StackViewController {
     
-    var msgType: Int = 1
+    var msgType: Int = 0
     var msgID: Int = -1
     var msgDescription: String = ""
     
@@ -88,13 +89,17 @@ class PopupNewsViewController
         lDesc.font = semiBold
         lDesc.textColor = .white
         lDesc.backgroundColor = .clear
+        lDesc.isUserInteractionEnabled = false
         
         view.addSubview(lTitle)
         view.addSubview(lDesc)
-        view.addSubview(btnClose)
         
+        let mBottom = h * 0.04
         
         if msgType <= 1 {
+            
+            view.addSubview(btnClose)
+            
             let btnOk = ViewUtils
                 .button(
                     text: "Хорошо"
@@ -105,49 +110,106 @@ class PopupNewsViewController
                     view.frame,
                     y: 0,
                     width: 0.7,
-                    height: 0.1,
+                    height: 0.05,
                     textSize: 0.35
                 )
+            
+            btnOk.frame.origin.y =
+                h - btnOk.frame.height - mBottom
+            
+            btnOk.addTarget(
+                self,
+                action: #selector(
+                    onClickBtnClose(
+                        _:
+                    )
+                ),
+                for: .touchUpInside
+            )
             
             view.addSubview(
                 btnOk
             )
         }
         
-        if msgType >= 1 && msgType <= 2 {
-            let btnUpdate = ViewUtils
-                .button(
-                    text: "Обновить приложение"
-                )
-            
-            LayoutUtils
-                .button(
-                    for: btnUpdate,
-                    view.frame,
-                    y: 0,
-                    width: 0.7,
-                    height: 0.1,
-                    textSize: 0.3
-                )
-            
-            let v = view.subviews[ // >= 3
-                view.subviews.count - 1
-            ]
-            
-            let wb = (v as? UIButton)?.frame.height ?? 0
-            let mBottom = h * 0.04
-            
-            btnUpdate.frame.origin.y =
-                h - wb + mBottom + btnUpdate.frame.height
-            
-            view.addSubview(
-                btnUpdate
-            )
+        if !(msgType >= 1 && msgType <= 2) {
+            return
         }
         
+        let btnUpdate = ViewUtils
+            .button(
+                text: "Обновить приложение"
+            )
+        
+        LayoutUtils
+            .button(
+                for: btnUpdate,
+                view.frame,
+                y: 0,
+                width: 0.7,
+                height: 0.05,
+                textSize: 0.35
+            )
+        
+        let v = view.subviews[ // >= 3
+            view.subviews.count - 1
+        ]
+        
+        let yyyy = v.frame.origin.y
+        
+        let yb = yyyy < h/2 ? h : yyyy
+        
+        print(
+            "Popup:",
+            yb,
+            h,
+            yyyy
+        )
+        
+        btnUpdate.frame.origin.y =
+            yb - btnUpdate.frame.height - h * 0.025
+        
+        btnUpdate.addTarget(
+            self,
+            action: #selector(
+                onClickBtnUpdate(
+                    _:
+                )
+            ),
+            for: .touchUpInside
+        )
+        
+        view.addSubview(
+            btnUpdate
+        )
         
     }
     
+    @objc override func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        markAsRead()
+        super.onClickBtnClose(sender)
+    }
+    
+    @objc private func onClickBtnUpdate(
+        _ sender: UIButton
+    ) {
+        
+        let vc = SKStoreProductViewController();
+        
+        vc.loadProduct(
+            withParameters: [
+                SKStoreProductParameterITunesItemIdentifier: NSNumber(
+                    value: 6443976042
+                )
+            ], completionBlock: nil)
+        
+        present(
+            vc,
+            animated: true
+        )
+    }
     
     private func markAsRead() {
         let def = UserDefaults.standard
@@ -156,4 +218,5 @@ class PopupNewsViewController
             forKey: KeyUtils.mIdNews
         )
     }
+    
 }
