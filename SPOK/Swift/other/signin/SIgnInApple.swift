@@ -1,25 +1,25 @@
 //
-//  SIgnInWithAppleDelegate.swift
+//  SignInWithAppleDelegate.swift
 //  SPOK
 //
 //  Created by Cell on 27.10.2022.
 //
 
 import AuthenticationServices;
-import FirebaseCore;
-import FirebaseAuth;
 
-class SignInWithAppleDelegate
+class SignInApple
     : NSObject,
       ASAuthorizationControllerDelegate,
       ASAuthorizationControllerPresentationContextProviding {
     
-    private var mNonce:String = "";
+    private var mNonce = "";
     
+    weak var mListener: SignInAppleListener? = nil
         
-    func run() {
+    func start() {
         
-        mNonce = Crypt.randomNonce()
+        mNonce = Crypt
+            .randomNonce()
         
         let request = ASAuthorizationAppleIDProvider()
             .createRequest()
@@ -52,7 +52,9 @@ class SignInWithAppleDelegate
         controller: ASAuthorizationController,
         didCompleteWithError error: Error
     ) {
-        
+        mListener?.onError(
+            error.localizedDescription
+        )
     }
     
     func authorizationController(
@@ -81,33 +83,7 @@ class SignInWithAppleDelegate
                 forKey: Utils.givenName
             )
             
-            let auth = Auth.auth();
-            
-            let cred = OAuthProvider
-                .credential(
-                    withProviderID: "apple.com",
-                    idToken: token,
-                    rawNonce: mNonce
-            )
-            
-            
-            auth.signIn(
-                with: cred
-            ) { (authResult, error) in
-                if error != nil{
-                    print(error);
-                    return;
-                }
-                
-                if let id = auth.currentUser?.uid
-                {
-                    userDef.setValue(
-                        id,
-                        forKey: Utils.userRef
-                    )
-                    
-                }
-            }
+            mListener?.onSuccess()
             
         default:
             break
@@ -119,6 +95,14 @@ class SignInWithAppleDelegate
     func presentationAnchor(
         for controller: ASAuthorizationController
     ) -> ASPresentationAnchor {
-        return view.window!
+        
+        return mListener?
+            .onAnchor()
+            .window
+        
+        ?? ASPresentationAnchor
+            .init(
+                frame: .zero
+            )
     }
 }
