@@ -8,7 +8,7 @@
 import UIKit;
 import FirebaseDatabase;
 
-class Utils{
+class Utils {
     
     private static let tag = "Utils:";
     
@@ -30,13 +30,8 @@ class Utils{
         "1726540389",
     ];
     
-    public static func moveToAnotherViewController(_ viewController: UIViewController, animation: UIView.AnimationOptions){
-        let window = UIApplication.shared.windows[0] as UIWindow;
-        window.rootViewController = viewController;
-        UIView.transition(with: window, duration: 0.65, options: animation, animations: nil, completion: nil);
-    }
-    
-    public static func mainNav() -> MainNavigationController {
+    public static func mainNav(
+    ) -> MainNavigationController {
         return UIApplication
             .shared
             .windows[0]
@@ -44,13 +39,15 @@ class Utils{
             as! MainNavigationController
     }
     
-    public static func main() -> MainViewController {
+    public static func main(
+    ) -> MainViewController {
         return mainNav()
             .viewControllers[0]
             as! MainViewController
     }
     
-    public static func insets() -> UIEdgeInsets {
+    public static func insets(
+    ) -> UIEdgeInsets {
         return UIApplication
             .shared
             .windows
@@ -58,8 +55,12 @@ class Utils{
             .safeAreaInsets ?? UIEdgeInsets.zero
     }
     
-    public static func configNotifications(center: UNUserNotificationCenter = UNUserNotificationCenter.current()){
-        center.requestAuthorization(options: [.sound, .alert], completionHandler: {
+    public static func configNotifications(
+        center: UNUserNotificationCenter = UNUserNotificationCenter.current()
+    ) {
+        center.requestAuthorization(
+            options: [.sound, .alert]
+        ) {
             (granted, error) in
             
             if let error = error {
@@ -114,53 +115,20 @@ class Utils{
                 }
             }
             
-        });
-        
-    }
-    
-    public static func getLocalizedString(_ key:String)->String{
-        return NSLocalizedString(key, tableName: "Localization", bundle: Bundle.main, value: "", comment: "");
-    }
-    
-    public static func setPrivacyAndTerms(tv_terms:UITextView, textColour:UIColor)-> Void{
-        
-        let terms = tv_terms.text!;
-        
-        var loc = terms.firstIndex(of: "\n");
-        var begin = 0;
-        
-        if (loc != nil){
-            begin = terms.distance(from: terms.startIndex, to: loc!)+1;
-        } else {
-            loc = terms.startIndex;
         }
         
-        let attrStr = NSMutableAttributedString(string: terms);
-        
-        attrStr.addAttributes([NSAttributedString.Key.font:UIFont(name: "OpenSans-SemiBold", size: tv_terms.font!.pointSize)!,
-            NSAttributedString.Key.foregroundColor:textColour],range: NSRange(location: 0, length: terms.count));
-        
-        let lang = ((Locale.current.languageCode ?? "ru")+"s").replacingOccurrences(of: "ens", with: "");
-        
-        print("setPrivacyAndTerms:",((Locale.current.languageCode ?? "ru")+"s").replacingOccurrences(of: "ens", with: ""), Locale.current.languageCode, (Locale.current.languageCode ?? "ru")+"s");
-        
-        var rang = NSRange(location: begin, length: terms.distance(from: loc!, to: terms.firstIndex(of: "&")!)-1);
-        
-        attrStr.addAttribute(.link, value: "https://sites.google.com/view/spokapp/"+lang+"terms", range: rang);
-        begin = rang.location+rang.length+2;
-        rang = NSRange(location: begin, length: terms.count-begin);
-        
-        attrStr.addAttribute(.link, value: "https://sites.google.com/view/spokapp/"+lang+"policy", range: rang);
-        
-        let parag = NSMutableParagraphStyle();
-        parag.alignment = .center;
-        
-        attrStr.addAttribute(.paragraphStyle, value: parag, range: NSRange(location: 0, length: terms.count-1));
-        
-        tv_terms.linkTextAttributes = [NSAttributedString.Key.foregroundColor: textColour,
-            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue];
-        tv_terms.attributedText = attrStr;
-        
+    }
+    
+    public static func getLocalizedString(
+        _ key:String
+    ) -> String {
+        return NSLocalizedString(
+            key,
+            tableName: "Localization",
+            bundle: Bundle.main,
+            value: "",
+            comment: ""
+        )
     }
     
     static func getLanguageCode()->String{
@@ -182,72 +150,26 @@ class Utils{
         gesture.require(toFail: double);
         
     }
+
     
-    static func downloadFile(http:String?,
-                             asyncExec: ((Data)->Void)? = nil,
-                             background: ((Data)->Void)? = nil,
-                             onError: (()->Void)? = nil) {
-        if http == nil{
-            print(self, "Http address is nil");
-            onError?();
-            return;
-        }
+    public static func cropImage(
+        _ s:CGSize,
+        input:UIImage?
+    )->UIImage {
         
-        if let url = URL(string:http!){
-            URLSession.shared.dataTask(with: url, completionHandler: {
-                data,response,error in
-                guard let data = data, error == nil else{
-                    print(self, error);
-                    onError?();
-                    return;
-                }
-                background?(data);
-                
-                DispatchQueue.main.async {
-                    asyncExec?(data);
-                }
-            }).resume();
-        }
-    }
-    
-    static func downloadFile(http:String?,
-                             completion:@escaping((Data)->Void),
-                             onError: (()->Void)? = nil){
-        downloadFile(http: http, asyncExec: completion, onError: onError);
-    }
-    
-    public static func scaleFont(_ label:UILabel, increaseSize:CGFloat = 0.0)->Void{
-        label.font = UIFont(name: label.font.fontName, size: label.font.pointSize * UIScreen.main.nativeScale/3 + UIScreen.main.nativeScale + increaseSize);
-    }
-    
-    public static func convertHex(
-        _ s:String
-    ) -> UIColor {
-        
-        let hex: String = s
-            .trimmingCharacters(
-                in: CharacterSet
-                    .whitespacesAndNewlines
-            );
-        let scanner = Scanner(string: hex);
-        scanner.scanLocation = 1;
-        
-        var color: UInt32 = 0;
-        scanner.scanHexInt32(&color);
-        
-        let mask = 0x000000FF;
-        return UIColor(red: CGFloat(Int(color >> 16) & mask)/255.0,
-                       green: CGFloat(Int(color >> 8) & mask)/255.0,
-                       blue: CGFloat(Int(color) & mask)/255.0,
-                       alpha: CGFloat(color >> 24)/255.0);
-    }
-    
-    public static func cropImage(_ s:CGSize, input:UIImage?)->UIImage{
         if input == nil{
             return UIImage();
         }
         
-        let croppedimg = input?.cgImage?.cropping(to: CGRect(origin: .zero, size: s));
+        let croppedimg = input?
+            .cgImage?
+            .cropping(
+                to: CGRect(
+                    origin: .zero,
+                    size: s
+                )
+            )
+        
         if croppedimg == nil{
             return UIImage();
         }
@@ -262,56 +184,17 @@ class Utils{
         
         var i = image;
         UIGraphicsBeginImageContext(s);
-        i.draw(in: CGRect(origin: .zero, size: s));
-        i = UIGraphicsGetImageFromCurrentImageContext()!;
-        UIGraphicsEndImageContext();
+        i.draw(
+            in: CGRect(
+                origin: .zero,
+                size: s)
+        )
+        i = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
         return i;
     }
     
-    public static func convertPathToUIImage(imageSize s:CGSize, path:UIBezierPath, tint: UIColor)->UIImage{
-        let layer = CAShapeLayer();
-        layer.path = path.cgPath;
-        layer.fillColor = tint.cgColor;
-        return convertCAToUIImage(s, layer: layer);
-    }
-    
-    public static func convertCAToUIImage(_ s:CGSize, layer: CAShapeLayer)->UIImage{
-        UIGraphicsBeginImageContext(s);
-        layer.render(in: UIGraphicsGetCurrentContext()!);
-        let i = UIGraphicsGetImageFromCurrentImageContext()!;
-        UIGraphicsEndImageContext();
-        return i;
-    }
-    
-    public static func setBackButton(_ b_close:CGRect, isLeftArrow:Bool)->CAShapeLayer{
-        let arrow = CAShapeLayer();
-        let path = UIBezierPath();
-        
-        var p1:CGPoint,p:CGPoint;
-        
-        if (isLeftArrow){
-            p1 = CGPoint(x: b_close.width*0.85, y: b_close.height*0.7);
-            path.move(to: p1);
-            p = CGPoint(x: b_close.width*0.65, y: b_close.height/2);
-        } else {
-            p1 = CGPoint(x: b_close.width*0.15, y: b_close.height*0.7);
-            path.move(to: p1);
-            p = CGPoint(x: b_close.width*0.35, y: b_close.height/2);
-        }
-        
-        path.addLine(to: p);
-        path.move(to: p);
-        path.addLine(to: CGPoint(x: p1.x, y: b_close.height-p1.y));
-        
-        arrow.path = path.cgPath;
-        arrow.lineWidth = 2.6;
-        arrow.lineCap = .round;
-        arrow.lineJoin = .round;
-        arrow.strokeColor = UIColor(named: "nothing_here")?.cgColor;
-        
-        return arrow;
-    }
-    
+ 
     class Exten {
         
         static func getSPCFile(
@@ -472,19 +355,5 @@ class Utils{
         }
     }
     
-    class Design{
-        static func roundedButton(_ b: UIButton){
-            b.layer.shadowColor = UIColor(named: "AccentColor")?.cgColor;
-            b.layer.shadowOpacity = 0.2;
-            b.layer.cornerRadius = b.bounds.height/2;
-            b.layer.shadowOffset = CGSize(width: 0, height:0);
-        }
-        
-        static func barButton(_ nc:UINavigationController?, _ title:String){
-            let item = UIBarButtonItem();
-            item.title = title;
-            item.tintColor = UIColor(named: "AccentColor");
-            nc?.navigationBar.topItem?.backBarButtonItem = item;
-        }
-    }
+    
 }

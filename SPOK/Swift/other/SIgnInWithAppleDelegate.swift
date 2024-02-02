@@ -6,18 +6,20 @@
 //
 
 import AuthenticationServices;
+import FirebaseCore;
 import FirebaseAuth;
 
-class SignInWithAppleDelegate {
+class SignInWithAppleDelegate
+    : NSObject,
+      ASAuthorizationControllerDelegate,
+      ASAuthorizationControllerPresentationContextProviding {
     
-    var nonce:String = "";
+    private var mNonce:String = "";
     
-    func run(
-        presentation: ASAuthorizationControllerPresentationContextProviding,
-        controllerDelegate: ASAuthorizationControllerDelegate
-    ) {
-        print(self, "Apple auth")
-        nonce = SignInViewController.randomNonceString();
+        
+    func run() {
+        
+        mNonce = Crypt.randomNonce()
         
         let request = ASAuthorizationAppleIDProvider()
             .createRequest()
@@ -27,9 +29,9 @@ class SignInWithAppleDelegate {
             .email
         ]
         
-        request.nonce = SignInViewController
+        request.nonce = Crypt
             .sha256(
-                nonce
+                mNonce
             )
         
         let authController = ASAuthorizationController(
@@ -37,28 +39,29 @@ class SignInWithAppleDelegate {
                 request
             ]
         )
-        authController.delegate = controllerDelegate
+        authController.delegate = self
         
         authController
-            .presentationContextProvider = presentation
+            .presentationContextProvider = self
         
         authController.performRequests()
     }
     
-    func errorSignIn(
+    
+    func authorizationController(
+        controller: ASAuthorizationController,
         didCompleteWithError error: Error
-    ) -> Void {
-        print("Apple auth error:", error);
+    ) {
+        
     }
     
-    func completeSignIn(
-        didCompleteWithAuthorization authorization: ASAuthorization,
-        errorTrig: (()->Void)?,
-        completionSignIn: @escaping (()->Void)
-    ) -> Void {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         
-        print(self, authorization.credential);
         switch authorization.credential {
+        
         case let appleID as ASAuthorizationAppleIDCredential:
             let idApple = appleID.user;
             let fullName = appleID.fullName;
@@ -84,7 +87,7 @@ class SignInWithAppleDelegate {
                 .credential(
                     withProviderID: "apple.com",
                     idToken: token,
-                    rawNonce: nonce
+                    rawNonce: mNonce
             )
             
             
@@ -93,7 +96,6 @@ class SignInWithAppleDelegate {
             ) { (authResult, error) in
                 if error != nil{
                     print(error);
-                    errorTrig?();
                     return;
                 }
                 
@@ -103,12 +105,20 @@ class SignInWithAppleDelegate {
                         id,
                         forKey: Utils.userRef
                     )
-                    completionSignIn()
+                    
                 }
             }
             
         default:
             break
         }
+
+        
+    }
+    
+    func presentationAnchor(
+        for controller: ASAuthorizationController
+    ) -> ASPresentationAnchor {
+        return view.window!
     }
 }
