@@ -46,6 +46,16 @@
 		256940962B6672620005BFCC /* UILabela.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940952B6672610005BFCC /* UILabela.swift */; };
 		256940982B676A040005BFCC /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256940972B676A040005BFCC /* Cache.swift */; };
 		2569409B2B6772B40005BFCC /* CacheDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569409A2B6772B40005BFCC /* CacheDir.swift */; };
+		257A7FA82B6CE1B300BBEF5E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7F9C2B6CE1B300BBEF5E /* Status.swift */; };
+		257A7FA92B6CE1B300BBEF5E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7F9E2B6CE1B300BBEF5E /* Currency.swift */; };
+		257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA02B6CE1B300BBEF5E /* Keys.swift */; };
+		257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA12B6CE1B300BBEF5E /* HttpUtils.swift */; };
+		257A7FAC2B6CE1B300BBEF5E /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */; };
+		257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */; };
+		257A7FAE2B6CE1B300BBEF5E /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA52B6CE1B300BBEF5E /* Payment.swift */; };
+		257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */; };
+		257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */; };
+		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259185382B5D8649001CFD7A /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 259185372B5D8649001CFD7A /* sheep_m.mp3 */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
@@ -157,6 +167,16 @@
 		256940952B6672610005BFCC /* UILabela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabela.swift; sourceTree = "<group>"; };
 		256940972B676A040005BFCC /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		2569409A2B6772B40005BFCC /* CacheDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDir.swift; sourceTree = "<group>"; };
+		257A7F9C2B6CE1B300BBEF5E /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		257A7F9E2B6CE1B300BBEF5E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		257A7FA02B6CE1B300BBEF5E /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		257A7FA12B6CE1B300BBEF5E /* HttpUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpUtils.swift; sourceTree = "<group>"; };
+		257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSnapshot.swift; sourceTree = "<group>"; };
+		257A7FA52B6CE1B300BBEF5E /* Payment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProcess.swift; sourceTree = "<group>"; };
+		257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
+		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259185372B5D8649001CFD7A /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sheep_m.mp3; path = ../aduio/sheep_m.mp3; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
@@ -388,6 +408,85 @@
 				2569409A2B6772B40005BFCC /* CacheDir.swift */,
 			);
 			path = dir;
+			sourceTree = "<group>";
+		};
+		257A7F992B6CE1B300BBEF5E /* payment */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F9A2B6CE1B300BBEF5E /* enums */,
+				257A7F9F2B6CE1B300BBEF5E /* utils */,
+				257A7FA22B6CE1B300BBEF5E /* models */,
+				257A7FA62B6CE1B300BBEF5E /* process */,
+			);
+			path = payment;
+			sourceTree = "<group>";
+		};
+		257A7F9A2B6CE1B300BBEF5E /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F9B2B6CE1B300BBEF5E /* status */,
+				257A7F9D2B6CE1B300BBEF5E /* currency */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		257A7F9B2B6CE1B300BBEF5E /* status */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F9C2B6CE1B300BBEF5E /* Status.swift */,
+			);
+			path = status;
+			sourceTree = "<group>";
+		};
+		257A7F9D2B6CE1B300BBEF5E /* currency */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F9E2B6CE1B300BBEF5E /* Currency.swift */,
+			);
+			path = currency;
+			sourceTree = "<group>";
+		};
+		257A7F9F2B6CE1B300BBEF5E /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FA02B6CE1B300BBEF5E /* Keys.swift */,
+				257A7FA12B6CE1B300BBEF5E /* HttpUtils.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		257A7FA22B6CE1B300BBEF5E /* models */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */,
+				257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */,
+				257A7FA52B6CE1B300BBEF5E /* Payment.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		257A7FA62B6CE1B300BBEF5E /* process */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */,
+			);
+			path = process;
+			sourceTree = "<group>";
+		};
+		257A7FB02B6CE1F100BBEF5E /* payment */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */,
+			);
+			path = payment;
+			sourceTree = "<group>";
+		};
+		257A7FB32B6CF3F700BBEF5E /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		259FE6122B623DA400E237B7 /* enums */ = {
@@ -659,6 +758,7 @@
 		2BA1025B276A5FFD00EB5B8C /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				257A7FB32B6CF3F700BBEF5E /* extensions */,
 				2507D2D42B467EBE00656C0B /* SPOKContentEngine */,
 				2507D2CD2B45D43200656C0B /* utils */,
 				25D5E4A72A69A47800A3126B /* views */,
@@ -674,6 +774,7 @@
 		2BA1025C276A602300EB5B8C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				257A7FB02B6CE1F100BBEF5E /* payment */,
 				25D32DDF2B6901F800EAEA20 /* pagers */,
 				25D32DDE2B6901E300EAEA20 /* signin */,
 				25D32DD62B68D67A00EAEA20 /* popups */,
@@ -689,6 +790,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				257A7F992B6CE1B300BBEF5E /* payment */,
 				25DB9A762B53BD3D00B5359F /* models */,
 				259FE6122B623DA400E237B7 /* enums */,
 				25C455C62B5BF8D400AF54B1 /* cache */,
@@ -948,11 +1050,13 @@
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
 				25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */,
 				25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */,
+				257A7FAC2B6CE1B300BBEF5E /* PaymentInfo.swift in Sources */,
 				259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
 				2569409B2B6772B40005BFCC /* CacheDir.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
+				257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */,
 				25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */,
@@ -961,6 +1065,7 @@
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
 				383AF7AF2875B17400859090 /* StorageApp.swift in Sources */,
 				256940912B660EDE0005BFCC /* CacheData.swift in Sources */,
+				257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */,
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
 				25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */,
@@ -982,12 +1087,15 @@
 				259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */,
 				25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */,
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
+				257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */,
 				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
 				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
+				257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
 				25DB9A722B52BE9200B5359F /* SplashViewController.swift in Sources */,
+				257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */,
 				25D32DDB2B68EE9700EAEA20 /* KeyUtils.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				25D32DD92B68D69A00EAEA20 /* PopupNewsViewController.swift in Sources */,
@@ -997,17 +1105,21 @@
 				2B3DE5B9290BAC7600B00528 /* SIgnInWithAppleDelegate.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,
+				257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */,
+				257A7FA82B6CE1B300BBEF5E /* Status.swift in Sources */,
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,
 				25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */,
 				25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */,
 				25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */,
 				256940942B6614160005BFCC /* CacheProgressListener.swift in Sources */,
+				257A7FA92B6CE1B300BBEF5E /* Currency.swift in Sources */,
 				250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */,
 				250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */,
 				25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */,
 				2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */,
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,
 				2BA101CF2763EFC900EB5B8C /* SceneDelegate.swift in Sources */,
+				257A7FAE2B6CE1B300BBEF5E /* Payment.swift in Sources */,
 				2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */,
 				25F770D72B598C9100C62071 /* Particles.swift in Sources */,
 				2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */,

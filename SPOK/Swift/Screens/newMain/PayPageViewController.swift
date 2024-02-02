@@ -16,6 +16,14 @@ class PayPageViewController
     public var mOnStats: ((String)->Void)? = nil
     public var mOnBack: (()->Void)? = nil
     
+    private let mPayment = Payment(
+        price: 169.00,
+        currency: .rub,
+        description: "SPOK Подписка на 1 месяц"
+    )
+    
+    private var mPaymentProcess: PaymentProcess!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,53 +112,28 @@ class PayPageViewController
     ) {
         sender.isEnabled = false
         
-        let alert = UIAlertController(
-            title: "Ошибка.",
-            message: "Проблемы с произведением оплаты. Попробуйте позже.",
-            preferredStyle: .alert
+        mPaymentProcess = PaymentProcess(
+            payment: mPayment
         )
         
-        let action = UIAlertAction(
-            title: "Вернуться",
-            style: .default
-        ) { action in
-            // Analytics
-            self.mOnStats?("payPageBack")
-            self.mOnBack?()
+        mPaymentProcess.start { [weak self] snap in
+            
+            guard let s = self else {
+                return
+            }
+            
+            print(s.TAG, "PaymentStart:", snap)
+            
+            DispatchQueue.ui {
+                self?.pushConfirmPage(
+                    snap
+                )
+                
+                sender.isEnabled = true
+                self?.mPaymentProcess = nil
+            }
         }
         
-        alert.addAction(action)
-        
-        let alertProcess = UIAlertController(
-            title: "Минутку...",
-            message: "Обрабатываем запрос приложения",
-            preferredStyle: .alert)
-        
-        self.present(
-            alertProcess,
-            animated: true
-        )
-        
-        DispatchQueue
-            .main
-            .asyncAfter(
-                deadline: .now() + 2.5
-            ) {                alertProcess.dismiss(
-                    animated: true
-                ) {
-                    self.navigationController?.present(
-                        alert,
-                        animated: true
-                    )
-                    
-                    self.pop(
-                        duration: 0.5
-                    ) {
-                        self.view.alpha = 0
-                    }
-                }
-                
-            }
     }
     
     @objc func btnExitClick(
@@ -158,11 +141,74 @@ class PayPageViewController
     ) {
         sender.isEnabled = false
         mOnStats?("payPageExit")
-        pop(
-            duration: 0.5
-        ) {
-            self.view.alpha = 0
-        }
+        popBaseAnim()
     }
  
+    private func pushConfirmPage(
+        _ snap: PaymentSnapshot
+    ) {
+        let web = WebConfirmationViewController()
+        web.mPaymentSnap = snap
+        web.view.alpha = 0
+        
+        print(TAG, "pushConfirmPage")
+        
+        push(
+            web,
+            animDuration: 0.8
+        ) {
+            web.view.alpha = 1.0
+        }
+    }
+    
+    /*
+     let alert = UIAlertController(
+         title: "Ошибка.",
+         message: "Проблемы с произведением оплаты. Попробуйте позже.",
+         preferredStyle: .alert
+     )
+     
+     let action = UIAlertAction(
+         title: "Вернуться",
+         style: .default
+     ) { action in
+         // Analytics
+         self.mOnStats?("payPageBack")
+         self.mOnBack?()
+     }
+     
+     alert.addAction(action)
+     
+     let alertProcess = UIAlertController(
+         title: "Минутку...",
+         message: "Обрабатываем запрос приложения",
+         preferredStyle: .alert)
+     
+     self.present(
+         alertProcess,
+         animated: true
+     )
+     
+     DispatchQueue
+         .main
+         .asyncAfter(
+             deadline: .now() + 2.5
+         ) {                alertProcess.dismiss(
+                 animated: true
+             ) {
+                 self.navigationController?.present(
+                     alert,
+                     animated: true
+                 )
+                 
+                 self.pop(
+                     duration: 0.5
+                 ) {
+                     self.view.alpha = 0
+                 }
+             }
+             
+         }
+     */
+    
 }
