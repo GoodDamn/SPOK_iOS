@@ -80,10 +80,14 @@ class SignInApple
             
             userDef.setValue(
                 fullName?.givenName,
-                forKey: Utils.givenName
+                forKey: Keys.GIVEN_NAME
             )
             
-            mListener?.onSuccess()
+            mListener?.onSuccess(
+                token: token,
+                nonce: mNonce,
+                def: userDef
+            )
             
         default:
             break

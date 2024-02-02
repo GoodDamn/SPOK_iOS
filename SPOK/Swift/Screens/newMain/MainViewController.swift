@@ -81,7 +81,7 @@ class MainViewController
             MainViewController
                 .mBuildNumber = buildNumber
             
-            var oldbn = def.integer(
+            let oldbn = def.integer(
                 forKey: KeyUtils.mOldBuildNumber
             )
             
@@ -127,7 +127,7 @@ class MainViewController
         
         print("Intro is completed");
         
-        let splash = SplashViewController()
+        let splash = SignInViewController()
         splash.view.alpha = 0
         push(
             splash,
@@ -137,7 +137,8 @@ class MainViewController
         }
         
         
-        DispatchQueue
+        
+        /*DispatchQueue
             .main
             .asyncAfter(
                 deadline: .now() + 2.5
@@ -153,7 +154,7 @@ class MainViewController
                 ) { b in
                     self.pop(at: 0)
                 }
-            }
+            }*/
     }
     
     public func pusht(

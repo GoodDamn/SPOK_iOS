@@ -12,23 +12,6 @@ class Utils {
     
     private static let tag = "Utils:";
     
-    public static let mDate = Date();
-
-    public static let mSTATS = true;
-    
-    public static let mKEY_CHECKLIST_COUNT = "cl";
-    public static let mKEY_GOT_CHECKLIST = "gl";
-    public static let mEChild = "Errors/iOS";
-    
-    public static let givenName:String = "name",
-                      userRef:String = "userID";
-    
-    public static let nonces:[String] = [
-        "8305976241",
-        "1870429536",
-        "7523194086",
-        "1726540389",
-    ];
     
     public static func mainNav(
     ) -> MainNavigationController {

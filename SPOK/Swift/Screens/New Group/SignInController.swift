@@ -17,31 +17,102 @@ class SignInViewController
     
     private let mSignInApple = SignInApple()
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad();
         
-        mBtnApple = UIButton()
+        // Creating components
+        // Loading resources
+        // Delegates, colors, font and etc.
+        
+        mSignInApple.mListener = self
+        
+        let bgColor = UIColor(
+            named: "background"
+        )
+        
+        let bold = UIFont(
+            name: "OpenSans-Bold",
+            size: 1
+        )
+        
+        let w = view.frame.width
+        let h = view.frame.height
+        
+        let wbtnSignApple = 0.922 * w
+        let marginLeft = (w - wbtnSignApple) / 2
+        let hbtnSignApple = 0.128 * w
+        
+        // Creating views
+        // Calculating bounds
+        mBtnApple = UIButton(
+            frame: CGRect(
+                x: marginLeft,
+                y: h * 0.45,
+                width: wbtnSignApple,
+                height: hbtnSignApple
+            )
+        )
+        
+        mTextViewPrivacy = UITextView(
+            frame: CGRect(
+                x: marginLeft,
+                y: mBtnApple.frame.bottom(),
+                width: wbtnSignApple,
+                height: 1
+            )
+        )
+        
+        // Fonts
+        mBtnApple
+            .titleLabel?
+            .font = bold?.withSize(
+                0.32 * hbtnSignApple
+            )
+        
+        
+        // Colors
+        mBtnApple.setTitleColor(
+            .white,
+            for: .normal
+        )
+        mBtnApple.backgroundColor = bgColor
+        mBtnApple
+            .layer
+            .shadowColor = UIColor
+                .white.cgColor
+        
+        view.backgroundColor = bgColor
+        
+        // Strings
         mBtnApple.setTitle(
-            "",
+            "Войти с помощью Apple",
             for: .normal
         )
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad();
-        mSignInApple.mListener = self
+        // Some design
+        let bl = mBtnApple.layer
+        bl.cornerRadius = 0.5 * hbtnSignApple
+        bl.shadowOffset = CGSize(
+            width: 0.5,
+            height: 0.5
+        )
+        bl.shadowRadius = hbtnSignApple * 0.17
+        bl.shadowOpacity = 0.55
         
+        mBtnApple.addTarget(
+            self,
+            action: #selector(
+                signInApple(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        view.addSubview(
+            mBtnApple
+        )
     }
     
-    @objc private func closeScreen(
-        _ v: UIButton
-    ) {
-
-    }
-    
-    
-    @objc private func loginApple(
+    @objc private func signInApple(
         _ sender: UIButton
     ) {
         print("Apple auth is started");
@@ -87,7 +158,7 @@ class SignInViewController
             
             def.setValue(
                 id,
-                forKey: Utils.userRef
+                forKey: Keys.USER_REF
             )
             
         }

@@ -19,5 +19,17 @@ class Keys {
     public static let URL_PAYMENTS = URL(
         string: "https://api.yookassa.ru/v3/payments"
     )!
+        
+    public static let ERROR_PATH = "Errors/iOS";
+    
+    public static let GIVEN_NAME = "name"
+    public static let USER_REF = "userID";
+    
+    public static let NONCES = [
+        "8305976241",
+        "1870429536",
+        "7523194086",
+        "1726540389",
+    ];
     
 }

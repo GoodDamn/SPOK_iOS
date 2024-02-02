@@ -28,60 +28,108 @@ public class Crypt {
         )
         
         ref.observeSingleEvent(
-            of: .value, with: { snap in
-            if let t = snap.value as? TimeInterval {
-                print(self, "buying sub...", snap.value, t, Date(timeIntervalSince1970: t/1000));
-                let indexNonce = Int.random(in: 0..<Utils.nonces.count);
-                // Concatenating
-                let input:String = Int(t/1000).description + premState + freeTrialState;
-                
-                let nonce:String = Utils.nonces[indexNonce];
-                var encrypted:[UInt8] = [];
-                let arr = Array(input);
-                print("sub", arr, nonce, input)
-                
-                for i in arr {
-                    encrypted.append(UInt8(nonce.distance(from: nonce.startIndex, to: nonce.firstIndex(of: i)!)));
-                }
-                let round = Int(days/32);
-                print("Crypt: ", days/32, round);
-                encrypted.append(UInt8(round));
-                encrypted.append(UInt8(days-round));
-                encrypted.append(UInt8(indexNonce));
-                
-                dataBase.reference(withPath: "Users/"+(UserDefaults().string(forKey: Utils.userRef) ?? "a")+"/p").setValue(String(data: Data(encrypted), encoding: .ascii));
-                
-                print("sub",encrypted);
+            of: .value
+        ) { snap,_  in
+            
+            guard let t = snap.value as? TimeInterval else {
+                return
             }
-        });
+            
+            let indexNonce = Int.random(
+                in: 0..<Keys.NONCES.count
+            )
+            
+            // Concatenating
+            let input  = "\(t/1000)\(premState)\(freeTrialState)"
+            
+            let nonce = Keys.NONCES[
+                indexNonce
+            ]
+            
+            var encrypted = Data()
+            let arr = Array(input)
+            
+            for i in arr {
+                
+                let j = nonce.distance(
+                    from: nonce.startIndex,
+                    to: nonce.firstIndex(
+                        of: i
+                    )!
+                )
+                
+                encrypted.append(
+                    UInt8(j)
+                )
+            }
+            
+            let round = Int(days/32)
+            
+            
+            encrypted.append(
+                UInt8(round)
+            )
+            encrypted.append(
+                UInt8(days-round)
+            )
+            encrypted.append(
+                UInt8(indexNonce)
+            )
+            
+            let id = UserDefaults
+                .standard
+                .string(
+                    Keys.USER_REF
+                )
+            
+            let path = "Users/\(id)/p"
+            
+            dataBase.reference(
+                withPath: path
+            ).setValue(
+                String(
+                    data: encrypted,
+                    encoding: .ascii
+                )
+            )
+        }
+        
     }
     
     
     public static func encryptString(
         _ input:[UInt16]
     ) -> String {
-        
         print("encryptString input",input)
-        var data:[UInt8] = [];
+        var data = Data(
+            count: input.count * 2
+        )
+        
         for i in input {
-            data.append(UInt8(i/127))
-            data.append(UInt8(i%127))
+            
+            data.append(
+                UInt8(i/127)
+            )
+            data.append(
+                UInt8(i%127)
+            )
         }
         
         print("encryptString", data);
         
         return String(
-            data: Data(data),
+            data: data,
             encoding: .ascii
-        )!
+        ) ?? ""
     }
     
     public static func decryptString(
         _ input:String
     ) -> [UInt16] {
+        
         print("decryptString:",input, input.count)
         
-        let data = ([UInt8])(input.data(using: .ascii)!)
+        let data = input.data(using: .ascii)!
         
         var decrypted:[UInt16] = []
         
@@ -93,7 +141,8 @@ public class Crypt {
         
         for ii in 0..<size {
             let i = ii*2
-            decrypted.append(UInt16(data[i])*127+UInt16(data[i+1]))
+            decrypted.append(
+                UInt16(data[i])*127 + UInt16(data[i+1]))
         }
         
         print("decryptString decrypted",decrypted);
