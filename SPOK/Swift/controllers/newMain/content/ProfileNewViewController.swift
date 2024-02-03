@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ProfileNewViewController
-    : SignInAppleController {
+    : AuthAppleController {
     
     private let TAG = "ProfileNewViewController"
     
@@ -356,7 +356,7 @@ class ProfileNewViewController
         
     }
     
-    override func onSignSuccess() {
+    override func onAuthSuccess() {
         startPayment()
     }
     

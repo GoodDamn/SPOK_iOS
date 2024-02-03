@@ -16,11 +16,11 @@ protocol SignInAppleListener
     ) -> UIView
     
     func onSuccess(
-        credentials: AuthCredential,
-        def: UserDefaults
+        credentials: AuthCredential
     )
     
     func onError(
         _ msg: String
     )
+    
 }

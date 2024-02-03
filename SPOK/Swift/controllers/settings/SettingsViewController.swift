@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SettingsViewController
-    : StackViewController {
+    : SignInAppleController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,9 @@ class SettingsViewController
         
         let w = view.frame.width
         let h = view.frame.height
+        
+        let hbtnDelete = h * 0.1
+        
         
         let btnClose = ViewUtils
             .buttonClose(
@@ -38,8 +41,46 @@ class SettingsViewController
             )
         )
         
+        let btnDelete = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: h-hbtnDelete,
+                width: w,
+                height: hbtnDelete
+            )
+        )
+        
+        btnDelete.setTitleColor(
+            .systemRed,
+            for: .normal
+        )
+        
+        btnDelete.setTitle(
+            "Удалить аккаунт",
+            for: .normal
+        )
+        
+        btnDelete.addTarget(
+            self,
+            action: #selector(
+                onClickBtnDelete(_:)
+            ),
+            for: .touchUpInside
+        )
         
         view.addSubview(btnClose)
+        view.addSubview(btnDelete)
     }
+    
+    @objc func onClickBtnDelete(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+       
+        signIn()
+        
+    }
+    
+    
     
 }

@@ -69,20 +69,10 @@ class SignInApple
             let idApple = appleID.user;
             let fullName = appleID.fullName;
             
-            print( ": Apple ID credentials: ", idApple, fullName);
-            
-            let userDef = UserDefaults
-                .standard;
-            
             let token = String(
                 data: appleID.identityToken!,
                 encoding: .utf8
             )!
-            
-            userDef.setValue(
-                fullName?.givenName,
-                forKey: Keys.GIVEN_NAME
-            )
             
             let cred = OAuthProvider
                 .credential(
@@ -92,8 +82,7 @@ class SignInApple
                 )
             
             mListener?.onSuccess(
-                credentials: cred,
-                def: userDef
+                credentials: cred
             )
             
         default:
