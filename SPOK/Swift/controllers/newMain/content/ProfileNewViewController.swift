@@ -364,6 +364,14 @@ class ProfileNewViewController
     ) {
         sender.isEnabled = false
         
+        let au = AuthUtils.user()
+        
+        print(
+            TAG,
+            "btnOpenFullAccess:",
+            au
+        )
+        
         if AuthUtils.user() != nil {
             startPayment()
             return

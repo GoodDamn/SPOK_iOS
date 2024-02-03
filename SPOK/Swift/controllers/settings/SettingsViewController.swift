@@ -96,26 +96,54 @@ extension SettingsViewController
     ) {
         
         let auth = Auth.auth()
-        auth.revokeToken(
-            withAuthorizationCode: authCode
-        ) { error in
+        
+        let credentials = OAuthProvider.credential(
+            withProviderID: "apple.com",
+            idToken: token,
+            rawNonce: nonce
+        )
+        
+        auth.currentUser?.reauthenticate(
+            with: credentials
+        ) { authData, error in
             
-            if error != nil {
+            guard let authData = authData,
+                error == nil else {
                 print(
-                    "SettingsViewController: REVOKE: ERROR",
+                    "SettingsViewController: REAUTH:",
                     error
                 )
                 return
             }
             
-            auth.currentUser?
-                .delete { error in
-                    
-                    print(
-                        "SettingsViewController: USER HAS BEEN DELETED", error
-                    )
+            auth.revokeToken(
+                withAuthorizationCode: authCode
+            ) { error in
+                print(
+                    "SettingsViewController: REVOKE: ERROR",
+                    error?.localizedDescription
+                )
             }
             
+            authData.user
+                .delete { error in
+                    print(
+                        "SettingsViewController: DELETE_USER:",
+                        error?.localizedDescription
+                    )
+                }
+            
+            
+        }
+        
+        do {
+            try auth.signOut()
+        } catch {
+            print(
+                "SettingsViewController:",
+                "SIGN_OUT_ERROR:",
+                error.localizedDescription
+            )
         }
         
     }
