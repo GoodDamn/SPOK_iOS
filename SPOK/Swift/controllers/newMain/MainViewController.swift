@@ -109,90 +109,30 @@ class MainViewController
             )
         )
         
-        
         if !def.bool(
-            forKey: Keys.COMPLETE_SIGN
+            forKey: Keys.COMPLETE_INTRO
         ) {
-            print("Time for Sign in process")
-            let c = SignInViewController()
-            c.view.alpha = 0
             
-            c.onSigned = { [weak self] in
-                guard let s = self else {
-                    return
-                }
-                
-                def.setValue(
-                    true,
-                    forKey: Keys.COMPLETE_SIGN
-                )
-                
-                let c = IntroSleepRootController()
-                                
-                s.pusht(
-                    c,
-                    animDuration: 1.5,
-                    options: .transitionCrossDissolve
-                ) { _ in
-                    s.pop(
-                        at: 0
-                    )
-                }
-            }
-            
-            push(
-                c,
-                animDuration: 0.5
+            print("Time for intro!")
+            showSplash(
+                msg: "готовим что-то\n уникальное..."
             ) {
-                c.view.alpha = 1.0
+                return
+                    IntroSleepRootController()
             }
             
             return
         }
         
-        if !def.bool(
-            forKey: Keys.COMPLETE_INTRO
+        print("Time for content!")
+        
+        showSplash(
+            msg: "отправляемся в\nмир снов..."
         ) {
-            print("Time for intro!")
-            let c = IntroSleepRootController()
-            c.view.alpha = 0
-            push(
-                c,
-                animDuration: 1.5
-            ) {
-                c.view.alpha = 1.0
-            }
-            return;
-        }
-                
-        let splash = SplashViewController()
-        splash.view.alpha = 0
-        push(
-            splash,
-            animDuration: 1.0
-        ) {
-            splash.view.alpha = 1.0
+            return
+                MainContentViewController()
         }
         
-        
-        
-        DispatchQueue
-            .main
-            .asyncAfter(
-                deadline: .now() + 2.5
-            ) {
-                let controller =  MainContentViewController()
-                
-                self.pusht(
-                    controller,
-                    animDuration: 1.0,
-                    options: [
-                        .transitionCrossDissolve
-                    ]
-                ) { b in
-                    self.pop(at: 0)
-                }
-            }
     }
     
     public func pusht(
@@ -209,9 +149,11 @@ class MainViewController
             from: prev!.view,
             to: c.view,
             duration: 1.5,
-            options: options,
-            completion: completion
-        )
+            options: options
+        ) { b in
+            c.transitionEnd()
+            completion?(b)
+        }
     }
     
     public func push(
@@ -280,6 +222,39 @@ class MainViewController
         addChild(c)
         view.addSubview(c.view)
         mCurrentIndex += 1
+    }
+    
+    private func showSplash(
+        msg: String,
+        _ completion: @escaping () -> StackViewController
+    ) {
+        let splash = SplashViewController()
+        splash.msgBottom = msg
+        splash.view.alpha = 0
+        push(
+            splash,
+            animDuration: 1.0
+        ) {
+            splash.view.alpha = 1.0
+        }
+        
+        DispatchQueue.ui(wait: 3.0) { [weak self] in
+            
+            guard let s = self else {
+                return
+            }
+            
+            s.pusht(
+                completion(),
+                animDuration: 1.0,
+                options: [
+                    .transitionCrossDissolve
+                ]
+            ) { b in
+                s.pop(at: 0)
+            }
+        }
+        
     }
     
     // Network dispatch queue

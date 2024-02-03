@@ -21,4 +21,18 @@ extension DispatchQueue {
         
     }
     
+    static func ui(
+        wait: TimeInterval,
+        _ c: @escaping () -> Void
+    ) {
+        
+        DispatchQueue
+            .main
+            .asyncAfter(
+                deadline: .now() + wait,
+                execute: c
+            )
+        
+    }
+    
 }

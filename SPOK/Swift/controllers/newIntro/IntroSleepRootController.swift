@@ -14,6 +14,12 @@ class IntroSleepRootController
     
     private final let TAG = "IntroSleepRootController"
     
+    private var mStart: (() -> Void)?
+    
+    override func onTransitionEnd() {
+        mStart?()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -49,8 +55,7 @@ class IntroSleepRootController
         
         view.backgroundColor = bgColor
         
-        let intro1 = IntroSleepViewController()
-        let intro2 = IntroSleep2ViewController()
+        let mIntro2 = IntroSleep2ViewController()
         let intro3 = IntroSleep3ViewController()
         
         intro3.onWillHide = {
@@ -90,50 +95,37 @@ class IntroSleepRootController
             }
         }
         
-        addChild(intro1)
-        view.addSubview(intro1.view)
-        
-        intro1.onEndTimer = {
-            intro1.hide()
-        }
-        
-        intro1.onHide = {
-            intro1.view.removeFromSuperview()
-            intro1.removeFromParent()
+        mIntro2.onHide = { [weak self] in
             
-            let s = self
-            
-            s.addChild(intro2)
-            s.view.addSubview(intro2.view)
-            
-            intro2.onHide = {
-                intro2.view.removeFromSuperview()
-                intro2.removeFromParent()
-                
-                s.addChild(intro3)
-                s.view.addSubview(intro3.view)
-                
-                intro3.show()
+            guard let s = self else {
+                return
             }
             
-            intro2.show() {
+            mIntro2.view.removeFromSuperview()
+            mIntro2.removeFromParent()
+            
+            s.addChild(intro3)
+            s.view.addSubview(intro3.view)
+            
+            intro3.show()
+            
+        }
+        
+        addChild(mIntro2)
+        view.addSubview(mIntro2.view)
+    
+        
+        mStart = {
+            mIntro2.show() {
                 audio?.play()
                 audio?.setVolume(
                     1.0,
                     fadeDuration: 2.0
                 )
-                intro2.startTopic()
+                mIntro2.startTopic()
             }
         }
         
-        intro1.show()
-        intro1.startTimer(
-            duration: 3.0
-        )
     }
-    
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+
 }

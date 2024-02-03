@@ -1,8 +1,8 @@
 //
-//  SplashViewController.swift
+//  IntroSleepViewController.swift
 //  SPOK
 //
-//  Created by GoodDamn on 13/01/2024.
+//  Created by GoodDamn on 09/01/2024.
 //
 
 import Foundation
@@ -10,6 +10,8 @@ import UIKit
 
 class SplashViewController
     : StackViewController {
+    
+    var msgBottom = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,14 @@ class SplashViewController
             )
         )
         
+        let lSubtitle = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: h * 0.786,
+                width: w,
+                height: sizeSubtitle * 3
+            )
+        )
         
         let wimage = 0.683 * w
         let himage = 0.802 * wimage
@@ -60,28 +70,23 @@ class SplashViewController
         lTitle.textColor = .white
         lTitle.numberOfLines = 0
         
-        let splashLine = UIImageView(
-            frame: CGRect(
-                x: 0,
-                y: h * 0.703,
-                width: w * 1.023,
-                height: w * 0.4
-            )
-        )
+        lSubtitle.text = msgBottom
+        lSubtitle.font = extraBold?
+            .withSize(sizeSubtitle)
+        lSubtitle.textColor = .white
+        lSubtitle.textAlignment = .center
+        lSubtitle.numberOfLines = 0
         
-        splashLine.frame
-            .center(
-                targetWidth: w
-            )
-        
-        splashLine.image = UIImage(
-            named: "splashline"
-        )
         
         view.addSubview(lTitle)
         view.addSubview(imageView)
-        view.addSubview(splashLine)
+        view.addSubview(lSubtitle)
+        
+        
     }
     
-    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+ 
 }

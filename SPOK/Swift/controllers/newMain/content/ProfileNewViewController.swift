@@ -168,7 +168,7 @@ class ProfileNewViewController
         )
         
         let a = NSMutableAttributedString(
-            string: "369 RUB \(mPayment.price) RUB"
+            string: "369 RUB \(Int(mPayment.price)) RUB"
         )
         
         let strikeColor = UIColor

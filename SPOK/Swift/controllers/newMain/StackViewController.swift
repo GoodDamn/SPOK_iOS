@@ -49,6 +49,10 @@ class StackViewController
         )
     }
     
+    public func transitionEnd() {
+        onTransitionEnd()
+    }
+    
     open func push(
         _ c: StackViewController,
         animDuration: TimeInterval,
@@ -114,5 +118,7 @@ class StackViewController
         sender.isEnabled = false
         popBaseAnim()
     }
+ 
+    internal func onTransitionEnd() {}
     
 }
