@@ -12,9 +12,11 @@ class SignInViewController
     : StackViewController,
       SignInAppleListener  {
     
-    private var mBtnApple: UIButton!
-    private var mTextViewPrivacy: UITextView!
+    private let TAG = "SignInViewController:"
     
+    var onSigned: (() -> Void)? = nil
+    
+    private var mBtnApple: UIButton!
     private let mSignInApple = SignInApple()
     
     override func viewDidLoad() {
@@ -53,7 +55,13 @@ class SignInViewController
             )
         )
         
-        mTextViewPrivacy = UITextView(
+        let btnClose = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.08
+            )
+        
+        let mTextViewPrivacy = UITextView(
             frame: CGRect(
                 x: marginLeft,
                 y: mBtnApple.frame.bottom(),
@@ -75,6 +83,7 @@ class SignInViewController
             .white,
             for: .normal
         )
+        mBtnApple.tintColor = .white
         mBtnApple.backgroundColor = bgColor
         mBtnApple
             .layer
@@ -99,6 +108,24 @@ class SignInViewController
         bl.shadowRadius = hbtnSignApple * 0.17
         bl.shadowOpacity = 0.55
         
+        btnClose.alpha = 0.11
+        
+        mBtnApple.setImage(
+            UIImage(
+                systemName: "applelogo"
+            ),
+            for: .normal
+        )
+        
+        mBtnApple.imageEdgeInsets = UIEdgeInsets(
+            top: 0,
+            left: -10,
+            bottom: 0,
+            right: 10
+        )
+        
+        // Adding targets
+        
         mBtnApple.addTarget(
             self,
             action: #selector(
@@ -107,14 +134,36 @@ class SignInViewController
             for: .touchUpInside
         )
         
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        // Adding views
+        
         view.addSubview(
             mBtnApple
         )
+        
+        view.addSubview(
+            btnClose
+        )
+    }
+    
+    @objc override func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        onSigned?()
     }
     
     @objc private func signInApple(
         _ sender: UIButton
     ) {
+        sender.isEnabled = false
         print("Apple auth is started");
         mSignInApple.start()
     }
@@ -126,40 +175,40 @@ class SignInViewController
     func onError(
         _ msg: String
     ) {
+        Toast.init(
+            text: msg,
+            duration: 2.5
+        ).show()
+        
         print("ERROR_SIGN_IN:", msg)
+        mBtnApple.isEnabled = true
     }
     
     func onSuccess(
-        token: String,
-        nonce: String,
+        credentials: AuthCredential,
         def: UserDefaults
     ) {
-        
-        let cred = OAuthProvider
-            .credential(
-                withProviderID: "apple.com",
-                idToken: token,
-                rawNonce: nonce
-            )
-        
         Auth.auth().signIn(
-            with: cred
-        ) { (authResult, error) in
+            with: credentials
+        ) { [weak self] (authResult, error) in
             
-            if error != nil {
-                print(error);
-                return;
+            guard let s = self else {
+                print("SignInController: onSuccess: GC")
+                return
             }
             
-            guard let id = authResult?.user
-                .uid else {
+            guard let auth = authResult,
+                  error == nil else {
+                print(s.TAG,"ERROR:",error)
                 return
             }
             
             def.setValue(
-                id,
+                auth.user.uid,
                 forKey: Keys.USER_REF
             )
+            
+            s.onSigned?()
             
         }
     }

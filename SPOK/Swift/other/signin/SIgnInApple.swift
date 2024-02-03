@@ -6,6 +6,7 @@
 //
 
 import AuthenticationServices;
+import FirebaseAuth
 
 class SignInApple
     : NSObject,
@@ -83,9 +84,15 @@ class SignInApple
                 forKey: Keys.GIVEN_NAME
             )
             
+            let cred = OAuthProvider
+                .credential(
+                    withProviderID: "apple.com",
+                    idToken: token,
+                    rawNonce: mNonce
+                )
+            
             mListener?.onSuccess(
-                token: token,
-                nonce: mNonce,
+                credentials: cred,
                 def: userDef
             )
             

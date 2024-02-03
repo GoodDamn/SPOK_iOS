@@ -54,10 +54,12 @@ class IntroSleepRootController
         let intro3 = IntroSleep3ViewController()
         
         intro3.onWillHide = {
-            UserDefaults()
+            UserDefaults
+                .standard
                 .setValue(
                     true,
-                    forKey: "intro");
+                    forKey: Keys.COMPLETE_INTRO
+                )
             
             audio?.setVolume(
                 0.0,

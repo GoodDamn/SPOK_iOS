@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 import UIKit.UIView
 
 protocol SignInAppleListener
@@ -15,8 +16,7 @@ protocol SignInAppleListener
     ) -> UIView
     
     func onSuccess(
-        token: String,
-        nonce: String,
+        credentials: AuthCredential,
         def: UserDefaults
     )
     

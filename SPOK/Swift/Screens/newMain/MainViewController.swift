@@ -111,7 +111,50 @@ class MainViewController
             )
         )
         
-        if !def.bool(forKey: "intro") {
+        
+        if !def.bool(
+            forKey: Keys.COMPLETE_SIGN
+        ) {
+            print("Time for Sign in process")
+            let c = SignInViewController()
+            c.view.alpha = 0
+            
+            c.onSigned = { [weak self] in
+                guard let s = self else {
+                    return
+                }
+                
+                def.setValue(
+                    true,
+                    forKey: Keys.COMPLETE_SIGN
+                )
+                
+                let c = IntroSleepRootController()
+                                
+                s.pusht(
+                    c,
+                    animDuration: 1.5,
+                    options: .transitionCrossDissolve
+                ) { _ in
+                    s.pop(
+                        at: 0
+                    )
+                }
+            }
+            
+            push(
+                c,
+                animDuration: 0.5
+            ) {
+                c.view.alpha = 1.0
+            }
+            
+            return
+        }
+        
+        if !def.bool(
+            forKey: Keys.COMPLETE_INTRO
+        ) {
             print("Time for intro!")
             let c = IntroSleepRootController()
             c.view.alpha = 0
@@ -121,13 +164,10 @@ class MainViewController
             ) {
                 c.view.alpha = 1.0
             }
-            
             return;
         }
-        
-        print("Intro is completed");
-        
-        let splash = SignInViewController()
+                
+        let splash = SplashViewController()
         splash.view.alpha = 0
         push(
             splash,
@@ -138,7 +178,7 @@ class MainViewController
         
         
         
-        /*DispatchQueue
+        DispatchQueue
             .main
             .asyncAfter(
                 deadline: .now() + 2.5
@@ -154,7 +194,7 @@ class MainViewController
                 ) { b in
                     self.pop(at: 0)
                 }
-            }*/
+            }
     }
     
     public func pusht(
@@ -163,7 +203,6 @@ class MainViewController
         options: UIView.AnimationOptions,
         completion: ((Bool) -> Void)?
     ) {
-        
         let prev = mControllers.last
         
         appendController(c)
@@ -182,7 +221,6 @@ class MainViewController
         animDuration: TimeInterval,
         animate: @escaping () -> Void
     ) {
-        mCurrentIndex += 1
         appendController(c)
         
         UIView.animate(
@@ -196,7 +234,7 @@ class MainViewController
         animate: (()->Void)? = nil
     ) {
         pop(
-            at: mCurrentIndex,
+            at: mCurrentIndex - 1,
             duration: duration,
             animate: animate
         )
@@ -231,6 +269,7 @@ class MainViewController
     private func removeController(
         at: Int
     ) {
+        let a = mControllers.count
         let c = mControllers[at]
         c.view.removeFromSuperview()
         c.removeFromParent()
@@ -243,8 +282,8 @@ class MainViewController
         mControllers.append(c)
         addChild(c)
         view.addSubview(c.view)
+        mCurrentIndex += 1
     }
-        
     
     // Network dispatch queue
     private func networkUpdate(

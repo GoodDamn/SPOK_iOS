@@ -20,10 +20,13 @@ class Keys {
         string: "https://api.yookassa.ru/v3/payments"
     )!
         
-    public static let ERROR_PATH = "Errors/iOS";
+    public static let ERROR_PATH = "Errors/iOS"
     
     public static let GIVEN_NAME = "name"
-    public static let USER_REF = "userID";
+    public static let USER_REF = "userID"
+    
+    public static let COMPLETE_INTRO = "intro"
+    public static let COMPLETE_SIGN = "signIn"
     
     public static let NONCES = [
         "8305976241",
