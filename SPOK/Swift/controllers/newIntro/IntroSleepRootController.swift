@@ -114,7 +114,6 @@ class IntroSleepRootController
         addChild(mIntro2)
         view.addSubview(mIntro2.view)
     
-        
         mStart = {
             mIntro2.show() {
                 audio?.play()

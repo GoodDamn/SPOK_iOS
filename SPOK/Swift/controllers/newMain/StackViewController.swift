@@ -49,8 +49,33 @@ class StackViewController
         )
     }
     
-    public func transitionEnd() {
+    public final func transitionEnd() {
         onTransitionEnd()
+    }
+    
+    public final func targetClose(
+        _ b: UIButton
+    ) {
+        b.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
+    }
+    
+    public final func pushBaseAnim(
+        _ c: StackViewController,
+        animDuration: TimeInterval
+    ) {
+        c.view.alpha = 0
+        push(
+            c,
+            animDuration: animDuration
+        ) {
+            c.view.alpha = 1.0
+        }
     }
     
     open func push(

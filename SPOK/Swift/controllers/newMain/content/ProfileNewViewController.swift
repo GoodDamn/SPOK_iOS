@@ -52,6 +52,22 @@ class ProfileNewViewController
         
         let mTopOffset = mInsets.top
         
+        let btnSettings = ViewUtils
+            .buttonClose(
+                "gearshape.fill",
+                in: view,
+                sizeSquare: 0.065
+            )
+        
+        btnSettings.tintColor = .white
+        btnSettings.addTarget(
+            self,
+            action: #selector(
+                onClickBtnSettings(_:)
+            ),
+            for: .touchUpInside
+        )
+        
         let lTitle = UILabel(
             frame: CGRect(
                 x: marginLeft,
@@ -305,6 +321,7 @@ class ProfileNewViewController
             offset: imageView2.frame.bottom()
         )
         
+        view.addSubview(btnSettings)
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
         view.addSubview(lSubtitleHead)
@@ -355,6 +372,16 @@ class ProfileNewViewController
         
         // Authentication
         signIn()
+    }
+    
+    @objc func onClickBtnSettings(
+        _ sender: UIButton
+    ) {
+        let settings = SettingsViewController()
+        pushBaseAnim(
+            settings,
+            animDuration: 0.3
+        )
     }
     
     @objc func btnShareImpression(

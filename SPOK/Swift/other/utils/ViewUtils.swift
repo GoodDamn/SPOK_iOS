@@ -120,6 +120,7 @@ public class ViewUtils {
     }
     
     public static func buttonClose(
+        _ systemNameImage: String = "xmark",
         in view: UIView,
         sizeSquare si: CGFloat
     ) -> UIButton {
@@ -155,7 +156,7 @@ public class ViewUtils {
         
         btnExit.setImage(
             UIImage(
-                systemName: "xmark",
+                systemName: systemNameImage,
                 withConfiguration: btnExitConfig
             ),
             for: .normal

@@ -86,6 +86,8 @@
 		25F94AD32B6E1A9F00FC8A32 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */; };
 		25F94AD72B6E1E8D00FC8A32 /* SignInAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD62B6E1E8D00FC8A32 /* SignInAppleController.swift */; };
 		25F94AD92B6E22BE00FC8A32 /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD82B6E22BE00FC8A32 /* AuthUtils.swift */; };
+		25F94ADC2B6E579500FC8A32 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ADB2B6E579500FC8A32 /* SettingsViewController.swift */; };
+		25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ADD2B6E587D00FC8A32 /* UIColor.swift */; };
 		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
 		2B3DE5B9290BAC7600B00528 /* SIgnInApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DE5B8290BAC7600B00528 /* SIgnInApple.swift */; };
 		2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */; };
@@ -209,6 +211,8 @@
 		25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		25F94AD62B6E1E8D00FC8A32 /* SignInAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleController.swift; sourceTree = "<group>"; };
 		25F94AD82B6E22BE00FC8A32 /* AuthUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
+		25F94ADB2B6E579500FC8A32 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		25F94ADD2B6E587D00FC8A32 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2B2199EB2920C65600F4505C /* test.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.storekit; sourceTree = "<group>"; };
 		2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -483,6 +487,7 @@
 				25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */,
 				25F94AD02B6E1A7200FC8A32 /* CGRect.swift */,
 				25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */,
+				25F94ADD2B6E587D00FC8A32 /* UIColor.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -693,6 +698,14 @@
 			path = signin;
 			sourceTree = "<group>";
 		};
+		25F94ADA2B6E573000FC8A32 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				25F94ADB2B6E579500FC8A32 /* SettingsViewController.swift */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
 		2B5684AF28901871003F4F15 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -784,6 +797,7 @@
 		2BA1025C276A602300EB5B8C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				25F94ADA2B6E573000FC8A32 /* settings */,
 				257A7FB02B6CE1F100BBEF5E /* payment */,
 				25D32DDF2B6901F800EAEA20 /* pagers */,
 				25D32DDE2B6901E300EAEA20 /* signin */,
@@ -1102,6 +1116,7 @@
 				257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */,
 				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
 				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
+				25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */,
 				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
 				257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
@@ -1135,6 +1150,7 @@
 				2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */,
 				25F770D72B598C9100C62071 /* Particles.swift in Sources */,
 				2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */,
+				25F94ADC2B6E579500FC8A32 /* SettingsViewController.swift in Sources */,
 				2B93CF4E276F2E5000219690 /* HomeViewController.swift in Sources */,
 				2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */,
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
