@@ -92,7 +92,7 @@
 		25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE42B6E608700FC8A32 /* AuthListener.swift */; };
 		25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE72B6E626100FC8A32 /* SignInListener.swift */; };
 		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
-		2B3DE5B9290BAC7600B00528 /* SIgnInApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DE5B8290BAC7600B00528 /* SIgnInApple.swift */; };
+		2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DE5B8290BAC7600B00528 /* SignInApple.swift */; };
 		2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */; };
 		2B4B3887290EDEAA0013D198 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3886290EDEAA0013D198 /* FirebaseAuth */; };
 		2B4B3889290EDEAA0013D198 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3888290EDEAA0013D198 /* FirebaseDatabase */; };
@@ -223,7 +223,7 @@
 		2B2199EB2920C65600F4505C /* test.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.storekit; sourceTree = "<group>"; };
 		2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B29CAFC2892BC3D006FE018 /* SPOK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SPOK.entitlements; sourceTree = "<group>"; };
-		2B3DE5B8290BAC7600B00528 /* SIgnInApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIgnInApple.swift; sourceTree = "<group>"; };
+		2B3DE5B8290BAC7600B00528 /* SignInApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInApple.swift; sourceTree = "<group>"; };
 		2B4B3881290EDDA10013D198 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
 		2B4C749E28E9A5E40097CDE7 /* SPOKMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKMusic.swift; sourceTree = "<group>"; };
 		2B4C74A428E9BDA20097CDE7 /* SPOKNotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKNotify.swift; sourceTree = "<group>"; };
@@ -701,7 +701,7 @@
 			isa = PBXGroup;
 			children = (
 				25F94AE62B6E621700FC8A32 /* protocols */,
-				2B3DE5B8290BAC7600B00528 /* SIgnInApple.swift */,
+				2B3DE5B8290BAC7600B00528 /* SignInApple.swift */,
 			);
 			path = signin;
 			sourceTree = "<group>";
@@ -1172,7 +1172,7 @@
 				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,
 				25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */,
 				25F94AD92B6E22BE00FC8A32 /* AuthUtils.swift in Sources */,
-				2B3DE5B9290BAC7600B00528 /* SIgnInApple.swift in Sources */,
+				2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,
 				257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */,

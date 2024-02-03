@@ -7,13 +7,18 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class SettingsViewController
     : SignInAppleController {
     
+    private let TAG = "SettingsViewController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        mSignListener = self
+        
         view.backgroundColor = UIColor
             .background()
         
@@ -76,11 +81,49 @@ class SettingsViewController
         _ sender: UIButton
     ) {
         sender.isEnabled = false
-       
         signIn()
+    }
+    
+}
+
+extension SettingsViewController
+    : SignInListener {
+    
+    func onSuccessSign(
+        token: String,
+        nonce: String,
+        authCode: String
+    ) {
+        
+        let auth = Auth.auth()
+        auth.revokeToken(
+            withAuthorizationCode: authCode
+        ) { error in
+            
+            if error != nil {
+                print(
+                    "SettingsViewController: REVOKE: ERROR",
+                    error
+                )
+                return
+            }
+            
+            auth.currentUser?
+                .delete { error in
+                    
+                    print(
+                        "SettingsViewController: USER HAS BEEN DELETED", error
+                    )
+            }
+            
+        }
         
     }
     
-    
+    func onErrorSign(
+        _ msg: String
+    ) {
+        
+    }
     
 }

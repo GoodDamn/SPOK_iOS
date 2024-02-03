@@ -21,7 +21,6 @@ class ProfileNewViewController
     
     private var mPaymentProcess: PaymentProcess!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

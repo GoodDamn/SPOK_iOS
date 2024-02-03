@@ -5,8 +5,7 @@
 //  Created by Cell on 27.10.2022.
 //
 
-import AuthenticationServices;
-import FirebaseAuth
+import AuthenticationServices
 
 class SignInApple
     : NSObject,
@@ -65,24 +64,31 @@ class SignInApple
         
         switch authorization.credential {
         
-        case let appleID as ASAuthorizationAppleIDCredential:
-            let idApple = appleID.user;
-            let fullName = appleID.fullName;
+        case let appleId as ASAuthorizationAppleIDCredential:
             
-            let token = String(
-                data: appleID.identityToken!,
+            guard let token = String(
+                data: appleId.identityToken!,
                 encoding: .utf8
-            )!
+            ) else {
+                return
+            }
             
-            let cred = OAuthProvider
-                .credential(
-                    withProviderID: "apple.com",
-                    idToken: token,
-                    rawNonce: mNonce
-                )
+            guard let authCode = appleId.authorizationCode else {
+                return
+            }
+            
+            guard let authCodeStr = String(
+                data: authCode,
+                encoding: .utf8
+            ) else {
+                return
+            }
+            
             
             mListener?.onSuccess(
-                credentials: cred
+                token: token,
+                nonce: mNonce,
+                authCode: authCodeStr
             )
             
         default:

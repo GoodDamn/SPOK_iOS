@@ -6,13 +6,14 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 protocol SignInListener
     : AnyObject {
  
     func onSuccessSign(
-        credentials: AuthCredential
+        token: String,
+        nonce: String,
+        authCode: String
     )
     
     func onErrorSign(

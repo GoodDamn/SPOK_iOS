@@ -7,14 +7,13 @@
 
 import Foundation
 import UIKit.UIView
-import FirebaseAuth
 
 class SignInAppleController
     : StackViewController {
     
     private static let TAG = "SignInAppleController"
     
-    internal var mSignListener: SignInListener? = nil
+    internal weak var mSignListener: SignInListener? = nil
     
     private let mSignIn = SignInApple()
     
@@ -45,11 +44,14 @@ extension SignInAppleController
     }
     
     func onSuccess(
-        credentials: AuthCredential
+        token: String,
+        nonce: String,
+        authCode: String
     ) {
-        
         mSignListener?.onSuccessSign(
-            credentials: credentials
+            token: token,
+            nonce: nonce,
+            authCode: authCode
         )
         
     }

@@ -42,8 +42,17 @@ extension AuthAppleController
     : SignInListener {
     
     func onSuccessSign(
-        credentials: AuthCredential
+        token: String,
+        nonce: String,
+        authCode: String
     ) {
+        let credentials = OAuthProvider
+            .credential(
+                withProviderID: "apple.com",
+                idToken: token,
+                rawNonce: nonce
+            )
+        
         Auth.auth().signIn(
             with: credentials
         ) { [weak self] authResult, error in
