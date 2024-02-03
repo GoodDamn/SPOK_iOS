@@ -7,18 +7,20 @@
 
 import Foundation
 import UIKit
-import FirebaseDatabase
 
 class ProfileNewViewController
-    : StackViewController {
+    : SignInAppleController {
     
-    private let mDatabase = Database
-        .database()
-        .reference(
-            withPath: "Stats/iOS"
-        )
+    private let TAG = "ProfileNewViewController"
     
-    private var mCurrentStreak = 0
+    private let mPayment = Payment(
+        price: 169.00,
+        currency: .rub,
+        description: "SPOK Подписка на 1 месяц"
+    )
+    
+    private var mPaymentProcess: PaymentProcess!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +130,7 @@ class ProfileNewViewController
         
         let himage1 = w * 0.352
         let offset = w * 0.14
-        let ximg13 = lSubtitleHead.frame.bottom() + h*0.06
+        let ximg13 = lSubtitleHead.frame.bottom() + h * 0.06
         
         let imageView1 = UIImageView(
             frame: CGRect(
@@ -166,7 +168,7 @@ class ProfileNewViewController
         )
         
         let a = NSMutableAttributedString(
-            string: "249 RUB 125 RUB"
+            string: "369 RUB \(mPayment.price) RUB"
         )
         
         let strikeColor = UIColor
@@ -337,28 +339,22 @@ class ProfileNewViewController
         
     }
     
+    override func onSignSuccess() {
+        startPayment()
+    }
+    
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
-        let c = PayPageViewController()
-        c.view.alpha = 0
+        sender.isEnabled = false
         
-        c.mOnStats = { child in
-            self.addStat(child)
+        if AuthUtils.user() != nil {
+            startPayment()
+            return
         }
         
-        c.mOnBack = {
-            self.mCurrentStreak += 1
-        }
-        
-        addStat("payPage")
-        
-        push(
-            c,
-            animDuration: 0.5
-        ) {
-            c.view.alpha = 1.0
-        }
+        // Authentication
+        signIn()
     }
     
     @objc func btnShareImpression(
@@ -380,8 +376,44 @@ class ProfileNewViewController
             
         }
     }
+     
+    private func startPayment() {
+        mPaymentProcess = PaymentProcess(
+            payment: mPayment
+        )
+        
+        mPaymentProcess.start { [weak self]
+            snap in
+            if self == nil {
+                return
+            }
+            DispatchQueue.ui {
+                self?.pushConfirmPage(
+                    snap
+                )
+            }
+        }
+    }
     
-    private func addStat(
+    
+    private func pushConfirmPage(
+        _ snap: PaymentSnapshot
+    ) {
+        let web = WebConfirmationViewController()
+        web.mPaymentSnap = snap
+        web.view.alpha = 0
+        
+        print(TAG, "pushConfirmPage")
+        
+        push(
+            web,
+            animDuration: 0.8
+        ) {
+            web.view.alpha = 1.0
+        }
+    }
+    
+    /*private func addStat(
         _ child: String
     ) {
         mDatabase
@@ -389,56 +421,6 @@ class ProfileNewViewController
             .setValue(ServerValue
                 .increment(1)
             )
-    }
+    }*/
 }
 
-extension UILabel {
-    
-    func setParagraph(
-        string: String,
-        style: NSMutableParagraphStyle
-    ) {
-        let a = NSMutableAttributedString(
-            string: string
-        )
-        
-        a.addAttribute(
-            .paragraphStyle,
-            value: style,
-            range: NSRange(
-                location: 0,
-                length: string.count
-            )
-        )
-        text = ""
-        attributedText = a
-    }
-    
-}
-
-extension CGRect {
-    
-    func bottom() -> CGFloat {
-        return height + origin.y
-    }
-
-    mutating func center(
-        targetHeight: CGFloat,
-        offset: CGFloat = 0
-    ) {
-        origin.y = offset + (targetHeight - height) * 0.5
-    }
-    
-    mutating func center(
-        targetWidth: CGFloat
-    ) {
-        origin.x = (targetWidth - width) * 0.5
-    }
-    
-    mutating func offsetX(
-        _ offx: CGFloat
-    ) {
-        origin.x = origin.x + offx
-    }
-    
-}

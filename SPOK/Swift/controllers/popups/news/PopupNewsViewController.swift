@@ -213,7 +213,7 @@ class PopupNewsViewController
         let def = UserDefaults.standard
         def.setValue(
             msgID,
-            forKey: KeyUtils.mIdNews
+            forKey: Keys.ID_NEWS
         )
     }
     

@@ -82,19 +82,17 @@ class MainViewController
                 .mBuildNumber = buildNumber
             
             let oldbn = def.integer(
-                forKey: KeyUtils.mOldBuildNumber
+                forKey: Keys.OLD_BUILD_NUMBER
             )
             
             if buildNumber != oldbn  {
                 def.removeObject(
-                    forKey: KeyUtils
-                        .mIdNews
+                    forKey: Keys.ID_NEWS
                 )
                 
                 def.setValue(
                     buildNumber,
-                    forKey: KeyUtils
-                        .mOldBuildNumber
+                    forKey: Keys.OLD_BUILD_NUMBER
                 )
             }
             
@@ -269,7 +267,6 @@ class MainViewController
     private func removeController(
         at: Int
     ) {
-        let a = mControllers.count
         let c = mControllers[at]
         c.view.removeFromSuperview()
         c.removeFromParent()

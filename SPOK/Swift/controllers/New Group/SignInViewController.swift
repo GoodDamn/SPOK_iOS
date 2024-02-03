@@ -9,24 +9,18 @@ import UIKit
 import FirebaseAuth
 
 class SignInViewController
-    : StackViewController,
-      SignInAppleListener  {
+    : SignInAppleController {
     
     private let TAG = "SignInViewController:"
     
-    var onSigned: (() -> Void)? = nil
-    
     private var mBtnApple: UIButton!
-    private let mSignInApple = SignInApple()
     
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
         
         // Creating components
         // Loading resources
         // Delegates, colors, font and etc.
-        
-        mSignInApple.mListener = self
         
         let bgColor = UIColor(
             named: "background"
@@ -165,55 +159,12 @@ class SignInViewController
     ) {
         sender.isEnabled = false
         print("Apple auth is started");
-        mSignInApple.start()
+        signIn()
     }
     
-    func onAnchor() -> UIView {
-        return view
-    }
-    
-    func onError(
-        _ msg: String
-    ) {
-        Toast.init(
-            text: msg,
-            duration: 2.5
-        ).show()
-        
-        print("ERROR_SIGN_IN:", msg)
+    override func onSignError() {
         mBtnApple.isEnabled = true
     }
-    
-    func onSuccess(
-        credentials: AuthCredential,
-        def: UserDefaults
-    ) {
-        Auth.auth().signIn(
-            with: credentials
-        ) { [weak self] (authResult, error) in
-            
-            guard let s = self else {
-                print("SignInController: onSuccess: GC")
-                return
-            }
-            
-            guard let auth = authResult,
-                  error == nil else {
-                print(s.TAG,"ERROR:",error)
-                return
-            }
-            
-            def.setValue(
-                auth.user.uid,
-                forKey: Keys.USER_REF
-            )
-            
-            s.onSigned?()
-            
-        }
-    }
-    
-    
 }
 
 

@@ -16,13 +16,6 @@ class PayPageViewController
     public var mOnStats: ((String)->Void)? = nil
     public var mOnBack: (()->Void)? = nil
     
-    private let mPayment = Payment(
-        price: 169.00,
-        currency: .rub,
-        description: "SPOK Подписка на 1 месяц"
-    )
-    
-    private var mPaymentProcess: PaymentProcess!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +105,7 @@ class PayPageViewController
     ) {
         sender.isEnabled = false
         
-        mPaymentProcess = PaymentProcess(
+        /*mPaymentProcess = PaymentProcess(
             payment: mPayment
         )
         
@@ -132,7 +125,7 @@ class PayPageViewController
                 sender.isEnabled = true
                 self?.mPaymentProcess = nil
             }
-        }
+        }*/
         
     }
     
@@ -144,22 +137,7 @@ class PayPageViewController
         popBaseAnim()
     }
  
-    private func pushConfirmPage(
-        _ snap: PaymentSnapshot
-    ) {
-        let web = WebConfirmationViewController()
-        web.mPaymentSnap = snap
-        web.view.alpha = 0
-        
-        print(TAG, "pushConfirmPage")
-        
-        push(
-            web,
-            animDuration: 0.8
-        ) {
-            web.view.alpha = 1.0
-        }
-    }
+    
     
     /*
      let alert = UIAlertController(

@@ -28,6 +28,10 @@ class Keys {
     public static let COMPLETE_INTRO = "intro"
     public static let COMPLETE_SIGN = "signIn"
     
+    public static let ID_NEWS = "idNews"
+    public static let OLD_BUILD_NUMBER = "oldbn"
+    public static let USER_DEF_COMP = "comp"
+    
     public static let NONCES = [
         "8305976241",
         "1870429536",
