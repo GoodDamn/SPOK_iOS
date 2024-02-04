@@ -308,7 +308,14 @@ extension MainViewController {
                 
             }
         
-        mPremiumService.start()
+        DatabaseUtils.apiKey(
+            Keys.API_YOO
+        ) { [weak self] apikey in
+            Keys.AUTH = apikey
+            self?.mPremiumService
+                .start()
+        }
+        
     }
     
     

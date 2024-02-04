@@ -9,9 +9,7 @@ import Foundation
 
 class Keys {
     
-    public static var AUTH = "".data(
-        using: .utf8
-    )!.base64EncodedString()
+    public static var AUTH = ""
     
     public static let DEEP_LINK_SUB =
         "s://a"
@@ -34,6 +32,8 @@ class Keys {
     
     public static let ID_PAYMENT = "pid"
     public static let ID_PAYMENT_TEMP = "pteid"
+    
+    public static let API_YOO = "yoo"
     
     public static let NONCES = [
         "8305976241",

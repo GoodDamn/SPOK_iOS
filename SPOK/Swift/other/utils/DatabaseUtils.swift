@@ -84,4 +84,34 @@ class DatabaseUtils {
         
     }
     
+    public static func apiKey(
+        _ key: String,
+        completion: @escaping ((String) -> Void)
+    ) {
+        
+        let ref = Database
+            .database()
+            .reference(
+                withPath: "API_KEYS/\(key)"
+            )
+        
+        ref.observeSingleEvent(
+            of: .value
+        ) { snap in
+            
+            guard let apikey = snap.value as? String else {
+                Log.d(
+                    DatabaseUtils.TAG,
+                    "apiKey: INVALID"
+                )
+                return
+            }
+            
+            completion(
+                apikey
+            )
+        }
+        
+    }
+    
 }
