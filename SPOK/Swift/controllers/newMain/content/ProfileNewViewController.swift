@@ -19,7 +19,11 @@ class ProfileNewViewController
         description: "SPOK Подписка на 1 месяц"
     )
     
+    private var messageController: MessageViewController? = nil
+    
     private var mPaymentProcess: PaymentProcess!
+    
+    private var mBtnOpenAccess: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,12 +63,11 @@ class ProfileNewViewController
             )
         
         btnSettings.tintColor = .white
-        btnSettings.addTarget(
-            self,
+        btnSettings.click(
+            for: self,
             action: #selector(
                 onClickBtnSettings(_:)
-            ),
-            for: .touchUpInside
+            )
         )
         
         let lTitle = UILabel(
@@ -222,22 +225,23 @@ class ProfileNewViewController
             w * -0.065
         )
         
-        let btnOpen = ViewUtils
+        mBtnOpenAccess = ViewUtils
             .button(
                 text: "Открыть полный доступ"
             )
         
         LayoutUtils.button(
-            for: btnOpen,
+            for: mBtnOpenAccess,
             view.frame,
             y: 0.85,
             width: 0.702,
             textSize: 0.28
         )
         
-        btnOpen.frame.origin.y = lPrice.frame.bottom() + h * 0.03
-        print("ProfileNewViewController:", "FRAMES:",view.bounds.size,UIScreen.main.bounds.size)
-        let sharey = btnOpen.frame.bottom() + h * 0.03
+        mBtnOpenAccess.frame.origin.y = lPrice.frame.bottom() + h * 0.03
+        
+        let sharey = mBtnOpenAccess
+            .frame.bottom() + h * 0.03
         
         let lastHeight = h - sharey
         let hNeedShare = h * 0.25
@@ -310,13 +314,13 @@ class ProfileNewViewController
             offset: sharey
         )
         
-        btnOpen.frame.center(
+        mBtnOpenAccess.frame.center(
             targetHeight: shareView.frame.origin.y - lPrice.frame.bottom(),
             offset: lPrice.frame.bottom()
         )
         
         lPrice.frame.center(
-            targetHeight: btnOpen.frame.origin.y - imageView2.frame.bottom(),
+            targetHeight: mBtnOpenAccess.frame.origin.y - imageView2.frame.bottom(),
             offset: imageView2.frame.bottom()
         )
         
@@ -335,28 +339,44 @@ class ProfileNewViewController
         shareView.addSubview(lShare)
         shareView.addSubview(btnShare)
         
-        view.addSubview(btnOpen)
+        view.addSubview(mBtnOpenAccess)
         
-        btnOpen.addTarget(
-            self,
+        mBtnOpenAccess.click(
+            for: self,
             action: #selector(
                 btnOpenFullAccess(_:)
-            ),
-            for: .touchUpInside
+            )
         )
         
-        btnShare.addTarget(
-            self,
+        btnShare.click(
+            for: self,
             action: #selector(
                 btnShareImpression(_:)
-            ),
-            for: .touchUpInside
+            )
         )
         
     }
     
     override func onAuthSuccess() {
+        messageController?
+            .pop()
+        messageController = nil
         startPayment()
+    }
+    
+    override func onAuthError() {
+        if messageController == nil {
+            return
+        }
+        
+        messageController!
+            .pop(
+                duration: 0.3
+            ) { [weak self] in
+                self?.messageController!.view
+                    .alpha = 0.0
+            }
+        messageController = nil
     }
     
     @objc func btnOpenFullAccess(
@@ -369,8 +389,26 @@ class ProfileNewViewController
             return
         }
         
-        // Authentication
-        signIn()
+        messageController = MessageViewController()
+        
+        messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
+        
+        messageController!.mAction = { [weak self] in
+            sender.isEnabled = true
+            self?.signIn()
+        }
+        
+        let v = messageController!
+            .view!
+        
+        v.alpha = 0.0
+        push(
+            messageController!,
+            animDuration: 0.4
+        ) {
+            v.alpha = 1.0
+        }
+        
     }
     
     @objc func onClickBtnSettings(
@@ -437,6 +475,8 @@ class ProfileNewViewController
         ) {
             web.view.alpha = 1.0
         }
+        
+        mBtnOpenAccess.isEnabled = true
     }
     
 }

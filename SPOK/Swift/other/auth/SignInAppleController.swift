@@ -32,10 +32,6 @@ class SignInAppleController
 extension SignInAppleController
     : SignInAppleListener {
     
-    func onAnchor() -> UIView {
-        return view
-    }
-    
     func onError(
         _ msg: String
     ) {

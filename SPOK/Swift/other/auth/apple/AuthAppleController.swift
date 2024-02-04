@@ -21,6 +21,7 @@ class AuthAppleController
     }
     
     internal func onAuthSuccess(){}
+    internal func onAuthError(){}
     
     private func processSignIn(
         _ auth: AuthDataResult
@@ -77,7 +78,7 @@ extension AuthAppleController
     func onErrorSign(
         _ msg: String
     ) {
-        
+        onAuthError()
     }
     
 }

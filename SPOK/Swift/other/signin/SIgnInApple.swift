@@ -101,14 +101,7 @@ class SignInApple
     func presentationAnchor(
         for controller: ASAuthorizationController
     ) -> ASPresentationAnchor {
-        
-        return mListener?
-            .onAnchor()
-            .window
-        
-        ?? ASPresentationAnchor
-            .init(
-                frame: .zero
-            )
+        return Utils.main()
+            .view.window!
     }
 }

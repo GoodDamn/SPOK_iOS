@@ -6,13 +6,9 @@
 //
 
 import Foundation
-import UIKit.UIView
 
 protocol SignInAppleListener
     : AnyObject {
-    
-    func onAnchor(
-    ) -> UIView
     
     func onSuccess(
         token: String,

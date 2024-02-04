@@ -13,31 +13,36 @@ class MessageViewController
     
     var msg = ""
     var mAction: (()->Void)? = nil
+    var mBlurView: UIVisualEffectView!
     
     override func loadView() {
-        let blurView = UIVisualEffectView(
-            frame: .zero
+        mBlurView = UIVisualEffectView(
+            frame: UIScreen.main.bounds
         )
         
-        blurView.effect = UIBlurEffect(
+        mBlurView.effect = UIBlurEffect(
             style: .systemChromeMaterialDark
         )
-        
-        view = blurView
+        print("loadView:")
+        view = mBlurView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        mBlurView.backgroundColor = .clear
+        mBlurView.contentView
+            .backgroundColor = .clear
+        
         let w = view.frame.width
         let h = view.frame.height
         
-        let marginTitle = w * 0.18
+        let marginTitle = w * 0.159
         let lTitle = UILabel(
             frame: CGRect(
                 x: marginTitle,
                 y: h * 0.4,
-                width: 0,
+                width: w-marginTitle*2,
                 height: 0
             )
         )
@@ -46,7 +51,7 @@ class MessageViewController
         lTitle.numberOfLines = 0
         lTitle.font = UIFont(
             name: "OpenSans-ExtraBold",
-            size: w * 0.053
+            size: w * 0.051
         )
         lTitle.textColor = .white
         lTitle.text = msg
@@ -56,7 +61,8 @@ class MessageViewController
         
         lTitle.frame.origin.x = (w-f.size.width) * 0.5
         
-        view.addSubview(lTitle)
+        mBlurView.contentView
+            .addSubview(lTitle)
         
     }
     

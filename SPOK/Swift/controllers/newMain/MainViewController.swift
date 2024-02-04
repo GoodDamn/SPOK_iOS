@@ -159,14 +159,18 @@ class MainViewController
     public func push(
         _ c: StackViewController,
         animDuration: TimeInterval,
-        animate: @escaping () -> Void
+        animate: @escaping () -> Void,
+        completion: ((Bool) -> Void)? = nil
     ) {
         appendController(c)
         
         UIView.animate(
             withDuration: animDuration,
             animations: animate
-        )
+        ) { b in
+            c.transitionEnd()
+            completion?(b)
+        }
     }
     
     public func pop(

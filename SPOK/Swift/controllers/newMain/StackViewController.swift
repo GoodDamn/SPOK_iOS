@@ -81,12 +81,14 @@ class StackViewController
     open func push(
         _ c: StackViewController,
         animDuration: TimeInterval,
-        animate: @escaping () -> Void
+        animate: @escaping () -> Void,
+        completion: ((Bool)->Void)? = nil
     ) {
         main.push(
             c,
             animDuration: animDuration,
-            animate: animate
+            animate: animate,
+            completion: completion
         )
         
     }
