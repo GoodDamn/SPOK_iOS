@@ -480,6 +480,8 @@ extension ProfileNewViewController {
         web.mPaymentSnap = snap
         web.view.alpha = 0
         
+        web.mPaymentListener = self
+        
         Log.d(
             TAG,
             "pushConfirmPage"
@@ -495,4 +497,14 @@ extension ProfileNewViewController {
         mBtnOpenAccess.isEnabled = true
     }
     
+}
+
+extension ProfileNewViewController
+    : PaymentConfirmationListener {
+    
+    func onPaid() {
+        
+    }
+    
+    func onExitPayment() {}
 }

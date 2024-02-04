@@ -13,6 +13,9 @@ class WebConfirmationViewController
     : StackViewController {
     
     private let TAG = "WebConfirmationViewController"
+
+    weak var mPaymentListener:
+        PaymentConfirmationListener? = nil
     
     var mPaymentSnap: PaymentSnapshot!
     private var mWeb: WKWebView!
@@ -53,6 +56,11 @@ class WebConfirmationViewController
         
     }
     
+}
+
+
+extension WebConfirmationViewController {
+    
     private func alert(
         _ msg: String
     ) {
@@ -91,6 +99,8 @@ class WebConfirmationViewController
                 ) { _ in}
             }
             
+            self?.mPaymentListener?
+                .onExitPayment()
             self?.popBaseAnim()
         }
         
@@ -109,8 +119,34 @@ class WebConfirmationViewController
         
     }
     
+    private func processPayment(
+        _ info: PaymentInfo
+    ) {
+        if info.status == .success {
+            
+            mPaymentListener?
+                .onPaid()
+            
+            // Register sub
+            DatabaseUtils.setUserValue(
+                info.id,
+                to: Keys.ID_PAYMENT
+            )
+            
+            DatabaseUtils.deleteUserValue(
+                key: Keys.ID_PAYMENT_TEMP
+            )
+            
+            popBaseAnim()
+            return
+        }
+        
+        alert(
+            "Выполнение платежа будет прервано"
+        )
+    }
+    
 }
-
 
 extension WebConfirmationViewController
     : WKNavigationDelegate {
@@ -163,30 +199,6 @@ extension WebConfirmationViewController
         
         decisionHandler(.cancel)
         
-    }
-    
-    private func processPayment(
-        _ info: PaymentInfo
-    ) {
-        if info.status == .success {
-            
-            // Register sub
-            DatabaseUtils.setUserValue(
-                info.id,
-                to: Keys.ID_PAYMENT
-            )
-            
-            DatabaseUtils.deleteUserValue(
-                key: Keys.ID_PAYMENT_TEMP
-            )
-            
-            popBaseAnim()
-            return
-        }
-        
-        alert(
-            "Выполнение платежа будет прервано"
-        )
     }
     
 }
