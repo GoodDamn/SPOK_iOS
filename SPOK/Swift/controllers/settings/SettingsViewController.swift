@@ -22,6 +22,11 @@ class SettingsViewController
         view.backgroundColor = UIColor
             .background()
         
+        let bold = UIFont(
+            name: "OpenSans-Bold",
+            size: 1
+        )
+        
         let w = view.frame.width
         let h = view.frame.height
         
@@ -65,6 +70,11 @@ class SettingsViewController
             for: .normal
         )
         
+        btnDelete.titleLabel?
+            .font = bold?.withSize(
+                hbtnDelete * 0.27
+            )
+        
         btnDelete.addTarget(
             self,
             action: #selector(
@@ -106,7 +116,6 @@ extension SettingsViewController
         auth.currentUser?.reauthenticate(
             with: credentials
         ) { authData, error in
-            
             guard let authData = authData,
                 error == nil else {
                 print(

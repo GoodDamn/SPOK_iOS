@@ -364,14 +364,6 @@ class ProfileNewViewController
     ) {
         sender.isEnabled = false
         
-        let au = AuthUtils.user()
-        
-        print(
-            TAG,
-            "btnOpenFullAccess:",
-            au
-        )
-        
         if AuthUtils.user() != nil {
             startPayment()
             return
@@ -447,14 +439,5 @@ class ProfileNewViewController
         }
     }
     
-    /*private func addStat(
-        _ child: String
-    ) {
-        mDatabase
-            .child("\(mCurrentStreak)_\(child)")
-            .setValue(ServerValue
-                .increment(1)
-            )
-    }*/
 }
 

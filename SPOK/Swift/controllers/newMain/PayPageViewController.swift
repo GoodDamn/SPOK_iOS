@@ -20,15 +20,7 @@ class PayPageViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blurView = UIVisualEffectView(
-            frame: view.frame
-        )
-        
-        blurView.alpha = 1.0
-        
-        blurView.effect = UIBlurEffect(
-            style: .systemChromeMaterialDark
-        )
+        /*
         
         let w = view.frame.width
         let h = view.frame.height
@@ -39,29 +31,7 @@ class PayPageViewController
                 sizeSquare: 0.084
             )
         
-        let marginTitle = w * 0.18
-        let lTitle = UILabel(
-            frame: CGRect(
-                x: marginTitle,
-                y: h * 0.4,
-                width: 0,
-                height: 0
-            )
-        )
         
-        lTitle.textAlignment = .center
-        lTitle.numberOfLines = 0
-        lTitle.font = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: w * 0.053
-        )
-        lTitle.textColor = .white
-        lTitle.text = "Перейти на\nстраницу оплаты?"
-        lTitle.sizeToFit()
-        
-        let f = lTitle.frame
-        
-        lTitle.frame.origin.x = (w-f.size.width) * 0.5
         
         let btnBuy = ViewUtils
             .button(
@@ -97,7 +67,7 @@ class PayPageViewController
             action: #selector(
                 btnBuyClick(_:)
             ), for: .touchUpInside
-        )
+        )*/
     }
     
     @objc func btnBuyClick(
