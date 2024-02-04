@@ -9,7 +9,7 @@ import Foundation
 
 class Keys {
     
-    public static let AUTH = "".data(
+    public static var AUTH = "".data(
         using: .utf8
     )!.base64EncodedString()
     

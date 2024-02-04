@@ -241,6 +241,16 @@ class MainViewController
         mCurrentIndex += 1
     }
     
+}
+
+extension MainViewController {
+    
+    public func superUpdatePremium() {
+        for c in mControllers {
+            c.updatePremium()
+        }
+    }
+    
     private func showSplash(
         msg: String,
         _ completion: @escaping () -> StackViewController
@@ -292,7 +302,7 @@ class MainViewController
                 
                 if withSub {
                     DispatchQueue.ui {
-                        self?.updateState()
+                        self?.superUpdatePremium()
                     }
                 }
                 
@@ -301,13 +311,6 @@ class MainViewController
         mPremiumService.start()
     }
     
-    
-    
-    private func updateState() {
-        for c in mControllers {
-            c.updatePremium()
-        }
-    }
     
     // Network dispatch queue
     private func networkUpdate(
@@ -321,4 +324,5 @@ class MainViewController
         )
         
     }
+    
 }

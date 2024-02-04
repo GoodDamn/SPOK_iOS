@@ -82,6 +82,10 @@ class StackViewController
         }
     }
     
+    public final func callUpdatePremium() {
+        main.superUpdatePremium()
+    }
+    
     
     open func push(
         _ c: StackViewController,

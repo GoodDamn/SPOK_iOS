@@ -382,7 +382,8 @@ class ProfileNewViewController
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
-        if MainViewController.mIsPremiumUser {
+        if MainViewController
+            .mIsPremiumUser {
             Toast.init(
                 text: "Подписка пока действует",
                 duration: 1.5
@@ -503,7 +504,9 @@ extension ProfileNewViewController
     : PaymentConfirmationListener {
     
     func onPaid() {
-        
+        MainViewController
+            .mIsPremiumUser = true
+        callUpdatePremium()
     }
     
     func onExitPayment() {}
