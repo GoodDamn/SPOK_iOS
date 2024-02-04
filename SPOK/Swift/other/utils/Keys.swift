@@ -32,6 +32,8 @@ class Keys {
     public static let OLD_BUILD_NUMBER = "oldbn"
     public static let USER_DEF_COMP = "comp"
     
+    public static let ID_PAYMENT = "pid"
+    
     public static let NONCES = [
         "8305976241",
         "1870429536",

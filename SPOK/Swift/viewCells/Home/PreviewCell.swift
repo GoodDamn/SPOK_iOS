@@ -23,13 +23,14 @@ class PreviewCell
     
     public var mCardTextSize: CardTextSize! {
         didSet {
-            print(
+            Log.d(
                 PreviewCell.TAG,
                 "CARD_TEXT_SIZE:",
                 mCardTextSize.title,
                 mCardTextSize.desc,
                 mDesc.font.pointSize
             )
+            
             if mCardTextSize.desc == mDesc.font.pointSize {
                 return
             }
@@ -52,14 +53,14 @@ class PreviewCell
     private var mCalculated = false
     
     deinit {
-        print(
+        Log.d(
             PreviewCell.TAG,
             "deinit()"
         )
     }
     
     private func ini() {
-        print(PreviewCell.TAG,
+        Log.d(PreviewCell.TAG,
               "ini:",
               frame
         )
@@ -135,12 +136,12 @@ class PreviewCell
             frame: frame
         )
         ini()
-        print(PreviewCell.TAG, "init(frame:)")
+        Log.d(PreviewCell.TAG, "init(frame:)")
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print(PreviewCell.TAG, "init(coder:)")
+        Log.d(PreviewCell.TAG, "init(coder:)")
     }
     
     @objc func onTap(
@@ -150,7 +151,14 @@ class PreviewCell
             return
         }
         
-        if s.isPremium {
+        if s.isPremium && !MainViewController
+            .mIsPremiumUser {
+            // Move to sub page
+            Log.d(
+                PreviewCell.TAG,
+                "MOVE TO SUB PAGE"
+            )
+            
             return
         }
         
@@ -201,7 +209,7 @@ class PreviewCell
     
     private func calculateBounds() {
         
-        print(
+        Log.d(
             PreviewCell.TAG,
             "calculated",
             mCalculated
@@ -241,16 +249,18 @@ class PreviewCell
         mDesc.frame.origin.y = y2
         mTitle.frame.origin.y = y1
         
-        print(PreviewCell.TAG,
-              "FRAMES_TEXT: TITLE",
-              ht,
-              mTitle.font.pointSize
+        Log.d(
+            PreviewCell.TAG,
+            "FRAMES_TEXT: TITLE",
+            ht,
+            mTitle.font.pointSize
         )
         
-        print(PreviewCell.TAG,
-              "FRAMES_TEXT: DESC",
-              hd,
-              mDesc.font.pointSize
+        Log.d(
+            PreviewCell.TAG,
+            "FRAMES_TEXT: DESC",
+            hd,
+            mDesc.font.pointSize
         )
         
         mCalculated = true
@@ -284,20 +294,36 @@ class PreviewCell
         
         calculateBounds()
         
-        if let part = mParticles {
-            part.isHidden = true
-            part.stop()
-            
-            if fileSPC.isPremium {
-                part.isHidden = false
-                part.start()
-            }
-        }
+        manageParticles(
+            fileSPC.isPremium
+        )
         
         UIView.animate(
             withDuration: 0.75
         ) { [weak self] in
             self?.contentView.alpha = 1.0
+        }
+        
+    }
+    
+    private func manageParticles(
+        _ topicPrem: Bool
+    ) {
+        if mParticles == nil {
+            return
+        }
+        
+        mParticles!.isHidden = true
+        mParticles!.stop()
+        
+        if MainViewController
+            .mIsPremiumUser {
+            return
+        }
+        
+        if topicPrem {
+            mParticles!.isHidden = false
+            mParticles!.start()
         }
         
     }

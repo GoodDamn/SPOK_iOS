@@ -12,6 +12,8 @@ import WebKit
 class WebConfirmationViewController
     : StackViewController {
     
+    private let TAG = "WebConfirmationViewController"
+    
     var mPaymentSnap: PaymentSnapshot!
     private var mWeb: WKWebView!
 
@@ -104,7 +106,8 @@ extension WebConfirmationViewController
     : WKNavigationDelegate {
     
     func webView(
-        _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
         if navigationAction.navigationType !=
@@ -156,10 +159,14 @@ extension WebConfirmationViewController
         _ info: PaymentInfo
     ) {
         if info.status == .success {
+            
             // Register sub
+            DatabaseUtils.setUserValue(
+                info.id,
+                to: Keys.ID_PAYMENT
+            )
             
             popBaseAnim()
-            
             return
         }
         

@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 import Network
+import FirebaseDatabase
 
 class MainViewController
-: UIViewController {
+    : UIViewController {
+    
+    private static let TAG = "MainViewController:"
     
     public static var mIsConnected = false
+    public static var mIsPremiumUser = false
     
     public static var mBuildNumber = -1
     public static var mBuildNumberOld = -2
@@ -22,16 +26,21 @@ class MainViewController
     public static var mCardTextSizeB: CardTextSize!
     public static var mCardTextSizeM: CardTextSize!
     
-    private var mControllers: [UIViewController] = []
+    private var mControllers: [StackViewController] = []
     
     private var mCurrentIndex = 0
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(
-            named: "background"
-        )
+        view.backgroundColor = UIColor
+            .background()
+        
+        checkSub()
         
         let mScreen = UIScreen
             .main
@@ -261,6 +270,49 @@ class MainViewController
         
     }
     
+    private func checkSub() {
+        
+        DatabaseUtils.userValue(
+            from: Keys.ID_PAYMENT
+        ) { value in
+            
+            guard let payId = value as? String
+                else {
+                Log.d(
+                    MainViewController.TAG,
+                    "CHECK_SUB: ",
+                    "INVALID_PAYMENT_ID"
+                )
+                return
+            }
+            
+            PaymentProcess.getPaymentInfo(
+                id: payId
+            ) { info in
+                
+                if info.status != .success {
+                    return
+                }
+                
+                MainViewController
+                    .mIsPremiumUser = true
+                
+                DispatchQueue.ui { [weak self] in
+                    self?.updateState()
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    private func updateState() {
+        for c in mControllers {
+            c.updatePremium()
+        }
+    }
+    
     // Network dispatch queue
     private func networkUpdate(
         _ path: NWPath
@@ -272,9 +324,5 @@ class MainViewController
             MainViewController.mIsConnected
         )
         
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
 }

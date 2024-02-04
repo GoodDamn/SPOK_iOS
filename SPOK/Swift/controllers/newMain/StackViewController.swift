@@ -49,6 +49,10 @@ class StackViewController
         )
     }
     
+    public final func updatePremium() {
+        onUpdatePremium()
+    }
+    
     public final func transitionEnd() {
         onTransitionEnd()
     }
@@ -77,6 +81,7 @@ class StackViewController
             c.view.alpha = 1.0
         }
     }
+    
     
     open func push(
         _ c: StackViewController,
@@ -147,5 +152,5 @@ class StackViewController
     }
  
     internal func onTransitionEnd() {}
-    
+    internal func onUpdatePremium() {}
 }

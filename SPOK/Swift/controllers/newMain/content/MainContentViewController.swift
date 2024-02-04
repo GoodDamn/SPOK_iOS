@@ -6,128 +6,30 @@
 //
 
 import UIKit;
-import Network;
 import FirebaseDatabase;
-import FirebaseAuth;
-import UserNotifications;
 
 class MainContentViewController
     : StackViewController {
     
     private let tag = "MainContentViewController:";
     
-    let language = Utils.getLanguageCode();
-    let mDatabase = Database.database();
+    private let mDatabase = Database
+        .database()
     
-    var mNavBar: BottomNavigationBar!;
+    private var mNavBar: BottomNavigationBar!;
     
-    var blurView = UIVisualEffectView(
-        effect: UIBlurEffect(
-            style: .systemChromeMaterial)
-    );
-    
-    var news: [UInt16] = [];
-    var history: [UInt16] = []{
-        didSet{
-            StorageApp.mUserDef
-                .setValue(history, forKey: StorageApp.historyKey);
-        }
-        
-    }
-    
-    var likes: [UInt16] = []{
-        didSet{
-            StorageApp.mUserDef.setValue(likes, forKey: StorageApp.likesKey);
-        }
-    }
-    var recommends: [UInt16] = []{
-        didSet{
-            StorageApp.mUserDef.setValue(recommends, forKey: StorageApp.recommendsKey);
-        }
-    }
-    var isPremiumUser: Bool = false;
-    var isAuthUser: Bool = false;
-    var freeTrialState: UInt8 = 0; // 0 - no free trial, 1 - is active, 2 - expired
-    var isConnected: Bool = false;
-    var isLoadMetaData: Bool = false;
-    var pageViewController: SimplePageViewController? = nil;
-    
-    var mDatabaseStats: DatabaseReference? = nil;
-    var mDatabaseUser: DatabaseReference? = nil;
+    private var mPageView: SimplePageViewController? = nil;
     
     @objc func onPause(){
         print(tag, "onPause();");
-        /*DispatchQueue.global(
-            qos: .userInitiated
-        ).async {
-            let userRef = StorageApp
-                .mUserDef
-                .string(
-                    forKey: Utils
-                        .userRef
-                );
-            
-            if userRef != nil
-                && self.isConnected
-                && self.isLoadMetaData
-                && self.isAuthUser {
-                let dataRef = Database.database().reference(withPath: "Users/"+userRef!);
-                dataRef.child("his2").setValue(Crypt.encryptString(self.history));
-                dataRef.child("like2").setValue(Crypt.encryptString(self.likes));
-                dataRef.child("rec2").setValue(Crypt.encryptString(self.recommends));
-            }
-        }*/
+        
     }
-    
-    /*override func viewWillAppear(
-        _ animated: Bool
-    ) {
-        print(self.tag, "viewWillAppear()",view.subviews);
-        
-        if view.subviews[1] is BottomNavigationBar {
-            return;
-        }
-        
-        NotificationCenter
-            .default
-            .addObserver(
-                self,
-                selector: #selector(onPause),
-                name: UIApplication
-                    .willResignActiveNotification
-                ,object: nil
-            );
-        
-    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(tag, "viewDidLoad()")
         
-        mDatabaseStats = mDatabase.reference(withPath: "Stats/iOS");
-        
-        isAuthUser = Auth.auth().currentUser != nil;
-        
-        history = StorageApp
-            .mUserDef
-            .array(
-                forKey: StorageApp.historyKey
-            ) as? [UInt16] ?? [];
-        
-        likes = StorageApp
-            .mUserDef
-            .array(
-                forKey: StorageApp.likesKey
-            ) as? [UInt16] ?? [];
-        
-        recommends = StorageApp
-            .mUserDef
-            .array(
-                forKey: StorageApp.recommendsKey
-            ) as? [UInt16] ?? [];
-        
-        let ref = mDatabase.reference();
         
         let b = UIScreen
             .main
@@ -163,7 +65,7 @@ class MainContentViewController
         );
         
         mNavBar.mOnSelectTab = { index in
-            self.pageViewController?
+            self.mPageView?
                 .mIndex = index
         }
         
@@ -182,21 +84,21 @@ class MainContentViewController
         mNavBar.center_vertical();
         mNavBar.center_horizontal();
         
-        pageViewController = SimplePageViewController(
+        mPageView = SimplePageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal
         )
         
-        pageViewController?.source = [
+        mPageView?.source = [
             HomeViewController(),
             ProfileNewViewController()
         ]
         
         addChild(
-            pageViewController!
+            mPageView!
         )
         
-        let cont = pageViewController!.view!
+        let cont = mPageView!.view!
         
         view.addSubview(
             cont
@@ -205,12 +107,11 @@ class MainContentViewController
         view.addSubview(mNavBar);
         
         checkPopupNews()
-        
      }
     
     override func viewDidLayoutSubviews() {
         print("MainContentViewController", "viewDidLayout:")
-        pageViewController?.view.frame = CGRect(
+        mPageView?.view.frame = CGRect(
             x: 0,
             y: 0,
             width: view.frame.width,
@@ -253,7 +154,6 @@ class MainContentViewController
     
     
     private func checkPopupNews() {
-        
         let def = UserDefaults.standard
         let lastId = def.integer(
             forKey: Keys.ID_NEWS
