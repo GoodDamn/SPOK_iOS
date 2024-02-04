@@ -383,7 +383,7 @@ class ProfileNewViewController
         _ sender: UIButton
     ) {
         if MainViewController.mIsPremiumUser {
-            return
+        //    return
         }
         
         sender.isEnabled = false

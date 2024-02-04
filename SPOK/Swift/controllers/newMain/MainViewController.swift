@@ -27,6 +27,7 @@ class MainViewController
     public static var mCardTextSizeB: CardTextSize!
     public static var mCardTextSizeM: CardTextSize!
     
+    
     private var mControllers: [StackViewController] = []
     
     private var mCurrentIndex = 0
@@ -281,60 +282,13 @@ class MainViewController
                 forKey: Keys.USER_REF
             )
         
-        DatabaseUtils.time { time in
-            
-            DatabaseUtils.userValue(
-                from: Keys.ID_PAYMENT
-            ) { value in
-                
-                guard let payId = value as? String
-                    else {
-                    Log.d(
-                        MainViewController.TAG,
-                        "CHECK_SUB: ",
-                        "INVALID_PAYMENT_ID"
-                    )
-                    return
-                }
-                
-                PaymentProcess.getPaymentInfo(
-                    id: payId
-                ) { info in
-                    
-                    if info.status != .success {
-                        return
-                    }
-
-                    let d = time - info.createdTime
-                    
-                    Log.d(
-                        MainViewController.TAG,
-                        "DELTA_TIME:",
-                        d,
-                        time,
-                        info.createdTime
-                    )
-                    
-                    if d > 2678400 { // Expired
-                        return
-                    }
-                    
-                    MainViewController
-                        .mIsPremiumUser = true
-                    
-                    DispatchQueue.ui { [weak self] in
-                        self?.updateState()
-                    }
-                    
-                }
-                
-            }
-            
-        }
+        
         
         
         
     }
+    
+    
     
     private func updateState() {
         for c in mControllers {

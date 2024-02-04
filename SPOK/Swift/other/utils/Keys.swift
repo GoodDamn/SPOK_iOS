@@ -33,6 +33,7 @@ class Keys {
     public static let USER_DEF_COMP = "comp"
     
     public static let ID_PAYMENT = "pid"
+    public static let ID_PAYMENT_TEMP = "pteid"
     
     public static let NONCES = [
         "8305976241",

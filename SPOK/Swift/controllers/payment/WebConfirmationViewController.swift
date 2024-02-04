@@ -45,6 +45,12 @@ class WebConfirmationViewController
         )
         
         mWeb.load(req)
+        
+        DatabaseUtils.setUserValue(
+            mPaymentSnap.id,
+            to: Keys.ID_PAYMENT_TEMP
+        )
+        
     }
     
     private func alert(
@@ -63,6 +69,10 @@ class WebConfirmationViewController
             title: "Да",
             style: .destructive
         ) { [weak self] action in
+            
+            DatabaseUtils.deleteUserValue(
+                key: Keys.ID_PAYMENT_TEMP
+            )
             
             if let payID = payID {
                 let url = Keys.URL_PAYMENTS
@@ -137,13 +147,13 @@ extension WebConfirmationViewController
                 id: mPaymentSnap.id
             ) { [weak self] info in
                 
-                if self == nil {
+                if self == nil || info == nil {
                     return
                 }
                 
                 DispatchQueue.ui {
                     self!.processPayment(
-                        info
+                        info!
                     )
                 }
                 
@@ -164,6 +174,10 @@ extension WebConfirmationViewController
             DatabaseUtils.setUserValue(
                 info.id,
                 to: Keys.ID_PAYMENT
+            )
+            
+            DatabaseUtils.deleteUserValue(
+                key: Keys.ID_PAYMENT_TEMP
             )
             
             popBaseAnim()

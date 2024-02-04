@@ -96,6 +96,7 @@
 		25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */; };
 		25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF02B6F7DD700FC8A32 /* Log.swift */; };
 		25F94AF32B6F94A300FC8A32 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF22B6F94A300FC8A32 /* String.swift */; };
+		25F94AF62B6FB8A600FC8A32 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */; };
 		2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */; };
 		2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3DE5B8290BAC7600B00528 /* SignInApple.swift */; };
 		2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */; };
@@ -229,6 +230,7 @@
 		25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtils.swift; sourceTree = "<group>"; };
 		25F94AF02B6F7DD700FC8A32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		25F94AF22B6F94A300FC8A32 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2B2199EB2920C65600F4505C /* test.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.storekit; sourceTree = "<group>"; };
 		2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -770,6 +772,14 @@
 			path = message;
 			sourceTree = "<group>";
 		};
+		25F94AF42B6FB89100FC8A32 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
 		2B5684AF28901871003F4F15 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,6 +887,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				25F94AF42B6FB89100FC8A32 /* service */,
 				25D32DDE2B6901E300EAEA20 /* auth */,
 				25F94ACB2B6D17FE00FC8A32 /* signin */,
 				257A7F992B6CE1B300BBEF5E /* payment */,
@@ -1199,6 +1210,7 @@
 				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,
 				25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */,
 				25F94AD92B6E22BE00FC8A32 /* AuthUtils.swift in Sources */,
+				25F94AF62B6FB8A600FC8A32 /* PremiumService.swift in Sources */,
 				2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,

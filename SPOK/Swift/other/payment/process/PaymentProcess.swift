@@ -80,7 +80,7 @@ class PaymentProcess {
     
     public static func getPaymentInfo(
         id: String,
-        completion: @escaping (PaymentInfo) -> Void
+        completion: @escaping (PaymentInfo?) -> Void
     ) {
         
         var req = URLRequest(
@@ -140,13 +140,17 @@ class PaymentProcess {
     
     private static func extractPaymentInfo(
         _ json: [String : Any]
-    ) -> PaymentInfo {
+    ) -> PaymentInfo? {
         
-        let id = json["id"] as! String
+        guard let id = json["id"] as? String else {
+            return nil
+        }
         
-        let status = Status(
-            rawValue: json["status"] as! String
-        )
+        guard let status = Status(
+            rawValue: json["status"] as? String ?? ""
+        ) else {
+            return nil
+        }
         
         let paid = json["paid"] as! Bool
         
@@ -165,7 +169,7 @@ class PaymentProcess {
         
         return PaymentInfo(
             id: id,
-            status: status!,
+            status: status,
             paid: paid,
             price: price!,
             currency: currency!,

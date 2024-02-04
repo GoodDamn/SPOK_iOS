@@ -51,6 +51,14 @@ class DatabaseUtils {
             )
     }
     
+    public static func deleteUserValue(
+        key: String
+    ) {
+        user()
+            .child(key)
+            .removeValue()
+    }
+    
     public static func setUserValue(
         _ value: Any,
         to: String
