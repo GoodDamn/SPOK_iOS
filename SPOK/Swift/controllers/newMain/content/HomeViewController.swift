@@ -10,8 +10,7 @@ import FirebaseDatabase;
 import FirebaseStorage;
 
 class HomeViewController
-    : StackViewController,
-      CollectionListener {
+    : StackViewController {
     
     private let TAG = "HomeViewController:";
     
@@ -96,14 +95,75 @@ class HomeViewController
             .delegateCollection = self
         
         mDownloader!.start()
+        
     }
+    
+    override func onUpdatePremium() {
+        openPremiumTopics(
+            mTableView
+        )
+    }
+    
+    @objc func onClickBtnBegin(
+        _ sender: UIButton
+    ) {
+        Log.d(
+            TAG,
+            "onClickBtnBegin:"
+        )
+        let c = SheepCounterViewController()
+        c.view.alpha = 0
+        
+        push(
+            c,
+            animDuration: 0.5
+        ) {
+            c.view.alpha = 1.0
+        }
+    }
+    
+}
+
+extension HomeViewController {
+    
+    private func openPremiumTopics(
+        _ inp: UIView
+    ) {
+        
+        if let previewCell =
+            inp as? PreviewCell {
+
+            guard let part = previewCell.mParticles else {
+                return
+            }
+
+            Log.d(
+                TAG,
+                "PreviewCell: DETECTED:",
+                previewCell.mTitle.text
+            )
+            
+            part.stop()
+            part.isHidden = true
+            
+            return
+        }
+        
+        for i in inp.subviews {
+            openPremiumTopics(i)
+        }
+    }
+}
+
+extension HomeViewController
+    : CollectionListener {
     
     func onFirstCollection(
         c: inout ArrayList<Collection>
     ) {
         mCollections = c
 
-        print(TAG, "onFirstCollection")
+        Log.d(TAG, "onFirstCollection")
                
         for i in mCollections.a.indices {
             mColDelegates.append(
@@ -136,7 +196,14 @@ class HomeViewController
     
     func onUpdate(i: Int) {
         let c = mCollections.a[i] as! CollectionTopic
-        print(TAG, "onUpdate",i, c.topicsIDs)
+        
+        Log.d(
+            TAG,
+            "onUpdate",
+            i,
+            c.topicsIDs
+        )
+        
         mColDelegates[i]
             .setCollection(
                 c
@@ -181,7 +248,7 @@ class HomeViewController
         ) { [weak self] cel in
             
             guard let s = self else {
-                print("HomeViewController: viewCell Sheep: GC")
+                Log.d("HomeViewController: viewCell Sheep: GC")
                 return
             }
             
@@ -202,7 +269,7 @@ class HomeViewController
                     for: .touchUpInside
                 )
             
-            print(s.TAG, "SheepViewCell:", cell.subviews.count)
+            Log.d(s.TAG, "SheepViewCell:", cell.subviews.count)
         }
         
         mCollections.a.append(
@@ -220,31 +287,10 @@ class HomeViewController
             ],
             with: .left)
     }
-    
-    
-    @objc func onClickBtnBegin(
-        _ sender: UIButton
-    ) {
-        print(
-            TAG,
-            "onClickBtnBegin:"
-        )
-        let c = SheepCounterViewController()
-        c.view.alpha = 0
-        
-        push(
-            c,
-            animDuration: 0.5
-        ) {
-            c.view.alpha = 1.0
-        }
-    }
-    
 }
 
-
 extension HomeViewController
-: UITableViewDataSource {
+    : UITableViewDataSource {
     
     func tableView(
         _ tableView: UITableView,
@@ -253,7 +299,7 @@ extension HomeViewController
         let c = mCollections.a[
             indexPath.row
         ]
-        print(TAG,
+        Log.d(TAG,
               "heightForRowAt:",
               c.height
         )

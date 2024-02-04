@@ -383,7 +383,11 @@ class ProfileNewViewController
         _ sender: UIButton
     ) {
         if MainViewController.mIsPremiumUser {
-        //    return
+            Toast.init(
+                text: "Подписка пока действует",
+                duration: 1.5
+            ).show()
+            return
         }
         
         sender.isEnabled = false
@@ -444,7 +448,12 @@ class ProfileNewViewController
             
         }
     }
-     
+    
+}
+
+
+extension ProfileNewViewController {
+    
     private func startPayment() {
         mPaymentProcess = PaymentProcess(
             payment: mPayment
@@ -471,7 +480,10 @@ class ProfileNewViewController
         web.mPaymentSnap = snap
         web.view.alpha = 0
         
-        print(TAG, "pushConfirmPage")
+        Log.d(
+            TAG,
+            "pushConfirmPage"
+        )
         
         push(
             web,
@@ -484,4 +496,3 @@ class ProfileNewViewController
     }
     
 }
-

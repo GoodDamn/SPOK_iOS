@@ -11,7 +11,7 @@ import FirebaseDatabase;
 class MainContentViewController
     : StackViewController {
     
-    private let tag = "MainContentViewController:";
+    private let TAG = "MainContentViewController:";
     
     private let mDatabase = Database
         .database()
@@ -19,16 +19,11 @@ class MainContentViewController
     private var mNavBar: BottomNavigationBar!;
     
     private var mPageView: SimplePageViewController? = nil;
-    
-    @objc func onPause(){
-        print(tag, "onPause();");
         
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(tag, "viewDidLoad()")
+        print(TAG, "viewDidLoad()")
         
         
         let b = UIScreen
@@ -119,6 +114,25 @@ class MainContentViewController
         )
         
         super.viewDidLayoutSubviews()
+    }
+    
+    override func onUpdatePremium() {
+        Log.d(
+            TAG,
+            "onUpdatePremium:",
+            MainViewController.mIsPremiumUser,
+            mPageView
+        )
+        
+        if mPageView == nil {
+            return
+        }
+        
+        for i in mPageView!.source {
+            (i as? StackViewController)?
+                .onUpdatePremium()
+        }
+        
     }
     
     private func createTab(

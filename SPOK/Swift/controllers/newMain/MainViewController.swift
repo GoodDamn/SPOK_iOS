@@ -285,11 +285,13 @@ class MainViewController
             )
         
         mPremiumService
-            .mOnCheckPremium = { withSub in
+            .mOnCheckPremium = {[weak self]
+                withSub in
+                
                 MainViewController.mIsPremiumUser = withSub
                 
                 if withSub {
-                    DispatchQueue.ui { [weak self] in
+                    DispatchQueue.ui {
                         self?.updateState()
                     }
                 }
