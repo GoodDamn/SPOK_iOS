@@ -27,6 +27,8 @@ class MainViewController
     public static var mCardTextSizeB: CardTextSize!
     public static var mCardTextSizeM: CardTextSize!
     
+    private let mPremiumService =
+        PremiumService()
     
     private var mControllers: [StackViewController] = []
     
@@ -282,10 +284,19 @@ class MainViewController
                 forKey: Keys.USER_REF
             )
         
+        mPremiumService
+            .mOnCheckPremium = { withSub in
+                MainViewController.mIsPremiumUser = withSub
+                
+                if withSub {
+                    DispatchQueue.ui { [weak self] in
+                        self?.updateState()
+                    }
+                }
+                
+            }
         
-        
-        
-        
+        mPremiumService.start()
     }
     
     
