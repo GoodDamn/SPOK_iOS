@@ -12,6 +12,24 @@ class DatabaseUtils {
     
     public static let TAG = "DatabaseUtils"
     
+    public static func time(
+        completion: @escaping (Int) -> Void
+    ) {
+        let ref = Database
+            .database()
+            .reference(
+                withPath: "opt/time"
+            )
+        
+        ref.observeSingleEvent(
+            of: .value
+        ) { snap in
+            completion(
+                snap.value as! Int
+            )
+        }
+    }
+    
     public static func user(
     ) -> DatabaseReference {
         let id = UserDefaults

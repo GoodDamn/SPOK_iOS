@@ -382,6 +382,10 @@ class ProfileNewViewController
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
+        if MainViewController.mIsPremiumUser {
+            return
+        }
+        
         sender.isEnabled = false
         
         if AuthUtils.user() != nil {

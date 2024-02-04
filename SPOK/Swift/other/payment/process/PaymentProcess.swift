@@ -14,7 +14,7 @@ class PaymentProcess {
     private var mPaymentSnap: PaymentSnapshot? = nil
     
     deinit {
-        print("PaymentProcess: deinit()")
+        Log.d("PaymentProcess: deinit()")
     }
     
     init(
@@ -49,7 +49,7 @@ class PaymentProcess {
             method: "POST"
         ) { [weak self] json in
             guard let s = self else {
-                print("PaymentProcess: requestJson: GC")
+                Log.d("PaymentProcess: requestJson: GC")
                 return
             }
             
@@ -62,12 +62,12 @@ class PaymentProcess {
                 confirmUrl: confirmUrl
             )
             
-            print(
+            Log.d(
                 "Payment: Snapshot:",
                 s.mPaymentSnap
             )
             
-            print(
+            Log.d(
                 "Payment: start:",
                 json
             )
@@ -99,21 +99,7 @@ class PaymentProcess {
         URLSession.shared.dataTask(
             with: req
         ) { data, resp, error in
-            
-            print(
-                "PaymentProcess: RESPONSE:",
-                resp
-            )
-            
-            print(
-                "PaymentProcess: ERROR: ",
-                error
-            )
-            
-            print(
-                "PaymentProcess: DATA:",
-                data
-            )
+    
             
             guard let data = data else {
                 return
@@ -126,7 +112,7 @@ class PaymentProcess {
                         with: data
                     ) as! [String : Any]
                 
-                print(
+                Log.d(
                     "PaymentProcess: paymentInfo: JSON",
                     json
                 )
@@ -141,7 +127,7 @@ class PaymentProcess {
                 
                 
             } catch {
-                print(
+                Log.d(
                     "PaymentProcess: paymentINFO:JSON",
                     error
                 )
@@ -175,12 +161,15 @@ class PaymentProcess {
                     as String
         )
         
+        let createdTime = (json["created_at"] as? String)?.iso8601Epoch() ?? 0
+        
         return PaymentInfo(
             id: id,
             status: status!,
             paid: paid,
             price: price!,
-            currency: currency!
+            currency: currency!,
+            createdTime: createdTime
         )
         
     }

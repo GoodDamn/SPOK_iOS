@@ -13,4 +13,5 @@ struct PaymentInfo {
     let paid: Bool
     let price: Float
     let currency: Currency
+    let createdTime: Int
 }

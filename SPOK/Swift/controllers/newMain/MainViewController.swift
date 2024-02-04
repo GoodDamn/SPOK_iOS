@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Network
 import FirebaseDatabase
+import FirebaseAuth
 
 class MainViewController
     : UIViewController {
@@ -272,38 +273,66 @@ class MainViewController
     
     private func checkSub() {
         
-        DatabaseUtils.userValue(
-            from: Keys.ID_PAYMENT
-        ) { value in
+        UserDefaults
+            .standard
+            .setValue(
+                AuthUtils.user()?
+                    .uid ?? "",
+                forKey: Keys.USER_REF
+            )
+        
+        DatabaseUtils.time { time in
             
-            guard let payId = value as? String
-                else {
-                Log.d(
-                    MainViewController.TAG,
-                    "CHECK_SUB: ",
-                    "INVALID_PAYMENT_ID"
-                )
-                return
-            }
-            
-            PaymentProcess.getPaymentInfo(
-                id: payId
-            ) { info in
+            DatabaseUtils.userValue(
+                from: Keys.ID_PAYMENT
+            ) { value in
                 
-                if info.status != .success {
+                guard let payId = value as? String
+                    else {
+                    Log.d(
+                        MainViewController.TAG,
+                        "CHECK_SUB: ",
+                        "INVALID_PAYMENT_ID"
+                    )
                     return
                 }
                 
-                MainViewController
-                    .mIsPremiumUser = true
-                
-                DispatchQueue.ui { [weak self] in
-                    self?.updateState()
+                PaymentProcess.getPaymentInfo(
+                    id: payId
+                ) { info in
+                    
+                    if info.status != .success {
+                        return
+                    }
+
+                    let d = time - info.createdTime
+                    
+                    Log.d(
+                        MainViewController.TAG,
+                        "DELTA_TIME:",
+                        d,
+                        time,
+                        info.createdTime
+                    )
+                    
+                    if d > 2678400 { // Expired
+                        return
+                    }
+                    
+                    MainViewController
+                        .mIsPremiumUser = true
+                    
+                    DispatchQueue.ui { [weak self] in
+                        self?.updateState()
+                    }
+                    
                 }
                 
             }
             
         }
+        
+        
         
     }
     
