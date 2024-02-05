@@ -32,23 +32,14 @@ class SettingsViewController
         
         let hbtnDelete = h * 0.1
         
-        
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
                 sizeSquare: 0.07
             )
+        
         targetClose(
             btnClose
-        )
-        
-        let stackView = UIStackView(
-            frame: CGRect(
-                x: 0,
-                y: h*0.4,
-                width: w,
-                height: h
-            )
         )
         
         let btnDelete = UIButton(
@@ -60,8 +51,27 @@ class SettingsViewController
             )
         )
         
+        let btnSignOut = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: btnDelete.frame.origin.y - hbtnDelete,
+                width: w,
+                height: hbtnDelete
+            )
+        )
+        
+        btnSignOut.setTitleColor(
+            .systemRed,
+            for: .normal
+        )
+                
         btnDelete.setTitleColor(
             .systemRed,
+            for: .normal
+        )
+        
+        btnSignOut.setTitle(
+            "Выйти из аккаунта",
             for: .normal
         )
         
@@ -75,16 +85,27 @@ class SettingsViewController
                 hbtnDelete * 0.27
             )
         
-        btnDelete.addTarget(
-            self,
+        btnSignOut.titleLabel?
+            .font = btnDelete.titleLabel?
+                .font
+        
+        btnSignOut.click(
+            for: self,
             action: #selector(
-                onClickBtnDelete(_:)
-            ),
-            for: .touchUpInside
+                onClickBtnSignOut(_:)
+            )
         )
         
-        view.addSubview(btnClose)
+        btnDelete.click(
+            for: self,
+            action: #selector(
+                onClickBtnDelete(_:)
+            )
+        )
+        
+        view.addSubview(btnSignOut)
         view.addSubview(btnDelete)
+        view.addSubview(btnClose)
     }
     
     @objc func onClickBtnDelete(
@@ -92,6 +113,23 @@ class SettingsViewController
     ) {
         sender.isEnabled = false
         signIn()
+    }
+    
+    @objc func onClickBtnSignOut(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        do {
+            try Auth.auth()
+                .signOut()
+        } catch {
+            Log.d(
+                TAG,
+                "SIGN_OUT_FAIL:",
+                error
+            )
+        }
+        exit(0)
     }
     
 }
@@ -116,6 +154,7 @@ extension SettingsViewController
         auth.currentUser?.reauthenticate(
             with: credentials
         ) { authData, error in
+            
             guard let authData = authData,
                 error == nil else {
                 print(
@@ -128,9 +167,23 @@ extension SettingsViewController
             auth.revokeToken(
                 withAuthorizationCode: authCode
             ) { error in
-                print(
+                Log.d(
                     "SettingsViewController: REVOKE: ERROR",
                     error?.localizedDescription
+                )
+            }
+            
+            DatabaseUtils
+                .user()
+                .removeValue()
+            
+            do {
+                try auth.signOut()
+            } catch {
+                print(
+                    "SettingsViewController:",
+                    "SIGN_OUT_ERROR:",
+                    error.localizedDescription
                 )
             }
             
@@ -140,19 +193,8 @@ extension SettingsViewController
                         "SettingsViewController: DELETE_USER:",
                         error?.localizedDescription
                     )
+                    exit(0)
                 }
-            
-            
-        }
-        
-        do {
-            try auth.signOut()
-        } catch {
-            print(
-                "SettingsViewController:",
-                "SIGN_OUT_ERROR:",
-                error.localizedDescription
-            )
         }
         
     }

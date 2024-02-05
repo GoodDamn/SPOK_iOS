@@ -325,7 +325,7 @@ extension MainViewController {
     ) {
         MainViewController.mIsConnected =
             path.status == .satisfied
-        print(
+        Log.d(
             "MainViewController: networkUpdate:",
             MainViewController.mIsConnected
         )

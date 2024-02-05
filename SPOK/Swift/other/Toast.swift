@@ -10,35 +10,26 @@ import UIKit;
 
 class Toast{
     
-    private var isShowing:Bool;
-    private var text:String;
-    private var duration:Double;
+    private var mIsShowing: Bool
+    private var mText: String
+    private var mDuration: Double
     
-    init(text:String, duration:Double){
-        self.text = text;
-        self.duration = duration;
-        isShowing = false;
-    }
-    
-    public func setText(
-        text:String
-    ) -> Toast{
-        self.text = text;
-        return self;
-    }
-    
-    public func setDuration(
+    init(
+        text: String,
         duration: Double
-    )->Toast{
-        self.duration = duration;
-        return self;
+    ) {
+        mText = text;
+        mDuration = duration;
+        mIsShowing = false;
     }
     
-    public func show(){
-        if (isShowing){
+    public func show() {
+        if (mIsShowing) {
             return;
         }
-        isShowing = true;
+        
+        mIsShowing = true
+        
         guard let window = UIApplication
             .shared
             .connectedScenes
@@ -47,12 +38,15 @@ class Toast{
         };
         
         let label = UILabel();
-        label.text = text;
-        label.textColor=UIColor.black;
-        label.font=UIFont.systemFont(ofSize: 18);
-        label.backgroundColor=UIColor.white;
-        label.numberOfLines=4;
-        label.textAlignment = .center;
+        label.text = mText;
+        label.textColor = .white;
+        label.font= UIFont.systemFont(
+            ofSize: 18
+        )
+        
+        label.backgroundColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
     
         let textSize = label.intrinsicContentSize;
         let lwidth=min(textSize.width, window.frame.width-40);
