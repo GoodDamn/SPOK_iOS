@@ -388,6 +388,14 @@
 			path = protocols;
 			sourceTree = "<group>";
 		};
+		254AA1102B711FA500853B17 /* labels */ = {
+			isa = PBXGroup;
+			children = (
+				256940952B6672610005BFCC /* UILabela.swift */,
+			);
+			path = labels;
+			sourceTree = "<group>";
+		};
 		255C04F32B4FA398006D9FD0 /* sleepIntro */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,12 +611,12 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				254AA1102B711FA500853B17 /* labels */,
 				255C04F32B4FA398006D9FD0 /* sleepIntro */,
 				2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */,
 				250622802B4E891900FCD636 /* ProgressBar.swift */,
 				250622822B4EA1F000FCD636 /* PageBar.swift */,
 				25F770D62B598C9100C62071 /* Particles.swift */,
-				256940952B6672610005BFCC /* UILabela.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1470,7 +1478,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1481,7 +1489,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.9;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1501,7 +1509,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1512,7 +1520,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.9;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
