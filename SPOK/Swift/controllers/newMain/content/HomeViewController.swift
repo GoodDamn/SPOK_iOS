@@ -6,10 +6,8 @@
 //
 
 import UIKit;
-import FirebaseDatabase;
-import FirebaseStorage;
 
-class HomeViewController
+final class HomeViewController
     : StackViewController {
     
     private let TAG = "HomeViewController:";

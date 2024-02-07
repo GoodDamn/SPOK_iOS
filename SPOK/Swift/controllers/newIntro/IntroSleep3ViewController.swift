@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class IntroSleep3ViewController
+final class IntroSleep3ViewController
     : DelegateViewController {
     
     private var mPageController: SimplePageViewController!
@@ -34,8 +34,10 @@ class IntroSleep3ViewController
         
         LayoutUtils.button(
             for: btnStart,
-            self.view.frame,
-            y: 0
+            view.frame,
+            y: 0,
+            width: 0.702,
+            textSize: 0.28
         )
         
         btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom

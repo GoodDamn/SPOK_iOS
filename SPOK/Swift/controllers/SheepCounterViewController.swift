@@ -72,7 +72,7 @@ class SheepCounterViewController
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
-                sizeSquare: 0.084
+                sizeSquare: 0.168
             )
         
         let ofx = w * 0.217

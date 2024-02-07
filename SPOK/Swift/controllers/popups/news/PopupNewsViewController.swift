@@ -41,7 +41,7 @@ class PopupNewsViewController
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
-                sizeSquare: 0.08
+                sizeSquare: 0.16
             )
         
         btnClose.addTarget(

@@ -14,7 +14,7 @@ public class SheepViewCell
     private static let TAG = "SheepViewCell:"
     public static let id = "sheep"
     
-    public weak var mBtnBegin: UIButton?
+    public var mBtnBegin: UIButton?
     private var mSheep: Sheep?
     private var moon: UIImageView?
     
@@ -37,21 +37,29 @@ public class SheepViewCell
             )
         
         moon = UIImageView()
-        moon!.image = UIImage(
+        moon?.image = UIImage(
             named: "moon 1"
         )
-        moon!.backgroundColor = .clear
+        moon?.backgroundColor = .clear
         
         mSheep = Sheep(
             frame: .zero
         )
         
-        contentView
-            .addSubview(mBtnBegin!)
-        contentView
-            .addSubview(mSheep!)
-        contentView
-            .addSubview(moon!)
+        if let beg = mBtnBegin {
+            contentView
+                .addSubview(beg)
+        }
+        
+        if let sheep = mSheep {
+            contentView
+                .addSubview(sheep)
+        }
+        
+        if let moon = moon {
+            contentView
+                .addSubview(moon)
+        }
     }
     
     required init?(coder: NSCoder) {

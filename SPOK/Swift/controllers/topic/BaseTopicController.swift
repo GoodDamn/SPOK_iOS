@@ -67,7 +67,7 @@ class BaseTopicController
         mBtnClose = ViewUtils
             .buttonClose(
                 in: view,
-                sizeSquare: 0.068
+                sizeSquare: 0.136
             )
         
         mBtnClose.alpha = 0.11

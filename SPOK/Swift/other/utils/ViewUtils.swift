@@ -122,7 +122,8 @@ public class ViewUtils {
     public static func buttonClose(
         _ systemNameImage: String = "xmark",
         in view: UIView,
-        sizeSquare si: CGFloat
+        sizeSquare si: CGFloat,
+        iconProp: CGFloat = 0.5
     ) -> UIButton {
         
         let w = view.frame.width
@@ -130,17 +131,19 @@ public class ViewUtils {
         
         let sizeBtnExit = si * w
         
+        let iconSize = sizeBtnExit * iconProp
+        
         let btnExitConfig = UIImage
             .SymbolConfiguration(
-                pointSize: sizeBtnExit,
+                pointSize: iconSize,
                 weight: .bold,
                 scale: .default
             )
         
         let btnExit = UIButton(
             frame: CGRect(
-                x: w-sizeBtnExit-w*0.06,
-                y: h * 0.04,
+                x: w - sizeBtnExit - w * 0.06,
+                y: h * 0.04 - iconSize * 0.5,
                 width: sizeBtnExit,
                 height: sizeBtnExit
             )

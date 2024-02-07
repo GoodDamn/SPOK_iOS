@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProfileNewViewController
+final class ProfileNewViewController
     : AuthAppleController {
     
     private let TAG = "ProfileNewViewController"
@@ -59,7 +59,8 @@ class ProfileNewViewController
             .buttonClose(
                 "gearshape.fill",
                 in: view,
-                sizeSquare: 0.065
+                sizeSquare: 0.13,
+                iconProp: 0.4
             )
         
         btnSettings.tintColor = .white

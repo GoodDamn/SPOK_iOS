@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class SettingsViewController
+final class SettingsViewController
     : SignInAppleController {
     
     private let TAG = "SettingsViewController"
@@ -35,7 +35,7 @@ class SettingsViewController
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
-                sizeSquare: 0.07
+                sizeSquare: 0.14
             )
         
         targetClose(
@@ -45,7 +45,7 @@ class SettingsViewController
         let btnDelete = UIButton(
             frame: CGRect(
                 x: 0,
-                y: h-hbtnDelete,
+                y: h - hbtnDelete - mInsets.bottom,
                 width: w,
                 height: hbtnDelete
             )
