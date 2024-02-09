@@ -14,6 +14,8 @@ final class SettingsViewController
     
     private let TAG = "SettingsViewController"
     
+    private var mTableOptions: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -42,30 +44,22 @@ final class SettingsViewController
             btnClose
         )
         
-        let btnDelete = UIButton(
+        let ytable = h * 0.4
+        
+        mTableOptions = UITableView(
             frame: CGRect(
                 x: 0,
-                y: h - hbtnDelete - mInsets.bottom,
+                y: ytable,
                 width: w,
-                height: hbtnDelete
-            )
+                height: h - ytable - mInsets.bottom
+            ),
+            style: .plain
         )
         
-        let btnSignOut = UIButton(
-            frame: CGRect(
-                x: 0,
-                y: btnDelete.frame.origin.y - hbtnDelete,
-                width: w,
-                height: hbtnDelete
-            )
-        )
+        mTableOptions.backgroundColor =
+            .clear
         
-        btnSignOut.setTitleColor(
-            .systemRed,
-            for: .normal
-        )
-                
-        btnDelete.setTitleColor(
+        /*btnDelete.setTitleColor(
             .systemRed,
             for: .normal
         )
@@ -83,28 +77,8 @@ final class SettingsViewController
         btnDelete.titleLabel?
             .font = bold?.withSize(
                 hbtnDelete * 0.27
-            )
+            )*/
         
-        btnSignOut.titleLabel?
-            .font = btnDelete.titleLabel?
-                .font
-        
-        btnSignOut.click(
-            for: self,
-            action: #selector(
-                onClickBtnSignOut(_:)
-            )
-        )
-        
-        btnDelete.click(
-            for: self,
-            action: #selector(
-                onClickBtnDelete(_:)
-            )
-        )
-        
-        view.addSubview(btnSignOut)
-        view.addSubview(btnDelete)
         view.addSubview(btnClose)
     }
     

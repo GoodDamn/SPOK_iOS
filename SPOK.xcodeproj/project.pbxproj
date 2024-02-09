@@ -66,6 +66,9 @@
 		25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */; };
 		25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5F2B510E0100C9A73E /* StackViewController.swift */; };
 		25D32DD92B68D69A00EAEA20 /* PopupNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D32DD82B68D69A00EAEA20 /* PopupNewsViewController.swift */; };
+		25D61E822B75F0F100B5A72B /* OptionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E812B75F0F100B5A72B /* OptionsTableView.swift */; };
+		25D61E852B75F35600B5A72B /* OptionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E842B75F35600B5A72B /* OptionTableCell.swift */; };
+		25D61E882B75F8A500B5A72B /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E872B75F8A500B5A72B /* Option.swift */; };
 		25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */; };
 		25DB9A782B53BD4900B5359F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A772B53BD4900B5359F /* Collection.swift */; };
 		25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */; };
@@ -201,6 +204,9 @@
 		25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		25C8BB5F2B510E0100C9A73E /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		25D32DD82B68D69A00EAEA20 /* PopupNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupNewsViewController.swift; sourceTree = "<group>"; };
+		25D61E812B75F0F100B5A72B /* OptionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableView.swift; sourceTree = "<group>"; };
+		25D61E842B75F35600B5A72B /* OptionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableCell.swift; sourceTree = "<group>"; };
+		25D61E872B75F8A500B5A72B /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDownloader.swift; sourceTree = "<group>"; };
 		25DB9A772B53BD4900B5359F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListener.swift; sourceTree = "<group>"; };
@@ -611,6 +617,7 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				25D61E802B75F0D700B5A72B /* tableViews */,
 				254AA1102B711FA500853B17 /* labels */,
 				255C04F32B4FA398006D9FD0 /* sleepIntro */,
 				2501D36C2A836CF1002FC348 /* BottomNavigationBar.swift */,
@@ -619,6 +626,30 @@
 				25F770D62B598C9100C62071 /* Particles.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		25D61E802B75F0D700B5A72B /* tableViews */ = {
+			isa = PBXGroup;
+			children = (
+				25D61E812B75F0F100B5A72B /* OptionsTableView.swift */,
+			);
+			path = tableViews;
+			sourceTree = "<group>";
+		};
+		25D61E832B75F33F00B5A72B /* option */ = {
+			isa = PBXGroup;
+			children = (
+				25D61E842B75F35600B5A72B /* OptionTableCell.swift */,
+			);
+			path = option;
+			sourceTree = "<group>";
+		};
+		25D61E862B75F89A00B5A72B /* option */ = {
+			isa = PBXGroup;
+			children = (
+				25D61E872B75F8A500B5A72B /* Option.swift */,
+			);
+			path = option;
 			sourceTree = "<group>";
 		};
 		25DB9A702B52BE7E00B5359F /* splash */ = {
@@ -641,6 +672,7 @@
 		25DB9A762B53BD3D00B5359F /* models */ = {
 			isa = PBXGroup;
 			children = (
+				25D61E862B75F89A00B5A72B /* option */,
 				25DB9ACF2B57EC3800B5359F /* collection */,
 				259FE6102B62325D00E237B7 /* CardTextSize.swift */,
 				256940852B63B72E0005BFCC /* ArrayList.swift */,
@@ -948,6 +980,7 @@
 		2BCE07C127AD2EDE00170B4A /* viewCells */ = {
 			isa = PBXGroup;
 			children = (
+				25D61E832B75F33F00B5A72B /* option */,
 				2BA51A9F280FF7F60035262A /* Home */,
 			);
 			path = viewCells;
@@ -1238,6 +1271,7 @@
 				257A7FA82B6CE1B300BBEF5E /* Status.swift in Sources */,
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,
 				25F94AD32B6E1A9F00FC8A32 /* UILabel.swift in Sources */,
+				25D61E822B75F0F100B5A72B /* OptionsTableView.swift in Sources */,
 				25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */,
 				25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */,
 				25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */,
@@ -1252,6 +1286,7 @@
 				257A7FAE2B6CE1B300BBEF5E /* Payment.swift in Sources */,
 				2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */,
 				25F770D72B598C9100C62071 /* Particles.swift in Sources */,
+				25D61E882B75F8A500B5A72B /* Option.swift in Sources */,
 				2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */,
 				25F94ADC2B6E579500FC8A32 /* SettingsViewController.swift in Sources */,
 				2B93CF4E276F2E5000219690 /* HomeViewController.swift in Sources */,
@@ -1259,6 +1294,7 @@
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
 				25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */,
 				2BF06BF628E7953B00A2ACFF /* SPOKTopic.swift in Sources */,
+				25D61E852B75F35600B5A72B /* OptionTableCell.swift in Sources */,
 				25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */,
 				2B4C74A528E9BDA20097CDE7 /* SPOKNotify.swift in Sources */,
 			);
@@ -1478,7 +1514,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1489,7 +1525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
@@ -1509,7 +1545,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = 88QU53792F;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1520,7 +1556,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.1;
+				MARKETING_VERSION = 0.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
