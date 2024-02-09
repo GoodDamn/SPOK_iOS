@@ -167,4 +167,38 @@ public class ViewUtils {
         return btnExit
     }
     
+    public static func alertAction(
+        title: String,
+        message: String? = nil,
+        controller: UIViewController,
+        accept: @escaping ((UIAlertAction) -> Void)
+    ) {
+        
+        let c = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        c.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: accept
+            )
+        )
+                    
+        c.addAction(
+            UIAlertAction(
+                title: "Отмена",
+                style: .cancel
+            )
+        )
+        
+        controller.present(
+            c,
+            animated: true
+        )
+    }
+    
 }
