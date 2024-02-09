@@ -28,6 +28,14 @@ final class OptionTableCell
     private var mImageViewIcon: UIImageView!
     private var mLabelTitle: UILabel!
     
+    override class func awakeFromNib() {
+        print("OptionTableCell: awakeFromNib")
+    }
+    
+    override func prepareForReuse() {
+        print("OptionTableCell: prepareReuse")
+    }
+    
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
@@ -37,38 +45,28 @@ final class OptionTableCell
             reuseIdentifier: reuseIdentifier
         )
         
-        let imageSize = frame.height * 0.5
-        let yimage = imageSize * 0.5
         
-        mImageViewIcon = UIImageView(
-            frame: CGRect(
-                x: 0,
-                y: yimage,
-                width: imageSize,
-                height: imageSize
-            )
-        )
-        
-        mLabelTitle = UILabel(
-            frame: CGRect(
-                x: imageSize,
-                y: yimage,
-                width: frame.width - imageSize,
-                height: imageSize
-            )
-        )
+        mImageViewIcon = UIImageView()
+        mLabelTitle = UILabel()
         
         mLabelTitle.font = UIFont(
             name: "OpenSans-SemiBold",
-            size: imageSize
+            size: 1
         )
         
-        mLabelTitle.textColor = .white
+        mLabelTitle.textColor = UIColor
+            .accent()
         
         backgroundColor = .clear
-        mImageViewIcon.backgroundColor = .clear
-        mLabelTitle.backgroundColor =
-            .clear
+        mImageViewIcon
+            .backgroundColor = .clear
+        
+        mLabelTitle
+            .backgroundColor = .clear
+        
+        mImageViewIcon.tintColor = UIColor
+            .accent()
+        
         
         contentView.addSubview(
             mImageViewIcon
@@ -77,6 +75,41 @@ final class OptionTableCell
         contentView.addSubview(
             mLabelTitle
         )
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if selectionStyle == .none {
+            return
+        }
+        
+        let w = frame.width
+        
+        let imageSize = frame.height * 0.25
+        let yimage = imageSize * 0.5
+        
+        mImageViewIcon.frame = CGRect(
+            x: 0,
+            y: imageSize - yimage,
+            width: imageSize,
+            height: imageSize
+        )
+        
+        mLabelTitle.frame = CGRect(
+            x: imageSize*2,
+            y: yimage,
+            width: w - imageSize*2,
+            height: imageSize
+        )
+        
+        mLabelTitle.font = mLabelTitle
+            .font?.withSize(
+                imageSize
+            )
+        
+        selectionStyle = .none
+        
     }
     
     required init?(

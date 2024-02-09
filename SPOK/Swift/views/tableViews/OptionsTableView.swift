@@ -11,8 +11,9 @@ import UIKit.UITableView
 final class OptionsTableView
     : UITableView {
     
+    public static var mOptionSize: CGSize = .zero
+    
     private final let mOptions: [Option]!
-    private final var mRowHeight: CGFloat = 0.0
     
     init(
         frame: CGRect,
@@ -20,7 +21,10 @@ final class OptionsTableView
         rowHeight: CGFloat,
         style: UITableView.Style
     ) {
-        mRowHeight = rowHeight
+        OptionsTableView.mOptionSize = CGSize(
+            width: frame.width,
+            height: rowHeight
+        )
         mOptions = source
         super.init(
             frame: frame,
@@ -62,7 +66,9 @@ extension OptionsTableView
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        return mRowHeight
+        return OptionsTableView
+            .mOptionSize
+            .height
     }
     
 }

@@ -15,4 +15,10 @@ extension UIColor {
         )
     }
     
+    static func accent() -> UIColor? {
+        return UIColor(
+            named: "btnBack"
+        )
+    }
+    
 }

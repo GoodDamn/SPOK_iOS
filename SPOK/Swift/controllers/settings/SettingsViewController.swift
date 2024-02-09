@@ -52,15 +52,17 @@ final class SettingsViewController
                 image: UIImage(
                     systemName: "xmark"
                 ),
-                text: "Sign out"
+                text: "Выйти из аккаунта"
             ),
             Option(
                 image: UIImage(
                     systemName: "xmark"
                 ),
-                text: "Delete"
+                text: "Удалить аккаунт"
             )
         ]
+        
+        print("OptionTableCell:", hbtnDelete)
         
         mTableOptions = OptionsTableView(
             frame: CGRect(
@@ -80,30 +82,10 @@ final class SettingsViewController
         mTableOptions
             .showsVerticalScrollIndicator = false
         
-        mTableOptions.separatorStyle = .none
+        //mTableOptions.separatorStyle = .none
         
         mTableOptions.backgroundColor =
             .clear
-        
-        /*btnDelete.setTitleColor(
-            .systemRed,
-            for: .normal
-        )
-        
-        btnSignOut.setTitle(
-            "Выйти из аккаунта",
-            for: .normal
-        )
-        
-        btnDelete.setTitle(
-            "Удалить аккаунт",
-            for: .normal
-        )
-        
-        btnDelete.titleLabel?
-            .font = bold?.withSize(
-                hbtnDelete * 0.27
-            )*/
         
         view.addSubview(
             mTableOptions

@@ -21,9 +21,8 @@ public class ViewUtils {
             size: 18
         )
         
-        btnStart.backgroundColor = UIColor(
-            named: "btnBack"
-        )
+        btnStart.backgroundColor = UIColor
+            .accent()
         
         btnStart.titleLabel?.font = bold
         btnStart.setTitleColor(
