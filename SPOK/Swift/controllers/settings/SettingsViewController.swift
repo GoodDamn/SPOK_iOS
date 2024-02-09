@@ -48,14 +48,14 @@ final class SettingsViewController
         let options = [
             Option(
                 image: UIImage(
-                    systemName: "xmark"
+                    systemName: "door.left.hand.open"
                 ),
                 text: "Выйти из аккаунта",
                 select: onClickBtnSignOut
             ),
             Option(
                 image: UIImage(
-                    systemName: "xmark"
+                    systemName: "trash.fill"
                 ),
                 text: "Удалить аккаунт",
                 select: onClickBtnDelete
@@ -98,6 +98,9 @@ final class SettingsViewController
     
     private func onClickBtnDelete() {
         //sender.isEnabled = false
+        
+        
+        
         signIn()
     }
     
