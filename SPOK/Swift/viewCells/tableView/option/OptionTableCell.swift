@@ -38,7 +38,7 @@ final class OptionTableCell
         }
     }
     
-    private var mImageViewArrow: UIImageView!
+    private var mViewPrimary: UIView? = nil
     private var mImageViewIcon: UIImageView!
     private var mLabelTitle: UILabel!
     
@@ -52,7 +52,6 @@ final class OptionTableCell
         )
         
         mImageViewIcon = UIImageView()
-        mImageViewArrow = UIImageView()
         
         mLabelTitle = UILabel()
         
@@ -66,18 +65,13 @@ final class OptionTableCell
         backgroundColor = .clear
         mImageViewIcon.backgroundColor =
             .clear
-        mImageViewArrow.backgroundColor =
-            .clear
+        
         mLabelTitle.backgroundColor =
             .clear
         
         mImageViewIcon.tintColor = UIColor
             .accent()
-        mImageViewArrow.tintColor = .gray
         
-        mImageViewArrow.image = UIImage(
-            systemName: "chevron.right"
-        )
         
         contentView.addSubview(
             mImageViewIcon
@@ -87,15 +81,12 @@ final class OptionTableCell
             mLabelTitle
         )
         
-        contentView.addSubview(
-            mImageViewArrow
-        )
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if selectionStyle == .none {
+        if selectionStyle == .none  {
             return
         }
         
@@ -113,14 +104,7 @@ final class OptionTableCell
             width: imageSize,
             height: imageSize
         )
-        
-        mImageViewArrow.frame = CGRect(
-            x: w - imageSize,
-            y: yimage,
-            width: imageSize * 0.5,
-            height: imageSize * 0.75
-        )
-        
+                
         mLabelTitle.frame = CGRect(
             x: imageSize*2,
             y: yimage,
@@ -144,4 +128,62 @@ final class OptionTableCell
             coder: coder
         )
     }
+    
+    func primaryView(
+        view: UIView?
+    ) {
+        if mViewPrimary != nil {
+            return
+        }
+        
+        guard let v = view else {
+            
+            let primar = UIImageView()
+            
+            primar.tintColor = .gray
+            
+            primar.backgroundColor =
+                .clear
+            
+            primar.image = UIImage(
+                systemName: "chevron.right"
+            )
+            
+            contentView.addSubview(
+                primar
+            )
+            
+            let f = mImageViewIcon.frame
+            let imageSize = f.width
+            
+            primar.frame = CGRect(
+                x: frame.width - imageSize,
+                y: f.origin.y,
+                width: imageSize * 0.5,
+                height: imageSize * 0.75
+            )
+            
+            mViewPrimary = primar
+            return
+        }
+         
+        print("primaryView:VIEW:",view)
+        
+        let ymid = frame.size.height * 0.5
+        let f = v.frame
+        
+        v.frame = CGRect(
+            x: frame.width - f.width,
+            y: ymid - f.height * 0.5,
+            width: f.width,
+            height: f.height
+        )
+        
+        contentView.addSubview(
+            v
+        )
+        
+        mViewPrimary = v
+    }
+    
 }

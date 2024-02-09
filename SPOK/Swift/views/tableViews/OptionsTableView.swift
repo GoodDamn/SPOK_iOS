@@ -99,6 +99,10 @@ extension OptionsTableView
         cell.image = option.image
         cell.text = option.text
         
+        cell.primaryView(
+            view: option.withView
+        )
+        
         return cell
     }
     

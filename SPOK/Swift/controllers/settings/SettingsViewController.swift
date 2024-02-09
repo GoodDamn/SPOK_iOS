@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import StoreKit
 
 final class SettingsViewController
     : SignInAppleController {
@@ -15,6 +16,8 @@ final class SettingsViewController
     private let TAG = "SettingsViewController"
     
     private var mTableOptions: OptionsTableView!
+    
+    private var mSwitcher: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,18 @@ final class SettingsViewController
         let ytable = btnClose.frame.bottom()
         let marginHorizontal = w * 0.08
         
+        mSwitcher = UISwitch(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: w * 0.094,
+                height: hbtnDelete * 0.38
+            )
+        )
+        
+        mSwitcher.thumbTintColor = .background()
+        mSwitcher.onTintColor = .white
+        
         targetClose(
             btnClose
         )
@@ -58,7 +73,8 @@ final class SettingsViewController
                 text: "Уведомления",
                 textColor: .white,
                 iconColor: .accent(),
-                select: onClickBtnRate
+                withView: mSwitcher,
+                select: onSwitchNotify
             ),
             Option(
                 image: UIImage(
@@ -67,6 +83,7 @@ final class SettingsViewController
                 text: "Оценить приложение",
                 textColor: .white,
                 iconColor: .accent(),
+                withView: nil,
                 select: onClickBtnRate
             ),
             Option(
@@ -76,6 +93,7 @@ final class SettingsViewController
                 text: "Выйти из аккаунта",
                 textColor: .white,
                 iconColor: .accent(),
+                withView: nil,
                 select: onClickBtnSignOut
             ),
             Option(
@@ -85,6 +103,7 @@ final class SettingsViewController
                 text: "Удалить аккаунт",
                 textColor: .danger(),
                 iconColor: .danger(),
+                withView: nil,
                 select: onClickBtnDelete
             )
         ]
@@ -146,7 +165,35 @@ final class SettingsViewController
         )
     }
     
+    
+    private func onSwitchNotify() {
+        
+        if mSwitcher.isEnabled {
+            UIApplication
+                .shared
+                .registerForRemoteNotifications()
+            return
+        }
+        
+    }
+    
     private func onClickBtnRate() {
+        
+        let store = SKStoreProductViewController()
+        
+        store.loadProduct(
+            withParameters: [
+                SKStoreProductParameterITunesItemIdentifier: NSNumber(
+                    value: 6443976042
+                )
+            ]
+        )
+        
+        Utils.main()
+            .present(
+                store,
+                animated: true
+            )
         
     }
     
