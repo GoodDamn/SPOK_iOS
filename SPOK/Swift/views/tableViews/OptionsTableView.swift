@@ -11,10 +11,14 @@ import UIKit.UITableView
 final class OptionsTableView
     : UITableView {
     
-    override init(
+    private var mOptions: [Option]!
+    
+    init(
         frame: CGRect,
+        source: inout [Option],
         style: UITableView.Style
     ) {
+        mOptions = source
         super.init(
             frame: frame,
             style: style
@@ -23,7 +27,10 @@ final class OptionsTableView
         delegate = self
         dataSource = self
      
-        
+        register(
+            OptionTableCell.self,
+            forCellReuseIdentifier: "option"
+        )
         
     }
     
@@ -64,7 +71,14 @@ extension OptionsTableView
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        return UITableViewCell()
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "option",
+            for: indexPath
+        )
+        
+        
+        return cell
     }
     
     
