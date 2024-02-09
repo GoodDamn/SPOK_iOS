@@ -71,6 +71,7 @@
 		25D61E882B75F8A500B5A72B /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E872B75F8A500B5A72B /* Option.swift */; };
 		25D61E8A2B7621C300B5A72B /* InversedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E892B7621C300B5A72B /* InversedTableViewCell.swift */; };
 		25D61E902B76233800B5A72B /* InversedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E8F2B76233800B5A72B /* InversedTableView.swift */; };
+		25D61E922B7643CE00B5A72B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E912B7643CE00B5A72B /* UIFont.swift */; };
 		25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */; };
 		25DB9A782B53BD4900B5359F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A772B53BD4900B5359F /* Collection.swift */; };
 		25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */; };
@@ -211,6 +212,7 @@
 		25D61E872B75F8A500B5A72B /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		25D61E892B7621C300B5A72B /* InversedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InversedTableViewCell.swift; sourceTree = "<group>"; };
 		25D61E8F2B76233800B5A72B /* InversedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InversedTableView.swift; sourceTree = "<group>"; };
+		25D61E912B7643CE00B5A72B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDownloader.swift; sourceTree = "<group>"; };
 		25DB9A772B53BD4900B5359F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListener.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				25F94ADD2B6E587D00FC8A32 /* UIColor.swift */,
 				25F94AEC2B6F690100FC8A32 /* UIButton.swift */,
 				25F94AF22B6F94A300FC8A32 /* String.swift */,
+				25D61E912B7643CE00B5A72B /* UIFont.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1304,6 +1307,7 @@
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,
 				25F94AD32B6E1A9F00FC8A32 /* UILabel.swift in Sources */,
 				25D61E822B75F0F100B5A72B /* OptionsTableView.swift in Sources */,
+				25D61E922B7643CE00B5A72B /* UIFont.swift in Sources */,
 				25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */,
 				25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */,
 				25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */,

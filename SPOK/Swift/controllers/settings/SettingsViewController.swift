@@ -31,15 +31,19 @@ final class SettingsViewController
         let w = view.frame.width
         let h = view.frame.height
         
-        let hbtnDelete = h * 0.1
-        let ytable:CGFloat = 0
-        let marginHorizontal = w * 0.08
         
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
                 sizeSquare: 0.14
             )
+        
+        btnClose.frame
+            .origin.y += mInsets.top
+        
+        let hbtnDelete = h * 0.1
+        let ytable = btnClose.frame.origin.y
+        let marginHorizontal = w * 0.08
         
         targetClose(
             btnClose
@@ -64,6 +68,25 @@ final class SettingsViewController
         
         print("OptionTableCell:", hbtnDelete)
         
+        let lSettings = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: btnClose.frame
+                    .origin.y,
+                width: w,
+                height: btnClose.frame.height
+            )
+        )
+        
+        lSettings.backgroundColor = .clear
+        lSettings.textColor = .white
+        lSettings.font = .bold(
+            withSize: lSettings.frame
+                .height * 0.35
+        )
+        lSettings.textAlignment = .center
+        lSettings.text = "Настройки"
+        
         mTableOptions = OptionsTableView(
             frame: CGRect(
                 x: marginHorizontal,
@@ -86,6 +109,10 @@ final class SettingsViewController
         
         mTableOptions.backgroundColor =
             .clear
+        
+        view.addSubview(
+            lSettings
+        )
         
         view.addSubview(
             mTableOptions
