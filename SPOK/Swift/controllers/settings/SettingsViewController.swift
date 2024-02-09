@@ -42,7 +42,7 @@ final class SettingsViewController
             .origin.y += mInsets.top
         
         let hbtnDelete = h * 0.1
-        let ytable = btnClose.frame.origin.y
+        let ytable = btnClose.frame.bottom()
         let marginHorizontal = w * 0.08
         
         targetClose(
@@ -82,7 +82,7 @@ final class SettingsViewController
         lSettings.textColor = .white
         lSettings.font = .bold(
             withSize: lSettings.frame
-                .height * 0.35
+                .height * 0.45
         )
         lSettings.textAlignment = .center
         lSettings.text = "Настройки"
@@ -98,6 +98,14 @@ final class SettingsViewController
             rowHeight: hbtnDelete,
             style: .plain
         )
+        
+        mTableOptions
+            .contentInset = UIEdgeInsets(
+                top: 20,
+                left: 0,
+                bottom: 0,
+                right: 0
+            )
         
         mTableOptions
             .showsHorizontalScrollIndicator = false

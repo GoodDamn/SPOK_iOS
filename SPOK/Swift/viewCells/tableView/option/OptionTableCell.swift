@@ -64,11 +64,6 @@ final class OptionTableCell
         contentView.addSubview(
             mLabelTitle
         )
-        
-        contentView.transform = CGAffineTransform(
-            scaleX: 1,
-            y: -1
-        )
     }
     
     override func layoutSubviews() {
