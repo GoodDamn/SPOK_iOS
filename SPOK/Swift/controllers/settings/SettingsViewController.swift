@@ -35,13 +35,14 @@ final class SettingsViewController
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
-                sizeSquare: 0.14
+                sizeSquare: 0.14,
+                iconProp: 0.4
             )
         
         btnClose.frame
             .origin.y += mInsets.top
         
-        let hbtnDelete = h * 0.1
+        let hbtnDelete = h * 0.07
         let ytable = btnClose.frame.bottom()
         let marginHorizontal = w * 0.08
         
@@ -52,9 +53,29 @@ final class SettingsViewController
         let options = [
             Option(
                 image: UIImage(
+                    systemName: "bell.fill"
+                ),
+                text: "Уведомления",
+                textColor: .white,
+                iconColor: .accent(),
+                select: onClickBtnRate
+            ),
+            Option(
+                image: UIImage(
+                    systemName: "star.fill"
+                ),
+                text: "Оценить приложение",
+                textColor: .white,
+                iconColor: .accent(),
+                select: onClickBtnRate
+            ),
+            Option(
+                image: UIImage(
                     systemName: "door.left.hand.open"
                 ),
                 text: "Выйти из аккаунта",
+                textColor: .white,
+                iconColor: .accent(),
                 select: onClickBtnSignOut
             ),
             Option(
@@ -62,6 +83,8 @@ final class SettingsViewController
                     systemName: "trash.fill"
                 ),
                 text: "Удалить аккаунт",
+                textColor: .danger(),
+                iconColor: .danger(),
                 select: onClickBtnDelete
             )
         ]
@@ -82,7 +105,7 @@ final class SettingsViewController
         lSettings.textColor = .white
         lSettings.font = .bold(
             withSize: lSettings.frame
-                .height * 0.45
+                .height * 0.38
         )
         lSettings.textAlignment = .center
         lSettings.text = "Настройки"
@@ -98,15 +121,7 @@ final class SettingsViewController
             rowHeight: hbtnDelete,
             style: .plain
         )
-        
-        mTableOptions
-            .contentInset = UIEdgeInsets(
-                top: 20,
-                left: 0,
-                bottom: 0,
-                right: 0
-            )
-        
+                
         mTableOptions
             .showsHorizontalScrollIndicator = false
         
@@ -129,6 +144,10 @@ final class SettingsViewController
         view.addSubview(
             btnClose
         )
+    }
+    
+    private func onClickBtnRate() {
+        
     }
     
     private func onClickBtnDelete() {

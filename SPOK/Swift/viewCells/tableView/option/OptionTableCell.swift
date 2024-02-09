@@ -19,12 +19,26 @@ final class OptionTableCell
         }
     }
     
+    public var textColorr: UIColor? = nil {
+        didSet {
+            mLabelTitle.textColor = textColorr
+        }
+    }
+    
+    public var iconColor: UIColor? = nil {
+        didSet {
+            mImageViewIcon.tintColor =
+                iconColor
+        }
+    }
+    
     public var text: String? {
         didSet {
             mLabelTitle.text = text
         }
     }
     
+    private var mImageViewArrow: UIImageView!
     private var mImageViewIcon: UIImageView!
     private var mLabelTitle: UILabel!
     
@@ -38,6 +52,7 @@ final class OptionTableCell
         )
         
         mImageViewIcon = UIImageView()
+        mImageViewArrow = UIImageView()
         
         mLabelTitle = UILabel()
         
@@ -49,13 +64,20 @@ final class OptionTableCell
         mLabelTitle.textColor = .white
         
         backgroundColor = .clear
-        mImageViewIcon.backgroundColor = .clear
+        mImageViewIcon.backgroundColor =
+            .clear
+        mImageViewArrow.backgroundColor =
+            .clear
         mLabelTitle.backgroundColor =
             .clear
         
         mImageViewIcon.tintColor = UIColor
             .accent()
+        mImageViewArrow.tintColor = .gray
         
+        mImageViewArrow.image = UIImage(
+            systemName: "chevron.right"
+        )
         
         contentView.addSubview(
             mImageViewIcon
@@ -63,6 +85,10 @@ final class OptionTableCell
         
         contentView.addSubview(
             mLabelTitle
+        )
+        
+        contentView.addSubview(
+            mImageViewArrow
         )
     }
     
@@ -77,7 +103,7 @@ final class OptionTableCell
         
         let w = size.width
         
-        let imageSize = size.height * 0.25
+        let imageSize = size.height * 0.45
         let ymid = size.height * 0.5
         let yimage = ymid - imageSize * 0.5
         
@@ -86,6 +112,13 @@ final class OptionTableCell
             y: yimage,
             width: imageSize,
             height: imageSize
+        )
+        
+        mImageViewArrow.frame = CGRect(
+            x: w - imageSize,
+            y: yimage,
+            width: imageSize * 0.5,
+            height: imageSize * 0.75
         )
         
         mLabelTitle.frame = CGRect(
@@ -98,7 +131,7 @@ final class OptionTableCell
         
         mLabelTitle.font = mLabelTitle
             .font.withSize(
-                imageSize
+                imageSize * 0.7
             )
         
         selectionStyle = .none

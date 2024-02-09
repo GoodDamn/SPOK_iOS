@@ -93,6 +93,9 @@ extension OptionsTableView
             indexPath.row
         ]
         
+        cell.textColorr = option.textColor
+        cell.iconColor = option.iconColor
+        
         cell.image = option.image
         cell.text = option.text
         

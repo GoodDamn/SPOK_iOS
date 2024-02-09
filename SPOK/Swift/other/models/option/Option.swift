@@ -11,5 +11,7 @@ import UIKit.UIImage
 struct Option {
     let image: UIImage?
     let text: String?
+    let textColor: UIColor?
+    let iconColor: UIColor?
     let select: (()->Void)?
 }

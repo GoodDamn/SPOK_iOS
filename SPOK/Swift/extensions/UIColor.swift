@@ -21,4 +21,10 @@ extension UIColor {
         )
     }
     
+    static func danger() -> UIColor? {
+        return UIColor(
+            named: "danger"
+        )
+    }
+    
 }
