@@ -22,6 +22,7 @@ class BaseTopicController
     private var mPrevTextView: UITextViewPhrase? = nil
     
     private var mProgressBar: ProgressBar!
+    private var mProgressBarTopic: ProgressBar!
     
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
@@ -64,6 +65,17 @@ class BaseTopicController
         
         modalPresentationStyle = .overFullScreen
         
+        mProgressBarTopic = ViewUtils
+            .progressBar(
+                frame: view.frame,
+                x: 0.284,
+                y: 0.925,
+                width: 0.432,
+                height: 0.004
+            )
+        
+        mProgressBarTopic.alpha = 0
+        
         mBtnClose = ViewUtils
             .buttonClose(
                 in: view,
@@ -82,6 +94,10 @@ class BaseTopicController
         
         view.addSubview(
             mBtnClose
+        )
+        
+        view.addSubview(
+            mProgressBarTopic
         )
         
         let mFont = UIFont(
@@ -123,7 +139,11 @@ class BaseTopicController
         )
         
         mEngine.setOnEndScriptListener {
-            scriptText in
+            [weak self] scriptText in
+            
+            guard let s = self else {
+                return
+            }
             
             let textView = UITextViewPhrase(
                 frame: CGRect(
@@ -133,20 +153,28 @@ class BaseTopicController
                     height: 0),
                 scriptText.spannableString
             )
-            
+
             textView.font = mFont
             textView.textColor = mTextColor
             textView.show()
 
-            self.view
-                .insertSubview(
-                    textView,
-                    at: 0)
+            let prog = s.mScriptReader?
+                .progress() ?? 0
             
-            self.mPrevTextView?
+            s.mProgressBarTopic
+                .mProgress = s
+                    .mProgressBarTopic
+                    .maxProgress * prog
+            
+            s.view.insertSubview(
+                textView,
+                at: 0
+            )
+            
+            s.mPrevTextView?
                 .hide(mHideOffsetY)
             
-            self.mPrevTextView = textView
+            s.mPrevTextView = textView
         }
         
     }
@@ -290,6 +318,12 @@ class BaseTopicController
                 g
             )
             
+            UIView.animate(
+                withDuration: 0.3
+            ) {
+                s.mProgressBarTopic.alpha = 1.0
+            }
+            
             r.setOnReadScriptListener(
                 self
             )
@@ -324,21 +358,10 @@ extension BaseTopicController
         let w = view.frame.width
         let h = view.frame.height
         
-        mProgressBar = ProgressBar(
-            frame: CGRect(
-                x: w * 0.35,
-                y: h * 0.8,
-                width: w * 0.3,
-                height: h * 0.03
+        mProgressBar = ViewUtils
+            .progressBar(
+                frame: view.frame
             )
-        )
-        
-        mProgressBar.mColorBack = .white
-            .withAlphaComponent(0.2)
-        
-        mProgressBar.mColorProgress = .white
-        mProgressBar.maxProgress = 100
-        mProgressBar.mProgress = 0
         
         view.addSubview(
             mProgressBar

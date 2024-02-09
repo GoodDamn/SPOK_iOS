@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProgressBar
+public final class ProgressBar
     : UIView {
     
     private final let TAG = "ProgressBar:"
@@ -55,7 +55,7 @@ class ProgressBar
         super.init(coder: coder)
     }
     
-    override func draw(
+    public override func draw(
         _ rect: CGRect
     ) {
         super.draw(rect)

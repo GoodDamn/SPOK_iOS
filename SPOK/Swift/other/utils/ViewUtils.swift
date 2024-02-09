@@ -167,6 +167,36 @@ public class ViewUtils {
         return btnExit
     }
     
+    public static func progressBar(
+        frame: CGRect,
+        x: CGFloat = 0.35,
+        y: CGFloat = 0.8,
+        width: CGFloat = 0.3,
+        height: CGFloat = 0.03
+    ) -> ProgressBar {
+        
+        let w = frame.width
+        let h = frame.height
+        
+        let pb = ProgressBar(
+            frame: CGRect(
+                x: w * x,
+                y: h * y,
+                width: w * width,
+                height: h * height
+            )
+        )
+        
+        pb.mColorBack = .white
+            .withAlphaComponent(0.2)
+        
+        pb.mColorProgress = .white
+        pb.maxProgress = 100
+        pb.mProgress = 0
+        
+        return pb
+    }
+    
     public static func alertAction(
         title: String,
         message: String? = nil,

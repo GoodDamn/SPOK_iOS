@@ -53,6 +53,7 @@ class IntroSleep2ViewController
         
         let wpb = w * 0.234
         
+        
         mProgressBar = ProgressBar(
             frame: CGRect(
                 x: (w - wpb) / 2,

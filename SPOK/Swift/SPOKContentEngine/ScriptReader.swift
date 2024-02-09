@@ -72,10 +72,15 @@ public class ScriptReader {
         
     }
     
+    public func progress() -> CGFloat {
+        return CGFloat(mStream.position()) / CGFloat(mChunkLen)
+    }
+    
     public func setOnReadScriptListener(
         _ l: OnReadScript?
     ) {
         mOnReadScript = l
     }
+    
     
 }
