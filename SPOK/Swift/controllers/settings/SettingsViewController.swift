@@ -76,11 +76,6 @@ final class SettingsViewController
             style: .plain
         )
         
-        mTableOptions.transform = CGAffineTransform(
-            scaleX: 1,
-            y: -1
-        )
-        
         mTableOptions
             .showsHorizontalScrollIndicator = false
         

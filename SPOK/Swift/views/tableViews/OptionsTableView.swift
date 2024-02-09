@@ -9,7 +9,7 @@ import Foundation
 import UIKit.UITableView
 
 final class OptionsTableView
-    : UITableView {
+    : InversedTableView {
     
     public static var mOptionSize: CGSize = .zero
     
@@ -49,7 +49,6 @@ final class OptionsTableView
             coder: coder
         )
     }
-    
 }
 
 extension OptionsTableView

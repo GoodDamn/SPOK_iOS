@@ -9,7 +9,7 @@ import Foundation
 import UIKit.UITableViewCell
 
 final class OptionTableCell
-    : UITableViewCell {
+    : InversedTableViewCell {
     
     public static let id = "option"
     
