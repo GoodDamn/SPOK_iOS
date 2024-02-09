@@ -97,26 +97,35 @@ final class SettingsViewController
     }
     
     private func onClickBtnDelete() {
-        //sender.isEnabled = false
+        ViewUtils.alertAction(
+            title: "Удалить аккаунт?",
+            message: "Подписка и сохраненные данные будут утеряны",
+            controller: self
+        ) { [weak self] _ in
+            self?.signIn()
+        }
         
-        
-        
-        signIn()
     }
     
     private func onClickBtnSignOut() {
-        //sender.isEnabled = false
-        do {
-            try Auth.auth()
-                .signOut()
-        } catch {
-            Log.d(
-                TAG,
-                "SIGN_OUT_FAIL:",
-                error
-            )
+        ViewUtils.alertAction(
+            title: "Выйти из аккаунта?",
+            controller: self
+        ) { [weak self] _ in
+            
+            do {
+                try Auth.auth()
+                    .signOut()
+            } catch {
+                Log.d(
+                    self?.TAG,
+                    "SIGN_OUT_FAIL:",
+                    error
+                )
+            }
+            exit(0)
         }
-        exit(0)
+        
     }
     
 }

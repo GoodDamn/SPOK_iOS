@@ -182,15 +182,15 @@ public class ViewUtils {
         
         c.addAction(
             UIAlertAction(
-                title: "OK",
-                style: .default,
+                title: "Да",
+                style: .destructive,
                 handler: accept
             )
         )
                     
         c.addAction(
             UIAlertAction(
-                title: "Отмена",
+                title: "Нет",
                 style: .cancel
             )
         )
