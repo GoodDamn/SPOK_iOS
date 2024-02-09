@@ -11,6 +11,15 @@ import UIKit.UITableViewCell
 class InversedTableViewCell
     : UITableViewCell {
     
+    public var inversed: Bool = false {
+        didSet {
+            contentView.transform = CGAffineTransform(
+                scaleX: 1,
+                y: inversed ? -1 : 1
+            )
+        }
+    }
+    
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
@@ -19,13 +28,6 @@ class InversedTableViewCell
             style: style,
             reuseIdentifier: reuseIdentifier
         )
-        
-        contentView
-            .transform = CGAffineTransform(
-                scaleX: 1,
-                y: -1
-            )
-        
     }
     
     required init?(

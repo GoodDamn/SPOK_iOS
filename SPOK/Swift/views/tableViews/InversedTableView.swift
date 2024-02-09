@@ -11,6 +11,15 @@ import UIKit.UITableView
 class InversedTableView
     : UITableView {
     
+    public var inversed: Bool = false {
+        didSet {
+            transform = CGAffineTransform(
+                scaleX: 1,
+                y: inversed ? -1 : 1
+            )
+        }
+    }
+    
     override init(
         frame: CGRect,
         style: UITableView.Style
@@ -18,11 +27,6 @@ class InversedTableView
         super.init(
             frame: frame,
             style: style
-        )
-        
-        transform = CGAffineTransform(
-            scaleX: 1,
-            y: -1
         )
         
     }
