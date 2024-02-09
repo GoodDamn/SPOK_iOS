@@ -59,7 +59,8 @@ extension OptionsTableView
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        
+        mOptions[indexPath.row]
+            .select?()
     }
         
     func tableView(

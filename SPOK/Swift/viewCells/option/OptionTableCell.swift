@@ -28,14 +28,6 @@ final class OptionTableCell
     private var mImageViewIcon: UIImageView!
     private var mLabelTitle: UILabel!
     
-    override class func awakeFromNib() {
-        print("OptionTableCell: awakeFromNib")
-    }
-    
-    override func prepareForReuse() {
-        print("OptionTableCell: prepareReuse")
-    }
-    
     override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
@@ -45,8 +37,8 @@ final class OptionTableCell
             reuseIdentifier: reuseIdentifier
         )
         
-        
         mImageViewIcon = UIImageView()
+        
         mLabelTitle = UILabel()
         
         mLabelTitle.font = UIFont(
@@ -54,15 +46,12 @@ final class OptionTableCell
             size: 1
         )
         
-        mLabelTitle.textColor = UIColor
-            .accent()
+        mLabelTitle.textColor = .white
         
         backgroundColor = .clear
-        mImageViewIcon
-            .backgroundColor = .clear
-        
-        mLabelTitle
-            .backgroundColor = .clear
+        mImageViewIcon.backgroundColor = .clear
+        mLabelTitle.backgroundColor =
+            .clear
         
         mImageViewIcon.tintColor = UIColor
             .accent()
@@ -75,6 +64,11 @@ final class OptionTableCell
         contentView.addSubview(
             mLabelTitle
         )
+        
+        contentView.transform = CGAffineTransform(
+            scaleX: 1,
+            y: -1
+        )
     }
     
     override func layoutSubviews() {
@@ -84,14 +78,17 @@ final class OptionTableCell
             return
         }
         
-        let w = frame.width
+        let size = frame.size
         
-        let imageSize = frame.height * 0.25
-        let yimage = imageSize * 0.5
+        let w = size.width
+        
+        let imageSize = size.height * 0.25
+        let ymid = size.height * 0.5
+        let yimage = ymid - imageSize * 0.5
         
         mImageViewIcon.frame = CGRect(
             x: 0,
-            y: imageSize - yimage,
+            y: yimage,
             width: imageSize,
             height: imageSize
         )
@@ -103,13 +100,13 @@ final class OptionTableCell
             height: imageSize
         )
         
+        
         mLabelTitle.font = mLabelTitle
-            .font?.withSize(
+            .font.withSize(
                 imageSize
             )
         
         selectionStyle = .none
-        
     }
     
     required init?(

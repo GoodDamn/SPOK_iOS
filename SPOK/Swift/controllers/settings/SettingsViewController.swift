@@ -21,8 +21,7 @@ final class SettingsViewController
     
         mSignListener = self
         
-        view.backgroundColor = UIColor
-            .background()
+        view.backgroundColor = .background()
         
         let bold = UIFont(
             name: "OpenSans-Bold",
@@ -33,6 +32,8 @@ final class SettingsViewController
         let h = view.frame.height
         
         let hbtnDelete = h * 0.1
+        let ytable:CGFloat = 0
+        let marginHorizontal = w * 0.08
         
         let btnClose = ViewUtils
             .buttonClose(
@@ -44,21 +45,20 @@ final class SettingsViewController
             btnClose
         )
         
-        let ytable = h * 0.4
-        let marginHorizontal = w * 0.1
-        
         let options = [
             Option(
                 image: UIImage(
                     systemName: "xmark"
                 ),
-                text: "Выйти из аккаунта"
+                text: "Выйти из аккаунта",
+                select: onClickBtnSignOut
             ),
             Option(
                 image: UIImage(
                     systemName: "xmark"
                 ),
-                text: "Удалить аккаунт"
+                text: "Удалить аккаунт",
+                select: onClickBtnDelete
             )
         ]
         
@@ -76,13 +76,18 @@ final class SettingsViewController
             style: .plain
         )
         
+        mTableOptions.transform = CGAffineTransform(
+            scaleX: 1,
+            y: -1
+        )
+        
         mTableOptions
             .showsHorizontalScrollIndicator = false
         
         mTableOptions
             .showsVerticalScrollIndicator = false
         
-        //mTableOptions.separatorStyle = .none
+        mTableOptions.separatorStyle = .none
         
         mTableOptions.backgroundColor =
             .clear
@@ -96,17 +101,13 @@ final class SettingsViewController
         )
     }
     
-    @objc func onClickBtnDelete(
-        _ sender: UIButton
-    ) {
-        sender.isEnabled = false
+    private func onClickBtnDelete() {
+        //sender.isEnabled = false
         signIn()
     }
     
-    @objc func onClickBtnSignOut(
-        _ sender: UIButton
-    ) {
-        sender.isEnabled = false
+    private func onClickBtnSignOut() {
+        //sender.isEnabled = false
         do {
             try Auth.auth()
                 .signOut()
