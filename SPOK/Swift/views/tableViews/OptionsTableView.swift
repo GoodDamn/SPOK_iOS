@@ -11,13 +11,16 @@ import UIKit.UITableView
 final class OptionsTableView
     : UITableView {
     
-    private var mOptions: [Option]!
+    private final let mOptions: [Option]!
+    private final var mRowHeight: CGFloat = 0.0
     
     init(
         frame: CGRect,
-        source: inout [Option],
+        source: [Option],
+        rowHeight: CGFloat,
         style: UITableView.Style
     ) {
+        mRowHeight = rowHeight
         mOptions = source
         super.init(
             frame: frame,
@@ -29,7 +32,7 @@ final class OptionsTableView
      
         register(
             OptionTableCell.self,
-            forCellReuseIdentifier: "option"
+            forCellReuseIdentifier: OptionTableCell.id
         )
         
     }
@@ -37,6 +40,7 @@ final class OptionsTableView
     required init?(
         coder: NSCoder
     ) {
+        mOptions = []
         super.init(
             coder: coder
         )
@@ -58,7 +62,7 @@ extension OptionsTableView
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        return 207
+        return mRowHeight
     }
     
 }
@@ -72,11 +76,19 @@ extension OptionsTableView
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "option",
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: OptionTableCell.id,
             for: indexPath
-        )
+        ) as? OptionTableCell else {
+            return UITableViewCell()
+        }
         
+        let option = mOptions[
+            indexPath.row
+        ]
+        
+        cell.image = option.image
+        cell.text = option.text
         
         return cell
     }
@@ -86,7 +98,7 @@ extension OptionsTableView
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 2
+        return mOptions.count
     }
     
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIImage
 
-final struct Option {
-    let image: UIImage
-    let text: String
+struct Option {
+    let image: UIImage?
+    let text: String?
 }

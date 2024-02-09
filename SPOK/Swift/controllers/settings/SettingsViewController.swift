@@ -14,7 +14,7 @@ final class SettingsViewController
     
     private let TAG = "SettingsViewController"
     
-    private var mTableOptions: UITableView!
+    private var mTableOptions: OptionsTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +45,42 @@ final class SettingsViewController
         )
         
         let ytable = h * 0.4
+        let marginHorizontal = w * 0.1
         
-        mTableOptions = UITableView(
+        let options = [
+            Option(
+                image: UIImage(
+                    systemName: "xmark"
+                ),
+                text: "Sign out"
+            ),
+            Option(
+                image: UIImage(
+                    systemName: "xmark"
+                ),
+                text: "Delete"
+            )
+        ]
+        
+        mTableOptions = OptionsTableView(
             frame: CGRect(
-                x: 0,
+                x: marginHorizontal,
                 y: ytable,
-                width: w,
+                width: w - 2*marginHorizontal,
                 height: h - ytable - mInsets.bottom
             ),
+            source: options,
+            rowHeight: hbtnDelete,
             style: .plain
         )
+        
+        mTableOptions
+            .showsHorizontalScrollIndicator = false
+        
+        mTableOptions
+            .showsVerticalScrollIndicator = false
+        
+        mTableOptions.separatorStyle = .none
         
         mTableOptions.backgroundColor =
             .clear
@@ -79,7 +105,13 @@ final class SettingsViewController
                 hbtnDelete * 0.27
             )*/
         
-        view.addSubview(btnClose)
+        view.addSubview(
+            mTableOptions
+        )
+        
+        view.addSubview(
+            btnClose
+        )
     }
     
     @objc func onClickBtnDelete(

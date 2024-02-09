@@ -11,6 +11,8 @@ import UIKit.UITableViewCell
 final class OptionTableCell
     : UITableViewCell {
     
+    public static let id = "option"
+    
     public var image: UIImage? {
         didSet {
             mImageViewIcon.image = image
