@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completionHandler: { _, _ in}
         );
         
-        application.registerForRemoteNotifications();
-        
         messaging = Messaging.messaging();
         
         messaging?.delegate = self;

@@ -125,7 +125,9 @@ class MainViewController
         if !def.bool(
             forKey: Keys.COMPLETE_INTRO
         ) {
-            
+            UIApplication
+                .shared
+                .registerForRemoteNotifications()
             print("Time for intro!")
             showSplash(
                 msg: "готовим что-то\n уникальное..."

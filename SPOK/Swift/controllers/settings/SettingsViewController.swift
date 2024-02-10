@@ -17,8 +17,6 @@ final class SettingsViewController
     
     private var mTableOptions: OptionsTableView!
     
-    private var mSwitcher: UISwitch!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -49,7 +47,7 @@ final class SettingsViewController
         let ytable = btnClose.frame.bottom()
         let marginHorizontal = w * 0.08
         
-        mSwitcher = UISwitch(
+        let mSwitcher = UISwitch(
             frame: CGRect(
                 x: 0,
                 y: 0,
@@ -58,8 +56,20 @@ final class SettingsViewController
             )
         )
         
+        mSwitcher.addTarget(
+            self,
+            action: #selector(
+                onSwitchNotify(_:)
+            ),
+            for: .valueChanged
+        )
+        
         mSwitcher.thumbTintColor = .background()
         mSwitcher.onTintColor = .white
+        
+        mSwitcher.isOn = UIApplication
+            .shared
+            .isRegisteredForRemoteNotifications
         
         targetClose(
             btnClose
@@ -74,7 +84,7 @@ final class SettingsViewController
                 textColor: .white,
                 iconColor: .accent(),
                 withView: mSwitcher,
-                select: onSwitchNotify
+                select: nil
             ),
             Option(
                 image: UIImage(
@@ -166,15 +176,21 @@ final class SettingsViewController
     }
     
     
-    private func onSwitchNotify() {
+    @objc private func onSwitchNotify(
+        _ s: UISwitch
+    ) {
         
-        if mSwitcher.isEnabled {
-            UIApplication
-                .shared
-                .registerForRemoteNotifications()
+        let app = UIApplication
+            .shared
+        
+        if s.isOn {
+            app
+            .registerForRemoteNotifications()
             return
         }
         
+        
+        app.unregisterForRemoteNotifications()
     }
     
     private func onClickBtnRate() {

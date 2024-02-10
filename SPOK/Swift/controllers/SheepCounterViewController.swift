@@ -279,7 +279,9 @@ class Sheep
         UIView.animate(
             withDuration: 0.8,
             animations: {
-                self.jump(onX: onX)
+                self.jump(
+                    onX: onX
+                )
             }
         ) { b in
             self.removeFromSuperview()
