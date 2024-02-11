@@ -272,14 +272,12 @@ class PreviewCell
             return
         }
         
-        let img = Utils
-            .changeSizeOfImage(
-                frame.size,
-                image: fileSPC.image!
+        if let img = fileSPC.image {
+            mImageView.image = img.size(
+                frame.size
             )
+        }
         
-        mImageView.image = img
-    
         let sa = contentView.layer.bounds
                         
         let layer = contentView.layer
@@ -337,15 +335,12 @@ extension PreviewCell
     func onFile(
         data: inout Data?
     ) {
-        if data == nil {
+        if data == nil || mCache == nil {
             return
         }
         
-        mCache!.object = Utils
-            .Exten
-            .getSPCFile(
-                &data!
-            )
+        mCache!.object = Extension
+            .spc(&data!)
         
         DispatchQueue
             .main

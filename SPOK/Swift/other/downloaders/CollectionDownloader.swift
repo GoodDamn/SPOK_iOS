@@ -201,11 +201,8 @@ class CollectionDowloader
             
             var data = data
             
-            var d: FileSCS? = Utils
-                .Exten
-                .getSCSFile(
-                    &data
-                )
+            var d: FileSCS? = Extension
+                .scs(&data)
             
             s.addCollection(
                 &d,

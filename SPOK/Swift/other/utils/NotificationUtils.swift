@@ -84,8 +84,11 @@ class NotificationUtils {
                 
                 var dd = UInt8.random(in: 1...dailyContentSize);
                 
-                content.title = Utils.getLocalizedString("edn\(dd)");
-                content.body = Utils.getLocalizedString("ednb\(dd)");
+                content.title = String
+                    .locale("edn\(dd)")
+                
+                content.body = String
+                    .locale("ednb\(dd)");
                 
                 dateComponents.weekday = day;
                 dateComponents.minute = 0
@@ -102,8 +105,10 @@ class NotificationUtils {
                 
                 dd = UInt8.random(in: 1...dailyContentSize);
                 
-                content.title = Utils.getLocalizedString("edn\(dd)");
-                content.body = Utils.getLocalizedString("ednb\(dd)");
+                content.title = String
+                    .locale("edn\(dd)");
+                content.body = String
+                    .locale("ednb\(dd)");
                 
                 center.add(UNNotificationRequest(
                     identifier: "SPOK18\(day)\(dd)",

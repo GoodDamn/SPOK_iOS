@@ -26,4 +26,27 @@ extension String {
         return Int(d)
     }
     
+    static func locale(
+        _ key: String
+    ) -> String {
+        return NSLocalizedString(
+            key,
+            tableName: "Localization",
+            bundle: Bundle.main,
+            value: "",
+            comment: ""
+        )
+    }
+    
+    static func lang() -> String {
+        return Locale
+            .current
+            .languageCode?
+            .replacingOccurrences(
+                of: "ru",
+                with: "")
+            .uppercased() ?? ""
+    }
+    
+    
 }

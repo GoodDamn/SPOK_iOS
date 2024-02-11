@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FileSPC {
+public struct FileSPC {
     var isPremium: Bool = false;
     var categoryID: UInt8 = 0;
     var color: UIColor?;

@@ -166,9 +166,8 @@ class StorageApp {
             return nil
         }
         
-        return Utils
-            .Exten
-            .getSPCFile(&d)
+        return Extension
+            .spc(&d)
         
     }
     
@@ -211,9 +210,8 @@ class StorageApp {
                 )
             )
         
-        return Utils
-            .Exten
-            .getSCSFile(&d)
+        return Extension
+            .scs(&d)
     }
     
     public static func collection(

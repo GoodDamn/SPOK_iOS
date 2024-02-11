@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FileSCS {
+public struct FileSCS {
     var title:String?
     var topics: [UInt16]?
     var image: UIImage?
