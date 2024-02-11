@@ -20,11 +20,15 @@ class MainContentViewController
     
     private var mPageView: SimplePageViewController? = nil;
         
+    override func onTransitionEnd() {
+        NotificationUtils
+            .request()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print(TAG, "viewDidLoad()")
-        
         
         let b = UIScreen
             .main
@@ -102,7 +106,8 @@ class MainContentViewController
         view.addSubview(mNavBar);
         
         checkPopupNews()
-     }
+
+    }
     
     override func viewDidLayoutSubviews() {
         print("MainContentViewController", "viewDidLayout:")

@@ -27,24 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
-        print(TAG,"application launching with options")
-        
-        FirebaseApp.configure();
+        FirebaseApp.configure()
 
-        let center = UNUserNotificationCenter
-            .current();
-        center.delegate = self;
-        center.requestAuthorization(
-            options: [.alert, .badge, .sound],
-            completionHandler: { _, _ in}
-        );
+        messaging = Messaging.messaging()
         
-        messaging = Messaging.messaging();
+        messaging?.delegate = self
+        messaging?.isAutoInitEnabled = true
         
-        messaging?.delegate = self;
-        messaging?.isAutoInitEnabled = true;
-        
-        return true;
+        return true
     }
     
     func application(
@@ -53,12 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options: [UIApplication.OpenURLOptionsKey : Any] = [:]
     ) -> Bool {
         
-        return true;
-        
+        return true
     }
     
     // MARK: UISceneSession Lifecycle
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(
+        _ application: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(
@@ -67,13 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
     }
     
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+    func application(
+        _ application: UIApplication,
+        didDiscardSceneSessions sceneSessions: Set<UISceneSession>
+    ) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
         print(
             TAG,
@@ -84,7 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messaging?.apnsToken = deviceToken;
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    func application(_ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: Error
+    ) {
         print(
             TAG,
             "FAIL_REGISTER_REMOTE_NOTIFICATION:",
@@ -101,26 +101,11 @@ extension AppDelegate
         _ messaging: Messaging,
         didReceiveRegistrationToken fcmToken: String?
     ) {
-        
         print(
             TAG,
             "messaging(didReceiveRegistrationToken): ",
             fcmToken?.description
-        );
-    }
-    
-}
-
-extension AppDelegate
-    : UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        print(TAG, "The notification is to be presented", notification.request.identifier
         )
-        completionHandler([.alert]);
     }
+    
 }

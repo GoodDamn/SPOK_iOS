@@ -24,7 +24,6 @@ class Keys {
     public static let USER_REF = "userID"
     
     public static let COMPLETE_INTRO = "intro"
-    public static let COMPLETE_SIGN = "signIn"
     
     public static let ID_NEWS = "idNews"
     public static let OLD_BUILD_NUMBER = "oldbn"

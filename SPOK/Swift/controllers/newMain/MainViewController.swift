@@ -303,8 +303,6 @@ extension MainViewController {
             )
         }
         
-        
-        
         mPremiumService
             .mOnCheckPremium = {[weak self]
                 withSub in

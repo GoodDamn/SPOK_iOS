@@ -32,7 +32,6 @@ final class SettingsViewController
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
         
-        
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
@@ -71,9 +70,15 @@ final class SettingsViewController
         mSwitcher.thumbTintColor = .background()
         mSwitcher.onTintColor = .white
         
-        mSwitcher.isOn = UIApplication
-            .shared
-            .isRegisteredForRemoteNotifications
+        NotificationUtils.settings {
+            perm in
+            
+            let status = perm
+                .authorizationStatus
+            
+            mSwitcher.isOn = status
+                == .authorized
+        }
         
         targetClose(
             btnClose
@@ -193,6 +198,7 @@ final class SettingsViewController
             .shared
         
         if s.isOn {
+            
             app
             .registerForRemoteNotifications()
             return
@@ -200,6 +206,10 @@ final class SettingsViewController
         
         
         app.unregisterForRemoteNotifications()
+    
+        
+        
+        
     }
     
     private func onClickBtnRate() {
