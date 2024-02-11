@@ -186,7 +186,7 @@ class SheepCounterViewController
         
         mNextSheep = sheep
         
-        let a = UITextViewPhrase(
+        let textNumber = UITextViewPhrase(
             frame: CGRect(
                 x: 0,
                 y: f.height * 0.7,
@@ -195,16 +195,16 @@ class SheepCounterViewController
             ), String(mCounter)
         )
         
-        a.textColor = .white
-        a.font = mExtrabold
+        textNumber.textColor = .white
+        textNumber.font = mExtrabold
         
-        view.addSubview(a)
+        view.addSubview(textNumber)
         
-        a.show()
+        textNumber.show()
         
         mPrevc?.hide(300)
         
-        mPrevc = a
+        mPrevc = textNumber
         
         mCounter += 1
     }
@@ -222,78 +222,7 @@ class SheepCounterViewController
                 height: sizeSheep
             )
         )
-    }
-    
-}
-
-
-class Sheep
-    : UIImageView {
-    
-    private var mAmpJump: CGFloat = 0
-    private var mAngle: CGFloat = 0
-    
-    deinit {
-        print("Sheep: deinit()")
-    }
-    
-    override init(
-        frame: CGRect
-    ) {
-        mAmpJump = frame.height * -0.8
-        mAngle = -25/180 * .pi
-        super.init(frame: frame)
-        image = UIImage(
-            named: "sheep"
-        )
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    func jump(
-        onX: CGFloat
-    ) {
-        transform = CGAffineTransform(
-            translationX: onX + frame.width,
-            y: mAmpJump
-        ).rotated(
-            by: mAngle
-        )
-    }
-    
-    func land() {
-        transform = CGAffineTransform(
-            rotationAngle: 0
-        ).translatedBy(
-            x: 0,
-            y: 0
-        )
         
-    }
-    
-    func jumpAnim(
-        onX: CGFloat
-    ) {
-        UIView.animate(
-            withDuration: 0.8,
-            animations: {
-                self.jump(
-                    onX: onX
-                )
-            }
-        ) { b in
-            self.removeFromSuperview()
-        }
-    }
-    
-    func landAnim() {
-        UIView.animate(
-            withDuration: 0.8
-        ) {
-            self.land()
-        }
     }
     
 }
