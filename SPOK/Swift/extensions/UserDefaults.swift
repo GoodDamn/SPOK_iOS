@@ -11,10 +11,10 @@ extension UserDefaults {
     
     func string(
         _ key: String
-    ) -> String {
+    ) -> String? {
         return self.string(
             forKey: key
-        ) ?? "null"
+        )
     }
     
 }

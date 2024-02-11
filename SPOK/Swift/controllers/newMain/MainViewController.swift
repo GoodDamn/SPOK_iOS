@@ -267,7 +267,9 @@ extension MainViewController {
             splash.view.alpha = 1.0
         }
         
-        DispatchQueue.ui(wait: 3.0) { [weak self] in
+        DispatchQueue.ui(
+            wait: 3.0
+        ) { [weak self] in
             
             guard let s = self else {
                 return
@@ -288,13 +290,20 @@ extension MainViewController {
     
     private func checkSub() {
         
-        UserDefaults
+        let def = UserDefaults
             .standard
-            .setValue(
+        
+        if def.string(
+            Keys.USER_REF
+        ) == nil {
+            def.setValue(
                 AuthUtils.user()?
                     .uid ?? "",
                 forKey: Keys.USER_REF
             )
+        }
+        
+        
         
         mPremiumService
             .mOnCheckPremium = {[weak self]

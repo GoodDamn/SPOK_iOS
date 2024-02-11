@@ -47,7 +47,7 @@ class SheepCounterViewController
             contentsOf: url!,
             fileTypeHint: AVFileType.mp3.rawValue
         )
-        
+        mPlayer?.numberOfLoops = -1
         mPlayer?.prepareToPlay()
         
         view.backgroundColor = UIColor(

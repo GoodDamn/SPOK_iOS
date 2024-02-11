@@ -32,4 +32,8 @@ extension CGRect {
         origin.x = origin.x + offx
     }
     
+    func y() -> CGFloat {
+        return origin.y
+    }
+    
 }

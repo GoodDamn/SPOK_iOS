@@ -90,13 +90,10 @@ final class OptionTableCell
             return
         }
         
-        let size = frame.size
+        let w = frame.width
         
-        let w = size.width
-        
-        let imageSize = size.height * 0.45
-        let ymid = size.height * 0.5
-        let yimage = ymid - imageSize * 0.5
+        let (imageSize, yimage) =
+            tempCalc()
         
         mImageViewIcon.frame = CGRect(
             x: 0,
@@ -108,7 +105,7 @@ final class OptionTableCell
         mLabelTitle.frame = CGRect(
             x: imageSize*2,
             y: yimage,
-            width: w - imageSize*2,
+            width: frame.width - imageSize*2,
             height: imageSize
         )
         
@@ -138,7 +135,17 @@ final class OptionTableCell
         
         guard let v = view else {
             
-            let primar = UIImageView()
+            let (imageSize, yimage) =
+                tempCalc()
+            
+            let primar = UIImageView(
+                frame: CGRect(
+                    x: frame.width - imageSize,
+                    y: yimage,
+                    width: imageSize * 0.5,
+                    height: imageSize * 0.75
+                )
+            )
             
             primar.tintColor = .gray
             
@@ -153,21 +160,9 @@ final class OptionTableCell
                 primar
             )
             
-            let f = mImageViewIcon.frame
-            let imageSize = f.width
-            
-            primar.frame = CGRect(
-                x: frame.width - imageSize,
-                y: f.origin.y,
-                width: imageSize * 0.5,
-                height: imageSize * 0.75
-            )
-            
             mViewPrimary = primar
             return
         }
-         
-        print("primaryView:VIEW:",view)
         
         let ymid = frame.size.height * 0.5
         let f = v.frame
@@ -184,6 +179,22 @@ final class OptionTableCell
         )
         
         mViewPrimary = v
+    }
+    
+    private func tempCalc() -> (
+        imageSize: CGFloat,
+        yimage: CGFloat
+    ) {
+        let size = frame.size
+        let w = size.width
+        
+        let imageSize = size.height * 0.45
+        let yimage = (size.height - imageSize) * 0.5
+        
+        return (
+            imageSize: imageSize,
+            yimage: yimage
+        )
     }
     
 }

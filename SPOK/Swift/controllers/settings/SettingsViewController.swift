@@ -30,7 +30,7 @@ final class SettingsViewController
         )
         
         let w = view.frame.width
-        let h = view.frame.height
+        let h = view.frame.height - mInsets.top
         
         
         let btnClose = ViewUtils
@@ -40,8 +40,12 @@ final class SettingsViewController
                 iconProp: 0.4
             )
         
+        let beginPosY = mInsets.top < 1
+            ? btnClose.frame.y()
+            : mInsets.top
+        
         btnClose.frame
-            .origin.y += mInsets.top
+            .origin.y = beginPosY
         
         let hbtnDelete = h * 0.07
         let ytable = btnClose.frame.bottom()
@@ -98,7 +102,7 @@ final class SettingsViewController
             ),
             Option(
                 image: UIImage(
-                    systemName: "door.left.hand.open"
+                    named: "login"
                 ),
                 text: "Выйти из аккаунта",
                 textColor: .white,
@@ -118,8 +122,6 @@ final class SettingsViewController
             )
         ]
         
-        print("OptionTableCell:", hbtnDelete)
-        
         let lSettings = UILabel(
             frame: CGRect(
                 x: 0,
@@ -134,7 +136,7 @@ final class SettingsViewController
         lSettings.textColor = .white
         lSettings.font = .bold(
             withSize: lSettings.frame
-                .height * 0.38
+                .height * 0.46
         )
         lSettings.textAlignment = .center
         lSettings.text = "Настройки"
@@ -161,6 +163,13 @@ final class SettingsViewController
         
         mTableOptions.backgroundColor =
             .clear
+        
+        mTableOptions.contentInset = UIEdgeInsets(
+            top: 8,
+            left: 0,
+            bottom: 0,
+            right: 0
+        )
         
         view.addSubview(
             lSettings

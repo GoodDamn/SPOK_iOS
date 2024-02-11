@@ -32,6 +32,8 @@ final class ProfileNewViewController
         
         modalPresentationStyle = .fullScreen
         
+        view.clipsToBounds = true
+        
         let w = view.frame.width
         let h = view.frame.height - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
