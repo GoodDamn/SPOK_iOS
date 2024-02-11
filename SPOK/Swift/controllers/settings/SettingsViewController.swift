@@ -76,8 +76,10 @@ final class SettingsViewController
             let status = perm
                 .authorizationStatus
             
-            mSwitcher.isOn = status
+            DispatchQueue.ui {
+                mSwitcher.isOn = status
                 == .authorized
+            }
         }
         
         targetClose(
@@ -196,20 +198,16 @@ final class SettingsViewController
         
         let app = UIApplication
             .shared
-        
-        if s.isOn {
             
+        if s.isOn {
             app
             .registerForRemoteNotifications()
-            return
+        } else {
+            app
+            .unregisterForRemoteNotifications()
         }
         
-        
-        app.unregisterForRemoteNotifications()
-    
-        
-        
-        
+        Utils.openSettings()
     }
     
     private func onClickBtnRate() {

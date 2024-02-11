@@ -12,7 +12,6 @@ class Utils {
     
     private static let tag = "Utils:";
     
-    
     public static func mainNav(
     ) -> MainNavigationController {
         return UIApplication
@@ -38,69 +37,7 @@ class Utils {
             .safeAreaInsets ?? UIEdgeInsets.zero
     }
     
-    public static func configNotifications(
-        center: UNUserNotificationCenter = UNUserNotificationCenter.current()
-    ) {
-        center.requestAuthorization(
-            options: [.sound, .alert]
-        ) {
-            (granted, error) in
-            
-            if let error = error {
-                print(self.tag, error)
-                return;
-            }
-            
-            if granted{
-                print(self.tag, "Permission is granted");
-                
-                center.removeAllPendingNotificationRequests();
-                
-                let dailyContentSize:UInt8 = 4;
-                
-                var dateComponents = DateComponents();
-                dateComponents.calendar = Calendar.current;
-                
-                let content = UNMutableNotificationContent();
-                
-                for day in 1...7 {
-                    
-                    var dd = UInt8.random(in: 1...dailyContentSize);
-                    
-                    content.title = Utils.getLocalizedString("edn\(dd)");
-                    content.body = Utils.getLocalizedString("ednb\(dd)");
-                    
-                    dateComponents.weekday = day;
-                    dateComponents.minute = 0
-                    dateComponents.hour = 7
-                    
-                    center.add(UNNotificationRequest(
-                        identifier: ("SPOK7\(day)\(dd)"),
-                        content: content,
-                        trigger: UNCalendarNotificationTrigger(
-                            dateMatching: dateComponents,
-                            repeats: true)))
-                    
-                    dateComponents.hour = 18;
-                    
-                    dd = UInt8.random(in: 1...dailyContentSize);
-                    
-                    content.title = Utils.getLocalizedString("edn\(dd)");
-                    content.body = Utils.getLocalizedString("ednb\(dd)");
-                    
-                    center.add(UNNotificationRequest(
-                        identifier: "SPOK18\(day)\(dd)",
-                        content: content,
-                        trigger: UNCalendarNotificationTrigger(
-                            dateMatching: dateComponents,
-                            repeats: true)))
-                    
-                }
-            }
-            
-        }
-        
-    }
+    
     
     public static func getLocalizedString(
         _ key:String
@@ -114,31 +51,50 @@ class Utils {
         )
     }
     
-    static func getLanguageCode()->String{
-        return Locale.current.languageCode?.replacingOccurrences(of: "ru", with: "").uppercased() ?? "";
+    static func getLanguageCode() -> String {
+        return Locale
+            .current
+            .languageCode?
+            .replacingOccurrences(
+                of: "ru",
+                with: "")
+            .uppercased() ?? ""
     }
     
     
-    static func configLikes(_ controller: UIViewController,_ cell:UICollectionViewCell, id:Int, selectors:[Selector]) {
-        let gesture = UITapGestureRecognizer(target: controller, action: selectors[0]);
-        gesture.numberOfTapsRequired = 1;
-        gesture.name = id.description;
-        cell.addGestureRecognizer(gesture);
+    /*static func configLikes(
+        _ controller: UIViewController,
+        _ cell: UICollectionViewCell,
+        id: Int,
+        selectors: [Selector]
+    ) {
+        let gesture = UITapGestureRecognizer(
+            target: controller,
+            action: selectors[0]
         
-        let double = UITapGestureRecognizer(target: controller, action: selectors[1]);
-        double.numberOfTapsRequired = 2;
-        double.name = id.description;
-        cell.addGestureRecognizer(double);
+        )
+        gesture.numberOfTapsRequired = 1
+        gesture.name = id.description
+        cell.addGestureRecognizer(gesture)
         
-        gesture.require(toFail: double);
+        let double = UITapGestureRecognizer(
+            target: controller,
+            action: selectors[1]
+        )
+        double.numberOfTapsRequired = 2
+        double.name = id.description
+        cell.addGestureRecognizer(double)
         
-    }
+        gesture.require(
+            toFail: double
+        )
+        
+    }*/
 
-    
     public static func cropImage(
         _ s:CGSize,
         input:UIImage?
-    )->UIImage {
+    ) -> UIImage {
         
         if input == nil{
             return UIImage();
@@ -177,6 +133,24 @@ class Utils {
         return i;
     }
     
+    public static func openSettings() {
+        
+        guard let settings = NSURL(
+            string: UIApplication
+                .openSettingsURLString
+        ) else {
+            return
+        }
+        
+        UIApplication
+            .shared
+            .open(
+                settings as URL,
+                options: [:],
+                completionHandler: nil
+            )
+        
+    }
  
     class Exten {
         
