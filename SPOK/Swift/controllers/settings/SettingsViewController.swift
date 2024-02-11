@@ -323,6 +323,7 @@ extension SettingsViewController
                         "SettingsViewController: DELETE_USER:",
                         error?.localizedDescription
                     )
+                    
                     exit(0)
                 }
         }

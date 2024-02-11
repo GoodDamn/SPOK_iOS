@@ -79,7 +79,7 @@ class MainViewController
             desc: 0.066 * wm // 0.066
         )
         
-        print("MainViewController::", "CARD_TEXT_SIZES:",
+        Log.d("MainViewController::", "CARD_TEXT_SIZES:",
               "B:", MainViewController.mCardTextSizeB,
               "M:", MainViewController.mCardTextSizeM
         )
@@ -128,7 +128,7 @@ class MainViewController
             UIApplication
                 .shared
                 .registerForRemoteNotifications()
-            print("Time for intro!")
+            Log.d("Time for intro!")
             showSplash(
                 msg: "готовим что-то\n уникальное..."
             ) {
@@ -139,7 +139,7 @@ class MainViewController
             return
         }
         
-        print("Time for content!")
+        Log.d("Time for content!")
         
         showSplash(
             msg: "отправляемся в\nмир снов..."
@@ -293,15 +293,13 @@ extension MainViewController {
         let def = UserDefaults
             .standard
         
-        if def.string(
-            Keys.USER_REF
-        ) == nil {
-            def.setValue(
-                AuthUtils.user()?
-                    .uid ?? "",
-                forKey: Keys.USER_REF
-            )
-        }
+        
+        def.setValue(
+            AuthUtils.user()?
+                .uid ?? "",
+            forKey: Keys.USER_REF
+        )
+        
         
         mPremiumService
             .mOnCheckPremium = {[weak self]
