@@ -227,7 +227,7 @@ public class SPOKContentEngine {
             currentPos = ByteUtils
                 .int(&endPosByte)
             
-            print(TAG, "RES_END_POS:",currentPos, endPosByte)
+            print(TAG, "RES_END_POS:",currentPos, ([UInt8])(endPosByte))
             
             fileLen = currentPos - prevPos
             print(TAG, "FILE_LEN:",fileLen)
@@ -286,7 +286,7 @@ public class SPOKContentEngine {
             }
             
             prevPos = currentPos
-            fis.skip(-fileLen-ret)
+            fis.skip(-fileLen-ret+1)
         }
         
         fis.close()

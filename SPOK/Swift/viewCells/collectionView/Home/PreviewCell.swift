@@ -154,10 +154,10 @@ class PreviewCell
         if s.isPremium && !MainViewController
             .mIsPremiumUser {
             // Move to sub page
-            Log.d(
-                PreviewCell.TAG,
-                "MOVE TO SUB PAGE"
-            )
+            Toast(
+                text: "Доступно только с подпиской",
+                duration: 1.5
+            ).show()
             
             return
         }
@@ -208,7 +208,6 @@ class PreviewCell
     }
     
     private func calculateBounds() {
-        
         Log.d(
             PreviewCell.TAG,
             "calculated",

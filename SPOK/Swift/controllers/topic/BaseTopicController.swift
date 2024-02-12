@@ -216,6 +216,13 @@ class BaseTopicController
         _ soundPool: [AVAudioPlayer?]
     ) {
         print(TAG, "onSFX")
+        
+        guard let id = sfxId else {
+            return
+        }
+        
+        soundPool[id]?.play()
+        
     }
     
     func onError(

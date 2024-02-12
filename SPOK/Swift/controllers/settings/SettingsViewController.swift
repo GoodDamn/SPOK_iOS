@@ -310,7 +310,7 @@ extension SettingsViewController
             do {
                 try auth.signOut()
             } catch {
-                print(
+                Log.d(
                     "SettingsViewController:",
                     "SIGN_OUT_ERROR:",
                     error.localizedDescription
