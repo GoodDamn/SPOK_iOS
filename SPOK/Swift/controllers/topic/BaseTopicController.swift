@@ -102,7 +102,7 @@ class BaseTopicController
         
         let mFont = UIFont(
             name: "OpenSans-SemiBold",
-            size: view.frame.width * 0.057
+            size: view.frame.width * 0.047 // 0.057
         )
         
         let mTextColor = UIColor(
@@ -218,6 +218,10 @@ class BaseTopicController
         print(TAG, "onSFX")
         
         guard let id = sfxId else {
+            return
+        }
+        
+        if id < 0 || id >= soundPool.count {
             return
         }
         
