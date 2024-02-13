@@ -305,11 +305,7 @@ class BaseTopicController
         guard let r = mScriptReader else {
             return
         }
-        
-        print(TAG, "initEngine: META:",
-              mEngine.metadataAmbient()
-        )
-        
+
         view
             .gestureRecognizers?
             .removeAll()
@@ -340,6 +336,39 @@ class BaseTopicController
         r.next()
         
         view.isUserInteractionEnabled = true
+        
+        showLabelSong()
+    }
+    
+    private func showLabelSong() {
+        
+        guard let meta = mEngine
+            .metadataAmbient() else {
+            return
+        }
+        
+        let w = view.frame.width
+        let h = view.frame.height
+        
+        let mLabelSong = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: h * 0.8,
+                width: w,
+                height: 1
+            )
+        )
+        
+        mLabelSong.textAlignment = .center
+        mLabelSong.textColor = .white
+        mLabelSong.font = .bold(
+            withSize: h * 0.035
+        )
+        mLabelSong.text = "\(meta.artist) - \(meta.title)"
+        
+        mLabelSong.sizeToFit()
+        
+        view.addSubview(mLabelSong)
     }
     
     private func nothing() {

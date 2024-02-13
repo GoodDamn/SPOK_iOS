@@ -30,7 +30,7 @@ extension AVAsset {
     
     static func mp3Meta(
         from data: inout Data
-    ) -> Metadata {
+    ) -> Metadata? {
         let (asset, url) = asset(
             from: &data
         )
@@ -47,11 +47,17 @@ extension AVAsset {
             $0.commonKey == .commonKeyArtist
         }?.value as? String
         
+        print("AVAsset:", artist, title, meta)
+        
         FileManager
             .delete(
                 url: url
             )
-         
+        
+        if artist == nil {
+            return nil
+        }
+        
         return Metadata(
             title: title,
             artist: artist

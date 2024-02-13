@@ -283,11 +283,10 @@ public final class SPOKContentEngine {
                         fadeDuration: 0
                     )
                     
-                    AVAsset.mp3Meta(
-                        from: &file
-                    ) {[weak self] meta in
-                        self?.metadata = meta
-                    }
+                    metadata = AVAsset
+                        .mp3Meta(
+                            from: &file
+                        )
                     
                 }
             } else {
