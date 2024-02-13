@@ -286,9 +286,7 @@ public final class SPOKContentEngine {
                     AVAsset.mp3Meta(
                         from: &file
                     ) {[weak self] meta in
-                        
                         self?.metadata = meta
-                        
                     }
                     
                 }
