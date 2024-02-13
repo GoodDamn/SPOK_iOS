@@ -7,9 +7,9 @@
 
 import UserNotifications;
 
-class EveryDayNotification{
+final class EveryDayNotification{
 
-    func showNotification()->UNNotificationRequest{
+    final func showNotification()->UNNotificationRequest{
         let titles = ["SPOK as a lifestyle ✌",
             "At home or on the way to work? 🏠",
             "Light your inner fire! 🔥",

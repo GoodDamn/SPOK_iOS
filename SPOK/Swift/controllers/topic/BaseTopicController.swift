@@ -297,54 +297,50 @@ class BaseTopicController
         
         DispatchQueue.main.async {
             [weak self] in
-            
-            guard let s = self else {
-                print(
-                    "BaseTopicController:",
-                    "initEngine: GC"
-                )
-                return
-            }
-            
-            guard let r = s.mScriptReader else {
-                return
-            }
-            
-            print(s.TAG, "initEngine!!!GESTURES")
-            
-            s.view
-                .gestureRecognizers?
-                .removeAll()
-            
-            let g = UITapGestureRecognizer(
-                target: self,
-                action: #selector(
-                    s.onTouch(_:)
-                )
-            )
-            
-            g.numberOfTapsRequired = 1
-            
-            s.view.addGestureRecognizer(
-                g
-            )
-            
-            UIView.animate(
-                withDuration: 0.3
-            ) {
-                s.mProgressBarTopic.alpha = 1.0
-            }
-            
-            r.setOnReadScriptListener(
-                self
-            )
-            
-            r.next()
-            
-            s.view.isUserInteractionEnabled = true
+            self?.startTopic()
         }
     }
     
+    private func startTopic() {
+        guard let r = mScriptReader else {
+            return
+        }
+        
+        print(TAG, "initEngine: META:",
+              mEngine.metadataAmbient()
+        )
+        
+        view
+            .gestureRecognizers?
+            .removeAll()
+        
+        let g = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                onTouch(_:)
+            )
+        )
+        
+        g.numberOfTapsRequired = 1
+        
+        view.addGestureRecognizer(
+            g
+        )
+        
+        UIView.animate(
+            withDuration: 0.3
+        ) { [weak self] in
+            self?.mProgressBarTopic.alpha = 1.0
+        }
+        
+        r.setOnReadScriptListener(
+            self
+        )
+        
+        r.next()
+        
+        view.isUserInteractionEnabled = true
+    }
     
     private func nothing() {
         Toast.init(

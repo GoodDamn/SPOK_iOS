@@ -29,4 +29,27 @@ extension UILabel {
         attributedText = a
     }
     
+    func textHeight() -> CGFloat {
+        return textHeight(
+            width: frame.width
+        )
+    }
+    
+    func textHeight(
+        width: CGFloat
+    ) -> CGFloat {
+        return systemLayoutSizeFitting(
+            CGSize(
+                width: frame.width,
+                height: UIView
+                    .layoutFittingCompressedSize
+                    .height
+            ),
+            withHorizontalFittingPriority:
+                    .required,
+            verticalFittingPriority:
+                    .fittingSizeLevel
+        ).height
+    }
+    
 }

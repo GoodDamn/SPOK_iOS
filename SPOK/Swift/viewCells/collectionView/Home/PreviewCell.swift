@@ -7,9 +7,8 @@
 
 import Foundation
 import UIKit
-import FirebaseStorage
 
-class PreviewCell
+final class PreviewCell
     : UICollectionViewCell{
     
     private static let TAG = "PreviewCell:"
@@ -368,32 +367,5 @@ extension PreviewCell
     }
     
     func onError() {}
-    
-}
-
-extension UILabel {
-    
-    func textHeight() -> CGFloat {
-        return textHeight(
-            width: frame.width
-        )
-    }
-    
-    func textHeight(
-        width: CGFloat
-    ) -> CGFloat {
-        return systemLayoutSizeFitting(
-            CGSize(
-                width: frame.width,
-                height: UIView
-                    .layoutFittingCompressedSize
-                    .height
-            ),
-            withHorizontalFittingPriority:
-                    .required,
-            verticalFittingPriority:
-                    .fittingSizeLevel
-        ).height
-    }
     
 }

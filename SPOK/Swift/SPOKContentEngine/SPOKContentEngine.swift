@@ -1,7 +1,7 @@
 
 import AVFoundation
 
-public class SPOKContentEngine {
+public final class SPOKContentEngine {
     
     private let TAG = "SPOKContentEngine:"
     
@@ -19,9 +19,11 @@ public class SPOKContentEngine {
     private var mSfxPool:[AVAudioPlayer?] = []
     private var mResources: [Any?] = []
     
+    private var metadata: Metadata? = nil
+    
     public init() {}
     
-    public func read(
+    public final func read(
         chunk: inout Data
     ) {
         
@@ -29,7 +31,7 @@ public class SPOKContentEngine {
         
         print(TAG, "LEN:",chunk[offset])
         
-        var textLen = ByteUtils
+        let textLen = ByteUtils
             .short(
                 &chunk
             )
@@ -45,9 +47,9 @@ public class SPOKContentEngine {
             encoding: .utf8
         ) ?? ""
         
-        var textConfig = ScriptText()
+        let textConfig = ScriptText()
         
-        var advancedText = text.components(
+        let advancedText = text.components(
             separatedBy: "|"
         )
         
@@ -167,7 +169,7 @@ public class SPOKContentEngine {
     }
     
     
-    public func loadResources(
+    public final func loadResources(
         dataSKC: inout Data
     ) {
         
@@ -267,7 +269,7 @@ public class SPOKContentEngine {
                 player.prepareToPlay()
                 
                 // 1 MB
-                if (file.count <= 1048579) {
+                if file.count <= 1048579 {
                     mResources[i] = sfxID
                     mSfxPool.append(
                         player
@@ -280,6 +282,15 @@ public class SPOKContentEngine {
                         0.0,
                         fadeDuration: 0
                     )
+                    
+                    AVAsset.mp3Meta(
+                        from: &file
+                    ) {[weak self] meta in
+                        
+                        self?.metadata = meta
+                        
+                    }
+                    
                 }
             } else {
                 // .svc
@@ -292,18 +303,23 @@ public class SPOKContentEngine {
         fis.close()
     }
 
-    public func release() {
+    public final func metadataAmbient(
+    ) -> Metadata? {
+        return metadata
+    }
+    
+    public final func release() {
         mResources.removeAll()
         mSfxPool.removeAll()
     }
     
-    public func setOnEndScriptListener(
+    public final func setOnEndScriptListener(
         _ l: ((ScriptText) -> Void)?
     ) {
         mOnEndScript = l
     }
     
-    public func setOnReadCommandListener(
+    public final func setOnReadCommandListener(
         _ l: OnReadCommand?
     ) {
         mOnReadCommand = l
