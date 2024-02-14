@@ -39,21 +39,15 @@ extension AVAsset {
             exten: ".mp3"
         )
         
-        print("AVAsset:", FileManager.default.fileExists(
-            atPath: url.pathh()
-        ))
-        
         let meta = asset.metadata
         
-        let title = meta.first(
-            where: {
-                $0.commonKey == .commonKeyTitle
-            }
-        )?.value as? String
+        let title = asset.findMeta(
+            .commonKeyTitle
+        )
         
-        let artist = meta.first {
-            $0.commonKey == .commonKeyArtist
-        }?.value as? String
+        let artist = asset.findMeta(
+            .commonKeyArtist
+        )
         
         print("AVAsset:", artist, title)
         
@@ -62,14 +56,18 @@ extension AVAsset {
                 url: url
             )
         
-        if artist == nil {
-            return nil
-        }
-        
         return Metadata(
             title: title,
             artist: artist
         )
+    }
+    
+    private func findMeta(
+        _ key: AVMetadataKey
+    ) -> String {
+        metadata.first {
+            $0.commonKey == key
+        }?.value as? String ?? ""
     }
     
 }

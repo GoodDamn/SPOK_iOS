@@ -342,8 +342,11 @@ class BaseTopicController
     
     private func showLabelSong() {
         
-        let meta = mEngine
-            .metadataAmbient()
+        guard let meta = mEngine
+            .metadataAmbient() else {
+            return
+        }
+        
         let w = view.frame.width
         let h = view.frame.height
         
@@ -361,7 +364,7 @@ class BaseTopicController
         mLabelSong.font = .regular(
             withSize: h * 0.025
         )
-        mLabelSong.text = "\(meta?.artist) - \(meta?.title)"
+        mLabelSong.text = "\(meta.artist) - \(meta.title)"
         
         mLabelSong.sizeToFit()
         

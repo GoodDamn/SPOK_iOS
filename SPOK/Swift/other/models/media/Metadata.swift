@@ -8,6 +8,6 @@
 import Foundation
 
 public struct Metadata {
-    let title: String?
-    let artist: String?
+    let title: String
+    let artist: String
 }
