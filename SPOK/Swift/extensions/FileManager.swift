@@ -10,13 +10,14 @@ import Foundation
 extension FileManager {
     
     static func temp(
-        data: inout Data
+        data: inout Data,
+        exten: String
     ) -> URL {
         
         let dir = FileManager.default
             .temporaryDirectory
         
-        let fileName = "123.mp3"
+        let fileName = "123\(exten)"
         
         let url = dir.append(
             fileName

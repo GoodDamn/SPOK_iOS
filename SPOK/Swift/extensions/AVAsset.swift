@@ -11,12 +11,14 @@ import AVKit
 extension AVAsset {
     
     static func asset(
-        from data: inout Data
+        from data: inout Data,
+        exten: String
     ) -> (AVAsset, URL) {
         
         let tempUrl = FileManager
             .temp(
-                data: &data
+                data: &data,
+                exten: exten
             )
         
         let asset = AVAsset(
@@ -33,7 +35,8 @@ extension AVAsset {
     ) -> Metadata? {
         
         let (asset, url) = asset(
-            from: &data
+            from: &data,
+            exten: ".mp3"
         )
         
         print("AVAsset:", FileManager.default.fileExists(
