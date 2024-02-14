@@ -19,19 +19,23 @@ class BaseTopicController
     
     private var mPrevTextView: UITextViewPhrase? = nil
     
+    private var mLabelSong: UILabel? = nil
+    
+    private var mBtnClose: UIButton!
+    
     private var mProgressBar: ProgressBar!
     private var mProgressBarTopic: ProgressBar!
+    
     
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
     private var mId = Int.min
     private var mNetworkUrl = ""
+    private var mIsFirstTouch = true
     
     private var mCacheFile: CacheProgress<Void>!
     private let mEngine =
         SPOKContentEngine()
-    
-    private var mBtnClose: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +168,15 @@ class BaseTopicController
     @objc func onTouch(
         _ sender: UITapGestureRecognizer
     ) {
+        if mIsFirstTouch {
+            mIsFirstTouch = false
+            mLabelSong?.alpha(
+                0.0
+            ) { [weak self] _ in
+                self?.mLabelSong?.removeFromSuperview()
+            }
+        }
+        
         mScriptReader!.next()
     }
     
@@ -263,7 +276,7 @@ extension BaseTopicController {
         let w = view.frame.width
         let h = view.frame.height
         
-        let mLabelSong = UILabel(
+        mLabelSong = UILabel(
             frame: CGRect(
                 x: 0,
                 y: h * 0.8,
@@ -272,16 +285,36 @@ extension BaseTopicController {
             )
         )
         
-        mLabelSong.textAlignment = .center
-        mLabelSong.textColor = .white
-        mLabelSong.font = .regular(
+        guard let label = mLabelSong
+            else {
+            return
+        }
+        
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .semibold(
             withSize: h * 0.025
         )
-        mLabelSong.text = "\(meta.artist) - \(meta.title)"
+        label.text = "\(meta.artist) - \(meta.title)"
         
-        mLabelSong.sizeToFit()
+        label.sizeToFit()
         
-        view.addSubview(mLabelSong)
+        label
+            .frame
+            .origin
+            .x = (w - label.frame.width) * 0.5
+        
+        
+        label.alpha = 0
+        
+        view.addSubview(
+            label
+        )
+        
+        label.alpha(
+            1.0
+        )
+        
     }
     
     private func nothing() {
