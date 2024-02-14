@@ -240,9 +240,9 @@ public final class SPOKContentEngine {
             
             // Read file content
             // Read header file
-            var h = Int(fis.read())
+            let h = Int(fis.read())
             fis.skip(-1)
-            file = fis.read(fileLen)
+            file = fis.read(1,fileLen)
             
             print(
                 TAG,
@@ -294,7 +294,7 @@ public final class SPOKContentEngine {
             }
             
             prevPos = currentPos
-            fis.skip(-fileLen-ret+1)
+            fis.skip(-fileLen-ret)
         }
         
         fis.close()

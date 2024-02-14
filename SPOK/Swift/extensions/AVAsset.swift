@@ -31,9 +31,14 @@ extension AVAsset {
     static func mp3Meta(
         from data: inout Data
     ) -> Metadata? {
+        
         let (asset, url) = asset(
             from: &data
         )
+        
+        print("AVAsset:", FileManager.default.fileExists(
+            atPath: url.pathh()
+        ))
         
         let meta = asset.metadata
         
@@ -47,7 +52,7 @@ extension AVAsset {
             $0.commonKey == .commonKeyArtist
         }?.value as? String
         
-        print("AVAsset:", artist, title, meta)
+        print("AVAsset:", artist, title)
         
         FileManager
             .delete(
