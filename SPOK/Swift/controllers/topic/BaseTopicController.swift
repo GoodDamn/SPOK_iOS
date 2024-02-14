@@ -11,9 +11,7 @@ import UIKit
 import FirebaseStorage
 
 class BaseTopicController
-    : StackViewController,
-      OnReadCommand,
-      OnReadScript {
+    : StackViewController {
     
     private final let TAG = "BaseTopicController:"
     
@@ -34,29 +32,6 @@ class BaseTopicController
         SPOKContentEngine()
     
     private var mBtnClose: UIButton!
-    
-    @objc func onTouch(
-        _ sender: UITapGestureRecognizer
-    ) {
-        mScriptReader!.next()
-    }
-    
-    @objc override func onClickBtnClose(
-        _ sender: UIButton
-    ) {
-        sender.isEnabled = false
-
-        mCurrentPlayer?
-            .stopFade(
-                duration: 0.39
-            )
-        
-        pop(
-            duration: 0.4
-        ) {
-            self.view.alpha = 0
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,101 +154,39 @@ class BaseTopicController
         
     }
     
-    func onAmbient(
-        _ player: AVAudioPlayer?
-    ) {
-        
-        print(TAG, "onAmbient",player?.data)
-        let ses = AVAudioSession
-            .sharedInstance()
-        do {
-            try ses
-                .setCategory(
-                    .playback
-                )
-            try ses.setActive(true)
-        } catch {
-            print(TAG, "onAmbient: ERROR::SESSION",error)
-        }
-        player?.play()
-        player?.setVolume(
-            1.0,
-            fadeDuration: 1.5
-        )
-        
-        guard let prevP = mCurrentPlayer else {
-            mCurrentPlayer = player
-            return
-        }
-        
-        prevP.stopFade { [weak self] in
-            self?.mCurrentPlayer = prevP
-        }
-    }
-    
-    func onSFX(
-        _ sfxId: Int?,
-        _ soundPool: [AVAudioPlayer?]
-    ) {
-        print(TAG, "onSFX")
-        
-        guard let id = sfxId else {
-            return
-        }
-        
-        if id < 0 || id >= soundPool.count {
-            return
-        }
-        
-        soundPool[id]?.play()
-        
-    }
-    
-    func onError(
-        _ errorMsg: String
-    ) {
-        print(TAG, "onError:",errorMsg)
-    }
-    
-    func onFinish() {
-        view.gestureRecognizers?[0]
-            .isEnabled = false
-        mBtnClose.isEnabled = false
-        
-        mCurrentPlayer?.stopFade(
-            duration: 2.4
-        )
-        
-        if mPrevTextView == nil {
-            self.pop(
-                duration: 0.2
-            ) {
-                self.view.alpha = 0
-            }
-            return
-        }
-        
-        UIView.animate(
-            withDuration: 2.5,
-            animations: {
-                self.mPrevTextView!.alpha = 0.0
-            },
-            completion: { b in
-                self.pop(
-                    duration: 0.2
-                ) {
-                    self.view.alpha = 0
-                }
-            }
-        )
-    }
-    
     public func setID(
         _ id: Int
     ) {
         mId = id
         mNetworkUrl = "content/skc/\(id).skc"
     }
+    
+    @objc func onTouch(
+        _ sender: UITapGestureRecognizer
+    ) {
+        mScriptReader!.next()
+    }
+    
+    @objc override func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+
+        mCurrentPlayer?
+            .stopFade(
+                duration: 0.39
+            )
+        
+        pop(
+            duration: 0.4
+        ) {
+            self.view.alpha = 0
+        }
+    }
+    
+}
+
+extension BaseTopicController {
     
     // Better to load on background thread
     private func initEngine(
@@ -384,15 +297,12 @@ class BaseTopicController
         }
         
     }
-    
 }
 
 extension BaseTopicController
     : CacheProgressListener {
     
     func onPrepareDownload() {
-        let w = view.frame.width
-        let h = view.frame.height
         
         mProgressBar = ViewUtils
             .progressBar(
@@ -461,6 +371,104 @@ extension BaseTopicController
     // Background thread
     func onNet(data: inout Data?) {}
     
+}
+
+extension BaseTopicController
+    : OnReadScript {
+    
+    func onFinish() {
+        view.gestureRecognizers?[0]
+            .isEnabled = false
+        mBtnClose.isEnabled = false
+        
+        mCurrentPlayer?.stopFade(
+            duration: 2.4
+        )
+        
+        if mPrevTextView == nil {
+            self.pop(
+                duration: 0.2
+            ) {
+                self.view.alpha = 0
+            }
+            return
+        }
+        
+        UIView.animate(
+            withDuration: 2.5,
+            animations: {
+                self.mPrevTextView!.alpha = 0.0
+            },
+            completion: { b in
+                self.pop(
+                    duration: 0.2
+                ) {
+                    self.view.alpha = 0
+                }
+            }
+        )
+    }
+    
+}
+
+extension BaseTopicController
+    : OnReadCommand {
+    
+    func onAmbient(
+        _ player: AVAudioPlayer?
+    ) {
+        
+        Log.d(TAG, "onAmbient",player?.data)
+        let ses = AVAudioSession
+            .sharedInstance()
+        do {
+            try ses
+                .setCategory(
+                    .playback
+                )
+            try ses.setActive(true)
+        } catch {
+            print(TAG, "onAmbient: ERROR::SESSION",error)
+        }
+        player?.play()
+        player?.setVolume(
+            1.0,
+            fadeDuration: 1.5
+        )
+        
+        guard let prevP = mCurrentPlayer else {
+            mCurrentPlayer = player
+            return
+        }
+        
+        prevP.stopFade { [weak self] in
+            self?.mCurrentPlayer = prevP
+        }
+    }
+    
+    func onSFX(
+        _ sfxId: Int?,
+        _ soundPool: [AVAudioPlayer?]
+    ) {
+        print(TAG, "onSFX")
+        
+        guard let id = sfxId else {
+            return
+        }
+        
+        if id < 0 || id >= soundPool.count {
+            return
+        }
+        
+        soundPool[id]?.play()
+        
+    }
+    
+    func onError(
+        _ errorMsg: String
+    ) {
+        print(TAG, "onError:",errorMsg)
+    }
 }
 
 extension AVAudioPlayer {

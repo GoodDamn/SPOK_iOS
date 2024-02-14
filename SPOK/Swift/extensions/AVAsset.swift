@@ -26,7 +26,6 @@ extension AVAsset {
         )
         
         return (asset, tempUrl)
-        
     }
     
     
@@ -48,8 +47,6 @@ extension AVAsset {
         let artist = asset.findMeta(
             .commonKeyArtist
         )
-        
-        print("AVAsset:", artist, title)
         
         FileManager
             .delete(
