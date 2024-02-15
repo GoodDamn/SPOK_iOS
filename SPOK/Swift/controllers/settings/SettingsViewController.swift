@@ -250,6 +250,14 @@ final class SettingsViewController
             do {
                 try Auth.auth()
                     .signOut()
+                
+                UserDefaults
+                    .standard
+                    .removeObject(
+                        forKey: Keys
+                            .USER_REF
+                    )
+                
             } catch {
                 Log.d(
                     self?.TAG,
@@ -309,6 +317,12 @@ extension SettingsViewController
             
             do {
                 try auth.signOut()
+                UserDefaults
+                    .standard
+                    .removeObject(
+                        forKey: Keys
+                            .USER_REF
+                    )
             } catch {
                 Log.d(
                     "SettingsViewController:",
