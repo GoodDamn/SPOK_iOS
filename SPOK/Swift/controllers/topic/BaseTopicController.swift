@@ -483,7 +483,7 @@ extension BaseTopicController
         _ sfxId: Int?,
         _ soundPool: [AVAudioPlayer?]
     ) {
-        print(TAG, "onSFX")
+        Log.d(TAG, "onSFX")
         
         guard let id = sfxId else {
             return

@@ -290,17 +290,6 @@ extension MainViewController {
     
     private func checkSub() {
         
-        let def = UserDefaults
-            .standard
-        
-        
-        def.setValue(
-            AuthUtils.user()?
-                .uid ?? "",
-            forKey: Keys.USER_REF
-        )
-        
-        
         mPremiumService
             .mOnCheckPremium = {[weak self]
                 withSub in
@@ -322,6 +311,23 @@ extension MainViewController {
             self?.mPremiumService
                 .start()
         }
+        
+        let def = UserDefaults
+            .standard
+        
+        guard let userID = AuthUtils
+            .user()?
+            .uid else {
+            def.removeObject(
+                forKey: Keys.USER_REF
+            )
+            return
+        }
+        
+        def.setValue(
+            userID,
+            forKey: Keys.USER_REF
+        )
         
     }
     

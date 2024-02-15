@@ -17,4 +17,10 @@ extension UserDefaults {
         )
     }
     
+    func userID() -> String? {
+        return string(
+            forKey: Keys.USER_REF
+        )
+    }
+    
 }

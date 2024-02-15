@@ -31,12 +31,14 @@ class DatabaseUtils {
     }
     
     public static func user(
-    ) -> DatabaseReference {
-        let id = UserDefaults
+    ) -> DatabaseReference? {
+        guard let id = UserDefaults
             .standard
             .string(
                 Keys.USER_REF
-            )
+            ) else {
+            return nil
+        }
         
         print(
             DatabaseUtils.TAG,
@@ -54,7 +56,7 @@ class DatabaseUtils {
     public static func deleteUserValue(
         key: String
     ) {
-        user()
+        user()?
             .child(key)
             .removeValue()
     }
@@ -63,7 +65,7 @@ class DatabaseUtils {
         _ value: Any,
         to: String
     ) {
-        user()
+        user()?
             .child(to)
             .setValue(value)
     }
@@ -72,7 +74,7 @@ class DatabaseUtils {
         from: String,
         completion: @escaping (Any?) -> Void
     ) {
-        user()
+        user()?
             .child(from)
             .observeSingleEvent(
                 of: .value
