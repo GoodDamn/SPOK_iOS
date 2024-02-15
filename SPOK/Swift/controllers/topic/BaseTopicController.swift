@@ -19,7 +19,7 @@ class BaseTopicController
     
     private var mPrevTextView: UITextViewPhrase? = nil
     
-    private var mLabelSong: UILabel? = nil
+    private var mLabelSong: ImageLabel? = nil
     
     private var mBtnClose: UIButton!
     
@@ -276,11 +276,13 @@ extension BaseTopicController {
         let w = view.frame.width
         let h = view.frame.height
         
-        mLabelSong = UILabel(
+        let mLeft = w * 0.1
+        
+        mLabelSong = ImageLabel(
             frame: CGRect(
-                x: 0,
+                x: mLeft,
                 y: h * 0.8,
-                width: w,
+                width: w - mLeft*2,
                 height: 1
             )
         )
@@ -290,20 +292,24 @@ extension BaseTopicController {
             return
         }
         
-        label.textAlignment = .center
         label.textColor = .white
         label.font = .semibold(
             withSize: h * 0.025
         )
+        label.textColor = .white
         label.text = "\(meta.artist) - \(meta.title)"
         
+        label.image = UIImage(
+            systemName: "music.note"
+        )
+        
+        label.imageColor = .white
         label.sizeToFit()
         
         label
             .frame
             .origin
             .x = (w - label.frame.width) * 0.5
-        
         
         label.alpha = 0
         

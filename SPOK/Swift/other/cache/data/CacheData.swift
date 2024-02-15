@@ -8,13 +8,15 @@
 import Foundation
 
 
-class CacheData<T>
+final class CacheData<T>
     : CacheFile<T> {
+    
+    internal let maxSize:Int64 = 5 * 1024 * 1024
     
     override func onUpdateCache() {
         // Update cache or create
         mReference.getData(
-            maxSize: 1024*1024
+            maxSize: maxSize
         ) { [weak self] data, error in
             
             if error != nil {

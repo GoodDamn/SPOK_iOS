@@ -304,7 +304,7 @@ extension SettingsViewController
             }
             
             DatabaseUtils
-                .user()
+                .user()?
                 .removeValue()
             
             do {
@@ -319,7 +319,7 @@ extension SettingsViewController
             
             authData.user
                 .delete { error in
-                    print(
+                    Log.d(
                         "SettingsViewController: DELETE_USER:",
                         error?.localizedDescription
                     )
