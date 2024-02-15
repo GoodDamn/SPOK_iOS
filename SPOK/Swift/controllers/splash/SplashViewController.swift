@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SplashViewController
+final class SplashViewController
     : StackViewController {
     
     var msgBottom = ""
@@ -50,7 +50,7 @@ class SplashViewController
         )
         
         let wimage = 0.683 * w
-        let himage = 0.802 * wimage
+        let himage = 0.812 * wimage
         
         let imageView = UIImageView(
             frame: CGRect(
