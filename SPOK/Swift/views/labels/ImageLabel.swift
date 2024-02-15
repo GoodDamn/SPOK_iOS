@@ -89,7 +89,7 @@ final class ImageLabel
             height: imageSize
         )
         
-        mLabel.frame.origin.x = imageSize
+        mLabel.frame.origin.x = imageSize + 20
         
         frame = CGRect(
             x: frame.origin.x,
