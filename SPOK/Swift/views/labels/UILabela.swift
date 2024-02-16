@@ -93,7 +93,7 @@ final class UILabela
         
         let fontSize = font.pointSize
         let dy = fontSize * 0.25
-        let imgSize = fontSize * 1.5
+        let imgSize = fontSize * 1.3
         
         mImageAttach.bounds = CGRect(
             x: 0,
