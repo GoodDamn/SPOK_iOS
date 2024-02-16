@@ -36,7 +36,6 @@ public final class ProgressBar
     
     public var mProgress: CGFloat = 0.0 {
         didSet {
-            print(TAG, "Prog:", mProgress, maxProgress)
             mLayerProgress.strokeEnd = mProgress / maxProgress * 0.5
         }
     }

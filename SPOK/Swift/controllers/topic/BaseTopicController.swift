@@ -8,9 +8,8 @@
 import Foundation
 import AVFoundation
 import UIKit
-import FirebaseStorage
 
-class BaseTopicController
+final class BaseTopicController
     : StackViewController {
     
     private final let TAG = "BaseTopicController:"
@@ -87,8 +86,6 @@ class BaseTopicController
         let mTextColor = UIColor(
             named: "text_topic"
         )
-        
-        view.isUserInteractionEnabled = false
         
         view.backgroundColor = UIColor(
             named: "background")
@@ -249,11 +246,11 @@ extension BaseTopicController {
             g
         )
         
-        UIView.animate(
-            withDuration: 0.3
-        ) { [weak self] in
-            self?.mProgressBarTopic.alpha = 1.0
-        }
+        mProgressBarTopic
+            .alpha(
+                duration: 0.3,
+                1.0
+            )
         
         r.setOnReadScriptListener(
             self
@@ -261,7 +258,6 @@ extension BaseTopicController {
         
         r.next()
         
-        view.isUserInteractionEnabled = true
         
         showLabelSong()
     }
@@ -356,13 +352,16 @@ extension BaseTopicController
         
     }
     
-    func onWrittenStorage() {
-        UIView.animate(
-            withDuration: 1.2,
-            animations: { [weak self] in
-                self?.mProgressBar
-                    .alpha = 0
-            }
+    func onWrittenStorage() {}
+    
+    func onProgress(percent: Double) {
+        mProgressBar.mProgress = percent
+    }
+    
+    func onSuccess() {
+        mProgressBar.alpha(
+            duration: 1.2,
+            0.0
         ) { [weak self] _ in
             self?.mProgressBar.removeFromSuperview()
         }
@@ -389,12 +388,6 @@ extension BaseTopicController
             )
         }
     }
-    
-    func onProgress(percent: Double) {
-        mProgressBar.mProgress = percent
-    }
-    
-    func onSuccess() {}
     
     func onError() {
         nothing()
@@ -510,24 +503,4 @@ extension BaseTopicController
     ) {
         print(TAG, "onError:",errorMsg)
     }
-}
-
-extension AVAudioPlayer {
-    
-    func stopFade(
-        duration f: TimeInterval = 1.5,
-        completion: (()->Void)? = nil
-    ) {
-        setVolume(
-            0.0,
-            fadeDuration: f)
-        
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + f
-        ) { [weak self] in
-            self?.stop()
-            completion?()
-        }
-    }
-    
 }

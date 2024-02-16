@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class SheepCounterViewController
+final class SheepCounterViewController
     : StackViewController {
     
     private let TAG = "SheepCounterViewController:"

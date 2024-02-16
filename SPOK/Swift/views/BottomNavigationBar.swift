@@ -7,7 +7,7 @@
 
 import UIKit;
 
-class BottomNavigationBar: UIView {
+final class BottomNavigationBar: UIView {
     
     private let TAG = "BottomNavigationBar";
     

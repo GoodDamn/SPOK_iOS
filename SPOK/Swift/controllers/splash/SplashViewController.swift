@@ -50,7 +50,7 @@ final class SplashViewController
         )
         
         let wimage = 0.683 * w
-        let himage = 0.812 * wimage
+        let himage = 0.872 * wimage
         
         let imageView = UIImageView(
             frame: CGRect(
