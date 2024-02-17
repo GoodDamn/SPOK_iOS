@@ -328,12 +328,29 @@ extension MainViewController {
             return
         }
         
+        guard let resPath = Bundle
+            .main
+            .resourcePath else {
+            return
+        }
+        
+        let dirPath = "\(resPath)/\(dir)"
+        
         print("copyFolder:", cacheDir)
         for i in urls {
             let fileName = i.lastPathComponent
-            let data = fm.contents(
-                atPath: i.pathh()
-            )
+            
+            let filePath = "\(dirPath)/\(i.pathh())"
+            
+            print("copyFolder: DATA:", i.pathh(), filePath)
+            
+            guard let data = fm.contents(
+                atPath: filePath
+            ) else {
+                print("copyFolder: DATA IS NIL")
+                continue
+            }
+            
             
             fm.createFile(
                 atPath: dirContentCache.append(
