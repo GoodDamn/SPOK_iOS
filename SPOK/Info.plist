@@ -3,15 +3,10 @@
 <plist version="1.0">
 <dict>
     
-    <key>SKExternalPurchase</key>
-    <array>
-        <string>ru</string>
-    </array>
-    
     <key>SKExternalPurchaseLink</key>
     <dict>
         <key>ru</key>
-        <string>https://spokapp.com/pay</string>
+        <string>https://spokapp.com</string>
     </dict>
     
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
