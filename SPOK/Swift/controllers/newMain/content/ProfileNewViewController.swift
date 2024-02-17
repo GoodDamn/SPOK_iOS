@@ -385,6 +385,19 @@ final class ProfileNewViewController
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
+        
+        
+        if #available(iOS 15.4, *) {
+            let shit = ShitAppleController()
+            Utils.mainNav()
+                .pushViewController(
+                    shit,
+                    animated: true
+                )
+            
+            return
+        }
+        
         if MainViewController
             .mIsPremiumUser {
             Toast.init(
@@ -459,6 +472,7 @@ final class ProfileNewViewController
 extension ProfileNewViewController {
     
     private func startPayment() {
+        
         mPaymentProcess = PaymentProcess(
             payment: mPayment
         )
@@ -480,6 +494,7 @@ extension ProfileNewViewController {
     private func pushConfirmPage(
         _ snap: PaymentSnapshot
     ) {
+        
         let web = WebConfirmationViewController()
         web.mPaymentSnap = snap
         web.view.alpha = 0

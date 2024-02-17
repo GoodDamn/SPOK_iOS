@@ -56,6 +56,7 @@
 		257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */; };
 		257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */; };
 		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
+		258B792C2B8067B30049304E /* ShitAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B792B2B8067B30049304E /* ShitAppleController.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
@@ -207,6 +208,7 @@
 		257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProcess.swift; sourceTree = "<group>"; };
 		257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
 		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		258B792B2B8067B30049304E /* ShitAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShitAppleController.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -550,6 +552,14 @@
 				25D4763E2B7F0D9E00B5467D /* AVAudioPlayer.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		258B792A2B80679B0049304E /* shitAppleController */ = {
+			isa = PBXGroup;
+			children = (
+				258B792B2B8067B30049304E /* ShitAppleController.swift */,
+			);
+			path = shitAppleController;
 			sourceTree = "<group>";
 		};
 		259FE6122B623DA400E237B7 /* enums */ = {
@@ -991,6 +1001,7 @@
 		2BA1025C276A602300EB5B8C /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				258B792A2B80679B0049304E /* shitAppleController */,
 				25F94ADA2B6E573000FC8A32 /* settings */,
 				257A7FB02B6CE1F100BBEF5E /* payment */,
 				25D32DDF2B6901F800EAEA20 /* pagers */,
@@ -1284,6 +1295,7 @@
 				25F94AF32B6F94A300FC8A32 /* String.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* ProfileNewViewController.swift in Sources */,
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
+				258B792C2B8067B30049304E /* ShitAppleController.swift in Sources */,
 				25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */,
 				383AF7AF2875B17400859090 /* StorageApp.swift in Sources */,
 				256940912B660EDE0005BFCC /* CacheData.swift in Sources */,
