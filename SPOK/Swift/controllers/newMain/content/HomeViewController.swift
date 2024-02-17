@@ -234,14 +234,25 @@ extension HomeViewController
     
     func onFinish() {
         mDownloader = nil
-        let last = mCollections.a[
-            mCollections.a.count - 1
-        ]
+        
+        let colCount = mCollections.a.count
+        
+        var titleSize: CGFloat = 18
+        var heightCell: CGFloat = 250
+        
+        if colCount != 0 {
+            let last = mCollections.a[
+                colCount - 1
+            ]
+            
+            titleSize = last.titleSize
+            heightCell = last.height
+        }
         
         let viewCell = CollectionRowView(
             title: "Счетчик овечек",
-            titleSize: last.titleSize,
-            height: last.height,
+            titleSize: titleSize,
+            height: heightCell,
             idCell: SheepViewCell.id
         ) { [weak self] cel in
             

@@ -129,12 +129,18 @@ class MainViewController
                 .shared
                 .registerForRemoteNotifications()
             Log.d("Time for intro!")
+            
             showSplash(
                 msg: "готовим что-то\n уникальное..."
             ) {
                 return
                     IntroSleepRootController()
             }
+            
+            // Copying first content Kit to
+            // Cache directory
+            
+            cacheFirstContentKit()
             
             return
         }
@@ -250,6 +256,92 @@ extension MainViewController {
     public func superUpdatePremium() {
         for c in mControllers {
             c.updatePremium()
+        }
+    }
+    
+    private func cacheFirstContentKit() {
+        
+        let fm = FileManager.default
+        
+        guard let cache = fm.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        ).first else {
+            return
+        }
+        
+        copyFolder(
+            cacheDir: cache,
+            dir: StorageApp.mDirContent,
+            bundleDir: StorageApp.mDirContent,
+            bundleExten: "skc"
+        )
+        
+        copyFolder(
+            cacheDir: cache,
+            dir: StorageApp.mDirPreviews,
+            bundleDir: StorageApp.mDirPreviews,
+            bundleExten: "spc"
+        )
+        
+        copyFolder(
+            cacheDir: cache,
+            dir: StorageApp.mDirCollectionSleep,
+            bundleDir: StorageApp.mDirCollectionSleep,
+            bundleExten: ".scs"
+        )
+    }
+    
+    private func copyFolder(
+        cacheDir: URL,
+        dir: String,
+        bundleDir: String,
+        bundleExten: String
+    ) {
+        
+        let bundle = Bundle.main
+        
+        guard let urls = bundle.urls(
+            forResourcesWithExtension: bundleExten,
+            subdirectory: bundleDir
+        ) else {
+            return
+        }
+        
+        let dirContentCache = cacheDir
+            .append(
+                dir
+            )
+        
+        let fm = FileManager.default
+        
+        do {
+            try fm.createDirectory(
+                at: dirContentCache,
+                withIntermediateDirectories: true
+            )
+        } catch {
+            print(
+                "cacheFirstContentKit: CONTENT_DIR_ERROR:",
+                error
+            )
+            return
+        }
+        
+        print("copyFolder:", cacheDir)
+        for i in urls {
+            let fileName = i.lastPathComponent
+            let data = fm.contents(
+                atPath: i.pathh()
+            )
+            
+            fm.createFile(
+                atPath: dirContentCache.append(
+                    fileName
+                ).pathh(),
+                contents: data
+            )
+            
         }
     }
     

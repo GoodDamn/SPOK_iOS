@@ -20,6 +20,10 @@ class StorageApp {
                recommendsKey = "recoms";
     
     public static let mDirCollection = "collection"
+    
+    public static let mDirCollectionSleep =
+        "\(mDirCollection)/sleep"
+    
     public static let mDirPreviews = "preview"
     public static let mDirContent = "content"
     

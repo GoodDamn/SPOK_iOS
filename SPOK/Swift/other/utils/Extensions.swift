@@ -14,6 +14,7 @@ public final class Extension {
         _ data: inout Data,
         scale: CGFloat = UIScreen.main.scale
     ) -> FileSPC {
+        
         let conf = data[0];
         let isPremium = (conf & 0xff) >> 6 == 1;
         let categoryID = conf & 0x3f;
@@ -77,7 +78,7 @@ public final class Extension {
         scale: CGFloat = UIScreen.main.scale
     ) -> FileSCS? {
         
-        guard var data = data else {
+        guard var data = data, !data.isEmpty else {
             return nil
         }
         
