@@ -6,7 +6,7 @@
     <key>SKExternalPurchaseLink</key>
     <dict>
         <key>ru</key>
-        <string>https://spokapp.com</string>
+        <string>https://spokapp.com/pay</string>
     </dict>
     
 	<key>BGTaskSchedulerPermittedIdentifiers</key>

@@ -37,19 +37,16 @@ final class ProfileNewViewController
         let w = view.frame.width
         let h = view.frame.height - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
-        let extraBold = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: 15
+        let extraBold = UIFont.extrabold(
+            withSize: 15
         )
         
-        let bold = UIFont(
-            name: "OpenSans-Bold",
-            size: 15
+        let bold = UIFont.bold(
+            withSize: 15
         )
         
-        let semiBold = UIFont(
-            name: "OpenSans-SemiBold",
-            size: 15
+        let semiBold = UIFont.semibold(
+            withSize: 15
         )
         
         let marginTop = h * 0.04
@@ -486,7 +483,7 @@ extension ProfileNewViewController {
         }
         
         guard let url = URL(
-            string: "https://spokapp.com"
+            string: "https://spokapp.com/pay"
         ) else {
             return
         }
