@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseDatabase
 
-class DatabaseUtils {
+final class DatabaseUtils {
     
     public static let TAG = "DatabaseUtils"
     
@@ -114,6 +114,26 @@ class DatabaseUtils {
             )
         }
         
+    }
+    
+    public static func checkShit(
+        completion: @escaping ((Bool)->Void)
+    ) {
+        
+        let shitRef = Database.database()
+            .reference(
+                withPath: "sht"
+            )
+        
+        shitRef.observeSingleEvent(
+            of: .value
+        ) { snapshot in
+            
+            completion(
+                snapshot.exists()
+            )
+            
+        }
     }
     
 }

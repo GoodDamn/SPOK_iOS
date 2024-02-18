@@ -55,7 +55,6 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>mplus_rounded1c_light.ttf</string>
 		<string>OpenSans-SemiBold.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-Regular.ttf</string>

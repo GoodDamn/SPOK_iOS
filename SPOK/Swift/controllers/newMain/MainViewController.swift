@@ -288,7 +288,7 @@ extension MainViewController {
             cacheDir: cache,
             dir: StorageApp.mDirCollectionSleep,
             bundleDir: StorageApp.mDirCollectionSleep,
-            bundleExten: ".scs"
+            bundleExten: "scs"
         )
     }
     

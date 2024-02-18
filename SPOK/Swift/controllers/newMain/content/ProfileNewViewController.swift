@@ -385,19 +385,6 @@ final class ProfileNewViewController
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
-        
-        
-        if #available(iOS 15.4, *) {
-            let shit = ShitAppleController()
-            Utils.mainNav()
-                .pushViewController(
-                    shit,
-                    animated: true
-                )
-            
-            return
-        }
-        
         if MainViewController
             .mIsPremiumUser {
             Toast.init(
@@ -473,6 +460,46 @@ extension ProfileNewViewController {
     
     private func startPayment() {
         
+        DatabaseUtils.checkShit { [weak self]
+            isValid in
+            
+            if isValid {
+                self?.startShitPayment()
+                return
+            }
+            
+            self?.startNativePayment()
+        }
+        
+    }
+    
+    private func startShitPayment() {
+        if #available(iOS 15.4, *) {
+            let shit = ShitAppleController()
+            Utils.mainNav()
+                .pushViewController(
+                    shit,
+                    animated: true
+                )
+            
+            return
+        }
+        
+        guard let url = URL(
+            string: "https://spokapp.com"
+        ) else {
+            return
+        }
+        
+        UIApplication
+            .shared
+            .open(
+                url
+            )
+        
+    }
+    
+    private func startNativePayment() {
         mPaymentProcess = PaymentProcess(
             payment: mPayment
         )
@@ -489,7 +516,6 @@ extension ProfileNewViewController {
             }
         }
     }
-    
     
     private func pushConfirmPage(
         _ snap: PaymentSnapshot
