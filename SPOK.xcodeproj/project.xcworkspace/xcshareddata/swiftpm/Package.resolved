@@ -82,15 +82,6 @@
       }
     },
     {
-      "identity" : "mailcore2",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/MailCore/mailcore2",
-      "state" : {
-        "branch" : "master",
-        "revision" : "7417b2e8dd7e2c028aadb72056e4d1428c0627c4"
-      }
-    },
-    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
@@ -106,15 +97,6 @@
       "state" : {
         "revision" : "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
         "version" : "2.3.1"
-      }
-    },
-    {
-      "identity" : "purchases-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/RevenueCat/purchases-ios.git",
-      "state" : {
-        "revision" : "d9f849df382fdda22b1ec46d935b1540a50a0e1a",
-        "version" : "4.22.1"
       }
     },
     {

@@ -270,97 +270,88 @@ extension MainViewController {
             return
         }
         
-        copyFolder(
-            cacheDir: cache,
-            dir: StorageApp.mDirContent,
-            bundleDir: StorageApp.mDirContent,
-            bundleExten: "skc"
-        )
-        
-        copyFolder(
-            cacheDir: cache,
-            dir: StorageApp.mDirPreviews,
-            bundleDir: StorageApp.mDirPreviews,
-            bundleExten: "spc"
-        )
-        
-        copyFolder(
-            cacheDir: cache,
-            dir: StorageApp.mDirCollectionSleep,
-            bundleDir: StorageApp.mDirCollectionSleep,
-            bundleExten: "scs"
-        )
-    }
-    
-    private func copyFolder(
-        cacheDir: URL,
-        dir: String,
-        bundleDir: String,
-        bundleExten: String
-    ) {
-        
-        let bundle = Bundle.main
-        
-        guard let urls = bundle.urls(
-            forResourcesWithExtension: bundleExten,
-            subdirectory: bundleDir
-        ) else {
-            return
-        }
-        
-        let dirContentCache = cacheDir
-            .append(
-                dir
-            )
-        
-        let fm = FileManager.default
-        
-        do {
-            try fm.createDirectory(
-                at: dirContentCache,
-                withIntermediateDirectories: true
-            )
-        } catch {
-            print(
-                "cacheFirstContentKit: CONTENT_DIR_ERROR:",
-                error
-            )
-            return
-        }
-        
         guard let resPath = Bundle
             .main
             .resourcePath else {
             return
         }
         
-        let dirPath = "\(resPath)/\(dir)"
+        guard let content = try? fm.contentsOfDirectory(
+            atPath: resPath
+        ) else {
+            return
+        }
         
-        print("copyFolder:", cacheDir)
-        for i in urls {
-            let fileName = i.lastPathComponent
-            
-            let filePath = "\(dirPath)/\(i.pathh())"
-            
-            print("copyFolder: DATA:", i.pathh(), filePath)
-            
-            guard let data = fm.contents(
-                atPath: filePath
-            ) else {
-                print("copyFolder: DATA IS NIL")
+        let dirColl = cache.append(
+            StorageApp.mDirCollectionSleep
+        )
+        
+        let dirPrev = cache.append(
+            StorageApp.mDirPreviews
+        )
+        
+        let dirCont = cache.append(
+            StorageApp.mDirContent
+        )
+        
+        try? fm.createDirectory(
+            at: dirColl,
+            withIntermediateDirectories: true
+        )
+        
+        try? fm.createDirectory(
+            at: dirPrev,
+            withIntermediateDirectories: false
+        )
+        
+        try? fm.createDirectory(
+            at: dirCont,
+            withIntermediateDirectories: false
+        )
+        
+        let bundle = Bundle.main.bundleURL
+        
+        for fileName in content {
+            if fileName.contains(".skc") {
+                try? fm.copyItem(
+                    at: bundle.append(
+                        fileName
+                    ),
+                    to: dirCont.append(
+                        fileName
+                    )
+                )
                 continue
             }
             
+            if fileName.contains(".scs") {
+                try? fm.copyItem(
+                    at: bundle.append(
+                        fileName
+                    ),
+                    to: dirColl.append(
+                        fileName
+                    )
+                )
+                continue
+            }
             
-            fm.createFile(
-                atPath: dirContentCache.append(
-                    fileName
-                ).pathh(),
-                contents: data
-            )
+            if fileName.contains(".spc") {
+                try? fm.copyItem(
+                    at: bundle.append(
+                        fileName
+                    ),
+                    to: dirPrev.append(
+                        fileName
+                    )
+                )
+                continue
+            }
             
         }
+        
     }
+    
     
     private func showSplash(
         msg: String,

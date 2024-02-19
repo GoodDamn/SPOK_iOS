@@ -6,12 +6,8 @@
 //
 
 import UIKit;
-//import FBSDKCoreKit;
-import FirebaseCore;
-import FirebaseMessaging;
-import RevenueCat;
-import AuthenticationServices;
-import UserNotifications;
+import FirebaseCore
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

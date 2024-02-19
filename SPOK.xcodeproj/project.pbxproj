@@ -57,16 +57,35 @@
 		257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */; };
 		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
 		258B792C2B8067B30049304E /* ShitAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B792B2B8067B30049304E /* ShitAppleController.swift */; };
-		258B79642B80FD7F0049304E /* content in Resources */ = {isa = PBXBuildFile; fileRef = 258B79612B80FD7F0049304E /* content */; };
-		258B79652B80FD7F0049304E /* collection in Resources */ = {isa = PBXBuildFile; fileRef = 258B79622B80FD7F0049304E /* collection */; };
-		258B79662B80FD7F0049304E /* preview in Resources */ = {isa = PBXBuildFile; fileRef = 258B79632B80FD7F0049304E /* preview */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
-		2598FAB62A44394600230574 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2598FAB52A44394600230574 /* RevenueCat */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
+		25C5B14A2B83B0CC00AB7114 /* 60.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1302B83B0CC00AB7114 /* 60.skc */; };
+		25C5B14B2B83B0CC00AB7114 /* 61.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1312B83B0CC00AB7114 /* 61.skc */; };
+		25C5B14C2B83B0CD00AB7114 /* 59.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1322B83B0CC00AB7114 /* 59.skc */; };
+		25C5B14D2B83B0CD00AB7114 /* 58.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1332B83B0CC00AB7114 /* 58.skc */; };
+		25C5B14E2B83B0CD00AB7114 /* 56.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1342B83B0CC00AB7114 /* 56.skc */; };
+		25C5B14F2B83B0CD00AB7114 /* 57.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1352B83B0CC00AB7114 /* 57.skc */; };
+		25C5B1502B83B0CD00AB7114 /* 55.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1362B83B0CC00AB7114 /* 55.skc */; };
+		25C5B1512B83B0CD00AB7114 /* 54.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1372B83B0CC00AB7114 /* 54.skc */; };
+		25C5B1522B83B0CD00AB7114 /* 53.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1382B83B0CC00AB7114 /* 53.skc */; };
+		25C5B1532B83B0CD00AB7114 /* 52.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1392B83B0CC00AB7114 /* 52.skc */; };
+		25C5B1542B83B0CD00AB7114 /* 0.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13C2B83B0CC00AB7114 /* 0.scs */; };
+		25C5B1552B83B0CD00AB7114 /* 1.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13D2B83B0CC00AB7114 /* 1.scs */; };
+		25C5B1562B83B0CD00AB7114 /* 2.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13E2B83B0CC00AB7114 /* 2.scs */; };
+		25C5B1572B83B0CD00AB7114 /* 58M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1402B83B0CC00AB7114 /* 58M.spc */; };
+		25C5B1582B83B0CD00AB7114 /* 60B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1412B83B0CC00AB7114 /* 60B.spc */; };
+		25C5B1592B83B0CD00AB7114 /* 55B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1422B83B0CC00AB7114 /* 55B.spc */; };
+		25C5B15A2B83B0CD00AB7114 /* 59B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1432B83B0CC00AB7114 /* 59B.spc */; };
+		25C5B15B2B83B0CD00AB7114 /* 56M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1442B83B0CC00AB7114 /* 56M.spc */; };
+		25C5B15C2B83B0CD00AB7114 /* 57M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1452B83B0CC00AB7114 /* 57M.spc */; };
+		25C5B15D2B83B0CD00AB7114 /* 54B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1462B83B0CC00AB7114 /* 54B.spc */; };
+		25C5B15E2B83B0CD00AB7114 /* 61M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1472B83B0CC00AB7114 /* 61M.spc */; };
+		25C5B1602B83B0CD00AB7114 /* 52B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1492B83B0CC00AB7114 /* 52B.spc */; };
+		25C5B1662B83D19D00AB7114 /* 53B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1652B83D19D00AB7114 /* 53B.spc */; };
 		25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */; };
 		25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5F2B510E0100C9A73E /* StackViewController.swift */; };
 		25D32DD92B68D69A00EAEA20 /* PopupNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D32DD82B68D69A00EAEA20 /* PopupNewsViewController.swift */; };
@@ -212,15 +231,35 @@
 		257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
 		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		258B792B2B8067B30049304E /* ShitAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShitAppleController.swift; sourceTree = "<group>"; };
-		258B79612B80FD7F0049304E /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = ../../../../content; sourceTree = "<group>"; };
-		258B79622B80FD7F0049304E /* collection */ = {isa = PBXFileReference; lastKnownFileType = folder; name = collection; path = ../../../../collection; sourceTree = "<group>"; };
-		258B79632B80FD7F0049304E /* preview */ = {isa = PBXFileReference; lastKnownFileType = folder; name = preview; path = ../../../../preview; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
+		25C5B1302B83B0CC00AB7114 /* 60.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 60.skc; sourceTree = "<group>"; };
+		25C5B1312B83B0CC00AB7114 /* 61.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 61.skc; sourceTree = "<group>"; };
+		25C5B1322B83B0CC00AB7114 /* 59.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59.skc; sourceTree = "<group>"; };
+		25C5B1332B83B0CC00AB7114 /* 58.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58.skc; sourceTree = "<group>"; };
+		25C5B1342B83B0CC00AB7114 /* 56.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 56.skc; sourceTree = "<group>"; };
+		25C5B1352B83B0CC00AB7114 /* 57.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 57.skc; sourceTree = "<group>"; };
+		25C5B1362B83B0CC00AB7114 /* 55.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 55.skc; sourceTree = "<group>"; };
+		25C5B1372B83B0CC00AB7114 /* 54.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 54.skc; sourceTree = "<group>"; };
+		25C5B1382B83B0CC00AB7114 /* 53.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53.skc; sourceTree = "<group>"; };
+		25C5B1392B83B0CC00AB7114 /* 52.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 52.skc; sourceTree = "<group>"; };
+		25C5B13C2B83B0CC00AB7114 /* 0.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0.scs; sourceTree = "<group>"; };
+		25C5B13D2B83B0CC00AB7114 /* 1.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.scs; sourceTree = "<group>"; };
+		25C5B13E2B83B0CC00AB7114 /* 2.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.scs; sourceTree = "<group>"; };
+		25C5B1402B83B0CC00AB7114 /* 58M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58M.spc; sourceTree = "<group>"; };
+		25C5B1412B83B0CC00AB7114 /* 60B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 60B.spc; sourceTree = "<group>"; };
+		25C5B1422B83B0CC00AB7114 /* 55B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 55B.spc; sourceTree = "<group>"; };
+		25C5B1432B83B0CC00AB7114 /* 59B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59B.spc; sourceTree = "<group>"; };
+		25C5B1442B83B0CC00AB7114 /* 56M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 56M.spc; sourceTree = "<group>"; };
+		25C5B1452B83B0CC00AB7114 /* 57M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 57M.spc; sourceTree = "<group>"; };
+		25C5B1462B83B0CC00AB7114 /* 54B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 54B.spc; sourceTree = "<group>"; };
+		25C5B1472B83B0CC00AB7114 /* 61M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 61M.spc; sourceTree = "<group>"; };
+		25C5B1492B83B0CC00AB7114 /* 52B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 52B.spc; sourceTree = "<group>"; };
+		25C5B1652B83D19D00AB7114 /* 53B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53B.spc; sourceTree = "<group>"; };
 		25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		25C8BB5F2B510E0100C9A73E /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		25D32DD82B68D69A00EAEA20 /* PopupNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupNewsViewController.swift; sourceTree = "<group>"; };
@@ -273,7 +312,6 @@
 		25F94AFD2B700F6300FC8A32 /* PaymentConfirmationListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmationListener.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2B2199EB2920C65600F4505C /* test.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.storekit; sourceTree = "<group>"; };
-		2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B29CAFC2892BC3D006FE018 /* SPOK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SPOK.entitlements; sourceTree = "<group>"; };
 		2B3DE5B8290BAC7600B00528 /* SignInApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInApple.swift; sourceTree = "<group>"; };
 		2B4B3881290EDDA10013D198 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
@@ -310,18 +348,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2B29CAE92892B9F1006FE018 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2BA101C62763EFC900EB5B8C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2598FAB62A44394600230574 /* RevenueCat in Frameworks */,
 				2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */,
 				2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */,
 				253E298E2A44493700304958 /* StoreKit.framework in Frameworks */,
@@ -571,9 +601,9 @@
 		258B792E2B80F5BD0049304E /* contentKit */ = {
 			isa = PBXGroup;
 			children = (
-				258B79622B80FD7F0049304E /* collection */,
-				258B79612B80FD7F0049304E /* content */,
-				258B79632B80FD7F0049304E /* preview */,
+				25C5B13A2B83B0CC00AB7114 /* collection */,
+				25C5B12F2B83B0CC00AB7114 /* content */,
+				25C5B13F2B83B0CC00AB7114 /* preview */,
 			);
 			path = contentKit;
 			sourceTree = "<group>";
@@ -597,6 +627,61 @@
 				256940972B676A040005BFCC /* Cache.swift */,
 			);
 			path = cache;
+			sourceTree = "<group>";
+		};
+		25C5B12F2B83B0CC00AB7114 /* content */ = {
+			isa = PBXGroup;
+			children = (
+				25C5B1302B83B0CC00AB7114 /* 60.skc */,
+				25C5B1312B83B0CC00AB7114 /* 61.skc */,
+				25C5B1322B83B0CC00AB7114 /* 59.skc */,
+				25C5B1332B83B0CC00AB7114 /* 58.skc */,
+				25C5B1342B83B0CC00AB7114 /* 56.skc */,
+				25C5B1352B83B0CC00AB7114 /* 57.skc */,
+				25C5B1362B83B0CC00AB7114 /* 55.skc */,
+				25C5B1372B83B0CC00AB7114 /* 54.skc */,
+				25C5B1382B83B0CC00AB7114 /* 53.skc */,
+				25C5B1392B83B0CC00AB7114 /* 52.skc */,
+			);
+			name = content;
+			path = ../../../../../content;
+			sourceTree = "<group>";
+		};
+		25C5B13A2B83B0CC00AB7114 /* collection */ = {
+			isa = PBXGroup;
+			children = (
+				25C5B13B2B83B0CC00AB7114 /* sleep */,
+			);
+			name = collection;
+			path = ../../../../../collection;
+			sourceTree = "<group>";
+		};
+		25C5B13B2B83B0CC00AB7114 /* sleep */ = {
+			isa = PBXGroup;
+			children = (
+				25C5B13C2B83B0CC00AB7114 /* 0.scs */,
+				25C5B13D2B83B0CC00AB7114 /* 1.scs */,
+				25C5B13E2B83B0CC00AB7114 /* 2.scs */,
+			);
+			path = sleep;
+			sourceTree = "<group>";
+		};
+		25C5B13F2B83B0CC00AB7114 /* preview */ = {
+			isa = PBXGroup;
+			children = (
+				25C5B1652B83D19D00AB7114 /* 53B.spc */,
+				25C5B1402B83B0CC00AB7114 /* 58M.spc */,
+				25C5B1412B83B0CC00AB7114 /* 60B.spc */,
+				25C5B1422B83B0CC00AB7114 /* 55B.spc */,
+				25C5B1432B83B0CC00AB7114 /* 59B.spc */,
+				25C5B1442B83B0CC00AB7114 /* 56M.spc */,
+				25C5B1452B83B0CC00AB7114 /* 57M.spc */,
+				25C5B1462B83B0CC00AB7114 /* 54B.spc */,
+				25C5B1472B83B0CC00AB7114 /* 61M.spc */,
+				25C5B1492B83B0CC00AB7114 /* 52B.spc */,
+			);
+			name = preview;
+			path = ../../../../../preview;
 			sourceTree = "<group>";
 		};
 		25D32DD62B68D67A00EAEA20 /* popups */ = {
@@ -952,7 +1037,6 @@
 				2BA101C92763EFC900EB5B8C /* SPOK.app */,
 				2BA101DF2763EFCB00EB5B8C /* SPOKTests.xctest */,
 				2BA101EA2763EFCB00EB5B8C /* SPOKUITests.xctest */,
-				2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1107,23 +1191,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2B29CAEB2892B9F1006FE018 /* NotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2B29CAF72892B9F1006FE018 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
-			buildPhases = (
-				2B29CAE82892B9F1006FE018 /* Sources */,
-				2B29CAE92892B9F1006FE018 /* Frameworks */,
-				2B29CAEA2892B9F1006FE018 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotificationServiceExtension;
-			productName = NotificationServiceExtension;
-			productReference = 2B29CAEC2892B9F1006FE018 /* NotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		2BA101C82763EFC900EB5B8C /* SPOK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BA101F32763EFCB00EB5B8C /* Build configuration list for PBXNativeTarget "SPOK" */;
@@ -1141,7 +1208,6 @@
 				2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */,
 				2B4B3886290EDEAA0013D198 /* FirebaseAuth */,
 				2B4B3888290EDEAA0013D198 /* FirebaseDatabase */,
-				2598FAB52A44394600230574 /* RevenueCat */,
 				25063EB32A77E4A7001C1CCE /* FirebaseStorage */,
 				2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */,
 				2515639D2ACBBF96009EAA2F /* FirebaseFirestore */,
@@ -1195,9 +1261,6 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					2B29CAEB2892B9F1006FE018 = {
-						CreatedOnToolsVersion = 12.4;
-					};
 					2BA101C82763EFC900EB5B8C = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -1223,8 +1286,6 @@
 			mainGroup = 2BA101C02763EFC900EB5B8C;
 			packageReferences = (
 				2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */,
-				25F534272AC476FD00EEE557 /* XCRemoteSwiftPackageReference "mailcore2" */,
 			);
 			productRefGroup = 2BA101CA2763EFC900EB5B8C /* Products */;
 			projectDirPath = "";
@@ -1233,19 +1294,11 @@
 				2BA101C82763EFC900EB5B8C /* SPOK */,
 				2BA101DE2763EFCB00EB5B8C /* SPOKTests */,
 				2BA101E92763EFCB00EB5B8C /* SPOKUITests */,
-				2B29CAEB2892B9F1006FE018 /* NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2B29CAEA2892B9F1006FE018 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2BA101DD2763EFCB00EB5B8C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1264,31 +1317,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				258B79652B80FD7F0049304E /* collection in Resources */,
+				25C5B1562B83B0CD00AB7114 /* 2.scs in Resources */,
+				25C5B15A2B83B0CD00AB7114 /* 59B.spc in Resources */,
+				25C5B1532B83B0CD00AB7114 /* 52.skc in Resources */,
+				25C5B15E2B83B0CD00AB7114 /* 61M.spc in Resources */,
+				25C5B1602B83B0CD00AB7114 /* 52B.spc in Resources */,
+				25C5B1662B83D19D00AB7114 /* 53B.spc in Resources */,
+				25C5B1512B83B0CD00AB7114 /* 54.skc in Resources */,
+				25C5B1582B83B0CD00AB7114 /* 60B.spc in Resources */,
+				25C5B14F2B83B0CD00AB7114 /* 57.skc in Resources */,
+				25C5B14E2B83B0CD00AB7114 /* 56.skc in Resources */,
+				25C5B14D2B83B0CD00AB7114 /* 58.skc in Resources */,
 				25B35B152B51236B002704E1 /* Main.storyboard in Resources */,
-				258B79642B80FD7F0049304E /* content in Resources */,
 				2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */,
 				25F94AF92B700E4D00FC8A32 /* sheep_m.mp3 in Resources */,
 				2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */,
 				2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */,
+				25C5B14A2B83B0CC00AB7114 /* 60.skc in Resources */,
 				2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */,
+				25C5B1552B83B0CD00AB7114 /* 1.scs in Resources */,
+				25C5B15C2B83B0CD00AB7114 /* 57M.spc in Resources */,
+				25C5B1592B83B0CD00AB7114 /* 55B.spc in Resources */,
+				25C5B15D2B83B0CD00AB7114 /* 54B.spc in Resources */,
+				25C5B1542B83B0CD00AB7114 /* 0.scs in Resources */,
+				25C5B15B2B83B0CD00AB7114 /* 56M.spc in Resources */,
+				25C5B14C2B83B0CD00AB7114 /* 59.skc in Resources */,
+				25C5B14B2B83B0CC00AB7114 /* 61.skc in Resources */,
+				25C5B1522B83B0CD00AB7114 /* 53.skc in Resources */,
 				2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */,
-				258B79662B80FD7F0049304E /* preview in Resources */,
 				2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */,
+				25C5B1572B83B0CD00AB7114 /* 58M.spc in Resources */,
 				2BCC4909290E346100A5F4F4 /* LaunchScreen.storyboard in Resources */,
+				25C5B1502B83B0CD00AB7114 /* 55.skc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2B29CAE82892B9F1006FE018 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2BA101C52763EFC900EB5B8C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1458,46 +1524,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2B29CAF52892B9F1006FE018 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BK45F2432S;
-				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = spokLab.SPOK.NotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2B29CAF62892B9F1006FE018 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BK45F2432S;
-				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = spokLab.SPOK.NotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		2BA101F12763EFCB00EB5B8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1623,11 +1649,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SPOK/SPOK.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 58;
-				DEVELOPMENT_TEAM = 88QU53792F;
+				CURRENT_PROJECT_VERSION = 59;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
@@ -1637,10 +1663,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.8;
+				MARKETING_VERSION = 0.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DEV PROFILE NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1654,11 +1680,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SPOK/SPOK.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 58;
-				DEVELOPMENT_TEAM = 88QU53792F;
+				CURRENT_PROJECT_VERSION = 59;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
@@ -1668,10 +1694,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.8;
+				MARKETING_VERSION = 0.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SPOK DISTR A/S PROFILE";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SPOK DEV PROFILE NEW";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1765,15 +1791,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2B29CAF72892B9F1006FE018 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2B29CAF52892B9F1006FE018 /* Debug */,
-				2B29CAF62892B9F1006FE018 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2BA101C42763EFC900EB5B8C /* Build configuration list for PBXProject "SPOK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1813,22 +1830,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		25F534272AC476FD00EEE557 /* XCRemoteSwiftPackageReference "mailcore2" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MailCore/mailcore2";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1854,11 +1855,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B4B3883290EDEAA0013D198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		2598FAB52A44394600230574 /* RevenueCat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2598FAB42A44394600230574 /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = RevenueCat;
 		};
 		2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

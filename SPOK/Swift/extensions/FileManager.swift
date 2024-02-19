@@ -44,4 +44,36 @@ extension FileManager {
             )
     }
     
+    func copy(
+        fromDir: URL,
+        fromFile: String,
+        toDir: URL,
+        toFile: String
+    ) {
+        copy(
+            to: toDir.append(
+                toFile
+            ),
+            from: fromDir.append(
+                fromFile
+            )
+        )
+    }
+    
+    func copy(
+        to: URL,
+        from: URL
+    ) {
+        guard let data = contents(
+            atPath: from.pathh()
+        ), !data.isEmpty else {
+            return
+        }
+        
+        createFile(
+            atPath: to.pathh(),
+            contents: data
+        )
+    }
+    
 }
