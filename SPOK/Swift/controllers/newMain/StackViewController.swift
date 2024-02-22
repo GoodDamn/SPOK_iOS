@@ -53,6 +53,10 @@ class StackViewController
         onUpdatePremium()
     }
     
+    public final func updateState() {
+        onUpdateState()
+    }
+    
     public final func transitionEnd() {
         onTransitionEnd()
     }
@@ -157,4 +161,5 @@ class StackViewController
  
     internal func onTransitionEnd() {}
     internal func onUpdatePremium() {}
+    internal func onUpdateState() {}
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 final class ProfileNewViewController
     : AuthAppleController {
@@ -215,6 +216,7 @@ final class ProfileNewViewController
             length: 7)
         )
         
+        lPrice.isHidden = true
         lPrice.textColor = .white
         lPrice.textAlignment = .center
         lPrice.font = bold?
@@ -227,15 +229,24 @@ final class ProfileNewViewController
         
         mBtnOpenAccess = ViewUtils
             .button(
-                text: "Открыть полный доступ"
+                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay"
             )
+        
+        mBtnOpenAccess
+            .titleLabel?
+            .numberOfLines = 0
+        
+        mBtnOpenAccess
+            .titleLabel?
+            .textAlignment = .center
         
         LayoutUtils.button(
             for: mBtnOpenAccess,
             view.frame,
             y: 0.85,
             width: 0.702,
-            textSize: 0.28
+            height: 0.1, // X
+            textSize: 0.22 // 0.28
         )
         
         mBtnOpenAccess.frame.origin.y = lPrice.frame.bottom() + h * 0.03
@@ -357,6 +368,12 @@ final class ProfileNewViewController
         
     }
     
+    override func onUpdateState() {
+        // Update view;
+        // Show price
+        // Change text of button with full access
+    }
+    
     override func onAuthSuccess() {
         messageController?
             .pop()
@@ -472,13 +489,17 @@ extension ProfileNewViewController {
     
     private func startShitPayment() {
         if #available(iOS 15.4, *) {
-            let shit = ShitAppleController()
-            Utils.mainNav()
-                .pushViewController(
-                    shit,
-                    animated: true
-                )
-            
+            Task {
+                do {
+                    try await ExternalPurchaseLink
+                        .open()
+                } catch {
+                    print(
+                        "startShitPayment: ERROR:",
+                        error
+                    )
+                }
+            }
             return
         }
         
