@@ -23,8 +23,8 @@ final class ProfileNewViewController
     private var messageController: MessageViewController? = nil
     
     private var mPaymentProcess: PaymentProcess!
-    
     private var mBtnOpenAccess: UIButton!
+    private var mLabelPrice: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +177,7 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        let lPrice = UILabel(
+        mLabelPrice = UILabel(
             frame: CGRect(
                 x: 0,
                 y: imageView2.frame.bottom() + h * 0.02,
@@ -199,7 +199,7 @@ final class ProfileNewViewController
         a.addAttributes([
             NSAttributedString.Key
                 .font: bold?
-                    .withSize(lPrice
+                    .withSize(mLabelPrice
                         .frame.height * 0.6
             ),
             NSAttributedString.Key
@@ -216,15 +216,13 @@ final class ProfileNewViewController
             length: 7)
         )
         
-        lPrice.isHidden = MainViewController
-            .mIsShitPayment
-        lPrice.textColor = .white
-        lPrice.textAlignment = .center
-        lPrice.font = bold?
-            .withSize(lPrice.frame.height)
-        lPrice.attributedText = a
+        mLabelPrice.textColor = .white
+        mLabelPrice.textAlignment = .center
+        mLabelPrice.font = bold?
+            .withSize(mLabelPrice.frame.height)
+        mLabelPrice.attributedText = a
         
-        lPrice.frame.offsetX(
+        mLabelPrice.frame.offsetX(
             w * -0.065
         )
         
@@ -243,7 +241,7 @@ final class ProfileNewViewController
         
         layoutPriceBtn()
         
-        mBtnOpenAccess.frame.origin.y = lPrice.frame.bottom() + h * 0.03
+        mBtnOpenAccess.frame.origin.y = mLabelPrice.frame.bottom() + h * 0.03
         
         let sharey = mBtnOpenAccess
             .frame.bottom() + h * 0.03
@@ -320,11 +318,11 @@ final class ProfileNewViewController
         )
         
         mBtnOpenAccess.frame.center(
-            targetHeight: shareView.frame.origin.y - lPrice.frame.bottom(),
-            offset: lPrice.frame.bottom()
+            targetHeight: shareView.frame.origin.y - mLabelPrice.frame.bottom(),
+            offset: mLabelPrice.frame.bottom()
         )
         
-        lPrice.frame.center(
+        mLabelPrice.frame.center(
             targetHeight: mBtnOpenAccess.frame.origin.y - imageView2.frame.bottom(),
             offset: imageView2.frame.bottom()
         )
@@ -338,7 +336,7 @@ final class ProfileNewViewController
         view.addSubview(imageView2)
         view.addSubview(imageView3)
         
-        view.addSubview(lPrice)
+        view.addSubview(mLabelPrice)
         
         view.addSubview(shareView)
         shareView.addSubview(lShare)
@@ -363,9 +361,6 @@ final class ProfileNewViewController
     }
     
     override func onUpdateState() {
-        // Update view;
-        // Show price
-        // Change text of button with full access
         layoutPriceBtn()
     }
     
@@ -539,6 +534,9 @@ extension ProfileNewViewController {
             height = 0.1
             textSize = 0.22
         }
+        
+        mLabelPrice.isHidden = MainViewController
+            .mIsShitPayment
         
         mBtnOpenAccess.setTitle(
             title,
