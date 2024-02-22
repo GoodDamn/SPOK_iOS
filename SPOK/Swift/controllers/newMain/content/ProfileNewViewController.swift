@@ -216,7 +216,8 @@ final class ProfileNewViewController
             length: 7)
         )
         
-        lPrice.isHidden = true
+        lPrice.isHidden = MainViewController
+            .mIsShitPayment
         lPrice.textColor = .white
         lPrice.textAlignment = .center
         lPrice.font = bold?
@@ -229,7 +230,7 @@ final class ProfileNewViewController
         
         mBtnOpenAccess = ViewUtils
             .button(
-                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay"
+                text: ""
             )
         
         mBtnOpenAccess
@@ -240,14 +241,7 @@ final class ProfileNewViewController
             .titleLabel?
             .textAlignment = .center
         
-        LayoutUtils.button(
-            for: mBtnOpenAccess,
-            view.frame,
-            y: 0.85,
-            width: 0.702,
-            height: 0.1, // X
-            textSize: 0.22 // 0.28
-        )
+        layoutPriceBtn()
         
         mBtnOpenAccess.frame.origin.y = lPrice.frame.bottom() + h * 0.03
         
@@ -372,6 +366,7 @@ final class ProfileNewViewController
         // Update view;
         // Show price
         // Change text of button with full access
+        layoutPriceBtn()
     }
     
     override func onAuthSuccess() {
@@ -473,18 +468,12 @@ final class ProfileNewViewController
 extension ProfileNewViewController {
     
     private func startPayment() {
-        
-        DatabaseUtils.checkShit { [weak self]
-            isValid in
-            
-            if isValid {
-                self?.startShitPayment()
-                return
-            }
-            
-            self?.startNativePayment()
+        if MainViewController.mIsShitPayment {
+            startShitPayment()
+            return
         }
         
+        startNativePayment()
     }
     
     private func startShitPayment() {
@@ -533,6 +522,37 @@ extension ProfileNewViewController {
                 )
             }
         }
+    }
+    
+    private func layoutPriceBtn() {
+        
+        var textSize = 0.28
+        var height = 0.051
+        
+        var title = "Открыть полный доступ"
+        
+        if MainViewController
+            .mIsShitPayment {
+            
+            title = "Оплата подписки на сайте:\nhttps://spokapp.com/pay"
+            
+            height = 0.1
+            textSize = 0.22
+        }
+        
+        mBtnOpenAccess.setTitle(
+            title,
+            for: .normal
+        )
+        
+        LayoutUtils.button(
+            for: mBtnOpenAccess,
+            view.frame,
+            y: 0.85,
+            width: 0.702,
+            height: height,
+            textSize: textSize
+        )
     }
     
     private func pushConfirmPage(
