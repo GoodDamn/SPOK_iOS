@@ -523,6 +523,9 @@ extension ProfileNewViewController {
     
     private func layoutPriceBtn() {
                 
+        mLabelPrice.isHidden = MainViewController
+            .mIsShitPayment
+        
         if MainViewController
             .mIsShitPayment {
             
@@ -532,70 +535,46 @@ extension ProfileNewViewController {
                 y: 0.85,
                 width: 0.702,
                 height: 0.1,
-                textSize: 0.22
+                textSize: 0.18
             )
             
-            let attach = NSTextAttachment()
-            
-            if let image = UIImage(
-                named: "link"
-            ) {
-                let lb = mBtnOpenAccess
-                    .titleLabel
-                
-                let size = lb?.font.pointSize ?? 15
-                
-                let g = size * 1.3
-                attach.bounds = CGRect(
-                    x: 0,
-                    y: size * -0.25,
-                    width: g,
-                    height: g
-                )
-                
-                attach.image = image.withTintColor(
-                    lb?.textColor ?? .white,
-                    renderingMode: .alwaysTemplate
-                )
-                
-            }
-            
-            let attachImage = NSAttributedString(
-                attachment: attach
-            )
-            
-            let attr = NSMutableAttributedString(
+            let text = NSAttributedString(
                 string: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
             )
             
-            attr.append(
-                attachImage
-            )
+            let pointSize = mBtnOpenAccess
+                .titleLabel?
+                .font
+                .pointSize ?? 15
             
             mBtnOpenAccess.setAttributedTitle(
-                attr,
+                NSAttributedString.withImage(
+                    text: text,
+                    pointSize: pointSize,
+                    image: UIImage(
+                        named: "link"
+                    )
+                ),
                 for: .normal
             )
             
-        } else {
-            
-            mBtnOpenAccess.setTitle(
-                "Открыть полный доступ",
-                for: .normal
-            )
-            
-            LayoutUtils.button(
-                for: mBtnOpenAccess,
-                view.frame,
-                y: 0.85,
-                width: 0.702,
-                height: 0.051,
-                textSize: 0.28
-            )
+            return
         }
         
-        mLabelPrice.isHidden = MainViewController
-            .mIsShitPayment
+        mBtnOpenAccess.setTitle(
+            "Открыть полный доступ",
+            for: .normal
+        )
+        
+        LayoutUtils.button(
+            for: mBtnOpenAccess,
+            view.frame,
+            y: 0.85,
+            width: 0.702,
+            height: 0.051,
+            textSize: 0.28
+        )
+        
     }
     
     private func pushConfirmPage(

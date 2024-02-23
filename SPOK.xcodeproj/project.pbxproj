@@ -115,7 +115,7 @@
 		25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */; };
 		25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */; };
 		25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */; };
-		25EA75412B87B6E1003FC583 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSMutableAttributedString.swift */; };
+		25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSAttributedString.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
 		25F94ACD2B6D181F00FC8A32 /* SignInAppleListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */; };
 		25F94ACF2B6D28F000FC8A32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */; };
@@ -289,7 +289,7 @@
 		25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutUtils.swift; sourceTree = "<group>"; };
 		25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
-		25EA75402B87B6E1003FC583 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		25EA75402B87B6E1003FC583 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
 		25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleListener.swift; sourceTree = "<group>"; };
 		25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -586,7 +586,7 @@
 				25D476142B7B1FE400B5467D /* FileManager.swift */,
 				25D476392B7C8E1100B5467D /* UIView.swift */,
 				25D4763E2B7F0D9E00B5467D /* AVAudioPlayer.swift */,
-				25EA75402B87B6E1003FC583 /* NSMutableAttributedString.swift */,
+				25EA75402B87B6E1003FC583 /* NSAttributedString.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1375,7 +1375,7 @@
 				2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */,
 				25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */,
 				383AF7AF2875B17400859090 /* StorageApp.swift in Sources */,
-				25EA75412B87B6E1003FC583 /* NSMutableAttributedString.swift in Sources */,
+				25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */,
 				256940912B660EDE0005BFCC /* CacheData.swift in Sources */,
 				257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */,
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
