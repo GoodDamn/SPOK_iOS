@@ -573,20 +573,10 @@
 		257A7FB32B6CF3F700BBEF5E /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */,
-				25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */,
-				25F94AD02B6E1A7200FC8A32 /* CGRect.swift */,
-				25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */,
-				25F94ADD2B6E587D00FC8A32 /* UIColor.swift */,
-				25F94AEC2B6F690100FC8A32 /* UIButton.swift */,
-				25F94AF22B6F94A300FC8A32 /* String.swift */,
-				25D61E912B7643CE00B5A72B /* UIFont.swift */,
-				25D4760E2B79056900B5467D /* UIImage.swift */,
-				25D476122B7B1F4B00B5467D /* AVAsset.swift */,
-				25D476142B7B1FE400B5467D /* FileManager.swift */,
-				25D476392B7C8E1100B5467D /* UIView.swift */,
-				25D4763E2B7F0D9E00B5467D /* AVAudioPlayer.swift */,
-				25EA75402B87B6E1003FC583 /* NSAttributedString.swift */,
+				25EA75452B886AA8003FC583 /* coreGraphics */,
+				25EA75442B886A0A003FC583 /* AVFoundation */,
+				25EA75432B886998003FC583 /* foundation */,
+				25EA75422B886974003FC583 /* UIKit */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -912,6 +902,48 @@
 				25DB9AC52B57945300B5359F /* CollectionTopic.swift */,
 			);
 			path = collection;
+			sourceTree = "<group>";
+		};
+		25EA75422B886974003FC583 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */,
+				25F94ADD2B6E587D00FC8A32 /* UIColor.swift */,
+				25F94AEC2B6F690100FC8A32 /* UIButton.swift */,
+				25D61E912B7643CE00B5A72B /* UIFont.swift */,
+				25D4760E2B79056900B5467D /* UIImage.swift */,
+				25D476392B7C8E1100B5467D /* UIView.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		25EA75432B886998003FC583 /* foundation */ = {
+			isa = PBXGroup;
+			children = (
+				257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */,
+				25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */,
+				25EA75402B87B6E1003FC583 /* NSAttributedString.swift */,
+				25F94AF22B6F94A300FC8A32 /* String.swift */,
+				25D476142B7B1FE400B5467D /* FileManager.swift */,
+			);
+			path = foundation;
+			sourceTree = "<group>";
+		};
+		25EA75442B886A0A003FC583 /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				25D476122B7B1F4B00B5467D /* AVAsset.swift */,
+				25D4763E2B7F0D9E00B5467D /* AVAudioPlayer.swift */,
+			);
+			path = AVFoundation;
+			sourceTree = "<group>";
+		};
+		25EA75452B886AA8003FC583 /* coreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				25F94AD02B6E1A7200FC8A32 /* CGRect.swift */,
+			);
+			path = coreGraphics;
 			sourceTree = "<group>";
 		};
 		25F770D82B59A71D00C62071 /* raw */ = {
