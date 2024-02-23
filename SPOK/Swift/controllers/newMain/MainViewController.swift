@@ -8,16 +8,15 @@
 import Foundation
 import UIKit
 import Network
-import FirebaseDatabase
-import FirebaseAuth
 
-class MainViewController
+final class MainViewController
     : UIViewController {
     
     private static let TAG = "MainViewController:"
     
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
+    public static var mIsShitPayment = true
     
     public static var mBuildNumber = -1
     public static var mBuildNumberOld = -2
@@ -44,6 +43,7 @@ class MainViewController
         view.backgroundColor = UIColor
             .background()
         
+        checkState()
         checkSub()
         
         let mScreen = UIScreen
@@ -253,9 +253,15 @@ class MainViewController
 
 extension MainViewController {
     
-    public func superUpdatePremium() {
+    public final func superUpdatePremium() {
         for c in mControllers {
             c.updatePremium()
+        }
+    }
+    
+    public final func superUpdateState() {
+        for c in mControllers {
+            c.updateState()
         }
     }
     
@@ -384,6 +390,18 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
+        }
+        
+    }
+    
+    private func checkState() {
+        
+        DatabaseUtils.checkShit { [weak self]
+            withShitPayment in
+            
+            MainViewController.mIsShitPayment = withShitPayment
+            
+            self?.superUpdateState()
         }
         
     }

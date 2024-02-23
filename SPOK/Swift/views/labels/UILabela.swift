@@ -13,27 +13,15 @@ final class UILabela
     
     private var mParagraph = NSMutableParagraphStyle()
     
-    private var mImageAttach = NSTextAttachment()
-    
     public var lineHeight: CGFloat = 1.0 {
         didSet {
             mParagraph.lineHeightMultiple = lineHeight
         }
     }
     
-    public var leftImage: UIImage? = nil {
-        didSet {
-            mImageAttach.image = leftImage
-        }
-    }
+    public var leftImage: UIImage? = nil
     
-    public var leftImageColor: UIColor = .blue {
-        
-        didSet {
-            
-        }
-        
-    }
+    public var leftImageColor: UIColor = .blue
     
     override init(frame: CGRect) {
         super.init(
@@ -55,7 +43,7 @@ final class UILabela
             return
         }
         
-        let a = NSMutableAttributedString(
+        let attrText = NSMutableAttributedString(
             string: text
         )
         
@@ -64,13 +52,13 @@ final class UILabela
             length: text.count
         )
         
-        a.addAttribute(
+        attrText.addAttribute(
             .font,
             value: font,
             range: range
         )
         
-        a.addAttribute(
+        attrText.addAttribute(
             .foregroundColor,
             value: textColor,
             range: range
@@ -78,7 +66,7 @@ final class UILabela
         
         mParagraph.alignment = textAlignment
         
-        a.addAttribute(
+        attrText.addAttribute(
             .paragraphStyle,
             value: mParagraph,
             range: range
@@ -86,57 +74,21 @@ final class UILabela
         
         // Image attachment
         
-        if mImageAttach.image == nil {
-            attributedText = a
+        if leftImage == nil {
+            attributedText = attrText
             return
         }
-        
-        let fontSize = font.pointSize
-        let dy = fontSize * 0.25
-        let imgSize = fontSize * 1.3
-        
-        mImageAttach.bounds = CGRect(
-            x: 0,
-            y: -dy,
-            width: imgSize,
-            height: imgSize
-        )
-        
-        let tempImage = mImageAttach
-            .image?
-            .withTintColor(
-                leftImageColor,
-                renderingMode:
-                    .alwaysTemplate
+              
+        attributedText = NSAttributedString
+            .withImage(
+                text: attrText,
+                pointSize: font.pointSize,
+                image: leftImage?.withTintColor(
+                    leftImageColor,
+                    renderingMode: .alwaysTemplate
+                ),
+                isRight: false
             )
-        
-        mImageAttach.image = tempImage
-        
-        let attachStr = NSMutableAttributedString(
-            attachment: mImageAttach
-        )
-        
-        attachStr.addAttribute(
-            .foregroundColor,
-            value: leftImageColor,
-            range: NSRange(
-                location: 0,
-                length: 1
-            )
-        )
-        
-        attachStr.append(
-            NSAttributedString(
-                string: " "
-            )
-        )
-        
-        attachStr.append(
-            a
-        )
-        
-                
-        attributedText = attachStr
     }
     
 }

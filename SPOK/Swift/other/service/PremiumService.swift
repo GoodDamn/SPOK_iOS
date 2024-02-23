@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PremiumService {
+final class PremiumService {
     
     private static let TAG = "PremiumService"
     

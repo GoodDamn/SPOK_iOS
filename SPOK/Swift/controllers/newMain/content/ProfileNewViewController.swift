@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 final class ProfileNewViewController
     : AuthAppleController {
@@ -22,8 +23,8 @@ final class ProfileNewViewController
     private var messageController: MessageViewController? = nil
     
     private var mPaymentProcess: PaymentProcess!
-    
     private var mBtnOpenAccess: UIButton!
+    private var mLabelPrice: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +177,7 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        let lPrice = UILabel(
+        mLabelPrice = UILabel(
             frame: CGRect(
                 x: 0,
                 y: imageView2.frame.bottom() + h * 0.02,
@@ -198,7 +199,7 @@ final class ProfileNewViewController
         a.addAttributes([
             NSAttributedString.Key
                 .font: bold?
-                    .withSize(lPrice
+                    .withSize(mLabelPrice
                         .frame.height * 0.6
             ),
             NSAttributedString.Key
@@ -215,30 +216,32 @@ final class ProfileNewViewController
             length: 7)
         )
         
-        lPrice.textColor = .white
-        lPrice.textAlignment = .center
-        lPrice.font = bold?
-            .withSize(lPrice.frame.height)
-        lPrice.attributedText = a
+        mLabelPrice.textColor = .white
+        mLabelPrice.textAlignment = .center
+        mLabelPrice.font = bold?
+            .withSize(mLabelPrice.frame.height)
+        mLabelPrice.attributedText = a
         
-        lPrice.frame.offsetX(
+        mLabelPrice.frame.offsetX(
             w * -0.065
         )
         
         mBtnOpenAccess = ViewUtils
             .button(
-                text: "Открыть полный доступ"
+                text: ""
             )
         
-        LayoutUtils.button(
-            for: mBtnOpenAccess,
-            view.frame,
-            y: 0.85,
-            width: 0.702,
-            textSize: 0.28
-        )
+        mBtnOpenAccess
+            .titleLabel?
+            .numberOfLines = 0
         
-        mBtnOpenAccess.frame.origin.y = lPrice.frame.bottom() + h * 0.03
+        mBtnOpenAccess
+            .titleLabel?
+            .textAlignment = .center
+        
+        layoutPriceBtn()
+        
+        mBtnOpenAccess.frame.origin.y = mLabelPrice.frame.bottom() + h * 0.03
         
         let sharey = mBtnOpenAccess
             .frame.bottom() + h * 0.03
@@ -315,11 +318,11 @@ final class ProfileNewViewController
         )
         
         mBtnOpenAccess.frame.center(
-            targetHeight: shareView.frame.origin.y - lPrice.frame.bottom(),
-            offset: lPrice.frame.bottom()
+            targetHeight: shareView.frame.origin.y - mLabelPrice.frame.bottom(),
+            offset: mLabelPrice.frame.bottom()
         )
         
-        lPrice.frame.center(
+        mLabelPrice.frame.center(
             targetHeight: mBtnOpenAccess.frame.origin.y - imageView2.frame.bottom(),
             offset: imageView2.frame.bottom()
         )
@@ -333,7 +336,7 @@ final class ProfileNewViewController
         view.addSubview(imageView2)
         view.addSubview(imageView3)
         
-        view.addSubview(lPrice)
+        view.addSubview(mLabelPrice)
         
         view.addSubview(shareView)
         shareView.addSubview(lShare)
@@ -355,6 +358,10 @@ final class ProfileNewViewController
             )
         )
         
+    }
+    
+    override func onUpdateState() {
+        layoutPriceBtn()
     }
     
     override func onAuthSuccess() {
@@ -401,6 +408,7 @@ final class ProfileNewViewController
         messageController = MessageViewController()
         
         messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
+        
         
         messageController!.mAction = { [weak self] in
             sender.isEnabled = true
@@ -456,29 +464,28 @@ final class ProfileNewViewController
 extension ProfileNewViewController {
     
     private func startPayment() {
-        
-        DatabaseUtils.checkShit { [weak self]
-            isValid in
-            
-            if isValid {
-                self?.startShitPayment()
-                return
-            }
-            
-            self?.startNativePayment()
+        if MainViewController.mIsShitPayment {
+            startShitPayment()
+            return
         }
         
+        startNativePayment()
     }
     
     private func startShitPayment() {
         if #available(iOS 15.4, *) {
-            let shit = ShitAppleController()
-            Utils.mainNav()
-                .pushViewController(
-                    shit,
-                    animated: true
-                )
-            
+            Task {
+                do {
+                    try await ExternalPurchaseLink
+                        .open()
+                } catch {
+                    print(
+                        "startShitPayment: ERROR:",
+                        error
+                    )
+                }
+            }
+            mBtnOpenAccess.isEnabled = true
             return
         }
         
@@ -512,6 +519,62 @@ extension ProfileNewViewController {
                 )
             }
         }
+    }
+    
+    private func layoutPriceBtn() {
+                
+        mLabelPrice.isHidden = MainViewController
+            .mIsShitPayment
+        
+        if MainViewController
+            .mIsShitPayment {
+            
+            LayoutUtils.button(
+                for: mBtnOpenAccess,
+                view.frame,
+                y: 0.85,
+                width: 0.702,
+                height: 0.1,
+                textSize: 0.18
+            )
+            
+            let text = NSAttributedString(
+                string: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
+            )
+            
+            let pointSize = mBtnOpenAccess
+                .titleLabel?
+                .font
+                .pointSize ?? 15
+            
+            mBtnOpenAccess.setAttributedTitle(
+                NSAttributedString.withImage(
+                    text: text,
+                    pointSize: pointSize,
+                    image: UIImage(
+                        named: "link"
+                    )
+                ),
+                for: .normal
+            )
+            
+            return
+        }
+        
+        mBtnOpenAccess.setTitle(
+            "Открыть полный доступ",
+            for: .normal
+        )
+        
+        LayoutUtils.button(
+            for: mBtnOpenAccess,
+            view.frame,
+            y: 0.85,
+            width: 0.702,
+            height: 0.051,
+            textSize: 0.28
+        )
+        
     }
     
     private func pushConfirmPage(
