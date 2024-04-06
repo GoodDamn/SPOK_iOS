@@ -63,6 +63,12 @@ final class PremiumService {
             paymentType
         ) { [weak self] info in
             
+            print(
+                PremiumService.TAG,
+                "INFO:",
+                info
+            )
+            
             // No sub
             guard let s = self,
                   info != nil else {

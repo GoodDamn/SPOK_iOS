@@ -16,7 +16,6 @@ final class MainViewController
     
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
-    public static var mIsShitPayment = true
     
     public static var mBuildNumber = -1
     public static var mBuildNumberOld = -2
@@ -43,7 +42,6 @@ final class MainViewController
         view.backgroundColor = UIColor
             .background()
         
-        checkState()
         checkSub()
         
         let mScreen = UIScreen
@@ -390,18 +388,6 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
-        }
-        
-    }
-    
-    private func checkState() {
-        
-        DatabaseUtils.checkShit { [weak self]
-            withShitPayment in
-            
-            MainViewController.mIsShitPayment = withShitPayment
-            
-            self?.superUpdateState()
         }
         
     }
