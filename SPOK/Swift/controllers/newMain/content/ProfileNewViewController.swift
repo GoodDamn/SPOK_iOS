@@ -5,9 +5,7 @@
 //  Created by GoodDamn on 09/01/2024.
 //
 
-import Foundation
 import UIKit
-import StoreKit
 
 final class ProfileNewViewController
     : AuthAppleController {
@@ -125,7 +123,7 @@ final class ProfileNewViewController
                 x: w * 0.297,
                 y: lSubtitleHead
                     .frame
-                    .bottom() + h*0.03,
+                    .bottom() + h * 0.03,
                 width: himage2,
                 height: himage2
             )
@@ -319,7 +317,8 @@ final class ProfileNewViewController
         messageController?
             .pop()
         messageController = nil
-        startPayment()
+        ExternalPurchaseLinkCompat
+            .open()
     }
     
     override func onAuthError() {
@@ -337,6 +336,11 @@ final class ProfileNewViewController
         messageController = nil
     }
     
+}
+
+
+extension ProfileNewViewController {
+    
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
@@ -352,7 +356,8 @@ final class ProfileNewViewController
         sender.isEnabled = false
         
         if AuthUtils.user() != nil {
-            startPayment()
+            ExternalPurchaseLinkCompat
+                .open()
             return
         }
         
@@ -408,43 +413,4 @@ final class ProfileNewViewController
         }
     }
     
-}
-
-
-extension ProfileNewViewController {
-    
-    private func startPayment() {
-        startShitPayment()
-    }
-    
-    private func startShitPayment() {
-        if #available(iOS 15.4, *) {
-            Task {
-                do {
-                    try await ExternalPurchaseLink
-                        .open()
-                } catch {
-                    print(
-                        "startShitPayment: ERROR:",
-                        error
-                    )
-                }
-            }
-            mBtnOpenAccess.isEnabled = true
-            return
-        }
-        
-        guard let url = URL(
-            string: "https://spokapp.com/pay"
-        ) else {
-            return
-        }
-        
-        UIApplication
-            .shared
-            .open(
-                url
-            )
-        
-    }
 }
