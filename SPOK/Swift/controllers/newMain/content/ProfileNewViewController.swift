@@ -364,7 +364,6 @@ final class ProfileNewViewController
         
         messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
         
-        
         messageController!.mAction = { [weak self] in
             sender.isEnabled = true
             self?.signIn()
@@ -451,31 +450,6 @@ extension ProfileNewViewController {
                 url
             )
         
-    }
-    
-    private func pushConfirmPage(
-        _ snap: PaymentSnapshot
-    ) {
-        
-        let web = WebConfirmationViewController()
-        web.mPaymentSnap = snap
-        web.view.alpha = 0
-        
-        web.mPaymentListener = self
-        
-        Log.d(
-            TAG,
-            "pushConfirmPage"
-        )
-        
-        push(
-            web,
-            animDuration: 0.8
-        ) {
-            web.view.alpha = 1.0
-        }
-        
-        mBtnOpenAccess.isEnabled = true
     }
     
 }
