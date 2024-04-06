@@ -12,16 +12,12 @@ import StoreKit
 final class ProfileNewViewController
     : AuthAppleController {
     
-    private let TAG = "ProfileNewViewController"
-    
     private var messageController: MessageViewController? = nil
     
     private var mBtnOpenAccess: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("MainContentViewController", "viewDidLoad:", mInsets)
         
         modalPresentationStyle = .fullScreen
         
@@ -451,17 +447,4 @@ extension ProfileNewViewController {
             )
         
     }
-    
-}
-
-extension ProfileNewViewController
-    : PaymentConfirmationListener {
-    
-    func onPaid() {
-        MainViewController
-            .mIsPremiumUser = true
-        callUpdatePremium()
-    }
-    
-    func onExitPayment() {}
 }
