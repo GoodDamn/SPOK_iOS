@@ -5,31 +5,17 @@
 //  Created by GoodDamn on 09/01/2024.
 //
 
-import Foundation
 import UIKit
-import StoreKit
 
 final class ProfileNewViewController
     : AuthAppleController {
     
-    private let TAG = "ProfileNewViewController"
-    
-    private let mPayment = Payment(
-        price: 169.00,
-        currency: .rub,
-        description: "SPOK Подписка на 1 месяц"
-    )
-    
     private var messageController: MessageViewController? = nil
     
-    private var mPaymentProcess: PaymentProcess!
     private var mBtnOpenAccess: UIButton!
-    private var mLabelPrice: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("MainContentViewController", "viewDidLoad:", mInsets)
         
         modalPresentationStyle = .fullScreen
         
@@ -137,7 +123,7 @@ final class ProfileNewViewController
                 x: w * 0.297,
                 y: lSubtitleHead
                     .frame
-                    .bottom() + h*0.03,
+                    .bottom() + h * 0.03,
                 width: himage2,
                 height: himage2
             )
@@ -177,55 +163,6 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        mLabelPrice = UILabel(
-            frame: CGRect(
-                x: 0,
-                y: imageView2.frame.bottom() + h * 0.02,
-                width: w,
-                height: h * 0.028
-            )
-        )
-        
-        let a = NSMutableAttributedString(
-            string: "369 RUB \(Int(mPayment.price)) RUB / мес."
-        )
-        
-        let strikeColor = UIColor
-            .white
-            .withAlphaComponent(
-                0.7
-            )
-        
-        a.addAttributes([
-            NSAttributedString.Key
-                .font: bold?
-                    .withSize(mLabelPrice
-                        .frame.height * 0.6
-            ),
-            NSAttributedString.Key
-                .foregroundColor: strikeColor,
-            NSAttributedString.Key
-                .strikethroughStyle: NSUnderlineStyle
-                .single
-                .rawValue,
-            NSAttributedString.Key
-                .strikethroughColor:
-                    strikeColor
-        ],range: NSRange(
-            location: 0,
-            length: 7)
-        )
-        
-        mLabelPrice.textColor = .white
-        mLabelPrice.textAlignment = .center
-        mLabelPrice.font = bold?
-            .withSize(mLabelPrice.frame.height)
-        mLabelPrice.attributedText = a
-        
-        mLabelPrice.frame.offsetX(
-            w * -0.065
-        )
-        
         mBtnOpenAccess = ViewUtils
             .button(
                 text: ""
@@ -239,9 +176,37 @@ final class ProfileNewViewController
             .titleLabel?
             .textAlignment = .center
         
-        layoutPriceBtn()
+        LayoutUtils.button(
+            for: mBtnOpenAccess,
+            view.frame,
+            y: 0.85,
+            width: 0.702,
+            height: 0.1,
+            textSize: 0.18
+        )
         
-        mBtnOpenAccess.frame.origin.y = mLabelPrice.frame.bottom() + h * 0.03
+        let text = NSAttributedString(
+            string: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
+        )
+        
+        let pointSize = mBtnOpenAccess
+            .titleLabel?
+            .font
+            .pointSize ?? 15
+        
+        mBtnOpenAccess.setAttributedTitle(
+            NSAttributedString.withImage(
+                text: text,
+                pointSize: pointSize,
+                image: UIImage(
+                    named: "link"
+                )
+            ),
+            for: .normal
+        )
+        
+        mBtnOpenAccess.frame.origin.y = imageView2.frame
+            .bottom() + h * 0.03
         
         let sharey = mBtnOpenAccess
             .frame.bottom() + h * 0.03
@@ -317,16 +282,6 @@ final class ProfileNewViewController
             offset: sharey
         )
         
-        mBtnOpenAccess.frame.center(
-            targetHeight: shareView.frame.origin.y - mLabelPrice.frame.bottom(),
-            offset: mLabelPrice.frame.bottom()
-        )
-        
-        mLabelPrice.frame.center(
-            targetHeight: mBtnOpenAccess.frame.origin.y - imageView2.frame.bottom(),
-            offset: imageView2.frame.bottom()
-        )
-        
         view.addSubview(btnSettings)
         view.addSubview(lTitle)
         view.addSubview(lTitleHead)
@@ -335,8 +290,6 @@ final class ProfileNewViewController
         view.addSubview(imageView1)
         view.addSubview(imageView2)
         view.addSubview(imageView3)
-        
-        view.addSubview(mLabelPrice)
         
         view.addSubview(shareView)
         shareView.addSubview(lShare)
@@ -360,15 +313,12 @@ final class ProfileNewViewController
         
     }
     
-    override func onUpdateState() {
-        layoutPriceBtn()
-    }
-    
     override func onAuthSuccess() {
         messageController?
             .pop()
         messageController = nil
-        startPayment()
+        ExternalPurchaseLinkCompat
+            .open()
     }
     
     override func onAuthError() {
@@ -386,6 +336,11 @@ final class ProfileNewViewController
         messageController = nil
     }
     
+}
+
+
+extension ProfileNewViewController {
+    
     @objc func btnOpenFullAccess(
         _ sender: UIButton
     ) {
@@ -401,14 +356,14 @@ final class ProfileNewViewController
         sender.isEnabled = false
         
         if AuthUtils.user() != nil {
-            startPayment()
+            ExternalPurchaseLinkCompat
+                .open()
             return
         }
         
         messageController = MessageViewController()
         
         messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
-        
         
         messageController!.mAction = { [weak self] in
             sender.isEnabled = true
@@ -458,160 +413,4 @@ final class ProfileNewViewController
         }
     }
     
-}
-
-
-extension ProfileNewViewController {
-    
-    private func startPayment() {
-        if MainViewController.mIsShitPayment {
-            startShitPayment()
-            return
-        }
-        
-        startNativePayment()
-    }
-    
-    private func startShitPayment() {
-        if #available(iOS 15.4, *) {
-            Task {
-                do {
-                    try await ExternalPurchaseLink
-                        .open()
-                } catch {
-                    print(
-                        "startShitPayment: ERROR:",
-                        error
-                    )
-                }
-            }
-            mBtnOpenAccess.isEnabled = true
-            return
-        }
-        
-        guard let url = URL(
-            string: "https://spokapp.com/pay"
-        ) else {
-            return
-        }
-        
-        UIApplication
-            .shared
-            .open(
-                url
-            )
-        
-    }
-    
-    private func startNativePayment() {
-        mPaymentProcess = PaymentProcess(
-            payment: mPayment
-        )
-        
-        mPaymentProcess.start { [weak self]
-            snap in
-            if self == nil {
-                return
-            }
-            DispatchQueue.ui {
-                self?.pushConfirmPage(
-                    snap
-                )
-            }
-        }
-    }
-    
-    private func layoutPriceBtn() {
-                
-        mLabelPrice.isHidden = MainViewController
-            .mIsShitPayment
-        
-        if MainViewController
-            .mIsShitPayment {
-            
-            LayoutUtils.button(
-                for: mBtnOpenAccess,
-                view.frame,
-                y: 0.85,
-                width: 0.702,
-                height: 0.1,
-                textSize: 0.18
-            )
-            
-            let text = NSAttributedString(
-                string: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
-            )
-            
-            let pointSize = mBtnOpenAccess
-                .titleLabel?
-                .font
-                .pointSize ?? 15
-            
-            mBtnOpenAccess.setAttributedTitle(
-                NSAttributedString.withImage(
-                    text: text,
-                    pointSize: pointSize,
-                    image: UIImage(
-                        named: "link"
-                    )
-                ),
-                for: .normal
-            )
-            
-            return
-        }
-        
-        mBtnOpenAccess.setTitle(
-            "Открыть полный доступ",
-            for: .normal
-        )
-        
-        LayoutUtils.button(
-            for: mBtnOpenAccess,
-            view.frame,
-            y: 0.85,
-            width: 0.702,
-            height: 0.051,
-            textSize: 0.28
-        )
-        
-    }
-    
-    private func pushConfirmPage(
-        _ snap: PaymentSnapshot
-    ) {
-        
-        let web = WebConfirmationViewController()
-        web.mPaymentSnap = snap
-        web.view.alpha = 0
-        
-        web.mPaymentListener = self
-        
-        Log.d(
-            TAG,
-            "pushConfirmPage"
-        )
-        
-        push(
-            web,
-            animDuration: 0.8
-        ) {
-            web.view.alpha = 1.0
-        }
-        
-        mBtnOpenAccess.isEnabled = true
-    }
-    
-}
-
-extension ProfileNewViewController
-    : PaymentConfirmationListener {
-    
-    func onPaid() {
-        MainViewController
-            .mIsPremiumUser = true
-        callUpdatePremium()
-    }
-    
-    func onExitPayment() {}
 }

@@ -54,8 +54,9 @@
 		257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */; };
 		257A7FAE2B6CE1B300BBEF5E /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA52B6CE1B300BBEF5E /* Payment.swift */; };
 		257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */; };
-		257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */; };
 		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
+		257D81222BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */; };
+		257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257D81252BC1810900B5743B /* LaunchScreen.storyboard */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
@@ -153,7 +154,6 @@
 		2BA101EF2763EFCB00EB5B8C /* SPOKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA101EE2763EFCB00EB5B8C /* SPOKUITests.swift */; };
 		2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA1023D276A11DE00EB5B8C /* Toast.swift */; };
 		2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */; };
-		2BCC4909290E346100A5F4F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA101D72763EFCA00EB5B8C /* LaunchScreen.storyboard */; };
 		2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 383AF7A82875806000859090 /* OpenSans-Bold.ttf */; };
 		2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */; };
 		2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */; };
@@ -228,8 +228,9 @@
 		257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSnapshot.swift; sourceTree = "<group>"; };
 		257A7FA52B6CE1B300BBEF5E /* Payment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProcess.swift; sourceTree = "<group>"; };
-		257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
 		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
+		257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalPurchaseLinkCompat.swift; sourceTree = "<group>"; };
+		257D81252BC1810900B5743B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -325,7 +326,6 @@
 		2BA101CC2763EFC900EB5B8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BA101CE2763EFC900EB5B8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2BA101D52763EFCA00EB5B8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2BA101D82763EFCA00EB5B8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BA101DA2763EFCA00EB5B8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = SPOK/Info.plist; sourceTree = SOURCE_ROOT; };
 		2BA101DF2763EFCB00EB5B8C /* SPOKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPOKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA101E32763EFCB00EB5B8C /* SPOKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKTests.swift; sourceTree = "<group>"; };
@@ -337,7 +337,6 @@
 		2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		2BA1024F276A487C00EB5B8C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		2BB4FA5127E207B400574FDA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentViewController.swift; sourceTree = "<group>"; };
 		2BD279BD279EFEAE00E6A1FD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKTopic.swift; sourceTree = "<group>"; };
@@ -562,14 +561,6 @@
 			path = process;
 			sourceTree = "<group>";
 		};
-		257A7FB02B6CE1F100BBEF5E /* payment */ = {
-			isa = PBXGroup;
-			children = (
-				257A7FB12B6CE1FC00BBEF5E /* WebConfirmationViewController.swift */,
-			);
-			path = payment;
-			sourceTree = "<group>";
-		};
 		257A7FB32B6CF3F700BBEF5E /* extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +570,14 @@
 				25EA75422B886974003FC583 /* UIKit */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		257D81202BC17DDD00B5743B /* compat */ = {
+			isa = PBXGroup;
+			children = (
+				257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */,
+			);
+			path = compat;
 			sourceTree = "<group>";
 		};
 		258B792E2B80F5BD0049304E /* contentKit */ = {
@@ -1103,8 +1102,8 @@
 		2BA10242276A41F000EB5B8C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				2BA101D72763EFCA00EB5B8C /* LaunchScreen.storyboard */,
 				25B35B142B51236B002704E1 /* Main.storyboard */,
+				257D81252BC1810900B5743B /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1128,7 +1127,6 @@
 			isa = PBXGroup;
 			children = (
 				25F94ADA2B6E573000FC8A32 /* settings */,
-				257A7FB02B6CE1F100BBEF5E /* payment */,
 				25D32DDF2B6901F800EAEA20 /* pagers */,
 				25D32DD62B68D67A00EAEA20 /* popups */,
 				25DB9A702B52BE7E00B5359F /* splash */,
@@ -1143,6 +1141,7 @@
 		2BA1025D276A603100EB5B8C /* other */ = {
 			isa = PBXGroup;
 			children = (
+				257D81202BC17DDD00B5743B /* compat */,
 				25F94AF42B6FB89100FC8A32 /* service */,
 				25D32DDE2B6901E300EAEA20 /* auth */,
 				25F94ACB2B6D17FE00FC8A32 /* signin */,
@@ -1350,6 +1349,7 @@
 				25C5B1512B83B0CD00AB7114 /* 54.skc in Resources */,
 				25C5B1582B83B0CD00AB7114 /* 60B.spc in Resources */,
 				25C5B14F2B83B0CD00AB7114 /* 57.skc in Resources */,
+				257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */,
 				25C5B14E2B83B0CD00AB7114 /* 56.skc in Resources */,
 				25C5B14D2B83B0CD00AB7114 /* 58.skc in Resources */,
 				25B35B152B51236B002704E1 /* Main.storyboard in Resources */,
@@ -1371,7 +1371,6 @@
 				2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */,
 				2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */,
 				25C5B1572B83B0CD00AB7114 /* 58M.spc in Resources */,
-				2BCC4909290E346100A5F4F4 /* LaunchScreen.storyboard in Resources */,
 				25C5B1502B83B0CD00AB7114 /* 55.skc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1393,6 +1392,7 @@
 				259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */,
 				25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
+				257D81222BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
 				2569409B2B6772B40005BFCC /* CacheDir.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
@@ -1465,7 +1465,6 @@
 				25D61E902B76233800B5A72B /* InversedTableView.swift in Sources */,
 				25D476112B7906D600B5467D /* Extensions.swift in Sources */,
 				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,
-				257A7FB22B6CE1FC00BBEF5E /* WebConfirmationViewController.swift in Sources */,
 				257A7FA82B6CE1B300BBEF5E /* Status.swift in Sources */,
 				25D4760D2B78F8D000B5467D /* NotificationUtils.swift in Sources */,
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,
@@ -1534,18 +1533,6 @@
 			targetProxy = 2BA101EB2763EFCB00EB5B8C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2BA101D72763EFCA00EB5B8C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2BA101D82763EFCA00EB5B8C /* Base */,
-				2BB4FA5127E207B400574FDA /* ru */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2BA101F12763EFCB00EB5B8C /* Debug */ = {
@@ -1683,6 +1670,8 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = SPOK/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SPOK;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1714,6 +1703,8 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = SPOK/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SPOK;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -209,6 +209,11 @@ final class SheepCounterViewController
         mCounter += 1
     }
     
+}
+
+
+extension SheepCounterViewController {
+    
     private func createSheep() -> Sheep {
         
         let f = view.frame
