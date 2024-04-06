@@ -211,7 +211,8 @@ final class ProfileNewViewController
             for: .normal
         )
         
-        
+        mBtnOpenAccess.frame.origin.y = imageView2.frame
+            .bottom() + h * 0.03
         
         let sharey = mBtnOpenAccess
             .frame.bottom() + h * 0.03
