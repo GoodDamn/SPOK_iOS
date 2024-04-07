@@ -40,6 +40,9 @@ final class BaseTopicController
     
         print(TAG, "viewDidLoad()")
         
+        let w = view.width()
+        let h = view.height()
+        
         modalPresentationStyle = .overFullScreen
         
         mProgressBarTopic = ViewUtils
@@ -77,20 +80,17 @@ final class BaseTopicController
             mProgressBarTopic
         )
         
-        let mFont = UIFont(
-            name: "OpenSans-SemiBold",
-            size: view.frame.width * 0.047 // 0.057
-        )
+        let mFont = UIFont
+            .extrabold( // 0.057
+                withSize: w * 0.047
+            )
         
         let mTextColor = UIColor(
             named: "text_topic"
         )
         
-        view.backgroundColor = UIColor(
-            named: "background")
+        view.backgroundColor = .background()
         
-        let w = view.width()
-        let h = view.height()
         
         
         let mHideOffsetY = h * 0.3
@@ -130,7 +130,6 @@ final class BaseTopicController
 
             textView.font = mFont
             textView.textColor = mTextColor
-            
             
             textView.attribute()
             textView.sizeToFit()
@@ -215,19 +214,19 @@ extension BaseTopicController {
             return
         }
         
-        print(TAG, "initEngine!!!LOAD_RES")
+        Log.d(TAG, "initEngine!!!LOAD_RES")
         
         mEngine.loadResources(
             dataSKC: &data
         )
         
-        print(TAG, "initEngine!!!SCRIPT_READER")
+        Log.d(TAG, "initEngine!!!SCRIPT_READER")
         mScriptReader = ScriptReader(
             engine: mEngine,
             dataSKC: &data
         )
         
-        DispatchQueue.main.async {
+        DispatchQueue.ui {
             [weak self] in
             self?.startTopic()
         }

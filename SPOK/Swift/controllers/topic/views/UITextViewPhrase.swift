@@ -14,18 +14,22 @@ final class UITextViewPhrase
         frame: CGRect,
         _ text: String
     ) {
-        super.init(frame: frame);
-        self.text = text;
-        backgroundColor = .clear;
+        super.init(
+            frame: frame
+        )
+        self.text = text
+        backgroundColor = .clear
         isUserInteractionEnabled = false
-        textAlignment = .center;
+        textAlignment = .center
         numberOfLines = 0
-        alpha = 0.0;
+        alpha = 0.0
         lineHeight = 0.83
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder);
+        super.init(
+            coder: coder
+        )
     }
     
     deinit{
@@ -55,8 +59,8 @@ final class UITextViewPhrase
                 
                 self?.alpha = 0.0
             }
-        ) { _ in
-            self.removeFromSuperview();
+        ) { [weak self] _ in
+            self?.removeFromSuperview()
             completion?()
         }
         
