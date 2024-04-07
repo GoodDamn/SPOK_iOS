@@ -5,6 +5,7 @@
 //  Created by GoodDamn on 09/01/2024.
 //
 
+import Foundation
 import UIKit
 
 final class ProfileNewViewController

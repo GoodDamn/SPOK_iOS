@@ -21,7 +21,6 @@
 		25063EB02A776DC2001C1CCE /* FileSCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EAF2A776DC2001C1CCE /* FileSCS.swift */; };
 		25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB12A77A1D5001C1CCE /* FileSPC.swift */; };
 		25063EB42A77E4A7001C1CCE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 25063EB32A77E4A7001C1CCE /* FirebaseStorage */; };
-		25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25063EB52A7A05F3001C1CCE /* FileSKC1.swift */; };
 		2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2CE2B45D45C00656C0B /* ByteUtils.swift */; };
 		2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2D02B46707A00656C0B /* BaseTopicController.swift */; };
 		2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2DE2B469C1D00656C0B /* ScriptRead.swift */; };
@@ -57,6 +56,7 @@
 		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
 		257D81222BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */; };
 		257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257D81252BC1810900B5743B /* LaunchScreen.storyboard */; };
+		257D81282BC18BA900B5743B /* SignInAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81272BC18BA900B5743B /* SignInAppleController.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
@@ -122,7 +122,6 @@
 		25F94ACF2B6D28F000FC8A32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */; };
 		25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD02B6E1A7200FC8A32 /* CGRect.swift */; };
 		25F94AD32B6E1A9F00FC8A32 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */; };
-		25F94AD72B6E1E8D00FC8A32 /* SignInAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD62B6E1E8D00FC8A32 /* SignInAppleController.swift */; };
 		25F94AD92B6E22BE00FC8A32 /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AD82B6E22BE00FC8A32 /* AuthUtils.swift */; };
 		25F94ADC2B6E579500FC8A32 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ADB2B6E579500FC8A32 /* SettingsViewController.swift */; };
 		25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ADD2B6E587D00FC8A32 /* UIColor.swift */; };
@@ -142,8 +141,6 @@
 		2B4B3885290EDEAA0013D198 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3884290EDEAA0013D198 /* FirebaseAnalytics */; };
 		2B4B3887290EDEAA0013D198 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3886290EDEAA0013D198 /* FirebaseAuth */; };
 		2B4B3889290EDEAA0013D198 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2B4B3888290EDEAA0013D198 /* FirebaseDatabase */; };
-		2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4C749E28E9A5E40097CDE7 /* SPOKMusic.swift */; };
-		2B4C74A528E9BDA20097CDE7 /* SPOKNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4C74A428E9BDA20097CDE7 /* SPOKNotify.swift */; };
 		2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5684B028901882003F4F15 /* EveryDayNotification.swift */; };
 		2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */; };
 		2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B82F18B29603E73004414B9 /* UITextViewPhrase.swift */; };
@@ -160,7 +157,6 @@
 		2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA1024F276A487C00EB5B8C /* OpenSans-SemiBold.ttf */; };
 		2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BA101D52763EFCA00EB5B8C /* Assets.xcassets */; };
 		2BD279BE279EFEAE00E6A1FD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD279BD279EFEAE00E6A1FD /* Utils.swift */; };
-		2BF06BF628E7953B00A2ACFF /* SPOKTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */; };
 		2BF3566E293136BF00ECA142 /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3566D293136BF00ECA142 /* Crypt.swift */; };
 		383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383AF7AC28758BD300859090 /* MainNavigationController.swift */; };
 		383AF7AF2875B17400859090 /* StorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383AF7AE2875B17400859090 /* StorageApp.swift */; };
@@ -197,7 +193,6 @@
 		250622822B4EA1F000FCD636 /* PageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBar.swift; sourceTree = "<group>"; };
 		25063EAF2A776DC2001C1CCE /* FileSCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSCS.swift; sourceTree = "<group>"; };
 		25063EB12A77A1D5001C1CCE /* FileSPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSPC.swift; sourceTree = "<group>"; };
-		25063EB52A7A05F3001C1CCE /* FileSKC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSKC1.swift; sourceTree = "<group>"; };
 		2507D2CE2B45D45C00656C0B /* ByteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteUtils.swift; sourceTree = "<group>"; };
 		2507D2D02B46707A00656C0B /* BaseTopicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTopicController.swift; sourceTree = "<group>"; };
 		2507D2DE2B469C1D00656C0B /* ScriptRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRead.swift; sourceTree = "<group>"; };
@@ -231,6 +226,7 @@
 		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalPurchaseLinkCompat.swift; sourceTree = "<group>"; };
 		257D81252BC1810900B5743B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		257D81272BC18BA900B5743B /* SignInAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleController.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -296,7 +292,6 @@
 		25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		25F94AD02B6E1A7200FC8A32 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		25F94AD62B6E1E8D00FC8A32 /* SignInAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInAppleController.swift; path = ../SignInAppleController.swift; sourceTree = "<group>"; };
 		25F94AD82B6E22BE00FC8A32 /* AuthUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
 		25F94ADB2B6E579500FC8A32 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		25F94ADD2B6E587D00FC8A32 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -316,8 +311,6 @@
 		2B29CAFC2892BC3D006FE018 /* SPOK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SPOK.entitlements; sourceTree = "<group>"; };
 		2B3DE5B8290BAC7600B00528 /* SignInApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInApple.swift; sourceTree = "<group>"; };
 		2B4B3881290EDDA10013D198 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
-		2B4C749E28E9A5E40097CDE7 /* SPOKMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKMusic.swift; sourceTree = "<group>"; };
-		2B4C74A428E9BDA20097CDE7 /* SPOKNotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKNotify.swift; sourceTree = "<group>"; };
 		2B5684B028901882003F4F15 /* EveryDayNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveryDayNotification.swift; sourceTree = "<group>"; };
 		2B63203E291F5E9A00BE529E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B82F18B29603E73004414B9 /* UITextViewPhrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewPhrase.swift; sourceTree = "<group>"; };
@@ -339,7 +332,6 @@
 		2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentViewController.swift; sourceTree = "<group>"; };
 		2BD279BD279EFEAE00E6A1FD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPOKTopic.swift; sourceTree = "<group>"; };
 		2BF3566D293136BF00ECA142 /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
 		383AF7A82875806000859090 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		383AF7AC28758BD300859090 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -706,7 +698,7 @@
 			children = (
 				25F94AE32B6E606C00FC8A32 /* protocols */,
 				25F94AE02B6E5E8400FC8A32 /* apple */,
-				25F94ADF2B6E5E7600FC8A32 /* signin */,
+				257D81272BC18BA900B5743B /* SignInAppleController.swift */,
 			);
 			path = auth;
 			sourceTree = "<group>";
@@ -972,14 +964,6 @@
 			path = settings;
 			sourceTree = "<group>";
 		};
-		25F94ADF2B6E5E7600FC8A32 /* signin */ = {
-			isa = PBXGroup;
-			children = (
-				25F94AD62B6E1E8D00FC8A32 /* SignInAppleController.swift */,
-			);
-			path = signin;
-			sourceTree = "<group>";
-		};
 		25F94AE02B6E5E8400FC8A32 /* apple */ = {
 			isa = PBXGroup;
 			children = (
@@ -1192,12 +1176,8 @@
 		2BF06BF428E7951F00A2ACFF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2BF06BF528E7953B00A2ACFF /* SPOKTopic.swift */,
-				2B4C749E28E9A5E40097CDE7 /* SPOKMusic.swift */,
-				2B4C74A428E9BDA20097CDE7 /* SPOKNotify.swift */,
 				25063EAF2A776DC2001C1CCE /* FileSCS.swift */,
 				25063EB12A77A1D5001C1CCE /* FileSPC.swift */,
-				25063EB52A7A05F3001C1CCE /* FileSKC1.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1432,7 +1412,6 @@
 				25D61E8A2B7621C300B5A72B /* InversedTableViewCell.swift in Sources */,
 				2569408E2B660D850005BFCC /* CacheFileHandler.swift in Sources */,
 				2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */,
-				25F94AD72B6E1E8D00FC8A32 /* SignInAppleController.swift in Sources */,
 				256940962B6672620005BFCC /* UILabela.swift in Sources */,
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
 				25F94AFE2B700F6300FC8A32 /* PaymentConfirmationListener.swift in Sources */,
@@ -1445,13 +1424,13 @@
 				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
 				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
 				25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */,
-				2B4C749F28E9A5E40097CDE7 /* SPOKMusic.swift in Sources */,
 				257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
 				257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				25D32DD92B68D69A00EAEA20 /* PopupNewsViewController.swift in Sources */,
+				257D81282BC18BA900B5743B /* SignInAppleController.swift in Sources */,
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,
 				25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */,
 				25D4763A2B7C8E1100B5467D /* UIView.swift in Sources */,
@@ -1493,11 +1472,8 @@
 				2B93CF4E276F2E5000219690 /* HomeViewController.swift in Sources */,
 				2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */,
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
-				25063EB62A7A05F3001C1CCE /* FileSKC1.swift in Sources */,
-				2BF06BF628E7953B00A2ACFF /* SPOKTopic.swift in Sources */,
 				25D61E852B75F35600B5A72B /* OptionTableCell.swift in Sources */,
 				25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */,
-				2B4C74A528E9BDA20097CDE7 /* SPOKNotify.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

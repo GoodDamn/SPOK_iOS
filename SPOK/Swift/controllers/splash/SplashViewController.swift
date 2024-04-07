@@ -31,21 +31,21 @@ final class SplashViewController
             size: sizeTitle
         )
         
-        let lTitle = UILabel(
+        let lTitle = UILabela(
             frame: CGRect(
                 x: w*0.1,
                 y: h*0.05,
-                width: w,
-                height: sizeTitle * 6
+                width: w*0.9,
+                height: 0
             )
         )
         
-        let lSubtitle = UILabel(
+        let lSubtitle = UILabela(
             frame: CGRect(
                 x: 0,
                 y: h * 0.786,
                 width: w,
-                height: sizeSubtitle * 3
+                height: 0
             )
         )
         
@@ -68,7 +68,9 @@ final class SplashViewController
         lTitle.text = "Добро\nпожаловать в\nSPOK.Сон"
         lTitle.font = extraBold
         lTitle.textColor = .white
+        lTitle.textAlignment = .center
         lTitle.numberOfLines = 0
+        lTitle.lineHeight = 0.83
         
         lSubtitle.text = msgBottom
         lSubtitle.font = extraBold?
@@ -76,7 +78,20 @@ final class SplashViewController
         lSubtitle.textColor = .white
         lSubtitle.textAlignment = .center
         lSubtitle.numberOfLines = 0
+        lSubtitle.lineHeight = 0.83
         
+        lTitle.backgroundColor = .red
+        lSubtitle.backgroundColor = .red
+        
+        lTitle.attribute()
+        lSubtitle.attribute()
+        
+        lTitle.sizeToFit()
+        lSubtitle.sizeToFit()
+        
+        lTitle.frame.origin.x = (w - lTitle.frame.width) * 0.5
+        
+        lSubtitle.frame.origin.x = (w - lSubtitle.frame.width) * 0.5
         
         view.addSubview(lTitle)
         view.addSubview(imageView)
