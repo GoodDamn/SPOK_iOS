@@ -90,9 +90,7 @@ final class BaseTopicController
         )
         
         view.backgroundColor = .background()
-        
-        
-        
+                
         let mHideOffsetY = h * 0.3
         
         mCacheFile = CacheProgress<Void>(
@@ -135,7 +133,9 @@ final class BaseTopicController
             textView.sizeToFit()
             
             textView.frame.origin.y = s
-                .view.center.y - textView.height()
+                .view.center.y -
+                textView.height() -
+                textView.font.pointSize
             
             textView.frame.origin.x = (s
                 .view.width() - textView.width()
@@ -298,7 +298,7 @@ extension BaseTopicController {
         
         label.textColor = .white
         label.font = .semibold(
-            withSize: h * 0.025
+            withSize: w * 0.055
         )
         label.textColor = .white
         label.text = "\(meta.artist) - \(meta.title)"
@@ -324,7 +324,7 @@ extension BaseTopicController {
         )
         
         label.alpha(
-            1.0
+            0.65
         )
         
         ViewUtils.debugLines(
