@@ -103,10 +103,6 @@ final class SplashViewController
         view.addSubview(lTitle)
         view.addSubview(imageView)
         view.addSubview(lSubtitle)
-        
-        ViewUtils.debugLines(
-            in: view
-        )
     }
     
 }
