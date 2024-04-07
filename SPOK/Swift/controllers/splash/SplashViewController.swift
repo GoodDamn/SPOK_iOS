@@ -96,7 +96,9 @@ final class SplashViewController
         view.addSubview(imageView)
         view.addSubview(lSubtitle)
         
-        
+        ViewUtils.debugLines(
+            in: view
+        )
     }
     
 }

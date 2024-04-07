@@ -35,7 +35,7 @@ class StackViewController
         super.viewDidAppear(animated)
     }
     
-    public func framee(
+    public final func framee(
         x: CGFloat,
         y: CGFloat,
         width: CGFloat,

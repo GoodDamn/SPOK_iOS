@@ -374,7 +374,7 @@ extension MainViewController {
         DispatchQueue.ui(
             wait: 3.0
         ) { [weak self] in
-            
+            //return
             guard let s = self else {
                 return
             }

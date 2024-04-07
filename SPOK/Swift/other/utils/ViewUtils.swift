@@ -38,6 +38,52 @@ public class ViewUtils {
         return btnStart
     }
     
+    public static func debugLines(
+        in view: UIView
+    ) {
+        let c = view.center
+        let path = UIBezierPath()
+        path.move(
+            to: CGPoint(
+                x: c.x,
+                y: 0
+            )
+        )
+        
+        path.addLine(
+            to: CGPoint(
+                x: c.x,
+                y: c.y + c.y
+            )
+        )
+        
+        path.move(
+            to: CGPoint(
+                x: 0,
+                y: c.y
+            )
+        )
+        
+        path.addLine(
+            to: CGPoint(
+                x: c.x + c.x,
+                y: c.y
+            )
+        )
+        
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        
+        layer.strokeColor = UIColor.red
+            .cgColor
+        layer.fillColor = nil
+        
+        layer.lineWidth = 2.0
+        
+        view.layer.addSublayer(
+            layer
+        )
+    }
     
     public static func createHeader(
         in view: UIView,
