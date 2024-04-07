@@ -22,8 +22,8 @@ final class ProfileNewViewController
         
         view.clipsToBounds = true
         
-        let w = view.frame.width
-        let h = view.frame.height - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
+        let w = view.width()
+        let h = view.height() - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         
         let extraBold = UIFont.extrabold(
             withSize: 15
@@ -91,7 +91,7 @@ final class ProfileNewViewController
         lTitle.text = "Профиль"
         lTitle.textColor = .white
         lTitle.font = extraBold?
-            .withSize(lTitle.frame.height)
+            .withSize(lTitle.height())
         
         lTitle.sizeToFit()
         
@@ -99,7 +99,7 @@ final class ProfileNewViewController
         lTitleHead.text = "Теперь можно все"
         lTitleHead.textColor = .white
         lTitleHead.font = bold?
-            .withSize(lTitleHead.frame.height)
+            .withSize(lTitleHead.height())
         
         lSubtitleHead.text = "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
         lSubtitleHead.lineHeight = 0.83
@@ -107,7 +107,7 @@ final class ProfileNewViewController
         lSubtitleHead.textColor = .white
         lSubtitleHead.font = semiBold?
             .withSize(lSubtitleHead
-                .frame.height
+                .height()
         )
         lSubtitleHead.numberOfLines = 0
         lSubtitleHead.attribute()
@@ -274,9 +274,9 @@ final class ProfileNewViewController
         )
         
         btnShare.frame.origin.y =
-            shareView.frame.height -
-            btnShare.frame.height -
-            shareView.frame.height * 0.155
+            shareView.height() -
+            btnShare.height() -
+            shareView.height() * 0.155
         
         shareView.frame.center(
             targetHeight: lastHeight,
@@ -296,7 +296,9 @@ final class ProfileNewViewController
         shareView.addSubview(lShare)
         shareView.addSubview(btnShare)
         
-        view.addSubview(mBtnOpenAccess)
+        view.addSubview(
+            mBtnOpenAccess
+        )
         
         mBtnOpenAccess.click(
             for: self,
