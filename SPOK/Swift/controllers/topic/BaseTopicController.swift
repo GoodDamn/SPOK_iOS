@@ -25,7 +25,6 @@ final class BaseTopicController
     private var mProgressBar: ProgressBar!
     private var mProgressBarTopic: ProgressBar!
     
-    
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
     private var mId = Int.min
@@ -155,28 +154,6 @@ final class BaseTopicController
         
     }
     
-    public func setID(
-        _ id: Int
-    ) {
-        mId = id
-        mNetworkUrl = "content/skc/\(id).skc"
-    }
-    
-    @objc func onTouch(
-        _ sender: UITapGestureRecognizer
-    ) {
-        if mIsFirstTouch {
-            mIsFirstTouch = false
-            mLabelSong?.alpha(
-                0.0
-            ) { [weak self] _ in
-                self?.mLabelSong?.removeFromSuperview()
-            }
-        }
-        
-        mScriptReader!.next()
-    }
-    
     @objc override func onClickBtnClose(
         _ sender: UIButton
     ) {
@@ -193,10 +170,31 @@ final class BaseTopicController
             self.view.alpha = 0
         }
     }
-    
 }
 
 extension BaseTopicController {
+    
+    public func setID(
+        _ id: Int
+    ) {
+        mId = id
+        mNetworkUrl = "content/skc/\(id).skc"
+    }
+    
+    @objc private func onTouch(
+        _ sender: UITapGestureRecognizer
+    ) {
+        if mIsFirstTouch {
+            mIsFirstTouch = false
+            mLabelSong?.alpha(
+                0.0
+            ) { [weak self] _ in
+                self?.mLabelSong?.removeFromSuperview()
+            }
+        }
+        
+        mScriptReader!.next()
+    }
     
     // Better to load on background thread
     private func initEngine(
@@ -317,6 +315,10 @@ extension BaseTopicController {
         
         label.alpha(
             1.0
+        )
+        
+        ViewUtils.debugLines(
+            in: view
         )
         
     }

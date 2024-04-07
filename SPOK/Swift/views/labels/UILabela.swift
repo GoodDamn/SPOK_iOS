@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-final class UILabela
+class UILabela
     : UILabel {
     
     private var mParagraph = NSMutableParagraphStyle()
     
-    public var lineHeight: CGFloat = 1.0 {
+    public final var lineHeight: CGFloat = 1.0 {
         didSet {
             mParagraph.lineHeightMultiple = lineHeight
         }
     }
     
-    public var leftImage: UIImage? = nil
+    public final var leftImage: UIImage? = nil
     
-    public var leftImageColor: UIColor = .blue
+    public final var leftImageColor: UIColor = .blue
     
     override init(frame: CGRect) {
         super.init(
@@ -37,7 +37,7 @@ final class UILabela
         )
     }
     
-    public func attribute() {
+    public final func attribute() {
         
         guard let text = text else {
             return

@@ -26,6 +26,18 @@ extension UIView {
         
     }
     
+    func animate(
+        duration: TimeInterval = 0.5,
+        animations: @escaping () -> Void,
+        completion: ((Bool)->Void)? = nil
+    ) {
+        UIView.animate(
+            withDuration: duration,
+            animations: animations,
+            completion: completion
+        )
+    }
+    
     func bottomy() -> CGFloat {
         frame.origin.y + frame.height
     }

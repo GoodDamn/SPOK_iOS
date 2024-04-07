@@ -7,8 +7,8 @@
 
 import UIKit;
 
-class UITextViewPhrase
-    : UILabel {
+final class UITextViewPhrase
+    : UILabela {
     
     init(
         frame: CGRect,
@@ -21,6 +21,7 @@ class UITextViewPhrase
         textAlignment = .center;
         numberOfLines = 0
         alpha = 0.0;
+        lineHeight = 0.83
     }
     
     required init?(coder: NSCoder) {
@@ -31,42 +32,38 @@ class UITextViewPhrase
         print("UITextViewPhrase: deinit()")
     }
     
-    public func show() {
-        let h = sizeThatFits(
-            CGSize(
-                width: frame.width,
-                height: CGFloat
-                    .greatestFiniteMagnitude
-            )
-        ).height
+    public final func show() {
         
-        frame.size.height = h
+        sizeToFit()
+        attribute()
         
-        UIView.animate(
-            withDuration: TimeInterval
-                .random(in: 0.3..<1.0),
-            delay: 0.35
-        ) {
-            self.alpha = 1.0
-        }
+        animate(
+            animations: { [weak self] in
+                self?.alpha = 1.0
+            }
+        )
     }
     
-    public func hide(
+    public final func hide(
         _ maxValY: CGFloat,
         _ completion: (()->Void)? = nil
     ) {
-        UIView.animate(
-            withDuration: 2.0,
-            animations: {
-                self.transform = CGAffineTransform(
+        
+        animate(
+            animations: { [weak self] in
+                
+                self?.transform = CGAffineTransform(
                     translationX: 0,
                     y: maxValY
-                );
-                self.alpha = 0.0;
-        }) { b in
+                )
+                
+                self?.alpha = 0.0
+            }
+        ) { _ in
             self.removeFromSuperview();
             completion?()
         }
+        
     }
     
 }
