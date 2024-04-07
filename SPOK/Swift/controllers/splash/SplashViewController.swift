@@ -55,7 +55,7 @@ final class SplashViewController
         let imageView = UIImageView(
             frame: CGRect(
                 x: (w - wimage) * 0.5,
-                y: (h - himage) * 0.5,
+                y: (h - himage) * 0.51,
                 width: wimage,
                 height: himage
             )
@@ -65,7 +65,7 @@ final class SplashViewController
             named: "meditate"
         )
         
-        lTitle.text = "Добро\nпожаловать в\nSPOK.Сон"
+        lTitle.text = "Добро\nпожаловать\nв SPOK.Сон"
         lTitle.font = extraBold
         lTitle.textColor = .white
         lTitle.textAlignment = .center
@@ -89,8 +89,16 @@ final class SplashViewController
         lTitle.frame.origin.x = (w -
             lTitle.width()) * 0.5
         
+        lTitle.frame.origin.y = (
+            imageView.frame.y() - lTitle.height()) * 0.5
+        
         lSubtitle.frame.origin.x = (w -
             lSubtitle.width()) * 0.5
+        
+        lSubtitle.frame.origin.y =
+            imageView.bottomy() +
+        (h - imageView.bottomy() - lSubtitle.height()) * 0.5
+        
         
         view.addSubview(lTitle)
         view.addSubview(imageView)

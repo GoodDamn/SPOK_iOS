@@ -26,6 +26,10 @@ extension UIView {
         
     }
     
+    func bottomy() -> CGFloat {
+        frame.origin.y + frame.height
+    }
+    
     func width() -> CGFloat {
         frame.width
     }

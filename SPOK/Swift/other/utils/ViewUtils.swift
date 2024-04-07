@@ -74,7 +74,7 @@ public class ViewUtils {
         let layer = CAShapeLayer()
         layer.path = path.cgPath
         
-        layer.strokeColor = UIColor.red
+        layer.strokeColor = UIColor.white
             .cgColor
         layer.fillColor = nil
         

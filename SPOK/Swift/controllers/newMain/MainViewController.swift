@@ -146,7 +146,7 @@ final class MainViewController
         Log.d("Time for content!")
         
         showSplash(
-            msg: "отправляемся в\nмир снов..."
+            msg: "отправляемся\nв мир снов..."
         ) {
             return
                 MainContentViewController()
@@ -374,7 +374,7 @@ extension MainViewController {
         DispatchQueue.ui(
             wait: 3.0
         ) { [weak self] in
-            //return
+            return
             guard let s = self else {
                 return
             }
