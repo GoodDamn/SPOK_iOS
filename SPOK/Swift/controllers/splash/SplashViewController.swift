@@ -80,18 +80,17 @@ final class SplashViewController
         lSubtitle.numberOfLines = 0
         lSubtitle.lineHeight = 0.83
         
-        lTitle.backgroundColor = .red
-        lSubtitle.backgroundColor = .red
-        
         lTitle.attribute()
         lSubtitle.attribute()
         
         lTitle.sizeToFit()
         lSubtitle.sizeToFit()
         
-        lTitle.frame.origin.x = (w - lTitle.frame.width) * 0.5
+        lTitle.frame.origin.x = (w -
+            lTitle.width()) * 0.5
         
-        lSubtitle.frame.origin.x = (w - lSubtitle.frame.width) * 0.5
+        lSubtitle.frame.origin.x = (w -
+            lSubtitle.width()) * 0.5
         
         view.addSubview(lTitle)
         view.addSubview(imageView)

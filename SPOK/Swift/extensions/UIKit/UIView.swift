@@ -26,4 +26,12 @@ extension UIView {
         
     }
     
+    func width() -> CGFloat {
+        frame.width
+    }
+    
+    func height() -> CGFloat {
+        frame.height
+    }
+    
 }
