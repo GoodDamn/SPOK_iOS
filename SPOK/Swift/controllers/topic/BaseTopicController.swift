@@ -16,15 +16,6 @@ final class BaseTopicController
     
     private var mScriptReader: ScriptReader? = nil
     
-    private var mPrevTextView: UITextViewPhrase? = nil
-    
-    private var mLabelSong: UILabela? = nil
-    
-    private var mBtnClose: UIButton!
-    
-    private var mProgressBar: ProgressBar!
-    private var mProgressBarTopic: ProgressBar!
-    
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
     private var mId = Int.min
@@ -34,6 +25,15 @@ final class BaseTopicController
     private var mCacheFile: CacheProgress<Void>!
     private let mEngine =
         SPOKContentEngine()
+    
+    private var mPrevTextView: UITextViewPhrase? = nil
+    
+    private var mLabelSong: UILabela? = nil
+    
+    private var mBtnClose: UIButton!
+    
+    private var mProgressBar: ProgressBar!
+    private var mProgressBarTopic: ProgressBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,12 +89,11 @@ final class BaseTopicController
         view.backgroundColor = UIColor(
             named: "background")
         
-        let viewFrame = view.frame
+        let w = view.width()
+        let h = view.height()
         
-        let mSpanPointX = viewFrame.width * 0.1
-        let mSpanPointY = viewFrame.height * 0.4
         
-        let mHideOffsetY = viewFrame.height * 0.3
+        let mHideOffsetY = h * 0.3
         
         mCacheFile = CacheProgress<Void>(
             pathStorage: mNetworkUrl,
@@ -122,15 +121,27 @@ final class BaseTopicController
             
             let textView = UITextViewPhrase(
                 frame: CGRect(
-                    x: mSpanPointX,
-                    y: mSpanPointY,
-                    width: viewFrame.width - mSpanPointX*2,
+                    x: w * 0.1,
+                    y: 0,
+                    width: w * 0.9,
                     height: 0),
                 scriptText.spannableString
             )
 
             textView.font = mFont
             textView.textColor = mTextColor
+            
+            
+            textView.attribute()
+            textView.sizeToFit()
+            
+            textView.frame.origin.y = s
+                .view.center.y - textView.height()
+            
+            textView.frame.origin.x = (s
+                .view.width() - textView.width()
+            ) * 0.5
+            
             textView.show()
 
             let prog = s.mScriptReader?

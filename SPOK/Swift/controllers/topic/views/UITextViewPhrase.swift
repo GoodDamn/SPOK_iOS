@@ -33,10 +33,6 @@ final class UITextViewPhrase
     }
     
     public final func show() {
-        
-        sizeToFit()
-        attribute()
-        
         animate(
             animations: { [weak self] in
                 self?.alpha = 1.0
