@@ -5,13 +5,14 @@
 //  Created by Cell on 17.04.2022.
 //
 
-import UIKit;
-public class CollectionTableViewCell
+import UIKit
+
+public final class CollectionTableViewCell
     : TitleTableViewCell {
     
     public static let id = "collections"
     
-    public var collectionView: UICollectionView!
+    private(set) var collectionView: UICollectionView!
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -21,7 +22,8 @@ public class CollectionTableViewCell
             style: style,
             reuseIdentifier: reuseIdentifier
         )
-        print("CollectionTableViewCell: init()",frame)
+        
+        Log.d("CollectionTableViewCell: init()",frame)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -38,8 +40,8 @@ public class CollectionTableViewCell
         backgroundColor = .clear
         contentView.backgroundColor = .clear
         collectionView.backgroundColor = .clear
-        
-               
+        mTitle?.backgroundColor = .clear
+           
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.showsHorizontalScrollIndicator = false
@@ -55,7 +57,7 @@ public class CollectionTableViewCell
     }
     
     required init?(coder: NSCoder) {
-        print("CollectionTableViewCell: init(CODER)")
+        Log.d("CollectionTableViewCell: init(CODER)")
         super.init(coder:coder)
     }
     

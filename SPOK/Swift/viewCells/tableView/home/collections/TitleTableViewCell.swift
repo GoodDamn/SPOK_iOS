@@ -11,7 +11,7 @@ import UIKit
 public class TitleTableViewCell
     : UITableViewCell {
     
-    public var mTitle: UILabel? = nil
+    private(set) var mTitle: UILabel? = nil
     
     private var mIsCalculated = false
     
@@ -36,7 +36,7 @@ public class TitleTableViewCell
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
-        print("TitleTableViewCell: init()")
+        Log.d("TitleTableViewCell: init()")
         super.init(
             style: style,
             reuseIdentifier: reuseIdentifier
@@ -45,7 +45,7 @@ public class TitleTableViewCell
     }
     
     required init?(coder: NSCoder) {
-        print("TitleTableViewCell: init(NSCoder)")
+        Log.d("TitleTableViewCell: init(NSCoder)")
         super.init(coder: coder)
         ini()
     }
@@ -57,7 +57,7 @@ public class TitleTableViewCell
             return
         }
         
-        print("TitleTableViewCell: layoutSubviews()")
+        Log.d("TitleTableViewCell: layoutSubviews()")
         
         let w = frame.width
         let s = 0.053 * w
@@ -69,7 +69,7 @@ public class TitleTableViewCell
             height: mTitle?.frame.height ?? 15
         )
         
-        print(
+        Log.d(
             "TitleTableViewCell",
             "LFRAME:",
             mTitle?.frame

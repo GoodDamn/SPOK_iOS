@@ -371,7 +371,7 @@ extension HomeViewController
         
         if colview.delegate == nil {
 
-            colview.frame.origin.y = label.frame.bottom() + coll.cardSize.height * 0.124
+            colview.frame.origin.y = label.frame.bottom() + (cell.mTitle?.font.pointSize ?? 0)
             
             colview.frame.size = CGSize(
                 width: view.frame.width,
