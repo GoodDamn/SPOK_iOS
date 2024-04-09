@@ -217,10 +217,12 @@ private final class Page
         mCarouselView?.stop()
     }
     
+}
+
+extension Page {
     public func setCarousels(
         _ carousels: [CarouselView.Carousel]
     ) {
-        // 40 207 207
         
         let h = view.frame.height
         let w = view.frame.width
@@ -231,10 +233,14 @@ private final class Page
             carousels: carousels,
             frame: CGRect(
                 x: 0,
-                y: h * 0.256 + mInsets.top * 0.3,
+                y: (h - hcv) * 0.508,
                 width: w,
                 height: hcv
             )
+        )
+        
+        mCarouselView?.transform = CGAffineTransform(
+            rotationAngle: -5.35 / 180 * .pi
         )
         
         view.addSubview(

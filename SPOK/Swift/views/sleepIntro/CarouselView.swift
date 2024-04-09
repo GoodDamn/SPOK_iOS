@@ -73,10 +73,6 @@ final class CarouselView
                 UICollectionViewCell.self,
                 forCellWithReuseIdentifier: c.type
             )
-            
-            cv.transform = CGAffineTransform(
-                rotationAngle: -5.35 / 180 * .pi
-            )
                     
             addSubview(cv)
                     

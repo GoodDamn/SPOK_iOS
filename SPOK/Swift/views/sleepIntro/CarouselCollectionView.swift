@@ -44,7 +44,7 @@ final class CarouselCollectionView
         
         contentInset = UIEdgeInsets(
             top: 0,
-            left: frame.height * 0.08,
+            left: frame.height * 0.12,
             bottom: 0,
             right: 0
         )
