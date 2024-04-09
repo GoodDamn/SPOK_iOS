@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-class CarouselCollectionView
+final class CarouselCollectionView
     : UICollectionView {
     
     private final let TAG = "CarouselCollectionView"
     
-    public var mCellSize: CGSize = .zero
-    public var mType: String =
+    private(set) var mCellSize: CGSize = .zero
+    private(set) var mType: String =
         CarouselView.mTYPE_M
     
     private var mPosition = 0
@@ -40,6 +40,13 @@ class CarouselCollectionView
         register(
             ImageViewCell.self,
             forCellWithReuseIdentifier: ImageViewCell.id
+        )
+        
+        contentInset = UIEdgeInsets(
+            top: 0,
+            left: frame.height * 0.08,
+            bottom: 0,
+            right: 0
         )
         
         backgroundColor = .clear

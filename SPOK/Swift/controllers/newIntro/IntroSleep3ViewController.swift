@@ -162,14 +162,14 @@ final class IntroSleep3ViewController
         )
     }
     
-    @objc func onTap(
+    @objc private func onTap(
         _ sender: UITapGestureRecognizer
     ) {
         sender.isEnabled = false
         mPageController.mIndex = 1
     }
     
-    @objc func onClickBtnStart(
+    @objc private func onClickBtnStart(
         _ sender: UIButton
     ) {
         sender.isEnabled = false
@@ -178,10 +178,8 @@ final class IntroSleep3ViewController
     
 }
 
-private class Page
+private final class Page
     : StackViewController {
-    
-    private final let TAG = "Page:"
     
     public var mOnLoadView: ((UIView)->Void)? = nil
     
@@ -215,7 +213,7 @@ private class Page
     override func viewDidDisappear(
         _ animated: Bool
     ) {
-        print(TAG, "viewDidDisappear")
+        Log.d(Page.self, "viewDidDisappear")
         mCarouselView?.stop()
     }
     

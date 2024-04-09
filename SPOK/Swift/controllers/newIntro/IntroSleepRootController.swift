@@ -9,12 +9,10 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class IntroSleepRootController
+final class IntroSleepRootController
     : StackViewController {
     
-    private final let TAG = "IntroSleepRootController"
-    
-    private var mStart: (() -> Void)?
+    private final var mStart: (() -> Void)?
     
     override func onTransitionEnd() {
         mStart?()
@@ -114,6 +112,10 @@ class IntroSleepRootController
         addChild(mIntro2)
         view.addSubview(mIntro2.view)
     
+        ViewUtils.debugLines(
+            in: intro3.view
+        )
+        
         mStart = {
             mIntro2.show() {
                 audio?.play()
@@ -124,6 +126,11 @@ class IntroSleepRootController
                 mIntro2.startTopic()
             }
         }
+        
+        
+        ViewUtils.debugLines(
+            in: view
+        )
         
     }
 

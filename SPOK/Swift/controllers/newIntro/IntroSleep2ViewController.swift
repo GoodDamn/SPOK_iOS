@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 
-class IntroSleep2ViewController
+final class IntroSleep2ViewController
     : DelegateViewController {
-    
-    private final let TAG = "IntroSleep2ViewController"
     
     private let mPieces = [
         "привет",
@@ -36,7 +34,10 @@ class IntroSleep2ViewController
         
         view.isUserInteractionEnabled = true
         
-        print(TAG, "DID LOAD")
+        Log.d(
+            IntroSleep2ViewController.self,
+            "DID LOAD"
+        )
         
         let w = view.frame.width
         let h = view.frame.height
@@ -52,7 +53,6 @@ class IntroSleep2ViewController
         )
         
         let wpb = w * 0.234
-        
         
         mProgressBar = ProgressBar(
             frame: CGRect(
@@ -88,20 +88,33 @@ class IntroSleep2ViewController
         view.addGestureRecognizer(
             gesture
         )
+        
     }
     
-    @objc func next(
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+extension IntroSleep2ViewController {
+    
+    @objc private func next(
         _ sender: UITapGestureRecognizer
     ) {
         nextPiece()
     }
     
-    func startTopic() {
+    final func startTopic() {
         nextPiece()
     }
     
-    private func nextPiece() {
-        print(TAG, "onNext:", mCurrent, mPieces.count)
+    private final func nextPiece() {
+        Log.d(
+            IntroSleep2ViewController.self,
+            "onNext:",
+            mCurrent,
+            mPieces.count
+        )
         
         mProgressBar.mProgress = CGFloat(mCurrent)
         
@@ -139,10 +152,5 @@ class IntroSleep2ViewController
         
         mCurrent += 1
     }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     
 }

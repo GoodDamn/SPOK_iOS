@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CarouselView
+final class CarouselView
     : UIView {
     
     private final let TAG = "CarouselView"
@@ -59,13 +59,13 @@ class CarouselView
              
             cv.tag = 1
             
-            cv.setContentOffset(
+            /*cv.setContentOffset(
                 CGPoint(
                     x: c.from,
                     y: 0
                 ),
                 animated: true
-            )
+            )*/
             
             cv.backgroundColor = .clear
             
@@ -75,7 +75,7 @@ class CarouselView
             )
             
             cv.transform = CGAffineTransform(
-                rotationAngle: -10 / 180 * .pi
+                rotationAngle: -5.35 / 180 * .pi
             )
                     
             addSubview(cv)
@@ -97,11 +97,11 @@ class CarouselView
     }
     
     public func start() {
+        return
         var p = CGPoint(
             x:0,
             y:0
         )
-        
         mTimer = Timer.scheduledTimer(
             withTimeInterval: 0.01,
             repeats: true
