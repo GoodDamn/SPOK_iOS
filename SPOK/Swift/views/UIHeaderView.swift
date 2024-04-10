@@ -50,6 +50,9 @@ final class UIHeaderView
     
     public final func layout() {
         
+        let parag = NSMutableParagraphStyle()
+        parag.lineHeightMultiple = 0.83
+                
         let attr = NSMutableAttributedString(
             string: "\(title)\n\n\(subtitle)"
         )
@@ -57,6 +60,11 @@ final class UIHeaderView
         let rangeTitle = NSRange(
             location: 0,
             length: title.count
+        )
+        
+        let rangeSubtitle = NSRange(
+            location: title.count + 2,
+            length: subtitle.count
         )
         
         attr.addAttribute(
@@ -92,17 +100,20 @@ final class UIHeaderView
             value: UIFont.semibold(
                 withSize: subtitleSize
             ),
-            range: NSRange(
-                location: title.count + 2,
-                length: subtitle.count
-            )
+            range: rangeSubtitle
+        )
+        
+        attr.addAttribute(
+            .paragraphStyle,
+            value: parag,
+            range: rangeSubtitle
         )
         
         mAttr = attr
         
         frame.size.height = attr.size()
             .height
-            .rounded()
+            .rounded() + 1
         
         setNeedsDisplay()
     }

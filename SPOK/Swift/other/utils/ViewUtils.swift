@@ -16,15 +16,13 @@ public class ViewUtils {
         
         let btnStart = UIButton()
         
-        let bold = UIFont(
-            name: "OpenSans-Bold",
-            size: 18
-        )
-        
         btnStart.backgroundColor = UIColor
             .accent()
         
-        btnStart.titleLabel?.font = bold
+        btnStart.titleLabel?.font = .bold(
+            withSize: 18
+        )
+        
         btnStart.setTitleColor(
             .white,
             for: .normal
@@ -33,7 +31,6 @@ public class ViewUtils {
         btnStart.setTitle(
             text,
             for: .normal)
-        
         
         return btnStart
     }
@@ -76,8 +73,8 @@ public class ViewUtils {
         
         layer.strokeColor = UIColor.white
             .cgColor
-        layer.fillColor = nil
         
+        layer.fillColor = nil
         layer.lineWidth = 2.0
         
         view.layer.addSublayer(
@@ -96,7 +93,7 @@ public class ViewUtils {
         let w = frame.width
         let h = frame.height
         
-        let space = h * 0.01
+        let space = h * 0.016
         let marginLeft = w * 0.094
         
         let ts = w * titleSize
@@ -118,8 +115,8 @@ public class ViewUtils {
         header.subtitle = subtitle
         
         header.backgroundColor = .clear
-        
         header.layout()
+        
         return header
     }
     
@@ -130,8 +127,8 @@ public class ViewUtils {
         iconProp: CGFloat = 0.5
     ) -> UIButton {
         
-        let w = view.frame.width
-        let h = view.frame.height
+        let w = view.width()
+        let h = view.height()
         
         let sizeBtnExit = si * w
         
