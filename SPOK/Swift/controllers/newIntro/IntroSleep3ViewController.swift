@@ -163,19 +163,19 @@ private final class Page
     
     public var mOnLoadView: ((UIView)->Void)? = nil
     
-    private var mCarouselView: CarouselView? = nil
+    private var mCarouselView: CarouselView!
     
     override func viewDidAppear(
         _ animated: Bool
     ) {
-        mCarouselView?.start()
+        mCarouselView.start()
     }
     
     override func viewDidDisappear(
         _ animated: Bool
     ) {
         Log.d(Page.self, "viewDidDisappear")
-        mCarouselView?.stop()
+        mCarouselView.stop()
     }
     
 }
@@ -208,18 +208,26 @@ extension Page {
             )
         )
         
-        mCarouselView?.transform = CGAffineTransform(
+        mCarouselView.transform = CGAffineTransform(
             rotationAngle: -5.35 / 180 * .pi
         )
         
         view.addSubview(
-            mCarouselView!
+            mCarouselView
         )
         
-        ViewUtils.createHeader(
-            in: view,
+        let header = ViewUtils.createHeader(
+            frame: view.frame,
             title: title,
             subtitle: subtitle
+        )
+        
+        header.backgroundColor = .blue
+        
+        header.frame.origin.y = (mCarouselView.frame.y() - header.height()) * 0.5
+        
+        view.addSubview(
+            header
         )
         
         view.clipsToBounds = true

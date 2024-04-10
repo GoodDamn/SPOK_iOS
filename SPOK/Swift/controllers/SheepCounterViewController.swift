@@ -62,12 +62,14 @@ final class SheepCounterViewController
             size: w * 0.086
         )
         
-        ViewUtils.createHeader(
-            in: view,
+        let header = ViewUtils.createHeader(
+            frame: view.frame,
             title: "Счётчик\nовечек...",
             subtitle: "Считай бесконечных овечек, чтобы\nлучше уснуть.",
             subtitleSize: 0.041
         )
+        
+        header.frame.origin.y = mInsets.top
         
         let btnClose = ViewUtils
             .buttonClose(
@@ -103,6 +105,7 @@ final class SheepCounterViewController
         view.addSubview(btnClose)
         view.addSubview(mNextSheep!)
         view.addSubview(lTap)
+        view.addSubview(header)
         
         let g = UITapGestureRecognizer(
             target: self,
@@ -126,7 +129,12 @@ final class SheepCounterViewController
         )
     }
     
-    @objc func onClickBtnExit(
+}
+
+
+extension SheepCounterViewController {
+    
+    @objc private func onClickBtnExit(
         _ sender: UIButton
     ) {
         sender.isEnabled = false
@@ -137,7 +145,7 @@ final class SheepCounterViewController
         }
     }
     
-    @objc func onTap(
+    @objc private func onTap(
         _ sender: UITapGestureRecognizer
     ) {
         
@@ -208,11 +216,6 @@ final class SheepCounterViewController
         
         mCounter += 1
     }
-    
-}
-
-
-extension SheepCounterViewController {
     
     private func createSheep() -> Sheep {
         

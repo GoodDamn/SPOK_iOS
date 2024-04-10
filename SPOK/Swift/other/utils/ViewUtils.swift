@@ -86,49 +86,24 @@ public class ViewUtils {
     }
     
     public static func createHeader(
-        in view: UIView,
+        frame: CGRect,
         title: String,
         subtitle: String,
         titleSize: CGFloat = 0.086,
-        subtitleSize: CGFloat = 0.054,
-        endPointY: CGFloat = 0
-    ) {
-
-        let f = view.frame
+        subtitleSize: CGFloat = 0.054
+    ) -> UIView {
         
-        let w = f.width
-        let h = f.height
+        let w = frame.width
+        let h = frame.height
         
-        let window = UIApplication
-            .shared
-            .windows
-            .first
-        
-        var topInset = window?
-            .safeAreaInsets.top ?? 0
-        
-        if topInset == 0 {
-            topInset = h * 0.05
-        }
-        
-        let extraBold = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: w * titleSize
-        )
-        
-        let semiBold = UIFont(
-            name: "OpenSans-SemiBold",
-            size: w * subtitleSize
-        )
-        
+        let space = h * 0.02
         let marginLeft = w * 0.094
-        
         let ww = w - marginLeft
         
         let lTitle = UILabel(
             frame: CGRect(
                 x: marginLeft,
-                y: topInset,
+                y: 0,
                 width: ww,
                 height: 0
             )
@@ -136,24 +111,27 @@ public class ViewUtils {
     
         lTitle.text = title
         lTitle.textColor = .white
-        lTitle.font = extraBold
+        lTitle.font = .extrabold(
+            withSize: w * titleSize
+        )
         lTitle.numberOfLines = 0
         lTitle.sizeToFit()
         
-        let fr = lTitle.frame
-        let or = fr.origin
         
         let lSubtitle = UILabel(
             frame: CGRect(
-                x: or.x,
-                y: fr.height + or.y + w * 0.05,
+                x: marginLeft,
+                y: lTitle.bottomy() + space,
                 width: ww,
                 height: 0
             )
         )
+        
         lSubtitle.text = subtitle
         lSubtitle.textColor = .white
-        lSubtitle.font = semiBold
+        lSubtitle.font = .semibold(
+            withSize: w * subtitleSize
+        )
         lSubtitle.numberOfLines = 0
         
         lSubtitle.sizeToFit()
@@ -161,8 +139,21 @@ public class ViewUtils {
         lTitle.isUserInteractionEnabled = false
         lSubtitle.isUserInteractionEnabled = false
         
+        let totalHeight = lTitle.height() + lSubtitle.height() + space
+        
+        let view = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: frame.width,
+                height: totalHeight
+            )
+        )
+        
         view.addSubview(lTitle)
         view.addSubview(lSubtitle)
+        
+        return view
     }
     
     public static func buttonClose(
