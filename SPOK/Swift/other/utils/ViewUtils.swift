@@ -96,64 +96,29 @@ public class ViewUtils {
         let w = frame.width
         let h = frame.height
         
-        let space = h * 0.02
+        let space = h * 0.01
         let marginLeft = w * 0.094
-        let ww = w - marginLeft
         
-        let lTitle = UILabel(
+        let ts = w * titleSize
+        let tts = w * subtitleSize
+        
+        let header = UIHeaderView(
             frame: CGRect(
                 x: marginLeft,
                 y: 0,
-                width: ww,
-                height: 0
-            )
-        )
-    
-        lTitle.text = title
-        lTitle.textColor = .white
-        lTitle.font = .extrabold(
-            withSize: w * titleSize
-        )
-        lTitle.numberOfLines = 0
-        lTitle.sizeToFit()
-        
-        
-        let lSubtitle = UILabel(
-            frame: CGRect(
-                x: marginLeft,
-                y: lTitle.bottomy() + space,
-                width: ww,
+                width: w - marginLeft,
                 height: 0
             )
         )
         
-        lSubtitle.text = subtitle
-        lSubtitle.textColor = .white
-        lSubtitle.font = .semibold(
-            withSize: w * subtitleSize
-        )
-        lSubtitle.numberOfLines = 0
+        header.titleSize = ts
+        header.subtitleSize = tts
+        header.spacing = space
+        header.title = title
+        header.subtitle = subtitle
         
-        lSubtitle.sizeToFit()
-        
-        lTitle.isUserInteractionEnabled = false
-        lSubtitle.isUserInteractionEnabled = false
-        
-        let totalHeight = lTitle.height() + lSubtitle.height() + space
-        
-        let view = UIView(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: frame.width,
-                height: totalHeight
-            )
-        )
-        
-        view.addSubview(lTitle)
-        view.addSubview(lSubtitle)
-        
-        return view
+        header.layout()
+        return header
     }
     
     public static func buttonClose(
