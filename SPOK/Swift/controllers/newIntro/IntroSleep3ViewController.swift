@@ -197,11 +197,7 @@ private final class Page
             subtitle: mSubtitle
         )
         
-        let w = view.frame.width
-        let h = view.frame.height
-        
         view.clipsToBounds = true
-        
     }
  
     override func viewDidAppear(
@@ -224,17 +220,23 @@ extension Page {
         _ carousels: [CarouselView.Carousel]
     ) {
         
-        let h = view.frame.height
-        let w = view.frame.width
+        let h = view.height()
+        let w = view.width()
         
-        let hcv = 0.496 * h
+        let space = h * 0.02
+        
+        let x = w * 0.05
+        
+        let hcv = MainViewController.mCardSizeB
+            .height * 2 + space
         
         mCarouselView = CarouselView(
             carousels: carousels,
+            space: space,
             frame: CGRect(
-                x: 0,
-                y: (h - hcv) * 0.508,
-                width: w,
+                x: -x,
+                y: (h - hcv) * 0.5 + hcv * 0.077,
+                width: w + x,
                 height: hcv
             )
         )

@@ -25,6 +25,7 @@ final class CarouselView
     
     init(
         carousels: [Carousel],
+        space: CGFloat,
         frame: CGRect
     ) {
         mCarousels = carousels
@@ -32,13 +33,12 @@ final class CarouselView
             frame: frame
         )
         
+        backgroundColor = .blue
         
         let w = frame.width
         let htable = frame.height
-        mSpacing = 0.05 * w
-        
-        let hmargin = 0.1 * w
-        
+        mSpacing = space
+                
         var y:CGFloat = 0
         
         for i in 0..<mCarousels.count {
@@ -50,13 +50,13 @@ final class CarouselView
                 type: c.type,
                 cellSize: c.cellSize,
                 frame: CGRect(
-                    x: -hmargin,
+                    x: -space,
                     y: y,
-                    width: w+hmargin*2,
+                    width: w+space*2,
                     height: c.cellSize.height
                 )
             )
-             
+            
             cv.tag = 1
             
             /*cv.setContentOffset(

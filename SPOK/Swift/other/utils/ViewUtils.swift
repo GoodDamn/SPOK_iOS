@@ -90,7 +90,8 @@ public class ViewUtils {
         title: String,
         subtitle: String,
         titleSize: CGFloat = 0.086,
-        subtitleSize: CGFloat = 0.054
+        subtitleSize: CGFloat = 0.054,
+        endPointY: CGFloat = 0
     ) {
 
         let f = view.frame
