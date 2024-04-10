@@ -75,12 +75,9 @@ final class IntroSleep3ViewController
             v.addSubview(btnStart)
         }
         
-        page.setHeader(
+        page.layout(
             title: "Засыпайки",
-            subtitle: "Всего пару минут,\nчтобы настроиться на сон."
-        )
-        
-        page.setCarousels([
+            subtitle: "Всего пару минут,\nчтобы настроиться на сон.", [
             CarouselView.Carousel(
                 cellSize: b,
                 type: CarouselView
@@ -97,12 +94,9 @@ final class IntroSleep3ViewController
             )
         ])
         
-        page2.setHeader(
+        page2.layout(
             title: "Истории на ночь",
-            subtitle: "Расслабляйся, читая\nневероятные рассказы"
-        )
-        
-        page2.setCarousels([
+            subtitle: "Расслабляйся, читая\nневероятные рассказы", [
             CarouselView.Carousel(
                 cellSize: b,
                 type: CarouselView
@@ -162,20 +156,6 @@ final class IntroSleep3ViewController
         )
     }
     
-    @objc private func onTap(
-        _ sender: UITapGestureRecognizer
-    ) {
-        sender.isEnabled = false
-        mPageController.mIndex = 1
-    }
-    
-    @objc private func onClickBtnStart(
-        _ sender: UIButton
-    ) {
-        sender.isEnabled = false
-        self.hide()
-    }
-    
 }
 
 private final class Page
@@ -183,23 +163,8 @@ private final class Page
     
     public var mOnLoadView: ((UIView)->Void)? = nil
     
-    private var mTitle = ""
-    private var mSubtitle = ""
-    
     private var mCarouselView: CarouselView? = nil
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        ViewUtils.createHeader(
-            in: view,
-            title: mTitle,
-            subtitle: mSubtitle
-        )
-        
-        view.clipsToBounds = true
-    }
- 
     override func viewDidAppear(
         _ animated: Bool
     ) {
@@ -216,7 +181,9 @@ private final class Page
 }
 
 extension Page {
-    public func setCarousels(
+    public func layout(
+        title: String,
+        subtitle: String,
         _ carousels: [CarouselView.Carousel]
     ) {
         
@@ -249,15 +216,33 @@ extension Page {
             mCarouselView!
         )
         
+        ViewUtils.createHeader(
+            in: view,
+            title: title,
+            subtitle: subtitle
+        )
+        
+        view.clipsToBounds = true
+        
         mOnLoadView?(view)
         
     }
+}
+
+extension IntroSleep3ViewController {
     
-    public func setHeader(
-        title: String,
-        subtitle: String
+    @objc private func onTap(
+        _ sender: UITapGestureRecognizer
     ) {
-        mTitle = title
-        mSubtitle = subtitle
+        sender.isEnabled = false
+        mPageController.mIndex = 1
     }
+    
+    @objc private func onClickBtnStart(
+        _ sender: UIButton
+    ) {
+        sender.isEnabled = false
+        self.hide()
+    }
+    
 }
