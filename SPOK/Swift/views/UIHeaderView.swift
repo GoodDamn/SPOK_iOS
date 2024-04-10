@@ -48,7 +48,7 @@ final class UIHeaderView
     }
     
     
-    public func layout() {
+    public final func layout() {
         
         let attr = NSMutableAttributedString(
             string: "\(title)\n\n\(subtitle)"
@@ -98,13 +98,12 @@ final class UIHeaderView
             )
         )
         
-        let s = attr.size()
-        
-        print(UIHeaderView.self, title, subtitle)
-        
         mAttr = attr
         
-        frame.size = s.rnd()
+        frame.size.height = attr.size()
+            .height
+            .rounded()
+        
         setNeedsDisplay()
     }
     

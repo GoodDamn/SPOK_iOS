@@ -222,8 +222,6 @@ extension Page {
             subtitle: subtitle
         )
         
-        header.backgroundColor = .blue
-        
         header.frame.origin.y = (mCarouselView.frame.y() - header.height()) * 0.5
         
         view.addSubview(

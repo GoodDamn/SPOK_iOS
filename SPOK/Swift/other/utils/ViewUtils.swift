@@ -117,6 +117,8 @@ public class ViewUtils {
         header.title = title
         header.subtitle = subtitle
         
+        header.backgroundColor = .clear
+        
         header.layout()
         return header
     }
