@@ -50,4 +50,18 @@ extension UIView {
         frame.height
     }
     
+    func corner(
+        normHeight: CGFloat
+    ) {
+        layer.cornerRadius = frame.height * normHeight
+        layer.masksToBounds = true
+    }
+    
+    func centerH(
+        in view: UIView
+    ) {
+        frame.origin.x = (view.frame.width -
+            frame.width) * 0.5
+    }
+    
 }

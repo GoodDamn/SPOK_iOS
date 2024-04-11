@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class LayoutUtils {
-
+   
     public static func textButton(
         for b: UITextButton,
         size view: CGSize,

@@ -36,11 +36,19 @@ final class IntroSleep3ViewController
             for: btnStart,
             size: view.frame.size,
             textSize: 0.014,
-            paddingHorizontal: 0.05,
-            paddingVertical: 0.02
+            paddingHorizontal: 0.3,
+            paddingVertical: 0.03
         )
         
         btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom
+        
+        btnStart.centerH(
+            in: view
+        )
+        
+        btnStart.corner(
+            normHeight: 0.2
+        )
         
         let bsf = btnStart.frame
         
