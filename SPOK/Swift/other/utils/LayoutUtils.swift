@@ -8,8 +8,29 @@
 import Foundation
 import UIKit
 
-class LayoutUtils {
+final class LayoutUtils {
 
+    public static func textButton(
+        for b: UITextButton,
+        height: CGFloat,
+        textSize: CGFloat = 0.03
+    ) {
+        
+        b.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: 150,
+            height: 0
+        )
+        
+        b.font = b.font?.withSize(
+            textSize * height
+        )
+        
+        b.layout()
+        
+    }
+    
     public static func button(
         for b: UIButton?,
         _ viewFrame: CGRect,

@@ -62,6 +62,7 @@
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25AB40322BC64BE1009E735F /* UIHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40312BC64BE1009E735F /* UIHeaderView.swift */; };
 		25AB40382BC6F46A009E735F /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40372BC6F46A009E735F /* CGSize.swift */; };
+		25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40392BC7A19A009E735F /* UITextButton.swift */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
@@ -234,6 +235,7 @@
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25AB40312BC64BE1009E735F /* UIHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeaderView.swift; sourceTree = "<group>"; };
 		25AB40372BC6F46A009E735F /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		25AB40392BC7A19A009E735F /* UITextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextButton.swift; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				250622822B4EA1F000FCD636 /* PageBar.swift */,
 				25F770D62B598C9100C62071 /* Particles.swift */,
 				25AB40312BC64BE1009E735F /* UIHeaderView.swift */,
+				25AB40392BC7A19A009E735F /* UITextButton.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1481,6 +1484,7 @@
 				2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */,
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
 				25D61E852B75F35600B5A72B /* OptionTableCell.swift in Sources */,
+				25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */,
 				25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

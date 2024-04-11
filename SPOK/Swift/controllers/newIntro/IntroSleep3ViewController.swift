@@ -28,28 +28,18 @@ final class IntroSleep3ViewController
         view.addSubview(mPageController.view)
             
         let btnStart = ViewUtils
-            .button(
+            .textButton(
                 text: "Начать приключение"
             )
         
-        LayoutUtils.button(
+        LayoutUtils.textButton(
             for: btnStart,
-            view.frame,
-            y: 0,
-            width: 0.702,
-            textSize: 0.28
+            height: view.frame.height,
+            textSize: 0.05
         )
         
         btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom
-        
-        btnStart.addTarget(
-            self,
-            action: #selector(
-                self.onClickBtnStart(_:)
-            ),
-            for: .touchUpInside
-        )
-        
+                
         let bsf = btnStart.frame
         
         let hPageBar = h * 0.03

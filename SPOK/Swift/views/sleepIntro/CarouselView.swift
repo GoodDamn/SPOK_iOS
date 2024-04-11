@@ -32,7 +32,6 @@ final class CarouselView
         )
         
         let w = frame.width
-        let htable = frame.height
         mSpacing = space
                 
         var y:CGFloat = 0

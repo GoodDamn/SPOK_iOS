@@ -10,10 +10,24 @@ import UIKit
 
 public class ViewUtils {
     
+    public static func textButton(
+        text: String
+    ) -> UITextButton {
+        let textBtn = UITextButton()
+        
+        textBtn.backgroundColor = .accent()
+        textBtn.text = text
+        textBtn.textColor = .white
+        textBtn.font = .bold(
+            withSize: 18
+        )
+        
+        return textBtn
+    }
+    
     public static func button(
         text: String
     ) -> UIButton {
-        
         let btnStart = UIButton()
         
         btnStart.backgroundColor = UIColor
