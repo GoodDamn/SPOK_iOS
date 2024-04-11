@@ -11,8 +11,6 @@ import UIKit
 final class CarouselView
     : UIView {
     
-    private final let TAG = "CarouselView"
-    
     public static let mTYPE_B = "b"
     public static let mTYPE_M = "m"
     
@@ -32,8 +30,6 @@ final class CarouselView
         super.init(
             frame: frame
         )
-        
-        backgroundColor = .blue
         
         let w = frame.width
         let htable = frame.height
@@ -59,13 +55,13 @@ final class CarouselView
             
             cv.tag = 1
             
-            /*cv.setContentOffset(
+            cv.setContentOffset(
                 CGPoint(
                     x: c.from,
                     y: 0
                 ),
                 animated: true
-            )*/
+            )
             
             cv.backgroundColor = .clear
             
@@ -73,9 +69,18 @@ final class CarouselView
                 UICollectionViewCell.self,
                 forCellWithReuseIdentifier: c.type
             )
-                    
+            
             addSubview(cv)
-                    
+            
+            let insetRight = abs(frame.x())
+            
+            cv.contentInset = UIEdgeInsets(
+                top: 0,
+                left: insetRight,
+                bottom: 0,
+                right: insetRight
+            )
+            
             cv.delegate = self
             cv.dataSource = self
             
@@ -93,27 +98,31 @@ final class CarouselView
     }
     
     public func start() {
-        return
         var p = CGPoint(
             x:0,
             y:0
         )
+        
         mTimer = Timer.scheduledTimer(
             withTimeInterval: 0.01,
             repeats: true
-        ) { _ in
+        ) { [weak self] _ in
             
-            for i in 0..<self.mCarousels.count {
+            guard let s = self else {
+                return
+            }
+            
+            for i in 0..<s.mCarousels.count {
                 
-                let c = self
+                let c = s
                     .mCarousels[i]
                 
                 p.x = c.from
                 
-                self.mCarousels[i]
+                s.mCarousels[i]
                     .from += c.delta
                 
-                self.mCollectionViews[i].setContentOffset(
+                s.mCollectionViews[i].setContentOffset(
                     p,
                     animated: false
                 )
@@ -144,7 +153,6 @@ extension CarouselView
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        print(TAG, "sectionCount: 8")
         return 8
     }
     
@@ -176,15 +184,9 @@ extension CarouselView
         
         let type = cell.frame.width > w * 0.8 ? 1 : 2
         
-        print(TAG, "TAG:",type,imgid,collectionView.tag)
-        
-        
         cell.mImageView.image = UIImage(
             named: "\(type)\(imgid)"
         )
-        
-        cell.backgroundColor = .gray
-        cell.layer.cornerRadius = cell.frame.height * 0.12
         
         return cell
     }
@@ -202,7 +204,6 @@ extension CarouselView
         let s = (collectionView as! CarouselCollectionView
         ).mCellSize
         
-        print(TAG, "cell size:", s)
         return s
     }
     

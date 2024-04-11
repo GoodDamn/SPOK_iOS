@@ -102,7 +102,11 @@ final class HomeViewController
         )
     }
     
-    @objc func onClickBtnBegin(
+}
+
+extension HomeViewController {
+    
+    @objc private func onClickBtnBegin(
         _ sender: UIButton
     ) {
         Log.d(
@@ -119,10 +123,6 @@ final class HomeViewController
             c.view.alpha = 1.0
         }
     }
-    
-}
-
-extension HomeViewController {
     
     private func openPremiumTopics(
         _ inp: UIView

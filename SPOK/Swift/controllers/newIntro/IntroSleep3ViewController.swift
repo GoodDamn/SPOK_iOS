@@ -202,7 +202,7 @@ extension Page {
             space: space,
             frame: CGRect(
                 x: -x,
-                y: (h - hcv) * 0.5 + hcv * 0.077,
+                y: (h - hcv) * 0.5 + hcv * 0.042,
                 width: w + x,
                 height: hcv
             )

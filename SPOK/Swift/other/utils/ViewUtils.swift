@@ -93,7 +93,7 @@ public class ViewUtils {
         let w = frame.width
         let h = frame.height
         
-        let space = h * 0.016
+        let space = h * 0.019
         let marginLeft = w * 0.094
         
         let ts = w * titleSize

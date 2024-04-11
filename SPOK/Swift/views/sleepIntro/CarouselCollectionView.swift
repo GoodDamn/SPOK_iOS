@@ -11,8 +11,6 @@ import UIKit
 final class CarouselCollectionView
     : UICollectionView {
     
-    private final let TAG = "CarouselCollectionView"
-    
     private(set) var mCellSize: CGSize = .zero
     private(set) var mType: String =
         CarouselView.mTYPE_M
@@ -42,13 +40,6 @@ final class CarouselCollectionView
             forCellWithReuseIdentifier: ImageViewCell.id
         )
         
-        contentInset = UIEdgeInsets(
-            top: 0,
-            left: frame.height * 0.12,
-            bottom: 0,
-            right: 0
-        )
-        
         backgroundColor = .clear
         
         isUserInteractionEnabled = false
@@ -69,15 +60,19 @@ final class CarouselCollectionView
     
 }
 
-class ImageViewCell
+final class ImageViewCell
     : UICollectionViewCell {
     
     public static let id = "iv"
     
-    public var mImageView: UIImageView!
+    public final var mImageView: UIImageView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(
+        frame: CGRect
+    ) {
+        super.init(
+            frame: frame
+        )
         mImageView = UIImageView(
             frame: CGRect(
                 x: 0,
@@ -87,7 +82,8 @@ class ImageViewCell
             )
         )
         
-        print("CarouselCollectionView:",frame)
+        backgroundColor = .gray
+        layer.cornerRadius = frame.height * 0.12
         
         contentView.addSubview(
             mImageView
@@ -97,12 +93,4 @@ class ImageViewCell
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //contentView.frame = mImageView.frame
-        print("CarouselCollectionView: layoutSubviews()")
-        
-    }
-    
 }
