@@ -12,7 +12,9 @@ final class IntroSleep3ViewController
     : DelegateViewController {
     
     private var mPageController: SimplePageViewController!
-        
+    
+    private var mBtnStart: UITextButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,31 +28,31 @@ final class IntroSleep3ViewController
         
         addChild(mPageController)
         view.addSubview(mPageController.view)
-            
-        let btnStart = ViewUtils
+        
+        mBtnStart = ViewUtils
             .textButton(
                 text: "Начать приключение"
             )
         
         LayoutUtils.textButton(
-            for: btnStart,
+            for: mBtnStart,
             size: view.frame.size,
             textSize: 0.014,
             paddingHorizontal: 0.3,
             paddingVertical: 0.03
         )
         
-        btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom
+        mBtnStart.frame.origin.y = h - mBtnStart.frame.height - h * 0.02 - Utils.insets().bottom
         
-        btnStart.centerH(
+        mBtnStart.centerH(
             in: view
         )
         
-        btnStart.corner(
+        mBtnStart.corner(
             normHeight: 0.2
         )
         
-        let bsf = btnStart.frame
+        let bsf = mBtnStart.frame
         
         let hPageBar = h * 0.03
         
@@ -70,10 +72,6 @@ final class IntroSleep3ViewController
         
         let page = Page()
         let page2 = Page()
-        
-        page2.mOnLoadView = { v in
-            v.addSubview(btnStart)
-        }
         
         page.layout(
             title: "Засыпайки",
@@ -140,6 +138,13 @@ final class IntroSleep3ViewController
             pageBar.mCurrentPage = i
         }
         
+        mBtnStart.scale(
+            x: 0.0,
+            y: 0.0
+        )
+        mBtnStart.isUserInteractionEnabled = false
+        
+        view.addSubview(mBtnStart)
         view.addSubview(pageBar)
         
         let g = UITapGestureRecognizer(
@@ -161,27 +166,22 @@ final class IntroSleep3ViewController
 private final class Page
     : StackViewController {
     
-    public var mOnLoadView: ((UIView)->Void)? = nil
+    private final var mCarouselView: CarouselView!
     
-    private var mCarouselView: CarouselView!
-    
-    override func viewDidAppear(
+    override final func viewDidAppear(
         _ animated: Bool
     ) {
         mCarouselView.start()
     }
     
-    override func viewDidDisappear(
+    override final func viewDidDisappear(
         _ animated: Bool
     ) {
         Log.d(Page.self, "viewDidDisappear")
         mCarouselView.stop()
     }
     
-}
-
-extension Page {
-    public func layout(
+    final func layout(
         title: String,
         subtitle: String,
         _ carousels: [CarouselView.Carousel]
@@ -222,17 +222,15 @@ extension Page {
             subtitle: subtitle
         )
         
-        header.frame.origin.y = (mCarouselView.frame.y() - header.height()) * 0.5
+        header.frame.origin.y = mInsets.top + (mCarouselView.frame.y() - mInsets.top - header.height()) * 0.5
         
         view.addSubview(
             header
         )
         
         view.clipsToBounds = true
-        
-        mOnLoadView?(view)
-        
     }
+    
 }
 
 extension IntroSleep3ViewController {
@@ -242,6 +240,15 @@ extension IntroSleep3ViewController {
     ) {
         sender.isEnabled = false
         mPageController.mIndex = 1
+        mBtnStart.animate(
+            animations: { [weak self] in
+                self?.mBtnStart.scale()
+            }
+        ) { [weak self] _ in
+            self?.mBtnStart
+                .isUserInteractionEnabled = true
+        }
+        
     }
     
     @objc private func onClickBtnStart(

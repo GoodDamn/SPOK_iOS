@@ -47,13 +47,11 @@ final public class UITextButton
             return
         }
         
-        let s = frame.size
-        
         let res = CGRect(
-            x: (s.width - textBounds.width) * 0.5,
-            y: (s.height - textBounds.height) * 0.5,
-            width: s.width,
-            height: s.height
+            x: (rect.width - textBounds.width) * 0.5,
+            y: (rect.height - textBounds.height) * 0.5,
+            width: rect.width,
+            height: rect.height
         )
         
         print(UITextButton.self, rect, res)

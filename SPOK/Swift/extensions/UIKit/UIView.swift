@@ -50,6 +50,16 @@ extension UIView {
         frame.height
     }
     
+    func scale(
+        x: CGFloat = 1.0,
+        y: CGFloat = 1.0
+    ) {
+        transform = CGAffineTransform(
+            scaleX: x,
+            y: y
+        )
+    }
+    
     func corner(
         normHeight: CGFloat
     ) {
