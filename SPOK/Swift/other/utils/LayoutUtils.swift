@@ -12,19 +12,16 @@ final class LayoutUtils {
 
     public static func textButton(
         for b: UITextButton,
-        height: CGFloat,
-        textSize: CGFloat = 0.03
+        size view: CGSize,
+        textSize: CGFloat = 0.03,
+        paddingHorizontal: CGFloat,
+        paddingVertical: CGFloat
     ) {
         
-        b.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: 150,
-            height: 0
-        )
-        
+        b.paddingH = view.width * paddingHorizontal
+        b.paddingV = view.height * paddingVertical
         b.font = b.font?.withSize(
-            textSize * height
+            textSize * view.height
         )
         
         b.layout()

@@ -13,6 +13,8 @@ final public class UITextButton
     final var textColor: UIColor = .lightText
     final var text: String? = nil
     final var font: UIFont? = nil
+    final var paddingV: CGFloat = 15
+    final var paddingH: CGFloat = 15
     
     private final var mAttr: NSAttributedString? = nil
     
@@ -39,8 +41,25 @@ final public class UITextButton
             rect
         )
         
-        mAttr?.draw(
-            in: rect
+        // Centered text in view
+        
+        guard let textBounds = mAttr?.size() else {
+            return
+        }
+        
+        let s = frame.size
+        
+        let res = CGRect(
+            x: (s.width - textBounds.width) * 0.5,
+            y: (s.height - textBounds.height) * 0.5,
+            width: s.width,
+            height: s.height
+        )
+        
+        print(UITextButton.self, rect, res)
+        
+        mAttr!.draw(
+            in: res
         )
     }
     
@@ -64,7 +83,6 @@ final public class UITextButton
             range: range
         )
         
-        
         attr.addAttribute(
             .foregroundColor,
             value: textColor,
@@ -73,9 +91,15 @@ final public class UITextButton
         
         mAttr = attr
         
-        frame.size.height = attr.size()
-            .height
+        let size = attr.size()
         
+        frame = CGRect(
+            x: frame.origin.x - paddingH,
+            y: frame.origin.y - paddingV,
+            width: size.width + paddingH,
+            height: size.height + paddingV
+        )
+                
         setNeedsDisplay()
     }
     

@@ -34,12 +34,14 @@ final class IntroSleep3ViewController
         
         LayoutUtils.textButton(
             for: btnStart,
-            height: view.frame.height,
-            textSize: 0.05
+            size: view.frame.size,
+            textSize: 0.014,
+            paddingHorizontal: 0.05,
+            paddingVertical: 0.02
         )
         
         btnStart.frame.origin.y = h - btnStart.frame.height - h * 0.02 - Utils.insets().bottom
-                
+        
         let bsf = btnStart.frame
         
         let hPageBar = h * 0.03
