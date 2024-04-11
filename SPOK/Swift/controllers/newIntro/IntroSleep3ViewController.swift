@@ -42,8 +42,6 @@ final class IntroSleep3ViewController
             paddingVertical: 0.03
         )
         
-        mBtnStart.frame.origin.y = h - mBtnStart.frame.height - h * 0.02 - Utils.insets().bottom
-        
         mBtnStart.centerH(
             in: view
         )
@@ -52,18 +50,20 @@ final class IntroSleep3ViewController
             normHeight: 0.2
         )
         
-        let bsf = mBtnStart.frame
+        let insets = Utils.insets()
+        
+        let btnStartY = h -
+            mBtnStart.frame.height - h * 0.02 -
+            insets.bottom
         
         let hPageBar = h * 0.03
         
-        let pageBar = PageBar(
-            frame: CGRect(
-                x: w * 0.374,
-                y: bsf.origin.y - hPageBar - h*0.019,
-                width: w * 0.241,
-                height: hPageBar
-            )
-        )
+        let pageButtonOffsetBet =  h*0.019
+        
+        let pageBarY = btnStartY - hPageBar -
+            pageButtonOffsetBet
+        
+        let pageButtonHeight = btnStartY + mBtnStart.height() - pageBarY
         
         let m = MainViewController
             .mCardSizeM!
@@ -124,6 +124,26 @@ final class IntroSleep3ViewController
             animated: true
         )
         
+        let pageButtonY = page2.carouselY()
+            + pageButtonHeight * 0.5
+        
+        let pageBar = PageBar(
+            frame: CGRect(
+                x: 0,
+                y: pageButtonY,
+                width: w * 0.241,
+                height: hPageBar
+            )
+        )
+        
+        mBtnStart.frame.origin.y = pageBar
+            .bottomy() +
+            pageButtonOffsetBet
+        
+        pageBar.centerH(
+            in: view
+        )
+        
         pageBar.maxPages = 2
         pageBar.mColorBack = .white
             .withAlphaComponent(0.2)
@@ -179,6 +199,10 @@ private final class Page
     ) {
         Log.d(Page.self, "viewDidDisappear")
         mCarouselView.stop()
+    }
+    
+    final func carouselY() -> CGFloat {
+        mCarouselView.bottomy()
     }
     
     final func layout(
