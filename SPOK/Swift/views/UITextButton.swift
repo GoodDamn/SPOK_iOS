@@ -12,13 +12,35 @@ final public class UITextButton
     
     final var textColor: UIColor = .lightText
     final var text: String? = nil
-    final var font: UIFont? = nil
+    final var font: UIFont? = nil {
+        didSet {
+            guard let size = font?.pointSize else {
+                return
+            }
+            
+            mAttachment.bounds = CGRect(
+                x: 0,
+                y: size * -0.25,
+                width: size,
+                height: size
+            )
+        }
+    }
+    final var textImage: UIImage? = nil {
+        didSet {
+            mAttachment.image = textImage
+        }
+    }
+    
     final var paddingV: CGFloat = 15
     final var paddingH: CGFloat = 15
     
     final var onClick: ((UIView) -> Void)? = nil
     
-    private final var mAttr: NSAttributedString? = nil
+    private final var mAttr:
+        NSAttributedString? = nil
+    
+    private final var mAttachment = NSTextAttachment()
     
     override init(
         frame: CGRect
@@ -56,8 +78,6 @@ final public class UITextButton
             height: rect.height
         )
         
-        print(UITextButton.self, rect, res)
-        
         mAttr!.draw(
             in: res
         )
@@ -68,30 +88,23 @@ final public class UITextButton
             return
         }
         
-        let attr = NSMutableAttributedString(
-            string: text
-        )
         
-        let range = NSRange(
-            location: 0,
-            length: text.count
-        )
+        if textImage == nil {
+            mAttr = attributeWholeText(
+                text
+            )
+        } else {
+            // Checking image pattern ($i)
+            
+            let attr = NSMutableAttributedString()
+            attributeWithImage(
+                to: attr,
+                text: text
+            )
+            mAttr = attr
+        }
         
-        attr.addAttribute(
-            .font,
-            value: font,
-            range: range
-        )
-        
-        attr.addAttribute(
-            .foregroundColor,
-            value: textColor,
-            range: range
-        )
-        
-        mAttr = attr
-        
-        let size = attr.size()
+        let size = mAttr!.size()
         
         frame = CGRect(
             x: frame.origin.x - paddingH,
@@ -108,7 +121,7 @@ final public class UITextButton
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        guard let location = touchLocation(
+        guard let _ = touchLocation(
             touches
         ) else {
             return
@@ -178,6 +191,68 @@ extension UITextButton {
         point.y < 0 ||
         point.x > bounds.width ||
         point.y > bounds.height
+    }
+    
+    private func attributeWithImage(
+        to: NSMutableAttributedString,
+        text: String
+    ) {
+        let arr = text.components(
+            separatedBy: "$i"
+        )
+        
+        var pos = 0
+        for str in arr {
+            
+            if str.count == 0 {
+                continue
+            }
+            
+            pos += str.count
+            
+            let imageAtt = NSAttributedString(
+                attachment: mAttachment
+            )
+            
+            to.append(
+                attributeWholeText(
+                    str
+                )
+            )
+            
+            to.append(
+                imageAtt
+            )
+            
+            print("PATTERN:",pos,str)
+        }
+    }
+    
+    private func attributeWholeText(
+        _ text: String
+    ) -> NSMutableAttributedString {
+        let attr = NSMutableAttributedString(
+            string: text
+        )
+        
+        let range = NSRange(
+            location: 0,
+            length: text.count
+        )
+        
+        attr.addAttribute(
+            .font,
+            value: font,
+            range: range
+        )
+        
+        attr.addAttribute(
+            .foregroundColor,
+            value: textColor,
+            range: range
+        )
+        
+        return attr
     }
     
 }

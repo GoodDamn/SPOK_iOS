@@ -166,8 +166,12 @@ final class ProfileNewViewController
         
         mBtnOpenAccess = ViewUtils
             .textButton(
-                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
+                text: "Оплата подписки на сайте:$i\nhttps://spokapp.com/pay$i"
             )
+        
+        mBtnOpenAccess.textImage = UIImage(
+            named: "link"
+        )
         
         LayoutUtils.textButton(
             for: mBtnOpenAccess,
@@ -261,6 +265,8 @@ final class ProfileNewViewController
             paddingVertical: 0.03
         )
         
+        btnShare.onClick = onClickBtnShareImpression(_:)
+        
         btnShare.frame.origin.y =
             shareView.height() -
             btnShare.height() -
@@ -290,8 +296,6 @@ final class ProfileNewViewController
         view.addSubview(
             mBtnOpenAccess
         )
-        
-        btnShare.onClick = onClickBtnShareImpression(_:)
         
     }
     
