@@ -122,29 +122,42 @@ extension IntroSleep2ViewController {
             view.isUserInteractionEnabled = false
             // Move to another controller
             self.hide()
-            mPrevTextView?.hide(300)
+            mPrevTextView?.hide(
+                duration: 1.5,
+                300)
             return
         }
         
-        let f = view.frame
-        
-        let y = f.height * 0.4
+        let y = view.height() * 0.5 -
+            (mFont?.pointSize ?? 0)
         
         let t = UITextViewPhrase(
             frame: CGRect(
                 x: 0,
                 y: y,
-                width: f.width,
-                height: f.height - y
-            ), mPieces[mCurrent]
+                width: view.width(),
+                height: 0
+            ),
+            mPieces[mCurrent]
         )
         
         t.font = mFont
         view.insertSubview(t, at: 0)
+        t.attribute()
+        t.sizeToFit()
+        t.centerH(
+            in: view
+        )
         
-        t.show()
+        t.frame.origin.y = view.height() * 0.5
+        - t.height() - (mFont?.pointSize ?? 0)
+        
+        t.show(
+            duration: 1.5
+        )
         
         mPrevTextView?.hide(
+            duration: 1.5,
             300
         )
         

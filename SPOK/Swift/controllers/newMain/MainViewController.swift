@@ -361,16 +361,10 @@ extension MainViewController {
         msg: String,
         _ completion: @escaping () -> StackViewController
     ) {
-        let splash = IntroSleep3ViewController()
-        addChild(splash)
-        view.addSubview(splash.view)
-        //splash.msgBottom = msg
+        let splash = SplashViewController()
+        splash.msgBottom = msg
         splash.view.alpha = 1
-        
-        ViewUtils.debugLines(
-            in: splash.view
-        )
-        /*push(
+        push(
             splash,
             animDuration: 1.0
         ) {
@@ -394,7 +388,7 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
-        }*/
+        }
         
     }
     

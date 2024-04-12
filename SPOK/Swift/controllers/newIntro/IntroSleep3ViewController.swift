@@ -174,10 +174,22 @@ final class IntroSleep3ViewController
             )
         )
         
+        let gStart = UITapGestureRecognizer(
+            target: self,
+            action: #selector(
+                onClickBtnStart(_:)
+            )
+        )
+        
         g.numberOfTapsRequired = 1
+        gStart.numberOfTapsRequired = 1
         
         view.addGestureRecognizer(
             g
+        )
+        
+        mBtnStart.addGestureRecognizer(
+            gStart
         )
     }
     
@@ -187,6 +199,8 @@ private final class Page
     : StackViewController {
     
     private final var mCarouselView: CarouselView!
+    
+    private final var mBottomY: CGFloat = 0
     
     override final func viewDidAppear(
         _ animated: Bool
@@ -202,7 +216,7 @@ private final class Page
     }
     
     final func carouselY() -> CGFloat {
-        mCarouselView.bottomy()
+        mBottomY
     }
     
     final func layout(
@@ -231,6 +245,8 @@ private final class Page
                 height: hcv
             )
         )
+        
+        mBottomY = mCarouselView.bottomy()
         
         mCarouselView.transform = CGAffineTransform(
             rotationAngle: -5.35 / 180 * .pi
@@ -265,18 +281,15 @@ extension IntroSleep3ViewController {
         sender.isEnabled = false
         mPageController.mIndex = 1
         mBtnStart.animate(
-            animations: { [weak self] in
-                self?.mBtnStart.scale()
-            }
-        ) { [weak self] _ in
-            self?.mBtnStart
-                .isUserInteractionEnabled = true
+        ) { [weak self] in
+            self?.mBtnStart.scale()
         }
+        mBtnStart.isUserInteractionEnabled = true
         
     }
     
     @objc private func onClickBtnStart(
-        _ sender: UIButton
+        _ sender: UITapGestureRecognizer
     ) {
         sender.isEnabled = false
         self.hide()

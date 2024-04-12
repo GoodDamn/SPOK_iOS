@@ -36,8 +36,11 @@ final class UITextViewPhrase
         print("UITextViewPhrase: deinit()")
     }
     
-    public final func show() {
+    public final func show(
+        duration: TimeInterval = 0.5
+    ) {
         animate(
+            duration: duration,
             animations: { [weak self] in
                 self?.alpha = 1.0
             }
@@ -45,11 +48,13 @@ final class UITextViewPhrase
     }
     
     public final func hide(
+        duration: TimeInterval = 0.5,
         _ maxValY: CGFloat,
         _ completion: (()->Void)? = nil
     ) {
         
         animate(
+            duration: duration,
             animations: { [weak self] in
                 
                 self?.transform = CGAffineTransform(
