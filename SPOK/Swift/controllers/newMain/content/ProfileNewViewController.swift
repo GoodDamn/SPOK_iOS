@@ -172,29 +172,18 @@ final class ProfileNewViewController
         LayoutUtils.textButton(
             for: mBtnOpenAccess,
             size: view.frame.size,
-            textSize: 0.015,
-            paddingHorizontal: 0.1,
-            paddingVertical: 0.02
+            textSize: 0.017,
+            paddingHorizontal: 0.18,
+            paddingVertical: 0.03
         )
+        
+        mBtnOpenAccess.onClick = onClickBtnOpenFullAccess(_:)
         
         mBtnOpenAccess.centerH(
             in: view
         )
-        
-        /*(
-            for: mBtnOpenAccess,
-            view.frame,
-            y: 0.85,
-            width: 0.702,
-            height: 0.1,
-            textSize: 0.18
-        )*/
-        
-        /*let pointSize = mBtnOpenAccess
-            .titleLabel?
-            .font
-            .pointSize ?? 15
-        
+
+        /*
         mBtnOpenAccess.setAttributedTitle(
             NSAttributedString.withImage(
                 text: text,
@@ -260,17 +249,16 @@ final class ProfileNewViewController
         lShare.sizeToFit()
         
         let btnShare = ViewUtils
-            .button(
+            .textButton(
                 text: "Поделиться впечатлением"
             )
         
-        LayoutUtils.button(
+        LayoutUtils.textButton(
             for: btnShare,
-            shareView.frame,
-            y: 0.6,
-            width: 0.782,
-            height: 0.242,
-            textSize: 0.28
+            size: view.frame.size,
+            textSize: 0.016,
+            paddingHorizontal: 0.2,
+            paddingVertical: 0.03
         )
         
         btnShare.frame.origin.y =
@@ -278,9 +266,12 @@ final class ProfileNewViewController
             btnShare.height() -
             shareView.height() * 0.155
         
-        shareView.frame.center(
-            targetHeight: lastHeight,
-            offset: sharey
+        shareView.centerH(
+            in: view
+        )
+        
+        btnShare.centerH(
+            in: shareView
         )
         
         view.addSubview(btnSettings)
@@ -300,19 +291,7 @@ final class ProfileNewViewController
             mBtnOpenAccess
         )
         
-        /*mBtnOpenAccess.click(
-            for: self,
-            action: #selector(
-                btnOpenFullAccess(_:)
-            )
-        )*/
-        
-        btnShare.click(
-            for: self,
-            action: #selector(
-                btnShareImpression(_:)
-            )
-        )
+        btnShare.onClick = onClickBtnShareImpression(_:)
         
     }
     
@@ -344,8 +323,8 @@ final class ProfileNewViewController
 
 extension ProfileNewViewController {
     
-    @objc func btnOpenFullAccess(
-        _ sender: UIButton
+    private func onClickBtnOpenFullAccess(
+        _ sender: UIView
     ) {
         if MainViewController
             .mIsPremiumUser {
@@ -356,11 +335,12 @@ extension ProfileNewViewController {
             return
         }
         
-        sender.isEnabled = false
+        sender.isUserInteractionEnabled = false
         
         if AuthUtils.user() != nil {
             ExternalPurchaseLinkCompat
                 .open()
+            sender.isUserInteractionEnabled = true
             return
         }
         
@@ -369,7 +349,7 @@ extension ProfileNewViewController {
         messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
         
         messageController!.mAction = { [weak self] in
-            sender.isEnabled = true
+            sender.isUserInteractionEnabled = true
             self?.signIn()
         }
         
@@ -386,18 +366,8 @@ extension ProfileNewViewController {
         
     }
     
-    @objc func onClickBtnSettings(
-        _ sender: UIButton
-    ) {
-        let settings = SettingsViewController()
-        pushBaseAnim(
-            settings,
-            animDuration: 0.3
-        )
-    }
-    
-    @objc func btnShareImpression(
-        _ sender: UIButton
+    private func onClickBtnShareImpression(
+        _ sender: UIView
     ) {
         let app = UIApplication.shared
         
@@ -414,6 +384,16 @@ extension ProfileNewViewController {
             }
             
         }
+    }
+    
+    @objc func onClickBtnSettings(
+        _ sender: UIButton
+    ) {
+        let settings = SettingsViewController()
+        pushBaseAnim(
+            settings,
+            animDuration: 0.3
+        )
     }
     
 }
