@@ -14,9 +14,9 @@ public class SheepViewCell
     private static let TAG = "SheepViewCell:"
     public static let id = "sheep"
     
-    public var mBtnBegin: UIButton?
-    private var mSheep: Sheep?
-    private var moon: UIImageView?
+    public var mBtnBegin: UITextButton!
+    private var mSheep: Sheep!
+    private var moon: UIImageView!
     
     private var mIsCalculated = false
     
@@ -32,34 +32,28 @@ public class SheepViewCell
         selectionStyle = .none
         
         mBtnBegin = ViewUtils
-            .button(
+            .textButton(
                 text: "НАЧАТЬ"
             )
         
         moon = UIImageView()
-        moon?.image = UIImage(
+        moon.image = UIImage(
             named: "moon 1"
         )
-        moon?.backgroundColor = .clear
+        moon.backgroundColor = .clear
         
         mSheep = Sheep(
             frame: .zero
         )
         
-        if let beg = mBtnBegin {
-            contentView
-                .addSubview(beg)
-        }
+        contentView
+            .addSubview(mBtnBegin)
         
-        if let sheep = mSheep {
-            contentView
-                .addSubview(sheep)
-        }
+        contentView
+            .addSubview(mSheep)
         
-        if let moon = moon {
-            contentView
-                .addSubview(moon)
-        }
+        contentView
+            .addSubview(moon)
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +77,7 @@ public class SheepViewCell
         let mb = w * 0.135
         let off = w * 0.07
         
-        moon?.frame = CGRect(
+        moon.frame = CGRect(
             x: w-mb-off,
             y: off,
             width: mb,
@@ -91,21 +85,40 @@ public class SheepViewCell
         )
         
         let b = 0.345 * w
-        mSheep?.frame = CGRect(
+        mSheep.frame = CGRect(
             x: (w-b) * 0.5,
             y: (h-b) * 0.5 - h * 0.1,
             width: b,
             height: b
         )
         
-        LayoutUtils.button(
+        LayoutUtils.textButton(
             for: mBtnBegin,
-            frame,
-            y: 0.7,
-            width: 0.62,
-            height: 0.15,
-            cornerRadius: 0.5,
-            textSize: 0.4
+            size: frame.size,
+            textSize: 0.025,
+            paddingHorizontal: 0.02,
+            paddingVertical: 0.04
+        )
+        
+        LayoutUtils.textButton(
+            for: mBtnBegin,
+            size: frame.size,
+            textSize: 0.07,
+            paddingHorizontal: 0.3,
+            paddingVertical: 0.08
+        )
+        
+        mBtnBegin.corner(
+            normHeight: 0.5
+        )
+        
+        mBtnBegin.y(
+            0.7,
+            in: self
+        )
+        
+        mBtnBegin.centerH(
+            in: self
         )
         
         mIsCalculated = true

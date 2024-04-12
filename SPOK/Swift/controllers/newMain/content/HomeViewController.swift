@@ -106,8 +106,8 @@ final class HomeViewController
 
 extension HomeViewController {
     
-    @objc private func onClickBtnBegin(
-        _ sender: UIButton
+    private func onClickBtnBegin(
+        _ sender: UIView
     ) {
         Log.d(
             TAG,
@@ -267,16 +267,8 @@ extension HomeViewController
             
             cell.backgroundColor = .clear
             
-            cell.mBtnBegin?
-                .addTarget(
-                    self,
-                    action: #selector(
-                        s.onClickBtnBegin(
-                            _:
-                        )
-                    ),
-                    for: .touchUpInside
-                )
+            cell.mBtnBegin.onClick =
+                s.onClickBtnBegin(_:)
             
             Log.d(s.TAG, "SheepViewCell:", cell.subviews.count)
         }

@@ -74,4 +74,11 @@ extension UIView {
             frame.width) * 0.5
     }
     
+    func y(
+        _ norm: CGFloat,
+        in view: UIView
+    ) {
+        frame.origin.y = view.frame.height * norm
+    }
+    
 }
