@@ -128,13 +128,10 @@ extension IntroSleep2ViewController {
             return
         }
         
-        let y = view.height() * 0.5 -
-            (mFont?.pointSize ?? 0)
-        
         let t = UITextViewPhrase(
             frame: CGRect(
                 x: 0,
-                y: y,
+                y: 0,
                 width: view.width(),
                 height: 0
             ),

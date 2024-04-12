@@ -13,7 +13,7 @@ final class ProfileNewViewController
     
     private var messageController: MessageViewController? = nil
     
-    private var mBtnOpenAccess: UIButton!
+    private var mBtnOpenAccess: UITextButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,32 +165,32 @@ final class ProfileNewViewController
         )
         
         mBtnOpenAccess = ViewUtils
-            .button(
-                text: ""
+            .textButton(
+                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
             )
         
-        mBtnOpenAccess
-            .titleLabel?
-            .numberOfLines = 0
+        LayoutUtils.textButton(
+            for: mBtnOpenAccess,
+            size: view.frame.size,
+            textSize: 0.015,
+            paddingHorizontal: 0.1,
+            paddingVertical: 0.02
+        )
         
-        mBtnOpenAccess
-            .titleLabel?
-            .textAlignment = .center
+        mBtnOpenAccess.centerH(
+            in: view
+        )
         
-        LayoutUtils.button(
+        /*(
             for: mBtnOpenAccess,
             view.frame,
             y: 0.85,
             width: 0.702,
             height: 0.1,
             textSize: 0.18
-        )
+        )*/
         
-        let text = NSAttributedString(
-            string: "Оплата подписки на сайте:\nhttps://spokapp.com/pay "
-        )
-        
-        let pointSize = mBtnOpenAccess
+        /*let pointSize = mBtnOpenAccess
             .titleLabel?
             .font
             .pointSize ?? 15
@@ -204,7 +204,7 @@ final class ProfileNewViewController
                 )
             ),
             for: .normal
-        )
+        )*/
         
         mBtnOpenAccess.frame.origin.y = imageView2.frame
             .bottom() + h * 0.03
@@ -300,12 +300,12 @@ final class ProfileNewViewController
             mBtnOpenAccess
         )
         
-        mBtnOpenAccess.click(
+        /*mBtnOpenAccess.click(
             for: self,
             action: #selector(
                 btnOpenFullAccess(_:)
             )
-        )
+        )*/
         
         btnShare.click(
             for: self,
