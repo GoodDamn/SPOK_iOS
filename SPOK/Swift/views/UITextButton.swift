@@ -92,8 +92,6 @@ final public class UITextButton
             height: rect.height - y - y
         )
         
-        print("UITextButton", textBounds, rect, res)
-        
         mAttr!.draw(
             in: res
         )

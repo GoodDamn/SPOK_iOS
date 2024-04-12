@@ -166,7 +166,7 @@ final class ProfileNewViewController
         
         mBtnOpenAccess = ViewUtils
             .textButton(
-                text: "Оплата подписки на сайте:$i\nhttps://spokapp.com/pay$i"
+                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
             )
         
         mBtnOpenAccess.textImage = UIImage(
@@ -189,17 +189,9 @@ final class ProfileNewViewController
             in: view
         )
 
-        /*
-        mBtnOpenAccess.setAttributedTitle(
-            NSAttributedString.withImage(
-                text: text,
-                pointSize: pointSize,
-                image: UIImage(
-                    named: "link"
-                )
-            ),
-            for: .normal
-        )*/
+        mBtnOpenAccess.corner(
+            normHeight: 0.2
+        )
         
         mBtnOpenAccess.frame.origin.y = imageView2.frame
             .bottom() + h * 0.03
@@ -229,9 +221,10 @@ final class ProfileNewViewController
             blue: 94.0/255,
             alpha: 1.0
         )
-        shareView
-            .layer
-            .cornerRadius = hshare * 0.083
+        
+        shareView.corner(
+            normHeight: 0.083
+        )
         
         
         let lShareLeft = wshare * 0.109
@@ -274,12 +267,16 @@ final class ProfileNewViewController
             btnShare.height() -
             shareView.height() * 0.155
         
-        shareView.centerH(
-            in: view
+        btnShare.corner(
+            normHeight: 0.2
         )
         
         btnShare.centerH(
             in: shareView
+        )
+        
+        shareView.centerH(
+            in: view
         )
         
         view.addSubview(btnSettings)
