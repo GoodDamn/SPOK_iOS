@@ -102,7 +102,7 @@ public class ViewUtils {
         subtitle: String,
         titleSize: CGFloat = 0.086,
         subtitleSize: CGFloat = 0.054
-    ) -> UIView {
+    ) -> UIHeaderView {
         
         let w = frame.width
         let h = frame.height

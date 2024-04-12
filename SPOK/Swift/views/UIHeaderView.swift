@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UIHeaderView
+final public class UIHeaderView
     : UIView {
     
     final var title: String = ""
@@ -35,7 +35,7 @@ final class UIHeaderView
     }
     
     
-    override func draw(
+    override public func draw(
         _ rect: CGRect
     ) {
         super.draw(

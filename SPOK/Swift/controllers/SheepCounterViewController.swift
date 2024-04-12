@@ -16,10 +16,11 @@ final class SheepCounterViewController
     
     private var mCounter = 1
     
+    private var mLabelTap: UILabel!
+    private var mViewHeader: UIHeaderView!
+    
     private var mExtrabold: UIFont? = nil
-    
     private var mNextSheep: Sheep? = nil
-    
     private var mPlayer: AVAudioPlayer? = nil
     
     private weak var mPrevc: UITextViewPhrase? = nil
@@ -57,19 +58,17 @@ final class SheepCounterViewController
         let w = view.frame.width
         let h = view.frame.height
         
-        mExtrabold = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: w * 0.086
-        )
+        mExtrabold = UIFont.extrabold(
+            withSize: w * 0.086)
         
-        let header = ViewUtils.createHeader(
+        mViewHeader = ViewUtils.createHeader(
             frame: view.frame,
             title: "Счётчик\nовечек...",
             subtitle: "Считай бесконечных овечек, чтобы\nлучше уснуть.",
             subtitleSize: 0.041
         )
         
-        header.frame.origin.y = mInsets.top
+        mViewHeader.frame.origin.y = mInsets.top
         
         let btnClose = ViewUtils
             .buttonClose(
@@ -78,7 +77,7 @@ final class SheepCounterViewController
             )
         
         let ofx = w * 0.217
-        let lTap = UILabel(
+        mLabelTap = UILabel(
             frame: CGRect(
                 x: ofx,
                 y: h * 0.75,
@@ -87,25 +86,25 @@ final class SheepCounterViewController
             )
         )
         
-        lTap.numberOfLines = 0
-        lTap.font = UIFont(
+        mLabelTap.numberOfLines = 0
+        mLabelTap.font = UIFont(
             name: "OpenSans-SemiBold",
             size: w * 0.04
         )
-        lTap.text = "Нажимай на экран и считай овечек."
-        lTap.textColor = .white
-        lTap.textAlignment = .center
-        lTap.sizeToFit()
+        mLabelTap.text = "Нажимай на экран и считай овечек."
+        mLabelTap.textColor = .white
+        mLabelTap.textAlignment = .center
+        mLabelTap.sizeToFit()
         
-        lTap.frame.origin.x =
-            (w-lTap.frame.width) * 0.5
+        mLabelTap.frame.origin.x =
+            (w-mLabelTap.frame.width) * 0.5
         
         mNextSheep = createSheep()
         
-        view.addSubview(btnClose)
         view.addSubview(mNextSheep!)
-        view.addSubview(lTap)
-        view.addSubview(header)
+        view.addSubview(mLabelTap)
+        view.addSubview(mViewHeader)
+        view.addSubview(btnClose)
         
         let g = UITapGestureRecognizer(
             target: self,
@@ -140,8 +139,8 @@ extension SheepCounterViewController {
         sender.isEnabled = false
         pop(
             duration: 0.5
-        ) {
-            self.view.alpha = 0
+        ) { [weak self] in
+            self?.view.alpha = 0
         }
     }
     
@@ -150,21 +149,18 @@ extension SheepCounterViewController {
     ) {
         
         if mCounter == 1 {
-            // 0,1,4
-            
-            let s = view.subviews
-            
             UIView.animate(
                 withDuration: 0.7,
-                animations: {
-                    s[0].alpha = 0.0
-                    s[1].alpha = 0.0
-                    s[4].alpha = 0.0
+                animations: { [weak self] in
+                    self?.mViewHeader.alpha = 0.0
+                    self?.mLabelTap.alpha = 0.0
                 }
-            ) { b in
-                s[0].removeFromSuperview()
-                s[1].removeFromSuperview()
-                s[4].removeFromSuperview()
+            ) { [weak self] _ in
+                self?.mViewHeader
+                    .removeFromSuperview()
+                
+                self?.mLabelTap
+                    .removeFromSuperview()
             }
             
             let inst = AVAudioSession
@@ -208,9 +204,20 @@ extension SheepCounterViewController {
         
         view.addSubview(textNumber)
         
-        textNumber.show()
+        textNumber.attribute()
+        textNumber.sizeToFit()
         
-        mPrevc?.hide(300)
+        textNumber.centerH(
+            in: view
+        )
+        
+        textNumber.show(
+            duration: 0.8
+        )
+        
+        mPrevc?.hide(
+            duration: 1.0,
+            300)
         
         mPrevc = textNumber
         
