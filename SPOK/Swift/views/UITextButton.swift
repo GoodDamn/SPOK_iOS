@@ -10,8 +10,21 @@ import UIKit
 final public class UITextButton
     : UIView {
     
-    final var textColor: UIColor = .lightText
     final var text: String? = nil
+    final var textColor: UIColor = .lightText
+    
+    final var textImage: UIImage? = nil {
+        didSet {
+            mAttachment.image = textImage
+        }
+    }
+    
+    final var textAlignment: NSTextAlignment = .left {
+        didSet {
+            mParagraph.alignment = textAlignment
+        }
+    }
+    
     final var font: UIFont? = nil {
         didSet {
             guard let size = font?.pointSize else {
@@ -26,11 +39,6 @@ final public class UITextButton
             )
         }
     }
-    final var textImage: UIImage? = nil {
-        didSet {
-            mAttachment.image = textImage
-        }
-    }
     
     final var paddingV: CGFloat = 15
     final var paddingH: CGFloat = 15
@@ -41,6 +49,9 @@ final public class UITextButton
         NSAttributedString? = nil
     
     private final var mAttachment = NSTextAttachment()
+    
+    private final var mParagraph =
+        NSMutableParagraphStyle()
     
     override init(
         frame: CGRect
@@ -84,27 +95,37 @@ final public class UITextButton
     }
     
     public func layout() {
+        
         guard let text = text else {
             return
         }
         
-        
-        if textImage == nil {
-            mAttr = attributeWholeText(
+        let attr: NSMutableAttributedString =
+        textImage == nil ? {
+            let a = attributeWholeText(
                 text
             )
-        } else {
-            // Checking image pattern ($i)
             
+            attributeParagraph(
+                for: a
+            )
+            
+            return a
+        } () : {
             let attr = NSMutableAttributedString()
+            attributeParagraph(
+                for: attr
+            )
             attributeWithImage(
                 to: attr,
                 text: text
             )
-            mAttr = attr
-        }
+            return attr
+        }()
         
-        let size = mAttr!.size()
+        mAttr = attr
+        
+        let size = attr.size()
         
         frame = CGRect(
             x: frame.origin.x - paddingH,
@@ -191,6 +212,19 @@ extension UITextButton {
         point.y < 0 ||
         point.x > bounds.width ||
         point.y > bounds.height
+    }
+    
+    private func attributeParagraph(
+        for attr: NSMutableAttributedString
+    ) {
+        attr.addAttribute(
+            .paragraphStyle,
+            value: mParagraph,
+            range: NSRange(
+                location: 0,
+                length: attr.length
+            )
+        )
     }
     
     private func attributeWithImage(

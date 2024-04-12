@@ -173,6 +173,8 @@ final class ProfileNewViewController
             named: "link"
         )
         
+        mBtnOpenAccess.textAlignment = .center
+        
         LayoutUtils.textButton(
             for: mBtnOpenAccess,
             size: view.frame.size,
