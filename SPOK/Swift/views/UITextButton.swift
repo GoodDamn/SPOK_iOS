@@ -88,8 +88,8 @@ final public class UITextButton
         let res = CGRect(
             x: x,
             y: y,
-            width: rect.width - x - x,
-            height: rect.height - y - y
+            width: rect.width - x - x + 1,
+            height: rect.height - y - y + 1
         )
         
         mAttr!.draw(
