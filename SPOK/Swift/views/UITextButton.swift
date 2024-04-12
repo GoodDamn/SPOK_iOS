@@ -77,17 +77,22 @@ final public class UITextButton
         )
         
         // Centered text in view
-        
         guard let textBounds = mAttr?.size() else {
             return
         }
         
+        let x = (rect.width - textBounds.width) * 0.5
+        
+        let y = (rect.height - textBounds.height) * 0.5
+        
         let res = CGRect(
-            x: (rect.width - textBounds.width) * 0.5,
-            y: (rect.height - textBounds.height) * 0.5,
-            width: rect.width,
-            height: rect.height
+            x: x,
+            y: y,
+            width: rect.width - x - x,
+            height: rect.height - y - y
         )
+        
+        print("UITextButton", textBounds, rect, res)
         
         mAttr!.draw(
             in: res
@@ -95,7 +100,6 @@ final public class UITextButton
     }
     
     public func layout() {
-        
         guard let text = text else {
             return
         }
@@ -113,12 +117,13 @@ final public class UITextButton
             return a
         } () : {
             let attr = NSMutableAttributedString()
-            attributeParagraph(
-                for: attr
-            )
             attributeWithImage(
                 to: attr,
                 text: text
+            )
+            
+            attributeParagraph(
+                for: attr
             )
             return attr
         }()
