@@ -134,7 +134,6 @@
 		25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE42B6E608700FC8A32 /* AuthListener.swift */; };
 		25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE72B6E626100FC8A32 /* SignInListener.swift */; };
 		25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEA2B6F46E900FC8A32 /* MessageViewController.swift */; };
-		25F94AED2B6F690200FC8A32 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEC2B6F690100FC8A32 /* UIButton.swift */; };
 		25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */; };
 		25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF02B6F7DD700FC8A32 /* Log.swift */; };
 		25F94AF32B6F94A300FC8A32 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF22B6F94A300FC8A32 /* String.swift */; };
@@ -309,7 +308,6 @@
 		25F94AE42B6E608700FC8A32 /* AuthListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListener.swift; sourceTree = "<group>"; };
 		25F94AE72B6E626100FC8A32 /* SignInListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInListener.swift; sourceTree = "<group>"; };
 		25F94AEA2B6F46E900FC8A32 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		25F94AEC2B6F690100FC8A32 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtils.swift; sourceTree = "<group>"; };
 		25F94AF02B6F7DD700FC8A32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		25F94AF22B6F94A300FC8A32 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -914,7 +912,6 @@
 			children = (
 				25F94AD22B6E1A9F00FC8A32 /* UILabel.swift */,
 				25F94ADD2B6E587D00FC8A32 /* UIColor.swift */,
-				25F94AEC2B6F690100FC8A32 /* UIButton.swift */,
 				25D61E912B7643CE00B5A72B /* UIFont.swift */,
 				25D4760E2B79056900B5467D /* UIImage.swift */,
 				25D476392B7C8E1100B5467D /* UIView.swift */,
@@ -1407,7 +1404,6 @@
 				257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */,
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
 				25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */,
-				25F94AED2B6F690200FC8A32 /* UIButton.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
 				25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */,
 				25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */,

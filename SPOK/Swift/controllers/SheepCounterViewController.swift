@@ -119,13 +119,7 @@ final class SheepCounterViewController
             g
         )
         
-        btnClose.addTarget(
-            self,
-            action: #selector(
-                onClickBtnExit(_:)
-            ),
-            for: .touchUpInside
-        )
+        btnClose.onClick = onClickBtnExit(_:)
     }
     
 }
@@ -133,10 +127,10 @@ final class SheepCounterViewController
 
 extension SheepCounterViewController {
     
-    @objc private func onClickBtnExit(
-        _ sender: UIButton
+    private func onClickBtnExit(
+        _ sender: UIView
     ) {
-        sender.isEnabled = false
+        sender.isUserInteractionEnabled = false
         pop(
             duration: 0.5
         ) { [weak self] in

@@ -132,13 +132,6 @@ class StackViewController
         )
     }
     
-    internal func onClickBtnClose(
-        _ sender: UIView
-    ) {
-        sender.isUserInteractionEnabled = false
-        popBaseAnim()
-    }
- 
     internal func onTransitionEnd() {}
     internal func onUpdatePremium() {}
     internal func onUpdateState() {}

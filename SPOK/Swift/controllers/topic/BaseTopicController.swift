@@ -30,7 +30,7 @@ final class BaseTopicController
     
     private var mLabelSong: UILabela? = nil
     
-    private var mBtnClose: UIButton!
+    private var mBtnClose: UIImageButton!
     
     private var mProgressBar: ProgressBar!
     private var mProgressBarTopic: ProgressBar!
@@ -64,13 +64,7 @@ final class BaseTopicController
         
         mBtnClose.alpha = 0.11
         
-        /*mBtnClose.addTarget(
-            self,
-            action: #selector(
-                onClickBtnClose(_:)
-            ),
-            for: .touchUpInside
-        )*/
+        mBtnClose.onClick = onClickBtnClose(_:)
         
         view.addSubview(
             mBtnClose
@@ -164,7 +158,7 @@ final class BaseTopicController
         
     }
     
-    override func onClickBtnClose(
+    private func onClickBtnClose(
         _ sender: UIView
     ) {
         mCurrentPlayer?
@@ -172,7 +166,8 @@ final class BaseTopicController
                 duration: 0.39
             )
         
-        super.onClickBtnClose(sender)
+        sender.isUserInteractionEnabled = false
+        popBaseAnim()
     }
 }
 
@@ -419,7 +414,7 @@ extension BaseTopicController
     func onFinish() {
         view.gestureRecognizers?[0]
             .isEnabled = false
-        mBtnClose.isEnabled = false
+        mBtnClose.isUserInteractionEnabled = false
         
         mCurrentPlayer?.stopFade(
             duration: 2.4

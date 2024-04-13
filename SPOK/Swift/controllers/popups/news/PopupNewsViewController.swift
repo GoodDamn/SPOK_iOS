@@ -42,13 +42,7 @@ final class PopupNewsViewController
                 sizeSquare: 0.16
             )
         
-        btnClose.addTarget(
-            self,
-            action: #selector(
-                onClickBtnClose(_:)
-            ),
-            for: .touchUpInside
-        )
+        btnClose.onClick = onClickBtnClose(_:)
         
         let lTitle = UILabela(
             frame: CGRect(
@@ -171,18 +165,12 @@ final class PopupNewsViewController
         
     }
     
-    @objc override func onClickBtnClose(
+    private func onClickBtnClose(
         _ sender: UIView
     ) {
         markAsRead()
-        super.onClickBtnClose(sender)
-    }
-    
-    private func onClickBtnClosing(
-        _ sender: UIView
-    ) {
-        markAsRead()
-        super.onClickBtnClose(sender)
+        sender.isUserInteractionEnabled = false
+        popBaseAnim()
     }
     
     private func onClickBtnUpdate(

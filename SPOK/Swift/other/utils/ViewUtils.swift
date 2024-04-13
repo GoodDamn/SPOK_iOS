@@ -139,7 +139,7 @@ public class ViewUtils {
         in view: UIView,
         sizeSquare si: CGFloat,
         iconProp: CGFloat = 0.5
-    ) -> UIButton {
+    ) -> UIImageButton {
         
         let w = view.width()
         let h = view.height()
@@ -155,7 +155,7 @@ public class ViewUtils {
                 scale: .default
             )
         
-        let btnExit = UIButton(
+        let btnExit = UIImageButton(
             frame: CGRect(
                 x: w - sizeBtnExit - w * 0.06,
                 y: h * 0.04 - iconSize * 0.5,
@@ -172,13 +172,12 @@ public class ViewUtils {
             alpha: 1.0
         )
         
-        btnExit.setImage(
-            UIImage(
-                systemName: systemNameImage,
-                withConfiguration: btnExitConfig
-            ),
-            for: .normal
+        btnExit.image = UIImage(
+            systemName: systemNameImage,
+            withConfiguration: btnExitConfig
         )
+        
+        btnExit.setNeedsDisplay()
         
         return btnExit
     }

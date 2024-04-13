@@ -51,12 +51,8 @@ final class ProfileNewViewController
             )
         
         btnSettings.tintColor = .white
-        btnSettings.click(
-            for: self,
-            action: #selector(
-                onClickBtnSettings(_:)
-            )
-        )
+        btnSettings.onClick =
+            onClickBtnSettings(_:)
         
         let lTitle = UILabel(
             frame: CGRect(
@@ -389,8 +385,8 @@ extension ProfileNewViewController {
         }
     }
     
-    @objc func onClickBtnSettings(
-        _ sender: UIButton
+    private func onClickBtnSettings(
+        _ sender: UIView
     ) {
         let settings = SettingsViewController()
         pushBaseAnim(

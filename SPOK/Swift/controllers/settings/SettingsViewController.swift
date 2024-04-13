@@ -46,6 +46,8 @@ final class SettingsViewController
         btnClose.frame
             .origin.y = beginPosY
         
+        btnClose.onClick = onClickBtnClose(_:)
+        
         let hbtnDelete = h * 0.07
         let ytable = btnClose.frame.bottom()
         let marginHorizontal = w * 0.08
@@ -81,11 +83,7 @@ final class SettingsViewController
                 == .authorized
             }
         }
-        
-        targetClose(
-            btnClose
-        )
-        
+                
         let options = [
             Option(
                 image: UIImage(
@@ -191,6 +189,9 @@ final class SettingsViewController
         )
     }
     
+}
+
+extension SettingsViewController {
     
     @objc private func onSwitchNotify(
         _ s: UISwitch
@@ -228,6 +229,13 @@ final class SettingsViewController
                 animated: true
             )
         
+    }
+    
+    private func onClickBtnClose(
+        _ sender: UIView
+    ) {
+        view.isUserInteractionEnabled = false
+        popBaseAnim()
     }
     
     private func onClickBtnDelete() {
