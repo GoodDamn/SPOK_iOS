@@ -12,24 +12,6 @@ final public class UIImageButton
     
     final var image: UIImage? = nil
     
-    override init(
-        frame: CGRect
-    ) {
-        super.init(
-            frame: frame
-        )
-    }
-    
-    
-    required init?(
-        coder: NSCoder
-    ) {
-        super.init(
-            coder: coder
-        )
-    }
-    
-    
     override public func draw(
         _ rect: CGRect
     ) {
