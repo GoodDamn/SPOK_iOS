@@ -11,8 +11,6 @@ import UIKit
 class StackViewController
     : UIViewController {
     
-    private final let TAG = "StackViewController"
-    
     public final let mInsets = {
         let w = UIApplication
             .shared
@@ -27,12 +25,6 @@ class StackViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         main = Utils.main()
-    }
-    
-    override func viewDidAppear(
-        _ animated: Bool
-    ) {
-        super.viewDidAppear(animated)
     }
     
     public final func framee(
@@ -60,19 +52,7 @@ class StackViewController
     public final func transitionEnd() {
         onTransitionEnd()
     }
-    
-    public final func targetClose(
-        _ b: UIButton
-    ) {
-        b.addTarget(
-            self,
-            action: #selector(
-                onClickBtnClose(_:)
-            ),
-            for: .touchUpInside
-        )
-    }
-    
+        
     public final func pushBaseAnim(
         _ c: StackViewController,
         animDuration: TimeInterval
@@ -152,10 +132,10 @@ class StackViewController
         )
     }
     
-    @objc func onClickBtnClose(
-        _ sender: UIButton
+    internal func onClickBtnClose(
+        _ sender: UIView
     ) {
-        sender.isEnabled = false
+        sender.isUserInteractionEnabled = false
         popBaseAnim()
     }
  

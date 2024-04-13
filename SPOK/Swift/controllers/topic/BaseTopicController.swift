@@ -64,13 +64,13 @@ final class BaseTopicController
         
         mBtnClose.alpha = 0.11
         
-        mBtnClose.addTarget(
+        /*mBtnClose.addTarget(
             self,
             action: #selector(
                 onClickBtnClose(_:)
             ),
             for: .touchUpInside
-        )
+        )*/
         
         view.addSubview(
             mBtnClose
@@ -164,21 +164,15 @@ final class BaseTopicController
         
     }
     
-    @objc override func onClickBtnClose(
-        _ sender: UIButton
+    override func onClickBtnClose(
+        _ sender: UIView
     ) {
-        sender.isEnabled = false
-
         mCurrentPlayer?
             .stopFade(
                 duration: 0.39
             )
         
-        pop(
-            duration: 0.4
-        ) {
-            self.view.alpha = 0
-        }
+        super.onClickBtnClose(sender)
     }
 }
 

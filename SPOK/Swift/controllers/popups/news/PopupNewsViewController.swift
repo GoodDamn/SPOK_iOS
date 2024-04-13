@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import StoreKit
 
-class PopupNewsViewController
+final class PopupNewsViewController
     : StackViewController {
     
     var msgType: Int = 0
@@ -19,22 +19,20 @@ class PopupNewsViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(
-            named: "background"
-        )
+        view.backgroundColor = .background()
         
-        let w = view.frame.width
-        let h = view.frame.height
+        let w = view.width()
+        let h = view.height()
         
-        let extraBold = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: h * 0.05
-        )
+        let extraBold = UIFont
+            .extrabold(
+                withSize: h * 0.05
+            )
         
-        let semiBold = UIFont(
-            name: "OpenSans-SemiBold",
-            size: h * 0.02
-        )
+        let semiBold = UIFont
+            .semibold(
+                withSize: h * 0.02
+            )
         
         let mLeft = 0.08 * w
         
@@ -99,31 +97,27 @@ class PopupNewsViewController
             view.addSubview(btnClose)
             
             let btnOk = ViewUtils
-                .button(
+                .textButton(
                     text: "Хорошо"
                 )
-            LayoutUtils
-                .button(
-                    for: btnOk,
-                    view.frame,
-                    y: 0,
-                    width: 0.7,
-                    height: 0.05,
-                    textSize: 0.35
-                )
+            
+            LayoutUtils.textButton(
+                for: btnOk,
+                size: view.frame.size,
+                textSize: 0.02,
+                paddingHorizontal: 0.2,
+                paddingVertical: 0.04
+            )
             
             btnOk.frame.origin.y =
-                h - btnOk.frame.height - mBottom
+                h - btnOk.height() - mBottom
             
-            btnOk.addTarget(
-                self,
-                action: #selector(
-                    onClickBtnClose(
-                        _:
-                    )
-                ),
-                for: .touchUpInside
+            btnOk.centerH(
+                in: view
             )
+            
+            btnOk.onClick =
+                onClickBtnClose(_:)
             
             view.addSubview(
                 btnOk
@@ -135,29 +129,31 @@ class PopupNewsViewController
         }
         
         let btnUpdate = ViewUtils
-            .button(
+            .textButton(
                 text: "Обновить приложение"
             )
         
-        LayoutUtils
-            .button(
-                for: btnUpdate,
-                view.frame,
-                y: 0,
-                width: 0.7,
-                height: 0.05,
-                textSize: 0.35
-            )
+        LayoutUtils.textButton(
+            for: btnUpdate,
+            size: view.frame.size,
+            textSize: 0.02,
+            paddingHorizontal: 0.2,
+            paddingVertical: 0.04
+        )
+        
+        btnUpdate.centerH(
+            in: view
+        )
         
         let v = view.subviews[ // >= 3
             view.subviews.count - 1
         ]
         
-        let yyyy = v.frame.origin.y
+        let yyyy = v.frame.y()
         
         let yb = yyyy < h/2 ? h : yyyy
         
-        print(
+        Log.d(
             "Popup:",
             yb,
             h,
@@ -165,17 +161,9 @@ class PopupNewsViewController
         )
         
         btnUpdate.frame.origin.y =
-            yb - btnUpdate.frame.height - h * 0.025
+            yb - btnUpdate.height() - h * 0.025
         
-        btnUpdate.addTarget(
-            self,
-            action: #selector(
-                onClickBtnUpdate(
-                    _:
-                )
-            ),
-            for: .touchUpInside
-        )
+        btnUpdate.onClick = onClickBtnUpdate(_:)
         
         view.addSubview(
             btnUpdate
@@ -184,14 +172,21 @@ class PopupNewsViewController
     }
     
     @objc override func onClickBtnClose(
-        _ sender: UIButton
+        _ sender: UIView
     ) {
         markAsRead()
         super.onClickBtnClose(sender)
     }
     
-    @objc private func onClickBtnUpdate(
-        _ sender: UIButton
+    private func onClickBtnClosing(
+        _ sender: UIView
+    ) {
+        markAsRead()
+        super.onClickBtnClose(sender)
+    }
+    
+    private func onClickBtnUpdate(
+        _ sender: UIView
     ) {
         
         let vc = SKStoreProductViewController();

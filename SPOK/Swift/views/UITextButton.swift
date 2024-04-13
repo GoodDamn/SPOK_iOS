@@ -8,7 +8,7 @@
 import UIKit
 
 final public class UITextButton
-    : UIView {
+    : UIViewListenable {
     
     final var text: String? = nil
     final var textColor: UIColor = .lightText
@@ -42,8 +42,6 @@ final public class UITextButton
     
     final var paddingV: CGFloat = 15
     final var paddingH: CGFloat = 15
-    
-    final var onClick: ((UIView) -> Void)? = nil
     
     private final var mAttr:
         NSAttributedString? = nil
@@ -139,83 +137,9 @@ final public class UITextButton
                 
         setNeedsDisplay()
     }
- 
-    
-    public override func touchesBegan(
-        _ touches: Set<UITouch>,
-        with event: UIEvent?
-    ) {
-        guard let _ = touchLocation(
-            touches
-        ) else {
-            return
-        }
-        
-        animate(
-            duration: 0.3
-        ) { [weak self] in
-            self?.scale(
-                x: 0.85,
-                y: 0.85
-            )
-        }
-        
-    }
-    
-    public override func touchesEnded(
-        _ touches: Set<UITouch>,
-        with event: UIEvent?
-    ) {
-        guard let location = touchLocation(
-            touches
-        ) else {
-            return
-        }
-        
-        animate(
-            duration: 0.3
-        ) { [weak self] in
-            self?.scale(
-                x: 1.0,
-                y: 1.0
-            )
-        }
-        
-        if notInsideBounds(location) {
-            return
-        }
-        
-        onClick?(self)
-    }
-    
 }
 
 extension UITextButton {
-    
-    private func touchLocation(
-        _ touches: Set<UITouch>
-    ) -> CGPoint? {
-        touches.first?.location(
-            in: self
-        )
-    }
-    
-    private func insideBounds(
-        _ point: CGPoint
-    ) -> Bool {
-        return !notInsideBounds(
-            point
-        )
-    }
-    
-    private func notInsideBounds(
-        _ point: CGPoint
-    ) -> Bool {
-        point.x < 0 ||
-        point.y < 0 ||
-        point.x > bounds.width ||
-        point.y > bounds.height
-    }
     
     private func attributeParagraph(
         for attr: NSMutableAttributedString
