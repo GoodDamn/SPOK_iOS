@@ -26,13 +26,13 @@ final class SheepCounterViewController
     private weak var mPrevc: UITextViewPhrase? = nil
     
     deinit {
-        print("SheepCounterViewController: deinit()")
+        Log.d("SheepCounterViewController: deinit()")
     }
     
     override func viewDidDisappear(
         _ animated: Bool
     ) {
-        print(TAG, "viewDidDisappear")
+        Log.d(TAG, "viewDidDisappear")
         mPlayer?.stop()
     }
     
