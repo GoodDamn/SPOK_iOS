@@ -13,8 +13,6 @@ import StoreKit
 final class SettingsViewController
     : SignInAppleController {
     
-    private let TAG = "SettingsViewController"
-    
     private var mTableOptions: OptionsTableView!
     
     override func viewDidLoad() {
@@ -24,10 +22,8 @@ final class SettingsViewController
         
         view.backgroundColor = .background()
         
-        let bold = UIFont(
-            name: "OpenSans-Bold",
-            size: 1
-        )
+        let bold = UIFont
+            .bold(withSize: 1)
         
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
@@ -268,7 +264,7 @@ extension SettingsViewController {
                 
             } catch {
                 Log.d(
-                    self?.TAG,
+                    SettingsViewController.self,
                     "SIGN_OUT_FAIL:",
                     error
                 )

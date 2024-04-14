@@ -177,6 +177,13 @@ public class ViewUtils {
             withConfiguration: btnExitConfig
         )
         
+        btnExit.backgroundColor = .brown
+        
+        btnExit.scale = CGPoint(
+            x: 0.5,
+            y: 0.5
+        )
+        
         btnExit.setNeedsDisplay()
         
         return btnExit

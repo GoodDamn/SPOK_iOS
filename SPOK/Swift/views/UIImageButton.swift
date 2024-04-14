@@ -12,6 +12,48 @@ final public class UIImageButton
     
     final var image: UIImage? = nil
     
+    final var scale = CGPoint(
+        x: 1.0,
+        y: 1.0
+    ) {
+        didSet {
+            
+            let w = frame.width
+            let h = frame.height
+            
+            let ow = scale.x * w * 0.5
+            let oh = scale.y * h * 0.5
+            
+            imageRect = CGRect(
+                x: ow,
+                y: oh,
+                width: w - ow - ow,
+                height: h - oh - oh
+            )
+            
+        }
+    }
+    
+    private final var imageRect: CGRect = .zero
+    
+    public override init(
+        frame: CGRect
+    ) {
+        imageRect = frame
+        super.init(
+            frame: frame
+        )
+    }
+    
+    public required init?(
+        coder: NSCoder
+    ) {
+        super.init(
+            coder: coder
+        )
+        imageRect = frame
+    }
+    
     override public func draw(
         _ rect: CGRect
     ) {
@@ -20,8 +62,7 @@ final public class UIImageButton
         )
         
         image?.draw(
-            in: rect
+            in: imageRect
         )
     }
-    
 }
