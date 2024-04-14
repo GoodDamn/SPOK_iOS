@@ -164,7 +164,11 @@ public class ViewUtils {
             )
         )
         
-        btnExit.backgroundColor = .clear
+        btnExit.image = UIImage(
+            systemName: systemNameImage,
+            withConfiguration: btnExitConfig
+        )
+        
         btnExit.tintColor = UIColor(
             red: 197.0 / 255,
             green: 197 / 255,
@@ -172,17 +176,12 @@ public class ViewUtils {
             alpha: 1.0
         )
         
-        btnExit.image = UIImage(
-            systemName: systemNameImage,
-            withConfiguration: btnExitConfig
-        )
-        
-        btnExit.backgroundColor = .brown
-        
         btnExit.scale = CGPoint(
             x: 0.5,
             y: 0.5
         )
+        
+        btnExit.backgroundColor = .clear
         
         btnExit.setNeedsDisplay()
         

@@ -11,7 +11,6 @@ final public class UIImageButton
     : UIViewListenable {
     
     final var image: UIImage? = nil
-    
     final var scale = CGPoint(
         x: 1.0,
         y: 1.0
@@ -31,6 +30,18 @@ final public class UIImageButton
                 height: h - oh - oh
             )
             
+            image = image?.withTintColor(
+                tintColor
+            )
+            
+        }
+    }
+    
+    public override var tintColor: UIColor! {
+        didSet {
+            image = image?.withTintColor(
+                tintColor
+            )
         }
     }
     
