@@ -106,20 +106,16 @@ final class SheepCounterViewController
         view.addSubview(mViewHeader)
         view.addSubview(btnClose)
         
-        let g = UITapGestureRecognizer(
-            target: self,
-            action: #selector(onTap(_:))
-        )
-        
-        g.numberOfTapsRequired = 1
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        view.addGestureRecognizer(
-            g
-        )
-        
         btnClose.onClick = onClickBtnExit(_:)
+    }
+    
+    override func touchesEnded(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
+    ) {
+        onTap()
     }
     
 }
@@ -138,10 +134,7 @@ extension SheepCounterViewController {
         }
     }
     
-    @objc private func onTap(
-        _ sender: UITapGestureRecognizer
-    ) {
-        
+    private func onTap() {
         if mCounter == 1 {
             UIView.animate(
                 withDuration: 0.7,

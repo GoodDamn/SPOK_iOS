@@ -16,11 +16,13 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        guard let _ = touchLocation(
+        guard let loc = touchLocation(
             touches
         ) else {
             return
         }
+        
+        print(UIViewListenable.self, "BEGAN:",loc)
         
         animate(
             duration: 0.3
@@ -56,6 +58,8 @@ public class UIViewListenable
         ) else {
             return
         }
+        
+        print(UIViewListenable.self, "END:",location)
         
         animate(
             duration: 0.3
