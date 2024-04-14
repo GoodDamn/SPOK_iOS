@@ -291,8 +291,7 @@ extension BaseTopicController {
         label.attribute()
         label.sizeToFit()
         
-        label
-            .frame
+        label.frame
             .origin
             .x = (w - label.frame.width) * 0.5
         

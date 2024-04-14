@@ -17,7 +17,7 @@ class CacheFile<T>
     internal var mFirstLoad: Bool = true
     
     deinit {
-        print("CacheFile:deinit()")
+        Log.d("CacheFile:deinit()")
     }
     
     init(
@@ -53,7 +53,7 @@ class CacheFile<T>
         }
         
         DispatchQueue.global(
-            qos: .default
+            qos: .userInteractive
         ).async {
             var cache = StorageApp
                 .file(

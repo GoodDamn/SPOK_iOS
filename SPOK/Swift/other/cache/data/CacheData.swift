@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class CacheData<T>
     : CacheFile<T> {
     
@@ -22,27 +21,23 @@ final class CacheData<T>
             if error != nil {
                 self?.delegate?
                     .onError()
-                print(
+                Log.d(
                     "CacheFile",
                     "ERROR_DATA:",
                     error
                 )
                 return
             }
+            var data = data
             
-            DispatchQueue
-                .global(
-                    qos: .default
+            DispatchQueue.global(
+                qos: .userInteractive
+            ).async {
+                // Send new data
+                self?.delegate?.onNet(
+                    data: &data
                 )
-                .async {
-                    
-                    var data = data
-                    
-                    // Send new data
-                    self?.delegate?.onNet(
-                        data: &data
-                    )
-                }
+            }
         }
     }
     

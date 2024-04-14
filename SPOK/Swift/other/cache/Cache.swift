@@ -60,7 +60,7 @@ class Cache<T> {
                     self?.delegate?
                         .onError()
                     
-                    print(
+                    Log.d(
                         "Cache:",
                         "ERROR_META:",
                         error
@@ -87,7 +87,7 @@ class Cache<T> {
             .updated?
             .timeIntervalSince1970 ?? 0
         
-        print(
+        Log.d(
             "Cache",
             "cacheTime:",
             localTime,
@@ -113,7 +113,7 @@ class Cache<T> {
                 )
         }
         
-        print(
+        Log.d(
             "Cache",
             "TIME TO CACHE UPDATE!"
         )
@@ -121,6 +121,6 @@ class Cache<T> {
         onUpdateCache()
     }
     
-    func onUpdateCache() {}
-    func onCacheNotExpired() {}
+    internal func onUpdateCache() {}
+    internal func onCacheNotExpired() {}
 }
