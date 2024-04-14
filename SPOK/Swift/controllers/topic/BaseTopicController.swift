@@ -12,7 +12,7 @@ import UIKit
 final class BaseTopicController
     : StackViewController {
     
-    private final let TAG = "BaseTopicController:"
+    private let TAG = "BaseTopicController"
     
     private var mScriptReader: ScriptReader? = nil
     
@@ -38,7 +38,10 @@ final class BaseTopicController
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        print(TAG, "viewDidLoad()")
+        Log.d(
+            TAG,
+            "viewDidLoad()"
+        )
         
         let w = view.width()
         let h = view.height()
@@ -169,19 +172,10 @@ final class BaseTopicController
         sender.isUserInteractionEnabled = false
         popBaseAnim()
     }
-}
-
-extension BaseTopicController {
     
-    public func setID(
-        _ id: Int
-    ) {
-        mId = id
-        mNetworkUrl = "content/skc/\(id).skc"
-    }
-    
-    @objc private func onTouch(
-        _ sender: UITapGestureRecognizer
+    override func touchesEnded(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
     ) {
         if mIsFirstTouch {
             mIsFirstTouch = false
@@ -193,6 +187,16 @@ extension BaseTopicController {
         }
         
         mScriptReader!.next()
+    }
+}
+
+extension BaseTopicController {
+    
+    public func setID(
+        _ id: Int
+    ) {
+        mId = id
+        mNetworkUrl = "content/skc/\(id).skc"
     }
     
     // Better to load on background thread
@@ -225,23 +229,6 @@ extension BaseTopicController {
         guard let r = mScriptReader else {
             return
         }
-
-        view
-            .gestureRecognizers?
-            .removeAll()
-        
-        let g = UITapGestureRecognizer(
-            target: self,
-            action: #selector(
-                onTouch(_:)
-            )
-        )
-        
-        g.numberOfTapsRequired = 1
-        
-        view.addGestureRecognizer(
-            g
-        )
         
         mProgressBarTopic
             .alpha(
@@ -463,7 +450,7 @@ extension BaseTopicController
                 )
             try ses.setActive(true)
         } catch {
-            print(TAG, "onAmbient: ERROR::SESSION",error)
+            Log.d(TAG, "onAmbient: ERROR::SESSION",error)
         }
         player?.play()
         player?.setVolume(
@@ -502,6 +489,6 @@ extension BaseTopicController
     func onError(
         _ errorMsg: String
     ) {
-        print(TAG, "onError:",errorMsg)
+        Log.d(TAG, "onError:",errorMsg)
     }
 }
