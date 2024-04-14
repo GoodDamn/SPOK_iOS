@@ -49,7 +49,7 @@ public class ViewUtils {
         return btnStart
     }
     
-    public static func debugLines(
+    /*public static func debugLines(
         in view: UIView
     ) {
         let c = view.center
@@ -94,7 +94,7 @@ public class ViewUtils {
         view.layer.addSublayer(
             layer
         )
-    }
+    }*/
     
     public static func createHeader(
         frame: CGRect,

@@ -138,7 +138,9 @@ final class BaseTopicController
                 .view.width() - textView.width()
             ) * 0.5
             
-            textView.show()
+            textView.show(
+                duration: 0.7
+            )
 
             let prog = s.mScriptReader?
                 .progress() ?? 0
@@ -154,7 +156,10 @@ final class BaseTopicController
             )
             
             s.mPrevTextView?
-                .hide(mHideOffsetY)
+                .hide(
+                    duration: 1.0,
+                    mHideOffsetY
+                )
             
             s.mPrevTextView = textView
         }
@@ -241,8 +246,6 @@ extension BaseTopicController {
         )
         
         r.next()
-        
-        
         showLabelSong()
     }
     
@@ -253,8 +256,8 @@ extension BaseTopicController {
             return
         }
         
-        let w = view.frame.width
-        let h = view.frame.height
+        let w = view.width()
+        let h = view.height()
         
         let mLeft = w * 0.1
         
@@ -302,11 +305,6 @@ extension BaseTopicController {
         label.alpha(
             0.65
         )
-        
-        ViewUtils.debugLines(
-            in: view
-        )
-        
     }
     
     private func nothing() {
@@ -317,8 +315,8 @@ extension BaseTopicController {
         
         pop(
             duration: 0.3
-        ) {
-            self.view.alpha = 0
+        ) { [weak self] in
+            self?.view.alpha = 0
         }
         
     }
@@ -337,7 +335,6 @@ extension BaseTopicController
         view.addSubview(
             mProgressBar
         )
-        
     }
     
     func onWrittenStorage() {}
@@ -359,7 +356,7 @@ extension BaseTopicController
         ).async { [weak self] in
             
             guard let s = self else {
-                print(
+                Log.d(
                     "BaseTopicController:",
                     "onWrittenStorage: GC"
                 )
@@ -399,8 +396,7 @@ extension BaseTopicController
     : OnReadScript {
     
     func onFinish() {
-        view.gestureRecognizers?[0]
-            .isEnabled = false
+        view.isUserInteractionEnabled = false
         mBtnClose.isUserInteractionEnabled = false
         
         mCurrentPlayer?.stopFade(
@@ -408,27 +404,26 @@ extension BaseTopicController
         )
         
         if mPrevTextView == nil {
-            self.pop(
+            pop(
                 duration: 0.2
-            ) {
-                self.view.alpha = 0
+            ) { [weak self] in
+                self?.view.alpha = 0
             }
             return
         }
         
-        UIView.animate(
-            withDuration: 2.5,
-            animations: {
-                self.mPrevTextView!.alpha = 0.0
-            },
-            completion: { b in
-                self.pop(
-                    duration: 0.2
-                ) {
-                    self.view.alpha = 0
-                }
+        mPrevTextView?.animate(
+            duration: 2.5,
+            animations: { [weak self] in
+                self?.mPrevTextView!.alpha = 0.0
             }
-        )
+        ) { [weak self] _ in
+            self?.pop(
+                duration: 0.2
+            ) {
+                self?.view.alpha = 0
+            }
+        }
     }
     
 }

@@ -112,10 +112,6 @@ final class IntroSleepRootController
         addChild(mIntro2)
         view.addSubview(mIntro2.view)
     
-        ViewUtils.debugLines(
-            in: intro3.view
-        )
-        
         mStart = {
             mIntro2.show() {
                 audio?.play()
@@ -126,11 +122,6 @@ final class IntroSleepRootController
                 mIntro2.startTopic()
             }
         }
-        
-        
-        ViewUtils.debugLines(
-            in: view
-        )
         
     }
 
