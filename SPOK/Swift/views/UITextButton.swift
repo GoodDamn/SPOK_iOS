@@ -40,6 +40,8 @@ final public class UITextButton
         }
     }
     
+    final var isUnderlinedText = false
+    
     final var paddingV: CGFloat = 15
     final var paddingH: CGFloat = 15
     
@@ -121,6 +123,7 @@ final public class UITextButton
                 
         setNeedsDisplay()
     }
+    
 }
 
 extension UITextButton {
@@ -169,7 +172,6 @@ extension UITextButton {
                 imageAtt
             )
             
-            print("PATTERN:",pos,str)
         }
     }
     
@@ -196,6 +198,16 @@ extension UITextButton {
             value: textColor,
             range: range
         )
+        
+        if isUnderlinedText {
+            attr.addAttribute(
+                .underlineStyle,
+                value: NSUnderlineStyle
+                    .single
+                    .rawValue,
+                range: range
+            )
+        }
         
         return attr
     }

@@ -165,6 +165,9 @@ final class ProfileNewViewController
                 text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
             )
         
+        mBtnOpenAccess.isAnimatedTouch = false
+        mBtnOpenAccess.isUnderlinedText = true
+        
         mBtnOpenAccess.textImage = UIImage(
             named: "link"
         )

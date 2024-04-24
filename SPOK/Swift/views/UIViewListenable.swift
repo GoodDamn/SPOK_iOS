@@ -12,6 +12,8 @@ public class UIViewListenable
     
     final var onClick: ((UIView) -> Void)? = nil
     
+    final var isAnimatedTouch = true
+    
     public final override func touchesBegan(
         _ touches: Set<UITouch>,
         with event: UIEvent?
@@ -22,7 +24,11 @@ public class UIViewListenable
             return
         }
         
-        print(UIViewListenable.self, "BEGAN:",loc)
+        onTouchBegin()
+        
+        if !isAnimatedTouch {
+            return
+        }
         
         animate(
             duration: 0.3
@@ -59,15 +65,18 @@ public class UIViewListenable
             return
         }
         
-        print(UIViewListenable.self, "END:",location)
+        onTouchEnd()
         
-        animate(
-            duration: 0.3
-        ) { [weak self] in
-            self?.scale(
-                x: 1.0,
-                y: 1.0
-            )
+        if isAnimatedTouch {
+            animate(
+                duration: 0.3
+            ) { [weak self] in
+                self?.scale(
+                    x: 1.0,
+                    y: 1.0
+                )
+            }
+            return
         }
         
         if notInsideBounds(location) {
@@ -76,6 +85,9 @@ public class UIViewListenable
         
         onClick?(self)
     }
+    
+    internal func onTouchBegin(){}
+    internal func onTouchEnd(){}
     
     private final func touchLocation(
         _ touches: Set<UITouch>

@@ -134,6 +134,59 @@ public class ViewUtils {
         return header
     }
     
+    public static func btnClose(
+        _ systemNameImage: String = "xmark",
+        in view: UIView,
+        sizeSquare si: CGFloat,
+        iconProp: CGFloat = 0.5
+    ) -> UIImageButton {
+        let w = view.width()
+        let h = view.height()
+        
+        let sizeBtnExit = si * h
+        
+        let iconSize = sizeBtnExit * iconProp
+        
+        let btnExitConfig = UIImage
+            .SymbolConfiguration(
+                pointSize: iconSize,
+                weight: .bold,
+                scale: .default
+            )
+        
+        let btnExit = UIImageButton(
+            frame: CGRect(
+                x: w - sizeBtnExit - w * 0.06,
+                y: h * 0.04 - iconSize * 0.5,
+                width: sizeBtnExit,
+                height: sizeBtnExit
+            )
+        )
+        
+        btnExit.image = UIImage(
+            systemName: systemNameImage,
+            withConfiguration: btnExitConfig
+        )
+        
+        btnExit.tintColor = UIColor(
+            red: 197.0 / 255,
+            green: 197 / 255,
+            blue: 197 / 255,
+            alpha: 1.0
+        )
+        
+        btnExit.scale = CGPoint(
+            x: 0.5,
+            y: 0.5
+        )
+        
+        btnExit.backgroundColor = .clear
+        
+        btnExit.setNeedsDisplay()
+        
+        return btnExit
+    }
+    
     public static func buttonClose(
         _ systemNameImage: String = "xmark",
         in view: UIView,
