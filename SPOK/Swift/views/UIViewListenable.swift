@@ -76,7 +76,6 @@ public class UIViewListenable
                     y: 1.0
                 )
             }
-            return
         }
         
         if notInsideBounds(location) {
