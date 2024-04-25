@@ -10,6 +10,24 @@ import UIKit
 
 final class LayoutUtils {
    
+    public static func shitTextView(
+        for b: UIShitTextView,
+        size view: CGSize,
+        textSize: CGFloat = 0.03,
+        paddingHorizontal: CGFloat,
+        paddingVertical: CGFloat
+    ) {
+        
+        b.paddingH = view.width * paddingHorizontal
+        b.paddingV = view.height * paddingVertical
+        b.font = b.font?.withSize(
+            textSize * view.height
+        )
+        
+        b.layout()
+        
+    }
+    
     public static func textButton(
         for b: UITextButton,
         size view: CGSize,

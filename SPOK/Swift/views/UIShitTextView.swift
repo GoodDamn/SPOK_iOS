@@ -11,12 +11,37 @@ final class UIShitTextView
     : UITextView {
     
     final var isUnderlinedText = false
-    final var textImage: UIImage?
+    final var textImage: UIImage? {
+        didSet {
+            mAttachment.image = textImage
+        }
+    }
     
+    final var paddingV: CGFloat = 15
+    final var paddingH: CGFloat = 15
+    
+    final var urls: [String: URLAction]? = nil
+
     private final var mAttachment = NSTextAttachment()
     
     private final var mParagraph =
         NSMutableParagraphStyle()
+    
+    override var font: UIFont? {
+        didSet {
+            guard let size = font?.pointSize else {
+                return
+            }
+            
+            mAttachment.bounds = CGRect(
+                x: 0,
+                y: size * -0.25,
+                width: size,
+                height: size
+            )
+        }
+    }
+    
     
     override var textAlignment: NSTextAlignment {
         didSet {
@@ -25,6 +50,8 @@ final class UIShitTextView
     }
     
     public final func layout() {
+        
+        delegate = self
         
         guard let text = text else {
             return
@@ -54,25 +81,55 @@ final class UIShitTextView
             return attr
         }()
         
-        let s = attr.size()
+        if urls != nil {
+            for u in urls! {
+                let r = attr.mutableString
+                    .range(
+                        of: u.value.id
+                    )
+                
+                attr.addAttribute(
+                    .link,
+                    value: URL(
+                        fileURLWithPath: u.key
+                    ),
+                    range: r
+                )
+            }
+            
+        }
         
-        frame.size = CGSize(
-            width: s.width + 1,
-            height: s.height + 1
-        )
-        
-        attributedText = attr
-        
-        /*let size = attr.size()
+        let size = attr.size()
         
         frame = CGRect(
             x: frame.origin.x - paddingH,
             y: frame.origin.y - paddingV,
             width: size.width + paddingH,
             height: size.height + paddingV
-        )*/
+        )
         
-        
+        attributedText = attr
+    }
+    
+}
+
+struct URLAction {
+    let id: String
+    let action: (UIView) -> Void
+}
+
+extension UIShitTextView
+    : UITextViewDelegate {
+    
+    func textView(
+        _ textView: UITextView,
+        shouldInteractWith URL: URL,
+        in characterRange: NSRange,
+        interaction: UITextItemInteraction
+    ) -> Bool {
+        let a = urls?[URL.lastPathComponent]
+        a?.action(self)
+        return true
     }
     
 }

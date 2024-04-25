@@ -171,9 +171,14 @@ final class ProfileNewViewController
         
         mBtnOpenAccess.text = "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
         
-        mBtnOpenAccess.textImage = UIImage(
-            named: "link"
-        )
+        mBtnOpenAccess.urls = [
+            "a": URLAction(
+                id: "https://spokapp.com/pay",
+                action:
+                    onClickBtnOpenFullAccess(_:)
+            )
+                
+        ]
         
         mBtnOpenAccess.textColor = .white
         mBtnOpenAccess.font = bold
@@ -182,33 +187,19 @@ final class ProfileNewViewController
         mBtnOpenAccess.textAlignment = .center
         mBtnOpenAccess.isSelectable = true
         mBtnOpenAccess.isEditable = false
-        
-        mBtnOpenAccess.layout()
-        
-        /*mBtnOpenAccess = ViewUtils
-            .textButton(
-                text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
-            )
-        
-        mBtnOpenAccess.isAnimatedTouch = false
         mBtnOpenAccess.isUnderlinedText = true
         
         mBtnOpenAccess.textImage = UIImage(
             named: "link"
         )
         
-        mBtnOpenAccess.textAlignment = .center
-        
-        LayoutUtils.textButton(
+        LayoutUtils.shitTextView(
             for: mBtnOpenAccess,
             size: view.frame.size,
             textSize: 0.017,
             paddingHorizontal: 0.18,
             paddingVertical: 0.03
         )
-        
-        mBtnOpenAccess.onClick = onClickBtnOpenFullAccess(_:)
-        */
         
         mBtnOpenAccess.centerH(
             in: view
