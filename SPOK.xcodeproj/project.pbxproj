@@ -65,6 +65,7 @@
 		25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40392BC7A19A009E735F /* UITextButton.swift */; };
 		25AB403E2BCAD39B009E735F /* UIImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB403D2BCAD39B009E735F /* UIImageButton.swift */; };
 		25AB40402BCAD500009E735F /* UIViewListenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB403F2BCAD500009E735F /* UIViewListenable.swift */; };
+		25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40412BDA05C3009E735F /* UIShitTextView.swift */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
@@ -239,6 +240,7 @@
 		25AB40392BC7A19A009E735F /* UITextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextButton.swift; sourceTree = "<group>"; };
 		25AB403D2BCAD39B009E735F /* UIImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageButton.swift; sourceTree = "<group>"; };
 		25AB403F2BCAD500009E735F /* UIViewListenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewListenable.swift; sourceTree = "<group>"; };
+		25AB40412BDA05C3009E735F /* UIShitTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIShitTextView.swift; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 				25AB40392BC7A19A009E735F /* UITextButton.swift */,
 				25AB403D2BCAD39B009E735F /* UIImageButton.swift */,
 				25AB403F2BCAD500009E735F /* UIViewListenable.swift */,
+				25AB40412BDA05C3009E735F /* UIShitTextView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1405,6 +1408,7 @@
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
 				25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
+				25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */,
 				25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */,
 				25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */,
 				25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */,

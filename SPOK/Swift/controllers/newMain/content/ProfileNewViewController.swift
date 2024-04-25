@@ -13,7 +13,7 @@ final class ProfileNewViewController
     
     private var messageController: MessageViewController? = nil
     
-    private var mBtnOpenAccess: UITextButton!
+    private var mBtnOpenAccess: UIShitTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,7 +160,32 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        mBtnOpenAccess = ViewUtils
+        mBtnOpenAccess = UIShitTextView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: w*0.5,
+                height: 30
+            )
+        )
+        
+        mBtnOpenAccess.text = "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
+        
+        mBtnOpenAccess.textImage = UIImage(
+            named: "link"
+        )
+        
+        mBtnOpenAccess.textColor = .white
+        mBtnOpenAccess.font = bold
+        
+        mBtnOpenAccess.backgroundColor = .accent()
+        mBtnOpenAccess.textAlignment = .center
+        mBtnOpenAccess.isSelectable = true
+        mBtnOpenAccess.isEditable = false
+        
+        mBtnOpenAccess.layout()
+        
+        /*mBtnOpenAccess = ViewUtils
             .textButton(
                 text: "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
             )
@@ -183,6 +208,7 @@ final class ProfileNewViewController
         )
         
         mBtnOpenAccess.onClick = onClickBtnOpenFullAccess(_:)
+        */
         
         mBtnOpenAccess.centerH(
             in: view
