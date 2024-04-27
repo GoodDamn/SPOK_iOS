@@ -66,6 +66,9 @@
 		25AB403E2BCAD39B009E735F /* UIImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB403D2BCAD39B009E735F /* UIImageButton.swift */; };
 		25AB40402BCAD500009E735F /* UIViewListenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB403F2BCAD500009E735F /* UIViewListenable.swift */; };
 		25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40412BDA05C3009E735F /* UIShitTextView.swift */; };
+		25AB40462BDCB292009E735F /* 0.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25AB40432BDCB245009E735F /* 0.scs */; };
+		25AB40472BDCB292009E735F /* 1.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25AB40442BDCB245009E735F /* 1.scs */; };
+		25AB40482BDCB292009E735F /* 2.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25AB40452BDCB245009E735F /* 2.scs */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
 		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
@@ -79,9 +82,6 @@
 		25C5B1512B83B0CD00AB7114 /* 54.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1372B83B0CC00AB7114 /* 54.skc */; };
 		25C5B1522B83B0CD00AB7114 /* 53.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1382B83B0CC00AB7114 /* 53.skc */; };
 		25C5B1532B83B0CD00AB7114 /* 52.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1392B83B0CC00AB7114 /* 52.skc */; };
-		25C5B1542B83B0CD00AB7114 /* 0.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13C2B83B0CC00AB7114 /* 0.scs */; };
-		25C5B1552B83B0CD00AB7114 /* 1.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13D2B83B0CC00AB7114 /* 1.scs */; };
-		25C5B1562B83B0CD00AB7114 /* 2.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B13E2B83B0CC00AB7114 /* 2.scs */; };
 		25C5B1572B83B0CD00AB7114 /* 58M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1402B83B0CC00AB7114 /* 58M.spc */; };
 		25C5B1582B83B0CD00AB7114 /* 60B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1412B83B0CC00AB7114 /* 60B.spc */; };
 		25C5B1592B83B0CD00AB7114 /* 55B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25C5B1422B83B0CC00AB7114 /* 55B.spc */; };
@@ -241,6 +241,9 @@
 		25AB403D2BCAD39B009E735F /* UIImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageButton.swift; sourceTree = "<group>"; };
 		25AB403F2BCAD500009E735F /* UIViewListenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewListenable.swift; sourceTree = "<group>"; };
 		25AB40412BDA05C3009E735F /* UIShitTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIShitTextView.swift; sourceTree = "<group>"; };
+		25AB40432BDCB245009E735F /* 0.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0.scs; sourceTree = "<group>"; };
+		25AB40442BDCB245009E735F /* 1.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.scs; sourceTree = "<group>"; };
+		25AB40452BDCB245009E735F /* 2.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.scs; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
@@ -254,9 +257,6 @@
 		25C5B1372B83B0CC00AB7114 /* 54.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 54.skc; sourceTree = "<group>"; };
 		25C5B1382B83B0CC00AB7114 /* 53.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53.skc; sourceTree = "<group>"; };
 		25C5B1392B83B0CC00AB7114 /* 52.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 52.skc; sourceTree = "<group>"; };
-		25C5B13C2B83B0CC00AB7114 /* 0.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0.scs; sourceTree = "<group>"; };
-		25C5B13D2B83B0CC00AB7114 /* 1.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.scs; sourceTree = "<group>"; };
-		25C5B13E2B83B0CC00AB7114 /* 2.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.scs; sourceTree = "<group>"; };
 		25C5B1402B83B0CC00AB7114 /* 58M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58M.spc; sourceTree = "<group>"; };
 		25C5B1412B83B0CC00AB7114 /* 60B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 60B.spc; sourceTree = "<group>"; };
 		25C5B1422B83B0CC00AB7114 /* 55B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 55B.spc; sourceTree = "<group>"; };
@@ -643,9 +643,9 @@
 		25C5B13B2B83B0CC00AB7114 /* sleep */ = {
 			isa = PBXGroup;
 			children = (
-				25C5B13C2B83B0CC00AB7114 /* 0.scs */,
-				25C5B13D2B83B0CC00AB7114 /* 1.scs */,
-				25C5B13E2B83B0CC00AB7114 /* 2.scs */,
+				25AB40432BDCB245009E735F /* 0.scs */,
+				25AB40442BDCB245009E735F /* 1.scs */,
+				25AB40452BDCB245009E735F /* 2.scs */,
 			);
 			path = sleep;
 			sourceTree = "<group>";
@@ -1335,7 +1335,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25C5B1562B83B0CD00AB7114 /* 2.scs in Resources */,
+				25AB40462BDCB292009E735F /* 0.scs in Resources */,
+				25AB40472BDCB292009E735F /* 1.scs in Resources */,
+				25AB40482BDCB292009E735F /* 2.scs in Resources */,
 				25C5B15A2B83B0CD00AB7114 /* 59B.spc in Resources */,
 				25C5B1532B83B0CD00AB7114 /* 52.skc in Resources */,
 				25C5B15E2B83B0CD00AB7114 /* 61M.spc in Resources */,
@@ -1354,11 +1356,9 @@
 				2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */,
 				25C5B14A2B83B0CC00AB7114 /* 60.skc in Resources */,
 				2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */,
-				25C5B1552B83B0CD00AB7114 /* 1.scs in Resources */,
 				25C5B15C2B83B0CD00AB7114 /* 57M.spc in Resources */,
 				25C5B1592B83B0CD00AB7114 /* 55B.spc in Resources */,
 				25C5B15D2B83B0CD00AB7114 /* 54B.spc in Resources */,
-				25C5B1542B83B0CD00AB7114 /* 0.scs in Resources */,
 				25C5B15B2B83B0CD00AB7114 /* 56M.spc in Resources */,
 				25C5B14C2B83B0CD00AB7114 /* 59.skc in Resources */,
 				25C5B14B2B83B0CC00AB7114 /* 61.skc in Resources */,
