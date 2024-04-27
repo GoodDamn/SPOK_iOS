@@ -173,7 +173,7 @@ final class ProfileNewViewController
         
         mBtnOpenAccess.urls = [
             "a": URLAction(
-                id: "https://spokapp.com/pay",
+                id: "",
                 action:
                     onClickBtnOpenFullAccess(_:)
             )

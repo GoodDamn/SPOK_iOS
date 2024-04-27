@@ -8,7 +8,7 @@
 import UIKit
 
 final class UIShitTextView
-    : UITextView {
+    : UIView {
     
     final var isUnderlinedText = false
     final var textImage: UIImage? {
@@ -17,17 +17,23 @@ final class UIShitTextView
         }
     }
     
-    final var paddingV: CGFloat = 15
-    final var paddingH: CGFloat = 15
+    final var isEditable = false {
+        didSet {
+            mTextView.isEditable = isEditable
+        }
+    }
     
-    final var urls: [String: URLAction]? = nil
-
-    private final var mAttachment = NSTextAttachment()
+    final var isSelectable = true {
+        didSet {
+            mTextView.isSelectable = isSelectable
+        }
+    }
     
-    private final var mParagraph =
-        NSMutableParagraphStyle()
+    final var textColor: UIColor? = .black
     
-    override var font: UIFont? {
+    final var font: UIFont? = .systemFont(
+        ofSize: 15.0
+    ) {
         didSet {
             guard let size = font?.pointSize else {
                 return
@@ -42,16 +48,42 @@ final class UIShitTextView
         }
     }
     
+    final var text: String? = nil
     
-    override var textAlignment: NSTextAlignment {
+    final var textAlignment
+        : NSTextAlignment = .left {
         didSet {
             mParagraph.alignment = textAlignment
         }
     }
     
+    final var paddingV: CGFloat = 15
+    final var paddingH: CGFloat = 15
+    
+    final var urls: [String: URLAction]? = nil
+
+    private final let mTextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.textContainerInset = .zero
+        textView.textContainer
+            .lineFragmentPadding = 0
+        return textView
+    }()
+    
+    private final var mAttachment = NSTextAttachment()
+    
+    private final var mParagraph =
+        NSMutableParagraphStyle()
+    
     public final func layout() {
         
-        delegate = self
+        if subviews.isEmpty {
+            addSubview(
+                mTextView
+            )
+            mTextView.delegate = self
+        }
         
         guard let text = text else {
             return
@@ -83,7 +115,13 @@ final class UIShitTextView
         
         if urls != nil {
             for u in urls! {
-                let r = attr.mutableString
+                
+                let r = u.value.id.isEmpty ?
+                NSRange(
+                    location: 0,
+                    length: attr.mutableString
+                        .length - 1
+                ) : attr.mutableString
                     .range(
                         of: u.value.id
                     )
@@ -108,7 +146,14 @@ final class UIShitTextView
             height: size.height + paddingV
         )
         
-        attributedText = attr
+        mTextView.frame = CGRect(
+            x: 0,
+            y: (frame.height - size.height) * 0.5,
+            width: frame.width,
+            height: size.height
+        )
+        
+        mTextView.attributedText = attr
     }
     
 }
