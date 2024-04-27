@@ -63,7 +63,7 @@ final class PremiumService {
             paymentType
         ) { [weak self] info in
             
-            print(
+            Log.d(
                 PremiumService.TAG,
                 "INFO:",
                 info
