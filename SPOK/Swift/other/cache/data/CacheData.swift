@@ -30,14 +30,13 @@ final class CacheData<T>
             }
             var data = data
             
-            DispatchQueue.global(
-                qos: .userInteractive
-            ).async {
+            DispatchQueue.back {
                 // Send new data
                 self?.delegate?.onNet(
                     data: &data
                 )
             }
+            
         }
     }
     

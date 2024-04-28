@@ -50,7 +50,7 @@ class CollectionDowloader
     }
     
     deinit {
-        print(TAG, "deinit()")
+        Log.d(TAG, "deinit()")
     }
     
     override func onUpdateCache() {
@@ -95,7 +95,7 @@ class CollectionDowloader
             [weak self] in
             
             guard let s = self else {
-                print("CollectionDownloader: download: self is garbage collected")
+                Log.d("CollectionDownloader: download: self is garbage collected")
                 return
             }
             
@@ -190,12 +190,12 @@ class CollectionDowloader
         ) { [weak self] data, error in
             
             guard let s = self else {
-                print("CollectionDownloader: getData:", items.index(), " self is garbage collected")
+                Log.d("CollectionDownloader: getData:", items.index(), " self is garbage collected")
                 return
             }
             
             if data == nil || error != nil {
-                print(s.TAG, "ERROR:DATA:",error)
+                Log.d(s.TAG, "ERROR:DATA:",error)
                 return
             }
             
@@ -224,7 +224,7 @@ class CollectionDowloader
     }
     
     private func loadCache() {
-        print(TAG,
+        Log.d(TAG,
               "loadCache:",
               mPathToSave
         )
@@ -232,7 +232,7 @@ class CollectionDowloader
         if !StorageApp.exists(
             at: mPathToSave
         ) {
-            print(TAG, "loadCache: not exists")
+            Log.d(TAG, "loadCache: not exists")
             return
         }
         
@@ -263,7 +263,7 @@ class CollectionDowloader
         _ c: inout [Collection]
     ) {
         guard var col = col else {
-            print(TAG, "data_nil: col: addCollection:")
+            Log.d(TAG, "data_nil: col: addCollection:")
             return
         }
         
@@ -273,7 +273,7 @@ class CollectionDowloader
         
         let height = cs + titleSize + cs * 0.193 + cs * 0.124
         
-        print(TAG, "addCollection:",col.title, col.topics)
+        Log.d(TAG, "addCollection:",col.title, col.topics)
         
         c.append(
             CollectionTopic(

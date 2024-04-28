@@ -52,14 +52,17 @@ class CacheFile<T>
             return
         }
         
-        DispatchQueue.global(
-            qos: .userInteractive
-        ).async {
+        DispatchQueue.back { [weak self] in
+            
+            guard let s = self else {
+                return
+            }
+            
             var cache = StorageApp
                 .file(
-                    path: self.mPathToSave
+                    path: s.mPathToSave
                 )
-            self.delegate?.onFile(
+            s.delegate?.onFile(
                 data: &cache
             )
         }

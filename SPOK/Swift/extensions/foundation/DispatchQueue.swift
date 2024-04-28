@@ -35,4 +35,14 @@ extension DispatchQueue {
         
     }
     
+    static func back(
+        _ c: @escaping () -> Void
+    ) {
+        DispatchQueue.global(
+            qos: .userInitiated
+        ).async(
+            execute: c
+        )
+    }
+    
 }
