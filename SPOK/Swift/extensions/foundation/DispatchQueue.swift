@@ -39,7 +39,7 @@ extension DispatchQueue {
         _ c: @escaping () -> Void
     ) {
         DispatchQueue.global(
-            qos: .userInitiated
+            qos: .userInteractive
         ).async(
             execute: c
         )

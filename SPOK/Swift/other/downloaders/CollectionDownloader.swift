@@ -60,13 +60,13 @@ class CollectionDowloader
                 list, error in
                 
                 guard let s = self else {
-                    print("CollectionDownloader: listAll: ARC collected")
+                    Log.d("CollectionDownloader: listAll: ARC collected")
                     return
                 }
                 
                 guard let list = list,
                       error == nil else {
-                    print(s.TAG, "ERROR_LIST:",error)
+                    Log.d(s.TAG, "ERROR_LIST:",error)
                     return
                 }
                 
