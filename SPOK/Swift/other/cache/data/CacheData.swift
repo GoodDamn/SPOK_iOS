@@ -30,7 +30,7 @@ final class CacheData<T>
             }
             var data = data
             
-            DispatchQueue.back {
+            DispatchQueue.interactive {
                 // Send new data
                 self?.delegate?.onNet(
                     data: &data

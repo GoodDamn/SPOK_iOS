@@ -52,7 +52,7 @@ class CacheFile<T>
             return
         }
         
-        DispatchQueue.back { [weak self] in
+        DispatchQueue.interactive { [weak self] in
             
             guard let s = self else {
                 return
