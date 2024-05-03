@@ -77,7 +77,7 @@ final class MainViewController
             desc: 0.066 * wm // 0.066
         )
         
-        Log.d("MainViewController::", "CARD_TEXT_SIZES:",
+        Log.d(TAG, "CARD_TEXT_SIZES:",
               "B:", MainViewController.mCardTextSizeB,
               "M:", MainViewController.mCardTextSizeM
         )
