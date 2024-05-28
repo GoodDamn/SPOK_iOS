@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PaymentProcess {
+final class PaymentProcess {
     
     private let mJson: [String : Any]
     
@@ -18,23 +18,38 @@ class PaymentProcess {
     }
     
     init(
-        payment: Payment
+        payment: Payment,
+        email: String
     ) {
+        let amountJS = [
+            "value": payment.price,
+            "currency": payment
+                .currency
+                .rawValue
+        ] as [String : Any]
+        
         mJson = [
-            "amount": [
-                "value": payment.price,
-                "currency": payment
-                    .currency
-                    .rawValue
-            ],
+            "amount": amountJS,
             "capture": payment
                 .withCapture,
             "confirmation": [
                 "type": "redirect",
                 "return_url": Keys.DEEP_LINK_SUB
             ],
-            "description": payment
-                .description
+            "receipt": [
+                "customer": [
+                    "email": email
+                ],
+                "items": [[
+                    "description": payment
+                        .description,
+                    "quantity": 1,
+                    "amount": amountJS,
+                    "vat_code": 1,
+                    "payment_mode": "full_payment",
+                    "payment_subject": "commodity"
+                ]]
+            ]
         ] as [String : Any]
     }
     

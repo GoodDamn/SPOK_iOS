@@ -11,9 +11,10 @@ class HttpUtils {
     
     public static func header(
     ) -> [String : String] {
-        let uuid = UUID().uuidString
+        let uuid = UUID()
+            .uuidString
         
-        print("HttpUtils:","header",uuid, Keys.AUTH)
+        Log.d("HttpUtils:","header",uuid, Keys.AUTH)
         
         return [
             "Authorization" : "Basic \(Keys.AUTH)",

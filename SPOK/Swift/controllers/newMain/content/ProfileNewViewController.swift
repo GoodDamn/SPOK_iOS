@@ -15,6 +15,16 @@ final class ProfileNewViewController
     
     private var mBtnOpenAccess: UITextButton!
     
+    private static let mPayment = Payment(
+        price: 169.00,
+        currency: .rub,
+        description: "Подписка SPOK на 1 месяц"
+    )
+    
+    private let mPaymentProcess = PaymentProcess(
+        payment: ProfileNewViewController.mPayment
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -195,6 +205,9 @@ final class ProfileNewViewController
             normHeight: 0.2
         )
         
+        mBtnOpenAccess.onClick =
+            onClickBtnOpenFullAccess(_:)
+        
         mBtnOpenAccess.frame.origin.y = imageView2.frame
             .bottom() + h * 0.03
         
@@ -304,8 +317,7 @@ final class ProfileNewViewController
         messageController?
             .pop()
         messageController = nil
-        ExternalPurchaseLinkCompat
-            .open()
+        startPayment()
     }
     
     override func onAuthError() {
@@ -343,8 +355,7 @@ extension ProfileNewViewController {
         sender.isUserInteractionEnabled = false
         
         if AuthUtils.user() != nil {
-            ExternalPurchaseLinkCompat
-                .open()
+            startPayment()
             sender.isUserInteractionEnabled = true
             return
         }
@@ -378,14 +389,14 @@ extension ProfileNewViewController {
         
         guard let url = URL(string: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
         ) else {
-            print("ProfileNewViewController", "URL_ERROR:")
+            Log.d("ProfileNewViewController", "URL_ERROR:")
             return
         }
         
         app.open(url) { success in
             
             if success {
-                print("SUCCESS")
+                Log.d("SUCCESS")
             }
             
         }
@@ -399,6 +410,41 @@ extension ProfileNewViewController {
             settings,
             animDuration: 0.3
         )
+    }
+    
+}
+
+extension ProfileNewViewController {
+    
+    private func startPayment() {
+        mPaymentProcess.start { [weak self]
+            snap in
+            
+            DispatchQueue.ui {
+                
+                let c =
+                WebConfirmationViewController()
+                c.mPaymentSnap = snap
+                
+                self?.pushBaseAnim(
+                    c,
+                    animDuration: 0.3
+                )
+            }
+        }
+    }
+    
+}
+
+extension ProfileNewViewController
+    : PaymentConfirmationListener {
+    
+    func onPaid() {
+        
+    }
+    
+    func onExitPayment() {
+        
     }
     
 }

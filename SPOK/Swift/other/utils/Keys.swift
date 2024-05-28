@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Keys {
+final class Keys {
     
     public static var AUTH = ""
     
