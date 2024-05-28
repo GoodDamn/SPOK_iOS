@@ -10,6 +10,28 @@ import UIKit.UIView
 
 extension UIView {
     
+    func shadow(
+        radius: CGFloat
+    ) {
+        layer.shadowOffset = CGSize(
+            width: 0.5,
+            height: 0.5
+        )
+        layer.shadowRadius = radius
+    }
+    
+    func shadow(
+        alpha: Float
+    ) {
+        layer.shadowOpacity = alpha
+    }
+    
+    func shadow(
+        color: UIColor?
+    ) {
+        layer.shadowColor = color?.cgColor
+    }
+    
     func alpha(
         duration: TimeInterval = 0.5,
         _ a: CGFloat,

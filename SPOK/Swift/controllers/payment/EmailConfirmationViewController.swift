@@ -21,12 +21,24 @@ final class EmailConfirmationViewController
         let w = view.frame.width
         let h = view.frame.height
         
+        let marginH = w * 0.2
+        let marginTop = h * 0.1
+        
+        let labelEmail = UILabela(
+            frame: CGRect(
+                x: marginH,
+                y: marginTop,
+                width: w - marginH,
+                height: 1
+            )
+        )
+        
         let textEmail = UITextField(
             frame: CGRect(
-                x: 0,
+                x: marginH,
                 y: 0,
-                width: w,
-                height: h * 0.15
+                width: w - marginH*2,
+                height: h * 0.08
             )
         )
         
@@ -35,27 +47,60 @@ final class EmailConfirmationViewController
                 text: "OK"
             )
         
+        labelEmail.text = "Отправить чек на:"
+        labelEmail.textColor = .white
+        labelEmail.font = .bold(
+            withSize: w * 0.08
+        )
+        
+        labelEmail.attribute()
+        labelEmail.sizeToFit()
+        
         textEmail.autocapitalizationType = .none
         textEmail.placeholder = "Email"
-        textEmail.borderStyle = .roundedRect
+        textEmail.backgroundColor = .background()
+        textEmail.textColor = .white
+        textEmail.layer.borderColor = UIColor.white.cgColor
+        textEmail.layer.borderWidth = textEmail.height() * 0.02
+        
+        textEmail.corner(
+            normHeight: 0.25
+        )
         
         LayoutUtils.textButton(
             for: textBtnConfirm,
             size: view.frame.size,
-            textSize: 0.027,
+            textSize: 0.024,
             paddingHorizontal: 0.3,
-            paddingVertical: 0.05
+            paddingVertical: 0.038
         )
         
+        labelEmail.centerH(
+            in: view
+        )
+        
+        textEmail.frame.origin.y =
+            labelEmail.bottomy() +
+            labelEmail.height() * 0.1
+        
         textBtnConfirm.frame.origin.y =
-            textEmail.frame.height
+            textEmail.bottomy() +
+            textEmail.height() * 0.1
         
         textBtnConfirm.centerH(
             in: view
         )
         
+        textBtnConfirm.corner(
+            normHeight: 0.35
+        )
+        
         view.addSubview(
             textEmail
+        )
+        
+        view.addSubview(
+            labelEmail
         )
         
         view.addSubview(
