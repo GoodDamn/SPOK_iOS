@@ -12,6 +12,24 @@ final class DatabaseUtils {
     
     public static let TAG = "DatabaseUtils"
     
+    public static func pirate(
+        completion: @escaping (Bool) -> Void
+    ) {
+        let ref = Database
+            .database()
+            .reference(
+                withPath: "pir"
+            )
+        
+        ref.observeSingleEvent(
+            of: .value
+        ) { snap in
+            completion(
+                snap.exists()
+            )
+        }
+    }
+    
     public static func time(
         completion: @escaping (Int) -> Void
     ) {
@@ -40,7 +58,7 @@ final class DatabaseUtils {
             return nil
         }
         
-        print(
+        Log.d(
             DatabaseUtils.TAG,
             "USER_ID:",
             id
