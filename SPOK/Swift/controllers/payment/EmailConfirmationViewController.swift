@@ -21,7 +21,7 @@ final class EmailConfirmationViewController
         let w = view.frame.width
         let h = view.frame.height
         
-        let marginH = w * 0.2
+        let marginH = w * 0.13
         let marginTop = h * 0.1
         
         let labelEmail = UILabela(
@@ -33,7 +33,7 @@ final class EmailConfirmationViewController
             )
         )
         
-        let textEmail = UITextField(
+        let textEmail = UIEditText(
             frame: CGRect(
                 x: marginH,
                 y: 0,
@@ -61,7 +61,7 @@ final class EmailConfirmationViewController
         textEmail.backgroundColor = .background()
         textEmail.textColor = .white
         textEmail.layer.borderColor = UIColor.white.cgColor
-        textEmail.layer.borderWidth = textEmail.height() * 0.02
+        textEmail.layer.borderWidth = textEmail.height() * 0.01
         
         textEmail.corner(
             normHeight: 0.25
@@ -81,11 +81,11 @@ final class EmailConfirmationViewController
         
         textEmail.frame.origin.y =
             labelEmail.bottomy() +
-            labelEmail.height() * 0.1
+            labelEmail.height() * 0.5
         
         textBtnConfirm.frame.origin.y =
             textEmail.bottomy() +
-            textEmail.height() * 0.1
+            textEmail.height() * 0.5
         
         textBtnConfirm.centerH(
             in: view

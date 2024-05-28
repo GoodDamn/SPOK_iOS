@@ -101,6 +101,7 @@
 		25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */; };
 		25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */; };
 		25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSAttributedString.swift */; };
+		25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B3DC2C05B388007F156C /* UIEditText.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
 		25F94ACD2B6D181F00FC8A32 /* SignInAppleListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */; };
 		25F94ACF2B6D28F000FC8A32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */; };
@@ -278,6 +279,7 @@
 		25DB9ACA2B57CC1600B5359F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRowView.swift; sourceTree = "<group>"; };
 		25EA75402B87B6E1003FC583 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		25F3B3DC2C05B388007F156C /* UIEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditText.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
 		25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleListener.swift; sourceTree = "<group>"; };
 		25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 				25AB403D2BCAD39B009E735F /* UIImageButton.swift */,
 				25AB403F2BCAD500009E735F /* UIViewListenable.swift */,
 				25AB40412BDA05C3009E735F /* UIShitTextView.swift */,
+				25F3B3DC2C05B388007F156C /* UIEditText.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				2B04493A280C03AF00ADA8B5 /* CollectionTableViewCell.swift in Sources */,
 				256940962B6672620005BFCC /* UILabela.swift in Sources */,
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
+				25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */,
 				25F94AFE2B700F6300FC8A32 /* PaymentConfirmationListener.swift in Sources */,
 				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
 				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
