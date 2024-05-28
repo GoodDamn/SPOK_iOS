@@ -34,13 +34,12 @@ final class PremiumService {
                     .setUserValue(
                         payIdTemp!,
                         to: Keys.ID_PAYMENT
-                    )
-                
-                DatabaseUtils
-                    .deleteUserValue(
-                        key: Keys.ID_PAYMENT_TEMP
-                    )
-                
+                    ) {
+                        DatabaseUtils
+                            .deleteUserValue(
+                                key: Keys.ID_PAYMENT_TEMP
+                            )
+                    }
                 self?.mOnCheckPremium?(withSub)
                 return
             }

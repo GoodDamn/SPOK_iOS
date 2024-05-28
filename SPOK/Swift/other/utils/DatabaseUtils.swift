@@ -63,11 +63,26 @@ final class DatabaseUtils {
     
     public static func setUserValue(
         _ value: Any,
-        to: String
+        to: String,
+        completion: (() -> Void)? = nil
     ) {
         user()?
             .child(to)
-            .setValue(value)
+            .setValue(
+                value,
+                withCompletionBlock: {
+                    error, ref in
+                    if error != nil {
+                        Log.d(
+                            DatabaseUtils.TAG,
+                            "ERROR: setUserValue",
+                            error
+                        )
+                        return
+                    }
+                    completion?()
+                }
+            )
     }
     
     public static func userValue(

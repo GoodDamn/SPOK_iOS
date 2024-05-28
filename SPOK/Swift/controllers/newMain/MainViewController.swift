@@ -16,6 +16,7 @@ final class MainViewController
     
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
+    public static var mCanPay = false
     
     public static var mBuildNumber = -1
     public static var mBuildNumberOld = -2
@@ -399,6 +400,8 @@ extension MainViewController {
                 withSub in
                 
                 MainViewController.mIsPremiumUser = withSub
+                
+                MainViewController.mCanPay = true
                 
                 if withSub {
                     DispatchQueue.ui {

@@ -345,6 +345,16 @@ extension ProfileNewViewController {
     private func onClickBtnOpenFullAccess(
         _ sender: UIView
     ) {
+        
+        if !MainViewController
+            .mCanPay {
+            Toast.init(
+                text: "Проверка подписки",
+                duration: 1.5
+            ).show()
+            return
+        }
+        
         if MainViewController
             .mIsPremiumUser {
             Toast.init(
