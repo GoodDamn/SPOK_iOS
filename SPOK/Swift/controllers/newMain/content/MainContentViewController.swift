@@ -69,7 +69,6 @@ class MainContentViewController
         }
         
         createTab(systemNameImage: "house", imageSize: imageSize);
-        /*createTab(systemNameImage: "magnifyingglass", imageSize: imageSize);*/
         createTab(
             systemNameImage: "person.fill",
             imageSize: imageSize
@@ -90,7 +89,7 @@ class MainContentViewController
         
         mPageView?.source = [
             HomeViewController(),
-            ProfileNewViewController()
+            false ? SettingsViewController() : ProfileNewViewController()
         ]
         
         addChild(

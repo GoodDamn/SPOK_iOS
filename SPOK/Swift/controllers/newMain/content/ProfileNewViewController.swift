@@ -13,7 +13,7 @@ final class ProfileNewViewController
     
     private var messageController: MessageViewController? = nil
     
-    private var mBtnOpenAccess: UIShitTextView!
+    private var mBtnOpenAccess: UITextButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,7 +160,7 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        mBtnOpenAccess = UIShitTextView(
+        mBtnOpenAccess = UITextButton(
             frame: CGRect(
                 x: 0,
                 y: 0,
@@ -169,37 +169,23 @@ final class ProfileNewViewController
             )
         )
         
-        mBtnOpenAccess.text = "Оплата подписки на сайте:\nhttps://spokapp.com/pay $i"
-        
-        mBtnOpenAccess.urls = [
-            "a": URLAction(
-                id: "",
-                action:
-                    onClickBtnOpenFullAccess(_:)
-            )
-                
-        ]
-        
-        mBtnOpenAccess.textColor = .white
-        mBtnOpenAccess.font = bold
-        
-        mBtnOpenAccess.backgroundColor = .accent()
-        mBtnOpenAccess.textAlignment = .center
-        mBtnOpenAccess.isSelectable = true
-        mBtnOpenAccess.isEditable = false
-        mBtnOpenAccess.isUnderlinedText = true
-        
-        mBtnOpenAccess.textImage = UIImage(
-            named: "link"
+        mBtnOpenAccess = ViewUtils.textButton(
+            text: "Получить полный доступ"
         )
         
-        LayoutUtils.shitTextView(
+        LayoutUtils.textButton(
             for: mBtnOpenAccess,
             size: view.frame.size,
             textSize: 0.017,
             paddingHorizontal: 0.18,
             paddingVertical: 0.03
         )
+        
+        mBtnOpenAccess.textColor = .white
+        mBtnOpenAccess.font = bold
+        
+        mBtnOpenAccess.backgroundColor = .accent()
+        mBtnOpenAccess.textAlignment = .center
         
         mBtnOpenAccess.centerH(
             in: view

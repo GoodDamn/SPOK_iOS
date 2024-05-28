@@ -46,11 +46,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>SKExternalPurchaseLink</key>
-	<dict>
-		<key>ru</key>
-		<string>https://spokapp.com/pay</string>
-	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-SemiBold.ttf</string>

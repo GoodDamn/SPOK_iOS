@@ -12,7 +12,7 @@ import Network
 final class MainViewController
     : UIViewController {
     
-    private static let TAG = "MainViewController:"
+    private let TAG = "MainViewController:"
     
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
