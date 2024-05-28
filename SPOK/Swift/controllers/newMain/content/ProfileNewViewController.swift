@@ -21,8 +21,10 @@ final class ProfileNewViewController
         description: "Подписка SPOK на 1 месяц"
     )
     
-    private let mPaymentProcess = PaymentProcess(
-        payment: ProfileNewViewController.mPayment
+    private var mPaymentProcess = PaymentProcess(
+        payment: ProfileNewViewController
+            .mPayment,
+        email: ""
     )
     
     override func viewDidLoad() {
@@ -416,14 +418,21 @@ extension ProfileNewViewController {
 
 extension ProfileNewViewController {
     
-    private func startPayment() {
+    private func onGetEmail(
+        email: String
+    ) {
+        mPaymentProcess = PaymentProcess(
+            payment: ProfileNewViewController.mPayment,
+            email: email
+        )
+        
         mPaymentProcess.start { [weak self]
             snap in
             
             DispatchQueue.ui {
-                
                 let c =
                 WebConfirmationViewController()
+                c.mPaymentListener = self
                 c.mPaymentSnap = snap
                 
                 self?.pushBaseAnim(
@@ -434,13 +443,28 @@ extension ProfileNewViewController {
         }
     }
     
+    private func startPayment() {
+        let c = EmailConfirmationViewController()
+        
+        c.onConfirmEmail = onGetEmail(email:)
+        
+        present(
+            c,
+            animated: true
+        )
+    }
+    
 }
 
 extension ProfileNewViewController
     : PaymentConfirmationListener {
     
     func onPaid() {
-        
+        DispatchQueue.ui { [weak self] in
+            MainViewController.mIsPremiumUser =
+                true
+            self?.callUpdatePremium()
+        }
     }
     
     func onExitPayment() {

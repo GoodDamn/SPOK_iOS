@@ -28,6 +28,8 @@ final class PaymentProcess {
                 .rawValue
         ] as [String : Any]
         
+        // I hope, It optimizet by the compiler to
+        // static vars
         mJson = [
             "amount": amountJS,
             "capture": payment

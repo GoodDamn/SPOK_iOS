@@ -172,7 +172,7 @@ extension WebConfirmationViewController
             return
         }
         
-        print(
+        Log.d(
             "WebView: LINK_URL:",
             redirUrl
         )
