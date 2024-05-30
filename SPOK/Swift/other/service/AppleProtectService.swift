@@ -46,7 +46,7 @@ final class AppleProtectService {
                 forKey: Keys
                     .USER_DEF_APPLE_CHECK
             )
-            
+                        
             def.setValue(
                 self?.mCurrentTime,
                 forKey: Keys

@@ -10,11 +10,15 @@ import FirebaseCore
 import FirebaseMessaging
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    private final let TAG = "AppDelegate:"
+class AppDelegate
+    : UIResponder,
+      UIApplicationDelegate {
     
     public static var mDoAppleCheck = true
+    
+    private var mProtectService:
+        AppleProtectService? =
+        AppleProtectService()
     
     var window: UIWindow?;
     
@@ -32,15 +36,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messaging?.delegate = self
         messaging?.isAutoInitEnabled = true
         
-        let protect = AppleProtectService()
+        Log.d(
+            AppDelegate.self,
+            "time for update protect:",
+            mProtectService?
+                .isTimeForUpdateState()
+        )
         
-        if !protect.isTimeForUpdateState() {
+        if !(mProtectService?
+            .isTimeForUpdateState() ?? false) {
             return true
         }
         
-        protect.updateAppleState {
-            hasApple in
+        mProtectService!.updateAppleState {
+            [weak self] hasApple in
             AppDelegate.mDoAppleCheck = hasApple
+            self?.mProtectService = nil
         }
         
         return true
@@ -82,8 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        print(
-            TAG,
+        Log.d(
+            AppDelegate.self,
             "DEVICE_TOKEN:",
             deviceToken,
             messaging
@@ -95,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
         Log.d(
-            TAG,
+            AppDelegate.self,
             "FAIL_REGISTER_REMOTE_NOTIFICATION:",
             error
         )
@@ -111,7 +122,7 @@ extension AppDelegate
         didReceiveRegistrationToken fcmToken: String?
     ) {
         Log.d(
-            TAG,
+            AppDelegate.self,
             "messaging(didReceiveRegistrationToken): ",
             fcmToken?.description
         )

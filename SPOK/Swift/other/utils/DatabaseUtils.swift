@@ -10,8 +10,6 @@ import FirebaseDatabase
 
 final class DatabaseUtils {
     
-    public static let TAG = "DatabaseUtils"
-    
     public static func pirate(
         completion: @escaping (Bool) -> Void
     ) {
@@ -59,7 +57,7 @@ final class DatabaseUtils {
         }
         
         Log.d(
-            DatabaseUtils.TAG,
+            DatabaseUtils.self,
             "USER_ID:",
             id
         )
@@ -92,7 +90,7 @@ final class DatabaseUtils {
                     error, ref in
                     if error != nil {
                         Log.d(
-                            DatabaseUtils.TAG,
+                            DatabaseUtils.self,
                             "ERROR: setUserValue",
                             error
                         )
@@ -136,7 +134,7 @@ final class DatabaseUtils {
             
             guard let apikey = snap.value as? String else {
                 Log.d(
-                    DatabaseUtils.TAG,
+                    DatabaseUtils.self,
                     "apiKey: INVALID"
                 )
                 return
