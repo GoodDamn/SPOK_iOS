@@ -11,17 +11,31 @@ final class AppleProtectService {
     
     private static let INTERVAL: TimeInterval = 604800
     
+    private let mCurrentTime: TimeInterval
+    
+    init() {
+        mCurrentTime = Date()
+            .timeIntervalSince1970
+    }
+    
+    deinit {
+        Log.d(
+            AppleProtectService.self,
+            "deinit()"
+        )
+    }
+    
     func isTimeForUpdateState() -> Bool {
         let time = UserDefaults.standard
             .timeForAppleCheck()
         
-        let currentTime = Date().timeIntervalSince1970
-        
-        return currentTime - time > AppleProtectService.INTERVAL
+        return mCurrentTime - time > AppleProtectService.INTERVAL
     }
     
-    func updateAppleState() {
-        DatabaseUtils.pirate {
+    func updateAppleState(
+        completion: ((Bool) -> Void)? = nil
+    ) {
+        DatabaseUtils.pirate { [weak self]
             doAppleCheck in
             
             let def = UserDefaults
@@ -29,8 +43,17 @@ final class AppleProtectService {
             
             def.setValue(
                 doAppleCheck,
-                forKey: Keys.USER_DEF_APPLE_CHECK
+                forKey: Keys
+                    .USER_DEF_APPLE_CHECK
             )
+            
+            def.setValue(
+                self?.mCurrentTime,
+                forKey: Keys
+                    .USER_DEF_APPLE_PREV_TIME
+            )
+            
+            completion?(doAppleCheck)
         }
     }
     

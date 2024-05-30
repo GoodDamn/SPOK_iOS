@@ -32,9 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messaging?.delegate = self
         messaging?.isAutoInitEnabled = true
         
-        AppDelegate.mDoAppleCheck =
-            AppleProtectService()
-            .appleExists()
+        let protect = AppleProtectService()
+        
+        if !protect.isTimeForUpdateState() {
+            return true
+        }
+        
+        protect.updateAppleState {
+            hasApple in
+            AppDelegate.mDoAppleCheck = hasApple
+        }
         
         return true
     }
