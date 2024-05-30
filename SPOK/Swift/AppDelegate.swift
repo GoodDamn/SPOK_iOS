@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private final let TAG = "AppDelegate:"
     
+    public static var mDoAppleCheck = true
+    
     var window: UIWindow?;
     
     var messaging: Messaging? = nil;
@@ -29,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         messaging?.delegate = self
         messaging?.isAutoInitEnabled = true
+        
+        AppDelegate.mDoAppleCheck =
+            AppleProtectService()
+            .appleExists()
         
         return true
     }
@@ -81,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print(
+        Log.d(
             TAG,
             "FAIL_REGISTER_REMOTE_NOTIFICATION:",
             error
@@ -97,7 +103,7 @@ extension AppDelegate
         _ messaging: Messaging,
         didReceiveRegistrationToken fcmToken: String?
     ) {
-        print(
+        Log.d(
             TAG,
             "messaging(didReceiveRegistrationToken): ",
             fcmToken?.description

@@ -17,6 +17,18 @@ extension UserDefaults {
         )
     }
     
+    func timeForAppleCheck() -> TimeInterval {
+        return double(
+            forKey: Keys.USER_DEF_APPLE_PREV_TIME
+        )
+    }
+    
+    func doAppleCheck() -> Bool {
+        return bool(
+            forKey: Keys.USER_DEF_APPLE_CHECK
+        )
+    }
+    
     func userID() -> String? {
         return string(
             forKey: Keys.USER_REF

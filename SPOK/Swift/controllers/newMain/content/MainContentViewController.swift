@@ -28,7 +28,7 @@ class MainContentViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(TAG, "viewDidLoad()")
+        Log.d(TAG, "viewDidLoad()")
         
         let b = UIScreen
             .main
@@ -60,7 +60,7 @@ class MainContentViewController
         
         mNavBar.mOffset = 30;
         mNavBar.mTintColorSelected = UIColor(
-            named:"AccentColor"
+            named: "AccentColor"
         );
         
         mNavBar.mOnSelectTab = { index in
@@ -89,7 +89,9 @@ class MainContentViewController
         
         mPageView?.source = [
             HomeViewController(),
-            false ? SettingsViewController() : ProfileNewViewController()
+            AppDelegate.mDoAppleCheck
+                ? SettingsViewController()
+                : ProfileNewViewController()
         ]
         
         addChild(
@@ -109,7 +111,7 @@ class MainContentViewController
     }
     
     override func viewDidLayoutSubviews() {
-        print("MainContentViewController", "viewDidLayout:")
+        Log.d("MainContentViewController", "viewDidLayout:")
         mPageView?.view.frame = CGRect(
             x: 0,
             y: 0,
@@ -139,6 +141,9 @@ class MainContentViewController
         
     }
     
+}
+
+extension MainContentViewController {
     private func createTab(
         systemNameImage: String,
         imageSize: CGSize
@@ -229,5 +234,4 @@ class MainContentViewController
             popup.view.alpha = 1
         }
     }
-    
 }
