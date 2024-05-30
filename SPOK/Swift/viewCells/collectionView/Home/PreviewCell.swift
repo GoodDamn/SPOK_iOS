@@ -114,20 +114,6 @@ final class PreviewCell
             .addSubview(mDesc)
         contentView
             .addSubview(mParticles)
-        
-        let g = UITapGestureRecognizer(
-            target: self,
-            action: #selector(
-                onTap(_:)
-            )
-        )
-        
-        g.numberOfTapsRequired = 1
-        
-        contentView.addGestureRecognizer(
-            g
-        )
-        
     }
     
     override init(frame: CGRect) {
@@ -143,9 +129,14 @@ final class PreviewCell
         Log.d(PreviewCell.TAG, "init(coder:)")
     }
     
-    @objc func onTap(
-        _ sender: UITapGestureRecognizer
+    override func touchesEnded(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
     ) {
+        guard let _ = touches.first else {
+            return
+        }
+        
         guard let s = mCache?.object else {
             return
         }
@@ -206,6 +197,9 @@ final class PreviewCell
         mCache?.load()
     }
     
+}
+
+extension PreviewCell {
     private func calculateBounds() {
         Log.d(
             PreviewCell.TAG,
@@ -323,7 +317,6 @@ final class PreviewCell
         }
         
     }
-    
 }
 
 extension PreviewCell
