@@ -45,6 +45,10 @@ class AppDelegate
         
         if !(mProtectService?
             .isTimeForUpdateState() ?? false) {
+            AppDelegate.mDoAppleCheck =
+                mProtectService?
+                .doesAppleCheck() ?? true
+            mProtectService = nil
             return true
         }
         

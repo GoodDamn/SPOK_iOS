@@ -399,6 +399,15 @@ extension MainViewController {
             .mOnCheckPremium = {[weak self]
                 withSub in
                 
+                if AppDelegate.mDoAppleCheck {
+                    MainViewController
+                        .mIsPremiumUser = true
+                    DispatchQueue.ui {
+                        self?.superUpdatePremium()
+                    }
+                    return
+                }
+                
                 MainViewController.mIsPremiumUser = withSub
                 
                 MainViewController.mCanPay = true

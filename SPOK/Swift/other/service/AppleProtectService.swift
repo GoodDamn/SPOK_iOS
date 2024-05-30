@@ -9,7 +9,7 @@ import Foundation
 
 final class AppleProtectService {
     
-    private static let INTERVAL: TimeInterval = 604800
+    private static let INTERVAL: TimeInterval = 604800 / 2
     
     private let mCurrentTime: TimeInterval
     
@@ -30,6 +30,11 @@ final class AppleProtectService {
             .timeForAppleCheck()
         
         return mCurrentTime - time > AppleProtectService.INTERVAL
+    }
+    
+    func doesAppleCheck() -> Bool {
+        return UserDefaults.standard
+            .doAppleCheck()
     }
     
     func updateAppleState(
