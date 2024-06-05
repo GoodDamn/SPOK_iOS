@@ -14,12 +14,6 @@ class AppDelegate
     : UIResponder,
       UIApplicationDelegate {
     
-    public static var mDoAppleCheck = true
-    
-    private var mProtectService:
-        AppleProtectService? =
-        AppleProtectService()
-    
     var window: UIWindow?;
     
     var messaging: Messaging? = nil;
@@ -35,28 +29,6 @@ class AppDelegate
         
         messaging?.delegate = self
         messaging?.isAutoInitEnabled = true
-        
-        Log.d(
-            AppDelegate.self,
-            "time for update protect:",
-            mProtectService?
-                .isTimeForUpdateState()
-        )
-        
-        if !(mProtectService?
-            .isTimeForUpdateState() ?? false) {
-            AppDelegate.mDoAppleCheck =
-                mProtectService?
-                .doesAppleCheck() ?? true
-            mProtectService = nil
-            return true
-        }
-        
-        mProtectService!.updateAppleState {
-            [weak self] hasApple in
-            AppDelegate.mDoAppleCheck = hasApple
-            self?.mProtectService = nil
-        }
         
         return true
     }

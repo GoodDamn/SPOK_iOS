@@ -17,6 +17,7 @@ final class MainViewController
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
     public static var mCanPay = false
+    public static var mDoAppleCheck = true
     
     public static var mBuildNumber = -1
     public static var mBuildNumberOld = -2
@@ -28,6 +29,9 @@ final class MainViewController
     
     private let mPremiumService =
         PremiumService()
+    
+    private var mProtectService: AppleProtectService? =
+        AppleProtectService()
     
     private var mControllers: [StackViewController] = []
     
@@ -43,7 +47,22 @@ final class MainViewController
         view.backgroundColor = UIColor
             .background()
         
-        checkSub()
+        checkApple { [weak self]
+            appleChecks in
+            
+            DispatchQueue.ui {
+                self?.superUpdateAppleCheck()
+            }
+            
+            if appleChecks {
+                MainViewController.mIsPremiumUser = true
+                DispatchQueue.ui {
+                    self?.superUpdatePremium()
+                }
+                return
+            }
+            self?.checkSub()
+        }
         
         let mScreen = UIScreen
             .main
@@ -258,9 +277,9 @@ extension MainViewController {
         }
     }
     
-    public final func superUpdateState() {
+    public final func superUpdateAppleCheck() {
         for c in mControllers {
-            c.updateState()
+            c.updateAppleCheck()
         }
     }
     
@@ -393,23 +412,50 @@ extension MainViewController {
         
     }
     
+    private func checkApple(
+        completion: ((Bool)-> Void)? = nil
+    ) {
+        Log.d(
+            AppDelegate.self,
+            "time for update protect:",
+            mProtectService?
+                .isTimeForUpdateState()
+        )
+                
+        if !(mProtectService?
+            .isTimeForUpdateState() ?? false) {
+            
+            let appleChecks = mProtectService?
+                .doesAppleCheck() ?? true
+            
+            MainViewController.mDoAppleCheck =
+                appleChecks
+            
+            completion?(
+                appleChecks
+            )
+            
+            mProtectService = nil
+            return
+        }
+        
+        mProtectService!.updateAppleState {
+            [weak self] hasApple in
+            MainViewController.mDoAppleCheck = hasApple
+            completion?(
+                hasApple
+            )
+            self?.mProtectService = nil
+        }
+    }
+    
     private func checkSub() {
         
         mPremiumService
             .mOnCheckPremium = {[weak self]
                 withSub in
                 
-                if AppDelegate.mDoAppleCheck {
-                    MainViewController
-                        .mIsPremiumUser = true
-                    DispatchQueue.ui {
-                        self?.superUpdatePremium()
-                    }
-                    return
-                }
-                
                 MainViewController.mIsPremiumUser = withSub
-                
                 MainViewController.mCanPay = true
                 
                 if withSub {

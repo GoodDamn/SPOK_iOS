@@ -8,7 +8,7 @@
 import UIKit;
 import FirebaseDatabase;
 
-class MainContentViewController
+final class MainContentViewController
     : StackViewController {
     
     private let TAG = "MainContentViewController:";
@@ -89,7 +89,7 @@ class MainContentViewController
         
         mPageView?.source = [
             HomeViewController(),
-            AppDelegate.mDoAppleCheck
+            MainViewController.mDoAppleCheck
                 ? SettingsViewController()
                 : ProfileNewViewController()
         ]
@@ -120,6 +120,21 @@ class MainContentViewController
         )
         
         super.viewDidLayoutSubviews()
+    }
+    
+    override func onUpdateAppleCheck() {
+        let appleChecks = MainViewController.mDoAppleCheck
+        Log.d(
+            TAG,
+            "onUpdateAppleCheck:",
+            appleChecks
+        )
+        
+        if appleChecks || mPageView == nil {
+            return
+        }
+        
+        mPageView?.source[1] = ProfileNewViewController()
     }
     
     override func onUpdatePremium() {

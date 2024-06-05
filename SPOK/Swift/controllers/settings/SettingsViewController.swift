@@ -124,7 +124,7 @@ final class SettingsViewController
         ]
         
         let lSettings = UILabel(
-            frame: CGRect(
+            frame: CGRect(s
                 x: 0,
                 y: btnClose.frame
                     .origin.y,

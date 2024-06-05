@@ -45,8 +45,8 @@ class StackViewController
         onUpdatePremium()
     }
     
-    public final func updateState() {
-        onUpdateState()
+    public final func updateAppleCheck() {
+        onUpdateAppleCheck()
     }
     
     public final func transitionEnd() {
@@ -134,5 +134,5 @@ class StackViewController
     
     internal func onTransitionEnd() {}
     internal func onUpdatePremium() {}
-    internal func onUpdateState() {}
+    internal func onUpdateAppleCheck() {}
 }
