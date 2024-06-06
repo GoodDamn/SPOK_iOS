@@ -15,6 +15,9 @@ final class SettingsViewController
     
     private var mTableOptions: OptionsTableView!
     
+    private var mOptionNotify: Option!
+    private var mOptionRate: Option!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -56,6 +59,28 @@ final class SettingsViewController
                 height: hbtnDelete * 0.38
             )
         )
+    
+        mOptionNotify = Option(
+            image: UIImage(
+                systemName: "bell.fill"
+            ),
+            text: "Уведомления",
+            textColor: .white,
+            iconColor: .accent(),
+            withView: mSwitcher,
+            select: nil
+        )
+        
+        mOptionRate = Option(
+            image: UIImage(
+                systemName: "star.fill"
+            ),
+            text: "Оценить приложение",
+            textColor: .white,
+            iconColor: .accent(),
+            withView: nil,
+            select: onClickBtnRate
+        )
         
         mSwitcher.addTarget(
             self,
@@ -79,28 +104,23 @@ final class SettingsViewController
                 == .authorized
             }
         }
-                
-        let options = [
+        
+        let options: [Option] = AuthUtils.user() == nil ? [
+            mOptionNotify,
+            mOptionRate,
             Option(
                 image: UIImage(
-                    systemName: "bell.fill"
+                    named: "login"
                 ),
-                text: "Уведомления",
-                textColor: .white,
-                iconColor: .accent(),
-                withView: mSwitcher,
-                select: nil
-            ),
-            Option(
-                image: UIImage(
-                    systemName: "star.fill"
-                ),
-                text: "Оценить приложение",
+                text: "Войти в аккаунт",
                 textColor: .white,
                 iconColor: .accent(),
                 withView: nil,
-                select: onClickBtnRate
-            ),
+                select: onClickBtnSignIn
+            )
+        ] : [
+            mOptionNotify,
+            mOptionRate,
             Option(
                 image: UIImage(
                     named: "login"
@@ -124,7 +144,7 @@ final class SettingsViewController
         ]
         
         let lSettings = UILabel(
-            frame: CGRect(s
+            frame: CGRect(
                 x: 0,
                 y: btnClose.frame
                     .origin.y,
@@ -232,6 +252,10 @@ extension SettingsViewController {
     ) {
         view.isUserInteractionEnabled = false
         popBaseAnim()
+    }
+    
+    private func onClickBtnSignIn() {
+        
     }
     
     private func onClickBtnDelete() {
