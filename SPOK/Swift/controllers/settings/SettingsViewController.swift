@@ -11,7 +11,7 @@ import FirebaseAuth
 import StoreKit
 
 final class SettingsViewController
-    : SignInAppleController {
+    : AuthAppleController {
     
     private var mTableOptions: OptionsTableView!
     
@@ -21,8 +21,6 @@ final class SettingsViewController
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        mSignListener = self
-        
         view.backgroundColor = .background()
         
         let bold = UIFont
@@ -255,7 +253,7 @@ extension SettingsViewController {
     }
     
     private func onClickBtnSignIn() {
-        
+        signIn()
     }
     
     private func onClickBtnDelete() {
@@ -295,86 +293,6 @@ extension SettingsViewController {
             }
             exit(0)
         }
-        
-    }
-    
-}
-
-extension SettingsViewController
-    : SignInListener {
-    
-    func onSuccessSign(
-        token: String,
-        nonce: String,
-        authCode: String
-    ) {
-        
-        let auth = Auth.auth()
-        
-        let credentials = OAuthProvider.credential(
-            withProviderID: "apple.com",
-            idToken: token,
-            rawNonce: nonce
-        )
-        
-        auth.currentUser?.reauthenticate(
-            with: credentials
-        ) { authData, error in
-            
-            guard let authData = authData,
-                error == nil else {
-                print(
-                    "SettingsViewController: REAUTH:",
-                    error
-                )
-                return
-            }
-            
-            auth.revokeToken(
-                withAuthorizationCode: authCode
-            ) { error in
-                Log.d(
-                    "SettingsViewController: REVOKE: ERROR",
-                    error?.localizedDescription
-                )
-            }
-            
-            DatabaseUtils
-                .user()?
-                .removeValue()
-            
-            do {
-                try auth.signOut()
-                UserDefaults
-                    .standard
-                    .removeObject(
-                        forKey: Keys
-                            .USER_REF
-                    )
-            } catch {
-                Log.d(
-                    "SettingsViewController:",
-                    "SIGN_OUT_ERROR:",
-                    error.localizedDescription
-                )
-            }
-            
-            authData.user
-                .delete { error in
-                    Log.d(
-                        "SettingsViewController: DELETE_USER:",
-                        error?.localizedDescription
-                    )
-                    
-                    exit(0)
-                }
-        }
-        
-    }
-    
-    func onErrorSign(
-        _ msg: String
-    ) {
         
     }
     

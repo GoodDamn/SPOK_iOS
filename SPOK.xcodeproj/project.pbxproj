@@ -56,6 +56,9 @@
 		257D81222BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */; };
 		257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257D81252BC1810900B5743B /* LaunchScreen.storyboard */; };
 		257D81282BC18BA900B5743B /* SignInAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81272BC18BA900B5743B /* SignInAppleController.swift */; };
+		257F7AD12C12BAAD00420F4E /* AuthMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD02C12BAAD00420F4E /* AuthMethod.swift */; };
+		257F7AD32C12BBF800420F4E /* AuthMethodReauth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */; };
+		257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
@@ -235,6 +238,9 @@
 		257D81212BC17DF100B5743B /* ExternalPurchaseLinkCompat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalPurchaseLinkCompat.swift; sourceTree = "<group>"; };
 		257D81252BC1810900B5743B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		257D81272BC18BA900B5743B /* SignInAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleController.swift; sourceTree = "<group>"; };
+		257F7AD02C12BAAD00420F4E /* AuthMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethod.swift; sourceTree = "<group>"; };
+		257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodReauth.swift; sourceTree = "<group>"; };
+		257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodSignIn.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -587,6 +593,16 @@
 			path = compat;
 			sourceTree = "<group>";
 		};
+		257F7ACF2C12BA9B00420F4E /* methods */ = {
+			isa = PBXGroup;
+			children = (
+				257F7AD02C12BAAD00420F4E /* AuthMethod.swift */,
+				257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */,
+				257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */,
+			);
+			path = methods;
+			sourceTree = "<group>";
+		};
 		258B792E2B80F5BD0049304E /* contentKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -656,6 +672,7 @@
 		25D32DDE2B6901E300EAEA20 /* auth */ = {
 			isa = PBXGroup;
 			children = (
+				257F7ACF2C12BA9B00420F4E /* methods */,
 				25F94AE32B6E606C00FC8A32 /* protocols */,
 				25F94AE02B6E5E8400FC8A32 /* apple */,
 				257D81272BC18BA900B5743B /* SignInAppleController.swift */,
@@ -1394,6 +1411,7 @@
 				25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */,
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
 				25D476182B7B274F00B5467D /* Metadata.swift in Sources */,
+				257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */,
 				25DB9AD12B57EC5000B5359F /* CollectionRowView.swift in Sources */,
 				25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */,
 				257A7FAC2B6CE1B300BBEF5E /* PaymentInfo.swift in Sources */,
@@ -1456,6 +1474,7 @@
 				257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */,
 				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
 				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
+				257F7AD32C12BBF800420F4E /* AuthMethodReauth.swift in Sources */,
 				25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */,
 				257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
@@ -1478,6 +1497,7 @@
 				25D476112B7906D600B5467D /* Extensions.swift in Sources */,
 				256940892B6571CD0005BFCC /* CacheListener.swift in Sources */,
 				257A7FA82B6CE1B300BBEF5E /* Status.swift in Sources */,
+				257F7AD12C12BAAD00420F4E /* AuthMethod.swift in Sources */,
 				25AB40402BCAD500009E735F /* UIViewListenable.swift in Sources */,
 				25D4760D2B78F8D000B5467D /* NotificationUtils.swift in Sources */,
 				256940862B63B72E0005BFCC /* ArrayList.swift in Sources */,

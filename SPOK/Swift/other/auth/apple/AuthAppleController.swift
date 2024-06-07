@@ -11,22 +11,38 @@ import FirebaseAuth
 class AuthAppleController
     : SignInAppleController {
     
-    private let TAG = "AuthAppleController"
+    private var mAuthMethod: AuthMethod? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mSignListener = self
-        
     }
+    
+    func signInSimply() {
+        signIn()
+    }
+    
+    func reauthenticate() {
+        signIn()
+    }
+    
+    internal func onSimplySignIn(){}
+    
+    internal func onReauth(
+        auth: AuthDataResult
+    ){}
+    internal func onReauthError(){}
     
     internal func onAuthSuccess(){}
     internal func onAuthError(){}
     
+}
+
+extension AuthAppleController {
+    
     private func processSignIn(
         _ auth: AuthDataResult
     ) {
-        
         UserDefaults
             .standard
             .setValue(
@@ -36,7 +52,6 @@ class AuthAppleController
         
         onAuthSuccess()
     }
-    
 }
 
 extension AuthAppleController
@@ -47,6 +62,15 @@ extension AuthAppleController
         nonce: String,
         authCode: String
     ) {
+        if mAuthMethod == nil {
+            Log.d(
+                AuthAppleController.self,
+                "onSuccessSign: ERROR:",
+                "AUTH_METHOD=nil"
+            )
+            return
+        }
+        
         let credentials = OAuthProvider
             .credential(
                 withProviderID: "apple.com",
@@ -54,25 +78,13 @@ extension AuthAppleController
                 rawNonce: nonce
             )
         
-        Auth.auth().signIn(
-            with: credentials
-        ) { [weak self] authResult, error in
-            
-            guard let auth = authResult,
-                  error == nil else {
-                print(
-                    self?.TAG,
-                    "ERROR:",
-                    error
-                )
-                return
-            }
-            
-            self?.processSignIn(
-                auth
-            )
-            
-        }
+        let auth = Auth.auth()
+        
+        mAuthMethod?.auth(
+            auth: auth,
+            credentials: credentials
+        )
+        
     }
     
     func onErrorSign(
