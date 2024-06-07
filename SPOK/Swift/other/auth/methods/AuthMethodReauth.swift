@@ -13,8 +13,10 @@ final class AuthMethodReauth
     
     override func auth(
         auth: Auth,
+        authCode: String,
         credentials: OAuthCredential
     ) {
+        mAuthCode = authCode
         auth.currentUser?.reauthenticate(
             with: credentials,
             completion: onReauth(auth:error:)
@@ -40,7 +42,8 @@ extension AuthMethodReauth {
         }
         
         completion?(
-            data
+            data,
+            mAuthCode
         )
     }
     

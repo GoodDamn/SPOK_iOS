@@ -24,7 +24,7 @@ class AuthAppleController
     final func authenticate() {
         mAuthMethod = methodSignIn
         mAuthMethod?.completion =
-            onAuth(_:)
+            onAuth(_:authCode:)
         
         mAuthMethod?.completionError =
             onAuthError(s:)
@@ -35,7 +35,7 @@ class AuthAppleController
         mAuthMethod = methodReauth
         
         mAuthMethod?.completion =
-            onReauth(auth:)
+            onReauthSuccess(auth:authCode:)
         
         mAuthMethod?.completionError =
             onAuthError(s:)
@@ -44,7 +44,10 @@ class AuthAppleController
     }
     
     internal func onAuthSuccess() {}
-    internal func onReauthSucess() {}
+    internal func onReauthSuccess(
+        auth: AuthDataResult,
+        authCode: String
+    ) {}
     
     internal func onAuthError(
         s: String
@@ -53,14 +56,9 @@ class AuthAppleController
 
 extension AuthAppleController {
     
-    private func onReauth(
-        auth: AuthDataResult
-    ) {
-        onReauthSucess()
-    }
-    
     private func onAuth(
-        _ auth: AuthDataResult
+        _ auth: AuthDataResult,
+        authCode: String
     ) {
         UserDefaults
             .standard
@@ -92,6 +90,7 @@ extension AuthAppleController
                 
         mAuthMethod?.auth(
             auth: Auth.auth(),
+            authCode: authCode,
             credentials: OAuthProvider.credential(
                 withProviderID: "apple.com",
                 idToken: token,

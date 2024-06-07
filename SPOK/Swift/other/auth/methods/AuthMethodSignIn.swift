@@ -13,8 +13,10 @@ final class AuthMethodSignIn
     
     override func auth(
         auth: Auth,
+        authCode: String,
         credentials: OAuthCredential
     ) {
+        mAuthCode = authCode
         auth.signIn(
             with: credentials,
             completion: onSignIn(auth:error:)
@@ -39,7 +41,8 @@ extension AuthMethodSignIn {
         }
         
         completion?(
-            data
+            data,
+            mAuthCode
         )
     }
 }

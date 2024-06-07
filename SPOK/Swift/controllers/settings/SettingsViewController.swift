@@ -203,11 +203,33 @@ final class SettingsViewController
         )
     }
     
-    override func onReauthSucess() {
+    override func onReauthSuccess(
+        auth: AuthDataResult,
+        authCode: String
+    ) {
         Log.d(
             SettingsViewController.self,
             "onReauthSucess:"
         )
+        
+        AuthUtils.userDelete(
+            auth: auth,
+            authCode: authCode
+        ) { [weak self] error in
+            
+            if error == nil {
+                Toast.init(
+                    text: "Аккаунт удален",
+                    duration: 1.0
+                ).show()
+                return
+            }
+            
+            Toast.init(
+                text: "Ошибка удаления аккаунта: \(error!.localizedDescription)",
+                duration: 1.0
+            ).show()
+        }
     }
     
     override func onAuthSuccess() {
@@ -294,26 +316,14 @@ extension SettingsViewController {
             title: "Выйти из аккаунта?",
             controller: self
         ) { [weak self] _ in
-            
-            do {
-                try Auth.auth()
-                    .signOut()
-                
-                UserDefaults
-                    .standard
-                    .removeObject(
-                        forKey: Keys
-                            .USER_REF
-                    )
-                
-            } catch {
+            AuthUtils.userSignOut(
+                auth: Auth.auth()
+            ) {
                 Log.d(
                     SettingsViewController.self,
-                    "SIGN_OUT_FAIL:",
-                    error
+                    "USER_SIGNED_OUT"
                 )
             }
-            exit(0)
         }
         
     }

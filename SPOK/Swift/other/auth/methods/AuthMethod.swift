@@ -9,9 +9,11 @@ import Foundation
 import FirebaseAuth
 
 class AuthMethod {
+    internal var mAuthCode = ""
     
     var completion: ((
-        AuthDataResult
+        AuthDataResult,
+        String
     ) -> Void)? = nil
     
     var completionError: ((
@@ -20,6 +22,7 @@ class AuthMethod {
     
     internal func auth(
         auth: Auth,
+        authCode: String,
         credentials: OAuthCredential
     ) {}
     
