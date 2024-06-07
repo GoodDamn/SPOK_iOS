@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import UIKit.UITableView
+import UIKit.UIStackView
 
 final class OptionsTableView
-    : InversedTableView {
+    : UIStackView {
     
-    public static var mOptionSize: CGSize = .zero
+    public var mOptionSize: CGSize = .zero
     
     final var mOptions: [Option] = [] {
         didSet {
@@ -21,38 +21,68 @@ final class OptionsTableView
     
     init(
         frame: CGRect,
-        rowHeight: CGFloat,
-        style: UITableView.Style
+        rowHeight: CGFloat
     ) {
-        OptionsTableView.mOptionSize = CGSize(
+        mOptionSize = CGSize(
             width: frame.width,
             height: rowHeight
         )
+        
         super.init(
-            frame: frame,
-            style: style
+            frame: frame
         )
         
-        delegate = self
-        dataSource = self
-     
-        register(
-            OptionTableCell.self,
-            forCellReuseIdentifier: OptionTableCell.id
-        )
+        axis = .vertical
+        spacing = rowHeight
         
     }
     
-    required init?(
+    required init(
         coder: NSCoder
     ) {
-        mOptions = []
         super.init(
             coder: coder
         )
     }
+    
 }
 
+extension OptionsTableView {
+    
+    private func reloadData() {
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+        
+        for option in mOptions {
+            
+            let view = OptionTableCell(
+                frame: CGRect(
+                    origin: .zero,
+                    size: mOptionSize
+                )
+            )
+            
+            view.iconColor = option.iconColor
+            view.image = option.image
+            view.text = option.text
+            view.textColorr = option.textColor
+            
+            addArrangedSubview(
+                view
+            )
+            
+            view.primaryView(
+                view: option.withView
+            )
+            
+        }
+        
+    }
+    
+}
+
+/*
 extension OptionsTableView
     : UITableViewDelegate {
     
@@ -117,4 +147,4 @@ extension OptionsTableView
     }
     
 }
-
+*/

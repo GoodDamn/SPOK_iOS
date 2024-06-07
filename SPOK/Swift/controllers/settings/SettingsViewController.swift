@@ -172,8 +172,7 @@ final class SettingsViewController
                 width: w - 2*marginHorizontal,
                 height: h - ytable - mInsets.bottom
             ),
-            rowHeight: hbtnDelete,
-            style: .plain
+            rowHeight: hbtnDelete
         )
         
         mTableOptions.mOptions =
@@ -181,23 +180,9 @@ final class SettingsViewController
                 mOptionsNonUser
                 : mOptionsUser
         
-        mTableOptions
-            .showsHorizontalScrollIndicator = false
-        
-        mTableOptions
-            .showsVerticalScrollIndicator = false
-        
-        mTableOptions.separatorStyle = .none
-        
-        mTableOptions.backgroundColor =
+       mTableOptions.backgroundColor =
             .clear
         
-        mTableOptions.contentInset = UIEdgeInsets(
-            top: 8,
-            left: 0,
-            bottom: 0,
-            right: 0
-        )
         
         view.addSubview(
             lSettings

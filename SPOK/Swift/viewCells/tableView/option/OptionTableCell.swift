@@ -9,9 +9,7 @@ import Foundation
 import UIKit.UITableViewCell
 
 final class OptionTableCell
-    : InversedTableViewCell {
-    
-    public static let id = "option"
+    : UIView {
     
     public var image: UIImage? {
         didSet {
@@ -43,79 +41,59 @@ final class OptionTableCell
     private var mLabelTitle: UILabel!
     
     override init(
-        style: UITableViewCell.CellStyle,
-        reuseIdentifier: String?
+        frame: CGRect
     ) {
         super.init(
-            style: style,
-            reuseIdentifier: reuseIdentifier
+            frame: frame
         )
-        
-        mImageViewIcon = UIImageView()
-        
-        mLabelTitle = UILabel()
-        
-        mLabelTitle.font = UIFont(
-            name: "OpenSans-SemiBold",
-            size: 1
-        )
-        
-        mLabelTitle.textColor = .white
-        
-        backgroundColor = .clear
-        mImageViewIcon.backgroundColor =
-            .clear
-        
-        mLabelTitle.backgroundColor =
-            .clear
-        
-        mImageViewIcon.tintColor = UIColor
-            .accent()
-        
-        
-        contentView.addSubview(
-            mImageViewIcon
-        )
-        
-        contentView.addSubview(
-            mLabelTitle
-        )
-        
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if selectionStyle == .none  {
-            return
-        }
         
         let w = frame.width
         
         let (imageSize, yimage) =
             tempCalc()
         
-        mImageViewIcon.frame = CGRect(
-            x: 0,
-            y: yimage,
-            width: imageSize,
-            height: imageSize
-        )
-                
-        mLabelTitle.frame = CGRect(
-            x: imageSize*2,
-            y: yimage,
-            width: frame.width - imageSize*2,
-            height: imageSize
-        )
-        
-        
-        mLabelTitle.font = mLabelTitle
-            .font.withSize(
-                imageSize * 0.7
+        mImageViewIcon = UIImageView(
+            frame: CGRect(
+                x: 0,
+                y: yimage,
+                width: imageSize,
+                height: imageSize
             )
+        )
         
-        selectionStyle = .none
+        mLabelTitle = UILabel(
+            frame: CGRect(
+                x: imageSize*2,
+                y: yimage,
+                width: frame.width - imageSize*2,
+                height: imageSize
+            )
+        )
+        
+        mLabelTitle.font = .semibold(
+            withSize: imageSize * 0.7
+        )
+        
+        mLabelTitle.textColor = .white
+        
+        backgroundColor = .clear
+        
+        mImageViewIcon.backgroundColor =
+            .clear
+        
+        mLabelTitle.backgroundColor =
+            .clear
+        
+        mImageViewIcon.tintColor = .accent()
+        
+        addSubview(
+            mImageViewIcon
+        )
+        
+        addSubview(
+            mLabelTitle
+        )
+        
     }
     
     required init?(
@@ -156,7 +134,7 @@ final class OptionTableCell
                 systemName: "chevron.right"
             )
             
-            contentView.addSubview(
+            addSubview(
                 primar
             )
             
@@ -174,7 +152,7 @@ final class OptionTableCell
             height: f.height
         )
         
-        contentView.addSubview(
+        addSubview(
             v
         )
         
