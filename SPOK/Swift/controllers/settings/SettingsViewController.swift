@@ -18,6 +18,9 @@ final class SettingsViewController
     private var mOptionNotify: Option!
     private var mOptionRate: Option!
     
+    private var mOptionsNonUser: [Option]!
+    private var mOptionsUser: [Option]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -80,30 +83,7 @@ final class SettingsViewController
             select: onClickBtnRate
         )
         
-        mSwitcher.addTarget(
-            self,
-            action: #selector(
-                onSwitchNotify(_:)
-            ),
-            for: .valueChanged
-        )
-        
-        mSwitcher.thumbTintColor = .background()
-        mSwitcher.onTintColor = .white
-        
-        NotificationUtils.settings {
-            perm in
-            
-            let status = perm
-                .authorizationStatus
-            
-            DispatchQueue.ui {
-                mSwitcher.isOn = status
-                == .authorized
-            }
-        }
-        
-        let options: [Option] = AuthUtils.user() == nil ? [
+        mOptionsNonUser = [
             mOptionNotify,
             mOptionRate,
             Option(
@@ -116,7 +96,9 @@ final class SettingsViewController
                 withView: nil,
                 select: onClickBtnSignIn
             )
-        ] : [
+        ]
+        
+        mOptionsUser = [
             mOptionNotify,
             mOptionRate,
             Option(
@@ -140,6 +122,29 @@ final class SettingsViewController
                 select: onClickBtnDelete
             )
         ]
+        
+        mSwitcher.addTarget(
+            self,
+            action: #selector(
+                onSwitchNotify(_:)
+            ),
+            for: .valueChanged
+        )
+        
+        mSwitcher.thumbTintColor = .background()
+        mSwitcher.onTintColor = .white
+        
+        NotificationUtils.settings {
+            perm in
+            
+            let status = perm
+                .authorizationStatus
+            
+            DispatchQueue.ui {
+                mSwitcher.isOn = status
+                == .authorized
+            }
+        }
         
         let lSettings = UILabel(
             frame: CGRect(
@@ -167,11 +172,15 @@ final class SettingsViewController
                 width: w - 2*marginHorizontal,
                 height: h - ytable - mInsets.bottom
             ),
-            source: options,
             rowHeight: hbtnDelete,
             style: .plain
         )
-                
+        
+        mTableOptions.mOptions =
+            AuthUtils.user() == nil ?
+                mOptionsNonUser
+                : mOptionsUser
+        
         mTableOptions
             .showsHorizontalScrollIndicator = false
         
@@ -222,6 +231,14 @@ final class SettingsViewController
                     text: "Аккаунт удален",
                     duration: 1.0
                 ).show()
+                
+                if self == nil {
+                    return
+                }
+                
+                self!.mTableOptions
+                    .mOptions = self!.mOptionsNonUser
+                
                 return
             }
             
@@ -237,6 +254,8 @@ final class SettingsViewController
             text: "Успешно",
             duration: 1.0
         ).show()
+        
+        mTableOptions.mOptions = mOptionsUser
     }
     
     override func onAuthError(
@@ -323,6 +342,14 @@ extension SettingsViewController {
                     SettingsViewController.self,
                     "USER_SIGNED_OUT"
                 )
+                
+                if self == nil {
+                    return
+                }
+                
+                self!.mTableOptions.mOptions = self!
+                    .mOptionsNonUser
+                
             }
         }
         

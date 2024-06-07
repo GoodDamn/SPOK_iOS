@@ -13,11 +13,14 @@ final class OptionsTableView
     
     public static var mOptionSize: CGSize = .zero
     
-    private final let mOptions: [Option]!
+    final var mOptions: [Option] = [] {
+        didSet {
+            reloadData()
+        }
+    }
     
     init(
         frame: CGRect,
-        source: [Option],
         rowHeight: CGFloat,
         style: UITableView.Style
     ) {
@@ -25,7 +28,6 @@ final class OptionsTableView
             width: frame.width,
             height: rowHeight
         )
-        mOptions = source
         super.init(
             frame: frame,
             style: style
