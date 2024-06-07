@@ -31,11 +31,15 @@ extension AuthMethodSignIn {
         guard let data = auth,
               error == nil else {
             Log.d(
-                AuthAppleController.self,
+                AuthMethodSignIn.self,
                 "ERROR:",
                 error
             )
             return
         }
+        
+        completion?(
+            data
+        )
     }
 }

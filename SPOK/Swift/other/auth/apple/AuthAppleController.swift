@@ -11,6 +11,9 @@ import FirebaseAuth
 class AuthAppleController
     : SignInAppleController {
     
+    private let methodReauth = AuthMethodReauth()
+    private let methodSignIn = AuthMethodSignIn()
+    
     private var mAuthMethod: AuthMethod? = nil
     
     override func viewDidLoad() {
@@ -18,29 +21,45 @@ class AuthAppleController
         mSignListener = self
     }
     
-    func signInSimply() {
+    final func authenticate() {
+        mAuthMethod = methodSignIn
+        mAuthMethod?.completion =
+            onAuth(auth:)
+        
+        mAuthMethod?.completionError =
+            onAuthError(s:)
         signIn()
     }
     
-    func reauthenticate() {
+    final func reauthenticate() {
+        mAuthMethod = methodReauth
+        
+        mAuthMethod?.completion =
+            onReauth(auth:)
+        
+        mAuthMethod?.completionError =
+            onAuthError(s:)
+        
         signIn()
     }
     
-    internal func onSimplySignIn(){}
+    internal func onAuthSuccess() {}
+    internal func onReauthSucess() {}
     
-    internal func onReauth(
-        auth: AuthDataResult
-    ){}
-    internal func onReauthError(){}
-    
-    internal func onAuthSuccess(){}
-    internal func onAuthError(){}
-    
+    internal func onAuthError(
+        s: String
+    ) {}
 }
 
 extension AuthAppleController {
     
-    private func processSignIn(
+    private func onReauth(
+        auth: AuthDataResult
+    ) {
+        onReauthSucess()
+    }
+    
+    private func onAuth(
         _ auth: AuthDataResult
     ) {
         UserDefaults
@@ -70,19 +89,14 @@ extension AuthAppleController
             )
             return
         }
-        
-        let credentials = OAuthProvider
-            .credential(
+                
+        mAuthMethod?.auth(
+            auth: Auth.auth(),
+            credentials: OAuthProvider.credential(
                 withProviderID: "apple.com",
                 idToken: token,
                 rawNonce: nonce
             )
-        
-        let auth = Auth.auth()
-        
-        mAuthMethod?.auth(
-            auth: auth,
-            credentials: credentials
         )
         
     }
@@ -90,7 +104,9 @@ extension AuthAppleController
     func onErrorSign(
         _ msg: String
     ) {
-        onAuthError()
+        mAuthMethod?.completionError?(
+            msg
+        )
     }
     
 }

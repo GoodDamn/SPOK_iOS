@@ -23,7 +23,7 @@ class SignInAppleController
         mSignIn.mListener = self
     }
     
-    internal func signIn() {
+    final func signIn() {
         mSignIn.start()
     }
     

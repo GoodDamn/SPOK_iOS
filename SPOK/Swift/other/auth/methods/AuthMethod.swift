@@ -10,6 +10,14 @@ import FirebaseAuth
 
 class AuthMethod {
     
+    var completion: ((
+        AuthDataResult
+    ) -> Void)? = nil
+    
+    var completionError: ((
+        String
+    ) -> Void)? = nil
+    
     internal func auth(
         auth: Auth,
         credentials: OAuthCredential

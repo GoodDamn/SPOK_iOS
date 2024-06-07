@@ -29,7 +29,19 @@ extension AuthMethodReauth {
         auth: AuthDataResult?,
         error: Error?
     ) {
+        guard let data = auth,
+              error == nil else {
+            Log.d(
+                AuthMethodReauth.self,
+                "ERROR:",
+                error
+            )
+            return
+        }
         
+        completion?(
+            data
+        )
     }
     
 }
