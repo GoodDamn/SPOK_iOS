@@ -105,15 +105,27 @@ final class DatabaseUtils {
         from: String,
         completion: @escaping (Any?) -> Void
     ) {
-        user()?
-            .child(from)
-            .observeSingleEvent(
-                of: .value
-        ) { snap in
+        let user = user()
+        if user == nil {
             completion(
-                snap.value
+                nil
             )
+            return
         }
+        
+        user?.child(from)
+            .observeSingleEvent(
+                of: .value,
+                with: { snap in
+                    completion(
+                        snap.value
+                    )
+                }
+            ) { error in
+                completion(
+                    nil
+                )
+            }
         
     }
     

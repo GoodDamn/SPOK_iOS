@@ -9,8 +9,6 @@ import Foundation
 
 final class PremiumService {
     
-    private static let TAG = "PremiumService"
-    
     var mOnCheckPremium: ((Bool) -> Void)? = nil
     
     private var mTime = 0
@@ -63,7 +61,7 @@ final class PremiumService {
         ) { [weak self] info in
             
             Log.d(
-                PremiumService.TAG,
+                PremiumService.self,
                 "INFO:",
                 info
             )
@@ -102,7 +100,7 @@ final class PremiumService {
         let d = mTime - info.createdTime
         
         Log.d(
-            PremiumService.TAG,
+            PremiumService.self,
             "DELTA_TIME:",
             d,
             mTime,

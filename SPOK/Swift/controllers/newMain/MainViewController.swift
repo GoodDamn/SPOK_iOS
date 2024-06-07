@@ -450,10 +450,18 @@ extension MainViewController {
     }
     
     private func checkSub() {
-        
+        Log.d(
+            MainViewController.self,
+            "checkSub:"
+        )
         mPremiumService
             .mOnCheckPremium = {[weak self]
                 withSub in
+                
+                Log.d(
+                    MainViewController.self,
+                    "checkSub: onCheckPremium"
+                )
                 
                 MainViewController.mIsPremiumUser = withSub
                 MainViewController.mCanPay = true
