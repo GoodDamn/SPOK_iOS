@@ -8,7 +8,7 @@
 import Foundation
 import UIKit.UIStackView
 
-final class OptionsTableView
+final class OptionsView
     : UIView {
     
     public var mOptionSize: CGSize = .zero
@@ -43,7 +43,7 @@ final class OptionsTableView
     
 }
 
-extension OptionsTableView {
+extension OptionsView {
     
     private func reloadData() {
         for subview in subviews {
@@ -54,7 +54,7 @@ extension OptionsTableView {
         
         for option in mOptions {
             
-            let view = OptionTableCell(
+            let view = OptionView(
                 frame: CGRect(
                     origin: CGPoint(
                         x: 0,

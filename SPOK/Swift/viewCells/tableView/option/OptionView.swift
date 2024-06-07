@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import UIKit.UITableViewCell
+import UIKit.UIView
 
-final class OptionTableCell
+final class OptionView
     : UIViewListenable {
     
     public var image: UIImage? {

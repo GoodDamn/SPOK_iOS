@@ -12,7 +12,7 @@ import FirebaseAuth
 final class SettingsViewController
     : AuthAppleController {
     
-    private var mTableOptions: OptionsTableView!
+    private var mTableOptions: OptionsView!
     
     private var mOptionNotify: Option!
     private var mOptionRate: Option!
@@ -164,7 +164,7 @@ final class SettingsViewController
         lSettings.textAlignment = .center
         lSettings.text = "Настройки"
         
-        mTableOptions = OptionsTableView(
+        mTableOptions = OptionsView(
             frame: CGRect(
                 x: marginHorizontal,
                 y: ytable,
