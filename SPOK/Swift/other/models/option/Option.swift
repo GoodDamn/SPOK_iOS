@@ -14,5 +14,5 @@ struct Option {
     let textColor: UIColor?
     let iconColor: UIColor?
     let withView: UIView?
-    let select: (()->Void)?
+    let select: ((UIView)->Void)?
 }

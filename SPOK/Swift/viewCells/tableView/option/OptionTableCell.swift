@@ -9,7 +9,7 @@ import Foundation
 import UIKit.UITableViewCell
 
 final class OptionTableCell
-    : UIView {
+    : UIViewListenable {
     
     public var image: UIImage? {
         didSet {
@@ -46,8 +46,6 @@ final class OptionTableCell
         super.init(
             frame: frame
         )
-        
-        let w = frame.width
         
         let (imageSize, yimage) =
             tempCalc()

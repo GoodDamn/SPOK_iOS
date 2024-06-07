@@ -9,7 +9,7 @@ import Foundation
 import UIKit.UIStackView
 
 final class OptionsTableView
-    : UIStackView {
+    : UIView {
     
     public var mOptionSize: CGSize = .zero
     
@@ -31,13 +31,9 @@ final class OptionsTableView
         super.init(
             frame: frame
         )
-        
-        axis = .vertical
-        spacing = rowHeight
-        
     }
     
-    required init(
+    required init?(
         coder: NSCoder
     ) {
         super.init(
@@ -54,28 +50,34 @@ extension OptionsTableView {
             subview.removeFromSuperview()
         }
         
+        var yOffset: CGFloat = 0
+        
         for option in mOptions {
             
             let view = OptionTableCell(
                 frame: CGRect(
-                    origin: .zero,
-                    size: mOptionSize
+                    origin: CGPoint(
+                        x: 0,
+                        y: yOffset
+                    ), size: mOptionSize
                 )
             )
+            
+            view.onClick = option.select
             
             view.iconColor = option.iconColor
             view.image = option.image
             view.text = option.text
             view.textColorr = option.textColor
             
-            addArrangedSubview(
+            addSubview(
                 view
             )
             
             view.primaryView(
                 view: option.withView
             )
-            
+            yOffset += mOptionSize.height
         }
         
     }

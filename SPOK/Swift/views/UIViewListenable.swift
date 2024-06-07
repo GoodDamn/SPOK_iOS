@@ -11,7 +11,6 @@ public class UIViewListenable
     : UIView {
     
     final var onClick: ((UIView) -> Void)? = nil
-    
     final var isAnimatedTouch = true
     
     public final override func touchesBegan(

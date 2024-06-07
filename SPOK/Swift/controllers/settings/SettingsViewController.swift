@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import FirebaseAuth
-import StoreKit
 
 final class SettingsViewController
     : AuthAppleController {
@@ -183,7 +182,6 @@ final class SettingsViewController
        mTableOptions.backgroundColor =
             .clear
         
-        
         view.addSubview(
             lSettings
         )
@@ -262,7 +260,6 @@ extension SettingsViewController {
     @objc private func onSwitchNotify(
         _ s: UISwitch
     ) {
-        
         let app = UIApplication
             .shared
             
@@ -277,24 +274,10 @@ extension SettingsViewController {
         Utils.openSettings()
     }
     
-    private func onClickBtnRate() {
-        
-        let store = SKStoreProductViewController()
-        
-        store.loadProduct(
-            withParameters: [
-                SKStoreProductParameterITunesItemIdentifier: NSNumber(
-                    value: 6443976042
-                )
-            ]
-        )
-        
-        Utils.main()
-            .present(
-                store,
-                animated: true
-            )
-        
+    private func onClickBtnRate(
+        view: UIView
+    ) {
+        ViewUtils.rateApp()
     }
     
     private func onClickBtnClose(
@@ -304,11 +287,15 @@ extension SettingsViewController {
         popBaseAnim()
     }
     
-    private func onClickBtnSignIn() {
+    private func onClickBtnSignIn(
+        view: UIView
+    ) {
         authenticate()
     }
     
-    private func onClickBtnDelete() {
+    private func onClickBtnDelete(
+        view: UIView
+    ) {
         ViewUtils.alertAction(
             title: "Удалить аккаунт?",
             message: "Подписка и сохраненные данные будут утеряны",
@@ -319,7 +306,9 @@ extension SettingsViewController {
         
     }
     
-    private func onClickBtnSignOut() {
+    private func onClickBtnSignOut(
+        view: UIView
+    ) {
         ViewUtils.alertAction(
             title: "Выйти из аккаунта?",
             controller: self
