@@ -207,6 +207,10 @@ final class SettingsViewController
             mTableOptions
         )
         
+        if MainViewController.mDoAppleCheck {
+            return
+        }
+        
         view.addSubview(
             btnClose
         )
