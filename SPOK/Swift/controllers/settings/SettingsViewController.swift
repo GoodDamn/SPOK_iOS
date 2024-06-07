@@ -203,6 +203,28 @@ final class SettingsViewController
         )
     }
     
+    override func onReauthSucess() {
+        Log.d(
+            SettingsViewController.self,
+            "onReauthSucess:"
+        )
+    }
+    
+    override func onAuthSuccess() {
+        Toast.init(
+            text: "Успешно",
+            duration: 1.0
+        ).show()
+    }
+    
+    override func onAuthError(
+        s: String
+    ) {
+        Toast.init(
+            text: "Ошибка: \(s)",
+            duration: 1.0
+        ).show()
+    }
 }
 
 extension SettingsViewController {
@@ -253,7 +275,7 @@ extension SettingsViewController {
     }
     
     private func onClickBtnSignIn() {
-        signIn()
+        authenticate()
     }
     
     private func onClickBtnDelete() {
@@ -262,7 +284,7 @@ extension SettingsViewController {
             message: "Подписка и сохраненные данные будут утеряны",
             controller: self
         ) { [weak self] _ in
-            self?.signIn()
+            self?.reauthenticate()
         }
         
     }

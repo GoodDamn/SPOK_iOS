@@ -322,7 +322,9 @@ final class ProfileNewViewController
         startPayment()
     }
     
-    override func onAuthError() {
+    override func onAuthError(
+        s: String
+    ) {
         if messageController == nil {
             return
         }
@@ -378,7 +380,7 @@ extension ProfileNewViewController {
         
         messageController!.mAction = { [weak self] in
             sender.isUserInteractionEnabled = true
-            self?.signIn()
+            self?.authenticate()
         }
         
         let v = messageController!

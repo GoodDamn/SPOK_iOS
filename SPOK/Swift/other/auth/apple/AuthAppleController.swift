@@ -24,7 +24,7 @@ class AuthAppleController
     final func authenticate() {
         mAuthMethod = methodSignIn
         mAuthMethod?.completion =
-            onAuth(auth:)
+            onAuth(_:)
         
         mAuthMethod?.completionError =
             onAuthError(s:)
