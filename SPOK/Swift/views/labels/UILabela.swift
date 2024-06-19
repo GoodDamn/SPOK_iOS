@@ -13,9 +13,12 @@ class UILabela
     
     private var mParagraph = NSMutableParagraphStyle()
     
+    public final var isStrikethroughed = false
+    
     public final var lineHeight: CGFloat = 1.0 {
         didSet {
             mParagraph.lineHeightMultiple = lineHeight
+            
         }
     }
     
@@ -57,6 +60,21 @@ class UILabela
             value: font,
             range: range
         )
+        
+        if isStrikethroughed {
+            attrText.addAttribute(
+                .strikethroughStyle,
+                value: NSUnderlineStyle
+                    .single
+                    .rawValue,
+                range: range
+            )
+            attrText.addAttribute(
+                .strikethroughColor,
+                value: textColor,
+                range: range
+            )
+        }
         
         attrText.addAttribute(
             .foregroundColor,

@@ -172,14 +172,8 @@ final class ProfileNewViewController
             named: "j"
         )
         
-        let lPrice = UILabela(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: 1,
-                height: 1
-            )
-        )
+        let lPrice = UILabela()
+        let lPriceOld = UILabela()
         let price = ProfileNewViewController
             .mPayment
             .price
@@ -189,7 +183,21 @@ final class ProfileNewViewController
             withSize: w * 0.0479
         )
         lPrice.textColor = .white
+        lPrice.attribute()
         lPrice.sizeToFit()
+        
+        
+        lPriceOld.text = "249 RUB"
+        lPriceOld.font = .bold(
+            withSize: lPrice.font.pointSize * 0.739
+        )
+        lPriceOld.textColor = .white
+            .withAlphaComponent(
+                0.7
+            )
+        lPriceOld.isStrikethroughed = true
+        lPriceOld.attribute()
+        lPriceOld.sizeToFit()
         
         mBtnOpenAccess = UITextButton(
             frame: CGRect(
@@ -235,6 +243,17 @@ final class ProfileNewViewController
         
         lPrice.frame.origin.y = imageView2.frame
             .bottom() + h * 0.03
+        
+        lPriceOld
+            .frame
+            .origin = CGPoint(
+                x: lPrice.frame.x() -
+                    lPriceOld.frame.width * 1.15,
+                y: lPrice.frame.y() + lPrice.font
+                    .pointSize - lPriceOld.font
+                    .pointSize
+                
+            )
         
         
         mBtnOpenAccess.frame.origin.y = lPrice.frame
@@ -338,6 +357,10 @@ final class ProfileNewViewController
         
         view.addSubview(
             lPrice
+        )
+        
+        view.addSubview(
+            lPriceOld
         )
         
         view.addSubview(
