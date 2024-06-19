@@ -172,6 +172,25 @@ final class ProfileNewViewController
             named: "j"
         )
         
+        let lPrice = UILabela(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 1,
+                height: 1
+            )
+        )
+        let price = ProfileNewViewController
+            .mPayment
+            .price
+        
+        lPrice.text = "\(Int(price)) RUB / месяц"
+        lPrice.font = .bold(
+            withSize: w * 0.0479
+        )
+        lPrice.textColor = .white
+        lPrice.sizeToFit()
+        
         mBtnOpenAccess = UITextButton(
             frame: CGRect(
                 x: 0,
@@ -182,7 +201,7 @@ final class ProfileNewViewController
         )
         
         mBtnOpenAccess = ViewUtils.textButton(
-            text: "Получить полный доступ"
+            text: "Открыть полный доступ"
         )
         
         LayoutUtils.textButton(
@@ -210,7 +229,15 @@ final class ProfileNewViewController
         mBtnOpenAccess.onClick =
             onClickBtnOpenFullAccess(_:)
         
-        mBtnOpenAccess.frame.origin.y = imageView2.frame
+        lPrice.centerH(
+            in: view
+        )
+        
+        lPrice.frame.origin.y = imageView2.frame
+            .bottom() + h * 0.03
+        
+        
+        mBtnOpenAccess.frame.origin.y = lPrice.frame
             .bottom() + h * 0.03
         
         let sharey = mBtnOpenAccess
@@ -308,6 +335,10 @@ final class ProfileNewViewController
         view.addSubview(shareView)
         shareView.addSubview(lShare)
         shareView.addSubview(btnShare)
+        
+        view.addSubview(
+            lPrice
+        )
         
         view.addSubview(
             mBtnOpenAccess
@@ -422,7 +453,8 @@ extension ProfileNewViewController {
         email: String
     ) {
         mPaymentProcess = PaymentProcess(
-            payment: ProfileNewViewController.mPayment,
+            payment: ProfileNewViewController
+                .mPayment,
             email: email
         )
         
