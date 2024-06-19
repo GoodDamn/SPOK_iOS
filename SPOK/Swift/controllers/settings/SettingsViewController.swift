@@ -16,6 +16,7 @@ final class SettingsViewController
     
     private var mOptionNotify: Option!
     private var mOptionRate: Option!
+    private var mOptionSupport: Option!
     
     private var mOptionsNonUser: [Option]!
     private var mOptionsUser: [Option]!
@@ -82,9 +83,21 @@ final class SettingsViewController
             select: onClickBtnRate
         )
         
+        mOptionSupport = Option(
+            image: UIImage(
+                systemName: "message.fill"
+            ),
+            text: "Связь с разработчиками",
+            textColor: .white,
+            iconColor: .accent(),
+            withView: nil,
+            select: onClickBtnSupport
+        )
+        
         mOptionsNonUser = [
             mOptionNotify,
             mOptionRate,
+            mOptionSupport,
             Option(
                 image: UIImage(
                     named: "login"
@@ -100,6 +113,7 @@ final class SettingsViewController
         mOptionsUser = [
             mOptionNotify,
             mOptionRate,
+            mOptionSupport,
             Option(
                 image: UIImage(
                     named: "login"
@@ -278,6 +292,14 @@ extension SettingsViewController {
         view: UIView
     ) {
         ViewUtils.rateApp()
+    }
+    
+    private func onClickBtnSupport(
+        view: UIView
+    ) {
+        FragmentUtils.openUrl(
+            urls: "https://t.me/aleksandrovprod"
+        )
     }
     
     private func onClickBtnClose(

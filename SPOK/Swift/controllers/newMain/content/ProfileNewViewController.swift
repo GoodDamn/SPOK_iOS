@@ -399,21 +399,9 @@ extension ProfileNewViewController {
     private func onClickBtnShareImpression(
         _ sender: UIView
     ) {
-        let app = UIApplication.shared
-        
-        guard let url = URL(string: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
-        ) else {
-            Log.d("ProfileNewViewController", "URL_ERROR:")
-            return
-        }
-        
-        app.open(url) { success in
-            
-            if success {
-                Log.d("SUCCESS")
-            }
-            
-        }
+        FragmentUtils.openUrl(
+            urls: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
+        )
     }
     
     private func onClickBtnSettings(

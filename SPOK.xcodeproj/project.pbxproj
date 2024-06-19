@@ -60,6 +60,7 @@
 		257F7AD32C12BBF800420F4E /* AuthMethodReauth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */; };
 		257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
+		25977E3E2C21E1FF001F3E54 /* FragmentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25AB40322BC64BE1009E735F /* UIHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40312BC64BE1009E735F /* UIHeaderView.swift */; };
@@ -242,6 +243,7 @@
 		257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodReauth.swift; sourceTree = "<group>"; };
 		257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodSignIn.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
+		25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentUtils.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25AB40312BC64BE1009E735F /* UIHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeaderView.swift; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 				25F94AF02B6F7DD700FC8A32 /* Log.swift */,
 				25D4760C2B78F8D000B5467D /* NotificationUtils.swift */,
 				25D476102B7906D600B5467D /* Extensions.swift */,
+				25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1467,6 +1470,7 @@
 				25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */,
 				25F94AFE2B700F6300FC8A32 /* PaymentConfirmationListener.swift in Sources */,
 				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
+				25977E3E2C21E1FF001F3E54 /* FragmentUtils.swift in Sources */,
 				2507D2CF2B45D45C00656C0B /* ByteUtils.swift in Sources */,
 				259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */,
 				25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */,
@@ -1696,7 +1700,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1729,7 +1733,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
