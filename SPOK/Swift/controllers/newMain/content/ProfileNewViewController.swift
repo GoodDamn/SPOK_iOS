@@ -109,7 +109,7 @@ final class ProfileNewViewController
         lTitleHead.font = bold?
             .withSize(lTitleHead.height())
         
-        lSubtitleHead.text = "Открой полный доступ ко всему контенту в приложении. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
+        lSubtitleHead.text = "Новые засыпайки и истории на ночь каждую неделю. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
         lSubtitleHead.lineHeight = 0.83
         lSubtitleHead.textAlignment = .center
         lSubtitleHead.textColor = .white
