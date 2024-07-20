@@ -11,7 +11,6 @@ import FirebaseStorage
 class Cache<T> {
     
     weak var delegate: CacheListener? = nil
-    var object: T? = nil
     
     internal let mReference: StorageReference
     internal let mPathToSave: String
@@ -33,7 +32,7 @@ class Cache<T> {
         
         mPathToSave = localPath.pathh()
         mUrlToSave = localPath
-        print(
+        Log.d(
             "Cache: URL_TO_SAVE:",
             mUrlToSave
         )

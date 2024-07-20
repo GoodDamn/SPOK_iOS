@@ -318,26 +318,23 @@ extension MainViewController {
             StorageApp.mDirContent
         )
         
-        try? fm.createDirectory(
-            at: dirColl,
-            withIntermediateDirectories: true
+        fm.createDirWithNullTime(
+            dir: dirColl
         )
         
-        try? fm.createDirectory(
-            at: dirPrev,
-            withIntermediateDirectories: false
+        fm.createDirWithNullTime(
+            dir: dirPrev
         )
         
-        try? fm.createDirectory(
-            at: dirCont,
-            withIntermediateDirectories: false
+        fm.createDirWithNullTime(
+            dir: dirCont
         )
         
         let bundle = Bundle.main.bundleURL
         
         for fileName in content {
             if fileName.contains(".skc") {
-                try? fm.copyItem(
+                fm.copyItemWithNullTime(
                     at: bundle.append(
                         fileName
                     ),
@@ -349,7 +346,7 @@ extension MainViewController {
             }
             
             if fileName.contains(".scs") {
-                try? fm.copyItem(
+                fm.copyItemWithNullTime(
                     at: bundle.append(
                         fileName
                     ),
@@ -361,7 +358,7 @@ extension MainViewController {
             }
             
             if fileName.contains(".spc") {
-                try? fm.copyItem(
+                fm.copyItemWithNullTime(
                     at: bundle.append(
                         fileName
                     ),

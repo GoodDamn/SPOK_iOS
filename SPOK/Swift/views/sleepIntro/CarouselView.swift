@@ -49,7 +49,9 @@ final class CarouselView
                     y: y,
                     width: w+space*2,
                     height: c.cellSize.height
-                )
+                ),
+                cardCount: c.cardCount,
+                cardOffset: c.cardOffset
             )
             
             cv.tag = 1
@@ -141,6 +143,8 @@ final class CarouselView
         var type: String
         var from: CGFloat
         var delta: CGFloat
+        let cardCount: Int
+        let cardOffset: Int
     }
 
 }
@@ -169,11 +173,17 @@ extension CarouselView
                 for: indexPath
         ) as! ImageViewCell
         
-        let imgid = collectionView.tag
-        collectionView.tag += 1
-        if collectionView.tag > 3 {
-            collectionView.tag = 1
+        var cardCount = 1
+        var cardOffset = 1
+        
+        if let c = collectionView as? 
+            CarouselCollectionView {
+            
+            cardCount = c.cardCount
+            cardOffset = c.cardOffset
         }
+        
+        let imgid = i % cardCount + cardOffset
         
        
         let w = UIScreen

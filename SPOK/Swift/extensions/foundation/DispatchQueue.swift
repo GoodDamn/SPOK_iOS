@@ -35,11 +35,12 @@ extension DispatchQueue {
         
     }
     
-    static func interactive(
+    static func io(
         _ c: @escaping () -> Void
     ) {
-        DispatchQueue.global(
-            qos: .userInteractive
+        DispatchQueue(
+            label: "shitApple",
+            qos: .userInitiated
         ).async(
             execute: c
         )

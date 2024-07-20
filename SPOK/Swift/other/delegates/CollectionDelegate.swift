@@ -58,7 +58,7 @@ extension CollectionDelegate
             .topicsIDs
             .count
         
-        print(TAG, "numberOfItemsInSection", c)
+        Log.d(TAG, "numberOfItemsInSection", c)
         return c
     }
     
@@ -72,7 +72,7 @@ extension CollectionDelegate
                 indexPath.row
             ]
         
-        print(TAG, "cellForItemAt", id, indexPath.row)
+        Log.d(TAG, "cellForItemAt", id, indexPath.row)
         
         let intID = Int(id);
         

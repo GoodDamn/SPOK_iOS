@@ -81,14 +81,18 @@ final class IntroSleep3ViewController
                 type: CarouselView
                     .mTYPE_B,
                 from: 0.0,
-                delta: 0.1
+                delta: 0.1,
+                cardCount: 2,
+                cardOffset: 1
             ),
             CarouselView.Carousel(
                 cellSize: m,
                 type: CarouselView
                     .mTYPE_M,
                 from: 1.0,
-                delta: -0.1
+                delta: -0.1,
+                cardCount: 4,
+                cardOffset: 1
             )
         ])
         
@@ -100,14 +104,18 @@ final class IntroSleep3ViewController
                 type: CarouselView
                     .mTYPE_B,
                 from: 0.0,
-                delta: 0.1
+                delta: 0.1,
+                cardCount: 2,
+                cardOffset: 3
             ),
             CarouselView.Carousel(
                 cellSize: b,
                 type: CarouselView
                     .mTYPE_M,
                 from: 1.0,
-                delta: -0.1
+                delta: -0.1,
+                cardCount: 2,
+                cardOffset: 4
             )
         ])
         
@@ -136,9 +144,18 @@ final class IntroSleep3ViewController
             )
         )
         
-        mBtnStart.frame.origin.y = pageBar
+        var yyy = pageBar
             .bottomy() +
             pageButtonOffsetBet
+        
+        let hhh = mBtnStart
+            .frame.height
+        
+        if yyy > h - hhh {
+            yyy = pageBar.frame.y() - hhh - pageButtonOffsetBet
+        }
+        
+        mBtnStart.frame.origin.y = yyy
         
         pageBar.centerH(
             in: view

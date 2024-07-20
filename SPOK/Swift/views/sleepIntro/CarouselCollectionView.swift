@@ -11,6 +11,9 @@ import UIKit
 final class CarouselCollectionView
     : UICollectionView {
     
+    let cardCount: Int
+    let cardOffset: Int
+    
     private(set) var mCellSize: CGSize = .zero
     private(set) var mType: String =
         CarouselView.mTYPE_M
@@ -22,8 +25,13 @@ final class CarouselCollectionView
     init(
         type: String,
         cellSize: CGSize,
-        frame: CGRect
+        frame: CGRect,
+        cardCount: Int,
+        cardOffset: Int
     ) {
+        self.cardCount = cardCount
+        self.cardOffset = cardOffset
+        
         mCellSize = cellSize
         mType = type
         
@@ -53,6 +61,8 @@ final class CarouselCollectionView
     required init?(
         coder: NSCoder
     ) {
+        cardCount = 1
+        cardOffset = 1
         super.init(
             coder: coder
         )

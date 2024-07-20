@@ -22,13 +22,6 @@ final class PreviewCell
     
     public var mCardTextSize: CardTextSize! {
         didSet {
-            Log.d(
-                PreviewCell.TAG,
-                "CARD_TEXT_SIZE:",
-                mCardTextSize.title,
-                mCardTextSize.desc,
-                mDesc.font.pointSize
-            )
             
             if mCardTextSize.desc == mDesc.font.pointSize {
                 return
@@ -48,21 +41,11 @@ final class PreviewCell
     
     private var mId: Int = Int.min
     private var mType: CardType = .M
-    private var mCache: CacheData<FileSPC>? = nil
     private var mCalculated = false
-    
-    deinit {
-        Log.d(
-            PreviewCell.TAG,
-            "deinit()"
-        )
-    }
+    private var mData: FileSPC? = nil
+    private var mCache: CacheData<FileSPC>? = nil
     
     private func ini() {
-        Log.d(PreviewCell.TAG,
-              "ini:",
-              frame
-        )
         
         let f = CGRect(
             x: 0,
@@ -84,7 +67,7 @@ final class PreviewCell
         )
         
         backgroundColor = .clear
-        contentView.backgroundColor = .clear
+        contentView.backgroundColor = .gray
         mImageView.backgroundColor = .clear
         
         let bold = UIFont(
@@ -121,12 +104,10 @@ final class PreviewCell
             frame: frame
         )
         ini()
-        Log.d(PreviewCell.TAG, "init(frame:)")
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        Log.d(PreviewCell.TAG, "init(coder:)")
     }
     
     override func touchesEnded(
@@ -137,7 +118,7 @@ final class PreviewCell
             return
         }
         
-        guard let s = mCache?.object else {
+        guard let s = mData else {
             return
         }
         
@@ -156,13 +137,12 @@ final class PreviewCell
         t.setID(mId)
         t.view.alpha = 0.0
         
-        Utils.main()
-            .push(
-                t,
-                animDuration: 0.3
-            ) {
-                t.view.alpha = 1.0
-            }
+        Utils.main().push(
+            t,
+            animDuration: 0.3
+        ) {
+            t.view.alpha = 1.0
+        }
         
     }
     
@@ -170,30 +150,22 @@ final class PreviewCell
         type: CardType,
         id: Int
     ) {
-        mId = id
+        mData = nil
         mType = type
-                
-        if mCache?.object != nil {
-            show()
-            return
-        }
+        mId = id
         
-        if mCache == nil {
-            
-            let localp = StorageApp
-                .previewUrl(
-                    id: mId,
-                    type: mType
-                )
-            
-            mCache = CacheData(
-                pathStorage: "Trainings/\(id)/\(type).spc",
-                localPath: localp
+        let localp = StorageApp
+            .previewUrl(
+                id: mId,
+                type: type
             )
-                
-            mCache!.delegate = self
-        }
         
+        mCache = CacheData<FileSPC>(
+            pathStorage: "Trainings/\(id)/\(type).spc",
+            localPath: localp
+        )
+        
+        mCache?.delegate = self
         mCache?.load()
     }
     
@@ -201,11 +173,6 @@ final class PreviewCell
 
 extension PreviewCell {
     private func calculateBounds() {
-        Log.d(
-            PreviewCell.TAG,
-            "calculated",
-            mCalculated
-        )
         
         if mCalculated {
             return
@@ -241,26 +208,12 @@ extension PreviewCell {
         mDesc.frame.origin.y = y2
         mTitle.frame.origin.y = y1
         
-        Log.d(
-            PreviewCell.TAG,
-            "FRAMES_TEXT: TITLE",
-            ht,
-            mTitle.font.pointSize
-        )
-        
-        Log.d(
-            PreviewCell.TAG,
-            "FRAMES_TEXT: DESC",
-            hd,
-            mDesc.font.pointSize
-        )
-        
         mCalculated = true
     }
     
     private func show() {
         
-        guard let fileSPC = mCache?.object else {
+        guard let fileSPC = mData else {
             return
         }
         
@@ -326,12 +279,14 @@ extension PreviewCell
     func onFile(
         data: inout Data?
     ) {
-        if data == nil || mCache == nil {
+        print("PreviewCell: onFile", data, mData)
+        if data == nil {
             return
         }
         
-        mCache!.object = Extension
-            .spc(&data!)
+        mData = Extension.spc(
+            &data!
+        )
         
         DispatchQueue
             .main
@@ -345,6 +300,7 @@ extension PreviewCell
     func onNet(
         data: inout Data?
     ) {
+        print("PreviewCell: onNet", data)
         // Save data
         StorageApp
             .preview(

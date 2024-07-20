@@ -44,6 +44,35 @@ extension FileManager {
             )
     }
     
+    func copyItemWithNullTime(
+        at: URL,
+        to: URL
+    ) {
+        try? copyItem(
+            at: at,
+            to: to
+        )
+        
+        StorageApp.modifTime(
+            path: to.pathh(),
+            time: 0.0
+        )
+    }
+    
+    func createDirWithNullTime(
+        dir: URL
+    ) {
+        try? createDirectory(
+            at: dir,
+            withIntermediateDirectories: true
+        )
+        
+        StorageApp.modifTime(
+            path: dir.pathh(),
+            time: 0.0
+        )
+    }
+    
     func copy(
         fromDir: URL,
         fromFile: String,
