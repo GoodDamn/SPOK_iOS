@@ -68,13 +68,13 @@ final class SheepCounterViewController
             subtitleSize: 0.041
         )
         
-        mViewHeader.frame.origin.y = mInsets.top
-        
         let btnClose = ViewUtils
             .buttonClose(
                 in: view,
                 sizeSquare: 0.168
             )
+        
+        mViewHeader.frame.origin.y = mInsets.top + btnClose.frame.y()
         
         let ofx = w * 0.217
         mLabelTap = UILabel(
