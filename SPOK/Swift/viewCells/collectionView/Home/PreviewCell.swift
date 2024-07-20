@@ -41,7 +41,6 @@ final class PreviewCell
     
     private var mId: Int = Int.min
     private var mType: CardType = .M
-    private var mCalculated = false
     private var mData: FileSPC? = nil
     private var mCache: CacheData<FileSPC>? = nil
     
@@ -174,10 +173,6 @@ final class PreviewCell
 extension PreviewCell {
     private func calculateBounds() {
         
-        if mCalculated {
-            return
-        }
-        
         let w = frame.width
         let h = frame.height
         
@@ -207,8 +202,6 @@ extension PreviewCell {
         
         mDesc.frame.origin.y = y2
         mTitle.frame.origin.y = y1
-        
-        mCalculated = true
     }
     
     private func show() {

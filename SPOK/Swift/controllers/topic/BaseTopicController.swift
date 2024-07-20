@@ -35,6 +35,8 @@ final class BaseTopicController
     private var mProgressBar: ProgressBar!
     private var mProgressBarTopic: ProgressBar!
     
+    private var mIsTopicFinished = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -182,6 +184,10 @@ final class BaseTopicController
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
+        if mIsTopicFinished {
+            return
+        }
+        
         if mIsFirstTouch {
             mIsFirstTouch = false
             mLabelSong?.alpha(
@@ -395,7 +401,7 @@ extension BaseTopicController
     : OnReadScript {
     
     func onFinish() {
-        view.isUserInteractionEnabled = false
+        mIsTopicFinished = true
         mBtnClose.isUserInteractionEnabled = false
         
         mCurrentPlayer?.stopFade(
