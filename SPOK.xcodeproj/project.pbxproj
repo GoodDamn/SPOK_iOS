@@ -62,6 +62,7 @@
 		25883A9E2C5760F000D46614 /* EmailShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9D2C5760F000D46614 /* EmailShareViewController.swift */; };
 		25883AA02C57657A00D46614 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9F2C57657A00D46614 /* Int.swift */; };
 		25883AA32C57708000D46614 /* UILinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA22C57708000D46614 /* UILinearLayout.swift */; };
+		25883AA62C57BB7200D46614 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA52C57BB7200D46614 /* ScrollView.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		25977E3E2C21E1FF001F3E54 /* FragmentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
@@ -248,6 +249,7 @@
 		25883A9D2C5760F000D46614 /* EmailShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailShareViewController.swift; sourceTree = "<group>"; };
 		25883A9F2C57657A00D46614 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		25883AA22C57708000D46614 /* UILinearLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinearLayout.swift; sourceTree = "<group>"; };
+		25883AA52C57BB7200D46614 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentUtils.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
@@ -627,6 +629,14 @@
 			path = viewGroup;
 			sourceTree = "<group>";
 		};
+		25883AA42C57BB5700D46614 /* scrollView */ = {
+			isa = PBXGroup;
+			children = (
+				25883AA52C57BB7200D46614 /* ScrollView.swift */,
+			);
+			path = scrollView;
+			sourceTree = "<group>";
+		};
 		258B792E2B80F5BD0049304E /* contentKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +752,7 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				25883AA42C57BB5700D46614 /* scrollView */,
 				25883AA12C57706100D46614 /* viewGroup */,
 				25D476082B789D1900B5467D /* sheeps */,
 				25D61E802B75F0D700B5A72B /* tableViews */,
@@ -1470,6 +1481,7 @@
 				25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
 				25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */,
+				25883AA62C57BB7200D46614 /* ScrollView.swift in Sources */,
 				25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */,
 				25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */,
 				25DB9ACB2B57CC1600B5359F /* TitleTableViewCell.swift in Sources */,

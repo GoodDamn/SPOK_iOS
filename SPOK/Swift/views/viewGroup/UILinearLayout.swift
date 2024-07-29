@@ -28,6 +28,9 @@ final class UILinearLayout
             in: self
         )
         
+        frame.size.height = view.frame.origin.y +
+            view.frame.size.height
+        
         super.addSubview(
             view
         )

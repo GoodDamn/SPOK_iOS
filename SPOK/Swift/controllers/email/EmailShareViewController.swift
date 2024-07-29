@@ -10,21 +10,6 @@ import UIKit
 final class EmailShareViewController
     : StackViewController {
     
-    var layout: UILinearLayout!
-    
-    override func loadView() {
-        layout = UILinearLayout(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: width,
-                height: height
-            )
-        )
-        
-        view = layout
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +19,16 @@ final class EmailShareViewController
             view.frame
         )
         
+        let layout = UILinearLayout(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: width,
+                height: 0
+            )
+        )
+        
+        
         let labelTitle = UILabel()
         labelTitle.text = "Привет!"
         labelTitle.textColor = .white
@@ -41,22 +36,28 @@ final class EmailShareViewController
             withSize: width * 32.nw()
         )
         
-        view.addSubview(
+        layout.addSubview(
             labelTitle
         )
         
         
         let labelDesc = UILabel()
-        labelDesc.text = "asdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\n"
+        labelDesc.text = "asdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nfggggggggggghgggggg"
         labelDesc.textColor = .white
         labelDesc.font = .semibold(
             withSize: width * 17.nw()
         )
         labelDesc.numberOfLines = 0
         
-        view.addSubview(
+        labelDesc.backgroundColor = .systemPink
+        
+        layout.addSubview(
             labelDesc
         )
         
+        ScrollView().configure(
+            parent: view,
+            contentView: layout
+        )
     }
 }
