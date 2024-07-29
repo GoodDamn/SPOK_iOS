@@ -30,14 +30,12 @@ final class CacheData<T>
             }
             var data = data
             
-            // Send new data
-            self?.delegate?.onNet(
-                data: &data
-            )
-            
-            /*DispatchQueue.io {
-                
-            }*/
+            DispatchQueue.io {
+                // Send new data
+                self?.delegate?.onNet(
+                    data: &data
+                )
+            }
             
         }
     }

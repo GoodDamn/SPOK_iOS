@@ -52,19 +52,19 @@ class CacheFile<T>
             return
         }
         
-        
-        var cache = StorageApp
-            .file(
-                path: mPathToSave
+        DispatchQueue.io { [weak self] in
+            guard let s = self else {
+                return
+            }
+            
+            var cache = StorageApp
+                .file(
+                    path: s.mPathToSave
+                )
+            s.delegate?.onFile(
+                data: &cache
             )
-        delegate?.onFile(
-            data: &cache
-        )
-        
-        /*DispatchQueue.io { [weak self] in
-            
-            
-        }*/
+        }
         
     }
     

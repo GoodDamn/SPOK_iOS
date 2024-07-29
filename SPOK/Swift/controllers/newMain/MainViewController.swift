@@ -14,6 +14,9 @@ final class MainViewController
     
     private let TAG = "MainViewController:"
     
+    public static var mWidth: CGFloat = 0
+    public static var mHeight: CGFloat = 0
+    
     public static var mIsConnected = false
     public static var mIsPremiumUser = false
     public static var mCanPay = false
@@ -46,6 +49,9 @@ final class MainViewController
         
         view.backgroundColor = UIColor
             .background()
+        
+        MainViewController.mWidth = view.width()
+        MainViewController.mHeight = view.height()
         
         checkApple { [weak self]
             appleChecks in
@@ -378,8 +384,8 @@ extension MainViewController {
         msg: String,
         _ completion: @escaping () -> StackViewController
     ) {
-        let splash = SplashViewController()
-        splash.msgBottom = msg
+        let splash = EmailShareViewController()
+        //splash.msgBottom = msg
         splash.view.alpha = 1
         push(
             splash,
@@ -387,6 +393,8 @@ extension MainViewController {
         ) {
             splash.view.alpha = 1.0
         }
+        
+        /*return
         
         DispatchQueue.ui(
             wait: 3.0
@@ -405,7 +413,7 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
-        }
+        }*/
         
     }
     

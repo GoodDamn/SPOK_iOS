@@ -20,12 +20,10 @@ class StackViewController
         return w?.safeAreaInsets ?? UIEdgeInsets.zero
     }()
     
-    private var main: MainViewController!
+    private let main = Utils.main()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        main = Utils.main()
-    }
+    internal var height=MainViewController.mHeight
+    internal var width=MainViewController.mWidth
     
     public final func framee(
         x: CGFloat,
