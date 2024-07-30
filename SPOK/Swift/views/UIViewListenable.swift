@@ -51,7 +51,18 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
+        if !isAnimatedTouch {
+            return
+        }
         
+        animate(
+            duration: 0.3
+        ) { [weak self] in
+            self?.scale(
+                x: 1.0,
+                y: 1.0
+            )
+        }
     }
     
     public final override func touchesEnded(

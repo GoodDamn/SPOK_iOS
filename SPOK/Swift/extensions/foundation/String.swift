@@ -35,6 +35,11 @@ extension String {
         
         return Int(d)
     }
+
+    static func currentTimeSeconds() -> String {
+        let d = Date().timeIntervalSince1970
+        return String(Int(d))
+    }
     
     static func locale(
         _ key: String

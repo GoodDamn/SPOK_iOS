@@ -26,14 +26,14 @@ final class AppleProtectService {
     }
     
     func isTimeForUpdateState() -> Bool {
-        let time = UserDefaults.standard
+        let time = UserDefaults
             .timeForAppleCheck()
         
         return mCurrentTime - time > AppleProtectService.INTERVAL
     }
     
     func doesAppleCheck() -> Bool {
-        return UserDefaults.standard
+        return UserDefaults
             .doAppleCheck()
     }
     

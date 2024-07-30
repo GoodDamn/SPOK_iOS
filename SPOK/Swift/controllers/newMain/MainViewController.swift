@@ -173,9 +173,11 @@ final class MainViewController
         
         showSplash(
             msg: "отправляемся\nв мир снов..."
-        ) {
-            return
+        ) { [weak self] in
+            let b = self?.hasContacts() ?? true
+            return b ?
                 MainContentViewController()
+            : EmailShareViewController()
         }
         
     }
@@ -289,6 +291,18 @@ extension MainViewController {
         }
     }
     
+    private func hasContacts() -> Bool {
+        if MainViewController.mDoAppleCheck {
+            return true
+        }
+        
+        if UserDefaults.contacts() != nil {
+            return true
+        }
+        
+        return false
+    }
+    
     private func cacheFirstContentKit() {
         
         let fm = FileManager.default
@@ -384,8 +398,8 @@ extension MainViewController {
         msg: String,
         _ completion: @escaping () -> StackViewController
     ) {
-        let splash = EmailShareViewController()
-        //splash.msgBottom = msg
+        let splash = SplashViewController()
+        splash.msgBottom = msg
         splash.view.alpha = 1
         push(
             splash,
@@ -393,9 +407,7 @@ extension MainViewController {
         ) {
             splash.view.alpha = 1.0
         }
-        
-        /*return
-        
+                
         DispatchQueue.ui(
             wait: 3.0
         ) { [weak self] in
@@ -413,7 +425,7 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
-        }*/
+        }
         
     }
     

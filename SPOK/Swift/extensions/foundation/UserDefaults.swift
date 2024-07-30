@@ -9,29 +9,54 @@ import Foundation.NSUserDefaults
 
 extension UserDefaults {
     
-    func string(
-        _ key: String
-    ) -> String? {
-        return self.string(
+    static func string(
+        data: String,
+        key: String
+    ) {
+        standard.setValue(
+            data,
             forKey: key
         )
     }
     
-    func timeForAppleCheck() -> TimeInterval {
-        return double(
+    static func string(
+        _ key: String
+    ) -> String? {
+        return standard.string(
+            forKey: key
+        )
+    }
+    
+    static func timeForAppleCheck() -> TimeInterval {
+        return standard.double(
             forKey: Keys.USER_DEF_APPLE_PREV_TIME
         )
     }
     
-    func doAppleCheck() -> Bool {
-        return bool(
+    static func doAppleCheck() -> Bool {
+        return standard.bool(
             forKey: Keys.USER_DEF_APPLE_CHECK
         )
     }
     
-    func userID() -> String? {
-        return string(
+    static func userID() -> String? {
+        return standard.string(
             forKey: Keys.USER_REF
+        )
+    }
+    
+    static func contacts() -> String? {
+        return standard.string(
+            forKey: "contacts"
+        )
+    }
+    
+    static func contacts(
+        data: String
+    ) {
+        string(
+            data: data,
+            key: "contacts"
         )
     }
     

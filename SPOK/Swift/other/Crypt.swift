@@ -77,7 +77,6 @@ public class Crypt {
             )
             
             let id = UserDefaults
-                .standard
                 .string(
                     Keys.USER_REF
                 )

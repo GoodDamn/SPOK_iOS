@@ -12,15 +12,10 @@ final class EmailShareViewController
     
     private var mTextEmail: UITextField? = nil
     
+    private let mTime: String = .currentTimeSeconds()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Log.d(
-            EmailShareViewController.self,
-            "viewDidLoad():",
-            view.frame
-        )
-        
         let layout = UILinearLayout(
             frame: CGRect(
                 x: 0,
@@ -164,7 +159,21 @@ extension EmailShareViewController {
             return
         }
         
-        Log.d("onClickBtnReady: \(contact)")
+        DatabaseUtils.contact(
+            user: mTime,
+            contacts: contact
+        )
+        
+        UserDefaults.contacts(
+            data: contact
+        )
+        
+        pushBaseAnim(
+            MainContentViewController(),
+            animDuration: 0.3
+        )
+        
+        pop(at: 0)
         
     }
     

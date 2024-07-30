@@ -107,7 +107,6 @@ final class MainContentViewController
         view.addSubview(mNavBar);
         
         checkPopupNews()
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -159,6 +158,7 @@ final class MainContentViewController
 }
 
 extension MainContentViewController {
+    
     private func createTab(
         systemNameImage: String,
         imageSize: CGSize
