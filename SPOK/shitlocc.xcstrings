@@ -11,6 +11,17 @@
           }
         }
       }
+    },
+    "hintInput" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПОЛЕ ДЛЯ ВВОДА"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

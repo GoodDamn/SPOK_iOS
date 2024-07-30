@@ -21,7 +21,9 @@ final class UILinearLayout
             .origin
             .y ?? 0) + (last?.height ?? 0)
         
-        view.sizeToFit()
+        if view.height() == 0 {
+            view.sizeToFit()
+        }
         view.frame.origin.y += lastY
         
         view.centerH(

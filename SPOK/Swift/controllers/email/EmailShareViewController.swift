@@ -36,6 +36,9 @@ final class EmailShareViewController
             withSize: width * 32.nw()
         )
         
+        labelTitle.frame.origin.y =
+            87.nh() * height
+        
         layout.addSubview(
             labelTitle
         )
@@ -59,8 +62,45 @@ final class EmailShareViewController
         labelDesc.numberOfLines = 0
         labelDesc.textAlignment = .center
                 
+        labelDesc.frame.origin.y = 63.nw() * width
+        
         layout.addSubview(
             labelDesc
+        )
+        
+        let textFieldEmail = UITextField(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: width * 316.nw(),
+                height: width * 72.nw()
+            )
+        )
+        
+        textFieldEmail.placeholder = .locale(
+            "hintInput"
+        )
+        
+        textFieldEmail.textColor = .white
+        textFieldEmail.textAlignment = .center
+        textFieldEmail.borderStyle = .roundedRect
+        textFieldEmail.layer.borderColor = UIColor
+            .white.cgColor
+        textFieldEmail.layer.borderWidth =
+            0.01388 * textFieldEmail.height()
+        
+        textFieldEmail.font = .semibold(
+            withSize: 0.20833 *
+                textFieldEmail.height()
+        )
+        
+        textFieldEmail.backgroundColor = .clear
+        
+        textFieldEmail.frame.origin.y =
+            37.nw() * width
+        
+        layout.addSubview(
+            textFieldEmail
         )
         
         ScrollView().configure(
