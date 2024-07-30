@@ -22,6 +22,17 @@
           }
         }
       }
+    },
+    "ready" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово!"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

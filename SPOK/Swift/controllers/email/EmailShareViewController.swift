@@ -103,6 +103,41 @@ final class EmailShareViewController
             textFieldEmail
         )
         
+        let btnReady = UITextButton(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 316.nw() * width,
+                height: 50.nw() * width
+            )
+        )
+        
+        btnReady.backgroundColor = .accent()
+        btnReady.isWrappedByText = false
+        
+        btnReady.frame.origin.y = 46.nw() * width
+        
+        btnReady.text = .locale(
+            "ready"
+        )
+        btnReady.textColor = .white
+        
+        btnReady.font = .bold(
+            withSize: btnReady.height() * 0.2834
+        )
+        
+        btnReady.textAlignment = .center
+        
+        btnReady.corner(
+            normHeight: 0.2
+        )
+        
+        btnReady.layout()
+        
+        layout.addSubview(
+            btnReady
+        )
+        
         ScrollView().configure(
             parent: view,
             contentView: layout

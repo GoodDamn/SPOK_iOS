@@ -40,6 +40,7 @@ final public class UITextButton
         }
     }
     
+    final var isWrappedByText = true
     final var isUnderlinedText = false
     
     final var paddingV: CGFloat = 15
@@ -114,12 +115,14 @@ final public class UITextButton
         
         let size = attr.size()
         
-        frame = CGRect(
-            x: frame.origin.x - paddingH,
-            y: frame.origin.y - paddingV,
-            width: size.width + paddingH,
-            height: size.height + paddingV
-        )
+        if isWrappedByText {
+            frame = CGRect(
+                x: frame.origin.x - paddingH,
+                y: frame.origin.y - paddingV,
+                width: size.width + paddingH,
+                height: size.height + paddingV
+            )
+        }
                 
         setNeedsDisplay()
     }
