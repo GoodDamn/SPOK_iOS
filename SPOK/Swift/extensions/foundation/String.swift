@@ -31,7 +31,7 @@ extension String {
     ) -> String {
         return NSLocalizedString(
             key,
-            tableName: "Localization",
+            tableName: "shitlocc",
             bundle: Bundle.main,
             value: "",
             comment: ""

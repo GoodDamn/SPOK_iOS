@@ -10,11 +10,9 @@ import UIKit
 final class ScrollView
     : UIScrollView {
     
-    
     private func initialize() {
         backgroundColor = .background()
     }
-    
     
     override init(
         frame: CGRect
@@ -38,10 +36,6 @@ final class ScrollView
     ) {
         subviews.last?.removeFromSuperview()
         
-        parent.backgroundColor = .red
-        backgroundColor = .green
-        contentView.backgroundColor = .blue
-        
         parent.addSubview(
             self
         )
@@ -55,11 +49,7 @@ final class ScrollView
         
         contentView.translatesAutoresizingMaskIntoConstraints
             = false
-        
-        Log.d(ScrollView.self,
-              parent.frame,
-              contentView.frame)
-        
+                
         NSLayoutConstraint.activate([
             topAnchor.constraint(
                 equalTo: parent.topAnchor
@@ -91,11 +81,18 @@ final class ScrollView
             contentView.widthAnchor.constraint(
                 equalTo: widthAnchor
             ),
-            contentView.heightAnchor.constraint(
-                equalTo: heightAnchor,
-                constant: 941.5 / UIScreen.main.nativeScale
+            
+            NSLayoutConstraint(
+                item: contentView,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: contentView.height()
             )
         ])
+        
     }
     
 }

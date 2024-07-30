@@ -41,16 +41,24 @@ final class EmailShareViewController
         )
         
         
-        let labelDesc = UILabel()
-        labelDesc.text = "asdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nasdsadsadasdsad\nfggggggggggghgggggg"
+        let labelDesc = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: width * 316.nw(),
+                height: 0
+            )
+        )
+        labelDesc.text = .locale(
+            "emailShare2"
+        )
         labelDesc.textColor = .white
         labelDesc.font = .semibold(
-            withSize: width * 17.nw()
+            withSize: width * 16.nw()
         )
         labelDesc.numberOfLines = 0
-        
-        labelDesc.backgroundColor = .systemPink
-        
+        labelDesc.textAlignment = .center
+                
         layout.addSubview(
             labelDesc
         )

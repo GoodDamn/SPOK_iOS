@@ -63,6 +63,7 @@
 		25883AA02C57657A00D46614 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9F2C57657A00D46614 /* Int.swift */; };
 		25883AA32C57708000D46614 /* UILinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA22C57708000D46614 /* UILinearLayout.swift */; };
 		25883AA62C57BB7200D46614 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA52C57BB7200D46614 /* ScrollView.swift */; };
+		25883AB32C58A8E000D46614 /* shitlocc.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 25883AB22C58A8E000D46614 /* shitlocc.xcstrings */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		25977E3E2C21E1FF001F3E54 /* FragmentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
@@ -250,6 +251,7 @@
 		25883A9F2C57657A00D46614 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		25883AA22C57708000D46614 /* UILinearLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinearLayout.swift; sourceTree = "<group>"; };
 		25883AA52C57BB7200D46614 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		25883AB22C58A8E000D46614 /* shitlocc.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = shitlocc.xcstrings; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		25977E3D2C21E1FF001F3E54 /* FragmentUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentUtils.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 				2BA10242276A41F000EB5B8C /* Storyboards */,
 				2BA101D52763EFCA00EB5B8C /* Assets.xcassets */,
 				2BA101DA2763EFCA00EB5B8C /* Info.plist */,
+				25883AB22C58A8E000D46614 /* shitlocc.xcstrings */,
 			);
 			path = SPOK;
 			sourceTree = "<group>";
@@ -1435,6 +1438,7 @@
 				25F3B4062C05C66A007F156C /* 60B.spc in Resources */,
 				25F3B4072C05C66A007F156C /* 58M.spc in Resources */,
 				25F3B3E22C05C315007F156C /* 2.scs in Resources */,
+				25883AB32C58A8E000D46614 /* shitlocc.xcstrings in Resources */,
 				25F3B4022C05C66A007F156C /* 52B.spc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
