@@ -10,6 +10,8 @@ import UIKit
 final class EmailShareViewController
     : StackViewController {
     
+    private var mTextEmail: UITextField? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,7 +70,7 @@ final class EmailShareViewController
             labelDesc
         )
         
-        let textFieldEmail = UITextField(
+        mTextEmail = UITextField(
             frame: CGRect(
                 x: 0,
                 y: 0,
@@ -77,31 +79,33 @@ final class EmailShareViewController
             )
         )
         
-        textFieldEmail.placeholder = .locale(
-            "hintInput"
-        )
-        
-        textFieldEmail.textColor = .white
-        textFieldEmail.textAlignment = .center
-        textFieldEmail.borderStyle = .roundedRect
-        textFieldEmail.layer.borderColor = UIColor
-            .white.cgColor
-        textFieldEmail.layer.borderWidth =
-            0.01388 * textFieldEmail.height()
-        
-        textFieldEmail.font = .semibold(
-            withSize: 0.20833 *
-                textFieldEmail.height()
-        )
-        
-        textFieldEmail.backgroundColor = .clear
-        
-        textFieldEmail.frame.origin.y =
-            37.nw() * width
-        
-        layout.addSubview(
-            textFieldEmail
-        )
+        if let it = mTextEmail {
+            it.placeholder = .locale(
+                "hintInput"
+            )
+            
+            it.textColor = .white
+            it.textAlignment = .center
+            it.borderStyle = .roundedRect
+            it.layer.borderColor = UIColor
+                .white.cgColor
+            it.layer.borderWidth =
+                0.01388 * it.height()
+            
+            it.font = .semibold(
+                withSize: 0.20833 *
+                it.height()
+            )
+            
+            it.backgroundColor = .clear
+            
+            it.frame.origin.y =
+                37.nw() * width
+            
+            layout.addSubview(
+                it
+            )
+        }
         
         let btnReady = UITextButton(
             frame: CGRect(
@@ -116,6 +120,8 @@ final class EmailShareViewController
         btnReady.isWrappedByText = false
         
         btnReady.frame.origin.y = 46.nw() * width
+        
+        btnReady.onClick = onClickBtnReady(_:)
         
         btnReady.text = .locale(
             "ready"
@@ -143,4 +149,23 @@ final class EmailShareViewController
             contentView: layout
         )
     }
+}
+
+extension EmailShareViewController {
+    
+    private func onClickBtnReady(
+        _ v: UIView
+    ) {
+        guard let contact = mTextEmail?
+            .text?.trim(), !contact.isEmpty else {
+            Toast.show(
+                text: .locale("noContact")
+            )
+            return
+        }
+        
+        Log.d("onClickBtnReady: \(contact)")
+        
+    }
+    
 }

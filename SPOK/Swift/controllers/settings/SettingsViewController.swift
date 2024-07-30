@@ -228,10 +228,9 @@ final class SettingsViewController
         ) { [weak self] error in
             
             if error == nil {
-                Toast.init(
-                    text: "Аккаунт удален",
-                    duration: 1.0
-                ).show()
+                Toast.show(
+                    text: "Аккаунт удален"
+                )
                 
                 if self == nil {
                     return
@@ -243,18 +242,16 @@ final class SettingsViewController
                 return
             }
             
-            Toast.init(
-                text: "Ошибка удаления аккаунта: \(error!.localizedDescription)",
-                duration: 1.0
-            ).show()
+            Toast.show(
+                text: "Ошибка удаления аккаунта: \(error!.localizedDescription)"
+            )
         }
     }
     
     override func onAuthSuccess() {
-        Toast.init(
-            text: "Успешно",
-            duration: 1.0
-        ).show()
+        Toast.show(
+            text: "Успешно"
+        )
         
         mTableOptions.mOptions = mOptionsUser
     }
@@ -262,10 +259,9 @@ final class SettingsViewController
     override func onAuthError(
         s: String
     ) {
-        Toast.init(
-            text: "Ошибка: \(s)",
-            duration: 1.0
-        ).show()
+        Toast.show(
+            text: "Ошибка: \(s)"
+        )
     }
 }
 

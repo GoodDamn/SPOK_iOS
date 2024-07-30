@@ -5,26 +5,16 @@
 //  Created by Cell on 15.12.2021.
 //
 
-import Foundation;
 import UIKit;
 
-class Toast {
+final class Toast {
     
-    private var mText: String
-    private var mDuration: Double
-    
-    init(
-        text: String,
-        duration: Double
+    static func show(
+        text: String
     ) {
-        mText = text;
-        mDuration = duration;
-    }
-    
-    public func show() {
         
         let c = UIAlertController(
-            title: mText,
+            title: text,
             message: nil,
             preferredStyle: .alert
         )

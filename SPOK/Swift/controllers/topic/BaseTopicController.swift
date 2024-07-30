@@ -313,10 +313,9 @@ extension BaseTopicController {
     }
     
     private func nothing() {
-        Toast.init(
-            text: "Nothing found",
-            duration: 1.8
-        ).show()
+        Toast.show(
+            text: "Nothing found"
+        )
         
         pop(
             duration: 0.3

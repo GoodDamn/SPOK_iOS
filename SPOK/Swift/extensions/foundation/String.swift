@@ -9,6 +9,16 @@ import Foundation
 
 extension String {
     
+    func isBlank() -> Bool {
+        return trim().isEmpty
+    }
+    
+    func trim() -> String {
+        return trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+    }
+    
     func iso8601Epoch() -> Int {
         let iso = ISO8601DateFormatter()
         iso.formatOptions = [

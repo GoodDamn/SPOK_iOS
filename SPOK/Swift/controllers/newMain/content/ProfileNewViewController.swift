@@ -404,19 +404,17 @@ extension ProfileNewViewController {
         
         if !MainViewController
             .mCanPay {
-            Toast.init(
-                text: "Проверка подписки",
-                duration: 1.5
-            ).show()
+            Toast.show(
+                text: "Проверка подписки"
+            )
             return
         }
         
         if MainViewController
             .mIsPremiumUser {
-            Toast.init(
-                text: "Подписка пока действует",
-                duration: 1.5
-            ).show()
+            Toast.show(
+                text: "Подписка пока действует"
+            )
             return
         }
         

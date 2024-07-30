@@ -124,11 +124,9 @@ final class PreviewCell
         if s.isPremium && !MainViewController
             .mIsPremiumUser {
             // Move to sub page
-            Toast(
-                text: "Доступно только с подпиской",
-                duration: 1.5
-            ).show()
-            
+            Toast.show(
+                text: "Доступно только с подпиской"
+            )
             return
         }
         
