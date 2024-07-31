@@ -9,6 +9,34 @@ import Foundation.NSUserDefaults
 
 extension UserDefaults {
     
+    static func stats() -> UserDefaults {
+        UserDefaults(
+            suiteName: "stats"
+        ) ?? standard
+    }
+    
+    static func statsKey(
+        _ key: String
+    ) -> Int {
+        return stats().integer(
+            forKey: key
+        )
+    }
+    
+    static func statsInc(
+        _ key: String
+    ) {
+        let s = stats()
+        let v = s.integer(
+            forKey: key
+        )
+        
+        s.setValue(
+            v + 1,
+            forKey: key
+        )
+    }
+    
     static func string(
         data: String,
         key: String
@@ -42,6 +70,19 @@ extension UserDefaults {
     static func userID() -> String? {
         return standard.string(
             forKey: Keys.USER_REF
+        )
+    }
+    
+    static func anonId() {
+        string(
+            data: .currentTimeSeconds(),
+            key: "anonId"
+        )
+    }
+    
+    static func anonId() -> String? {
+        return string(
+            "anonId"
         )
     }
     
