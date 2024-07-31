@@ -173,11 +173,8 @@ final class MainViewController
         
         showSplash(
             msg: "отправляемся\nв мир снов..."
-        ) { [weak self] in
-            let b = self?.hasContacts() ?? true
-            return b ?
-                MainContentViewController()
-            : EmailShareViewController()
+        ) {
+            return MainContentViewController()
         }
         
     }
@@ -289,18 +286,6 @@ extension MainViewController {
         for c in mControllers {
             c.updateAppleCheck()
         }
-    }
-    
-    private func hasContacts() -> Bool {
-        if MainViewController.mDoAppleCheck {
-            return true
-        }
-        
-        if UserDefaults.contacts() != nil {
-            return true
-        }
-        
-        return false
     }
     
     private func cacheFirstContentKit() {

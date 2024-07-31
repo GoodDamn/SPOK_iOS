@@ -72,14 +72,16 @@ final class IntroSleepRootController
         
         intro3.onHide = {
             
-            let window = UIApplication
-                .shared
-                .windows[0]
             
-            let mainNav = MainContentViewController()
+            let content = MainViewController
+                .mDoAppleCheck ? 
+                MainContentViewController()
+            : EmailShareViewController()
+            
+            
             
             self.pusht(
-                mainNav,
+                content,
                 animDuration: 2.0,
                 options: [
                     .transitionCrossDissolve

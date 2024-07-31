@@ -168,12 +168,15 @@ extension EmailShareViewController {
             data: contact
         )
         
-        pushBaseAnim(
+        pusht(
             MainContentViewController(),
-            animDuration: 0.3
-        )
-        
-        pop(at: 0)
+            animDuration: 0.3,
+            options: [
+                .transitionCrossDissolve
+            ]
+        ) { [weak self] _ in
+            self?.pop(at: 0)
+        }
         
     }
     
