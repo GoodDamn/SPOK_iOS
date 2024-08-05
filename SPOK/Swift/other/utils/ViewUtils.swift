@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import StoreKit
 
 public class ViewUtils {
     
@@ -48,24 +47,6 @@ public class ViewUtils {
             for: .normal)
         
         return btnStart
-    }
-    
-    public static func rateApp() {
-        let store = SKStoreProductViewController()
-        
-        store.loadProduct(
-            withParameters: [
-                SKStoreProductParameterITunesItemIdentifier: NSNumber(
-                    value: 6443976042
-                )
-            ]
-        )
-        
-        Utils.main()
-            .present(
-                store,
-                animated: true
-            )
     }
     
     /*public static func debugLines(

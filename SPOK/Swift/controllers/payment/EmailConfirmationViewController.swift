@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class EmailConfirmationViewController
-    : UIViewController {
+    : StatViewController {
     
     var onConfirmEmail: ((String) -> Void)? = nil
     

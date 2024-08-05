@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MessageViewController
+final class MessageViewController
     : StackViewController {
     
     var msg = ""
@@ -23,7 +23,7 @@ class MessageViewController
         mBlurView.effect = UIBlurEffect(
             style: .systemChromeMaterialDark
         )
-        print("loadView:")
+        Log.d("loadView:")
         view = mBlurView
     }
     
@@ -49,9 +49,8 @@ class MessageViewController
         
         lTitle.textAlignment = .center
         lTitle.numberOfLines = 0
-        lTitle.font = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: w * 0.051
+        lTitle.font = .extrabold(
+            withSize: w * 0.051
         )
         lTitle.textColor = .white
         lTitle.text = msg
@@ -61,8 +60,9 @@ class MessageViewController
         
         lTitle.frame.origin.x = (w-f.size.width) * 0.5
         
-        mBlurView.contentView
-            .addSubview(lTitle)
+        mBlurView.contentView.addSubview(
+            lTitle
+        )
         
     }
     

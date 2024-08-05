@@ -323,7 +323,7 @@ extension SettingsViewController {
     private func onClickBtnRate(
         view: UIView
     ) {
-        ViewUtils.rateApp()
+        FragmentUtils.openAppStorePage()
     }
     
     private func onClickBtnSupport(

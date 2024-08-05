@@ -183,9 +183,7 @@ final class PopupNewsViewController
     private func onClickBtnUpdate(
         _ sender: UIView
     ) {
-        FragmentUtils.openAppStorePage(
-            self
-        )
+        FragmentUtils.openAppStorePage()
     }
     
     private func markAsRead() {

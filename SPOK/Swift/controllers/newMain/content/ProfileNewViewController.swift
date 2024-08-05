@@ -394,17 +394,16 @@ final class ProfileNewViewController
     override func onAuthError(
         error: String
     ) {
-        if messageController == nil {
+        guard let it = messageController else {
             return
         }
         
-        messageController!
-            .pop(
-                duration: 0.3
-            ) { [weak self] in
-                self?.messageController!.view
-                    .alpha = 0.0
-            }
+        it.pop(
+            duration: 0.3
+        ) { [weak self] in
+            it.view.alpha = 0.0
+        }
+        
         messageController = nil
     }
     
@@ -425,8 +424,7 @@ extension ProfileNewViewController {
             return
         }
         
-        if MainViewController
-            .mIsPremiumUser {
+        if MainViewController.mIsPremiumUser {
             Toast.show(
                 text: "Подписка пока действует"
             )
@@ -443,22 +441,24 @@ extension ProfileNewViewController {
         
         messageController = MessageViewController()
         
-        messageController!.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
-        
-        messageController!.mAction = { [weak self] in
-            sender.isUserInteractionEnabled = true
-            self?.authenticate()
-        }
-        
-        let v = messageController!
-            .view!
-        
-        v.alpha = 0.0
-        push(
-            messageController!,
-            animDuration: 0.4
-        ) {
-            v.alpha = 1.0
+        if let it = messageController {
+            
+            it.msg = "Перед тем, как\nпродолжить создадим твой аккаунт..."
+            
+            it.mAction = { [weak self] in
+                sender.isUserInteractionEnabled = true
+                self?.authenticate()
+            }
+            
+            let v = it.view
+            
+            v.alpha = 0.0
+            push(
+                it,
+                animDuration: 0.4
+            ) {
+                v.alpha = 1.0
+            }
         }
         
     }
@@ -497,8 +497,7 @@ extension ProfileNewViewController {
             snap in
             
             DispatchQueue.ui {
-                let c =
-                WebConfirmationViewController()
+                let c = WebConfirmationViewController()
                 c.mPaymentListener = self
                 c.mPaymentSnap = snap
                 
@@ -513,7 +512,11 @@ extension ProfileNewViewController {
     private func startPayment() {
         let c = EmailConfirmationViewController()
         
-        c.onConfirmEmail = onGetEmail(email:)
+        c.onConfirmEmail = { [weak self] email in
+            self?.onGetEmail(
+                email: email
+            )
+        }
         
         present(
             c,
