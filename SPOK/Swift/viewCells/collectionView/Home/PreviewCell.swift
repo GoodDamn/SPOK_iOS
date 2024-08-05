@@ -62,16 +62,20 @@ final class PreviewCell
             .withAlphaComponent(0.4)
         
         mImageView = UIImageView(
-            frame: f
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: frame.width * 1.01,
+                height: frame.height * 1.01
+            )
         )
         
         backgroundColor = .clear
         contentView.backgroundColor = .gray
         mImageView.backgroundColor = .clear
         
-        let bold = UIFont(
-            name: "OpenSans-Bold",
-            size: 18
+        let bold = UIFont.bold(
+            withSize: 18
         )
         
         mTitle = UILabela()
