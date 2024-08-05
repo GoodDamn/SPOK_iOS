@@ -8,7 +8,9 @@
 import Foundation
 import AVFoundation
 
-public protocol OnReadCommand {
+protocol OnReadCommand
+    : AnyObject {
+    
     func onAmbient(
         _ player: AVAudioPlayer?
     )

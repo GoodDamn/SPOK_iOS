@@ -6,6 +6,10 @@
 //
 
 import Foundation
-public protocol OnReadScript {
+
+protocol OnReadScript
+    : AnyObject {
+    
     func onFinish()
+    
 }

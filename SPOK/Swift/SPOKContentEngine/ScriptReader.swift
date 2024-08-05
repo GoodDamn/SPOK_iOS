@@ -7,18 +7,17 @@
 
 import Foundation
 
-public class ScriptReader {
+class ScriptReader {
     
-    private final let TAG = "ScriptReader"
+    weak var onReadScript: OnReadScript? = nil
+    
     private final var mEngine: SPOKContentEngine
     
     private final var mFileLen: Int
     private final var mChunkLen: Int
     private final var mStream: FileInputStream
     
-    private var mOnReadScript: OnReadScript? = nil
-    
-    public init(
+    init(
         engine: SPOKContentEngine,
         dataSKC: inout Data
     ) {
@@ -34,8 +33,8 @@ public class ScriptReader {
         mChunkLen = mFileLen - ByteUtils
             .int(&resLenByte)
         
-        print(
-            TAG,
+        Log.d(
+            ScriptReader.self,
             "FILE_LEN:",
             mFileLen,
             "CHUNK_LEN:",
@@ -43,11 +42,14 @@ public class ScriptReader {
         )
     }
     
-    public func next() {
+    func next() {
         
         if mStream.position() >= mChunkLen {
-            print(TAG, "SCRIPT SECTION IS EMPTY")
-            mOnReadScript?.onFinish()
+            Log.d(
+                ScriptReader.self,
+                "SCRIPT SECTION IS EMPTY"
+            )
+            onReadScript?.onFinish()
             return
         }
         
@@ -56,8 +58,8 @@ public class ScriptReader {
         let chunkLen = ByteUtils
             .int(&chunkLenBytes)
         
-        print(
-            TAG,
+        Log.d(
+            ScriptReader.self,
             "CHUNK_LEN:",
             chunkLen,
             "BYTES:",
@@ -72,15 +74,8 @@ public class ScriptReader {
         
     }
     
-    public func progress() -> CGFloat {
+    func progress() -> CGFloat {
         return CGFloat(mStream.position()) / CGFloat(mChunkLen)
     }
-    
-    public func setOnReadScriptListener(
-        _ l: OnReadScript?
-    ) {
-        mOnReadScript = l
-    }
-    
     
 }

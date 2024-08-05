@@ -26,9 +26,6 @@ final class SettingsViewController
     
         view.backgroundColor = .background()
         
-        let bold = UIFont
-            .bold(withSize: 1)
-        
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
         

@@ -5,16 +5,17 @@ public final class SPOKContentEngine {
     
     private let TAG = "SPOKContentEngine:"
     
+    final weak var onReadCommand: OnReadCommand? = nil
+    public var onEndScript: (
+        (ScriptText) -> Void
+    )? = nil
+    
     private final let READ_BACKGROUND = 2;
     private final let READ_IMAGE = 3;
     private final let READ_GIF = 4;
     private final let READ_SFX = 5;
     private final let READ_AMBIENT = 6;
     private final let READ_VECTOR = 7;
-    
-    private var mOnEndScript:((ScriptText) -> Void)? = nil
-    
-    private var mOnReadCommand: OnReadCommand? = nil
     
     private var mSfxPool:[AVAudioPlayer?] = []
     private var mResources: [Any?] = []
@@ -29,7 +30,7 @@ public final class SPOKContentEngine {
         
         var offset = Int(chunk.startIndex)
         
-        print(TAG, "LEN:",chunk[offset])
+        Log.d(TAG, "LEN:",chunk[offset])
         
         let textLen = ByteUtils
             .short(
@@ -53,7 +54,7 @@ public final class SPOKContentEngine {
             separatedBy: "|"
         )
         
-        print(TAG, "TEXT:", text)
+        Log.d(TAG, "TEXT:", text)
         
         if (advancedText.count != 1) {
             textConfig.mAdvancedText = advancedText
@@ -63,7 +64,7 @@ public final class SPOKContentEngine {
         
         var i = textLen
         
-        print(
+        Log.d(
             TAG,
             "EXPRESSION:",
             chunk.count,
@@ -79,15 +80,13 @@ public final class SPOKContentEngine {
         
         i += 1
         
-        print(TAG, "SCRIPT_SIZE:", scriptSize)
+        Log.d(TAG, "SCRIPT_SIZE:", scriptSize)
         
         var j = 0
         
         while (j < scriptSize) {
             
-            var sResFile
-            : ScriptResource?
-            = nil
+            var sResFile: ScriptResource? = nil
             
             var currentOffset = i+j+offset
             let argSize = Int(
@@ -99,7 +98,7 @@ public final class SPOKContentEngine {
             
             let commandIndex = Int(chunk[currentOffset])
             
-            print(
+            Log.d(
                 TAG,
                 "LOOP:",
                 currentOffset,
@@ -132,7 +131,7 @@ public final class SPOKContentEngine {
                 sResFile = ScriptRead.sfx(
                     chunk: &chunk,
                     offset: currentOffset)
-                mOnReadCommand?.onSFX(
+                onReadCommand?.onSFX(
                     mResources[
                         Int(sResFile!
                             .resID)
@@ -144,11 +143,11 @@ public final class SPOKContentEngine {
                 sResFile = ScriptRead.ambient(
                     chunk: &chunk,
                     offset: currentOffset)
-                print(TAG, "READ_AMBIENT:",
+                Log.d(TAG, "READ_AMBIENT:",
                       sResFile!.resID,
                       mResources.count
                 )
-                mOnReadCommand?.onAmbient(
+                onReadCommand?.onAmbient(
                     mResources[
                         Int(sResFile!
                             .resID)
@@ -158,14 +157,14 @@ public final class SPOKContentEngine {
             case READ_VECTOR:
                 break
             default:
-                mOnReadCommand?.onError(
+                onReadCommand?.onError(
                     "Invalid command index: \(commandIndex)"
                 )
                 break
             }
             j += argSize
         }
-        mOnEndScript?(textConfig)
+        onEndScript?(textConfig)
     }
     
     
@@ -179,22 +178,22 @@ public final class SPOKContentEngine {
         
         let fileSize = dataSKC.count
         
-        print(TAG, "FileSize:",fileSize)
+        Log.d(TAG, "FileSize:",fileSize)
         
         var resLenBytes = fis.read(4)
         
-        print(TAG,"RES_LEN_BYTES:",([UInt8])(resLenBytes))
+        Log.d(TAG,"RES_LEN_BYTES:",([UInt8])(resLenBytes))
         
         let resLen = ByteUtils
             .int(
                 &resLenBytes
             )
         
-        print(TAG, "RES_LEN:",resLen)
+        Log.d(TAG, "RES_LEN:",resLen)
         
         let resPos = fileSize - resLen - 4
         
-        print(TAG, "RES_POS:",resPos)
+        Log.d(TAG, "RES_POS:",resPos)
         
         fis.skip(resPos-1)
         
@@ -204,7 +203,7 @@ public final class SPOKContentEngine {
 
         fis.skip(1)
         
-        print(TAG, "RES_COUNT:",resCount)
+        Log.d(TAG, "RES_COUNT:",resCount)
         
         mResources = [Any?](
             repeating: nil,
@@ -229,10 +228,10 @@ public final class SPOKContentEngine {
             currentPos = ByteUtils
                 .int(&endPosByte)
             
-            print(TAG, "RES_END_POS:",currentPos, ([UInt8])(endPosByte))
+            Log.d(TAG, "RES_END_POS:",currentPos, ([UInt8])(endPosByte))
             
             fileLen = currentPos - prevPos
-            print(TAG, "FILE_LEN:",fileLen)
+            Log.d(TAG, "FILE_LEN:",fileLen)
             
             let ret = fileSectionPos - (i + 1) * 4 + prevPos
             
@@ -244,7 +243,7 @@ public final class SPOKContentEngine {
             fis.skip(-1)
             file = fis.read(1,fileLen)
             
-            print(
+            Log.d(
                 TAG,
                 "HEADER:",h,
                 "FILE_SIZE:", file.count
@@ -263,7 +262,7 @@ public final class SPOKContentEngine {
                             .mp3
                             .rawValue
                     ) else {
-                    print(TAG, "ERROR: AVAudioPlayer")
+                    Log.d(TAG, "ERROR: AVAudioPlayer")
                     continue
                 }
                 player.prepareToPlay()
@@ -309,17 +308,4 @@ public final class SPOKContentEngine {
         mResources.removeAll()
         mSfxPool.removeAll()
     }
-    
-    public final func setOnEndScriptListener(
-        _ l: ((ScriptText) -> Void)?
-    ) {
-        mOnEndScript = l
-    }
-    
-    public final func setOnReadCommandListener(
-        _ l: OnReadCommand?
-    ) {
-        mOnReadCommand = l
-    }
-    
 }

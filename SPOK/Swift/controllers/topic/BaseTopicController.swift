@@ -23,8 +23,7 @@ final class BaseTopicController
     private var mIsFirstTouch = true
     
     private var mCacheFile: CacheProgress<Void>? = nil
-    private let mEngine =
-        SPOKContentEngine()
+    private let mEngine = SPOKContentEngine()
     
     private var mPrevTextView: UITextViewPhrase? = nil
     
@@ -58,7 +57,11 @@ final class BaseTopicController
         
         if let it = mBtnClose {
             it.alpha = 0.11
-            it.onClick = onClickBtnClose(_:)
+            it.onClick = { [weak self] view in
+                self?.onClickBtnClose(
+                    view
+                )
+            }
             view.addSubview(it)
         }
         
@@ -102,11 +105,8 @@ final class BaseTopicController
         
         mCacheFile?.load()
         
-        mEngine.setOnReadCommandListener(
-            self
-        )
-        
-        mEngine.setOnEndScriptListener {
+        mEngine.onReadCommand = self
+        mEngine.onEndScript = {
             [weak self] scriptText in
             
             guard let s = self else {
@@ -227,8 +227,7 @@ extension BaseTopicController {
             dataSKC: &data
         )
         
-        DispatchQueue.ui {
-            [weak self] in
+        DispatchQueue.ui { [weak self] in
             self?.startTopic()
         }
     }
@@ -243,10 +242,7 @@ extension BaseTopicController {
             1.0
         )
         
-        r.setOnReadScriptListener(
-            self
-        )
-        
+        r.onReadScript = self
         r.next()
         showLabelSong()
     }
