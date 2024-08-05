@@ -89,10 +89,11 @@ final class HomeViewController
             dir: "sleep",
             child: "Sleep"
         )
-        mDownloader!
-            .delegateCollection = self
         
-        mDownloader!.start()
+        if let it = mDownloader {
+            it.delegateCollection = self
+            it.start()
+        }
         
     }
     
@@ -267,8 +268,12 @@ extension HomeViewController
             
             cell.backgroundColor = .clear
             
-            cell.mBtnBegin.onClick =
-                s.onClickBtnBegin(_:)
+            cell.mBtnBegin.onClick = {
+                [weak self] view in
+                s.onClickBtnBegin(
+                    view
+                )
+            }
             
             Log.d(s.TAG, "SheepViewCell:", cell.subviews.count)
         }

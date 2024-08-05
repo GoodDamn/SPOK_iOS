@@ -46,16 +46,6 @@ final class MainViewController
         super.viewDidLoad()
         
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(
-                willTerminate(_:)
-            ),
-            name: UIApplication
-                .willTerminateNotification,
-            object: nil
-        )
-        
         view.backgroundColor = UIColor
             .background()
         
@@ -160,9 +150,8 @@ final class MainViewController
             
             showSplash(
                 msg: "готовим что-то\n уникальное..."
-            ) {
-                return
-                    IntroSleepRootController()
+            ) { [weak self] in
+                return IntroSleepRootController()
             }
             
             // Copying first content Kit to
@@ -177,7 +166,7 @@ final class MainViewController
         
         showSplash(
             msg: "отправляемся\nв мир снов..."
-        ) {
+        ) { [weak self] in
             return MainContentViewController()
         }
         
@@ -215,7 +204,7 @@ final class MainViewController
         UIView.animate(
             withDuration: animDuration,
             animations: animate
-        ) { b in
+        ) { [weak self] b in
             c.transitionEnd()
             completion?(b)
         }
@@ -274,12 +263,6 @@ final class MainViewController
         mCurrentIndex += 1
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(
-            self
-        )
-    }
-    
 }
 
 extension MainViewController {
@@ -298,14 +281,6 @@ extension MainViewController {
         }
     }
     
-    @objc private func willTerminate(
-        _ _: Notification
-    ) {
-        children.forEach { it in
-            (it as? StackViewController)?
-                .willTerminate()
-        }
-    }
     
     private func cacheFirstContentKit() {
         

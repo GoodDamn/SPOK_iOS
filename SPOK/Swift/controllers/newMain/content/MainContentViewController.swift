@@ -54,59 +54,51 @@ final class MainContentViewController
             )
         );
         
-        mNavBar.backgroundColor = UIColor(
-            named: "background"
-        );
+        mNavBar.backgroundColor = .background()
         
         mNavBar.mOffset = 30;
-        mNavBar.mTintColorSelected = UIColor(
-            named: "AccentColor"
-        );
+        mNavBar.mTintColorSelected = .accent()
         
-        mNavBar.mOnSelectTab = {[weak self] index in
-            self?.mPageView?
-                .mIndex = index
+        mNavBar.mOnSelectTab = { [weak self] index in
+            self?.mPageView?.mIndex = index
         }
         
         createTab(
             systemNameImage: "house",
             imageSize: imageSize
-        );
+        )
         
         createTab(
             systemNameImage: "person.fill",
             imageSize: imageSize
-        );
+        )
         
-        mNavBar.subviews[0]
-            .tintColor = UIColor(
-                named: "AccentColor"
-            );
+        mNavBar.subviews[0].tintColor = .accent()
         
-        mNavBar.center_vertical();
-        mNavBar.center_horizontal();
+        mNavBar.center_vertical()
+        mNavBar.center_horizontal()
         
         mPageView = SimplePageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal
         )
         
-        mPageView?.source = [
-            HomeViewController(),
-            MainViewController.mDoAppleCheck
+        if let it = mPageView {
+            it.source = [
+                HomeViewController(),
+                MainViewController.mDoAppleCheck
                 ? SettingsViewController()
                 : ProfileNewViewController()
-        ]
-        
-        addChild(
-            mPageView!
-        )
-        
-        let cont = mPageView!.view!
-        
-        view.addSubview(
-            cont
-        )
+            ]
+            
+            addChild(
+                it
+            )
+            
+            view.addSubview(
+                it.view
+            )
+        }
         
         view.addSubview(mNavBar);
         
@@ -137,7 +129,8 @@ final class MainContentViewController
             return
         }
         
-        mPageView?.source[1] = ProfileNewViewController()
+        mPageView?.source[1] = 
+            ProfileNewViewController()
     }
     
     override func onUpdatePremium() {

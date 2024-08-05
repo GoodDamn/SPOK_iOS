@@ -70,7 +70,7 @@ class StatViewController
         "stats/screens/\(mInstanceName)/\(child)"
     }
     
-    internal func onTerminateApp() {
+    deinit {
         Log.d(StatViewController.self, "\(mInstanceName): onTerminateApp:")
         
         getStatRef(
@@ -78,14 +78,5 @@ class StatViewController
         ).increment(
             .currentTimeSec() - mStartTimeSec
         )
-        
-    }
-    
-    public final func willTerminate() {
-        onTerminateApp()
-    }
-    
-    deinit {
-        onTerminateApp()
     }
 }
