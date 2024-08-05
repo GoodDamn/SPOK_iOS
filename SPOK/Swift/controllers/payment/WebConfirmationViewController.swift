@@ -82,6 +82,10 @@ extension WebConfirmationViewController {
                 key: Keys.ID_PAYMENT_TEMP
             )
             
+            self?.getStatRefId(
+                "PAY_CANCEL"
+            ).increment()
+            
             if let payID = payID {
                 let url = Keys.URL_PAYMENTS
                 .appendingPathComponent(
@@ -136,6 +140,10 @@ extension WebConfirmationViewController {
                     key: Keys.ID_PAYMENT_TEMP
                 )
             }
+            
+            getStatRefId(
+                "PAID"
+            ).increment()
             
             popBaseAnim()
             return

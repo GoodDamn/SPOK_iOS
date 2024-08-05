@@ -44,6 +44,10 @@ final class BaseTopicController
             "viewDidLoad()"
         )
         
+        getStatRefId(
+            "\(mId)/LOAD_"
+        ).increment()
+        
         let w = view.width()
         let h = view.height()
         
@@ -174,6 +178,15 @@ final class BaseTopicController
             )
         
         sender.isUserInteractionEnabled = false
+        
+        getStatRefId(
+            "\(mId)/CLOSE_"
+        ).increment()
+        
+        timeIncrement(
+            "\(mId)/CLOSE_TIME_"
+        )
+        
         popBaseAnim()
     }
     
@@ -394,6 +407,14 @@ extension BaseTopicController
         
         mCurrentPlayer?.stopFade(
             duration: 2.4
+        )
+        
+        getStatRefId(
+            "\(mId)/FINISH_"
+        ).increment()
+        
+        timeIncrement(
+            "\(mId)/FINISH_TIME_"
         )
         
         if mPrevTextView == nil {

@@ -47,11 +47,31 @@ class StatViewController
             didLoad
         )
         
-        getStatRef(
-            "didLoad\(mSessionId)"
+        getStatRefId(
+            "didLoad"
         ).increment()
     }
     
+    internal final func timeIncrement(
+        _ child: String
+    ) {
+        getStatRefId(
+            child
+        ).increment(
+            .currentTimeSec() - mStartTimeSec
+        )
+    }
+    
+    internal final func getStatRefId(
+        _ child: String
+    ) -> DatabaseReference {
+        Database.database()
+            .reference(
+                withPath: getStatChild(
+                    "\(child)\(mSessionId)"
+                )
+            )
+    }
     
     internal final func getStatRef(
         _ child: String

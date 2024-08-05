@@ -385,6 +385,10 @@ final class ProfileNewViewController
             authCode: authCode
         )
         
+        getStatRefId(
+            "PAY_AUTH"
+        ).increment()
+        
         messageController?
             .pop()
         messageController = nil
@@ -416,6 +420,10 @@ extension ProfileNewViewController {
         _ sender: UIView
     ) {
         
+        getStatRefId(
+            "PAY"
+        ).increment()
+        
         if !MainViewController
             .mCanPay {
             Toast.show(
@@ -425,6 +433,10 @@ extension ProfileNewViewController {
         }
         
         if MainViewController.mIsPremiumUser {
+            getStatRefId(
+                "PAY_ALREADY"
+            ).increment()
+            
             Toast.show(
                 text: "Подписка пока действует"
             )
@@ -439,6 +451,10 @@ extension ProfileNewViewController {
             return
         }
         
+        getStatRefId(
+            "PAY_SIGN"
+        ).increment()
+        
         messageController = MessageViewController()
         
         if let it = messageController {
@@ -452,12 +468,12 @@ extension ProfileNewViewController {
             
             let v = it.view
             
-            v.alpha = 0.0
+            v?.alpha = 0.0
             push(
                 it,
                 animDuration: 0.4
             ) {
-                v.alpha = 1.0
+                v?.alpha = 1.0
             }
         }
         
