@@ -55,17 +55,17 @@ final class ProfileNewViewController
         
         let mTopOffset = mInsets.top
         
-        let btnSettings = ViewUtils
-            .buttonClose(
-                "gearshape.fill",
-                in: view,
-                sizeSquare: 0.13,
-                iconProp: 0.4
-            )
+        let btnSettings = ViewUtils.buttonClose(
+            "gearshape.fill",
+            in: view,
+            sizeSquare: 0.13,
+            iconProp: 0.4
+        )
         
         btnSettings.tintColor = .white
-        btnSettings.onClick =
-            onClickBtnSettings(_:)
+        btnSettings.onClick = { [weak self] view in
+            self?.onClickBtnSettings(view)
+        }
         
         let lTitle = UILabel(
             frame: CGRect(
@@ -235,8 +235,11 @@ final class ProfileNewViewController
             normHeight: 0.2
         )
         
-        mBtnOpenAccess.onClick =
-            onClickBtnOpenFullAccess(_:)
+        mBtnOpenAccess.onClick = { [weak self] view in
+            self?.onClickBtnOpenFullAccess(
+                view
+            )
+        }
         
         lPrice.centerH(
             in: view
@@ -311,10 +314,9 @@ final class ProfileNewViewController
         lShare.attribute()
         lShare.sizeToFit()
         
-        let btnShare = ViewUtils
-            .textButton(
-                text: "Поделиться впечатлением"
-            )
+        let btnShare = ViewUtils.textButton(
+            text: "Поделиться впечатлением"
+        )
         
         LayoutUtils.textButton(
             for: btnShare,
@@ -324,7 +326,11 @@ final class ProfileNewViewController
             paddingVertical: 0.03
         )
         
-        btnShare.onClick = onClickBtnShareImpression(_:)
+        btnShare.onClick = { [weak self] view in
+            self?.onClickBtnShareImpression(
+                view
+            )
+        }
         
         btnShare.frame.origin.y =
             shareView.height() -

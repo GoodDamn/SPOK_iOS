@@ -26,8 +26,13 @@ final class IntroSleep3ViewController
             navigationOrientation: .horizontal
         )
         
-        addChild(mPageController)
-        view.addSubview(mPageController.view)
+        addChild(
+            mPageController
+        )
+        
+        view.addSubview(
+            mPageController.view
+        )
         
         mBtnStart = ViewUtils
             .textButton(
