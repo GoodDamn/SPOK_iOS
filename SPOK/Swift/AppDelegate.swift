@@ -67,7 +67,8 @@ class AppDelegate
     
     func application(
         _ application: UIApplication,
-        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+       didRegisterForRemoteNotificationsWithDeviceToken
+        deviceToken: Data
     ) {
         Log.d(
             AppDelegate.self,
@@ -78,8 +79,10 @@ class AppDelegate
         messaging?.apnsToken = deviceToken;
     }
     
-    func application(_ application: UIApplication,
-        didFailToRegisterForRemoteNotificationsWithError error: Error
+    func application(
+        _ application: UIApplication,
+       didFailToRegisterForRemoteNotificationsWithError
+        error: Error
     ) {
         Log.d(
             AppDelegate.self,

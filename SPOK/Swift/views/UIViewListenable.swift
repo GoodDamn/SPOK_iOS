@@ -92,7 +92,9 @@ public class UIViewListenable
             return
         }
         
-        onClick?(self)
+        onClick?(
+            self
+        )
     }
     
     internal func onTouchBegin(){}

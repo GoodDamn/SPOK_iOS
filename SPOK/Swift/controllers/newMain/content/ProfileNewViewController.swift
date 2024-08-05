@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 final class ProfileNewViewController
     : AuthAppleController {
@@ -369,7 +370,15 @@ final class ProfileNewViewController
         
     }
     
-    override func onAuthSuccess() {
+    override func onAuthSuccess(
+        _ auth: AuthDataResult,
+        authCode: String
+    ) {
+        super.onAuthSuccess(
+            auth,
+            authCode: authCode
+        )
+        
         messageController?
             .pop()
         messageController = nil
@@ -377,7 +386,7 @@ final class ProfileNewViewController
     }
     
     override func onAuthError(
-        s: String
+        error: String
     ) {
         if messageController == nil {
             return
@@ -459,9 +468,8 @@ extension ProfileNewViewController {
     private func onClickBtnSettings(
         _ sender: UIView
     ) {
-        let settings = SettingsViewController()
         pushBaseAnim(
-            settings,
+            SettingsViewController(),
             animDuration: 0.3
         )
     }

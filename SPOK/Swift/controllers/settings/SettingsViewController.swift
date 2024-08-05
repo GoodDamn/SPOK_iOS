@@ -46,7 +46,11 @@ final class SettingsViewController
         btnClose.frame
             .origin.y = beginPosY
         
-        btnClose.onClick = onClickBtnClose(_:)
+        btnClose.onClick = { [weak self] view in
+            self?.onClickBtnClose(
+                view: view
+            )
+        }
         
         let hbtnDelete = h * 0.07
         let ytable = btnClose.frame.bottom()
@@ -80,7 +84,11 @@ final class SettingsViewController
             textColor: .white,
             iconColor: .accent(),
             withView: nil,
-            select: onClickBtnRate
+            select: { [weak self] view in
+                self?.onClickBtnRate(
+                    view: view
+                )
+            }
         )
         
         mOptionSupport = Option(
@@ -91,7 +99,11 @@ final class SettingsViewController
             textColor: .white,
             iconColor: .accent(),
             withView: nil,
-            select: onClickBtnSupport
+            select: { [weak self] view in
+                self?.onClickBtnSupport(
+                    view: view
+                )
+            }
         )
         
         mOptionsNonUser = [
@@ -106,7 +118,11 @@ final class SettingsViewController
                 textColor: .white,
                 iconColor: .accent(),
                 withView: nil,
-                select: onClickBtnSignIn
+                select: { [weak self] view in
+                    self?.onClickBtnSignIn(
+                        view: view
+                    )
+                }
             )
         ]
         
@@ -122,7 +138,11 @@ final class SettingsViewController
                 textColor: .white,
                 iconColor: .accent(),
                 withView: nil,
-                select: onClickBtnSignOut
+                select: { [weak self] view in
+                    self?.onClickBtnSignOut(
+                        view: view
+                    )
+                }
             ),
             Option(
                 image: UIImage(
@@ -132,7 +152,11 @@ final class SettingsViewController
                 textColor: .danger(),
                 iconColor: .danger(),
                 withView: nil,
-                select: onClickBtnDelete
+                select: { [weak self] view in
+                    self?.onClickBtnDelete(
+                        view: view
+                    )
+                }
             )
         ]
         
@@ -214,7 +238,7 @@ final class SettingsViewController
     }
     
     override func onReauthSuccess(
-        auth: AuthDataResult,
+        _ auth: AuthDataResult,
         authCode: String
     ) {
         Log.d(
@@ -248,7 +272,15 @@ final class SettingsViewController
         }
     }
     
-    override func onAuthSuccess() {
+    override func onAuthSuccess(
+        _ auth: AuthDataResult,
+        authCode: String
+    ) {
+        super.onAuthSuccess(
+            auth,
+            authCode: authCode
+        )
+        
         Toast.show(
             text: "Успешно"
         )
@@ -257,10 +289,10 @@ final class SettingsViewController
     }
     
     override func onAuthError(
-        s: String
+        error: String
     ) {
         Toast.show(
-            text: "Ошибка: \(s)"
+            text: "Ошибка: \(error)"
         )
     }
 }
@@ -284,6 +316,13 @@ extension SettingsViewController {
         Utils.openSettings()
     }
     
+    private func onClickBtnClose(
+        view: UIView
+    ) {
+        view.isUserInteractionEnabled = false
+        popBaseAnim()
+    }
+    
     private func onClickBtnRate(
         view: UIView
     ) {
@@ -296,13 +335,6 @@ extension SettingsViewController {
         FragmentUtils.openUrl(
             urls: "https://t.me/aleksandrovprod"
         )
-    }
-    
-    private func onClickBtnClose(
-        _ sender: UIView
-    ) {
-        view.isUserInteractionEnabled = false
-        popBaseAnim()
     }
     
     private func onClickBtnSignIn(

@@ -137,7 +137,7 @@ final class PreviewCell
         Utils.main().push(
             t,
             animDuration: 0.3
-        ) {
+        ) { [weak self] in
             t.view.alpha = 1.0
         }
         
@@ -151,11 +151,10 @@ final class PreviewCell
         mType = type
         mId = id
         
-        let localp = StorageApp
-            .previewUrl(
-                id: mId,
-                type: type
-            )
+        let localp = StorageApp.previewUrl(
+            id: mId,
+            type: type
+        )
         
         mCache = CacheData<FileSPC>(
             pathStorage: "Trainings/\(id)/\(type).spc",

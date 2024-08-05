@@ -28,14 +28,12 @@ final class MainContentViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Log.d(TAG, "viewDidLoad()")
-        
         let b = UIScreen
             .main
             .bounds
             .size;
         
-        let hBar:CGFloat = 50;
+        let hBar: CGFloat = 50;
         let imageSize = CGSize(
             width: 60,
             height: 50
@@ -52,8 +50,10 @@ final class MainContentViewController
                 x: 0,
                 y: b.height-hBar-bottomPadding,
                 width: b.width,
-                height: hBar)
+                height: hBar
+            )
         );
+        
         mNavBar.backgroundColor = UIColor(
             named: "background"
         );
@@ -63,12 +63,16 @@ final class MainContentViewController
             named: "AccentColor"
         );
         
-        mNavBar.mOnSelectTab = { index in
-            self.mPageView?
+        mNavBar.mOnSelectTab = {[weak self] index in
+            self?.mPageView?
                 .mIndex = index
         }
         
-        createTab(systemNameImage: "house", imageSize: imageSize);
+        createTab(
+            systemNameImage: "house",
+            imageSize: imageSize
+        );
+        
         createTab(
             systemNameImage: "person.fill",
             imageSize: imageSize

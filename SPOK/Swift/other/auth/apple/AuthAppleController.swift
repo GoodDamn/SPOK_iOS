@@ -9,7 +9,10 @@ import Foundation
 import FirebaseAuth
 
 class AuthAppleController
-    : SignInAppleController {
+: SignInAppleController,
+OnAuthErrorListener,
+OnAuthSuccessListener,
+OnReauthSuccessListener {
     
     private let methodReauth = AuthMethodReauth()
     private let methodSignIn = AuthMethodSignIn()
@@ -22,41 +25,24 @@ class AuthAppleController
     }
     
     final func authenticate() {
-        mAuthMethod = methodSignIn
-        mAuthMethod?.completion =
-            onAuth(_:authCode:)
+        methodSignIn.onAuthSuccess = self
         
-        mAuthMethod?.completionError =
-            onAuthError(s:)
+        mAuthMethod = methodSignIn
+        mAuthMethod?.onAuthError = self
+
         signIn()
     }
     
     final func reauthenticate() {
+        methodReauth.onReauthSuccess = self
+        
         mAuthMethod = methodReauth
-        
-        mAuthMethod?.completion =
-            onReauthSuccess(auth:authCode:)
-        
-        mAuthMethod?.completionError =
-            onAuthError(s:)
+        mAuthMethod?.onAuthError = self
         
         signIn()
     }
     
-    internal func onAuthSuccess() {}
-    internal func onReauthSuccess(
-        auth: AuthDataResult,
-        authCode: String
-    ) {}
-    
-    internal func onAuthError(
-        s: String
-    ) {}
-}
-
-extension AuthAppleController {
-    
-    private func onAuth(
+    internal func onAuthSuccess(
         _ auth: AuthDataResult,
         authCode: String
     ) {
@@ -66,9 +52,18 @@ extension AuthAppleController {
                 auth.user.uid,
                 forKey: Keys.USER_REF
             )
-        
-        onAuthSuccess()
     }
+    
+    internal func onAuthError(
+        error: String
+    ) {
+        
+    }
+    
+    internal func onReauthSuccess(
+        _ auth: AuthDataResult,
+        authCode: String
+    ) {}
 }
 
 extension AuthAppleController
@@ -103,8 +98,8 @@ extension AuthAppleController
     func onErrorSign(
         _ msg: String
     ) {
-        mAuthMethod?.completionError?(
-            msg
+        onAuthError(
+            error: msg
         )
     }
     

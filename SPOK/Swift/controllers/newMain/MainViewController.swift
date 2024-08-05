@@ -36,8 +36,6 @@ final class MainViewController
     private var mProtectService: AppleProtectService? =
         AppleProtectService()
     
-    private var mControllers: [StackViewController] = []
-    
     private var mCurrentIndex = 0
     
     override var prefersStatusBarHidden: Bool {
@@ -46,6 +44,17 @@ final class MainViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(
+                willTerminate(_:)
+            ),
+            name: UIApplication
+                .willTerminateNotification,
+            object: nil
+        )
         
         view.backgroundColor = UIColor
             .background()
@@ -101,11 +110,6 @@ final class MainViewController
         MainViewController.mCardTextSizeM = CardTextSize(
             title: 0.12 * wm,
             desc: 0.066 * wm // 0.066
-        )
-        
-        Log.d(TAG, "CARD_TEXT_SIZES:",
-              "B:", MainViewController.mCardTextSizeB,
-              "M:", MainViewController.mCardTextSizeM
         )
         
         if let buildNum = Bundle
@@ -185,7 +189,7 @@ final class MainViewController
         options: UIView.AnimationOptions,
         completion: ((Bool) -> Void)?
     ) {
-        let prev = mControllers.last
+        let prev = children.last
         
         appendController(c)
         
@@ -207,7 +211,7 @@ final class MainViewController
         completion: ((Bool) -> Void)? = nil
     ) {
         appendController(c)
-        
+       
         UIView.animate(
             withDuration: animDuration,
             animations: animate
@@ -247,8 +251,8 @@ final class MainViewController
         UIView.animate(
             withDuration: duration!,
             animations: animate!
-        ) { _ in
-            self.removeController(
+        ) { [weak self] _ in
+            self?.removeController(
                 at: at
             )
         }
@@ -257,19 +261,23 @@ final class MainViewController
     private func removeController(
         at: Int
     ) {
-        let c = mControllers[at]
+        let c = children[at]
         c.view.removeFromSuperview()
         c.removeFromParent()
-        mControllers.remove(at: at)
     }
     
     private func appendController(
         _ c: StackViewController
     ) {
-        mControllers.append(c)
         addChild(c)
         view.addSubview(c.view)
         mCurrentIndex += 1
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(
+            self
+        )
     }
     
 }
@@ -277,14 +285,25 @@ final class MainViewController
 extension MainViewController {
     
     public final func superUpdatePremium() {
-        for c in mControllers {
-            c.updatePremium()
+        for c in children {
+            (c as? StackViewController)?
+                .updatePremium()
         }
     }
     
     public final func superUpdateAppleCheck() {
-        for c in mControllers {
-            c.updateAppleCheck()
+        for c in children {
+            (c as? StackViewController)?
+                .updateAppleCheck()
+        }
+    }
+    
+    @objc private func willTerminate(
+        _ _: Notification
+    ) {
+        children.forEach { it in
+            (it as? StackViewController)?
+                .willTerminate()
         }
     }
     

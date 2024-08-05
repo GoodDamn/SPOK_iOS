@@ -11,14 +11,7 @@ import FirebaseAuth
 class AuthMethod {
     internal var mAuthCode = ""
     
-    var completion: ((
-        AuthDataResult,
-        String
-    ) -> Void)? = nil
-    
-    var completionError: ((
-        String
-    ) -> Void)? = nil
+    weak var onAuthError: OnAuthErrorListener? = nil
     
     internal func auth(
         auth: Auth,

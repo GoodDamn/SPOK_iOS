@@ -31,6 +31,9 @@
 		2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2ED2B47210800656C0B /* OnReadCommand.swift */; };
 		2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2507D2EF2B47216000656C0B /* OnReadScript.swift */; };
 		2515639E2ACBBF96009EAA2F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2515639D2ACBBF96009EAA2F /* FirebaseFirestore */; };
+		251F91272C607F09002B71D0 /* OnAuthSuccessListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251F91262C607F09002B71D0 /* OnAuthSuccessListener.swift */; };
+		251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251F91282C607F34002B71D0 /* OnAuthErrorListener.swift */; };
+		251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251F912A2C6085D4002B71D0 /* OnReauthSuccessListener.swift */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
@@ -77,7 +80,6 @@
 		25AB40402BCAD500009E735F /* UIViewListenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB403F2BCAD500009E735F /* UIViewListenable.swift */; };
 		25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40412BDA05C3009E735F /* UIShitTextView.swift */; };
 		25B35B152B51236B002704E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B35B142B51236B002704E1 /* Main.storyboard */; };
-		25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B35B162B513E3B002704E1 /* PayPageViewController.swift */; };
 		25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C455C72B5BF90400AF54B1 /* CacheFile.swift */; };
 		25C8BB5D2B50FF1F00C9A73E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */; };
 		25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C8BB5F2B510E0100C9A73E /* StackViewController.swift */; };
@@ -221,6 +223,9 @@
 		2507D2EA2B471A0E00656C0B /* ScriptReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptReader.swift; sourceTree = "<group>"; };
 		2507D2ED2B47210800656C0B /* OnReadCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnReadCommand.swift; sourceTree = "<group>"; };
 		2507D2EF2B47216000656C0B /* OnReadScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnReadScript.swift; sourceTree = "<group>"; };
+		251F91262C607F09002B71D0 /* OnAuthSuccessListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAuthSuccessListener.swift; sourceTree = "<group>"; };
+		251F91282C607F34002B71D0 /* OnAuthErrorListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnAuthErrorListener.swift; sourceTree = "<group>"; };
+		251F912A2C6085D4002B71D0 /* OnReauthSuccessListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnReauthSuccessListener.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -267,7 +272,6 @@
 		25AB403F2BCAD500009E735F /* UIViewListenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewListenable.swift; sourceTree = "<group>"; };
 		25AB40412BDA05C3009E735F /* UIShitTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIShitTextView.swift; sourceTree = "<group>"; };
 		25B35B142B51236B002704E1 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		25B35B162B513E3B002704E1 /* PayPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPageViewController.swift; sourceTree = "<group>"; };
 		25C455C72B5BF90400AF54B1 /* CacheFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFile.swift; sourceTree = "<group>"; };
 		25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		25C8BB5F2B510E0100C9A73E /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
@@ -414,7 +418,6 @@
 				25C8BB5C2B50FF1F00C9A73E /* MainViewController.swift */,
 				25C8BB5F2B510E0100C9A73E /* StackViewController.swift */,
 				383AF7AC28758BD300859090 /* MainNavigationController.swift */,
-				25B35B162B513E3B002704E1 /* PayPageViewController.swift */,
 			);
 			path = newMain;
 			sourceTree = "<group>";
@@ -1029,6 +1032,9 @@
 			isa = PBXGroup;
 			children = (
 				25F94AE42B6E608700FC8A32 /* AuthListener.swift */,
+				251F91262C607F09002B71D0 /* OnAuthSuccessListener.swift */,
+				251F91282C607F34002B71D0 /* OnAuthErrorListener.swift */,
+				251F912A2C6085D4002B71D0 /* OnReauthSuccessListener.swift */,
 			);
 			path = protocols;
 			sourceTree = "<group>";
@@ -1491,6 +1497,8 @@
 				257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */,
+				251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */,
+				251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */,
 				25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */,
 				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
 				25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */,
@@ -1524,7 +1532,6 @@
 				25AB403E2BCAD39B009E735F /* UIImageButton.swift in Sources */,
 				256940982B676A040005BFCC /* Cache.swift in Sources */,
 				25D4760B2B789D3100B5467D /* Sheep.swift in Sources */,
-				25B35B172B513E3B002704E1 /* PayPageViewController.swift in Sources */,
 				250622732B4DAA7E00FCD636 /* SplashViewController.swift in Sources */,
 				259FE6142B623DC800E237B7 /* CardType.swift in Sources */,
 				25D61E8A2B7621C300B5A72B /* InversedTableViewCell.swift in Sources */,
@@ -1533,6 +1540,7 @@
 				256940962B6672620005BFCC /* UILabela.swift in Sources */,
 				250622832B4EA1F000FCD636 /* PageBar.swift in Sources */,
 				25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */,
+				251F91272C607F09002B71D0 /* OnAuthSuccessListener.swift in Sources */,
 				25F94AFE2B700F6300FC8A32 /* PaymentConfirmationListener.swift in Sources */,
 				25DB9A782B53BD4900B5359F /* Collection.swift in Sources */,
 				25977E3E2C21E1FF001F3E54 /* FragmentUtils.swift in Sources */,

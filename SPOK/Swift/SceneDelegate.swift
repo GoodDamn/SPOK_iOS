@@ -36,57 +36,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.scene = scene as? UIWindowScene;
         if self.scene == nil {return;}
         
-        /*let lastVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
-        print(tag,lastVersion);
-        if let currentVersion = userDefaults.string(forKey: "version") {
-            // Clear all cache if a new update
-            
-            print(tag, lastVersion, currentVersion);
-            
-            if currentVersion != lastVersion {
-                
-                do {
-                    try? Auth.auth().signOut();
-                } catch {
-                    print(tag, "ERROR: WHILE SIGNING OUT IN THE NEW VERSION");
-                }
-                
-                print(tag, "Clearing cache...");
-                let fileManager = FileManager.default;
-                
-                let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first;
-                
-                do {
-                    let dirContent = try fileManager.contentsOfDirectory(at: url!,
-                                                                     includingPropertiesForKeys: nil,
-                                                                     options: []);
-                    print(tag, "DIR_CONTENT:",dirContent);
-                    for ff in dirContent {
-                        do {
-                            try fileManager.removeItem(at: ff);
-                        } catch {
-                            print(tag, "DELETING_FILE_ERROR:",error);
-                        }
-                        
-                    }
-                    
-                } catch {
-                    print(tag, "DELETE_CACHE_EXCEPTION:",error);
-                }
-                
-                userDefaults.setValue(lastVersion, forKey: "version");
-                print(tag, url);
-                print(tag, "ATTACHING SignInViewController")
-                self.attachViewController(UIStoryboard(name: "Main", bundle: Bundle.main)
-                    .instantiateViewController(withIdentifier: "SignIn")
-                    as! SignInViewController);
-                return;
-            }
-            
-        } else {
-            userDefaults.setValue(lastVersion, forKey: "version");
-        }*/
-        
         attachViewController(
             MainNavigationController(
                 rootViewController: MainViewController()
@@ -135,4 +84,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
 }

@@ -9,6 +9,12 @@ import Foundation
 
 extension Int {
     
+    static func currentTimeSec() -> Int {
+        Int(
+            Date().timeIntervalSince1970
+        )
+    }
+    
     func nw() -> CGFloat {
         CGFloat(self) / 414.0
     }

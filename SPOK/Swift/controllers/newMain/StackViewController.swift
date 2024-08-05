@@ -51,7 +51,8 @@ class StackViewController
     public final func transitionEnd() {
         onTransitionEnd()
     }
-        
+    
+    
     public final func pushBaseAnim(
         _ c: StackViewController,
         animDuration: TimeInterval
@@ -60,7 +61,7 @@ class StackViewController
         push(
             c,
             animDuration: animDuration
-        ) {
+        ) { [weak self] in
             c.view.alpha = 1.0
         }
     }

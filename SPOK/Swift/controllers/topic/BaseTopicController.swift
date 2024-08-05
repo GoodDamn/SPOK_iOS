@@ -22,7 +22,7 @@ final class BaseTopicController
     private var mNetworkUrl = ""
     private var mIsFirstTouch = true
     
-    private var mCacheFile: CacheProgress<Void>!
+    private var mCacheFile: CacheProgress<Void>? = nil
     private let mEngine =
         SPOKContentEngine()
     
@@ -30,10 +30,10 @@ final class BaseTopicController
     
     private var mLabelSong: UILabela? = nil
     
-    private var mBtnClose: UIImageButton!
+    private var mBtnClose: UIImageButton? = nil
     
-    private var mProgressBar: ProgressBar!
-    private var mProgressBarTopic: ProgressBar!
+    private var mProgressBar: ProgressBar? = nil
+    private var mProgressBarTopic: ProgressBar? = nil
     
     private var mIsTopicFinished = false
     
@@ -50,6 +50,18 @@ final class BaseTopicController
         
         modalPresentationStyle = .overFullScreen
         
+        mBtnClose = ViewUtils
+            .buttonClose(
+                in: view,
+                sizeSquare: 0.136
+            )
+        
+        if let it = mBtnClose {
+            it.alpha = 0.11
+            it.onClick = onClickBtnClose(_:)
+            view.addSubview(it)
+        }
+        
         mProgressBarTopic = ViewUtils
             .progressBar(
                 frame: view.frame,
@@ -59,25 +71,10 @@ final class BaseTopicController
                 height: 0.004
             )
         
-        mProgressBarTopic.alpha = 0
-        
-        mBtnClose = ViewUtils
-            .buttonClose(
-                in: view,
-                sizeSquare: 0.136
-            )
-        
-        mBtnClose.alpha = 0.11
-        
-        mBtnClose.onClick = onClickBtnClose(_:)
-        
-        view.addSubview(
-            mBtnClose
-        )
-        
-        view.addSubview(
-            mProgressBarTopic
-        )
+        if let it = mProgressBarTopic {
+            it.alpha = 0
+            view.addSubview(it)
+        }
         
         let mFont = UIFont
             .extrabold( // 0.057
@@ -101,9 +98,9 @@ final class BaseTopicController
             backgroundLoad: true
         )
         
-        mCacheFile.delegate = self
+        mCacheFile?.delegate = self
         
-        mCacheFile.load()
+        mCacheFile?.load()
         
         mEngine.setOnReadCommandListener(
             self
@@ -147,10 +144,10 @@ final class BaseTopicController
             let prog = s.mScriptReader?
                 .progress() ?? 0
             
-            s.mProgressBarTopic
-                .mProgress = s
-                    .mProgressBarTopic
-                    .maxProgress * prog
+            s.mProgressBarTopic?
+                .mProgress = (s
+                    .mProgressBarTopic?
+                    .maxProgress ?? 0) * prog
             
             s.view.insertSubview(
                 textView,
@@ -197,7 +194,7 @@ final class BaseTopicController
             }
         }
         
-        mScriptReader!.next()
+        mScriptReader?.next()
     }
 }
 
@@ -241,11 +238,10 @@ extension BaseTopicController {
             return
         }
         
-        mProgressBarTopic
-            .alpha(
-                duration: 0.3,
-                1.0
-            )
+        mProgressBarTopic?.alpha(
+            duration: 0.3,
+            1.0
+        )
         
         r.setOnReadScriptListener(
             self
@@ -331,34 +327,31 @@ extension BaseTopicController
     
     func onPrepareDownload() {
         
-        mProgressBar = ViewUtils
-            .progressBar(
-                frame: view.frame
-            )
-        
-        view.addSubview(
-            mProgressBar
+        mProgressBar = ViewUtils.progressBar(
+            frame: view.frame
         )
+        
+        if let it = mProgressBar {
+            view.addSubview(it)
+        }
     }
     
     func onWrittenStorage() {}
     
     func onProgress(percent: Double) {
-        mProgressBar.mProgress = percent
+        mProgressBar?.mProgress = percent
     }
     
     func onSuccess() {
-        mProgressBar.alpha(
+        mProgressBar?.alpha(
             duration: 1.2,
             0.0
         ) { [weak self] _ in
-            self?.mProgressBar.removeFromSuperview()
+            self?.mProgressBar?
+                .removeFromSuperview()
         }
         
-        DispatchQueue.global(
-            qos: .default
-        ).async { [weak self] in
-            
+        DispatchQueue.io { [weak self] in
             guard let s = self else {
                 Log.d(
                     "BaseTopicController:",
@@ -401,7 +394,7 @@ extension BaseTopicController
     
     func onFinish() {
         mIsTopicFinished = true
-        mBtnClose.isUserInteractionEnabled = false
+        mBtnClose?.isUserInteractionEnabled = false
         
         mCurrentPlayer?.stopFade(
             duration: 2.4

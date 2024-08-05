@@ -13,6 +13,6 @@ struct Option {
     let text: String?
     let textColor: UIColor?
     let iconColor: UIColor?
-    let withView: UIView?
-    let select: ((UIView)->Void)?
+    var withView: UIView? = nil
+    var select: ((UIView)->Void)? = nil
 }

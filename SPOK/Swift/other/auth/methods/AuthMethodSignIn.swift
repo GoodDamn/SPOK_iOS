@@ -11,6 +11,8 @@ import FirebaseAuth
 final class AuthMethodSignIn
 : AuthMethod {
     
+    weak var onAuthSuccess: OnAuthSuccessListener? = nil
+    
     override func auth(
         auth: Auth,
         authCode: String,
@@ -40,9 +42,9 @@ extension AuthMethodSignIn {
             return
         }
         
-        completion?(
+        onAuthSuccess?.onAuthSuccess(
             data,
-            mAuthCode
+            authCode: mAuthCode
         )
     }
 }

@@ -13,6 +13,10 @@ class StatViewController
     
     internal final let mInstanceName: String
     
+    private var mSessionId = 0
+    
+    private let mStartTimeSec: Int = .currentTimeSec()
+    
     override init(
         nibName nibNameOrNil: String?,
         bundle nibBundleOrNil: Bundle?
@@ -39,12 +43,12 @@ class StatViewController
             didLoad
         )
         
-        let n = UserDefaults.statsKey(
+        mSessionId = UserDefaults.statsKey(
             didLoad
         )
         
         getStatRef(
-            "didLoad\(n)"
+            "didLoad\(mSessionId)"
         ).increment()
     }
     
@@ -64,5 +68,24 @@ class StatViewController
         _ child: String
     ) -> String {
         "stats/screens/\(mInstanceName)/\(child)"
+    }
+    
+    internal func onTerminateApp() {
+        Log.d(StatViewController.self, "\(mInstanceName): onTerminateApp:")
+        
+        getStatRef(
+            "terminate\(mSessionId)Time"
+        ).increment(
+            .currentTimeSec() - mStartTimeSec
+        )
+        
+    }
+    
+    public final func willTerminate() {
+        onTerminateApp()
+    }
+    
+    deinit {
+        onTerminateApp()
     }
 }
