@@ -42,15 +42,12 @@ final class IntroSleep2ViewController
         let w = view.frame.width
         let h = view.frame.height
         
-        mFont = UIFont(
-            name: "OpenSans-ExtraBold",
-            size: w * 0.04
+        mFont = UIFont.extrabold(
+            withSize: w * 0.04
         )
         
         modalPresentationStyle = .overFullScreen
-        view.backgroundColor = UIColor(
-            named: "background"
-        )
+        view.backgroundColor = .background()
         
         let wpb = w * 0.234
         
@@ -76,33 +73,22 @@ final class IntroSleep2ViewController
         
         mProgressBar.mProgress = 0
         
-        view.addSubview(mProgressBar)
-        
-        let gesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(next(_:))
+        view.addSubview(
+            mProgressBar
         )
-        
-        gesture.numberOfTapsRequired = 1
-        
-        view.addGestureRecognizer(
-            gesture
-        )
-        
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override func touchesEnded(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
+    ) {
+        nextPiece()
     }
+    
 }
 
 extension IntroSleep2ViewController {
     
-    @objc private func next(
-        _ sender: UITapGestureRecognizer
-    ) {
-        nextPiece()
-    }
     
     final func startTopic() {
         nextPiece()
@@ -121,7 +107,7 @@ extension IntroSleep2ViewController {
         if mCurrent >= mPieces.count {
             view.isUserInteractionEnabled = false
             // Move to another controller
-            self.hide()
+            hide()
             mPrevTextView?.hide(
                 duration: 1.5,
                 300)

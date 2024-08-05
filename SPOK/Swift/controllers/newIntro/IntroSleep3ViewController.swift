@@ -171,7 +171,7 @@ final class IntroSleep3ViewController
         
         pageBar.mCurrentPage = 0
         
-        mPageController.onNewPage = { i in
+        mPageController.onNewPage = { [weak self] i in
             pageBar.mCurrentPage = i
         }
         
@@ -309,7 +309,7 @@ extension IntroSleep3ViewController {
         _ sender: UITapGestureRecognizer
     ) {
         sender.isEnabled = false
-        self.hide()
+        hide()
     }
     
 }

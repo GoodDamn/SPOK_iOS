@@ -56,7 +56,7 @@ final class IntroSleepRootController
         let mIntro2 = IntroSleep2ViewController()
         let intro3 = IntroSleep3ViewController()
         
-        intro3.onWillHide = {
+        intro3.onWillHide = { [weak self] in
             UserDefaults
                 .standard
                 .setValue(
@@ -70,9 +70,7 @@ final class IntroSleepRootController
             )
         }
         
-        intro3.onHide = {
-            
-            
+        intro3.onHide = { [weak self] in
             let content = MainViewController
                 .mDoAppleCheck ? 
                 MainContentViewController()
@@ -80,16 +78,16 @@ final class IntroSleepRootController
             
             
             
-            self.pusht(
+            self?.pusht(
                 content,
                 animDuration: 2.0,
                 options: [
                     .transitionCrossDissolve
                 ]
-            ) { _ in
+            ) { [weak self] _ in
                 audio?.stop()
                 // previous view controller
-                self.pop(
+                self?.pop(
                     at: 0
                 )
             }
@@ -114,8 +112,8 @@ final class IntroSleepRootController
         addChild(mIntro2)
         view.addSubview(mIntro2.view)
     
-        mStart = {
-            mIntro2.show() {
+        mStart = { [weak self] in
+            mIntro2.show() { [weak self] in
                 audio?.play()
                 audio?.setVolume(
                     1.0,

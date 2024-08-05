@@ -116,7 +116,11 @@ final class EmailShareViewController
         
         btnReady.frame.origin.y = 46.nw() * width
         
-        btnReady.onClick = onClickBtnReady(_:)
+        btnReady.onClick = { [weak self] view in
+            self?.onClickBtnReady(
+                view
+            )
+        }
         
         btnReady.text = .locale(
             "ready"
