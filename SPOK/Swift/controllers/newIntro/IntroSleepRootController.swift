@@ -47,9 +47,7 @@ final class IntroSleepRootController
             
         }
         
-        let bgColor = UIColor(
-            named: "background"
-        )
+        let bgColor = UIColor.background()
         
         view.backgroundColor = bgColor
         
@@ -57,13 +55,8 @@ final class IntroSleepRootController
         let intro3 = IntroSleep3ViewController()
         
         intro3.onWillHide = { [weak self] in
-            UserDefaults
-                .standard
-                .setValue(
-                    true,
-                    forKey: Keys.COMPLETE_INTRO
-                )
-            
+            UserDefaults.completeIntro()
+    
             audio?.setVolume(
                 0.0,
                 fadeDuration: 2.0

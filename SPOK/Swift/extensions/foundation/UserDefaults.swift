@@ -9,6 +9,10 @@ import Foundation.NSUserDefaults
 
 extension UserDefaults {
     
+    static func main() -> UserDefaults {
+        standard
+    }
+    
     static func stats() -> UserDefaults {
         UserDefaults(
             suiteName: "stats"
@@ -70,6 +74,43 @@ extension UserDefaults {
     static func userID() -> String? {
         return standard.string(
             forKey: Keys.USER_REF
+        )
+    }
+    
+    static func userID(
+        _ id: String
+    ) {
+        standard.setValue(
+            id,
+            forKey: Keys.USER_REF
+        )
+    }
+    
+    static func isIntroCompleted() -> Bool {
+        standard.bool(
+            forKey: Keys.COMPLETE_INTRO
+        )
+    }
+    
+    static func completeIntro() {
+        standard.setValue(
+            true,
+            forKey: Keys.COMPLETE_INTRO
+        )
+    }
+    
+    static func oldBuildNumber(
+        _ i: Int
+    ) {
+        standard.setValue(
+            i,
+            forKey: Keys.OLD_BUILD_NUMBER
+        )
+    }
+    
+    static func oldBuildNumber() -> Int {
+        standard.integer(
+            forKey: Keys.OLD_BUILD_NUMBER
         )
     }
     

@@ -76,9 +76,6 @@ final class MainViewController
         
         let w = mScreen.width
         
-        let def = UserDefaults
-            .standard
-        
         let wb = w * 0.847
         let wm = w * 0.403
         
@@ -112,18 +109,16 @@ final class MainViewController
             MainViewController
                 .mBuildNumber = buildNumber
             
-            let oldbn = def.integer(
-                forKey: Keys.OLD_BUILD_NUMBER
-            )
+            let oldbn = UserDefaults
+                .oldBuildNumber()
             
             if buildNumber != oldbn  {
-                def.removeObject(
+                UserDefaults.main().removeObject(
                     forKey: Keys.ID_NEWS
                 )
                 
-                def.setValue(
-                    buildNumber,
-                    forKey: Keys.OLD_BUILD_NUMBER
+                UserDefaults.oldBuildNumber(
+                    buildNumber
                 )
             }
             
@@ -140,9 +135,7 @@ final class MainViewController
             )
         )
         
-        if !def.bool(
-            forKey: Keys.COMPLETE_INTRO
-        ) {
+        if !UserDefaults.isIntroCompleted() {
             UIApplication
                 .shared
                 .registerForRemoteNotifications()

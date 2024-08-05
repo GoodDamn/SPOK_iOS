@@ -9,6 +9,27 @@ import Foundation
 import UIKit.UIApplication
 
 final class FragmentUtils {
+    
+    static func openAppStorePage(
+        _ root: UIViewController
+    ) {
+        let vc = SKStoreProductViewController()
+        
+        vc.loadProduct(
+            withParameters: [
+                SKStoreProductParameterITunesItemIdentifier: NSNumber(
+                    value: 6443976042
+                )
+            ],
+            completionBlock: nil
+        )
+        
+        root.present(
+            vc,
+            animated: true
+        )
+    }
+    
     static func openUrl(
         urls: String
     ) {

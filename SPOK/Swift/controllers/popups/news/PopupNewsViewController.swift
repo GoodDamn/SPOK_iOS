@@ -24,25 +24,26 @@ final class PopupNewsViewController
         let w = view.width()
         let h = view.height()
         
-        let extraBold = UIFont
-            .extrabold(
-                withSize: h * 0.05
-            )
+        let extraBold = UIFont.extrabold(
+            withSize: h * 0.05
+        )
         
-        let semiBold = UIFont
-            .semibold(
-                withSize: h * 0.02
-            )
+        let semiBold = UIFont.semibold(
+            withSize: h * 0.02
+        )
         
         let mLeft = 0.08 * w
         
-        let btnClose = ViewUtils
-            .buttonClose(
-                in: view,
-                sizeSquare: 0.16
-            )
+        let btnClose = ViewUtils.buttonClose(
+            in: view,
+            sizeSquare: 0.16
+        )
         
-        btnClose.onClick = onClickBtnClose(_:)
+        btnClose.onClick = { [weak self] view in
+            self?.onClickBtnClose(
+                view
+            )
+        }
         
         let lTitle = UILabela(
             frame: CGRect(
@@ -110,8 +111,11 @@ final class PopupNewsViewController
                 in: view
             )
             
-            btnOk.onClick =
-                onClickBtnClose(_:)
+            btnOk.onClick = { [weak self] view in
+                self?.onClickBtnClose(
+                    view
+                )
+            }
             
             view.addSubview(
                 btnOk
@@ -122,10 +126,9 @@ final class PopupNewsViewController
             return
         }
         
-        let btnUpdate = ViewUtils
-            .textButton(
-                text: "Обновить приложение"
-            )
+        let btnUpdate = ViewUtils.textButton(
+            text: "Обновить приложение"
+        )
         
         LayoutUtils.textButton(
             for: btnUpdate,
@@ -157,7 +160,11 @@ final class PopupNewsViewController
         btnUpdate.frame.origin.y =
             yb - btnUpdate.height() - h * 0.025
         
-        btnUpdate.onClick = onClickBtnUpdate(_:)
+        btnUpdate.onClick = { [weak self] view in
+            self?.onClickBtnUpdate(
+                view
+            )
+        }
         
         view.addSubview(
             btnUpdate
@@ -176,25 +183,13 @@ final class PopupNewsViewController
     private func onClickBtnUpdate(
         _ sender: UIView
     ) {
-        
-        let vc = SKStoreProductViewController();
-        
-        vc.loadProduct(
-            withParameters: [
-                SKStoreProductParameterITunesItemIdentifier: NSNumber(
-                    value: 6443976042
-                )
-            ], completionBlock: nil)
-        
-        present(
-            vc,
-            animated: true
+        FragmentUtils.openAppStorePage(
+            self
         )
     }
     
     private func markAsRead() {
-        let def = UserDefaults.standard
-        def.setValue(
+        UserDefaults.main().setValue(
             msgID,
             forKey: Keys.ID_NEWS
         )

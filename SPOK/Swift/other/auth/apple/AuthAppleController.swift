@@ -46,12 +46,9 @@ OnReauthSuccessListener {
         _ auth: AuthDataResult,
         authCode: String
     ) {
-        UserDefaults
-            .standard
-            .setValue(
-                auth.user.uid,
-                forKey: Keys.USER_REF
-            )
+        UserDefaults.userID(
+            auth.user.uid
+        )
     }
     
     internal func onAuthError(
