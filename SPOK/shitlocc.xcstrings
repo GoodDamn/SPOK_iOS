@@ -1,13 +1,24 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "emailShare" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сейчас приложение тестируется - ты один из тестировщиков! Это здорово!"
+          }
+        }
+      }
+    },
     "emailShare2" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сейчас приложение тестируется - ты один из тестировщиков! Это здорово!\n\nПожалуйста укажи свою почту или telegram для обратной связи. Так мы сможем с тобой связаться, если нам понадобится твоя помощь в развитии приложения.\n\nНикаких рассылок, это мы гарантируем!\n\nБлагодарим за доверие и помощь."
+            "value" : "Пожалуйста укажи свою почту либо Telegram.  \nТак мы сможем с тобой связаться, если нам понадобится помощь в развитии приложения."
           }
         }
       }
@@ -18,7 +29,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ПОЛЕ ДЛЯ ВВОДА"
+            "value" : "Поле для ввода"
+          }
+        }
+      }
+    },
+    "noContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нужно ввести данные"
           }
         }
       }

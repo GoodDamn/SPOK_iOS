@@ -10,6 +10,8 @@ import UIKit
 final class UILinearLayout
     : UIView {
     
+    var paddingTop: CGFloat = 0
+    
     override func addSubview(
         _ view: UIView
     ) {
@@ -19,7 +21,7 @@ final class UILinearLayout
         
         let lastY = (last?
             .origin
-            .y ?? 0) + (last?.height ?? 0)
+            .y ?? paddingTop) + (last?.height ?? 0)
         
         if view.height() == 0 {
             view.sizeToFit()

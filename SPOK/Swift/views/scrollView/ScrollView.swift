@@ -10,8 +10,12 @@ import UIKit
 final class ScrollView
     : UIScrollView {
     
+    var paddingBottom: CGFloat = 0
+    
     private func initialize() {
         backgroundColor = .background()
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
     }
     
     override init(
@@ -20,6 +24,7 @@ final class ScrollView
         super.init(
             frame: frame
         )
+        initialize()
     }
     
     required init?(
@@ -28,6 +33,7 @@ final class ScrollView
         super.init(
             coder: coder
         )
+        initialize()
     }
     
     func configure(
@@ -89,7 +95,7 @@ final class ScrollView
                 toItem: nil,
                 attribute: .notAnAttribute,
                 multiplier: 1,
-                constant: contentView.height()
+                constant: contentView.height() + paddingBottom
             )
         ])
         

@@ -24,8 +24,7 @@ final class EmailShareViewController
                 height: 0
             )
         )
-        
-        
+                
         let labelTitle = UILabel()
         labelTitle.text = "Привет!"
         labelTitle.textColor = .white
@@ -40,12 +39,48 @@ final class EmailShareViewController
             labelTitle
         )
         
+        let imageView = UIImageView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: width * 353.nw(),
+                height: width * 257.nw()
+            )
+        )
+        imageView.image = UIImage(
+            named: "mm"
+        )
+        layout.addSubview(
+            imageView
+        )
+        
+        let labelParag = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: width * 325.nw(),
+                height: 0
+            )
+        )
+
+        labelParag.text = .locale(
+            "emailShare"
+        )
+        labelParag.textAlignment = .center
+        labelParag.font = .bold(
+            withSize: width * 20.nw()
+        )
+        labelParag.textColor = .white
+        labelParag.numberOfLines = 0
+        layout.addSubview(
+            labelParag
+        )
         
         let labelDesc = UILabel(
             frame: CGRect(
                 x: 0,
                 y: 0,
-                width: width * 316.nw(),
+                width: width * 325.nw(),
                 height: 0
             )
         )
@@ -59,7 +94,7 @@ final class EmailShareViewController
         labelDesc.numberOfLines = 0
         labelDesc.textAlignment = .center
                 
-        labelDesc.frame.origin.y = 63.nw() * width
+        labelDesc.frame.origin.y = 30.nw() * width
         
         layout.addSubview(
             labelDesc
@@ -69,8 +104,8 @@ final class EmailShareViewController
             frame: CGRect(
                 x: 0,
                 y: 0,
-                width: width * 316.nw(),
-                height: width * 72.nw()
+                width: width * 251.nw(),
+                height: width * 60.nw()
             )
         )
         
@@ -82,8 +117,7 @@ final class EmailShareViewController
             it.textColor = .white
             it.textAlignment = .center
             it.borderStyle = .roundedRect
-            it.layer.borderColor = UIColor
-                .white.cgColor
+            it.layer.borderColor = UIColor.white.cgColor
             it.layer.borderWidth =
                 0.01388 * it.height()
             
@@ -143,7 +177,9 @@ final class EmailShareViewController
             btnReady
         )
         
-        ScrollView().configure(
+        let s = ScrollView()
+        s.paddingBottom = btnReady.height()
+        s.configure(
             parent: view,
             contentView: layout
         )
