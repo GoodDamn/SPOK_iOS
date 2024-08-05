@@ -51,15 +51,11 @@ final class SheepCounterViewController
         mPlayer?.numberOfLoops = -1
         mPlayer?.prepareToPlay()
         
-        view.backgroundColor = UIColor(
-            named: "background"
-        )
-        
-        let w = view.frame.width
-        let h = view.frame.height
+        view.backgroundColor = .background()
         
         mExtrabold = UIFont.extrabold(
-            withSize: w * 0.086)
+            withSize: width * 0.086
+        )
         
         mViewHeader = ViewUtils.createHeader(
             frame: view.frame,
@@ -68,28 +64,27 @@ final class SheepCounterViewController
             subtitleSize: 0.041
         )
         
-        let btnClose = ViewUtils
-            .buttonClose(
-                in: view,
-                sizeSquare: 0.168
-            )
+        let btnClose = ViewUtils.buttonClose(
+            in: view,
+            sizeSquare: 0.168
+        )
         
-        mViewHeader.frame.origin.y = mInsets.top + btnClose.frame.y()
+        mViewHeader.frame.origin.y = mInsets.top
+            + btnClose.frame.y()
         
-        let ofx = w * 0.217
+        let ofx = width * 0.217
         mLabelTap = UILabel(
             frame: CGRect(
                 x: ofx,
-                y: h * 0.75,
-                width: w-ofx*2,
+                y: height * 0.75,
+                width: width - ofx*2,
                 height: 0
             )
         )
         
         mLabelTap.numberOfLines = 0
-        mLabelTap.font = UIFont(
-            name: "OpenSans-SemiBold",
-            size: w * 0.04
+        mLabelTap.font = .semibold(
+            withSize: width * 0.04
         )
         mLabelTap.text = "Нажимай на экран и считай овечек."
         mLabelTap.textColor = .white
@@ -97,7 +92,7 @@ final class SheepCounterViewController
         mLabelTap.sizeToFit()
         
         mLabelTap.frame.origin.x =
-            (w-mLabelTap.frame.width) * 0.5
+            (width-mLabelTap.frame.width) * 0.5
         
         mNextSheep = createSheep()
         
@@ -106,9 +101,12 @@ final class SheepCounterViewController
         view.addSubview(mViewHeader)
         view.addSubview(btnClose)
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        btnClose.onClick = onClickBtnExit(_:)
+        btnClose.onClick = {
+            [weak self] view in
+            self?.onClickBtnExit(
+                view
+            )
+        }
     }
     
     override func touchesEnded(
@@ -127,6 +125,13 @@ extension SheepCounterViewController {
         _ sender: UIView
     ) {
         sender.isUserInteractionEnabled = false
+        
+        getStatRefId(
+            "SHEEP_COUNT"
+        ).increment(
+            mCounter
+        )
+        
         pop(
             duration: 0.5
         ) { [weak self] in
