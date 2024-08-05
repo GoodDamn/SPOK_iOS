@@ -62,16 +62,11 @@ final class PreviewCell
             .withAlphaComponent(0.4)
         
         mImageView = UIImageView(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: frame.width * 1.01,
-                height: frame.height * 1.01
-            )
+            frame: f
         )
         
         backgroundColor = .clear
-        contentView.backgroundColor = .gray
+        contentView.backgroundColor = .clear
         mImageView.backgroundColor = .clear
         
         let bold = UIFont.bold(

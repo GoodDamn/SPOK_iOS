@@ -192,9 +192,16 @@ extension EmailShareViewController {
         _ v: UIView
     ) {
         guard let contact = mTextEmail?
-            .text?.trim(), !contact.isEmpty else {
+            .text?.trim(), !contact.isEmpty  else {
             Toast.show(
                 text: .locale("noContact")
+            )
+            return
+        }
+        
+        guard contact.count < 50 else {
+            Toast.show(
+                text: .locale("contact50")
             )
             return
         }

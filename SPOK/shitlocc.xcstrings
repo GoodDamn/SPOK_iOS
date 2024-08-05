@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "contact50" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Должно быть меньше 50 символов"
+          }
+        }
+      }
+    },
     "emailShare" : {
       "extractionState" : "manual",
       "localizations" : {
