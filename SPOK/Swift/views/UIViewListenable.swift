@@ -17,7 +17,6 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        print("touchesBegan")
         guard let loc = touchLocation(
             touches
         ) else {
@@ -45,14 +44,13 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        print("touchesMoved")
+        
     }
     
     public final override func touchesCancelled(
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        print("touchesCancelled")
         if !isAnimatedTouch {
             return
         }
@@ -71,7 +69,6 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        print("touchesEnded")
         guard let location = touchLocation(
             touches
         ) else {
@@ -91,9 +88,7 @@ public class UIViewListenable
             }
         }
         
-        if notInsideBounds(
-            location
-        ) {
+        if notInsideBounds(location) {
             return
         }
         
@@ -102,8 +97,8 @@ public class UIViewListenable
         )
     }
     
-    internal func onTouchBegin() {}
-    internal func onTouchEnd() {}
+    internal func onTouchBegin(){}
+    internal func onTouchEnd(){}
     
     private final func touchLocation(
         _ touches: Set<UITouch>

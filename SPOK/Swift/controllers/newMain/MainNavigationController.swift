@@ -23,7 +23,6 @@ class MainNavigationController
         navigationBar.isTranslucent = false
     }
     
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }

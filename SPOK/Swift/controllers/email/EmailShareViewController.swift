@@ -16,6 +16,7 @@ final class EmailShareViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let layout = UILinearLayout(
             frame: CGRect(
                 x: 0,
@@ -43,7 +44,10 @@ final class EmailShareViewController
             }
         }
         
-        btnClose.alpha = 0.15
+        btnClose.frame.origin.y = mInsets.top == 0 ? 0
+            : btnClose.frame.height * 0.75
+        
+        btnClose.alpha = 0.1
         
         layout.addSubview(
             btnClose,
@@ -56,8 +60,6 @@ final class EmailShareViewController
         labelTitle.font = .extrabold(
             withSize: width * 32.nw()
         )
-        
-        labelTitle.frame.origin.y = mInsets.top
         
         layout.addSubview(
             labelTitle
