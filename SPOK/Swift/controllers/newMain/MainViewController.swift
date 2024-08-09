@@ -370,8 +370,8 @@ extension MainViewController {
         msg: String,
         _ completion: @escaping () -> StackViewController
     ) {
-        let splash = SplashViewController()
-        splash.msgBottom = msg
+        let splash = EmailShareViewController()
+        //splash.msgBottom = msg
         splash.view.alpha = 1
         push(
             splash,
@@ -379,7 +379,7 @@ extension MainViewController {
         ) {
             splash.view.alpha = 1.0
         }
-                
+        /*
         DispatchQueue.ui(
             wait: 3.0
         ) { [weak self] in
@@ -397,7 +397,7 @@ extension MainViewController {
             ) { b in
                 s.pop(at: 0)
             }
-        }
+        }*/
         
     }
     

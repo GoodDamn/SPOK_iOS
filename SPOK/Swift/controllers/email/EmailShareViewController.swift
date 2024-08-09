@@ -8,7 +8,7 @@
 import UIKit
 
 final class EmailShareViewController
-    : StackViewController {
+    : KeyboardViewController {
     
     private var mTextEmail: UITextField? = nil
     
