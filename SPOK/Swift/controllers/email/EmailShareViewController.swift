@@ -24,7 +24,32 @@ final class EmailShareViewController
                 height: 0
             )
         )
-                
+        
+        let btnClose = ViewUtils.buttonClose(
+            in: view,
+            sizeSquare: 70.nw(),
+            iconProp: 0.25
+        )
+        
+        btnClose.onClick = { [weak self] v in
+            self?.pusht(
+                MainContentViewController(),
+                animDuration: 0.3,
+                options: [
+                    .transitionCrossDissolve
+                ]
+            ) { [weak self] _ in
+                self?.pop(at: 0)
+            }
+        }
+        
+        btnClose.alpha = 0.15
+        
+        layout.addSubview(
+            btnClose,
+            centerHorizontally: false
+        )
+        
         let labelTitle = UILabel()
         labelTitle.text = "Привет!"
         labelTitle.textColor = .white
@@ -32,8 +57,7 @@ final class EmailShareViewController
             withSize: width * 32.nw()
         )
         
-        labelTitle.frame.origin.y =
-            87.nh() * height
+        labelTitle.frame.origin.y = mInsets.top
         
         layout.addSubview(
             labelTitle

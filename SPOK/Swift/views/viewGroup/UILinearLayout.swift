@@ -15,6 +15,16 @@ final class UILinearLayout
     override func addSubview(
         _ view: UIView
     ) {
+        addSubview(
+            view,
+            centerHorizontally: true
+        )
+    }
+    
+    func addSubview(
+        _ view: UIView,
+        centerHorizontally: Bool = true
+    ) {
         let last = subviews
             .last?
             .frame
@@ -28,9 +38,11 @@ final class UILinearLayout
         }
         view.frame.origin.y += lastY
         
-        view.centerH(
-            in: self
-        )
+        if centerHorizontally {
+            view.centerH(
+                in: self
+            )
+        }
         
         frame.size.height = view.frame.origin.y +
             view.frame.size.height
