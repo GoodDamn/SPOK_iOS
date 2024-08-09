@@ -28,11 +28,18 @@ final class EmailShareViewController
         
         let btnClose = ViewUtils.buttonClose(
             in: view,
-            sizeSquare: 70.nw(),
-            iconProp: 0.25
+            sizeSquare: 50.nw(),
+            iconProp: 0.5
         )
         
         btnClose.onClick = { [weak self] v in
+            
+            v.isUserInteractionEnabled = false
+            
+            self?.getStatRef(
+                "CANCEL"
+            ).increment()
+            
             self?.pusht(
                 MainContentViewController(),
                 animDuration: 0.3,
@@ -44,8 +51,7 @@ final class EmailShareViewController
             }
         }
         
-        btnClose.frame.origin.y = mInsets.top == 0 ? 0
-            : btnClose.frame.height * 0.75
+        btnClose.frame.origin.y = 0
         
         btnClose.alpha = 0.1
         
@@ -60,6 +66,8 @@ final class EmailShareViewController
         labelTitle.font = .extrabold(
             withSize: width * 32.nw()
         )
+        
+        labelTitle.frame.origin.y = -btnClose.frame.height * 0.9
         
         layout.addSubview(
             labelTitle
@@ -231,6 +239,8 @@ extension EmailShareViewController {
             )
             return
         }
+        
+        v.isUserInteractionEnabled = false
         
         DatabaseUtils.contact(
             user: mTime,
