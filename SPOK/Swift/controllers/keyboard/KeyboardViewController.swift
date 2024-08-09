@@ -11,7 +11,6 @@ import UIKit
 class KeyboardViewController
     : StackViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +42,7 @@ class KeyboardViewController
     internal func onKeyboardWillShow(
         _ n: Notification
     ) {
-        view.frame.origin.y -= n.keyboardFrame().height
+        view.frame.origin.y = -n.keyboardFrame().height
     }
     
     internal func onKeyboardWillHide() {

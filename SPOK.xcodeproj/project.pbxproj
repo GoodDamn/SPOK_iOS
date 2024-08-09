@@ -36,6 +36,7 @@
 		251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251F912A2C6085D4002B71D0 /* OnReauthSuccessListener.swift */; };
 		252F7AE82C65D6D000851E8A /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AE72C65D6D000851E8A /* KeyboardViewController.swift */; };
 		252F7AEA2C65DFCC00851E8A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AE92C65DFCC00851E8A /* Notification.swift */; };
+		252F7AEC2C65E36200851E8A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AEB2C65E36200851E8A /* UIViewController.swift */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
@@ -230,6 +231,7 @@
 		251F912A2C6085D4002B71D0 /* OnReauthSuccessListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnReauthSuccessListener.swift; sourceTree = "<group>"; };
 		252F7AE72C65D6D000851E8A /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		252F7AE92C65DFCC00851E8A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		252F7AEB2C65E36200851E8A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -970,6 +972,7 @@
 				25D61E912B7643CE00B5A72B /* UIFont.swift */,
 				25D4760E2B79056900B5467D /* UIImage.swift */,
 				25D476392B7C8E1100B5467D /* UIView.swift */,
+				252F7AEB2C65E36200851E8A /* UIViewController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1602,6 +1605,7 @@
 				25C8BB602B510E0100C9A73E /* StackViewController.swift in Sources */,
 				25883AA32C57708000D46614 /* UILinearLayout.swift in Sources */,
 				25D476152B7B1FE400B5467D /* FileManager.swift in Sources */,
+				252F7AEC2C65E36200851E8A /* UIViewController.swift in Sources */,
 				25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */,
 				256940942B6614160005BFCC /* CacheProgressListener.swift in Sources */,
 				25AB40382BC6F46A009E735F /* CGSize.swift in Sources */,

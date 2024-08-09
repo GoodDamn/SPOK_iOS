@@ -183,6 +183,9 @@ final class EmailShareViewController
             parent: view,
             contentView: layout
         )
+        
+        setupKeyboardEditEnd()
+        
     }
 }
 
