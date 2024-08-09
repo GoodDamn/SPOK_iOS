@@ -100,7 +100,7 @@ final class EmailShareViewController
             labelDesc
         )
         
-        mTextEmail = UITextField(
+        mTextEmail = UITextFieldDone(
             frame: CGRect(
                 x: 0,
                 y: 0,
@@ -183,9 +183,6 @@ final class EmailShareViewController
             parent: view,
             contentView: layout
         )
-        
-        setupKeyboardEditEnd()
-        
     }
 }
 

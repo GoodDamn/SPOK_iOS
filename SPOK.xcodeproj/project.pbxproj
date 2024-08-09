@@ -37,6 +37,7 @@
 		252F7AE82C65D6D000851E8A /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AE72C65D6D000851E8A /* KeyboardViewController.swift */; };
 		252F7AEA2C65DFCC00851E8A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AE92C65DFCC00851E8A /* Notification.swift */; };
 		252F7AEC2C65E36200851E8A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AEB2C65E36200851E8A /* UIViewController.swift */; };
+		252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AEE2C6609A000851E8A /* UITextFieldDone.swift */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
@@ -232,6 +233,7 @@
 		252F7AE72C65D6D000851E8A /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		252F7AE92C65DFCC00851E8A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		252F7AEB2C65E36200851E8A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		252F7AEE2C6609A000851E8A /* UITextFieldDone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldDone.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -492,6 +494,15 @@
 				252F7AE72C65D6D000851E8A /* KeyboardViewController.swift */,
 			);
 			path = keyboard;
+			sourceTree = "<group>";
+		};
+		252F7AED2C66097800851E8A /* editText */ = {
+			isa = PBXGroup;
+			children = (
+				25F3B3DC2C05B388007F156C /* UIEditText.swift */,
+				252F7AEE2C6609A000851E8A /* UITextFieldDone.swift */,
+			);
+			path = editText;
 			sourceTree = "<group>";
 		};
 		254AA1102B711FA500853B17 /* labels */ = {
@@ -792,6 +803,7 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				252F7AED2C66097800851E8A /* editText */,
 				25883AA42C57BB5700D46614 /* scrollView */,
 				25883AA12C57706100D46614 /* viewGroup */,
 				25D476082B789D1900B5467D /* sheeps */,
@@ -807,7 +819,6 @@
 				25AB403D2BCAD39B009E735F /* UIImageButton.swift */,
 				25AB403F2BCAD500009E735F /* UIViewListenable.swift */,
 				25AB40412BDA05C3009E735F /* UIShitTextView.swift */,
-				25F3B3DC2C05B388007F156C /* UIEditText.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1513,6 +1524,7 @@
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
 				257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
+				252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */,
 				2B5684B128901882003F4F15 /* EveryDayNotification.swift in Sources */,
 				251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */,
 				251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */,

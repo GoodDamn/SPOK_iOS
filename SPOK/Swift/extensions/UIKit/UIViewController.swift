@@ -13,7 +13,8 @@ extension UIViewController {
     func setupKeyboardEditEnd() {
         forEachView { [weak self] v in
             
-            if v as? UITextField != nil {
+            if v is UITextField
+                || v is UIViewListenable {
                 return
             }
             
@@ -44,7 +45,9 @@ extension UIViewController {
         v: UIView,
         handle: (UIView) -> Void
     ) {
-        handle(v)
+        if v.subviews.isEmpty {
+            handle(v)
+        }
         v.subviews.forEach { [weak self] vi in
             self?.iterateSubviews(
                 v: vi,
