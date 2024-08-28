@@ -38,6 +38,10 @@
 		252F7AEA2C65DFCC00851E8A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AE92C65DFCC00851E8A /* Notification.swift */; };
 		252F7AEC2C65E36200851E8A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AEB2C65E36200851E8A /* UIViewController.swift */; };
 		252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AEE2C6609A000851E8A /* UITextFieldDone.swift */; };
+		252F7AF12C7F20F800851E8A /* SKServiceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */; };
+		252F7AF32C7F217000851E8A /* SKDelegateCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */; };
+		252F7AF52C7F25E100851E8A /* SKModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF42C7F25E100851E8A /* SKModelCollection.swift */; };
+		252F7AF72C7F604000851E8A /* SKServiceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF62C7F604000851E8A /* SKServiceCache.swift */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
@@ -234,6 +238,10 @@
 		252F7AE92C65DFCC00851E8A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		252F7AEB2C65E36200851E8A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		252F7AEE2C6609A000851E8A /* UITextFieldDone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldDone.swift; sourceTree = "<group>"; };
+		252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceCollection.swift; sourceTree = "<group>"; };
+		252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKDelegateCollection.swift; sourceTree = "<group>"; };
+		252F7AF42C7F25E100851E8A /* SKModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKModelCollection.swift; sourceTree = "<group>"; };
+		252F7AF62C7F604000851E8A /* SKServiceCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceCache.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -932,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */,
+				252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */,
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -971,6 +980,7 @@
 				25DB9A772B53BD4900B5359F /* Collection.swift */,
 				25DB9AD02B57EC5000B5359F /* CollectionRowView.swift */,
 				25DB9AC52B57945300B5359F /* CollectionTopic.swift */,
+				252F7AF42C7F25E100851E8A /* SKModelCollection.swift */,
 			);
 			path = collection;
 			sourceTree = "<group>";
@@ -1088,6 +1098,8 @@
 			children = (
 				25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */,
 				25F3B40C2C084190007F156C /* AppleProtectService.swift */,
+				252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */,
+				252F7AF62C7F604000851E8A /* SKServiceCache.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1507,6 +1519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25883AA02C57657A00D46614 /* Int.swift in Sources */,
+				252F7AF52C7F25E100851E8A /* SKModelCollection.swift in Sources */,
 				2569408C2B660C9B0005BFCC /* CacheProgress.swift in Sources */,
 				25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */,
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
@@ -1541,6 +1554,7 @@
 				256940912B660EDE0005BFCC /* CacheData.swift in Sources */,
 				257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */,
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
+				252F7AF32C7F217000851E8A /* SKDelegateCollection.swift in Sources */,
 				25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
 				25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */,
@@ -1595,6 +1609,7 @@
 				25D4763A2B7C8E1100B5467D /* UIView.swift in Sources */,
 				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,
 				25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */,
+				252F7AF72C7F604000851E8A /* SKServiceCache.swift in Sources */,
 				25F94AD92B6E22BE00FC8A32 /* AuthUtils.swift in Sources */,
 				25F94AF62B6FB8A600FC8A32 /* PremiumService.swift in Sources */,
 				2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */,
@@ -1625,6 +1640,7 @@
 				250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */,
 				250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */,
 				25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */,
+				252F7AF12C7F20F800851E8A /* SKServiceCollection.swift in Sources */,
 				2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */,
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,
 				2BA101CF2763EFC900EB5B8C /* SceneDelegate.swift in Sources */,
