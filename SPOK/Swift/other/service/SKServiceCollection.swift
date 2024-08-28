@@ -20,7 +20,10 @@ final class SKServiceCollection {
             withPath: "Sleep/ru.scc"
         )
     
-    private final let mServiceCache = SKServiceCache()
+    private final let mServiceCache = SKServiceCache(
+        fileName: "0.scc",
+        dirName: "cls"
+    )
     
     final func getCollectionAsync(
         offset: Int = 0,
@@ -62,12 +65,14 @@ final class SKServiceCollection {
     private final func onGetData(
         data: Data
     ) {
-        print(
-            SKServiceCollection.self,
-            "data:",
-            data
-        )
+        var d = data
+        guard let collections = d.scc() else {
+            return
+        }
         
+        delegate?.onGetCollections(
+            collections: &collections
+        )
     }
     
 }

@@ -42,6 +42,8 @@
 		252F7AF32C7F217000851E8A /* SKDelegateCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */; };
 		252F7AF52C7F25E100851E8A /* SKModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF42C7F25E100851E8A /* SKModelCollection.swift */; };
 		252F7AF72C7F604000851E8A /* SKServiceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF62C7F604000851E8A /* SKServiceCache.swift */; };
+		252F7AF92C7F628E00851E8A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AF82C7F628E00851E8A /* Data.swift */; };
+		252F7AFB2C7F6C8800851E8A /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252F7AFA2C7F6C8800851E8A /* URL.swift */; };
 		2549B86D2ACA7FC9005C87C5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2549B86C2ACA7FC9005C87C5 /* FirebaseMessaging */; };
 		255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */; };
 		255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */; };
@@ -109,11 +111,8 @@
 		25D61E922B7643CE00B5A72B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E912B7643CE00B5A72B /* UIFont.swift */; };
 		25D75FF22C05870C00EE1720 /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D75FF12C05870C00EE1720 /* WebConfirmationViewController.swift */; };
 		25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D75FF32C0598EE00EE1720 /* EmailConfirmationViewController.swift */; };
-		25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */; };
 		25DB9A782B53BD4900B5359F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A772B53BD4900B5359F /* Collection.swift */; };
-		25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */; };
 		25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AB92B53E61C00B5359F /* Iterator.swift */; };
-		25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */; };
 		25DB9AC02B55A73900B5359F /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ABF2B55A73900B5359F /* PreviewCell.swift */; };
 		25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC12B565AC600B5359F /* SheepCounterViewController.swift */; };
 		25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */; };
@@ -242,6 +241,8 @@
 		252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKDelegateCollection.swift; sourceTree = "<group>"; };
 		252F7AF42C7F25E100851E8A /* SKModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKModelCollection.swift; sourceTree = "<group>"; };
 		252F7AF62C7F604000851E8A /* SKServiceCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceCache.swift; sourceTree = "<group>"; };
+		252F7AF82C7F628E00851E8A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		252F7AFA2C7F6C8800851E8A /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		253E298D2A44493700304958 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		255C04F42B4FA3E4006D9FD0 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		255C04F62B4FE6BD006D9FD0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -309,11 +310,8 @@
 		25D61E912B7643CE00B5A72B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		25D75FF12C05870C00EE1720 /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
 		25D75FF32C0598EE00EE1720 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
-		25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDownloader.swift; sourceTree = "<group>"; };
 		25DB9A772B53BD4900B5359F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListener.swift; sourceTree = "<group>"; };
 		25DB9AB92B53E61C00B5359F /* Iterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iterator.swift; sourceTree = "<group>"; };
-		25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDelegate.swift; sourceTree = "<group>"; };
 		25DB9ABF2B55A73900B5359F /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		25DB9AC12B565AC600B5359F /* SheepCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepCounterViewController.swift; sourceTree = "<group>"; };
 		25DB9AC32B578CBE00B5359F /* SheepViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepViewCell.swift; sourceTree = "<group>"; };
@@ -899,15 +897,6 @@
 			path = splash;
 			sourceTree = "<group>";
 		};
-		25DB9A732B53AC6700B5359F /* downloaders */ = {
-			isa = PBXGroup;
-			children = (
-				25DB9A792B53C43A00B5359F /* protocols */,
-				25DB9A742B53AC9E00B5359F /* CollectionDownloader.swift */,
-			);
-			path = downloaders;
-			sourceTree = "<group>";
-		};
 		25DB9A762B53BD3D00B5359F /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,14 +907,6 @@
 				256940852B63B72E0005BFCC /* ArrayList.swift */,
 			);
 			path = models;
-			sourceTree = "<group>";
-		};
-		25DB9A792B53C43A00B5359F /* protocols */ = {
-			isa = PBXGroup;
-			children = (
-				25DB9A7A2B53C45A00B5359F /* CollectionListener.swift */,
-			);
-			path = protocols;
 			sourceTree = "<group>";
 		};
 		25DB9AB82B53E60E00B5359F /* iterators */ = {
@@ -939,7 +920,6 @@
 		25DB9ABC2B54E32700B5359F /* delegates */ = {
 			isa = PBXGroup;
 			children = (
-				25DB9ABD2B54E34100B5359F /* CollectionDelegate.swift */,
 				252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */,
 			);
 			path = delegates;
@@ -1008,6 +988,8 @@
 				25D476142B7B1FE400B5467D /* FileManager.swift */,
 				25883A9F2C57657A00D46614 /* Int.swift */,
 				252F7AE92C65DFCC00851E8A /* Notification.swift */,
+				252F7AF82C7F628E00851E8A /* Data.swift */,
+				252F7AFA2C7F6C8800851E8A /* URL.swift */,
 			);
 			path = foundation;
 			sourceTree = "<group>";
@@ -1291,7 +1273,6 @@
 				25DB9AC72B57B5DB00B5359F /* utils */,
 				25DB9ABC2B54E32700B5359F /* delegates */,
 				25DB9AB82B53E60E00B5359F /* iterators */,
-				25DB9A732B53AC6700B5359F /* downloaders */,
 				2507D2E52B46B9A900656C0B /* stream */,
 				2BF06BF428E7951F00A2ACFF /* Extensions */,
 				2B5684AF28901871003F4F15 /* Notifications */,
@@ -1521,7 +1502,6 @@
 				25883AA02C57657A00D46614 /* Int.swift in Sources */,
 				252F7AF52C7F25E100851E8A /* SKModelCollection.swift in Sources */,
 				2569408C2B660C9B0005BFCC /* CacheProgress.swift in Sources */,
-				25DB9ABE2B54E34100B5359F /* CollectionDelegate.swift in Sources */,
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
 				25D476182B7B274F00B5467D /* Metadata.swift in Sources */,
 				257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */,
@@ -1593,12 +1573,12 @@
 				383AF7AD28758BD300859090 /* MainNavigationController.swift in Sources */,
 				257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */,
 				25C455C82B5BF90400AF54B1 /* CacheFile.swift in Sources */,
-				25DB9A7B2B53C45A00B5359F /* CollectionListener.swift in Sources */,
 				257F7AD32C12BBF800420F4E /* AuthMethodReauth.swift in Sources */,
 				25F94ADE2B6E587D00FC8A32 /* UIColor.swift in Sources */,
 				257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
 				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
+				252F7AF92C7F628E00851E8A /* Data.swift in Sources */,
 				257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,
 				25883AB62C5A1D6200D46614 /* StatViewController.swift in Sources */,
@@ -1634,12 +1614,12 @@
 				25D476152B7B1FE400B5467D /* FileManager.swift in Sources */,
 				252F7AEC2C65E36200851E8A /* UIViewController.swift in Sources */,
 				25063EB22A77A1D5001C1CCE /* FileSPC.swift in Sources */,
+				252F7AFB2C7F6C8800851E8A /* URL.swift in Sources */,
 				256940942B6614160005BFCC /* CacheProgressListener.swift in Sources */,
 				25AB40382BC6F46A009E735F /* CGSize.swift in Sources */,
 				257A7FA92B6CE1B300BBEF5E /* Currency.swift in Sources */,
 				250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */,
 				250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */,
-				25DB9A752B53AC9E00B5359F /* CollectionDownloader.swift in Sources */,
 				252F7AF12C7F20F800851E8A /* SKServiceCollection.swift in Sources */,
 				2507D2D12B46707A00656C0B /* BaseTopicController.swift in Sources */,
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,

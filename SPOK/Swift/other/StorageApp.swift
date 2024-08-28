@@ -206,16 +206,19 @@ class StorageApp {
         _ dir: String,
         fileName: String
     ) -> FileSCS? {
-        var d = StorageApp
-            .load(
-                path: collectionUrl(
-                    dir,
-                    fileName: fileName
-                )
+        var d = StorageApp.load(
+            path: collectionUrl(
+                dir,
+                fileName: fileName
             )
+        )
+        
+        if d == nil {
+            return nil
+        }
         
         return Extension
-            .scs(&d)
+            .scs(&d!)
     }
     
     public static func collection(
@@ -313,12 +316,10 @@ class StorageApp {
     public static func rootPath(
         append path: String
     ) -> URL {
-        return FileManager
-            .default
-            .urls (
-                for: .cachesDirectory,
-                in: .userDomainMask
-            )[0].append(path)
+        return FileManager.default.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        )[0].append(path)
     }
     
     public static func file(

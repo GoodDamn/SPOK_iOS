@@ -74,19 +74,15 @@ public final class Extension {
     }
     
     public static func scs(
-        _ data: inout Data?,
-        scale: CGFloat = UIScreen.main.scale
+        _ data: inout Data,
+        scale: CGFloat = UIScreen.main.scale,
+        offset: Int = 0
     ) -> FileSCS? {
-        
-        guard var data = data, !data.isEmpty else {
-            return nil
-        }
-        
         var type: CardType
         var cardSize: CGSize
         var cardTextSize: CardTextSize
         
-        switch(data[0]) {
+        switch(data[offset]) {
         case 0:
             cardSize = MainViewController
                 .mCardSizeB
@@ -108,16 +104,20 @@ public final class Extension {
             cardSize = .zero
         }
         
-        let titleLen = Int(data[1])
+        var pos = offset+1
+        
+        let titleLen = Int(data[pos])
+        
+        pos += 1
         
         let title = String(
             data: data[
-                2..<(titleLen+2)
+                pos..<(titleLen+pos)
             ],
             encoding: .utf8
         )
         
-        var pos = 2+titleLen;
+        pos = titleLen+pos;
         
         let topicsLen = ByteUtils
             .int(
@@ -140,28 +140,10 @@ public final class Extension {
             pos += 2;
         }
         
-        if (pos >= data.count) {
-            return FileSCS(
-                title: title,
-                topics: topics,
-                image: nil,
-                cardSize: cardSize,
-                cardTextSize: cardTextSize,
-                type: type
-            )
-        }
-        
-        let img = UIImage(
-            data: data[
-                pos..<(data.count)
-            ],
-            scale: scale
-        );
-        
         return FileSCS(
             title: title,
             topics: topics,
-            image: img,
+            image: nil,
             cardSize: cardSize,
             cardTextSize: cardTextSize,
             type: type
