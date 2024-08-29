@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class UITableViewTypeable
+final class UITableViewTypeable
 : UITableView {
         
     var models: [SKModelTypeable]? = nil

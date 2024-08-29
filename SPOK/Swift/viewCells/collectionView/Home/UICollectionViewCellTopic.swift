@@ -56,6 +56,8 @@ final class UICollectionViewCellTopic
             radius: 0.01
         )
         
+        contentView.clipsToBounds = true
+        
         mParticles.backgroundColor = .black
             .withAlphaComponent(0.4)
         
@@ -152,7 +154,7 @@ extension UICollectionViewCellTopic {
         with size: CGSize
     ) {
         contentView.layer.cornerRadius = size
-            .height * 0.0732
+            .height * 0.0792
     }
     
     private func calculateBoundsText() {

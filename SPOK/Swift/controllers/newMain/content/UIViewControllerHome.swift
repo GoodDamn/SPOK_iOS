@@ -93,25 +93,6 @@ final class UIViewControllerHome
 }
 
 extension UIViewControllerHome {
-    
-    private func onClickBtnBegin(
-        _ sender: UIView
-    ) {
-        Log.d(
-            TAG,
-            "onClickBtnBegin:"
-        )
-        let c = SheepCounterViewController()
-        c.view.alpha = 0
-        
-        push(
-            c,
-            animDuration: 0.5
-        ) {
-            c.view.alpha = 1.0
-        }
-    }
-    
     private func openPremiumTopics(
         _ inp: UIView
     ) {
