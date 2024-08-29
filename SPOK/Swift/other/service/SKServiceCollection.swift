@@ -66,7 +66,7 @@ final class SKServiceCollection {
         data: Data
     ) {
         var d = data
-        guard let collections = d.scc() else {
+        guard var collections = d.scc() else {
             return
         }
         

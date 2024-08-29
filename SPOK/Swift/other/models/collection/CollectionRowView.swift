@@ -10,14 +10,14 @@ import Foundation
 public class CollectionRowView
     : Collection {
     
-    let setupView: ((TitleTableViewCell)->Void)
+    let setupView: ((UITableViewCellCollection)->Void)
     
     init(
         title: String,
         titleSize: CGFloat,
         height: CGFloat,
         idCell: String,
-        setupView: @escaping ((TitleTableViewCell)->Void)
+        setupView: @escaping ((UITableViewCellCollection)->Void)
     ) {
         self.setupView = setupView
         super.init(

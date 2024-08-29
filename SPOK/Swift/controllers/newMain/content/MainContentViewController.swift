@@ -85,7 +85,7 @@ final class MainContentViewController
         
         if let it = mPageView {
             it.source = [
-                HomeViewController(),
+                UIViewControllerHome(),
                 MainViewController.mDoAppleCheck
                 ? SettingsViewController()
                 : ProfileNewViewController()

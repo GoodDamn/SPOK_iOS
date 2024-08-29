@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public class SheepViewCell
-    : TitleTableViewCell {
+    : UITableViewCellCollection {
     
     private static let TAG = "SheepViewCell:"
     public static let id = "sheep"

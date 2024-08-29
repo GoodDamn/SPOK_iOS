@@ -1,5 +1,5 @@
 //
-//  collectionsCellCollView.swift
+//  UITableViewCellCollection.swift
 //  SPOK
 //
 //  Created by Cell on 17.04.2022.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-public final class CollectionTableViewCell
-    : TitleTableViewCell {
+final class UITableViewCellCollection
+: UITableViewCellTitle {
     
-    public static let id = "collections"
+    static let id = "collections"
     
     private(set) var collectionView: UICollectionView!
     
@@ -22,8 +22,6 @@ public final class CollectionTableViewCell
             style: style,
             reuseIdentifier: reuseIdentifier
         )
-        
-        Log.d("CollectionTableViewCell: init()",frame)
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,7 +41,6 @@ public final class CollectionTableViewCell
         mTitle?.backgroundColor = .clear
            
         collectionView.showsVerticalScrollIndicator = false
-        
         collectionView.showsHorizontalScrollIndicator = false
         
         collectionView.register(
@@ -57,19 +54,6 @@ public final class CollectionTableViewCell
     }
     
     required init?(coder: NSCoder) {
-        Log.d("CollectionTableViewCell: init(CODER)")
         super.init(coder:coder)
     }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        let a = mTitle?.frame.origin.x ?? 0
-        collectionView.contentInset = UIEdgeInsets(
-            top: 0,
-            left: a,
-            bottom: 0,
-            right: a
-        )
-    }
-    
 }

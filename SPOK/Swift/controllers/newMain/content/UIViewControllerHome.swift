@@ -1,25 +1,26 @@
 //
-//  MainViewController.swift
+//  UIViewControllerHome.swift
 //  SPOK
 //
 //  Created by Cell on 19.12.2021.
 //
 
-import UIKit;
+import UIKit
 
-final class HomeViewController
+final class UIViewControllerHome
 : StackViewController {
     
-    private let TAG = "HomeViewController:"
+    private let TAG = "UIViewControllerHome:"
     private let mServiceCollection = SKServiceCollection()
     
-    private var mTableView: UITableView!
+    private var mTableView: UITableViewTypeable!
     
     override func viewDidLoad() {
         super.viewDidLoad();
     
         let w = view.frame.width
-        let h = view.frame.height - mInsets.bottom - 50 // 50 - nav bar (MainContentViewController)
+        let h = view.frame.height - mInsets.bottom - 50
+            // 50 - nav bar (MainContentViewController)
         
         let wmoon = 0.594 * w
         let hmoon = 0.533 * w
@@ -38,29 +39,22 @@ final class HomeViewController
             named: "moon"
         )
         
-        mTableView = UITableView(
+        mTableView = UITableViewTypeable(
             frame: CGRect(
-                x: 0,
-                y: 0,
-                width: w,
-                height: h
-            )
+                origin: .zero,
+                size: view.frame.size
+            ),
+            viewTypes: [
+                SKModelViewTypeCollection(
+                    size: CGSize(
+                        width: w,
+                        height: w * 265.nw()
+                    )
+                )
+            ]
         )
         
         mTableView.separatorStyle = .none
-        
-        mTableView.register(
-            CollectionTableViewCell.self,
-            forCellReuseIdentifier:
-                CollectionTableViewCell.id
-        )
-        
-        mTableView.register(
-            SheepViewCell.self,
-            forCellReuseIdentifier:
-                SheepViewCell.id
-        )
-        
         mTableView.contentInset = UIEdgeInsets(
             top: mInsets.top == 0 ? h * 0.1 : 0,
             left: 0,
@@ -70,7 +64,6 @@ final class HomeViewController
         
         mTableView.backgroundColor = .clear
         mTableView.showsHorizontalScrollIndicator = false
-        
         mTableView.showsVerticalScrollIndicator = false
         
         view.addSubview(
@@ -93,7 +86,7 @@ final class HomeViewController
     
 }
 
-extension HomeViewController {
+extension UIViewControllerHome {
     
     private func onClickBtnBegin(
         _ sender: UIView
@@ -142,21 +135,45 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController
+extension UIViewControllerHome
 : SKDelegateCollection {
-    
     
     func onGetCollections(
         collections: inout [SKModelCollection]
     ) {
-        //mTableView.dataSource = self
-        //mTableView.delegate = self
-        //mTableView.reloadData()
+        if collections == nil {
+            return
+        }
+        var viewable = Array<SKModelTypeable>()
+        var paths = Array<IndexPath>()
+        
+        viewable.reserveCapacity(
+            collections.count
+        )
+        paths.reserveCapacity(
+            collections.count
+        )
+        
+        for i in 0..<paths.capacity {
+            paths.append(
+                IndexPath(
+                    row: i,
+                    section: 0
+                )
+            )
+            
+            viewable.append(
+                SKModelTypeable(
+                    model: collections[i],
+                    viewType: 0
+                )
+            )
+        }
+        
+        mTableView.models = viewable
+        mTableView.insertRows(
+            at: paths,
+            with: .fade
+        )
     }
-    
-}
-
-extension HomeViewController
-    : UITableViewDelegate {
-    // For flow layout
 }
