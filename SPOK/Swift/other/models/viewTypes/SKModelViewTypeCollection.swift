@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class SKModelViewTypeCollection
-: SKModelTypeableView {
+: NSObject, SKModelTypeableView {
     
     private let mSize: CGSize
     
@@ -57,7 +57,73 @@ final class SKModelViewTypeCollection
             with: mSize
         )
         
+        if let it = cell.collectionView {
+            it.topics = model.topicIds
+            cell.calculateBoundsCollection(
+                with: mSize
+            )
+            it.dataSource = self
+            it.delegate = self
+        }
+        
         return cell
     }
     
+}
+
+extension SKModelViewTypeCollection
+: UICollectionViewDataSource {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        (collectionView as? UICollectionViewTopics)?
+            .topics?
+            .count ?? 0
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let view = collectionView
+            as? UICollectionViewTopics else {
+            return UICollectionViewCell()
+        }
+        let index = indexPath.row
+        guard let topicId = view.topics?[index] else {
+            return UICollectionViewCell()
+        }
+        
+        guard let cell = view.dequeueReusableCell(
+            withReuseIdentifier: PreviewCell.ID,
+            for: indexPath
+        ) as? PreviewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.contentView.backgroundColor = .gray
+        
+        return cell
+    }
+    
+}
+
+extension SKModelViewTypeCollection
+: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return MainViewController.mCardSizeM
+    }
+    
+}
+
+extension SKModelViewTypeCollection
+: UICollectionViewDelegate {
+    // For flow layout
 }

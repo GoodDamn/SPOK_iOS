@@ -20,7 +20,7 @@ public class CollectionTopic
         cardSize: CGSize,
         title: String,
         height: CGFloat,
-        idCell: String = CollectionTableViewCell
+        idCell: String = UITableViewCellCollection
             .id,
         cardTextSize: CardTextSize,
         cardType: CardType

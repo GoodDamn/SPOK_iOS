@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-public class SheepViewCell
-    : UITableViewCellCollection {
+class SheepViewCell
+    : UITableViewCellTitle {
     
     private static let TAG = "SheepViewCell:"
-    public static let id = "sheep"
+    static let id = "sheep"
     
-    public var mBtnBegin: UITextButton!
+    var mBtnBegin: UITextButton!
     private var mSheep: Sheep!
     private var moon: UIImageView!
     
@@ -62,10 +62,8 @@ public class SheepViewCell
         )
     }
     
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
-        
-        print("SheepViewCell: calculated:", mIsCalculated)
         
         if mIsCalculated {
             return

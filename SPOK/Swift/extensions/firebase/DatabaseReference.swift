@@ -13,17 +13,20 @@ extension DatabaseReference {
         _ inc: Int = 1
     ) {
         
-        observeSingleEvent(
-            of: .value
-        ) { [weak self] snap in
-            let v = snap.value as? Int
-                ?? 0
-            
-            self?.setValue(
-                v + inc
-            )
-            
-        }
+        #if DEBUG
+        #else
+            observeSingleEvent(
+                of: .value
+            ) { [weak self] snap in
+                let v = snap.value as? Int
+                    ?? 0
+                
+                self?.setValue(
+                    v + inc
+                )
+                
+            }
+        #endif
     }
     
 }

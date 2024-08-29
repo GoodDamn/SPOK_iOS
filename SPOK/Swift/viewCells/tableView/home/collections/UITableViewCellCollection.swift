@@ -12,7 +12,7 @@ final class UITableViewCellCollection
     
     static let id = "collections"
     
-    private(set) var collectionView: UICollectionView!
+    private(set) var collectionView: UICollectionViewTopics!
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -26,7 +26,7 @@ final class UITableViewCellCollection
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        collectionView = UICollectionView(
+        collectionView = UICollectionViewTopics(
             frame: CGRect(
                 x: 0,
                 y: 0,
@@ -56,4 +56,16 @@ final class UITableViewCellCollection
     required init?(coder: NSCoder) {
         super.init(coder:coder)
     }
+    
+    final func calculateBoundsCollection(
+        with size: CGSize
+    ) {
+        collectionView.frame = CGRect(
+            x: 0,
+            y: size.height * 0.1132,
+            width: size.width,
+            height: size.height * 0.7812
+        )
+    }
+    
 }
