@@ -23,6 +23,8 @@ final class UITableViewCellCollection
             reuseIdentifier: reuseIdentifier
         )
         
+        selectionStyle = .none
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         

@@ -46,6 +46,10 @@ final class SKModelViewTypeSheep
             return UITableViewCell()
         }
         
+        sheepCell.calculateBoundsTitle(
+            with: mSize
+        )
+        
         sheepCell.layout(
             with: mSize
         )

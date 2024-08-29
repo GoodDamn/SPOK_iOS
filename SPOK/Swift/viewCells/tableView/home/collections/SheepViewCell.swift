@@ -14,7 +14,7 @@ final class SheepViewCell
     private static let TAG = "SheepViewCell:"
     static let id = "sheep"
     
-    var mBtnBegin: UITextButton!
+    private var mBtnBegin: UITextButton!
     private var mSheep: Sheep!
     private var moon: UIImageView!
     
@@ -27,11 +27,23 @@ final class SheepViewCell
             reuseIdentifier: reuseIdentifier
         )
         
+        mTitle?.text = "Счетчик овечек"
+        
         selectionStyle = .none
+        
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         
         mBtnBegin = ViewUtils.textButton(
             text: "НАЧАТЬ"
         )
+        
+        mBtnBegin.onClick = {
+            [weak self] v in
+            self?.onClickStart(
+                v: v
+            )
+        }
         
         moon = UIImageView()
         moon.image = UIImage(
@@ -56,9 +68,25 @@ final class SheepViewCell
         )
     }
     
-    required init?(coder: NSCoder) {
+    required init?(
+        coder: NSCoder
+    ) {
         super.init(
             coder: coder
+        )
+    }
+    
+    private func onClickStart(
+        v: UIView
+    ) {
+        let it = SheepCounterViewController()
+        it.view.alpha = 0.0
+        Utils.main().push(
+            it,
+            animDuration: 0.3,
+            animate: {
+                it.view.alpha = 1.0
+            }
         )
     }
     
