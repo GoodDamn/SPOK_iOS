@@ -59,6 +59,7 @@ final class SKModelViewTypeCollection
         
         if let it = cell.collectionView {
             it.topics = model.topicIds
+            it.topicSize = MainViewController.mCardSizeM
             cell.calculateBoundsCollection(
                 with: mSize
             )
@@ -97,13 +98,15 @@ extension SKModelViewTypeCollection
         }
         
         guard let cell = view.dequeueReusableCell(
-            withReuseIdentifier: PreviewCell.ID,
+            withReuseIdentifier: UICollectionViewCellTopic.ID,
             for: indexPath
-        ) as? PreviewCell else {
+        ) as? UICollectionViewCellTopic else {
             return UICollectionViewCell()
         }
         
-        cell.contentView.backgroundColor = .gray
+        cell.layout(
+            with: view.topicSize
+        )
         
         return cell
     }
@@ -118,7 +121,8 @@ extension SKModelViewTypeCollection
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return MainViewController.mCardSizeM
+        (collectionView as? UICollectionViewTopics)?
+            .topicSize ?? .zero
     }
     
 }

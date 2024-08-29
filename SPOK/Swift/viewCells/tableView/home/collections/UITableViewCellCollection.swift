@@ -44,8 +44,8 @@ final class UITableViewCellCollection
         collectionView.showsHorizontalScrollIndicator = false
         
         collectionView.register(
-            PreviewCell.self,
-            forCellWithReuseIdentifier: PreviewCell.ID
+            UICollectionViewCellTopic.self,
+            forCellWithReuseIdentifier: UICollectionViewCellTopic.ID
         )
         
         contentView.addSubview(
@@ -65,6 +65,15 @@ final class UITableViewCellCollection
             y: size.height * 0.1132,
             width: size.width,
             height: size.height * 0.7812
+        )
+        
+        let left = mTitle?.frame.x() ?? 0
+        
+        collectionView.contentInset = UIEdgeInsets(
+            top: 0,
+            left: left,
+            bottom: 0,
+            right: left
         )
     }
     

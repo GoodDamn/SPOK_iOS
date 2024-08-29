@@ -12,5 +12,6 @@ final class UICollectionViewTopics
 : UICollectionView {
     
     var topics: [UInt16]? = nil
+    var topicSize: CGSize = .zero
     
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SheepViewCell
+final class SheepViewCell
     : UITableViewCellTitle {
     
     private static let TAG = "SheepViewCell:"
@@ -17,8 +17,6 @@ class SheepViewCell
     var mBtnBegin: UITextButton!
     private var mSheep: Sheep!
     private var moon: UIImageView!
-    
-    private var mIsCalculated = false
     
     override init(
         style: UITableViewCell.CellStyle,
@@ -31,10 +29,9 @@ class SheepViewCell
         
         selectionStyle = .none
         
-        mBtnBegin = ViewUtils
-            .textButton(
-                text: "НАЧАТЬ"
-            )
+        mBtnBegin = ViewUtils.textButton(
+            text: "НАЧАТЬ"
+        )
         
         moon = UIImageView()
         moon.image = UIImage(
@@ -46,14 +43,17 @@ class SheepViewCell
             frame: .zero
         )
         
-        contentView
-            .addSubview(mBtnBegin)
+        contentView.addSubview(
+            mBtnBegin
+        )
         
-        contentView
-            .addSubview(mSheep)
+        contentView.addSubview(
+            mSheep
+        )
         
-        contentView
-            .addSubview(moon)
+        contentView.addSubview(
+            moon
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -62,15 +62,11 @@ class SheepViewCell
         )
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if mIsCalculated {
-            return
-        }
-        
-        let w = frame.width
-        let h = frame.height
+    func layout(
+        with size: CGSize
+    ) {
+        let w = size.width
+        let h = size.height
         
         let mb = w * 0.135
         let off = w * 0.07
@@ -92,7 +88,7 @@ class SheepViewCell
         
         LayoutUtils.textButton(
             for: mBtnBegin,
-            size: frame.size,
+            size: size,
             textSize: 0.025,
             paddingHorizontal: 0.02,
             paddingVertical: 0.04
@@ -100,7 +96,7 @@ class SheepViewCell
         
         LayoutUtils.textButton(
             for: mBtnBegin,
-            size: frame.size,
+            size: size,
             textSize: 0.07,
             paddingHorizontal: 0.3,
             paddingVertical: 0.08
@@ -118,8 +114,6 @@ class SheepViewCell
         mBtnBegin.centerH(
             in: self
         )
-        
-        mIsCalculated = true
     }
     
 }

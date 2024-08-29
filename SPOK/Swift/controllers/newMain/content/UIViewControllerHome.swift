@@ -50,6 +50,12 @@ final class UIViewControllerHome
                         width: w,
                         height: w * 265.nw()
                     )
+                ),
+                SKModelViewTypeSheep(
+                    size: CGSize(
+                        width: w,
+                        height: w * 283.nw()
+                    )
                 )
             ]
         )
@@ -110,22 +116,9 @@ extension UIViewControllerHome {
         _ inp: UIView
     ) {
         
-        if let previewCell =
-            inp as? PreviewCell {
-
-            guard let part = previewCell.mParticles else {
-                return
-            }
-
-            Log.d(
-                TAG,
-                "PreviewCell: DETECTED:",
-                previewCell.mTitle.text
-            )
-            
-            part.stop()
-            part.isHidden = true
-            
+        if let previewCell = inp
+          as? UICollectionViewCellTopic {
+            previewCell.stopParticles()
             return
         }
         
@@ -141,20 +134,13 @@ extension UIViewControllerHome
     func onGetCollections(
         collections: inout [SKModelCollection]
     ) {
-        if collections == nil {
-            return
-        }
         var viewable = Array<SKModelTypeable>()
         var paths = Array<IndexPath>()
+        let n = collections.count + 1
+        viewable.reserveCapacity(n)
+        paths.reserveCapacity(n)
         
-        viewable.reserveCapacity(
-            collections.count
-        )
-        paths.reserveCapacity(
-            collections.count
-        )
-        
-        for i in 0..<paths.capacity {
+        for i in 0..<collections.count {
             paths.append(
                 IndexPath(
                     row: i,
@@ -169,6 +155,19 @@ extension UIViewControllerHome
                 )
             )
         }
+        
+        viewable.append(
+            SKModelTypeable(
+                viewType: 1
+            )
+        )
+        
+        paths.append(
+            IndexPath(
+                row: paths.capacity - 1,
+                section: 0
+            )
+        )
         
         mTableView.models = viewable
         mTableView.insertRows(
