@@ -25,18 +25,29 @@ final class SKServiceCollection {
         dirName: "cls"
     )
     
+    private var mUpdateTime = 0
+    
     final func getCollectionAsync(
         offset: Int = 0,
         len: Int = 3
     ) {
+        if !mServiceCache.isEmpty() {
+            var d = mServiceCache.getData()
+            var collections = d?.scc()
+            if (collections != nil) {
+                delegate?.onGetCollections(
+                    collections: &(collections!)
+                )
+            }
+            
+        }
+        
         mReference.getMetadata { [weak self]
             meta, error in
-            
             guard let meta = meta,
                 error == nil else {
                 return
             }
-            
             self?.onGetMetadata(
                 meta: meta
             )
@@ -46,6 +57,20 @@ final class SKServiceCollection {
     private final func onGetMetadata(
         meta: StorageMetadata
     ) {
+        guard let updatedTime = meta.updated?.timeIntervalSince1970 else {
+            return
+        }
+        
+        mUpdateTime = Int(
+            updatedTime
+        )
+        
+        if mServiceCache.isValidCache(
+            time: mUpdateTime
+        ) {
+            return
+        }
+        
         mReference.getData(
             maxSize: SKServiceCollection.maxSize
         ) { [weak self] data, error in
@@ -69,6 +94,14 @@ final class SKServiceCollection {
         guard var collections = d.scc() else {
             return
         }
+        
+        mServiceCache.writeData(
+            data: &d
+        )
+        
+        mServiceCache.setLastModified(
+            time: mUpdateTime
+        )
         
         delegate?.onGetCollections(
             collections: &collections

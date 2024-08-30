@@ -9,39 +9,61 @@ import Foundation
 
 final class SKServiceCache {
     
-    private let mFileManager = FileManager
-        .default
-    
-    private let mainUrl = mFileManager.urls(
-        for: .cachesDirectory,
-        in: .userDomainMask
-    )[0]
-    
-    private var mPath = mainUrl
-    
-    private let mFileName: String
-    private let mDirName: String
+    private var mFile: SKFile
     
     init (
         fileName: String = "",
         dirName: String
     ) {
-        mFileName = fileName
-        mDirName = dirName
         
-        mPath = mPath.append(
-            mDirName
+        let dir = SKFile(
+            dir: dirName
+        )
+        
+        dir.mkdirs()
+        
+        mFile = SKFile(
+            dir: dirName,
+            name: fileName
+        )
+        
+        mFile.createNewFile()
+    }
+    
+    final func isEmpty() -> Bool {
+        return (
+            !mFile.exists() &&
+            mFile.length() == 0
         )
     }
     
-    func writeData(
-        data: Data
+    final func isValidCache(
+        time: Int
+    ) -> Bool {
+        return (
+            mFile.exists() &&
+            mFile.length() != 0 &&
+            mFile.lastModified() >= time
+        )
+    }
+    
+    final func setLastModified(
+        time: Int
     ) {
-        mFileManager.createFile(
-            atPath: mainUrl.append(
-                mDirName
-            ),
-            contents: <#T##Data?#>
+        mFile.setLastModified(
+            time: time
+        )
+    }
+    
+    final func getData() -> Data? {
+        return mFile.data()
+    }
+    
+    final func writeData(
+        data: inout Data
+    ) {
+        mFile.createNewFile(
+            data: &data
         )
     }
     
