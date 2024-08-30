@@ -9,4 +9,5 @@ import Foundation
 struct SKModelCollection {
     let title: String?
     let topicIds: [UInt16]
+    let cardType: CardType
 }

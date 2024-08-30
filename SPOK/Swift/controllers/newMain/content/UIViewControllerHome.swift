@@ -125,17 +125,35 @@ extension UIViewControllerHome
         viewable.reserveCapacity(n)
         paths.reserveCapacity(n)
         
+        var cardTextSize: CardTextSize
+        var cardSize: CGSize
+        
         for i in 0..<collections.count {
             paths.append(
                 IndexPath(
-                    row: i,
-                    section: 0
+                    row: 0,
+                    section: i
                 )
             )
             
+            let col = collections[i]
+            
+            switch(col.cardType) {
+            case .M:
+                cardTextSize = MainViewController.mCardTextSizeM
+                cardSize = MainViewController.mCardSizeM
+            default:
+                cardTextSize = MainViewController.mCardTextSizeB
+                cardSize = MainViewController.mCardSizeB
+            }
+            
             viewable.append(
                 SKModelTypeable(
-                    model: collections[i],
+                    model: SKModelTableViewCollection(
+                        model: col,
+                        cardTextSize: cardTextSize,
+                        cardSize: cardSize
+                    ),
                     viewType: 0
                 )
             )
@@ -149,8 +167,8 @@ extension UIViewControllerHome
         
         paths.append(
             IndexPath(
-                row: paths.capacity - 1,
-                section: 0
+                row: 0,
+                section: paths.capacity - 1
             )
         )
         

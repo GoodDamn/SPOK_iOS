@@ -71,6 +71,59 @@ extension Data {
         )
     }
     
+    mutating func sck(
+        offset: Int = 0
+    ) -> SKModelCollection {
+        var pos = offset+1
+        
+        let titleLen = Int(self[pos])
+        
+        pos += 1
+        
+        let title = String(
+            data: self[
+                pos..<(titleLen+pos)
+            ],
+            encoding: .utf8
+        )
+        
+        pos = titleLen+pos;
+        
+        let topicsLen = ByteUtils.int(
+            &self,
+            offset: pos
+        )
+        
+        pos += 4
+        var topics:[UInt16] = []
+        let b = pos + topicsLen
+        while pos < b {
+            topics.append(
+                UInt16(
+                    ByteUtils.short(
+                        &self,
+                        offset: pos
+                    )
+                )
+            )
+            pos += 2;
+        }
+        
+        var cardType: CardType
+        switch (self[offset]) {
+        case 0:
+            cardType = .B
+        default:
+            cardType = .M
+        }
+        
+        return SKModelCollection(
+            title: title,
+            topicIds: topics,
+            cardType: cardType
+        )
+    }
+    
     mutating func scc() -> [SKModelCollection]? {
         if isEmpty {
             return nil
@@ -80,7 +133,7 @@ extension Data {
         var collections = Array<SKModelCollection>()
         collections.reserveCapacity(n)
         
-        var dd: FileSCS?
+        var dd: SKModelCollection
         var i = 1
         var lenCol: Int
         
@@ -93,21 +146,11 @@ extension Data {
             )
             i += 2
             
-            dd = Extension.scs(
-                &self,
+            dd = sck(
                 offset: i
             )
             
-            if let d = dd {
-                if let t = d.topics {
-                    collections.append(
-                        SKModelCollection(
-                            title: d.title,
-                            topicIds: t
-                        )
-                    )
-                }
-            }
+            collections.append(dd)
             
             i += lenCol
         }

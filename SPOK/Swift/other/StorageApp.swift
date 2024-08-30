@@ -79,20 +79,6 @@ class StorageApp {
             .timeIntervalSince1970 ?? 0;
     }
     
-    public static func deleteCollection(
-        _ dir: String,
-        id: Int,
-        lang: String = ""
-    ) {
-        delete(
-            "\(mDirCollection)/\(dir)",
-            toscs(
-                id: id,
-                lang: lang
-            )
-        )
-    }
-    
     public static func contentUrl(
         id: Int,
         lang: String = ""
@@ -133,65 +119,6 @@ class StorageApp {
             data: &data
         )
     }
-    
-    public static func collectionUrl(
-        _ dir: String,
-        fileName: String
-    ) -> URL {
-        return rootPath(
-            append: "\(mDirCollection)/\(dir)"
-        ).append(fileName)
-    }
-    
-    public static func collection(
-        _ dir: String,
-        fileName: String
-    ) -> FileSCS? {
-        var d = StorageApp.load(
-            path: collectionUrl(
-                dir,
-                fileName: fileName
-            )
-        )
-        
-        if d == nil {
-            return nil
-        }
-        
-        return Extension
-            .scs(&d!)
-    }
-    
-    public static func collection(
-        _ dir:String,
-        id: Int,
-        lang: String = ""
-    ) -> FileSCS? {
-        return collection(
-            dir,
-            fileName: toscs(
-                id: id,
-                lang: lang
-            )
-        )
-    }
-    
-    public static func collection(
-        _ dir: String,
-        id: Int,
-        lang: String = "",
-        data: inout Data?
-    ) {
-        save(
-            file: toscs(
-                id: id,
-                lang: lang
-            ),
-            root: "\(mDirCollection)/\(dir)",
-            data: &data
-        )
-    }
-    
     
     public static func mkdir(
         path: String

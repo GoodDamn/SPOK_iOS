@@ -40,7 +40,7 @@ final class SKModelViewTypeCollection
         tableView: UITableView
     ) -> UITableViewCell {
         
-        guard let model = model as? SKModelCollection else {
+        guard let viewModel = model as? SKModelTableViewCollection else {
             return UITableViewCell()
         }
         
@@ -51,17 +51,17 @@ final class SKModelViewTypeCollection
             return UITableViewCell()
         }
         
-        cell.mTitle?.text = model.title
+        cell.mTitle?.text = viewModel.model.title
         
         cell.calculateBoundsTitle(
             with: mSize
         )
         
         if let it = cell.collectionView {
-            it.topics = model.topicIds
-            it.topicSize = MainViewController.mCardSizeM
-            it.cardType = .M
-            it.cardTextSize = MainViewController.mCardTextSizeM
+            it.topics = viewModel.model.topicIds
+            it.topicSize = viewModel.cardSize
+            it.cardType = viewModel.model.cardType
+            it.cardTextSize = viewModel.cardTextSize
             cell.calculateBoundsCollection(
                 with: mSize
             )
