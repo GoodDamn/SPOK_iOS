@@ -106,6 +106,10 @@ extension SKModelViewTypeCollection
             return UICollectionViewCell()
         }
         
+        cell.alpha = 0.0
+        
+        cell.stopParticles()
+        
         cell.layout(
             with: view.topicSize
         )

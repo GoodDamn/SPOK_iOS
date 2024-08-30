@@ -230,6 +230,13 @@ extension UICollectionViewCellTopic
         mImageView.image = preview.preview?.size(
             frame.size
         )
+        
+        animate(
+            animations: {
+                [weak self] in
+                self?.alpha = 1.0
+            }
+        )
     }
     
 }
