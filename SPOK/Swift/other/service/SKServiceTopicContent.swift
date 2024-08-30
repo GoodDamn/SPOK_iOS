@@ -11,6 +11,7 @@ import FirebaseStorage
 final class SKServiceTopicContent {
     
     private static let DIR = "skc"
+    private static let maxSize: Int64 = 50 * 1024 * 1024
     
     private let mReference = Storage
         .storage()
@@ -70,6 +71,11 @@ final class SKServiceTopicContent {
     }
     
     
+    final func cancelTask() {
+        mCurrentTask?.cancel()
+    }
+    
+    
     private final func onGetMetadata(
         meta: StorageMetadata
     ) {
@@ -89,13 +95,15 @@ final class SKServiceTopicContent {
             return
         }
         
-        mCurrentTask = mReferenceFull?.write(
-            toFile: mServiceCache.getPath()
-        ) { [weak self] _, error in
-            guard error == nil else {
+        mCurrentTask = mReferenceFull?.getData(
+            maxSize: SKServiceTopicContent.maxSize
+        ) { [weak self] data, error in
+            guard var data = data, error == nil else {
                 return
             }
-            self?.onSuccessDownload()
+            self?.onGetData(
+                data: &data
+            )
         }
         
         mCurrentTask?.observe(
@@ -122,14 +130,21 @@ final class SKServiceTopicContent {
         )
     }
     
-    private final func onSuccessDownload() {
+    private final func onGetData(
+        data: inout Data
+    ) {
+        
+        mServiceCache.writeData(
+            data: &data
+        )
+        
         mServiceCache.setLastModified(
             time: mUpdateTime
         )
         
         delegate?.onGetTopicContent(
             model: SKModelTopicContent(
-                data: mServiceCache.getData()
+                data: data
             )
         )
     }

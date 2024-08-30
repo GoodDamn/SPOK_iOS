@@ -177,6 +177,10 @@ final class BaseTopicController
         )
     }
     
+    deinit {
+        mServiceContent.cancelTask()
+    }
+    
     private func onClickBtnClose(
         _ sender: UIView
     ) {
@@ -225,6 +229,10 @@ extension BaseTopicController {
         _ data: inout Data?
     ) {
         guard var data = data else {
+            return
+        }
+        
+        if data.isEmpty {
             return
         }
         

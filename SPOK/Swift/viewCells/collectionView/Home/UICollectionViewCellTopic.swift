@@ -119,6 +119,10 @@ final class UICollectionViewCellTopic
         )
     }
     
+    deinit {
+        mServicePreview.cancel()
+    }
+    
     override func touchesEnded(
         _ touches: Set<UITouch>,
         with event: UIEvent?

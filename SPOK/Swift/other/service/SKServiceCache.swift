@@ -56,10 +56,10 @@ final class SKServiceCache {
     }
     
     final func isEmpty() -> Bool {
-        return (
-            !mFile.exists() &&
-            mFile.length() == 0
-        )
+        if !mFile.exists() {
+            return true
+        }
+        return mFile.length() == 0
     }
     
     final func isValidCache(
