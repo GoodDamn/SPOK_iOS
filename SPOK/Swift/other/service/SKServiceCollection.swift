@@ -75,28 +75,27 @@ final class SKServiceCollection {
             maxSize: SKServiceCollection.maxSize
         ) { [weak self] data, error in
             
-            guard let data = data,
+            guard var data = data,
                 error == nil else {
                 return
             }
             
             self?.onGetData(
-                data: data
+                data: &data
             )
         }
     }
     
     
     private final func onGetData(
-        data: Data
+        data: inout Data
     ) {
-        var d = data
-        guard var collections = d.scc() else {
+        guard var collections = data.scc() else {
             return
         }
         
         mServiceCache.writeData(
-            data: &d
+            data: &data
         )
         
         mServiceCache.setLastModified(

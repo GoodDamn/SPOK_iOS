@@ -10,69 +10,6 @@ import UIKit.UIImage
 
 public final class Extension {
     
-    public static func spc(
-        _ data: inout Data,
-        scale: CGFloat = UIScreen.main.scale
-    ) -> FileSPC {
-        
-        let conf = data[0];
-        let isPremium = (conf & 0xff) >> 6 == 1;
-        let categoryID = conf & 0x3f;
-        
-        let color = UIColor(
-            red: CGFloat(data[2]) / 255,
-            green: CGFloat(data[3]) / 255,
-            blue: CGFloat(data[4]) / 255,
-            alpha: CGFloat(data[1]) / 255
-        );
-        
-        let descLen = Int(
-            ByteUtils.short(
-                &data,
-                offset: 5
-            )
-        )
-        
-        var pos = 7 + descLen;
-        let description = String(
-            data: data[7..<pos],
-            encoding: .utf8
-        )
-        
-        let titleLen = Int(
-            ByteUtils.short(
-                &data,
-                offset: pos
-            )
-        )
-        
-        pos += 2;
-        let title = String(
-            data: data[
-                pos..<(titleLen+pos)
-            ],
-            encoding: .utf8
-        );
-        
-        pos += titleLen;
-        
-        let image = UIImage(
-            data: data[
-                pos..<data.count
-            ],
-            scale: scale
-        );
-        
-        return FileSPC(
-            isPremium: isPremium,
-            categoryID: categoryID,
-            color: color,
-            description: description,
-            title: title,
-            image: image
-        );
-    }
-    
     public static func scs(
         _ data: inout Data,
         scale: CGFloat = UIScreen.main.scale,

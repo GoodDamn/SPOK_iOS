@@ -15,10 +15,6 @@ class StorageApp {
     
     public static let mUserDef = UserDefaults();
     
-    static let historyKey = "history",
-               likesKey = "like",
-               recommendsKey = "recoms";
-    
     public static let mDirCollection = "collection"
     
     public static let mDirCollectionSleep =
@@ -136,61 +132,6 @@ class StorageApp {
             root: mDirContent,
             data: &data
         )
-    }
-    
-    public static func previewUrl(
-        id: Int,
-        type: CardType,
-        lang: String = ""
-    ) -> URL {
-        return rootPath(
-            append: mDirPreviews
-        ).append(
-            tospc(
-                id: id,
-                type: type,
-                lang: lang
-            )
-        )
-    }
-    
-    public static func preview(
-        id: Int,
-        type: CardType,
-        lang: String = ""
-    ) -> FileSPC? {
-        
-        guard var d = StorageApp.load(
-            path: previewUrl(
-                id: id,
-                type: type,
-                lang: lang
-            )
-        ) else {
-            return nil
-        }
-        
-        return Extension
-            .spc(&d)
-        
-    }
-    
-    public static func preview(
-        id: Int,
-        lang: String = "",
-        type: CardType,
-        data: inout Data?
-    ) {
-        StorageApp.save(
-            file: tospc(
-                id: id,
-                type: type,
-                lang: lang
-            ),
-            root: mDirPreviews,
-            data: &data
-        )
-        
     }
     
     public static func collectionUrl(
@@ -407,7 +348,6 @@ class StorageApp {
     ) -> Data? {
         
         let fpath = f.pathh()
-        print(debugTag, "load:" ,fpath)
         
         if !StorageApp.exists(
             at: fpath

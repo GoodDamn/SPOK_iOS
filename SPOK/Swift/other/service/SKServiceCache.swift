@@ -15,7 +15,6 @@ final class SKServiceCache {
         fileName: String = "",
         dirName: String
     ) {
-        
         let dir = SKFile(
             dir: dirName
         )
@@ -26,6 +25,32 @@ final class SKServiceCache {
             dir: dirName,
             name: fileName
         )
+        
+        if fileName.isEmpty {
+            return
+        }
+        
+        mFile.createNewFile()
+    }
+    
+    final func setFile(
+        fileName: String,
+        dirName: String
+    ) {
+        let dir = SKFile(
+            dir: dirName
+        )
+        
+        dir.mkdirs()
+        
+        mFile = SKFile(
+            dir: dirName,
+            name: fileName
+        )
+        
+        if fileName.isEmpty {
+            return
+        }
         
         mFile.createNewFile()
     }
