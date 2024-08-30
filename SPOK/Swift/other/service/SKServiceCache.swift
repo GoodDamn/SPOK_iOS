@@ -92,4 +92,8 @@ final class SKServiceCache {
         )
     }
     
+    final func getPath() -> URL {
+        return mFile.getPath()
+    }
+    
 }

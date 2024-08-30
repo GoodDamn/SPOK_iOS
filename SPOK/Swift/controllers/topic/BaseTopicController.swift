@@ -21,7 +21,9 @@ final class BaseTopicController
     private var mNetworkUrl = ""
     private var mIsFirstTouch = true
     
-    private var mCacheFile: CacheProgress<Void>? = nil
+    private var mIsGotContent = false
+    
+    private let mServiceContent = SKServiceTopicContent()
     private let mEngine = SPOKContentEngine()
     
     private var mPrevTextView: UITextViewPhrase? = nil
@@ -101,18 +103,8 @@ final class BaseTopicController
                 
         let mHideOffsetY = h * 0.3
         
-        mCacheFile = CacheProgress<Void>(
-            pathStorage: mNetworkUrl,
-            localPath: StorageApp
-                .contentUrl(
-                    id: topicId
-                ),
-            backgroundLoad: true
-        )
-        
-        mCacheFile?.delegate = self
-        
-        mCacheFile?.load()
+        mServiceContent.delegate = self
+        mServiceContent.delegateProgress = self
         
         mEngine.onReadCommand = self
         mEngine.onEndScript = {
@@ -172,15 +164,25 @@ final class BaseTopicController
             s.mPrevTextView = textView
         }
         
+        mProgressBar = ViewUtils.progressBar(
+            frame: view.frame
+        )
+        
+        if let it = mProgressBar {
+            view.addSubview(it)
+        }
+        
+        mServiceContent.getContent(
+            id: topicId
+        )
     }
     
     private func onClickBtnClose(
         _ sender: UIView
     ) {
-        mCurrentPlayer?
-            .stopFade(
-                duration: 0.39
-            )
+        mCurrentPlayer?.stopFade(
+            duration: 0.39
+        )
         
         sender.isUserInteractionEnabled = false
         
@@ -330,26 +332,25 @@ extension BaseTopicController {
 }
 
 extension BaseTopicController
-    : CacheProgressListener {
-    
-    func onPrepareDownload() {
-        
-        mProgressBar = ViewUtils.progressBar(
-            frame: view.frame
-        )
-        
-        if let it = mProgressBar {
-            view.addSubview(it)
+: SKDelegateOnProgressDownload {
+    func onProgressDownload(
+        progress: CGFloat
+    ) {
+        mProgressBar?.mProgress = 100 * progress
+    }
+}
+
+extension BaseTopicController
+: SKDelegateOnGetTopicContent {
+    func onGetTopicContent(
+        model: SKModelTopicContent
+    ) {
+        if mIsGotContent {
+            return
         }
-    }
-    
-    func onWrittenStorage() {}
-    
-    func onProgress(percent: Double) {
-        mProgressBar?.mProgress = percent
-    }
-    
-    func onSuccess() {
+        
+        mIsGotContent = true
+        
         mProgressBar?.alpha(
             duration: 1.2,
             0.0
@@ -367,33 +368,13 @@ extension BaseTopicController
                 return
             }
             
-            var data = StorageApp
-                .content(
-                    id: s.mId
-                )
+            var data = model.data
             
             s.initEngine(
                 &data
             )
         }
     }
-    
-    func onError() {
-        nothing()
-    }
-    
-    // Background thread
-    func onFile(
-        data: inout Data?
-    ) {
-        initEngine(
-            &data
-        )
-    }
-    
-    // Background thread
-    func onNet(data: inout Data?) {}
-    
 }
 
 extension BaseTopicController

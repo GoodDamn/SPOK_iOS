@@ -121,4 +121,8 @@ final class SKFile {
         )
     }
     
+    final func getPath() -> URL {
+        return mCurrentUrl
+    }
+    
 }
