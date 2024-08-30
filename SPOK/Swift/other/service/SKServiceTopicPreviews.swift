@@ -107,6 +107,14 @@ final class SKServiceTopicPreviews {
             return
         }
         
+        mServiceCache.writeData(
+            data: &data
+        )
+        
+        mServiceCache.setLastModified(
+            time: mUpdateTime
+        )
+        
         delegate?.onGetTopicPreview(
             preview: topic
         )

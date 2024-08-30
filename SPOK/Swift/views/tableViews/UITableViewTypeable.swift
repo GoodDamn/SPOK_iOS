@@ -13,6 +13,8 @@ final class UITableViewTypeable
         
     var models: [SKModelTypeable]? = nil
     
+    var space: CGFloat = 0
+    
     private let mViewTypes: [SKModelTypeableView]
     
     init(
@@ -48,19 +50,34 @@ final class UITableViewTypeable
 
 extension UITableViewTypeable
 : UITableViewDataSource {
-        
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
+    
+    func numberOfSections(
+        in tableView: UITableView
     ) -> Int {
         models?.count ?? 0
     }
     
     func tableView(
         _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        return 1
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        viewForHeaderInSection section: Int
+    ) -> UIView? {
+        let v = UIView()
+        v.backgroundColor = .clear
+        return v
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let index = indexPath.row
+        let index = indexPath.section
         guard let model = models?[index] else {
             return UITableViewCell()
         }
@@ -81,9 +98,16 @@ extension UITableViewTypeable
 
     func tableView(
         _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+        return space
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        let i = indexPath.row
+        let i = indexPath.section
         guard let model = models?[i] else {
             return 0
         }

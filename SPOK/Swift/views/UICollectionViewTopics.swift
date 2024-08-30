@@ -14,5 +14,9 @@ final class UICollectionViewTopics
     var topics: [UInt16]? = nil
     var topicSize: CGSize = .zero
     var cardType: CardType = .M
+    var cardTextSize: CardTextSize = CardTextSize(
+        title: 18.0,
+        desc: 11.0
+    )
     
 }

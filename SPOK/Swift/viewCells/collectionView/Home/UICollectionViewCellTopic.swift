@@ -22,21 +22,19 @@ final class UICollectionViewCellTopic
     
     private let mServicePreview = SKServiceTopicPreviews()
     
-    var mCardTextSize: CardTextSize! {
+    var cardTextSize: CardTextSize! {
         didSet {
-            if mCardTextSize.desc == mDesc.font.pointSize {
+            if cardTextSize.desc == mDesc.font.pointSize {
                 return
             }
             
-            mTitle.font = mTitle.font
-                .withSize(
-                    mCardTextSize.title
-                )
+            mTitle.font = mTitle.font.withSize(
+                cardTextSize.title
+            )
             
-            mDesc.font = mDesc.font
-                .withSize(
-                    mCardTextSize.desc
-                )
+            mDesc.font = mDesc.font.withSize(
+                cardTextSize.desc
+            )
         }
     }
     
@@ -162,7 +160,8 @@ extension UICollectionViewCellTopic {
         with size: CGSize
     ) {
         contentView.layer.cornerRadius = size
-            .height * 0.0792
+            .height * 0.09
+        
     }
     
     final func loadData(
@@ -177,8 +176,8 @@ extension UICollectionViewCellTopic {
     
     private final func calculateBoundsText() {
         
-        let w = frame.width
-        let h = frame.height
+        let w = frame.size.width
+        let h = frame.size.height
         
         let ltext = w * 0.083
         
@@ -225,7 +224,9 @@ extension UICollectionViewCellTopic
             mParticles.isHidden = false
         }
         
-        mImageView.image = preview.preview
+        mImageView.image = preview.preview?.size(
+            frame.size
+        )
     }
     
 }

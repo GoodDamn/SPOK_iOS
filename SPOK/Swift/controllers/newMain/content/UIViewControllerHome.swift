@@ -39,6 +39,8 @@ final class UIViewControllerHome
             named: "moon"
         )
         
+        let colHeight = w * 265.nw()
+        
         mTableView = UITableViewTypeable(
             frame: CGRect(
                 origin: .zero,
@@ -48,7 +50,7 @@ final class UIViewControllerHome
                 SKModelViewTypeCollection(
                     size: CGSize(
                         width: w,
-                        height: w * 265.nw()
+                        height: colHeight
                     )
                 ),
                 SKModelViewTypeSheep(
@@ -60,9 +62,11 @@ final class UIViewControllerHome
             ]
         )
         
+        mTableView.space = colHeight * 0.02
+        
         mTableView.separatorStyle = .none
         mTableView.contentInset = UIEdgeInsets(
-            top: mInsets.top == 0 ? h * 0.1 : 0,
+            top: mInsets.top + h * 0.05,
             left: 0,
             bottom: h * 0.1,
             right: 0

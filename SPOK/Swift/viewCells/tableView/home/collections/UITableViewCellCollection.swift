@@ -62,11 +62,13 @@ final class UITableViewCellCollection
     final func calculateBoundsCollection(
         with size: CGSize
     ) {
+        let collViewHeight = size.height * 0.7811
+        
         collectionView.frame = CGRect(
             x: 0,
-            y: size.height * 0.1132,
+            y: size.height - collViewHeight,
             width: size.width,
-            height: size.height * 0.7812
+            height: collViewHeight
         )
         
         let left = mTitle?.frame.x() ?? 0
