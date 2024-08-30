@@ -18,7 +18,6 @@ final class BaseTopicController
     
     private var mCurrentPlayer: AVAudioPlayer? = nil
     
-    private var mId = Int.min
     private var mNetworkUrl = ""
     private var mIsFirstTouch = true
     
@@ -36,6 +35,12 @@ final class BaseTopicController
     
     private var mIsTopicFinished = false
     
+    var topicId = Int.min {
+        didSet {
+            mNetworkUrl = "content/skc/\(topicId).skc"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -45,7 +50,7 @@ final class BaseTopicController
         )
         
         getStatRefId(
-            "\(mId)/LOAD_"
+            "\(topicId)/LOAD_"
         ).increment()
         
         let w = view.width()
@@ -100,7 +105,7 @@ final class BaseTopicController
             pathStorage: mNetworkUrl,
             localPath: StorageApp
                 .contentUrl(
-                    id: mId
+                    id: topicId
                 ),
             backgroundLoad: true
         )
@@ -180,11 +185,11 @@ final class BaseTopicController
         sender.isUserInteractionEnabled = false
         
         getStatRefId(
-            "\(mId)/CLOSE_"
+            "\(topicId)/CLOSE_"
         ).increment()
         
         timeIncrement(
-            "\(mId)/CLOSE_TIME_"
+            "\(topicId)/CLOSE_TIME_"
         )
         
         popBaseAnim()
@@ -212,13 +217,6 @@ final class BaseTopicController
 }
 
 extension BaseTopicController {
-    
-    public func setID(
-        _ id: Int
-    ) {
-        mId = id
-        mNetworkUrl = "content/skc/\(id).skc"
-    }
     
     // Better to load on background thread
     private func initEngine(
@@ -410,11 +408,11 @@ extension BaseTopicController
         )
         
         getStatRefId(
-            "\(mId)/FINISH_"
+            "\(topicId)/FINISH_"
         ).increment()
         
         timeIncrement(
-            "\(mId)/FINISH_TIME_"
+            "\(topicId)/FINISH_TIME_"
         )
         
         if mPrevTextView == nil {

@@ -21,6 +21,7 @@ final class UICollectionViewCellTopic
     private var mParticles: Particles!
     
     private let mServicePreview = SKServiceTopicPreviews()
+    private var mPreviewId = Int.min
     
     var cardTextSize: CardTextSize! {
         didSet {
@@ -126,16 +127,17 @@ final class UICollectionViewCellTopic
             return
         }
         
-        /*if s.isPremium && !MainViewController
+        if !mParticles.isHidden && !MainViewController
             .mIsPremiumUser {
             // Move to sub page
             Toast.show(
                 text: "Доступно только с подпиской"
             )
             return
-        }*/
+        }
         
         let t = BaseTopicController()
+        t.topicId = mPreviewId
         t.view.alpha = 0.0
         
         Utils.main().push(
@@ -168,6 +170,7 @@ extension UICollectionViewCellTopic {
         previewId: Int,
         type: CardType
     ) {
+        mPreviewId = previewId
         mServicePreview.getTopicPreview(
             id: previewId,
             type: type
