@@ -60,6 +60,7 @@ final class SKModelViewTypeCollection
         if let it = cell.collectionView {
             it.topics = model.topicIds
             it.topicSize = MainViewController.mCardSizeM
+            it.cardType = .M
             cell.calculateBoundsCollection(
                 with: mSize
             )
@@ -106,6 +107,11 @@ extension SKModelViewTypeCollection
         
         cell.layout(
             with: view.topicSize
+        )
+        
+        cell.loadData(
+            previewId: Int(topicId),
+            type: view.cardType
         )
         
         return cell

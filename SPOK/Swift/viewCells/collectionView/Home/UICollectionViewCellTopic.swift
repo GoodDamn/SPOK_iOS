@@ -12,13 +12,15 @@ final class UICollectionViewCellTopic
 : UICollectionViewCell {
     
     private static let TAG = "UICollectionViewCellTopic:"
-
-    static let ID = "cell"
+    
+    static let ID = "topicCell"
     
     private var mImageView: UIImageView!
     private var mTitle: UILabela!
     private var mDesc: UILabela!
     private var mParticles: Particles!
+    
+    private let mServicePreview = SKServiceTopicPreviews()
     
     var mCardTextSize: CardTextSize! {
         didSet {
@@ -44,6 +46,9 @@ final class UICollectionViewCellTopic
         super.init(
             frame: frame
         )
+        
+        mServicePreview.delegate = self
+        
         let f = CGRect(
             x: 0,
             y: 0,
@@ -102,6 +107,9 @@ final class UICollectionViewCellTopic
         contentView.addSubview(
             mParticles
         )
+        
+        mParticles.isHidden = true
+        mParticles.stop()
     }
     
     required init?(
@@ -145,19 +153,29 @@ final class UICollectionViewCellTopic
 
 extension UICollectionViewCellTopic {
     
-    func stopParticles() {
+    final func stopParticles() {
         mParticles.stop()
         mParticles.isHidden = true
     }
     
-    func layout(
+    final func layout(
         with size: CGSize
     ) {
         contentView.layer.cornerRadius = size
             .height * 0.0792
     }
     
-    private func calculateBoundsText() {
+    final func loadData(
+        previewId: Int,
+        type: CardType
+    ) {
+        mServicePreview.getTopicPreview(
+            id: previewId,
+            type: type
+        )
+    }
+    
+    private final func calculateBoundsText() {
         
         let w = frame.width
         let h = frame.height
@@ -189,4 +207,25 @@ extension UICollectionViewCellTopic {
         mDesc.frame.origin.y = y2
         mTitle.frame.origin.y = y1
     }
+}
+
+extension UICollectionViewCellTopic
+: SKDelegateOnGetTopicPreview {
+ 
+    func onGetTopicPreview(
+        preview: SKModelTopicPreview
+    ) {
+        mTitle.text = preview.title
+        mDesc.text = preview.desc
+        
+        calculateBoundsText()
+        
+        if preview.isPremium {
+            mParticles.start()
+            mParticles.isHidden = false
+        }
+        
+        mImageView.image = preview.preview
+    }
+    
 }

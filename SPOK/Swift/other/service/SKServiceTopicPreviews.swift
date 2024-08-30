@@ -12,6 +12,8 @@ final class SKServiceTopicPreviews {
     
     private static let maxSize: Int64 = 3 * 1024 * 1024
     
+    weak var delegate: SKDelegateOnGetTopicPreview? = nil
+    
     private let mReference = Storage
         .storage()
         .reference(
@@ -41,6 +43,15 @@ final class SKServiceTopicPreviews {
             fileName: "\(id)\(fileName)",
             dirName: "prs"
         )
+        
+        if !mServiceCache.isEmpty() {
+            var d = mServiceCache.getData()
+            if let topic = d?.spc() {
+                delegate?.onGetTopicPreview(
+                    preview: topic
+                )
+            }
+        }
         
         mReferenceTopic?.getMetadata {
             [weak self] meta, error in
@@ -96,7 +107,9 @@ final class SKServiceTopicPreviews {
             return
         }
         
-        
+        delegate?.onGetTopicPreview(
+            preview: topic
+        )
     }
     
 }

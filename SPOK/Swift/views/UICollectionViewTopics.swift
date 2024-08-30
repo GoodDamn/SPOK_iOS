@@ -13,5 +13,6 @@ final class UICollectionViewTopics
     
     var topics: [UInt16]? = nil
     var topicSize: CGSize = .zero
+    var cardType: CardType = .M
     
 }
