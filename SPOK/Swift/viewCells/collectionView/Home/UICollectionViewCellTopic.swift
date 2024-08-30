@@ -148,10 +148,13 @@ final class UICollectionViewCellTopic
         }
         
     }
-    
 }
 
 extension UICollectionViewCellTopic {
+    
+    final func onDidEndDisplaying() {
+        mServicePreview.cancel()
+    }
     
     final func stopParticles() {
         mParticles.stop()

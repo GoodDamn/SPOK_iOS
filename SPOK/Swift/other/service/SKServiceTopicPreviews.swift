@@ -14,19 +14,20 @@ final class SKServiceTopicPreviews {
     
     weak var delegate: SKDelegateOnGetTopicPreview? = nil
     
+    private var mReferenceTopic: StorageReference? = nil
+    private var mUpdateTime = 0
+    
     private let mReference = Storage
         .storage()
         .reference(
             withPath: "Trainings"
         )
     
-    private var mReferenceTopic: StorageReference? = nil
-    
     private let mServiceCache = SKServiceCache(
         dirName: "prs"
     )
     
-    private var mUpdateTime = 0
+    private var mCurrentTask: StorageDownloadTask? = nil
     
     final func getTopicPreview(
         id: Int,
@@ -67,6 +68,9 @@ final class SKServiceTopicPreviews {
         }
     }
     
+    final func cancel() {
+        mCurrentTask?.cancel()
+    }
     
     private final func onGetMetadata(
         meta: StorageMetadata
@@ -87,7 +91,7 @@ final class SKServiceTopicPreviews {
             return
         }
         
-        mReferenceTopic?.getData(
+        mCurrentTask = mReferenceTopic?.getData(
             maxSize: SKServiceTopicPreviews.maxSize
         ) { [weak self] data, error in
             guard var data = data, error == nil else {

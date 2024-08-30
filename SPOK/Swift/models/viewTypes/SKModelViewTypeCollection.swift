@@ -142,5 +142,14 @@ extension SKModelViewTypeCollection
 
 extension SKModelViewTypeCollection
 : UICollectionViewDelegate {
-    // For flow layout
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplaying cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        (cell as? UICollectionViewCellTopic)?
+            .onDidEndDisplaying()
+    }
+    
 }
