@@ -122,29 +122,6 @@
 		25DB9ACB2B57CC1600B5359F /* UITableViewCellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */; };
 		25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSAttributedString.swift */; };
 		25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B3DC2C05B388007F156C /* UIEditText.swift */; };
-		25F3B3E12C05C315007F156C /* 1.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3DE2C05C314007F156C /* 1.scs */; };
-		25F3B3E22C05C315007F156C /* 2.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3DF2C05C314007F156C /* 2.scs */; };
-		25F3B3E32C05C315007F156C /* 0.scs in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E02C05C315007F156C /* 0.scs */; };
-		25F3B3EE2C05C524007F156C /* 55.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E42C05C513007F156C /* 55.skc */; };
-		25F3B3EF2C05C524007F156C /* 61.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E52C05C515007F156C /* 61.skc */; };
-		25F3B3F02C05C524007F156C /* 54.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E62C05C516007F156C /* 54.skc */; };
-		25F3B3F12C05C524007F156C /* 56.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E72C05C518007F156C /* 56.skc */; };
-		25F3B3F22C05C524007F156C /* 59.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E82C05C51B007F156C /* 59.skc */; };
-		25F3B3F32C05C524007F156C /* 58.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3E92C05C51D007F156C /* 58.skc */; };
-		25F3B3F42C05C524007F156C /* 53.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3EA2C05C51F007F156C /* 53.skc */; };
-		25F3B3F52C05C524007F156C /* 52.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3EB2C05C521007F156C /* 52.skc */; };
-		25F3B3F62C05C524007F156C /* 57.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3EC2C05C522007F156C /* 57.skc */; };
-		25F3B3F72C05C524007F156C /* 60.skc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3ED2C05C524007F156C /* 60.skc */; };
-		25F3B4022C05C66A007F156C /* 52B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3F82C05C662007F156C /* 52B.spc */; };
-		25F3B4032C05C66A007F156C /* 55B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3F92C05C663007F156C /* 55B.spc */; };
-		25F3B4042C05C66A007F156C /* 56M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FA2C05C664007F156C /* 56M.spc */; };
-		25F3B4052C05C66A007F156C /* 54B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FB2C05C664007F156C /* 54B.spc */; };
-		25F3B4062C05C66A007F156C /* 60B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FC2C05C666007F156C /* 60B.spc */; };
-		25F3B4072C05C66A007F156C /* 58M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FD2C05C667007F156C /* 58M.spc */; };
-		25F3B4082C05C66A007F156C /* 59B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FE2C05C668007F156C /* 59B.spc */; };
-		25F3B4092C05C66A007F156C /* 57M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B3FF2C05C668007F156C /* 57M.spc */; };
-		25F3B40A2C05C66A007F156C /* 61M.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B4002C05C669007F156C /* 61M.spc */; };
-		25F3B40B2C05C66A007F156C /* 53B.spc in Resources */ = {isa = PBXBuildFile; fileRef = 25F3B4012C05C66A007F156C /* 53B.spc */; };
 		25F3B40D2C084190007F156C /* AppleProtectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B40C2C084190007F156C /* AppleProtectService.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
 		25F94ACD2B6D181F00FC8A32 /* SignInAppleListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */; };
@@ -321,29 +298,6 @@
 		25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellTitle.swift; sourceTree = "<group>"; };
 		25EA75402B87B6E1003FC583 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		25F3B3DC2C05B388007F156C /* UIEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditText.swift; sourceTree = "<group>"; };
-		25F3B3DE2C05C314007F156C /* 1.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.scs; sourceTree = "<group>"; };
-		25F3B3DF2C05C314007F156C /* 2.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.scs; sourceTree = "<group>"; };
-		25F3B3E02C05C315007F156C /* 0.scs */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0.scs; sourceTree = "<group>"; };
-		25F3B3E42C05C513007F156C /* 55.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 55.skc; sourceTree = "<group>"; };
-		25F3B3E52C05C515007F156C /* 61.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 61.skc; sourceTree = "<group>"; };
-		25F3B3E62C05C516007F156C /* 54.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 54.skc; sourceTree = "<group>"; };
-		25F3B3E72C05C518007F156C /* 56.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 56.skc; sourceTree = "<group>"; };
-		25F3B3E82C05C51B007F156C /* 59.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59.skc; sourceTree = "<group>"; };
-		25F3B3E92C05C51D007F156C /* 58.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58.skc; sourceTree = "<group>"; };
-		25F3B3EA2C05C51F007F156C /* 53.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53.skc; sourceTree = "<group>"; };
-		25F3B3EB2C05C521007F156C /* 52.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 52.skc; sourceTree = "<group>"; };
-		25F3B3EC2C05C522007F156C /* 57.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 57.skc; sourceTree = "<group>"; };
-		25F3B3ED2C05C524007F156C /* 60.skc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 60.skc; sourceTree = "<group>"; };
-		25F3B3F82C05C662007F156C /* 52B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 52B.spc; sourceTree = "<group>"; };
-		25F3B3F92C05C663007F156C /* 55B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 55B.spc; sourceTree = "<group>"; };
-		25F3B3FA2C05C664007F156C /* 56M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 56M.spc; sourceTree = "<group>"; };
-		25F3B3FB2C05C664007F156C /* 54B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 54B.spc; sourceTree = "<group>"; };
-		25F3B3FC2C05C666007F156C /* 60B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 60B.spc; sourceTree = "<group>"; };
-		25F3B3FD2C05C667007F156C /* 58M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58M.spc; sourceTree = "<group>"; };
-		25F3B3FE2C05C668007F156C /* 59B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 59B.spc; sourceTree = "<group>"; };
-		25F3B3FF2C05C668007F156C /* 57M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 57M.spc; sourceTree = "<group>"; };
-		25F3B4002C05C669007F156C /* 61M.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 61M.spc; sourceTree = "<group>"; };
-		25F3B4012C05C66A007F156C /* 53B.spc */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53B.spc; sourceTree = "<group>"; };
 		25F3B40C2C084190007F156C /* AppleProtectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleProtectService.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
 		25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleListener.swift; sourceTree = "<group>"; };
@@ -680,16 +634,6 @@
 			path = firebase;
 			sourceTree = "<group>";
 		};
-		258B792E2B80F5BD0049304E /* contentKit */ = {
-			isa = PBXGroup;
-			children = (
-				25FF6D132C04A96D005966FE /* collection */,
-				25FF6D182C04A96E005966FE /* content */,
-				25FF6D232C04A96E005966FE /* preview */,
-			);
-			path = contentKit;
-			sourceTree = "<group>";
-		};
 		259FE6122B623DA400E237B7 /* enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -983,7 +927,6 @@
 		25F770D82B59A71D00C62071 /* raw */ = {
 			isa = PBXGroup;
 			children = (
-				258B792E2B80F5BD0049304E /* contentKit */,
 				25F94AF72B700E4D00FC8A32 /* audio */,
 				25D32DE02B69032400EAEA20 /* fonts */,
 			);
@@ -1071,58 +1014,6 @@
 				25F94AFD2B700F6300FC8A32 /* PaymentConfirmationListener.swift */,
 			);
 			path = protocols;
-			sourceTree = "<group>";
-		};
-		25FF6D132C04A96D005966FE /* collection */ = {
-			isa = PBXGroup;
-			children = (
-				25FF6D142C04A96D005966FE /* sleep */,
-			);
-			path = collection;
-			sourceTree = "<group>";
-		};
-		25FF6D142C04A96D005966FE /* sleep */ = {
-			isa = PBXGroup;
-			children = (
-				25F3B3E02C05C315007F156C /* 0.scs */,
-				25F3B3DE2C05C314007F156C /* 1.scs */,
-				25F3B3DF2C05C314007F156C /* 2.scs */,
-			);
-			path = sleep;
-			sourceTree = "<group>";
-		};
-		25FF6D182C04A96E005966FE /* content */ = {
-			isa = PBXGroup;
-			children = (
-				25F3B3EB2C05C521007F156C /* 52.skc */,
-				25F3B3EA2C05C51F007F156C /* 53.skc */,
-				25F3B3E62C05C516007F156C /* 54.skc */,
-				25F3B3E42C05C513007F156C /* 55.skc */,
-				25F3B3E72C05C518007F156C /* 56.skc */,
-				25F3B3EC2C05C522007F156C /* 57.skc */,
-				25F3B3E92C05C51D007F156C /* 58.skc */,
-				25F3B3E82C05C51B007F156C /* 59.skc */,
-				25F3B3ED2C05C524007F156C /* 60.skc */,
-				25F3B3E52C05C515007F156C /* 61.skc */,
-			);
-			path = content;
-			sourceTree = "<group>";
-		};
-		25FF6D232C04A96E005966FE /* preview */ = {
-			isa = PBXGroup;
-			children = (
-				25F3B3F82C05C662007F156C /* 52B.spc */,
-				25F3B4012C05C66A007F156C /* 53B.spc */,
-				25F3B3FB2C05C664007F156C /* 54B.spc */,
-				25F3B3F92C05C663007F156C /* 55B.spc */,
-				25F3B3FA2C05C664007F156C /* 56M.spc */,
-				25F3B3FF2C05C668007F156C /* 57M.spc */,
-				25F3B3FD2C05C667007F156C /* 58M.spc */,
-				25F3B3FE2C05C668007F156C /* 59B.spc */,
-				25F3B3FC2C05C666007F156C /* 60B.spc */,
-				25F3B4002C05C669007F156C /* 61M.spc */,
-			);
-			path = preview;
 			sourceTree = "<group>";
 		};
 		2B5684AF28901871003F4F15 /* Notifications */ = {
@@ -1416,39 +1307,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25F3B4092C05C66A007F156C /* 57M.spc in Resources */,
-				25F3B3F12C05C524007F156C /* 56.skc in Resources */,
-				25F3B3E12C05C315007F156C /* 1.scs in Resources */,
-				25F3B3E32C05C315007F156C /* 0.scs in Resources */,
-				25F3B3EF2C05C524007F156C /* 61.skc in Resources */,
-				25F3B40B2C05C66A007F156C /* 53B.spc in Resources */,
 				257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */,
 				25B35B152B51236B002704E1 /* Main.storyboard in Resources */,
 				2BCC490F290E347500A5F4F4 /* Assets.xcassets in Resources */,
-				25F3B3EE2C05C524007F156C /* 55.skc in Resources */,
-				25F3B4052C05C66A007F156C /* 54B.spc in Resources */,
-				25F3B3F02C05C524007F156C /* 54.skc in Resources */,
-				25F3B40A2C05C66A007F156C /* 61M.spc in Resources */,
 				25F94AF92B700E4D00FC8A32 /* sheep_m.mp3 in Resources */,
 				2B63203F291F5E9A00BE529E /* GoogleService-Info.plist in Resources */,
 				2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */,
-				25F3B4082C05C66A007F156C /* 59B.spc in Resources */,
-				25F3B4042C05C66A007F156C /* 56M.spc in Resources */,
-				25F3B3F22C05C524007F156C /* 59.skc in Resources */,
 				2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */,
-				25F3B3F62C05C524007F156C /* 57.skc in Resources */,
-				25F3B4032C05C66A007F156C /* 55B.spc in Resources */,
-				25F3B3F52C05C524007F156C /* 52.skc in Resources */,
-				25F3B3F32C05C524007F156C /* 58.skc in Resources */,
-				25F3B3F42C05C524007F156C /* 53.skc in Resources */,
 				2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */,
-				25F3B3F72C05C524007F156C /* 60.skc in Resources */,
 				2BCC490D290E346A00A5F4F4 /* OpenSans-SemiBold.ttf in Resources */,
-				25F3B4062C05C66A007F156C /* 60B.spc in Resources */,
-				25F3B4072C05C66A007F156C /* 58M.spc in Resources */,
-				25F3B3E22C05C315007F156C /* 2.scs in Resources */,
 				25883AB32C58A8E000D46614 /* shitlocc.xcstrings in Resources */,
-				25F3B4022C05C66A007F156C /* 52B.spc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1764,7 +1632,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 85;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1777,7 +1645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8.2;
+				MARKETING_VERSION = 0.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "DISTRIBUTION PROVISN";
@@ -1797,7 +1665,7 @@
 				CODE_SIGN_IDENTITY = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Igor Aleksandrov (88QU53792F)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 85;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88QU53792F;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -1810,7 +1678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8.2;
+				MARKETING_VERSION = 0.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.spoklab.spok.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "DISTRIBUTION PROVISN";

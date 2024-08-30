@@ -120,21 +120,13 @@ extension UIViewControllerHome
         collections: inout [SKModelCollection]
     ) {
         var viewable = Array<SKModelTypeable>()
-        var paths = Array<IndexPath>()
         let n = collections.count + 1
         viewable.reserveCapacity(n)
-        paths.reserveCapacity(n)
         
         var cardTextSize: CardTextSize
         var cardSize: CGSize
         
         for i in 0..<collections.count {
-            paths.append(
-                IndexPath(
-                    row: 0,
-                    section: i
-                )
-            )
             
             let col = collections[i]
             
@@ -165,17 +157,8 @@ extension UIViewControllerHome
             )
         )
         
-        paths.append(
-            IndexPath(
-                row: 0,
-                section: paths.capacity - 1
-            )
-        )
         
         mTableView.models = viewable
-        mTableView.insertRows(
-            at: paths,
-            with: .fade
-        )
+        mTableView.reloadData()
     }
 }
