@@ -65,6 +65,7 @@ final class SKModelViewTypeCollection
             cell.calculateBoundsCollection(
                 with: mSize
             )
+            it.insetsSection.left = it.contentInset.right
             it.dataSource = self
             it.delegate = self
         }
@@ -77,13 +78,20 @@ final class SKModelViewTypeCollection
 extension SKModelViewTypeCollection
 : UICollectionViewDataSource {
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
+    func numberOfSections(
+        in collectionView: UICollectionView
     ) -> Int {
         (collectionView as? UICollectionViewTopics)?
             .topics?
             .count ?? 0
+    }
+    
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 1
     }
     
     func collectionView(
@@ -94,7 +102,7 @@ extension SKModelViewTypeCollection
             as? UICollectionViewTopics else {
             return UICollectionViewCell()
         }
-        let index = indexPath.row
+        let index = indexPath.section
         guard let topicId = view.topics?[index] else {
             return UICollectionViewCell()
         }
@@ -105,7 +113,7 @@ extension SKModelViewTypeCollection
         ) as? UICollectionViewCellTopic else {
             return UICollectionViewCell()
         }
-        
+                
         cell.alpha = 0.0
         
         cell.stopParticles()
@@ -128,6 +136,23 @@ extension SKModelViewTypeCollection
 
 extension SKModelViewTypeCollection
 : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        (collectionView as? UICollectionViewTopics)?
+            .insetsSection ?? .zero
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 0.0
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,

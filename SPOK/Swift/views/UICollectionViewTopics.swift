@@ -19,4 +19,6 @@ final class UICollectionViewTopics
         desc: 11.0
     )
     
+    var insetsSection: UIEdgeInsets = .zero
+    
 }

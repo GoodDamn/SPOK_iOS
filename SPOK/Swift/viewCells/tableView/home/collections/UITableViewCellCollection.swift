@@ -71,11 +71,11 @@ final class UITableViewCellCollection
             height: collViewHeight
         )
         
-        let left = mTitle?.frame.x() ?? 0
+        let left = mTitle?.frame.x() ?? 10
         
         collectionView.contentInset = UIEdgeInsets(
             top: 0,
-            left: left,
+            left: 0,
             bottom: 0,
             right: left
         )
