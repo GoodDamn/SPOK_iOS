@@ -238,6 +238,7 @@ extension UICollectionViewCellTopic
             frame.size
         )
         
+        
         animate(
             animations: {
                 [weak self] in

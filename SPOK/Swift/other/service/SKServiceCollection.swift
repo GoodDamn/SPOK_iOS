@@ -32,14 +32,20 @@ final class SKServiceCollection {
         len: Int = 3
     ) {
         if !mServiceCache.isEmpty() {
-            var d = mServiceCache.getData()
-            var collections = d?.scc()
-            if (collections != nil) {
-                delegate?.onGetCollections(
-                    collections: &(collections!)
-                )
+            DispatchQueue.io { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                var d = self.mServiceCache.getData()
+                if var collections = d?.scc() {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.onGetCollections(
+                            collections: &collections
+                        )
+                    }
+                }
             }
-            
         }
         
         mReference.getMetadata { [weak self]
@@ -57,7 +63,9 @@ final class SKServiceCollection {
     private final func onGetMetadata(
         meta: StorageMetadata
     ) {
-        guard let updatedTime = meta.updated?.timeIntervalSince1970 else {
+        guard let updatedTime = meta
+            .updated?
+            .timeIntervalSince1970 else {
             return
         }
         
@@ -79,10 +87,11 @@ final class SKServiceCollection {
                 error == nil else {
                 return
             }
-            
-            self?.onGetData(
-                data: &data
-            )
+            DispatchQueue.io { [weak self] in
+                self?.onGetData(
+                    data: &data
+                )
+            }
         }
     }
     
@@ -102,9 +111,11 @@ final class SKServiceCollection {
             time: mUpdateTime
         )
         
-        delegate?.onGetCollections(
-            collections: &collections
-        )
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.onGetCollections(
+                collections: &collections
+            )
+        }
     }
     
 }

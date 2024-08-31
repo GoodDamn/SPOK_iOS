@@ -46,11 +46,19 @@ final class SKServiceTopicPreviews {
         )
         
         if !mServiceCache.isEmpty() {
-            var d = mServiceCache.getData()
-            if let topic = d?.spc() {
-                delegate?.onGetTopicPreview(
-                    preview: topic
-                )
+            DispatchQueue.io { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                var d = self.mServiceCache.getData()
+                if let topic = d?.spc() {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.onGetTopicPreview(
+                            preview: topic
+                        )
+                    }
+                }
             }
         }
         
@@ -97,10 +105,11 @@ final class SKServiceTopicPreviews {
             guard var data = data, error == nil else {
                 return
             }
-            
-            self?.onGetData(
-                data: &data
-            )
+            DispatchQueue.io { [weak self] in
+                self?.onGetData(
+                    data: &data
+                )
+            }
         }
     }
  
@@ -119,9 +128,11 @@ final class SKServiceTopicPreviews {
             time: mUpdateTime
         )
         
-        delegate?.onGetTopicPreview(
-            preview: topic
-        )
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.onGetTopicPreview(
+                preview: topic
+            )
+        }
     }
     
 }
