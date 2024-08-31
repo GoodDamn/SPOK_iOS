@@ -229,7 +229,7 @@ extension UICollectionViewCellTopic
         
         calculateBoundsText()
         
-        if preview.isPremium {
+        if !MainViewController.mIsPremiumUser && preview.isPremium {
             mParticles.start()
             mParticles.isHidden = false
         }
