@@ -13,4 +13,5 @@ struct SKModelTopicPreview {
     let desc: String?
     let isPremium: Bool
     let preview: UIImage?
+    let color: UIColor
 }

@@ -227,6 +227,9 @@ extension UICollectionViewCellTopic
         mTitle.text = preview.title
         mDesc.text = preview.desc
         
+        mTitle.textColor = preview.color
+        mDesc.textColor = preview.color
+        
         calculateBoundsText()
         
         if !MainViewController.mIsPremiumUser && preview.isPremium {

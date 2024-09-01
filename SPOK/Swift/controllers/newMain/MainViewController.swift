@@ -146,12 +146,6 @@ final class MainViewController
             ) { [weak self] in
                 return IntroSleepRootController()
             }
-            
-            // Copying first content Kit to
-            // Cache directory
-            
-            cacheFirstContentKit()
-            
             return
         }
         
@@ -273,98 +267,6 @@ extension MainViewController {
                 .updateAppleCheck()
         }
     }
-    
-    
-    private func cacheFirstContentKit() {
-        
-        let fm = FileManager.default
-        
-        guard let cache = fm.urls(
-            for: .cachesDirectory,
-            in: .userDomainMask
-        ).first else {
-            return
-        }
-        
-        guard let resPath = Bundle
-            .main
-            .resourcePath else {
-            return
-        }
-        
-        guard let content = try? fm.contentsOfDirectory(
-            atPath: resPath
-        ) else {
-            return
-        }
-        
-        let dirColl = cache.append(
-            StorageApp.mDirCollectionSleep
-        )
-        
-        let dirPrev = cache.append(
-            StorageApp.mDirPreviews
-        )
-        
-        let dirCont = cache.append(
-            StorageApp.mDirContent
-        )
-        
-        fm.createDirWithNullTime(
-            dir: dirColl
-        )
-        
-        fm.createDirWithNullTime(
-            dir: dirPrev
-        )
-        
-        fm.createDirWithNullTime(
-            dir: dirCont
-        )
-        
-        let bundle = Bundle.main.bundleURL
-        
-        for fileName in content {
-            if fileName.contains(".skc") {
-                fm.copyItemWithNullTime(
-                    at: bundle.append(
-                        fileName
-                    ),
-                    to: dirCont.append(
-                        fileName
-                    )
-                )
-                continue
-            }
-            
-            if fileName.contains(".scs") {
-                fm.copyItemWithNullTime(
-                    at: bundle.append(
-                        fileName
-                    ),
-                    to: dirColl.append(
-                        fileName
-                    )
-                )
-                continue
-            }
-            
-            if fileName.contains(".spc") {
-                fm.copyItemWithNullTime(
-                    at: bundle.append(
-                        fileName
-                    ),
-                    to: dirPrev.append(
-                        fileName
-                    )
-                )
-                continue
-            }
-            
-        }
-        
-    }
-    
     
     private func showSplash(
         msg: String,

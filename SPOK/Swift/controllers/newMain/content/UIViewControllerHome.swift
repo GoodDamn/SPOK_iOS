@@ -66,7 +66,7 @@ final class UIViewControllerHome
         
         mTableView.separatorStyle = .none
         mTableView.contentInset = UIEdgeInsets(
-            top: mInsets.top + h * 0.05,
+            top: mInsets.top == 0 ? h * 0.05 : 0,
             left: 0,
             bottom: h * 0.1,
             right: 0

@@ -16,11 +16,9 @@ public class ScriptRead {
         textConfig: ScriptText
     ) {
         var offset = offset
-        let textSize = ByteUtils
-            .short(
-                &chunk,
-                offset: offset+1
-            ) / 1000
+        let textSize = chunk.int16(
+            offset: offset+1
+        ) / 1000
         
         offset += 3
         
@@ -75,7 +73,7 @@ public class ScriptRead {
         }
         
         
-        var text = textConfig.spannableString
+        let text = textConfig.spannableString
         
         if (argSize == 3) { // 2 args
             if (isColorSpan) {

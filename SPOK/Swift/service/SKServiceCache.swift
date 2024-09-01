@@ -31,6 +31,8 @@ final class SKServiceCache {
         }
         
         mFile.createNewFile()
+        
+        print(mFile.getPath())
     }
     
     final func setFile(

@@ -32,10 +32,7 @@ public final class SPOKContentEngine {
         
         Log.d(TAG, "LEN:",chunk[offset])
         
-        let textLen = ByteUtils
-            .short(
-                &chunk
-            )
+        let textLen = chunk.int16()
         
         offset += 2
         
@@ -180,14 +177,11 @@ public final class SPOKContentEngine {
         
         Log.d(TAG, "FileSize:",fileSize)
         
-        var resLenBytes = fis.read(4)
+        let resLenBytes = fis.read(4)
         
         Log.d(TAG,"RES_LEN_BYTES:",([UInt8])(resLenBytes))
         
-        let resLen = ByteUtils
-            .int(
-                &resLenBytes
-            )
+        let resLen = resLenBytes.int32()
         
         Log.d(TAG, "RES_LEN:",resLen)
         
@@ -222,11 +216,10 @@ public final class SPOKContentEngine {
         for i in 0..<resCount {
             
             // end file pos
-            var endPosByte =
+            let endPosByte =
                 fis.read(4)
             
-            currentPos = ByteUtils
-                .int(&endPosByte)
+            currentPos = endPosByte.int32()
             
             Log.d(TAG, "RES_END_POS:",currentPos, ([UInt8])(endPosByte))
             

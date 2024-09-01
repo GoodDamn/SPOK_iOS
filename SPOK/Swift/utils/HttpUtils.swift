@@ -37,7 +37,7 @@ class HttpUtils {
                 options: .fragmentsAllowed
             ) else {
             
-            print(
+            Log.d(
                   "HttpUtils: requestJson:ERROR_CONVERT"
             )
             
@@ -84,7 +84,7 @@ class HttpUtils {
             with: request
         ) { data, error, response in
             
-            print(
+            Log.d(
                 "HttpUtils:request_RESPONSE",
                 data,
                 error
@@ -92,7 +92,7 @@ class HttpUtils {
             
             
             guard let data = data else {
-                print(
+                Log.d(
                     "HttpUtils:request_ERROR:",
                     error
                 )
@@ -108,7 +108,7 @@ class HttpUtils {
                 
                 completion(json)
             } catch {
-                print(
+                Log.d(
                     "HttpUtils:request_JSON_PARSE_ERROR:",
                      error
                 )

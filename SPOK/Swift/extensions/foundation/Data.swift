@@ -10,7 +10,7 @@ import UIKit
 
 extension Data {
     
-    mutating func spc() -> SKModelTopicPreview? {
+    func spc() -> SKModelTopicPreview? {
         if isEmpty {
             return nil
         }
@@ -27,8 +27,7 @@ extension Data {
         )
         
         let descLen = Int(
-            ByteUtils.short(
-                &self,
+            int16(
                 offset: 5
             )
         )
@@ -40,8 +39,7 @@ extension Data {
         )
         
         let titleLen = Int(
-            ByteUtils.short(
-                &self,
+            int16(
                 offset: pos
             )
         )
@@ -67,11 +65,12 @@ extension Data {
             title: title,
             desc: description,
             isPremium: isPremium,
-            preview: image
+            preview: image,
+            color: color
         )
     }
     
-    mutating func sck(
+    func sck(
         offset: Int = 0
     ) -> SKModelCollection {
         var pos = offset+1
@@ -89,8 +88,7 @@ extension Data {
         
         pos = titleLen+pos;
         
-        let topicsLen = ByteUtils.int(
-            &self,
+        let topicsLen = int32(
             offset: pos
         )
         
@@ -100,8 +98,7 @@ extension Data {
         while pos < b {
             topics.append(
                 UInt16(
-                    ByteUtils.short(
-                        &self,
+                    int16(
                         offset: pos
                     )
                 )
@@ -124,7 +121,7 @@ extension Data {
         )
     }
     
-    mutating func scc() -> [SKModelCollection]? {
+    func scc() -> [SKModelCollection]? {
         if isEmpty {
             return nil
         }
@@ -140,8 +137,7 @@ extension Data {
         while (
             i < count
         ) {
-            lenCol = ByteUtils.short(
-                &self,
+            lenCol = int16(
                 offset: i
             )
             i += 2
@@ -156,6 +152,24 @@ extension Data {
         }
         
         return collections
+    }
+    
+    func int16(
+        offset: Int = 0
+    ) -> Int {
+        let offset = offset + Int(startIndex)
+        return Int(self[offset]) << 8 |
+            Int(self[offset+1])
+    }
+    
+    func int32(
+        offset: Int = 0
+    ) -> Int {
+        let offset = offset + Int(startIndex)
+        return Int(self[offset]) << 24   |
+            Int(self[offset+1]) << 16 |
+            Int(self[offset+2]) << 8  |
+            Int(self[offset+3])
     }
     
 }

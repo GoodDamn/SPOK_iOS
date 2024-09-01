@@ -27,11 +27,10 @@ class ScriptReader {
             data: &dataSKC
         )
         // deny resource length
-        var resLenByte = mStream.read(4)
+        let resLenByte = mStream.read(4)
 
         mFileLen = dataSKC.count
-        mChunkLen = mFileLen - ByteUtils
-            .int(&resLenByte)
+        mChunkLen = mFileLen - resLenByte.int32()
         
         Log.d(
             ScriptReader.self,
@@ -53,10 +52,9 @@ class ScriptReader {
             return
         }
         
-        var chunkLenBytes = mStream.read(4)
+        let chunkLenBytes = mStream.read(4)
         
-        let chunkLen = ByteUtils
-            .int(&chunkLenBytes)
+        let chunkLen = chunkLenBytes.int32()
         
         Log.d(
             ScriptReader.self,
