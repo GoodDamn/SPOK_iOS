@@ -185,7 +185,6 @@ extension UICollectionViewCellTopic {
     }
     
     private final func calculateBoundsText() {
-        
         let w = frame.size.width
         let h = frame.size.height
         
@@ -241,6 +240,10 @@ extension UICollectionViewCellTopic
             frame.size
         )
         
+        mImageView.transform = CGAffineTransform(
+            scaleX: 1.03,
+            y: 1.03
+        )
         
         animate(
             animations: {

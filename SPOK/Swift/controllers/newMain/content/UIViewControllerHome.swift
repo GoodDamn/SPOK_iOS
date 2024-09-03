@@ -130,7 +130,7 @@ extension UIViewControllerHome
             
             let col = collections[i]
             
-            switch(col.cardType) {
+            switch (col.cardType) {
             case .M:
                 cardTextSize = MainViewController.mCardTextSizeM
                 cardSize = MainViewController.mCardSizeM
