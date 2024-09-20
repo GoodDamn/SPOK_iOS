@@ -51,7 +51,7 @@ final class SKServiceTopicPreviews {
                     return
                 }
                 
-                var d = self.mServiceCache.getData()
+                let d = self.mServiceCache.getData()
                 if let topic = d?.spc() {
                     DispatchQueue.main.async { [weak self] in
                         self?.delegate?.onGetTopicPreview(

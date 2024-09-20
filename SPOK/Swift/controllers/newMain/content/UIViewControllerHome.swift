@@ -132,11 +132,11 @@ extension UIViewControllerHome
             
             switch (col.cardType) {
             case .M:
-                cardTextSize = MainViewController.mCardTextSizeM
-                cardSize = MainViewController.mCardSizeM
+                cardTextSize = SKViewControllerMain.mCardTextSizeM
+                cardSize = SKViewControllerMain.mCardSizeM
             default:
-                cardTextSize = MainViewController.mCardTextSizeB
-                cardSize = MainViewController.mCardSizeB
+                cardTextSize = SKViewControllerMain.mCardTextSizeB
+                cardSize = SKViewControllerMain.mCardSizeB
             }
             
             viewable.append(

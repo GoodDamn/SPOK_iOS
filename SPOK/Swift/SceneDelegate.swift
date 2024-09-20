@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         attachViewController(
             MainNavigationController(
-                rootViewController: MainViewController()
+                rootViewController: SKViewControllerMain()
             )
         )
     

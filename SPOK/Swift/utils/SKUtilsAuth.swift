@@ -8,13 +8,10 @@
 import Foundation
 import FirebaseAuth
 
-final class AuthUtils {
+final class SKUtilsAuth {
     
-    public static func user(
-    ) -> User? {
-        return Auth
-            .auth()
-            .currentUser
+    public static func user() -> User? {
+        Auth.auth().currentUser
     }
     
     public static func userSignOut(
@@ -32,7 +29,7 @@ final class AuthUtils {
             completion?()
         } catch {
             Log.d(
-                AuthUtils.self,
+                SKUtilsAuth.self,
                 "userSignOut_ERROR:",
                 error
             )

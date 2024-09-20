@@ -37,7 +37,7 @@ final class SKServiceCollection {
                     return
                 }
                 
-                var d = self.mServiceCache.getData()
+                let d = self.mServiceCache.getData()
                 if var collections = d?.scc() {
                     DispatchQueue.main.async { [weak self] in
                         self?.delegate?.onGetCollections(

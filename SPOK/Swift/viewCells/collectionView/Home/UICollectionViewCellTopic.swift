@@ -131,7 +131,7 @@ final class UICollectionViewCellTopic
             return
         }
         
-        if !mParticles.isHidden && !MainViewController
+        if !mParticles.isHidden && !SKViewControllerMain
             .mIsPremiumUser {
             // Move to sub page
             Toast.show(
@@ -144,7 +144,7 @@ final class UICollectionViewCellTopic
         t.topicId = mPreviewId
         t.view.alpha = 0.0
         
-        Utils.main().push(
+        UIApplication.main().push(
             t,
             animDuration: 0.3
         ) { [weak self] in
@@ -231,7 +231,7 @@ extension UICollectionViewCellTopic
         
         calculateBoundsText()
         
-        if !MainViewController.mIsPremiumUser && preview.isPremium {
+        if !SKViewControllerMain.mIsPremiumUser && preview.isPremium {
             mParticles.start()
             mParticles.isHidden = false
         }

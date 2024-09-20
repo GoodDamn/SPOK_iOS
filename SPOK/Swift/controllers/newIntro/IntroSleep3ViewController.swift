@@ -55,7 +55,7 @@ final class IntroSleep3ViewController
             normHeight: 0.2
         )
         
-        let insets = Utils.insets()
+        let insets = UIApplication.insets()
         
         let btnStartY = h -
             mBtnStart.frame.height - h * 0.02 -
@@ -70,9 +70,9 @@ final class IntroSleep3ViewController
         
         let pageButtonHeight = btnStartY + mBtnStart.height() - pageBarY
         
-        let m = MainViewController
+        let m = SKViewControllerMain
             .mCardSizeM!
-        let b = MainViewController
+        let b = SKViewControllerMain
             .mCardSizeB!
         
         let page = Page()
@@ -254,7 +254,7 @@ private final class Page
         
         let x = w * 0.05
         
-        let hcv = MainViewController.mCardSizeB
+        let hcv = SKViewControllerMain.mCardSizeB
             .height * 2 + space
         
         mCarouselView = CarouselView(

@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import UserNotifications.UNUserNotificationCenter
 
 final class SettingsViewController
-    : AuthAppleController {
+: AuthAppleController {
     
     private var mTableOptions: OptionsView!
     
@@ -168,15 +169,16 @@ final class SettingsViewController
         mSwitcher.thumbTintColor = .background()
         mSwitcher.onTintColor = .white
         
-        NotificationUtils.settings {
-            perm in
+        UNUserNotificationCenter.settings {
+            [weak self] perm in
             
             let status = perm
                 .authorizationStatus
             
+            let isOn = status == .authorized
+            
             DispatchQueue.ui {
-                mSwitcher.isOn = status
-                == .authorized
+                mSwitcher.isOn = isOn
             }
         }
         
@@ -210,7 +212,7 @@ final class SettingsViewController
         )
         
         mTableOptions.mOptions =
-            AuthUtils.user() == nil ?
+            SKUtilsAuth.user() == nil ?
                 mOptionsNonUser
                 : mOptionsUser
         
@@ -225,7 +227,7 @@ final class SettingsViewController
             mTableOptions
         )
         
-        if MainViewController.mDoAppleCheck {
+        if SKViewControllerMain.mDoAppleCheck {
             return
         }
         
@@ -243,7 +245,7 @@ final class SettingsViewController
             "onReauthSucess:"
         )
         
-        AuthUtils.userDelete(
+        SKUtilsAuth.userDelete(
             auth: auth,
             authCode: authCode
         ) { [weak self] error in
@@ -310,7 +312,7 @@ extension SettingsViewController {
             .unregisterForRemoteNotifications()
         }
         
-        Utils.openSettings()
+        UIApplication.openSettings()
     }
     
     private func onClickBtnClose(
@@ -323,14 +325,14 @@ extension SettingsViewController {
     private func onClickBtnRate(
         view: UIView
     ) {
-        FragmentUtils.openAppStorePage()
+        UIApplication.openAppStorePage()
     }
     
     private func onClickBtnSupport(
         view: UIView
     ) {
-        FragmentUtils.openUrl(
-            urls: "https://t.me/aleksandrovprod"
+        UIApplication.openUrl(
+            url: "https://t.me/aleksandrovprod"
         )
     }
     
@@ -360,7 +362,7 @@ extension SettingsViewController {
             title: "Выйти из аккаунта?",
             controller: self
         ) { [weak self] _ in
-            AuthUtils.userSignOut(
+            SKUtilsAuth.userSignOut(
                 auth: Auth.auth()
             ) {
                 Log.d(

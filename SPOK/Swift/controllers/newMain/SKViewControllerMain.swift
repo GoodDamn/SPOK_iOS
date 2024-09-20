@@ -7,9 +7,8 @@
 
 import Foundation
 import UIKit
-import Network
 
-final class MainViewController
+final class SKViewControllerMain
     : UIViewController {
     
     private let TAG = "MainViewController:"
@@ -33,24 +32,22 @@ final class MainViewController
     private let mPremiumService =
         PremiumService()
     
+    private let mServiceNetwork = SKServiceNetwork()
+    
     private var mProtectService: AppleProtectService? =
         AppleProtectService()
     
     private var mCurrentIndex = 0
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         view.backgroundColor = UIColor
             .background()
         
-        MainViewController.mWidth = view.width()
-        MainViewController.mHeight = view.height()
+        SKViewControllerMain.mWidth = view.width()
+        SKViewControllerMain.mHeight = view.height()
         
         checkApple { [weak self]
             appleChecks in
@@ -60,7 +57,7 @@ final class MainViewController
             }
             
             if appleChecks {
-                MainViewController.mIsPremiumUser = true
+                SKViewControllerMain.mIsPremiumUser = true
                 DispatchQueue.ui {
                     self?.superUpdatePremium()
                 }
@@ -79,34 +76,31 @@ final class MainViewController
         let wb = w * 0.847
         let wm = w * 0.403
         
-        MainViewController.mCardSizeB = CGSize(
+        SKViewControllerMain.mCardSizeB = CGSize(
             width: wb,
             height: w * 0.5
         )
         
-        MainViewController.mCardSizeM = CGSize(
+        SKViewControllerMain.mCardSizeM = CGSize(
             width: wm,
             height: w * 0.503
         )
         
-        MainViewController.mCardTextSizeB = CardTextSize(
+        SKViewControllerMain.mCardTextSizeB = CardTextSize(
             title: 0.063 * wb,
             desc: 0.037 * wb
         )
         
-        MainViewController.mCardTextSizeM = CardTextSize(
+        SKViewControllerMain.mCardTextSizeM = CardTextSize(
             title: 0.12 * wm,
             desc: 0.066 * wm // 0.066
         )
         
-        if let buildNum = Bundle
+        if let buildNumber = Bundle
             .main
-            .infoDictionary?["CFBundleVersion"]
-            as? String {
-            
-            let buildNumber = Int(buildNum) ?? -1
-            
-            MainViewController
+            .buildVersion() {
+                        
+            SKViewControllerMain
                 .mBuildNumber = buildNumber
             
             let oldbn = UserDefaults
@@ -124,14 +118,10 @@ final class MainViewController
             
         }
         
-        let monitor = NWPathMonitor()
-        monitor.pathUpdateHandler = {
-            [weak self] path in
-            self?.networkUpdate(path)
-        }
-        monitor.start(
+        mServiceNetwork.delegate = self
+        mServiceNetwork.listenNetwork(
             queue: DispatchQueue(
-                label: "Network"
+                label: "NETWORK"
             )
         )
         
@@ -252,7 +242,7 @@ final class MainViewController
     
 }
 
-extension MainViewController {
+extension SKViewControllerMain {
     
     public final func superUpdatePremium() {
         for c in children {
@@ -318,7 +308,7 @@ extension MainViewController {
             let appleChecks = mProtectService?
                 .doesAppleCheck() ?? true
             
-            MainViewController.mDoAppleCheck =
+            SKViewControllerMain.mDoAppleCheck =
                 appleChecks
             
             completion?(
@@ -331,7 +321,7 @@ extension MainViewController {
         
         mProtectService!.updateAppleState {
             [weak self] hasApple in
-            MainViewController.mDoAppleCheck = hasApple
+            SKViewControllerMain.mDoAppleCheck = hasApple
             completion?(
                 hasApple
             )
@@ -341,7 +331,7 @@ extension MainViewController {
     
     private func checkSub() {
         Log.d(
-            MainViewController.self,
+            SKViewControllerMain.self,
             "checkSub:"
         )
         mPremiumService
@@ -349,12 +339,12 @@ extension MainViewController {
                 withSub in
                 
                 Log.d(
-                    MainViewController.self,
+                    SKViewControllerMain.self,
                     "checkSub: onCheckPremium"
                 )
                 
-                MainViewController.mIsPremiumUser = withSub
-                MainViewController.mCanPay = true
+                SKViewControllerMain.mIsPremiumUser = withSub
+                SKViewControllerMain.mCanPay = true
                 
                 if withSub {
                     DispatchQueue.ui {
@@ -375,7 +365,7 @@ extension MainViewController {
         let def = UserDefaults
             .standard
         
-        guard let userID = AuthUtils
+        guard let userID = SKUtilsAuth
             .user()?
             .uid else {
             def.removeObject(
@@ -390,19 +380,21 @@ extension MainViewController {
         )
         
     }
+}
+
+extension SKViewControllerMain
+: SKDelegateOnNetworkChanged {
     
-    
-    // Network dispatch queue
-    private func networkUpdate(
-        _ path: NWPath
+    func onNetworkChanged(
+        isConnected: Bool
     ) {
-        MainViewController.mIsConnected =
-            path.status == .satisfied
+        SKViewControllerMain.mIsConnected =
+            isConnected
+            
         Log.d(
             "MainViewController: networkUpdate:",
-            MainViewController.mIsConnected
+            SKViewControllerMain.mIsConnected
         )
-        
     }
     
 }

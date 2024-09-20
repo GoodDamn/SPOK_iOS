@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Log {
+final class Log {
         
     public static func d(
         _ items: Any...

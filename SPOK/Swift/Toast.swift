@@ -5,14 +5,12 @@
 //  Created by Cell on 15.12.2021.
 //
 
-import UIKit;
+import UIKit
 
 final class Toast {
-    
     static func show(
         text: String
     ) {
-        
         let c = UIAlertController(
             title: text,
             message: nil,
@@ -24,11 +22,10 @@ final class Toast {
             style: .default)
         )
         
-        Utils.main()
-            .present(
-                c,
-                animated: true
-            )
+        UIApplication.main().present(
+            c,
+            animated: true
+        )
         
     }
 }

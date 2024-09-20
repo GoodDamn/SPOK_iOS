@@ -21,10 +21,10 @@ class StackViewController
         return w?.safeAreaInsets ?? UIEdgeInsets.zero
     }()
     
-    private let main = Utils.main()
+    private let main = UIApplication.main()
     
-    internal var height=MainViewController.mHeight
-    internal var width=MainViewController.mWidth
+    internal var height=SKViewControllerMain.mHeight
+    internal var width=SKViewControllerMain.mWidth
     
     public final func framee(
         x: CGFloat,

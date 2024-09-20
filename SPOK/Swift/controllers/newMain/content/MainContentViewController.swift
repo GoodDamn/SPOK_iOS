@@ -11,19 +11,11 @@ import FirebaseDatabase;
 final class MainContentViewController
     : StackViewController {
     
-    private let TAG = "MainContentViewController:";
+    private let mDatabase = Database.database()
     
-    private let mDatabase = Database
-        .database()
+    private var mNavBar: BottomNavigationBar!
     
-    private var mNavBar: BottomNavigationBar!;
-    
-    private var mPageView: SimplePageViewController? = nil;
-        
-    override func onTransitionEnd() {
-        NotificationUtils
-            .request()
-    }
+    private var mPageView: SimplePageViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +78,7 @@ final class MainContentViewController
         if let it = mPageView {
             it.source = [
                 UIViewControllerHome(),
-                MainViewController.mDoAppleCheck
+                SKViewControllerMain.mDoAppleCheck
                 ? SettingsViewController()
                 : ProfileNewViewController()
             ]
@@ -106,7 +98,11 @@ final class MainContentViewController
     }
     
     override func viewDidLayoutSubviews() {
-        Log.d("MainContentViewController", "viewDidLayout:")
+        Log.d(
+            MainContentViewController.self,
+            "viewDidLayout:"
+        )
+        
         mPageView?.view.frame = CGRect(
             x: 0,
             y: 0,
@@ -118,9 +114,9 @@ final class MainContentViewController
     }
     
     override func onUpdateAppleCheck() {
-        let appleChecks = MainViewController.mDoAppleCheck
+        let appleChecks = SKViewControllerMain.mDoAppleCheck
         Log.d(
-            TAG,
+            MainContentViewController.self,
             "onUpdateAppleCheck:",
             appleChecks
         )
@@ -135,9 +131,9 @@ final class MainContentViewController
     
     override func onUpdatePremium() {
         Log.d(
-            TAG,
+            MainContentViewController.self,
             "onUpdatePremium:",
-            MainViewController.mIsPremiumUser,
+            SKViewControllerMain.mIsPremiumUser,
             mPageView
         )
         
@@ -196,7 +192,7 @@ extension MainContentViewController {
         
         let currentId = lastId + 1
         
-        let buildNumber = MainViewController
+        let buildNumber = SKViewControllerMain
             .mBuildNumber
         
         let ref = mDatabase

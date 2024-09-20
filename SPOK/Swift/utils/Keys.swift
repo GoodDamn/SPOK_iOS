@@ -9,7 +9,6 @@ import Foundation
 
 final class Keys {
     
-    
     public static var AUTH = ""
     
     public static let DEEP_LINK_SUB =
@@ -36,12 +35,4 @@ final class Keys {
     public static let ID_PAYMENT_TEMP = "pteid"
     
     public static let API_YOO = "yoo"
-    
-    public static let NONCES = [
-        "8305976241",
-        "1870429536",
-        "7523194086",
-        "1726540389",
-    ];
-    
 }

@@ -18,8 +18,7 @@ class SignInApple
         
     func start() {
         
-        mNonce = Crypt
-            .randomNonce()
+        mNonce = SKUtilsCrypt.randomNonce()
         
         let request = ASAuthorizationAppleIDProvider()
             .createRequest()
@@ -29,10 +28,9 @@ class SignInApple
             .email
         ]
         
-        request.nonce = Crypt
-            .sha256(
-                mNonce
-            )
+        request.nonce = SKUtilsCrypt.sha256(
+            mNonce
+        )
         
         let authController = ASAuthorizationController(
             authorizationRequests: [
@@ -101,7 +99,9 @@ class SignInApple
     func presentationAnchor(
         for controller: ASAuthorizationController
     ) -> ASPresentationAnchor {
-        return Utils.main()
-            .view.window!
+        UIApplication
+            .main()
+            .view
+            .window!
     }
 }

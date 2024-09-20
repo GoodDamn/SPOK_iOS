@@ -64,7 +64,7 @@ final class IntroSleepRootController
         }
         
         intro3.onHide = { [weak self] in
-            let content = MainViewController
+            let content = SKViewControllerMain
                 .mDoAppleCheck ? 
                 MainContentViewController()
             : EmailShareViewController()

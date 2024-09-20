@@ -424,7 +424,7 @@ extension ProfileNewViewController {
             "PAY"
         ).increment()
         
-        if !MainViewController
+        if !SKViewControllerMain
             .mCanPay {
             Toast.show(
                 text: "Проверка подписки"
@@ -432,7 +432,7 @@ extension ProfileNewViewController {
             return
         }
         
-        if MainViewController.mIsPremiumUser {
+        if SKViewControllerMain.mIsPremiumUser {
             getStatRefId(
                 "PAY_ALREADY"
             ).increment()
@@ -445,7 +445,7 @@ extension ProfileNewViewController {
         
         sender.isUserInteractionEnabled = false
         
-        if AuthUtils.user() != nil {
+        if SKUtilsAuth.user() != nil {
             startPayment()
             sender.isUserInteractionEnabled = true
             return
@@ -482,8 +482,8 @@ extension ProfileNewViewController {
     private func onClickBtnShareImpression(
         _ sender: UIView
     ) {
-        FragmentUtils.openUrl(
-            urls: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
+        UIApplication.openUrl(
+            url: "https://forms.yandex.ru/cloud/659e823af47e735258a77960"
         )
     }
     
@@ -547,7 +547,7 @@ extension ProfileNewViewController
     
     func onPaid() {
         DispatchQueue.ui { [weak self] in
-            MainViewController.mIsPremiumUser =
+            SKViewControllerMain.mIsPremiumUser =
                 true
             self?.callUpdatePremium()
         }

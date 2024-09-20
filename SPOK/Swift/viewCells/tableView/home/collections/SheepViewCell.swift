@@ -81,7 +81,7 @@ final class SheepViewCell
     ) {
         let it = SheepCounterViewController()
         it.view.alpha = 0.0
-        Utils.main().push(
+        UIApplication.main().push(
             it,
             animDuration: 0.3,
             animate: {
