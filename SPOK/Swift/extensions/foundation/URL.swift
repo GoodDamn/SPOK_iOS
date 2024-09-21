@@ -7,6 +7,13 @@
 
 import Foundation
 extension URL {
+    
+    func request() -> URLRequest {
+        URLRequest(
+            url: self
+        )
+    }
+    
     func append(
         _ s: String
     ) -> URL {

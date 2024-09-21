@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HttpUtils {
+final class HttpUtils {
     
     public static func header(
     ) -> [String : String] {
@@ -31,16 +31,13 @@ class HttpUtils {
         completion: @escaping ([String : Any]) -> Void
     ) {
     
-        guard let data = try? JSONSerialization
-            .data(
-                withJSONObject: body,
-                options: .fragmentsAllowed
-            ) else {
-            
+        guard let data = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: .fragmentsAllowed
+        ) else {
             Log.d(
-                  "HttpUtils: requestJson:ERROR_CONVERT"
+                "HttpUtils: requestJson:ERROR_CONVERT"
             )
-            
             return
         }
         
@@ -69,52 +66,17 @@ class HttpUtils {
         req.allHTTPHeaderFields = header
         req.httpBody = body
         
-        request(
-            req,
-            completion: completion
-        )
-    }
-    
-    public static func request(
-        _ request: URLRequest,
-        completion: @escaping ([String : Any]) -> Void
-    ) {
-        
-        URLSession.shared.dataTask(
-            with: request
-        ) { data, error, response in
+        req.downloadData { data in
             
-            Log.d(
-                "HttpUtils:request_RESPONSE",
-                data,
-                error
-            )
-            
-            
-            guard let data = data else {
-                Log.d(
-                    "HttpUtils:request_ERROR:",
-                    error
-                )
+            guard let json = data.json() else {
                 return
             }
             
-            do {
-                let json = try JSONSerialization
-                    .jsonObject(
-                        with: data,
-                        options: .mutableLeaves
-                    ) as! [String : Any]
-                
-                completion(json)
-            } catch {
-                Log.d(
-                    "HttpUtils:request_JSON_PARSE_ERROR:",
-                     error
-                )
-            }
-        }.resume()
-        
+            completion(
+                json
+            )
+            
+        }
     }
     
 }

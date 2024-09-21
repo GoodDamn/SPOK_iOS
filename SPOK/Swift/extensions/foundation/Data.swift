@@ -10,6 +10,26 @@ import UIKit
 
 extension Data {
     
+    func json() -> [String : Any]? {
+        do {
+            guard let json = try JSONSerialization.jsonObject(
+                with: self,
+                options: .mutableLeaves
+            ) as? [String : Any] else {
+                return nil
+            }
+            
+            return json
+        } catch {
+            Log.d(
+                "Data::jsonSerialization()",
+                 error
+            )
+        }
+        
+        return nil
+    }
+    
     func spc() -> SKModelTopicPreview? {
         if isEmpty {
             return nil
@@ -17,7 +37,7 @@ extension Data {
         
         let conf = self[0]
         let isPremium = (conf & 0xff) >> 6 == 1
-        let categoryID = conf & 0x3f
+        //let categoryID = conf & 0x3f
         
         let color = UIColor(
             red: CGFloat(self[2]) / 255,

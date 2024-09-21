@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  SKViewControllerSettings.swift
 //  SPOK
 //
 //  Created by GoodDamn on 03/02/2024.
@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import UserNotifications.UNUserNotificationCenter
 
-final class SettingsViewController
+final class SKViewControllerSettings
 : AuthAppleController {
     
     private var mTableOptions: OptionsView!
@@ -241,7 +241,7 @@ final class SettingsViewController
         authCode: String
     ) {
         Log.d(
-            SettingsViewController.self,
+            SKViewControllerSettings.self,
             "onReauthSucess:"
         )
         
@@ -296,7 +296,7 @@ final class SettingsViewController
     }
 }
 
-extension SettingsViewController {
+extension SKViewControllerSettings {
     
     @objc private func onSwitchNotify(
         _ s: UISwitch
@@ -366,7 +366,7 @@ extension SettingsViewController {
                 auth: Auth.auth()
             ) {
                 Log.d(
-                    SettingsViewController.self,
+                    SKViewControllerSettings.self,
                     "USER_SIGNED_OUT"
                 )
                 

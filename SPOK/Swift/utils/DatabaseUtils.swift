@@ -14,12 +14,11 @@ final class DatabaseUtils {
         user: String,
         contacts: String
     ) {
-        Database.database()
-            .reference(
-                withPath: "contacts/\(user)"
-            ).setValue(
-                contacts
-            )
+        Database.database().reference(
+            withPath: "contacts/\(user)"
+        ).setValue(
+            contacts
+        )
     }
     
     public static func pirate(
@@ -60,10 +59,9 @@ final class DatabaseUtils {
     
     public static func user(
     ) -> DatabaseReference? {
-        guard let id = UserDefaults
-            .string(
-                Keys.USER_REF
-            ) else {
+        guard let id = UserDefaults.string(
+            Keys.USER_REF
+        ) else {
             return nil
         }
         
@@ -93,23 +91,20 @@ final class DatabaseUtils {
         to: String,
         completion: (() -> Void)? = nil
     ) {
-        user()?
-            .child(to)
-            .setValue(
-                value,
-                withCompletionBlock: {
-                    error, ref in
-                    if error != nil {
-                        Log.d(
-                            DatabaseUtils.self,
-                            "ERROR: setUserValue",
-                            error
-                        )
-                        return
-                    }
-                    completion?()
-                }
+        user()?.child(to).setValue(
+            value
+        ) { error, ref in
+            if error == nil {
+                completion?()
+                return
+            }
+            
+            Log.d(
+                DatabaseUtils.self,
+                "ERROR: setUserValue",
+                error
             )
+        }
     }
     
     public static func userValue(
@@ -137,36 +132,6 @@ final class DatabaseUtils {
                     nil
                 )
             }
-        
-    }
-    
-    public static func apiKey(
-        _ key: String,
-        completion: @escaping ((String) -> Void)
-    ) {
-        
-        let ref = Database
-            .database()
-            .reference(
-                withPath: "API_KEYS/\(key)"
-            )
-        
-        ref.observeSingleEvent(
-            of: .value
-        ) { snap in
-            
-            guard let apikey = snap.value as? String else {
-                Log.d(
-                    DatabaseUtils.self,
-                    "apiKey: INVALID"
-                )
-                return
-            }
-            
-            completion(
-                apikey
-            )
-        }
         
     }
     

@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-final class ProfileNewViewController
-    : AuthAppleController {
+final class SKViewControllerProfile
+: AuthAppleController {
     
     private var messageController: MessageViewController? = nil
     
@@ -23,7 +23,7 @@ final class ProfileNewViewController
     )
     
     private var mPaymentProcess = PaymentProcess(
-        payment: ProfileNewViewController
+        payment: SKViewControllerProfile
             .mPayment,
         email: ""
     )
@@ -99,16 +99,18 @@ final class ProfileNewViewController
         
         lTitle.text = "Профиль"
         lTitle.textColor = .white
-        lTitle.font = extraBold?
-            .withSize(lTitle.height())
+        lTitle.font = extraBold?.withSize(
+            lTitle.height()
+        )
         
         lTitle.sizeToFit()
         
         lTitleHead.textAlignment = .center
         lTitleHead.text = "Теперь можно все"
         lTitleHead.textColor = .white
-        lTitleHead.font = bold?
-            .withSize(lTitleHead.height())
+        lTitleHead.font = bold?.withSize(
+            lTitleHead.height()
+        )
         
         lSubtitleHead.text = "Новые засыпайки и истории на ночь каждую неделю. Засыпай быстрее и улучши качество своего сна вместе со SPOK"
         lSubtitleHead.lineHeight = 0.83
@@ -175,7 +177,7 @@ final class ProfileNewViewController
         
         let lPrice = UILabela()
         let lPriceOld = UILabela()
-        let price = ProfileNewViewController
+        let price = SKViewControllerProfile
             .mPayment
             .price
         
@@ -414,7 +416,7 @@ final class ProfileNewViewController
 }
 
 
-extension ProfileNewViewController {
+extension SKViewControllerProfile {
     
     private func onClickBtnOpenFullAccess(
         _ sender: UIView
@@ -491,20 +493,20 @@ extension ProfileNewViewController {
         _ sender: UIView
     ) {
         pushBaseAnim(
-            SettingsViewController(),
+            SKViewControllerSettings(),
             animDuration: 0.3
         )
     }
     
 }
 
-extension ProfileNewViewController {
+extension SKViewControllerProfile {
     
     private func onGetEmail(
         email: String
     ) {
         mPaymentProcess = PaymentProcess(
-            payment: ProfileNewViewController
+            payment: SKViewControllerProfile
                 .mPayment,
             email: email
         )
@@ -542,7 +544,7 @@ extension ProfileNewViewController {
     
 }
 
-extension ProfileNewViewController
+extension SKViewControllerProfile
     : PaymentConfirmationListener {
     
     func onPaid() {

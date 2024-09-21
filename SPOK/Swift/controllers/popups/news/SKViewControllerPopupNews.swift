@@ -1,5 +1,5 @@
 //
-//  PopupNews.swift
+//  SKViewControllerPopupNews.swift
 //  SPOK
 //
 //  Created by GoodDamn on 29/01/2024.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import StoreKit
 
-final class PopupNewsViewController
+final class SKViewControllerPopupNews
     : StackViewController {
     
     var msgType: Int = 0

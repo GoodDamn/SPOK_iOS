@@ -10,18 +10,18 @@ import FirebaseAuth
 
 final class SKUtilsAuth {
     
-    public static func user() -> User? {
+    static func user() -> User? {
         Auth.auth().currentUser
     }
     
-    public static func userSignOut(
+    static func userSignOut(
         auth: Auth,
         completion: (()->Void)? = nil
     ) {
         do {
             try auth.signOut()
             UserDefaults
-                .standard
+                .main()
                 .removeObject(
                     forKey: Keys
                         .USER_REF
@@ -36,7 +36,7 @@ final class SKUtilsAuth {
         }
     }
     
-    public static func userDelete(
+    static func userDelete(
         auth: AuthDataResult,
         authCode: String,
         completion: ((Error?)->Void)? = nil

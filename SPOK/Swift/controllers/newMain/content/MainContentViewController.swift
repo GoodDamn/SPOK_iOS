@@ -79,8 +79,8 @@ final class MainContentViewController
             it.source = [
                 UIViewControllerHome(),
                 SKViewControllerMain.mDoAppleCheck
-                ? SettingsViewController()
-                : ProfileNewViewController()
+                ? SKViewControllerSettings()
+                : SKViewControllerProfile()
             ]
             
             addChild(
@@ -126,7 +126,7 @@ final class MainContentViewController
         }
         
         mPageView?.source[1] = 
-            ProfileNewViewController()
+            SKViewControllerProfile()
     }
     
     override func onUpdatePremium() {
@@ -229,7 +229,7 @@ extension MainContentViewController {
             forPath: "i"
         ).value as? Int ?? 0
         
-        let popup = PopupNewsViewController()
+        let popup = SKViewControllerPopupNews()
         popup.title = title
         popup.msgType = type
         popup.msgDescription = desc

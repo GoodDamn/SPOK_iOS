@@ -32,6 +32,8 @@ final class SKViewControllerMain
     private let mPremiumService =
         PremiumService()
     
+    private let mServiceYookassa = SKServiceYooKassa()
+    
     private let mServiceNetwork = SKServiceNetwork()
     
     private var mProtectService: AppleProtectService? =
@@ -354,13 +356,8 @@ extension SKViewControllerMain {
                 
             }
         
-        DatabaseUtils.apiKey(
-            Keys.API_YOO
-        ) { [weak self] apikey in
-            Keys.AUTH = apikey
-            self?.mPremiumService
-                .start()
-        }
+        mServiceYookassa.onGetApiKey = self
+        mServiceYookassa.getApiKeyAsync()
         
         let def = UserDefaults
             .standard
@@ -380,6 +377,18 @@ extension SKViewControllerMain {
         )
         
     }
+}
+
+extension SKViewControllerMain
+: SKListenerOnGetYooKassaApiKey {
+    
+    func onGetYooKassaApiKey(
+        key: String
+    ) {
+        Keys.AUTH = key
+        mPremiumService.start()
+    }
+    
 }
 
 extension SKViewControllerMain
