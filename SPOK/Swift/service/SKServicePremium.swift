@@ -1,5 +1,5 @@
 //
-//  PremiumService.swift
+//  SKServicePremium.swift
 //  SPOK
 //
 //  Created by GoodDamn on 04/02/2024.
@@ -7,19 +7,22 @@
 
 import Foundation
 
-final class PremiumService {
+final class SKServicePremium {
     
-    var mOnCheckPremium: ((Bool) -> Void)? = nil
+    weak var onGetPremiumStatus: SKListenerOnGetPremiumStatus? = nil
+    
+    private let mServiceServerTime = SKServiceServerTime()
     
     private var mTime = 0
     
-    public func start() {
-        
-        DatabaseUtils.time { [weak self] time in
-            self?.mTime = time
-            self?.startService()
-        }
+    init() {
+        mServiceServerTime.onGetServerTime = self
     }
+    
+    public func getPremiumStatusAsync() {
+        mServiceServerTime.getServerTimeAsync()
+    }
+    
     
     private func startService() {
         checkPayment(
@@ -27,18 +30,17 @@ final class PremiumService {
         ) { [weak self] withSub, payIdTemp in
         
             if withSub {
-                
-                DatabaseUtils
-                    .setUserValue(
-                        payIdTemp!,
-                        to: Keys.ID_PAYMENT
-                    ) {
-                        DatabaseUtils
-                            .deleteUserValue(
-                                key: Keys.ID_PAYMENT_TEMP
-                            )
-                    }
-                self?.mOnCheckPremium?(withSub)
+                DatabaseUtils.setUserValue(
+                    payIdTemp!,
+                    to: Keys.ID_PAYMENT
+                ) {
+                    DatabaseUtils.deleteUserValue(
+                        key: Keys.ID_PAYMENT_TEMP
+                    )
+                }
+                self?.onGetPremiumStatus?.onGetPremiumStatus(
+                    hasPremium: withSub
+                )
                 return
             }
             
@@ -46,7 +48,9 @@ final class PremiumService {
             self?.checkPayment(
                 Keys.ID_PAYMENT
             ) { withSub, payId in
-                self?.mOnCheckPremium?(withSub)
+                self?.onGetPremiumStatus?.onGetPremiumStatus(
+                    hasPremium: withSub
+                )
             }
             
         }
@@ -61,7 +65,7 @@ final class PremiumService {
         ) { [weak self] info in
             
             Log.d(
-                PremiumService.self,
+                SKServicePremium.self,
                 "INFO:",
                 info
             )
@@ -100,7 +104,7 @@ final class PremiumService {
         let d = mTime - info.createdTime
         
         Log.d(
-            PremiumService.self,
+            SKServicePremium.self,
             "DELTA_TIME:",
             d,
             mTime,
@@ -131,6 +135,18 @@ final class PremiumService {
         }
         
         
+    }
+    
+}
+
+extension SKServicePremium
+: SKListenerOnGetServerTime {
+    
+    func onGetServerTime(
+        timeSec: Int
+    ) {
+        mTime = timeSec
+        startService()
     }
     
 }

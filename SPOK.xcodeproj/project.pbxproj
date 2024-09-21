@@ -127,6 +127,9 @@
 		25F056DA2C9E8A900019822B /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056D92C9E8A900019822B /* URLRequest.swift */; };
 		25F056DF2C9E90670019822B /* SKServiceYooKassa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056DE2C9E90670019822B /* SKServiceYooKassa.swift */; };
 		25F056E22C9E918A0019822B /* SKListenerOnGetYooKassaApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E12C9E918A0019822B /* SKListenerOnGetYooKassaApiKey.swift */; };
+		25F056E42C9E94540019822B /* SKListenerOnGetPremiumStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */; };
+		25F056E62C9E96640019822B /* SKServiceServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E52C9E96640019822B /* SKServiceServerTime.swift */; };
+		25F056E82C9E96950019822B /* SKListenerOnGetServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */; };
 		25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B3DC2C05B388007F156C /* UIEditText.swift */; };
 		25F3B40D2C084190007F156C /* AppleProtectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B40C2C084190007F156C /* AppleProtectService.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
@@ -144,7 +147,7 @@
 		25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */; };
 		25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF02B6F7DD700FC8A32 /* Log.swift */; };
 		25F94AF32B6F94A300FC8A32 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF22B6F94A300FC8A32 /* String.swift */; };
-		25F94AF62B6FB8A600FC8A32 /* PremiumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */; };
+		25F94AF62B6FB8A600FC8A32 /* SKServicePremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */; };
 		25F94AF92B700E4D00FC8A32 /* sheep_m.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 25F94AF82B700E4D00FC8A32 /* sheep_m.mp3 */; };
 		25F94AFE2B700F6300FC8A32 /* PaymentConfirmationListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AFD2B700F6300FC8A32 /* PaymentConfirmationListener.swift */; };
 		2B04493A280C03AF00ADA8B5 /* UITableViewCellCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B044939280C03AF00ADA8B5 /* UITableViewCellCollection.swift */; };
@@ -305,6 +308,9 @@
 		25F056D92C9E8A900019822B /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		25F056DE2C9E90670019822B /* SKServiceYooKassa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceYooKassa.swift; sourceTree = "<group>"; };
 		25F056E12C9E918A0019822B /* SKListenerOnGetYooKassaApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetYooKassaApiKey.swift; sourceTree = "<group>"; };
+		25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetPremiumStatus.swift; sourceTree = "<group>"; };
+		25F056E52C9E96640019822B /* SKServiceServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceServerTime.swift; sourceTree = "<group>"; };
+		25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetServerTime.swift; sourceTree = "<group>"; };
 		25F3B3DC2C05B388007F156C /* UIEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditText.swift; sourceTree = "<group>"; };
 		25F3B40C2C084190007F156C /* AppleProtectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleProtectService.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
@@ -322,7 +328,7 @@
 		25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtils.swift; sourceTree = "<group>"; };
 		25F94AF02B6F7DD700FC8A32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		25F94AF22B6F94A300FC8A32 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumService.swift; sourceTree = "<group>"; };
+		25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServicePremium.swift; sourceTree = "<group>"; };
 		25F94AF82B700E4D00FC8A32 /* sheep_m.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sheep_m.mp3; sourceTree = "<group>"; };
 		25F94AFD2B700F6300FC8A32 /* PaymentConfirmationListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmationListener.swift; sourceTree = "<group>"; };
 		2B044939280C03AF00ADA8B5 /* UITableViewCellCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellCollection.swift; sourceTree = "<group>"; };
@@ -501,6 +507,8 @@
 				252F7B122C818BDE00851E8A /* SKDelegateOnGetTopicPreview.swift */,
 				252F7B1A2C822D0600851E8A /* SKDelegateOnProgressDownload.swift */,
 				252F7B1C2C822E9600851E8A /* SKDelegateOnGetTopicContent.swift */,
+				25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */,
+				25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */,
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -1039,12 +1047,13 @@
 				25F056DD2C9E903F0019822B /* firebase */,
 				25F056CA2C9D39670019822B /* network */,
 				252F7B172C81EB7C00851E8A /* delegates */,
-				25F94AF52B6FB8A600FC8A32 /* PremiumService.swift */,
+				25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */,
 				25F3B40C2C084190007F156C /* AppleProtectService.swift */,
 				252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */,
 				252F7AF62C7F604000851E8A /* SKServiceCache.swift */,
 				252F7B0E2C81827B00851E8A /* SKServiceTopicPreviews.swift */,
 				252F7B182C81EB9D00851E8A /* SKServiceTopicContent.swift */,
+				25F056E52C9E96640019822B /* SKServiceServerTime.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1378,6 +1387,7 @@
 				251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */,
 				251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */,
 				25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */,
+				25F056E62C9E96640019822B /* SKServiceServerTime.swift in Sources */,
 				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
 				25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */,
 				25F94AE22B6E5E9F00FC8A32 /* AuthAppleController.swift in Sources */,
@@ -1391,7 +1401,9 @@
 				25F94AD12B6E1A7200FC8A32 /* CGRect.swift in Sources */,
 				25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */,
 				252F7B012C802DE600851E8A /* SKModelTypeable.swift in Sources */,
+				25F056E82C9E96950019822B /* SKListenerOnGetServerTime.swift in Sources */,
 				25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */,
+				25F056E42C9E94540019822B /* SKListenerOnGetPremiumStatus.swift in Sources */,
 				25883AA62C57BB7200D46614 /* ScrollView.swift in Sources */,
 				25F056DF2C9E90670019822B /* SKServiceYooKassa.swift in Sources */,
 				252F7B112C81891D00851E8A /* SKModelTopicPreview.swift in Sources */,
@@ -1448,7 +1460,7 @@
 				25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */,
 				252F7AF72C7F604000851E8A /* SKServiceCache.swift in Sources */,
 				25F94AD92B6E22BE00FC8A32 /* SKUtilsAuth.swift in Sources */,
-				25F94AF62B6FB8A600FC8A32 /* PremiumService.swift in Sources */,
+				25F94AF62B6FB8A600FC8A32 /* SKServicePremium.swift in Sources */,
 				2B3DE5B9290BAC7600B00528 /* SignInApple.swift in Sources */,
 				2BA101CD2763EFC900EB5B8C /* AppDelegate.swift in Sources */,
 				25D4763F2B7F0D9E00B5467D /* AVAudioPlayer.swift in Sources */,

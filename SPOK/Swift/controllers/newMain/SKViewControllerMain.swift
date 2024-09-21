@@ -30,7 +30,7 @@ final class SKViewControllerMain
     public static var mCardTextSizeM: CardTextSize!
     
     private let mPremiumService =
-        PremiumService()
+        SKServicePremium()
     
     private let mServiceYookassa = SKServiceYooKassa()
     
@@ -135,7 +135,7 @@ final class SKViewControllerMain
             
             showSplash(
                 msg: "готовим что-то\n уникальное..."
-            ) { [weak self] in
+            ) {
                 return IntroSleepRootController()
             }
             return
@@ -145,7 +145,7 @@ final class SKViewControllerMain
         
         showSplash(
             msg: "отправляемся\nв мир снов..."
-        ) { [weak self] in
+        ) {
             return MainContentViewController()
         }
         
@@ -183,7 +183,7 @@ final class SKViewControllerMain
         UIView.animate(
             withDuration: animDuration,
             animations: animate
-        ) { [weak self] b in
+        ) { b in
             c.transitionEnd()
             completion?(b)
         }
@@ -336,26 +336,7 @@ extension SKViewControllerMain {
             SKViewControllerMain.self,
             "checkSub:"
         )
-        mPremiumService
-            .mOnCheckPremium = {[weak self]
-                withSub in
-                
-                Log.d(
-                    SKViewControllerMain.self,
-                    "checkSub: onCheckPremium"
-                )
-                
-                SKViewControllerMain.mIsPremiumUser = withSub
-                SKViewControllerMain.mCanPay = true
-                
-                if withSub {
-                    DispatchQueue.ui {
-                        self?.superUpdatePremium()
-                    }
-                }
-                
-            }
-        
+        mPremiumService.onGetPremiumStatus = self
         mServiceYookassa.onGetApiKey = self
         mServiceYookassa.getApiKeyAsync()
         
@@ -380,13 +361,36 @@ extension SKViewControllerMain {
 }
 
 extension SKViewControllerMain
+: SKListenerOnGetPremiumStatus {
+    
+    func onGetPremiumStatus(
+        hasPremium: Bool
+    ) {
+        Log.d(
+            SKViewControllerMain.self,
+            "onGetPremiumStatus:"
+        )
+        
+        SKViewControllerMain.mIsPremiumUser = hasPremium
+        SKViewControllerMain.mCanPay = true
+        
+        if hasPremium {
+            DispatchQueue.ui { [weak self] in
+                self?.superUpdatePremium()
+            }
+        }
+    }
+    
+}
+
+extension SKViewControllerMain
 : SKListenerOnGetYooKassaApiKey {
     
     func onGetYooKassaApiKey(
         key: String
     ) {
         Keys.AUTH = key
-        mPremiumService.start()
+        mPremiumService.getPremiumStatusAsync()
     }
     
 }

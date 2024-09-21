@@ -39,24 +39,6 @@ final class DatabaseUtils {
         }
     }
     
-    public static func time(
-        completion: @escaping (Int) -> Void
-    ) {
-        let ref = Database
-            .database()
-            .reference(
-                withPath: "opt/time"
-            )
-        
-        ref.observeSingleEvent(
-            of: .value
-        ) { snap in
-            completion(
-                snap.value as! Int
-            )
-        }
-    }
-    
     public static func user(
     ) -> DatabaseReference? {
         guard let id = UserDefaults.string(
