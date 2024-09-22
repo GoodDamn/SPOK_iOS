@@ -17,7 +17,7 @@ final class WebConfirmationViewController
     weak var mPaymentListener:
         PaymentConfirmationListener? = nil
     
-    var mPaymentSnap: PaymentSnapshot!
+    var mPaymentSnap: SKModelPaymentSnapshot!
     private var mWeb: WKWebView!
 
     private let mServiceYookassa = SKServiceYooKassa()

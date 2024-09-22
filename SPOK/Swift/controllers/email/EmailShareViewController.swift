@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 final class EmailShareViewController
-    : KeyboardViewController {
+: KeyboardViewController {
     
     private var mTextEmail: UITextField? = nil
     
@@ -242,9 +243,9 @@ extension EmailShareViewController {
         
         v.isUserInteractionEnabled = false
         
-        DatabaseUtils.contact(
+        Database.sendContact(
             user: mTime,
-            contacts: contact
+            contact: contact
         )
         
         UserDefaults.contacts(

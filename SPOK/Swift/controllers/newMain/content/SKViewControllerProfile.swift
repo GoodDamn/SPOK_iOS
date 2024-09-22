@@ -15,14 +15,10 @@ final class SKViewControllerProfile
     private var messageController: MessageViewController? = nil
     
     private var mBtnOpenAccess: UITextButton!
-    
-    private static let mPayment = Payment(
-        price: 169.00,
-        currency: .rub,
-        description: "Подписка SPOK на 1 месяц"
-    )
-    
+        
     private let mServicePayment = SKServiceYookassaPayment()
+    
+    private let mPaymentSub: SKModelPayment = .subscription()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,9 +169,7 @@ final class SKViewControllerProfile
         
         let lPrice = UILabela()
         let lPriceOld = UILabela()
-        let price = SKViewControllerProfile
-            .mPayment
-            .price
+        let price = mPaymentSub.price
         
         lPrice.text = "\(Int(price)) RUB / месяц"
         lPrice.font = .bold(
@@ -499,7 +493,7 @@ extension SKViewControllerProfile {
         email: String
     ) {
         mServicePayment.paySubAsync(
-            with: SKViewControllerProfile.mPayment,
+            with: mPaymentSub,
             to: email
         )
     }
@@ -525,7 +519,7 @@ extension SKViewControllerProfile
 : SKListenerOnCreatePayment {
     
     func onCreatePayment(
-        snapshot: PaymentSnapshot
+        snapshot: SKModelPaymentSnapshot
     ) {
         DispatchQueue.ui { [weak self] in
             let c = WebConfirmationViewController()

@@ -11,7 +11,7 @@ protocol SKListenerOnCreatePayment
 : AnyObject {
     
     func onCreatePayment(
-        snapshot: PaymentSnapshot
+        snapshot: SKModelPaymentSnapshot
     )
     
 }

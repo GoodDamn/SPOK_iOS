@@ -10,17 +10,6 @@ import FirebaseDatabase
 
 final class DatabaseUtils {
     
-    public static func contact(
-        user: String,
-        contacts: String
-    ) {
-        Database.database().reference(
-            withPath: "contacts/\(user)"
-        ).setValue(
-            contacts
-        )
-    }
-    
     public static func pirate(
         completion: @escaping (Bool) -> Void
     ) {

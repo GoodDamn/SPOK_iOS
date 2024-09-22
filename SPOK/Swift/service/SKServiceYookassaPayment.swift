@@ -19,7 +19,7 @@ final class SKServiceYookassaPayment {
     }
     
     final func paySubAsync(
-        with payment: Payment,
+        with payment: SKModelPayment,
         to email: String
     ) {
         let amountJson = [
@@ -59,10 +59,6 @@ final class SKServiceYookassaPayment {
             body: json,
             method: "POST"
         ) { [weak self] json in
-            guard let s = self else {
-                Log.d("PaymentProcess: requestJson: GC")
-                return
-            }
             
             let confirm = json[
                 "confirmation"
@@ -72,7 +68,7 @@ final class SKServiceYookassaPayment {
                 "confirmation_url"
             ] ?? "https://google.com"
             
-            let paymentSnap = PaymentSnapshot(
+            let paymentSnap = SKModelPaymentSnapshot(
                 id: json["id"] as? String ?? "",
                 confirmUrl: confirmUrl
             )

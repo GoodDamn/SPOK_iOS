@@ -22,4 +22,15 @@ extension Database {
         )
     }
     
+    
+    static func sendContact(
+        user: String,
+        contact: String
+    ) {
+        database().reference(
+            withPath: "contacts/\(user)"
+        ).setValue(
+            contact
+        )
+    }
 }
