@@ -66,10 +66,9 @@
 		257A7FA92B6CE1B300BBEF5E /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7F9E2B6CE1B300BBEF5E /* Currency.swift */; };
 		257A7FAA2B6CE1B300BBEF5E /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA02B6CE1B300BBEF5E /* Keys.swift */; };
 		257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA12B6CE1B300BBEF5E /* HttpUtils.swift */; };
-		257A7FAC2B6CE1B300BBEF5E /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */; };
+		257A7FAC2B6CE1B300BBEF5E /* SKModelPaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA32B6CE1B300BBEF5E /* SKModelPaymentInfo.swift */; };
 		257A7FAD2B6CE1B300BBEF5E /* PaymentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */; };
 		257A7FAE2B6CE1B300BBEF5E /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA52B6CE1B300BBEF5E /* Payment.swift */; };
-		257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */; };
 		257A7FB52B6CF40800BBEF5E /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */; };
 		257D81262BC1810900B5743B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257D81252BC1810900B5743B /* LaunchScreen.storyboard */; };
 		257D81282BC18BA900B5743B /* SignInAppleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D81272BC18BA900B5743B /* SignInAppleController.swift */; };
@@ -130,6 +129,12 @@
 		25F056E42C9E94540019822B /* SKListenerOnGetPremiumStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */; };
 		25F056E62C9E96640019822B /* SKServiceServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E52C9E96640019822B /* SKServiceServerTime.swift */; };
 		25F056E82C9E96950019822B /* SKListenerOnGetServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */; };
+		25F056ED2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056EC2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift */; };
+		25F056F02C9FE8610019822B /* SKServiceUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056EF2C9FE8610019822B /* SKServiceUser.swift */; };
+		25F056F32C9FE9670019822B /* SKListenerOnGetUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056F22C9FE9670019822B /* SKListenerOnGetUserData.swift */; };
+		25F056F52C9FEB2A0019822B /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056F42C9FEB2A0019822B /* Database.swift */; };
+		25F056F72CA02D240019822B /* SKServiceYookassaPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056F62CA02D240019822B /* SKServiceYookassaPayment.swift */; };
+		25F056F92CA030510019822B /* SKListenerOnCreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */; };
 		25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B3DC2C05B388007F156C /* UIEditText.swift */; };
 		25F3B40D2C084190007F156C /* AppleProtectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B40C2C084190007F156C /* AppleProtectService.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
@@ -247,10 +252,9 @@
 		257A7F9E2B6CE1B300BBEF5E /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		257A7FA02B6CE1B300BBEF5E /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		257A7FA12B6CE1B300BBEF5E /* HttpUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpUtils.swift; sourceTree = "<group>"; };
-		257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		257A7FA32B6CE1B300BBEF5E /* SKModelPaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKModelPaymentInfo.swift; sourceTree = "<group>"; };
 		257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSnapshot.swift; sourceTree = "<group>"; };
 		257A7FA52B6CE1B300BBEF5E /* Payment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
-		257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProcess.swift; sourceTree = "<group>"; };
 		257A7FB42B6CF40800BBEF5E /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		257D81252BC1810900B5743B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		257D81272BC18BA900B5743B /* SignInAppleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleController.swift; sourceTree = "<group>"; };
@@ -311,6 +315,12 @@
 		25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetPremiumStatus.swift; sourceTree = "<group>"; };
 		25F056E52C9E96640019822B /* SKServiceServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceServerTime.swift; sourceTree = "<group>"; };
 		25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetServerTime.swift; sourceTree = "<group>"; };
+		25F056EC2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetPaymentInfo.swift; sourceTree = "<group>"; };
+		25F056EF2C9FE8610019822B /* SKServiceUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceUser.swift; sourceTree = "<group>"; };
+		25F056F22C9FE9670019822B /* SKListenerOnGetUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetUserData.swift; sourceTree = "<group>"; };
+		25F056F42C9FEB2A0019822B /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		25F056F62CA02D240019822B /* SKServiceYookassaPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceYookassaPayment.swift; sourceTree = "<group>"; };
+		25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnCreatePayment.swift; sourceTree = "<group>"; };
 		25F3B3DC2C05B388007F156C /* UIEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditText.swift; sourceTree = "<group>"; };
 		25F3B40C2C084190007F156C /* AppleProtectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleProtectService.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
@@ -509,6 +519,7 @@
 				252F7B1C2C822E9600851E8A /* SKDelegateOnGetTopicContent.swift */,
 				25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */,
 				25F056E72C9E96950019822B /* SKListenerOnGetServerTime.swift */,
+				25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */,
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -536,7 +547,6 @@
 				25F94AFC2B700F3300FC8A32 /* protocols */,
 				257A7F9A2B6CE1B300BBEF5E /* enums */,
 				257A7FA22B6CE1B300BBEF5E /* models */,
-				257A7FA62B6CE1B300BBEF5E /* process */,
 			);
 			path = payment;
 			sourceTree = "<group>";
@@ -569,19 +579,11 @@
 		257A7FA22B6CE1B300BBEF5E /* models */ = {
 			isa = PBXGroup;
 			children = (
-				257A7FA32B6CE1B300BBEF5E /* PaymentInfo.swift */,
+				257A7FA32B6CE1B300BBEF5E /* SKModelPaymentInfo.swift */,
 				257A7FA42B6CE1B300BBEF5E /* PaymentSnapshot.swift */,
 				257A7FA52B6CE1B300BBEF5E /* Payment.swift */,
 			);
 			path = models;
-			sourceTree = "<group>";
-		};
-		257A7FA62B6CE1B300BBEF5E /* process */ = {
-			isa = PBXGroup;
-			children = (
-				257A7FA72B6CE1B300BBEF5E /* PaymentProcess.swift */,
-			);
-			path = process;
 			sourceTree = "<group>";
 		};
 		257A7FB32B6CF3F700BBEF5E /* extensions */ = {
@@ -643,6 +645,7 @@
 			isa = PBXGroup;
 			children = (
 				25883AB82C5A591800D46614 /* DatabaseReference.swift */,
+				25F056F42C9FEB2A0019822B /* Database.swift */,
 			);
 			path = firebase;
 			sourceTree = "<group>";
@@ -975,8 +978,26 @@
 			isa = PBXGroup;
 			children = (
 				25F056E12C9E918A0019822B /* SKListenerOnGetYooKassaApiKey.swift */,
+				25F056EC2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift */,
 			);
 			path = delegates;
+			sourceTree = "<group>";
+		};
+		25F056EE2C9FE8510019822B /* user */ = {
+			isa = PBXGroup;
+			children = (
+				25F056F12C9FE9420019822B /* listeners */,
+				25F056EF2C9FE8610019822B /* SKServiceUser.swift */,
+			);
+			path = user;
+			sourceTree = "<group>";
+		};
+		25F056F12C9FE9420019822B /* listeners */ = {
+			isa = PBXGroup;
+			children = (
+				25F056F22C9FE9670019822B /* SKListenerOnGetUserData.swift */,
+			);
+			path = listeners;
 			sourceTree = "<group>";
 		};
 		25F770D82B59A71D00C62071 /* raw */ = {
@@ -1044,6 +1065,7 @@
 		25F94AF42B6FB89100FC8A32 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				25F056EE2C9FE8510019822B /* user */,
 				25F056DD2C9E903F0019822B /* firebase */,
 				25F056CA2C9D39670019822B /* network */,
 				252F7B172C81EB7C00851E8A /* delegates */,
@@ -1054,6 +1076,7 @@
 				252F7B0E2C81827B00851E8A /* SKServiceTopicPreviews.swift */,
 				252F7B182C81EB9D00851E8A /* SKServiceTopicContent.swift */,
 				25F056E52C9E96640019822B /* SKServiceServerTime.swift */,
+				25F056F62CA02D240019822B /* SKServiceYookassaPayment.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1372,23 +1395,26 @@
 				25D476182B7B274F00B5467D /* Metadata.swift in Sources */,
 				252F7B1F2C822EE300851E8A /* SKModelTopicContent.swift in Sources */,
 				257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */,
+				25F056F72CA02D240019822B /* SKServiceYookassaPayment.swift in Sources */,
 				25DB9AC02B55A73900B5359F /* UICollectionViewCellTopic.swift in Sources */,
-				257A7FAC2B6CE1B300BBEF5E /* PaymentInfo.swift in Sources */,
+				257A7FAC2B6CE1B300BBEF5E /* SKModelPaymentInfo.swift in Sources */,
 				25F056C92C9D38F60019822B /* SKServiceNetwork.swift in Sources */,
 				259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */,
+				25F056F32C9FE9670019822B /* SKListenerOnGetUserData.swift in Sources */,
 				25F056D52C9D43850019822B /* UIApplication.swift in Sources */,
 				25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
-				257A7FAF2B6CE1B300BBEF5E /* PaymentProcess.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */,
+				25F056ED2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift in Sources */,
 				251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */,
 				251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */,
 				25DB9AC42B578CBE00B5359F /* SheepViewCell.swift in Sources */,
 				25F056E62C9E96640019822B /* SKServiceServerTime.swift in Sources */,
 				255C04F92B504BB5006D9FD0 /* ViewUtils.swift in Sources */,
+				25F056F52C9FEB2A0019822B /* Database.swift in Sources */,
 				25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */,
 				25F94AE22B6E5E9F00FC8A32 /* AuthAppleController.swift in Sources */,
 				25F94AF32B6F94A300FC8A32 /* String.swift in Sources */,
@@ -1421,6 +1447,7 @@
 				25883A9E2C5760F000D46614 /* EmailShareViewController.swift in Sources */,
 				2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */,
 				25AB403E2BCAD39B009E735F /* UIImageButton.swift in Sources */,
+				25F056F02C9FE8610019822B /* SKServiceUser.swift in Sources */,
 				252F7B0F2C81827B00851E8A /* SKServiceTopicPreviews.swift in Sources */,
 				25D4760B2B789D3100B5467D /* Sheep.swift in Sources */,
 				250622732B4DAA7E00FCD636 /* SplashViewController.swift in Sources */,
@@ -1505,6 +1532,7 @@
 				252F7B1B2C822D0600851E8A /* SKDelegateOnProgressDownload.swift in Sources */,
 				25F94ADC2B6E579500FC8A32 /* SKViewControllerSettings.swift in Sources */,
 				2B93CF4E276F2E5000219690 /* UIViewControllerHome.swift in Sources */,
+				25F056F92CA030510019822B /* SKListenerOnCreatePayment.swift in Sources */,
 				2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */,
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
 				25F056D32C9D3DD90019822B /* SKUtilsCrypt.swift in Sources */,

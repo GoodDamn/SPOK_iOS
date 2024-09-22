@@ -9,6 +9,10 @@ import Foundation
 
 extension Int {
     
+    static func premiumLifeTimeSec() -> Int {
+        2_678_400 // 31 days
+    }
+    
     static func currentTimeSec() -> Int {
         Int(
             Date().timeIntervalSince1970

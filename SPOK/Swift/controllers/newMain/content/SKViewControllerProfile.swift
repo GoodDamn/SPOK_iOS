@@ -22,11 +22,7 @@ final class SKViewControllerProfile
         description: "Подписка SPOK на 1 месяц"
     )
     
-    private var mPaymentProcess = PaymentProcess(
-        payment: SKViewControllerProfile
-            .mPayment,
-        email: ""
-    )
+    private let mServicePayment = SKServiceYookassaPayment()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -391,8 +387,7 @@ final class SKViewControllerProfile
             "PAY_AUTH"
         ).increment()
         
-        messageController?
-            .pop()
+        messageController?.pop()
         messageController = nil
         startPayment()
     }
@@ -421,13 +416,11 @@ extension SKViewControllerProfile {
     private func onClickBtnOpenFullAccess(
         _ sender: UIView
     ) {
-        
         getStatRefId(
             "PAY"
         ).increment()
         
-        if !SKViewControllerMain
-            .mCanPay {
+        if !SKViewControllerMain.mCanPay {
             Toast.show(
                 text: "Проверка подписки"
             )
@@ -505,26 +498,10 @@ extension SKViewControllerProfile {
     private func onGetEmail(
         email: String
     ) {
-        mPaymentProcess = PaymentProcess(
-            payment: SKViewControllerProfile
-                .mPayment,
-            email: email
+        mServicePayment.paySubAsync(
+            with: SKViewControllerProfile.mPayment,
+            to: email
         )
-        
-        mPaymentProcess.start { [weak self]
-            snap in
-            
-            DispatchQueue.ui {
-                let c = WebConfirmationViewController()
-                c.mPaymentListener = self
-                c.mPaymentSnap = snap
-                
-                self?.pushBaseAnim(
-                    c,
-                    animDuration: 0.3
-                )
-            }
-        }
     }
     
     private func startPayment() {
@@ -545,7 +522,27 @@ extension SKViewControllerProfile {
 }
 
 extension SKViewControllerProfile
-    : PaymentConfirmationListener {
+: SKListenerOnCreatePayment {
+    
+    func onCreatePayment(
+        snapshot: PaymentSnapshot
+    ) {
+        DispatchQueue.ui { [weak self] in
+            let c = WebConfirmationViewController()
+            c.mPaymentListener = self
+            c.mPaymentSnap = snapshot
+            
+            self?.pushBaseAnim(
+                c,
+                animDuration: 0.3
+            )
+        }
+    }
+    
+}
+
+extension SKViewControllerProfile
+: PaymentConfirmationListener {
     
     func onPaid() {
         DispatchQueue.ui { [weak self] in

@@ -31,8 +31,7 @@ final class Keys {
     public static let USER_DEF_APPLE_CHECK = "pirate"
     public static let USER_DEF_APPLE_PREV_TIME = "pirateTime"
     
-    public static let ID_PAYMENT = "pid"
-    public static let ID_PAYMENT_TEMP = "pteid"
+    static let ID_PAYMENT = "pid"
     
     public static let API_YOO = "yoo"
 }

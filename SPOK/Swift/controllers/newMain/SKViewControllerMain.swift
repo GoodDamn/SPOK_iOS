@@ -33,7 +33,6 @@ final class SKViewControllerMain
         SKServicePremium()
     
     private let mServiceYookassa = SKServiceYooKassa()
-    
     private let mServiceNetwork = SKServiceNetwork()
     
     private var mProtectService: AppleProtectService? =
@@ -300,8 +299,7 @@ extension SKViewControllerMain {
         Log.d(
             AppDelegate.self,
             "time for update protect:",
-            mProtectService?
-                .isTimeForUpdateState()
+            mProtectService?.isTimeForUpdateState()
         )
                 
         if !(mProtectService?

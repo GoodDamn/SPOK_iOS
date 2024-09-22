@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseDatabase
 
 final class SKUtilsAuth {
     
@@ -47,8 +48,7 @@ final class SKUtilsAuth {
             withAuthorizationCode: authCode
         )
         
-        DatabaseUtils
-            .user()?
+        Database.user()?
             .removeValue()
         
         userSignOut(

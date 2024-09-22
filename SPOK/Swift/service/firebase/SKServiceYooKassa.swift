@@ -11,12 +11,52 @@ import FirebaseDatabase
 final class SKServiceYooKassa {
     
     weak var onGetApiKey: SKListenerOnGetYooKassaApiKey? = nil
+    weak var onGetPaymentInfo: SKListenerOnGetPaymentInfo? = nil
     
     private let mReference = Database
         .database()
         .reference(
             withPath: "API_KEYS/\(Keys.API_YOO)"
         )
+    
+    final func getPaymentInfoAsync(
+        payId: String
+    ) {
+        var req = URLRequest(
+            url: Keys.URL_PAYMENTS.append(
+                payId
+            )
+        )
+        
+        req.setValue(
+            "Basic \(Keys.AUTH)",
+            forHTTPHeaderField: "Authorization"
+        )
+        req.httpBody = nil
+        
+        req.downloadData { [weak self] data in
+            
+            guard let jsonRaw = data.json() else {
+                Log.d(
+                    SKServiceYooKassa.self,
+                    "error:"
+                )
+                return
+            }
+            
+            Log.d(
+                SKServiceYooKassa.self,
+                "paymenInfo:",
+                jsonRaw
+            )
+            
+            self?.onGetPaymentInfo?.onGetPaymentInfo(
+                info: .json(
+                    raw: jsonRaw
+                )
+            )
+        }
+    }
     
     final func getApiKeyAsync() {
         mReference.observeSingleEvent(

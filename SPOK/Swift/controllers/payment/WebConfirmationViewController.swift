@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 final class WebConfirmationViewController
-    : StackViewController {
+: StackViewController {
     
     private let TAG = "WebConfirmationViewController"
 
@@ -20,6 +20,9 @@ final class WebConfirmationViewController
     var mPaymentSnap: PaymentSnapshot!
     private var mWeb: WKWebView!
 
+    private let mServiceYookassa = SKServiceYooKassa()
+    private let mServiceUser = SKServiceUser()
+    
     override func loadView() {
         let config = WKWebViewConfiguration()
         mWeb = WKWebView(
@@ -35,6 +38,8 @@ final class WebConfirmationViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mServiceYookassa.onGetPaymentInfo = self
+        
         guard let url = URL(
             string: mPaymentSnap
                 .confirmUrl
@@ -49,11 +54,10 @@ final class WebConfirmationViewController
         
         mWeb.load(req)
         
-        DatabaseUtils.setUserValue(
-            mPaymentSnap.id,
-            to: Keys.ID_PAYMENT_TEMP
+        mServiceUser.setUserData(
+            key: Keys.ID_PAYMENT,
+            data: mPaymentSnap.id
         )
-        
     }
     
 }
@@ -78,8 +82,8 @@ extension WebConfirmationViewController {
             style: .destructive
         ) { [weak self] action in
             
-            DatabaseUtils.deleteUserValue(
-                key: Keys.ID_PAYMENT_TEMP
+            self?.mServiceUser.removeUserData(
+                key: Keys.ID_PAYMENT
             )
             
             self?.getStatRefId(
@@ -88,9 +92,9 @@ extension WebConfirmationViewController {
             
             if let payID = payID {
                 let url = Keys.URL_PAYMENTS
-                .appendingPathComponent(
+                .append(
                     payID
-                ).appendingPathComponent(
+                ).append(
                     "cancel"
                 )
                 
@@ -103,8 +107,7 @@ extension WebConfirmationViewController {
                 ) { _ in}
             }
             
-            self?.mPaymentListener?
-                .onExitPayment()
+            self?.mPaymentListener?.onExitPayment()
             self?.popBaseAnim()
         }
         
@@ -124,22 +127,16 @@ extension WebConfirmationViewController {
     }
     
     private func processPayment(
-        _ info: PaymentInfo
+        _ info: SKModelPaymentInfo
     ) {
         if info.status == .success {
+            mPaymentListener?.onPaid()
             
-            mPaymentListener?
-                .onPaid()
-            
-            // Register sub
-            DatabaseUtils.setUserValue(
-                info.id,
-                to: Keys.ID_PAYMENT
-            ) {
-                DatabaseUtils.deleteUserValue(
-                    key: Keys.ID_PAYMENT_TEMP
-                )
-            }
+            // register sub
+            mServiceUser.setUserData(
+                key: Keys.ID_PAYMENT,
+                data: info.id
+            )
             
             getStatRefId(
                 "PAID"
@@ -186,30 +183,34 @@ extension WebConfirmationViewController
         )
         
         if redirUrl == Keys.DEEP_LINK_SUB {
-            
-            PaymentProcess.getPaymentInfo(
-                id: mPaymentSnap.id
-            ) { [weak self] info in
-                
-                if self == nil || info == nil {
-                    return
-                }
-                
-                DispatchQueue.ui {
-                    self!.processPayment(
-                        info!
-                    )
-                }
-                
-            }
-            
+            mServiceYookassa.getPaymentInfoAsync(
+                payId: mPaymentSnap.id
+            )
         }
         
         decisionHandler(.cancel)
-        
     }
     
 }
 
 extension WebConfirmationViewController
-    : WKUIDelegate {}
+: SKListenerOnGetPaymentInfo {
+    
+    func onGetPaymentInfo(
+        info: SKModelPaymentInfo?
+    ) {
+        if info == nil {
+            return
+        }
+        
+        DispatchQueue.ui { [weak self] in
+            self?.processPayment(
+                info!
+            )
+        }
+    }
+    
+}
+
+extension WebConfirmationViewController
+: WKUIDelegate {}

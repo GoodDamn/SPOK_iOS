@@ -11,142 +11,64 @@ final class SKServicePremium {
     
     weak var onGetPremiumStatus: SKListenerOnGetPremiumStatus? = nil
     
-    private let mServiceServerTime = SKServiceServerTime()
+    private let mServiceYookassa = SKServiceYooKassa()
+    private let mServiceUser = SKServiceUser()
     
-    private var mTime = 0
+    var serverTimeSec = 0
     
     init() {
-        mServiceServerTime.onGetServerTime = self
+        mServiceYookassa.onGetPaymentInfo = self
+        mServiceUser.onGetUserData = self
     }
     
-    public func getPremiumStatusAsync() {
-        mServiceServerTime.getServerTimeAsync()
-    }
-    
-    
-    private func startService() {
-        checkPayment(
-            Keys.ID_PAYMENT_TEMP
-        ) { [weak self] withSub, payIdTemp in
-        
-            if withSub {
-                DatabaseUtils.setUserValue(
-                    payIdTemp!,
-                    to: Keys.ID_PAYMENT
-                ) {
-                    DatabaseUtils.deleteUserValue(
-                        key: Keys.ID_PAYMENT_TEMP
-                    )
-                }
-                self?.onGetPremiumStatus?.onGetPremiumStatus(
-                    hasPremium: withSub
-                )
-                return
-            }
-            
-            
-            self?.checkPayment(
-                Keys.ID_PAYMENT
-            ) { withSub, payId in
-                self?.onGetPremiumStatus?.onGetPremiumStatus(
-                    hasPremium: withSub
-                )
-            }
-            
-        }
-    }
-    
-    private func checkPayment(
-        _ paymentType: String,
-        completion: @escaping (Bool, String?) -> Void
-    ) {
-        processPayment(
-            paymentType
-        ) { [weak self] info in
-            
-            Log.d(
-                SKServicePremium.self,
-                "INFO:",
-                info
-            )
-            
-            // No sub
-            guard let s = self,
-                  info != nil else {
-                completion(false,nil)
-                return
-            }
-            
-            let withSub = s.checkSub(
-                info
-            )
-            
-            completion(
-                withSub,
-                info!.id
-            )
-        }
-        
-    }
-    
-    private func checkSub(
-        _ info: PaymentInfo?
-    ) -> Bool {
-        guard let info = info else {
-            // No sub
-            return false
-        }
-        
-        if info.status != .success {
-            return false
-        }
-
-        let d = mTime - info.createdTime
-        
-        Log.d(
-            SKServicePremium.self,
-            "DELTA_TIME:",
-            d,
-            mTime,
-            info.createdTime
+    func getPremiumStatusAsync() {
+        mServiceUser.getUserDataAsync(
+            key: Keys.ID_PAYMENT
         )
-        
-        return d <= 2678400 // 31 days
     }
+}
+
+extension SKServicePremium
+: SKListenerOnGetUserData {
     
-    private func processPayment(
-        _ paymentType: String,
-        completion: @escaping (PaymentInfo?) -> Void
+    func onGetUserData(
+        key: String,
+        data: Any?
     ) {
-        DatabaseUtils.userValue(
-            from: paymentType
-        ) { value in
-            
-            guard let payid = value as? String else {
-                completion(nil)
-                return
-            }
-            
-            PaymentProcess.getPaymentInfo(
-                id: payid
-            ) { info in
-                completion(info)
-            }
+        guard let payId = data as? String else {
+            onGetPremiumStatus?.onGetPremiumStatus(
+                hasPremium: false
+            )
+            return
         }
         
-        
+        mServiceYookassa.getPaymentInfoAsync(
+            payId: payId
+        )
     }
     
 }
 
 extension SKServicePremium
-: SKListenerOnGetServerTime {
+: SKListenerOnGetPaymentInfo {
     
-    func onGetServerTime(
-        timeSec: Int
+    func onGetPaymentInfo(
+        info: SKModelPaymentInfo?
     ) {
-        mTime = timeSec
-        startService()
+        guard let info = info else {
+            onGetPremiumStatus?.onGetPremiumStatus(
+                hasPremium: false
+            )
+            return
+        }
+        
+        let withPremium = info.status != .success &&
+            serverTimeSec - info.createdTime < .premiumLifeTimeSec()
+        
+        onGetPremiumStatus?.onGetPremiumStatus(
+            hasPremium: withPremium
+        )
+        
     }
     
 }
