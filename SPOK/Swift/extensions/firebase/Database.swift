@@ -10,6 +10,12 @@ import FirebaseDatabase
 
 extension Database {
     
+    static func pirate() -> DatabaseReference {
+        database().reference(
+            withPath: "pir"
+        )
+    }
+    
     static func user() -> DatabaseReference? {
         guard let id = UserDefaults.string(
             Keys.USER_REF

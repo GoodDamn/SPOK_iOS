@@ -29,14 +29,11 @@ final class SKViewControllerMain
     public static var mCardTextSizeB: CardTextSize!
     public static var mCardTextSizeM: CardTextSize!
     
-    private let mPremiumService =
-        SKServicePremium()
-    
+    private let mServicePremium = SKServicePremium()
     private let mServiceYookassa = SKServiceYooKassa()
     private let mServiceNetwork = SKServiceNetwork()
-    
-    private var mProtectService: AppleProtectService? =
-        AppleProtectService()
+    private let mServiceServer = SKServiceServer()
+    private let mServiceProtect = SKServiceAppleProtect()
     
     private var mCurrentIndex = 0
     
@@ -50,22 +47,8 @@ final class SKViewControllerMain
         SKViewControllerMain.mWidth = view.width()
         SKViewControllerMain.mHeight = view.height()
         
-        checkApple { [weak self]
-            appleChecks in
-            
-            DispatchQueue.ui {
-                self?.superUpdateAppleCheck()
-            }
-            
-            if appleChecks {
-                SKViewControllerMain.mIsPremiumUser = true
-                DispatchQueue.ui {
-                    self?.superUpdatePremium()
-                }
-                return
-            }
-            self?.checkSub()
-        }
+        mServiceServer.onGetServerConfig = self
+        mServiceProtect.onGetPiratedState = self
         
         let mScreen = UIScreen
             .main
@@ -293,53 +276,17 @@ extension SKViewControllerMain {
         }
     }
     
-    private func checkApple(
-        completion: ((Bool)-> Void)? = nil
-    ) {
-        Log.d(
-            AppDelegate.self,
-            "time for update protect:",
-            mProtectService?.isTimeForUpdateState()
-        )
-                
-        if !(mProtectService?
-            .isTimeForUpdateState() ?? false) {
-            
-            let appleChecks = mProtectService?
-                .doesAppleCheck() ?? true
-            
-            SKViewControllerMain.mDoAppleCheck =
-                appleChecks
-            
-            completion?(
-                appleChecks
-            )
-            
-            mProtectService = nil
-            return
-        }
-        
-        mProtectService!.updateAppleState {
-            [weak self] hasApple in
-            SKViewControllerMain.mDoAppleCheck = hasApple
-            completion?(
-                hasApple
-            )
-            self?.mProtectService = nil
-        }
-    }
-    
     private func checkSub() {
         Log.d(
             SKViewControllerMain.self,
             "checkSub:"
         )
-        mPremiumService.onGetPremiumStatus = self
+        mServicePremium.onGetPremiumStatus = self
         mServiceYookassa.onGetApiKey = self
         mServiceYookassa.getApiKeyAsync()
         
         let def = UserDefaults
-            .standard
+            .main()
         
         guard let userID = SKUtilsAuth
             .user()?
@@ -356,6 +303,35 @@ extension SKViewControllerMain {
         )
         
     }
+}
+
+extension SKViewControllerMain
+: SKListenerOnGetPiratedState {
+    
+    func onGetPiratedState(
+        isPirated: Bool
+    ) {
+        SKViewControllerMain.mDoAppleCheck = isPirated
+        
+        superUpdateAppleCheck()
+        
+        if isPirated {
+            SKViewControllerMain.mIsPremiumUser = true
+            superUpdatePremium()
+        }
+    }
+    
+}
+
+extension SKViewControllerMain
+: SKListenerOnGetServerConfig {
+    
+    func onGetServerConfig(
+        model: SKModelServerConfig
+    ) {
+        
+    }
+    
 }
 
 extension SKViewControllerMain
@@ -388,7 +364,7 @@ extension SKViewControllerMain
         key: String
     ) {
         Keys.AUTH = key
-        mPremiumService.getPremiumStatusAsync()
+        mServicePremium.getPremiumStatusAsync()
     }
     
 }

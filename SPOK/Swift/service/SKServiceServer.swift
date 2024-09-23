@@ -21,7 +21,7 @@ final class SKServiceServer {
     func getServerConfigAsync() {
         mReference.observeSingleEvent(
             of: .value
-        ) { [weak self] snap in
+        ) { [weak self] snap, _ in
             
             let timeSec = snap.childSnapshot(
                 forPath: "time"
@@ -34,7 +34,7 @@ final class SKServiceServer {
             let state = (snap.childSnapshot(
                 forPath: "state"
             ).value as? Int ?? 0) == 1
-            
+                        
             self?.onGetServerConfig?.onGetServerConfig(
                 model: SKModelServerConfig(
                     serverTimeSec: timeSec,

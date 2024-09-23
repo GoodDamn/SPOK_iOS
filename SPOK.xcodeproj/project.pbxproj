@@ -75,6 +75,8 @@
 		257F7AD12C12BAAD00420F4E /* AuthMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD02C12BAAD00420F4E /* AuthMethod.swift */; };
 		257F7AD32C12BBF800420F4E /* AuthMethodReauth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */; };
 		257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */; };
+		25874F202CA09DCD003F721C /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25874F1F2CA09DCD003F721C /* TimeInterval.swift */; };
+		25874F222CA1D588003F721C /* SKListenerOnGetPiratedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */; };
 		25883A9E2C5760F000D46614 /* EmailShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9D2C5760F000D46614 /* EmailShareViewController.swift */; };
 		25883AA02C57657A00D46614 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9F2C57657A00D46614 /* Int.swift */; };
 		25883AA32C57708000D46614 /* UILinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA22C57708000D46614 /* UILinearLayout.swift */; };
@@ -137,7 +139,7 @@
 		25F056F92CA030510019822B /* SKListenerOnCreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */; };
 		25F056FB2CA04E5F0019822B /* SKModelServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056FA2CA04E5F0019822B /* SKModelServerConfig.swift */; };
 		25F3B3DD2C05B388007F156C /* UIEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B3DC2C05B388007F156C /* UIEditText.swift */; };
-		25F3B40D2C084190007F156C /* AppleProtectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B40C2C084190007F156C /* AppleProtectService.swift */; };
+		25F3B40D2C084190007F156C /* SKServiceAppleProtect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F3B40C2C084190007F156C /* SKServiceAppleProtect.swift */; };
 		25F770D72B598C9100C62071 /* Particles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F770D62B598C9100C62071 /* Particles.swift */; };
 		25F94ACD2B6D181F00FC8A32 /* SignInAppleListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */; };
 		25F94ACF2B6D28F000FC8A32 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */; };
@@ -150,7 +152,6 @@
 		25F94AE52B6E608700FC8A32 /* AuthListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE42B6E608700FC8A32 /* AuthListener.swift */; };
 		25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AE72B6E626100FC8A32 /* SignInListener.swift */; };
 		25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEA2B6F46E900FC8A32 /* MessageViewController.swift */; };
-		25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */; };
 		25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF02B6F7DD700FC8A32 /* Log.swift */; };
 		25F94AF32B6F94A300FC8A32 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF22B6F94A300FC8A32 /* String.swift */; };
 		25F94AF62B6FB8A600FC8A32 /* SKServicePremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */; };
@@ -262,6 +263,8 @@
 		257F7AD02C12BAAD00420F4E /* AuthMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethod.swift; sourceTree = "<group>"; };
 		257F7AD22C12BBF800420F4E /* AuthMethodReauth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodReauth.swift; sourceTree = "<group>"; };
 		257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodSignIn.swift; sourceTree = "<group>"; };
+		25874F1F2CA09DCD003F721C /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetPiratedState.swift; sourceTree = "<group>"; };
 		25883A9D2C5760F000D46614 /* EmailShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailShareViewController.swift; sourceTree = "<group>"; };
 		25883A9F2C57657A00D46614 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		25883AA22C57708000D46614 /* UILinearLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinearLayout.swift; sourceTree = "<group>"; };
@@ -324,7 +327,7 @@
 		25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnCreatePayment.swift; sourceTree = "<group>"; };
 		25F056FA2CA04E5F0019822B /* SKModelServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKModelServerConfig.swift; sourceTree = "<group>"; };
 		25F3B3DC2C05B388007F156C /* UIEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEditText.swift; sourceTree = "<group>"; };
-		25F3B40C2C084190007F156C /* AppleProtectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleProtectService.swift; sourceTree = "<group>"; };
+		25F3B40C2C084190007F156C /* SKServiceAppleProtect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceAppleProtect.swift; sourceTree = "<group>"; };
 		25F770D62B598C9100C62071 /* Particles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particles.swift; sourceTree = "<group>"; };
 		25F94ACC2B6D181F00FC8A32 /* SignInAppleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleListener.swift; sourceTree = "<group>"; };
 		25F94ACE2B6D28F000FC8A32 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -337,7 +340,6 @@
 		25F94AE42B6E608700FC8A32 /* AuthListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListener.swift; sourceTree = "<group>"; };
 		25F94AE72B6E626100FC8A32 /* SignInListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInListener.swift; sourceTree = "<group>"; };
 		25F94AEA2B6F46E900FC8A32 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtils.swift; sourceTree = "<group>"; };
 		25F94AF02B6F7DD700FC8A32 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		25F94AF22B6F94A300FC8A32 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServicePremium.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				25F056E32C9E94540019822B /* SKListenerOnGetPremiumStatus.swift */,
 				25F056E72C9E96950019822B /* SKListenerOnGetServerConfig.swift */,
 				25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */,
+				25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */,
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -868,7 +871,6 @@
 				255C04F82B504BB5006D9FD0 /* ViewUtils.swift */,
 				25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */,
 				25F94AD82B6E22BE00FC8A32 /* SKUtilsAuth.swift */,
-				25F94AEE2B6F6DF500FC8A32 /* DatabaseUtils.swift */,
 				25F94AF02B6F7DD700FC8A32 /* Log.swift */,
 				25F056D22C9D3DD90019822B /* SKUtilsCrypt.swift */,
 			);
@@ -921,6 +923,7 @@
 				252F7AFA2C7F6C8800851E8A /* URL.swift */,
 				25F056CF2C9D3B4D0019822B /* Bundle.swift */,
 				25F056D92C9E8A900019822B /* URLRequest.swift */,
+				25874F1F2CA09DCD003F721C /* TimeInterval.swift */,
 			);
 			path = foundation;
 			sourceTree = "<group>";
@@ -1073,7 +1076,7 @@
 				25F056CA2C9D39670019822B /* network */,
 				252F7B172C81EB7C00851E8A /* delegates */,
 				25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */,
-				25F3B40C2C084190007F156C /* AppleProtectService.swift */,
+				25F3B40C2C084190007F156C /* SKServiceAppleProtect.swift */,
 				252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */,
 				252F7AF62C7F604000851E8A /* SKServiceCache.swift */,
 				252F7B0E2C81827B00851E8A /* SKServiceTopicPreviews.swift */,
@@ -1408,6 +1411,7 @@
 				25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
+				25874F202CA09DCD003F721C /* TimeInterval.swift in Sources */,
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */,
@@ -1422,7 +1426,6 @@
 				25F94AE22B6E5E9F00FC8A32 /* AuthAppleController.swift in Sources */,
 				25F94AF32B6F94A300FC8A32 /* String.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* SKViewControllerProfile.swift in Sources */,
-				25F94AEF2B6F6DF500FC8A32 /* DatabaseUtils.swift in Sources */,
 				25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */,
 				257A7FAD2B6CE1B300BBEF5E /* SKModelPaymentSnapshot.swift in Sources */,
 				255C04F52B4FA3E4006D9FD0 /* CarouselCollectionView.swift in Sources */,
@@ -1446,7 +1449,7 @@
 				25D476132B7B1F4B00B5467D /* AVAsset.swift in Sources */,
 				25F94ACD2B6D181F00FC8A32 /* SignInAppleListener.swift in Sources */,
 				25F94ACF2B6D28F000FC8A32 /* UserDefaults.swift in Sources */,
-				25F3B40D2C084190007F156C /* AppleProtectService.swift in Sources */,
+				25F3B40D2C084190007F156C /* SKServiceAppleProtect.swift in Sources */,
 				25883A9E2C5760F000D46614 /* EmailShareViewController.swift in Sources */,
 				2B82F18C29603E73004414B9 /* UITextViewPhrase.swift in Sources */,
 				25AB403E2BCAD39B009E735F /* UIImageButton.swift in Sources */,
@@ -1536,6 +1539,7 @@
 				252F7B1B2C822D0600851E8A /* SKDelegateOnProgressDownload.swift in Sources */,
 				25F94ADC2B6E579500FC8A32 /* SKViewControllerSettings.swift in Sources */,
 				2B93CF4E276F2E5000219690 /* UIViewControllerHome.swift in Sources */,
+				25874F222CA1D588003F721C /* SKListenerOnGetPiratedState.swift in Sources */,
 				25F056F92CA030510019822B /* SKListenerOnCreatePayment.swift in Sources */,
 				2507D2DF2B469C1D00656C0B /* ScriptRead.swift in Sources */,
 				2507D2E22B469C5400656C0B /* ScriptText.swift in Sources */,
