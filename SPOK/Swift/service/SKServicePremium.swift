@@ -26,7 +26,7 @@ final class SKServicePremium {
     ) {
         mServerTimeSec = serverTimeSec
         mServiceUser.getUserDataAsync(
-            key: Keys.ID_PAYMENT
+            key: .keyIdPayment()
         )
     }
 }

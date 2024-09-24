@@ -210,14 +210,14 @@ extension SKViewControllerMain
             .user()?
             .uid else {
             def.removeObject(
-                forKey: Keys.USER_REF
+                forKey: .keyUserId()
             )
             return
         }
         
         def.setValue(
             userID,
-            forKey: Keys.USER_REF
+            forKey: .keyUserId()
         )
     }
     

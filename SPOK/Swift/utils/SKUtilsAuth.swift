@@ -24,8 +24,7 @@ final class SKUtilsAuth {
             UserDefaults
                 .main()
                 .removeObject(
-                    forKey: Keys
-                        .USER_REF
+                    forKey: .keyUserId()
                 )
             completion?()
         } catch {

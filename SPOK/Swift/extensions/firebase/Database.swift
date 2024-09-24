@@ -18,7 +18,7 @@ extension Database {
     
     static func user() -> DatabaseReference? {
         guard let id = UserDefaults.string(
-            Keys.USER_REF
+            .keyUserId()
         ) else {
             return nil
         }

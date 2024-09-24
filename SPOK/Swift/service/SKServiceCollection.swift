@@ -24,26 +24,22 @@ final class SKServiceCollection {
         fileName: "0.scc",
         dirName: "cls"
     )
-    
-    private var mUpdateTime = 0
-    
+        
     final func getCollectionAsync(
         offset: Int = 0,
         len: Int = 3
     ) {
         if !mServiceCache.isEmpty() {
             DispatchQueue.io { [weak self] in
-                guard let self = self else {
+                let d = self?.mServiceCache.getData()
+                guard var collections = d?.scc() else {
                     return
                 }
                 
-                let d = self.mServiceCache.getData()
-                if var collections = d?.scc() {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.delegate?.onGetCollections(
-                            collections: &collections
-                        )
-                    }
+                DispatchQueue.ui {
+                    self?.delegate?.onGetCollections(
+                        collections: &collections
+                    )
                 }
             }
         }
@@ -69,27 +65,33 @@ final class SKServiceCollection {
             return
         }
         
-        mUpdateTime = Int(
+        let updateTime = Int(
             updatedTime
         )
         
         if mServiceCache.isValidCache(
-            time: mUpdateTime
+            time: updateTime
         ) {
             return
         }
         
+        // Capture updateTime
         mReference.getData(
             maxSize: SKServiceCollection.maxSize
         ) { [weak self] data, error in
             
-            guard var data = data,
-                error == nil else {
+            guard error == nil else {
                 return
             }
-            DispatchQueue.io { [weak self] in
+            
+            DispatchQueue.io {
+                guard var data = data else {
+                    return
+                }
+                
                 self?.onGetData(
-                    data: &data
+                    data: &data,
+                    updateTimeSec: updateTime
                 )
             }
         }
@@ -97,7 +99,8 @@ final class SKServiceCollection {
     
     
     private final func onGetData(
-        data: inout Data
+        data: inout Data,
+        updateTimeSec: Int
     ) {
         guard var collections = data.scc() else {
             return
@@ -108,10 +111,10 @@ final class SKServiceCollection {
         )
         
         mServiceCache.setLastModified(
-            time: mUpdateTime
+            time: updateTimeSec
         )
         
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.ui { [weak self] in
             self?.delegate?.onGetCollections(
                 collections: &collections
             )

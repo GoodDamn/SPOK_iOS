@@ -9,6 +9,22 @@ import Foundation
 
 extension String {
     
+    static func keyUserId() -> String {
+        "userID"
+    }
+    
+    static func keyIdPayment() -> String {
+        "pid"
+    }
+    
+    static func keyApiYoo() -> String {
+        "yoo"
+    }
+    
+    static func keyIntro() -> String {
+        "intro"
+    }
+    
     func isBlank() -> Bool {
         return trim().isEmpty
     }

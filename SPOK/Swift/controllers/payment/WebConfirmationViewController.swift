@@ -55,7 +55,7 @@ final class WebConfirmationViewController
         mWeb.load(req)
         
         mServiceUser.setUserData(
-            key: Keys.ID_PAYMENT,
+            key: .keyIdPayment(),
             data: mPaymentSnap.id
         )
     }
@@ -83,7 +83,7 @@ extension WebConfirmationViewController {
         ) { [weak self] action in
             
             self?.mServiceUser.removeUserData(
-                key: Keys.ID_PAYMENT
+                key: .keyIdPayment()
             )
             
             self?.getStatRefId(
@@ -134,7 +134,7 @@ extension WebConfirmationViewController {
             
             // register sub
             mServiceUser.setUserData(
-                key: Keys.ID_PAYMENT,
+                key: .keyIdPayment(),
                 data: info.id
             )
             

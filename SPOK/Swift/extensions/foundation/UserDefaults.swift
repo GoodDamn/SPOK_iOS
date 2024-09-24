@@ -73,7 +73,7 @@ extension UserDefaults {
     
     static func userID() -> String? {
         return standard.string(
-            forKey: Keys.USER_REF
+            forKey: .keyUserId()
         )
     }
     
@@ -82,20 +82,20 @@ extension UserDefaults {
     ) {
         standard.setValue(
             id,
-            forKey: Keys.USER_REF
+            forKey: .keyUserId()
         )
     }
     
     static func isIntroCompleted() -> Bool {
         standard.bool(
-            forKey: Keys.COMPLETE_INTRO
+            forKey: .keyIntro()
         )
     }
     
     static func completeIntro() {
         standard.setValue(
             true,
-            forKey: Keys.COMPLETE_INTRO
+            forKey: .keyIntro()
         )
     }
     

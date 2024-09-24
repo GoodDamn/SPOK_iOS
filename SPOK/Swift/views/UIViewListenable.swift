@@ -17,7 +17,7 @@ public class UIViewListenable
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        guard let loc = touchLocation(
+        guard let _ = touchLocation(
             touches
         ) else {
             return

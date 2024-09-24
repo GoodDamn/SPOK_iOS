@@ -16,7 +16,7 @@ final class SKServiceYooKassa {
     private let mReference = Database
         .database()
         .reference(
-            withPath: "API_KEYS/\(Keys.API_YOO)"
+            withPath: "API_KEYS/" + .keyApiYoo()
         )
     
     final func getPaymentInfoAsync(

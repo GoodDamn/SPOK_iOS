@@ -12,10 +12,11 @@ final class SKServiceTopicPreviews {
     
     private static let maxSize: Int64 = 3 * 1024 * 1024
     
+    private let mDir = "prs"
+    
     weak var delegate: SKDelegateOnGetTopicPreview? = nil
     
     private var mReferenceTopic: StorageReference? = nil
-    private var mUpdateTime = 0
     
     private let mReference = Storage
         .storage()
@@ -24,7 +25,7 @@ final class SKServiceTopicPreviews {
         )
     
     private let mServiceCache = SKServiceCache(
-        dirName: "prs"
+        dirName: ""
     )
     
     private var mCurrentTask: StorageDownloadTask? = nil
@@ -40,28 +41,29 @@ final class SKServiceTopicPreviews {
             fileName
         )
         
+        let fullName = "\(id)\(fileName)"
+        
         mServiceCache.setFile(
-            fileName: "\(id)\(fileName)",
-            dirName: "prs"
+            fileName: fullName,
+            dirName: mDir
         )
         
         if !mServiceCache.isEmpty() {
             DispatchQueue.io { [weak self] in
-                guard let self = self else {
+                let d = self?.mServiceCache.getData()
+                guard let topic = d?.spc() else {
                     return
                 }
                 
-                let d = self.mServiceCache.getData()
-                if let topic = d?.spc() {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.delegate?.onGetTopicPreview(
-                            preview: topic
-                        )
-                    }
+                DispatchQueue.ui {
+                    self?.delegate?.onGetTopicPreview(
+                        preview: topic
+                    )
                 }
             }
         }
         
+        // Capture fullName
         mReferenceTopic?.getMetadata {
             [weak self] meta, error in
             
@@ -71,7 +73,8 @@ final class SKServiceTopicPreviews {
             }
             
             self?.onGetMetadata(
-                meta: meta
+                meta: meta,
+                fullName: fullName
             )
         }
     }
@@ -81,7 +84,8 @@ final class SKServiceTopicPreviews {
     }
     
     private final func onGetMetadata(
-        meta: StorageMetadata
+        meta: StorageMetadata,
+        fullName: String
     ) {
         guard let updatedTime = meta
             .updated?
@@ -89,46 +93,68 @@ final class SKServiceTopicPreviews {
             return
         }
         
-        mUpdateTime = Int(
+        let updateTime = Int(
             updatedTime
         )
         
+        mServiceCache.setFile(
+            fileName: fullName,
+            dirName: mDir
+        )
+        
         if mServiceCache.isValidCache(
-            time: mUpdateTime
+            time: updateTime
         ) {
             return
         }
         
+        // Capture fullName and updateTime
         mCurrentTask = mReferenceTopic?.getData(
             maxSize: SKServiceTopicPreviews.maxSize
         ) { [weak self] data, error in
-            guard var data = data, error == nil else {
+            
+            guard error == nil else {
+                Log.d(error)
                 return
             }
-            DispatchQueue.io { [weak self] in
+            
+            DispatchQueue.io {
+                guard var data = data else {
+                    return
+                }
+                
                 self?.onGetData(
-                    data: &data
+                    data: &data,
+                    updateTimeSec: updateTime,
+                    fullName: fullName
                 )
             }
         }
     }
  
     private final func onGetData(
-        data: inout Data
+        data: inout Data,
+        updateTimeSec: Int,
+        fullName: String
     ) {
         guard let topic = data.spc() else {
             return
         }
+        
+        mServiceCache.setFile(
+            fileName: fullName,
+            dirName: mDir
+        )
         
         mServiceCache.writeData(
             data: &data
         )
         
         mServiceCache.setLastModified(
-            time: mUpdateTime
+            time: updateTimeSec
         )
         
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.ui { [weak self] in
             self?.delegate?.onGetTopicPreview(
                 preview: topic
             )
