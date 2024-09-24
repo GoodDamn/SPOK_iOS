@@ -10,24 +10,22 @@ import UIKit
 
 final class SKViewControllerMain
     : UIViewController {
+        
+    static var mWidth: CGFloat = 0
+    static var mHeight: CGFloat = 0
     
-    private let TAG = "MainViewController:"
+    static var mIsConnected = false
+    static var mIsPremiumUser = false
+    static var mCanPay = false
+    static var mDoAppleCheck = true
     
-    public static var mWidth: CGFloat = 0
-    public static var mHeight: CGFloat = 0
+    static var mBuildNumber = -1
+    static var mBuildNumberOld = -2
     
-    public static var mIsConnected = false
-    public static var mIsPremiumUser = false
-    public static var mCanPay = false
-    public static var mDoAppleCheck = true
-    
-    public static var mBuildNumber = -1
-    public static var mBuildNumberOld = -2
-    
-    public static var mCardSizeB: CGSize!
-    public static var mCardSizeM: CGSize!
-    public static var mCardTextSizeB: CardTextSize!
-    public static var mCardTextSizeM: CardTextSize!
+    static var mCardSizeB: CGSize!
+    static var mCardSizeM: CGSize!
+    static var mCardTextSizeB: CardTextSize!
+    static var mCardTextSizeM: CardTextSize!
     
     private let mServicePremium = SKServicePremium()
     private let mServiceYookassa = SKServiceYooKassa()
@@ -36,7 +34,6 @@ final class SKViewControllerMain
     private let mServiceProtect = SKServiceAppleProtect()
     
     private var mCurrentIndex = 0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +46,9 @@ final class SKViewControllerMain
         
         mServiceServer.onGetServerConfig = self
         mServiceProtect.onGetPiratedState = self
+        mServicePremium.onGetPremiumStatus = self
+        mServiceYookassa.onGetApiKey = self
+        mServiceNetwork.delegate = self
         
         let mScreen = UIScreen
             .main
@@ -102,12 +102,13 @@ final class SKViewControllerMain
             
         }
         
-        mServiceNetwork.delegate = self
         mServiceNetwork.listenNetwork(
             queue: DispatchQueue(
                 label: "NETWORK"
             )
         )
+        
+        mServiceProtect.getPiratedStateAsync()
         
         if !UserDefaults.isIntroCompleted() {
             UIApplication
@@ -133,7 +134,7 @@ final class SKViewControllerMain
         
     }
     
-    public func pusht(
+    func pusht(
         _ c: StackViewController,
         animDuration: TimeInterval,
         options: UIView.AnimationOptions,
@@ -154,7 +155,7 @@ final class SKViewControllerMain
         }
     }
     
-    public func push(
+    func push(
         _ c: StackViewController,
         animDuration: TimeInterval,
         animate: @escaping () -> Void,
@@ -171,7 +172,7 @@ final class SKViewControllerMain
         }
     }
     
-    public func pop(
+    func pop(
         duration: TimeInterval? = nil,
         animate: (()->Void)? = nil
     ) {
@@ -182,7 +183,7 @@ final class SKViewControllerMain
         )
     }
     
-    public func pop(
+    func pop(
         at: Int,
         duration: TimeInterval? = nil,
         animate: (()->Void)? = nil
@@ -228,14 +229,14 @@ final class SKViewControllerMain
 
 extension SKViewControllerMain {
     
-    public final func superUpdatePremium() {
+    final func superUpdatePremium() {
         for c in children {
             (c as? StackViewController)?
                 .updatePremium()
         }
     }
     
-    public final func superUpdateAppleCheck() {
+    final func superUpdateAppleCheck() {
         for c in children {
             (c as? StackViewController)?
                 .updateAppleCheck()
@@ -275,34 +276,6 @@ extension SKViewControllerMain {
             }
         }
     }
-    
-    private func checkSub() {
-        Log.d(
-            SKViewControllerMain.self,
-            "checkSub:"
-        )
-        mServicePremium.onGetPremiumStatus = self
-        mServiceYookassa.onGetApiKey = self
-        mServiceYookassa.getApiKeyAsync()
-        
-        let def = UserDefaults
-            .main()
-        
-        guard let userID = SKUtilsAuth
-            .user()?
-            .uid else {
-            def.removeObject(
-                forKey: Keys.USER_REF
-            )
-            return
-        }
-        
-        def.setValue(
-            userID,
-            forKey: Keys.USER_REF
-        )
-        
-    }
 }
 
 extension SKViewControllerMain
@@ -318,7 +291,31 @@ extension SKViewControllerMain
         if isPirated {
             SKViewControllerMain.mIsPremiumUser = true
             superUpdatePremium()
+            return
         }
+        
+        Log.d(
+            SKViewControllerMain.self,
+            "onGetPiratedState:"
+        )
+        
+        mServiceYookassa.getApiKeyAsync()
+        
+        let def = UserDefaults.main()
+        
+        guard let userID = SKUtilsAuth
+            .user()?
+            .uid else {
+            def.removeObject(
+                forKey: Keys.USER_REF
+            )
+            return
+        }
+        
+        def.setValue(
+            userID,
+            forKey: Keys.USER_REF
+        )
     }
     
 }
@@ -329,7 +326,9 @@ extension SKViewControllerMain
     func onGetServerConfig(
         model: SKModelServerConfig
     ) {
-        
+        mServicePremium.getPremiumStatusAsync(
+            serverTimeSec: model.serverTimeSec
+        )
     }
     
 }
@@ -364,7 +363,7 @@ extension SKViewControllerMain
         key: String
     ) {
         Keys.AUTH = key
-        mServicePremium.getPremiumStatusAsync()
+        mServiceServer.getServerConfigAsync()
     }
     
 }

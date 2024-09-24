@@ -14,14 +14,17 @@ final class SKServicePremium {
     private let mServiceYookassa = SKServiceYooKassa()
     private let mServiceUser = SKServiceUser()
     
-    var serverTimeSec = 0
+    private var mServerTimeSec = 0
     
     init() {
         mServiceYookassa.onGetPaymentInfo = self
         mServiceUser.onGetUserData = self
     }
     
-    func getPremiumStatusAsync() {
+    func getPremiumStatusAsync(
+        serverTimeSec: Int
+    ) {
+        mServerTimeSec = serverTimeSec
         mServiceUser.getUserDataAsync(
             key: Keys.ID_PAYMENT
         )
@@ -63,12 +66,11 @@ extension SKServicePremium
         }
         
         let withPremium = info.status != .success &&
-            serverTimeSec - info.createdTime < .premiumLifeTimeSec()
+            mServerTimeSec - info.createdTime < .premiumLifeTimeSec()
         
         onGetPremiumStatus?.onGetPremiumStatus(
             hasPremium: withPremium
         )
-        
     }
     
 }
