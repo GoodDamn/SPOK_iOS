@@ -77,6 +77,7 @@
 		257F7AD62C12BCAC00420F4E /* AuthMethodSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */; };
 		25874F202CA09DCD003F721C /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25874F1F2CA09DCD003F721C /* TimeInterval.swift */; };
 		25874F222CA1D588003F721C /* SKListenerOnGetPiratedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */; };
+		25874F242CA28497003F721C /* SKViewControllerNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25874F232CA28497003F721C /* SKViewControllerNavigation.swift */; };
 		25883A9E2C5760F000D46614 /* EmailShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9D2C5760F000D46614 /* EmailShareViewController.swift */; };
 		25883AA02C57657A00D46614 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883A9F2C57657A00D46614 /* Int.swift */; };
 		25883AA32C57708000D46614 /* UILinearLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AA22C57708000D46614 /* UILinearLayout.swift */; };
@@ -265,6 +266,7 @@
 		257F7AD52C12BCAC00420F4E /* AuthMethodSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMethodSignIn.swift; sourceTree = "<group>"; };
 		25874F1F2CA09DCD003F721C /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetPiratedState.swift; sourceTree = "<group>"; };
+		25874F232CA28497003F721C /* SKViewControllerNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewControllerNavigation.swift; sourceTree = "<group>"; };
 		25883A9D2C5760F000D46614 /* EmailShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailShareViewController.swift; sourceTree = "<group>"; };
 		25883A9F2C57657A00D46614 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		25883AA22C57708000D46614 /* UILinearLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILinearLayout.swift; sourceTree = "<group>"; };
@@ -1207,6 +1209,7 @@
 				2506226E2B4D6B6700FCD636 /* newMain */,
 				2BF92C9C284A1F8100EE0CEC /* topic */,
 				25DB9AC12B565AC600B5359F /* SheepCounterViewController.swift */,
+				25874F232CA28497003F721C /* SKViewControllerNavigation.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1435,6 +1438,7 @@
 				252F7B012C802DE600851E8A /* SKModelTypeable.swift in Sources */,
 				25F056E82C9E96950019822B /* SKListenerOnGetServerConfig.swift in Sources */,
 				25AB40422BDA05C3009E735F /* UIShitTextView.swift in Sources */,
+				25874F242CA28497003F721C /* SKViewControllerNavigation.swift in Sources */,
 				25F056E42C9E94540019822B /* SKListenerOnGetPremiumStatus.swift in Sources */,
 				25883AA62C57BB7200D46614 /* ScrollView.swift in Sources */,
 				25F056DF2C9E90670019822B /* SKServiceYooKassa.swift in Sources */,

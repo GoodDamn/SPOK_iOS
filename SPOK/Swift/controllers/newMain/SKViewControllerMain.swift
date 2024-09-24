@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SKViewControllerMain.swift
 //  SPOK
 //
 //  Created by GoodDamn on 11/01/2024.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class SKViewControllerMain
-    : UIViewController {
+: SKViewControllerNavigation {
         
     static var mWidth: CGFloat = 0
     static var mHeight: CGFloat = 0
@@ -32,8 +32,6 @@ final class SKViewControllerMain
     private let mServiceNetwork = SKServiceNetwork()
     private let mServiceServer = SKServiceServer()
     private let mServiceProtect = SKServiceAppleProtect()
-    
-    private var mCurrentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +109,6 @@ final class SKViewControllerMain
         mServiceProtect.getPiratedStateAsync()
         
         if !UserDefaults.isIntroCompleted() {
-            UIApplication
-                .shared
-                .registerForRemoteNotifications()
             Log.d("Time for intro!")
             
             showSplash(
@@ -133,98 +128,6 @@ final class SKViewControllerMain
         }
         
     }
-    
-    func pusht(
-        _ c: StackViewController,
-        animDuration: TimeInterval,
-        options: UIView.AnimationOptions,
-        completion: ((Bool) -> Void)?
-    ) {
-        let prev = children.last
-        
-        appendController(c)
-        
-        UIView.transition(
-            from: prev!.view,
-            to: c.view,
-            duration: 1.5,
-            options: options
-        ) { b in
-            c.transitionEnd()
-            completion?(b)
-        }
-    }
-    
-    func push(
-        _ c: StackViewController,
-        animDuration: TimeInterval,
-        animate: @escaping () -> Void,
-        completion: ((Bool) -> Void)? = nil
-    ) {
-        appendController(c)
-       
-        UIView.animate(
-            withDuration: animDuration,
-            animations: animate
-        ) { b in
-            c.transitionEnd()
-            completion?(b)
-        }
-    }
-    
-    func pop(
-        duration: TimeInterval? = nil,
-        animate: (()->Void)? = nil
-    ) {
-        pop(
-            at: mCurrentIndex - 1,
-            duration: duration,
-            animate: animate
-        )
-    }
-    
-    func pop(
-        at: Int,
-        duration: TimeInterval? = nil,
-        animate: (()->Void)? = nil
-    ) {
-        mCurrentIndex -= 1
-        
-        if animate == nil
-            || duration == nil
-        {
-            removeController(
-                at: at
-            )
-            return
-        }
-        
-        UIView.animate(
-            withDuration: duration!,
-            animations: animate!
-        ) { [weak self] _ in
-            self?.removeController(
-                at: at
-            )
-        }
-    }
-    
-    private func removeController(
-        at: Int
-    ) {
-        let c = children[at]
-        c.view.removeFromSuperview()
-        c.removeFromParent()
-    }
-    
-    private func appendController(
-        _ c: StackViewController
-    ) {
-        addChild(c)
-        view.addSubview(c.view)
-        mCurrentIndex += 1
-    }
-    
 }
 
 extension SKViewControllerMain {
@@ -378,7 +281,7 @@ extension SKViewControllerMain
             isConnected
             
         Log.d(
-            "MainViewController: networkUpdate:",
+            SKViewControllerMain.self,
             SKViewControllerMain.mIsConnected
         )
     }
