@@ -35,7 +35,7 @@ final class SKServiceYookassaPayment {
                 .withCapture,
             "confirmation": [
                 "type": "redirect",
-                "return_url": Keys.DEEP_LINK_SUB
+                "return_url": String.keyDeepLink()
             ],
             "receipt": [
                 "customer": [
@@ -54,7 +54,7 @@ final class SKServiceYookassaPayment {
         ] as [String: Any]
         
         HttpUtils.requestJson(
-            to: Keys.URL_PAYMENTS,
+            to: .yookassaPayments(),
             header: HttpUtils.header(),
             body: json,
             method: "POST"

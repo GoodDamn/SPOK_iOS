@@ -23,7 +23,7 @@ final class SKServiceYooKassa {
         payId: String
     ) {
         var req = URLRequest(
-            url: Keys.URL_PAYMENTS.append(
+            url: .yookassaPayments().append(
                 payId
             )
         )

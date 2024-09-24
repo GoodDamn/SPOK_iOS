@@ -27,6 +27,8 @@ final class SKViewControllerProfile
         
         view.clipsToBounds = true
         
+        mServicePayment.onCreatePayment = self
+        
         let w = view.width()
         let h = view.height() - mInsets.bottom - 50 // 50 - height nav bar (MainContentViewController)
         

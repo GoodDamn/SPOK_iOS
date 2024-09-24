@@ -91,8 +91,7 @@ extension WebConfirmationViewController {
             ).increment()
             
             if let payID = payID {
-                let url = Keys.URL_PAYMENTS
-                .append(
+                let url: URL = .yookassaPayments().append(
                     payID
                 ).append(
                     "cancel"
@@ -182,7 +181,7 @@ extension WebConfirmationViewController
             redirUrl
         )
         
-        if redirUrl == Keys.DEEP_LINK_SUB {
+        if redirUrl == .keyDeepLink() {
             mServiceYookassa.getPaymentInfoAsync(
                 payId: mPaymentSnap.id
             )

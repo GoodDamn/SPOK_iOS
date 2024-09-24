@@ -9,6 +9,10 @@ import Foundation
 
 extension String {
     
+    static func keyDeepLink() -> String {
+        "s://a"
+    }
+    
     static func keyUserId() -> String {
         "userID"
     }
@@ -18,7 +22,7 @@ extension String {
     }
     
     static func keyApiYoo() -> String {
-        "yoo"
+        "yooTest"
     }
     
     static func keyIntro() -> String {

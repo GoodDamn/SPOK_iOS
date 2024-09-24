@@ -10,13 +10,6 @@ import Foundation
 final class Keys {
     
     public static var AUTH = ""
-    
-    public static let DEEP_LINK_SUB =
-        "s://a"
-    
-    public static let URL_PAYMENTS = URL(
-        string: "https://api.yookassa.ru/v3/payments"
-    )!
         
     public static let ERROR_PATH = "Errors/iOS"
     

@@ -8,6 +8,12 @@
 import Foundation
 extension URL {
     
+    static func yookassaPayments() -> URL {
+        URL(
+            string: "https://api.yookassa.ru/v3/payments"
+        )!
+    }
+    
     func request() -> URLRequest {
         URLRequest(
             url: self
