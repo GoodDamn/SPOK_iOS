@@ -89,7 +89,7 @@ final class UIViewControllerHome
     }
     
     override func onUpdatePremium() {
-        openPremiumTopics(
+        managePremiumTopics(
             mTableView
         )
     }
@@ -97,18 +97,25 @@ final class UIViewControllerHome
 }
 
 extension UIViewControllerHome {
-    private func openPremiumTopics(
+    private func managePremiumTopics(
         _ inp: UIView
     ) {
         
-        if let previewCell = inp
-          as? UICollectionViewCellTopic {
+        if let previewCell = inp as? UICollectionViewCellTopic {
             previewCell.stopParticles()
+            
+            if SKViewControllerMain.mIsPremiumUser {
+                return
+            }
+            
+            if previewCell.isPremiumTopic {
+                previewCell.startParticles()
+            }
             return
         }
         
         for i in inp.subviews {
-            openPremiumTopics(i)
+            managePremiumTopics(i)
         }
     }
 }

@@ -42,7 +42,7 @@ final class EmailShareViewController
             ).increment()
             
             self?.pusht(
-                MainContentViewController(),
+                SKViewControllerMainContent(),
                 animDuration: 0.3,
                 options: [
                     .transitionCrossDissolve
@@ -253,7 +253,7 @@ extension EmailShareViewController {
         )
         
         pusht(
-            MainContentViewController(),
+            SKViewControllerMainContent(),
             animDuration: 0.3,
             options: [
                 .transitionCrossDissolve

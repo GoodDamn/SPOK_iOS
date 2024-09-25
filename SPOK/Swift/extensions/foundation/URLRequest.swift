@@ -16,6 +16,7 @@ extension URLRequest {
         ) { data, response, error in
             
             guard var data = data, error == nil else {
+                print("downloadData: error: ", response, error)
                 return
             }
             

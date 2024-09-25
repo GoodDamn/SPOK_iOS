@@ -1,5 +1,5 @@
 //
-//  ManagerViewController.swift
+//  SKViewControllerMainContent.swift
 //  SPOK
 //
 //  Created by Cell on 26.06.2022.
@@ -8,7 +8,7 @@
 import UIKit;
 import FirebaseDatabase;
 
-final class MainContentViewController
+final class SKViewControllerMainContent
     : StackViewController {
     
     private let mDatabase = Database.database()
@@ -99,7 +99,7 @@ final class MainContentViewController
     
     override func viewDidLayoutSubviews() {
         Log.d(
-            MainContentViewController.self,
+            SKViewControllerMainContent.self,
             "viewDidLayout:"
         )
         
@@ -116,7 +116,7 @@ final class MainContentViewController
     override func onUpdateAppleCheck() {
         let appleChecks = SKViewControllerMain.mDoAppleCheck
         Log.d(
-            MainContentViewController.self,
+            SKViewControllerMainContent.self,
             "onUpdateAppleCheck:",
             appleChecks
         )
@@ -131,7 +131,7 @@ final class MainContentViewController
     
     override func onUpdatePremium() {
         Log.d(
-            MainContentViewController.self,
+            SKViewControllerMainContent.self,
             "onUpdatePremium:",
             SKViewControllerMain.mIsPremiumUser,
             mPageView
@@ -150,7 +150,7 @@ final class MainContentViewController
     
 }
 
-extension MainContentViewController {
+extension SKViewControllerMainContent {
     
     private func createTab(
         systemNameImage: String,

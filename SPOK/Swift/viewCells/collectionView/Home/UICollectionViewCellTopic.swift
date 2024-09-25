@@ -23,6 +23,9 @@ final class UICollectionViewCellTopic
     private let mServicePreview = SKServiceTopicPreviews()
     private var mPreviewId = Int.min
     
+    private(set) var isPremiumTopic = false
+
+    
     var cardTextSize: CardTextSize! {
         didSet {
             if cardTextSize.desc == mDesc.font.pointSize {
@@ -131,7 +134,7 @@ final class UICollectionViewCellTopic
             return
         }
         
-        if !mParticles.isHidden && !SKViewControllerMain
+        if isPremiumTopic && !SKViewControllerMain
             .mIsPremiumUser {
             // Move to sub page
             Toast.show(
@@ -158,6 +161,11 @@ extension UICollectionViewCellTopic {
     
     final func onDidEndDisplaying() {
         mServicePreview.cancel()
+    }
+    
+    final func startParticles() {
+        mParticles.start()
+        mParticles.isHidden = false
     }
     
     final func stopParticles() {
@@ -231,7 +239,9 @@ extension UICollectionViewCellTopic
         
         calculateBoundsText()
         
-        if !SKViewControllerMain.mIsPremiumUser && preview.isPremium {
+        isPremiumTopic = preview.isPremium
+        
+        if !SKViewControllerMain.mIsPremiumUser && isPremiumTopic {
             mParticles.start()
             mParticles.isHidden = false
         }

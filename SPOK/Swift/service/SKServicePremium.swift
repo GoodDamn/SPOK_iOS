@@ -65,7 +65,7 @@ extension SKServicePremium
             return
         }
         
-        let withPremium = info.status != .success &&
+        let withPremium = info.status == .success &&
             mServerTimeSec - info.createdTime < .premiumLifeTimeSec()
         
         onGetPremiumStatus?.onGetPremiumStatus(

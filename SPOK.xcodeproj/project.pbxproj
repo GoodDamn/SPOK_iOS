@@ -171,7 +171,7 @@
 		2BA101E42763EFCB00EB5B8C /* SPOKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA101E32763EFCB00EB5B8C /* SPOKTests.swift */; };
 		2BA101EF2763EFCB00EB5B8C /* SPOKUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA101EE2763EFCB00EB5B8C /* SPOKUITests.swift */; };
 		2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA1023D276A11DE00EB5B8C /* Toast.swift */; };
-		2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */; };
+		2BC57A7528683E5A00A5A65C /* SKViewControllerMainContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC57A7428683E5A00A5A65C /* SKViewControllerMainContent.swift */; };
 		2BCC490A290E346A00A5F4F4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 383AF7A82875806000859090 /* OpenSans-Bold.ttf */; };
 		2BCC490B290E346A00A5F4F4 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */; };
 		2BCC490C290E346A00A5F4F4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */; };
@@ -369,7 +369,7 @@
 		2BA1024E276A487C00EB5B8C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		2BA1024F276A487C00EB5B8C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		2BA10250276A487D00EB5B8C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentViewController.swift; sourceTree = "<group>"; };
+		2BC57A7428683E5A00A5A65C /* SKViewControllerMainContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewControllerMainContent.swift; sourceTree = "<group>"; };
 		383AF7A82875806000859090 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		383AF7AC28758BD300859090 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -687,7 +687,7 @@
 			children = (
 				2506226F2B4D6EEB00FCD636 /* SKViewControllerProfile.swift */,
 				2B93CF4D276F2E5000219690 /* UIViewControllerHome.swift */,
-				2BC57A7428683E5A00A5A65C /* MainContentViewController.swift */,
+				2BC57A7428683E5A00A5A65C /* SKViewControllerMainContent.swift */,
 			);
 			path = content;
 			sourceTree = "<group>";
@@ -1482,7 +1482,7 @@
 				252F7AFF2C802D4300851E8A /* UITableViewTypeable.swift in Sources */,
 				252F7B192C81EB9D00851E8A /* SKServiceTopicContent.swift in Sources */,
 				250622812B4E891900FCD636 /* ProgressBar.swift in Sources */,
-				2BC57A7528683E5A00A5A65C /* MainContentViewController.swift in Sources */,
+				2BC57A7528683E5A00A5A65C /* SKViewControllerMainContent.swift in Sources */,
 				252F7AF92C7F628E00851E8A /* Data.swift in Sources */,
 				257A7FAB2B6CE1B300BBEF5E /* HttpUtils.swift in Sources */,
 				2507D2E72B46B9C100656C0B /* FileInputStream.swift in Sources */,

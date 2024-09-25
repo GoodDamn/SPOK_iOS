@@ -22,10 +22,14 @@ final class SKViewControllerSettings
     private var mOptionsNonUser: [Option]!
     private var mOptionsUser: [Option]!
     
+    private let mServicePremium = SKServicePremium()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         view.backgroundColor = .background()
+        
+        mServicePremium.onGetPremiumStatus = self
         
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
@@ -255,12 +259,7 @@ final class SKViewControllerSettings
                     text: "Аккаунт удален"
                 )
                 
-                if self == nil {
-                    return
-                }
-                
-                self!.mTableOptions
-                    .mOptions = self!.mOptionsNonUser
+                self?.disablePremium()
                 
                 return
             }
@@ -284,6 +283,9 @@ final class SKViewControllerSettings
             text: "Успешно"
         )
         
+        mServicePremium.getPremiumStatusAsync(
+            serverTimeSec: SKViewControllerMain.mServerTimeSec
+        )
         mTableOptions.mOptions = mOptionsUser
     }
     
@@ -370,16 +372,37 @@ extension SKViewControllerSettings {
                     "USER_SIGNED_OUT"
                 )
                 
-                if self == nil {
-                    return
-                }
-                
-                self!.mTableOptions.mOptions = self!
-                    .mOptionsNonUser
-                
+                self?.disablePremium()
             }
         }
         
+    }
+    
+    private func disablePremium() {
+        SKViewControllerMain.mIsPremiumUser = false
+        
+        UIApplication.main()
+            .superUpdatePremium()
+        
+        mTableOptions.mOptions = mOptionsNonUser
+    }
+    
+}
+
+extension SKViewControllerSettings
+: SKListenerOnGetPremiumStatus {
+    
+    func onGetPremiumStatus(
+        hasPremium: Bool
+    ) {
+        if !hasPremium {
+            return
+        }
+        
+        SKViewControllerMain.mIsPremiumUser = hasPremium
+        DispatchQueue.ui {
+            UIApplication.main().superUpdatePremium()
+        }
     }
     
 }

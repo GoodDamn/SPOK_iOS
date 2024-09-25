@@ -17,9 +17,7 @@ extension Database {
     }
     
     static func user() -> DatabaseReference? {
-        guard let id = UserDefaults.string(
-            .keyUserId()
-        ) else {
+        guard let id = SKUtilsAuth.user()?.uid else {
             return nil
         }
         

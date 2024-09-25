@@ -19,6 +19,8 @@ final class SKViewControllerMain
     static var mCanPay = false
     static var mDoAppleCheck = true
     
+    static var mServerTimeSec = 0
+    
     static var mBuildNumber = -1
     static var mBuildNumberOld = -2
     
@@ -124,7 +126,7 @@ final class SKViewControllerMain
         showSplash(
             msg: "отправляемся\nв мир снов..."
         ) {
-            return MainContentViewController()
+            return SKViewControllerMainContent()
         }
         
     }
@@ -203,22 +205,6 @@ extension SKViewControllerMain
         )
         
         mServiceYookassa.getApiKeyAsync()
-        
-        let def = UserDefaults.main()
-        
-        guard let userID = SKUtilsAuth
-            .user()?
-            .uid else {
-            def.removeObject(
-                forKey: .keyUserId()
-            )
-            return
-        }
-        
-        def.setValue(
-            userID,
-            forKey: .keyUserId()
-        )
     }
     
 }
@@ -229,6 +215,7 @@ extension SKViewControllerMain
     func onGetServerConfig(
         model: SKModelServerConfig
     ) {
+        SKViewControllerMain.mServerTimeSec = model.serverTimeSec
         mServicePremium.getPremiumStatusAsync(
             serverTimeSec: model.serverTimeSec
         )
