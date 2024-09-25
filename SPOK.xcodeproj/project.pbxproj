@@ -111,7 +111,7 @@
 		25D61E8A2B7621C300B5A72B /* InversedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E892B7621C300B5A72B /* InversedTableViewCell.swift */; };
 		25D61E902B76233800B5A72B /* InversedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E8F2B76233800B5A72B /* InversedTableView.swift */; };
 		25D61E922B7643CE00B5A72B /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D61E912B7643CE00B5A72B /* UIFont.swift */; };
-		25D75FF22C05870C00EE1720 /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D75FF12C05870C00EE1720 /* WebConfirmationViewController.swift */; };
+		25D75FF22C05870C00EE1720 /* SKViewControllerWebPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D75FF12C05870C00EE1720 /* SKViewControllerWebPayment.swift */; };
 		25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D75FF32C0598EE00EE1720 /* EmailConfirmationViewController.swift */; };
 		25DB9ABA2B53E61C00B5359F /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AB92B53E61C00B5359F /* Iterator.swift */; };
 		25DB9AC02B55A73900B5359F /* UICollectionViewCellTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ABF2B55A73900B5359F /* UICollectionViewCellTopic.swift */; };
@@ -300,7 +300,7 @@
 		25D61E892B7621C300B5A72B /* InversedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InversedTableViewCell.swift; sourceTree = "<group>"; };
 		25D61E8F2B76233800B5A72B /* InversedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InversedTableView.swift; sourceTree = "<group>"; };
 		25D61E912B7643CE00B5A72B /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		25D75FF12C05870C00EE1720 /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
+		25D75FF12C05870C00EE1720 /* SKViewControllerWebPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKViewControllerWebPayment.swift; sourceTree = "<group>"; };
 		25D75FF32C0598EE00EE1720 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
 		25DB9AB92B53E61C00B5359F /* Iterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iterator.swift; sourceTree = "<group>"; };
 		25DB9ABF2B55A73900B5359F /* UICollectionViewCellTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCellTopic.swift; sourceTree = "<group>"; };
@@ -825,7 +825,7 @@
 		25D75FF02C0586F700EE1720 /* payment */ = {
 			isa = PBXGroup;
 			children = (
-				25D75FF12C05870C00EE1720 /* WebConfirmationViewController.swift */,
+				25D75FF12C05870C00EE1720 /* SKViewControllerWebPayment.swift */,
 				25D75FF32C0598EE00EE1720 /* EmailConfirmationViewController.swift */,
 			);
 			path = payment;
@@ -1532,7 +1532,7 @@
 				2507D2EE2B47210800656C0B /* OnReadCommand.swift in Sources */,
 				252F7B062C80334300851E8A /* SKModelViewTypeCollection.swift in Sources */,
 				2BA101CF2763EFC900EB5B8C /* SceneDelegate.swift in Sources */,
-				25D75FF22C05870C00EE1720 /* WebConfirmationViewController.swift in Sources */,
+				25D75FF22C05870C00EE1720 /* SKViewControllerWebPayment.swift in Sources */,
 				257A7FAE2B6CE1B300BBEF5E /* SKModelPayment.swift in Sources */,
 				252F7B032C802F2700851E8A /* SKModelTypeableView.swift in Sources */,
 				2506227D2B4E6E0300FCD636 /* DelegateViewController.swift in Sources */,

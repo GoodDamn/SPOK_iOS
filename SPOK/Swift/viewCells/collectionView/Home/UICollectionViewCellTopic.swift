@@ -10,9 +10,7 @@ import UIKit
 
 final class UICollectionViewCellTopic
 : UICollectionViewCell {
-    
-    private static let TAG = "UICollectionViewCellTopic:"
-    
+        
     static let ID = "topicCell"
     
     private var mImageView: UIImageView!

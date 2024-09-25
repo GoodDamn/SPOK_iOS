@@ -524,7 +524,7 @@ extension SKViewControllerProfile
         snapshot: SKModelPaymentSnapshot
     ) {
         DispatchQueue.ui { [weak self] in
-            let c = WebConfirmationViewController()
+            let c = SKViewControllerWebPayment()
             c.mPaymentListener = self
             c.mPaymentSnap = snapshot
             

@@ -1,5 +1,5 @@
 //
-//  WebConfirmationViewController.swift
+//  SKViewControllerWebPayment.swift
 //  YooKassaTest
 //
 //  Created by GoodDamn on 31/01/2024.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import WebKit
 
-final class WebConfirmationViewController
+final class SKViewControllerWebPayment
 : StackViewController {
     
     private let TAG = "WebConfirmationViewController"
@@ -63,7 +63,7 @@ final class WebConfirmationViewController
 }
 
 
-extension WebConfirmationViewController {
+extension SKViewControllerWebPayment {
     
     private func alert(
         _ msg: String
@@ -81,10 +81,6 @@ extension WebConfirmationViewController {
             title: "Да",
             style: .destructive
         ) { [weak self] action in
-            
-            self?.mServiceUser.removeUserData(
-                key: .keyIdPayment()
-            )
             
             self?.getStatRefId(
                 "PAY_CANCEL"
@@ -152,7 +148,7 @@ extension WebConfirmationViewController {
     
 }
 
-extension WebConfirmationViewController
+extension SKViewControllerWebPayment
     : WKNavigationDelegate {
     
     func webView(
@@ -192,7 +188,7 @@ extension WebConfirmationViewController
     
 }
 
-extension WebConfirmationViewController
+extension SKViewControllerWebPayment
 : SKListenerOnGetPaymentInfo {
     
     func onGetPaymentInfo(
@@ -211,5 +207,5 @@ extension WebConfirmationViewController
     
 }
 
-extension WebConfirmationViewController
+extension SKViewControllerWebPayment
 : WKUIDelegate {}
