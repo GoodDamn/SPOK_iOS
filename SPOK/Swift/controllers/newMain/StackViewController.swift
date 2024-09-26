@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 
 class StackViewController
-    : StatViewController {
+: StatViewController {
     
     public final let mInsets = {
         let w = UIApplication

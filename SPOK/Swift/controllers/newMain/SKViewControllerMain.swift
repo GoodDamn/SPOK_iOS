@@ -123,6 +123,23 @@ final class SKViewControllerMain
         
         Log.d("Time for content!")
         
+        UserDefaults.statsInc(
+            "opens"
+        )
+        
+        let openTimes = UserDefaults.statsKey(
+            "opens"
+        )
+        
+        if openTimes == 2 {
+            showSplash(
+                msg: "отправляемся\nв мир снов..."
+            ) {
+                return EmailShareViewController()
+            }
+            return
+        }
+        
         showSplash(
             msg: "отправляемся\nв мир снов..."
         ) {

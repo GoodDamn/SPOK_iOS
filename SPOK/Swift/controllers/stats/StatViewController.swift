@@ -9,11 +9,11 @@ import FirebaseDatabase
 import UIKit.UIViewController
 
 class StatViewController
-    : UIViewController {
+: UIViewController {
     
     internal final let mInstanceName: String
     
-    private var mSessionId = 0
+    internal var mSessionId = 0
     
     private let mStartTimeSec: Int = .currentTimeSec()
     
@@ -91,7 +91,7 @@ class StatViewController
     }
     
     deinit {
-        Log.d(StatViewController.self, "\(mInstanceName): onTerminateApp:")
+        Log.d(StatViewController.self, "\(mInstanceName): deinit:")
         
         getStatRef(
             "terminate\(mSessionId)Time"

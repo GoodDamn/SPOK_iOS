@@ -64,15 +64,8 @@ final class IntroSleepRootController
         }
         
         intro3.onHide = { [weak self] in
-            let content = SKViewControllerMain
-                .mDoAppleCheck ? 
-                SKViewControllerMainContent()
-            : EmailShareViewController()
-            
-            
-            
             self?.pusht(
-                content,
+                SKViewControllerMainContent(),
                 animDuration: 2.0,
                 options: [
                     .transitionCrossDissolve
