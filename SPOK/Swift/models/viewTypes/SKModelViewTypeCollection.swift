@@ -62,6 +62,7 @@ final class SKModelViewTypeCollection
             it.topicSize = viewModel.cardSize
             it.cardType = viewModel.model.cardType
             it.cardTextSize = viewModel.cardTextSize
+            it.topicType = viewModel.model.title
             cell.calculateBoundsCollection(
                 with: mSize
             )
@@ -123,6 +124,7 @@ extension SKModelViewTypeCollection
         )
         
         cell.cardTextSize = view.cardTextSize
+        cell.topicType = view.topicType
         
         cell.loadData(
             previewId: Int(topicId),

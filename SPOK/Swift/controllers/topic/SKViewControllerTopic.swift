@@ -24,6 +24,7 @@ final class SKViewControllerTopic
         }
     }
     
+    var topicType: String? = nil
     var topicName: String? = nil
     
     override func viewDidLoad() {
@@ -54,10 +55,37 @@ final class SKViewControllerTopic
         lblTopicName.centerH(
             in: view
         )
+        
+        let textSizeTopicType = 0.4514 * lblTopicName.font
+            .pointSize
+        
+        let lblTopicType = UILabel(
+            frame: CGRect(
+                x: 0,
+                y: textSizeTopicType +
+                lblTopicName.frame.bottom(),
+                width: w,
+                height: 0
+            )
+        )
+        lblTopicType.font = .semibold(
+            withSize: textSizeTopicType
+        )
+        lblTopicType.backgroundColor = .clear
+        lblTopicType.text = topicType?.uppercased()
+        lblTopicType.textColor = .subtitle()
+        lblTopicType.textAlignment = .center
+        lblTopicType.sizeToFit()
+        lblTopicType.centerH(
+            in: view
+        )
+        
+        
         let btnClose = ViewUtils.buttonClose(
             in: view,
             sizeSquare: 59.nh() * h
         )
+        btnClose.backgroundColor = .green
         
         btnClose.onClick = { [weak self] v in
             self?.onClickBtnClose(v)
@@ -65,6 +93,10 @@ final class SKViewControllerTopic
         
         view.addSubview(
             lblTopicName
+        )
+        
+        view.addSubview(
+            lblTopicType
         )
         
         view.addSubview(

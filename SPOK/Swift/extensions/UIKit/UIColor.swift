@@ -9,20 +9,26 @@ import UIKit.UIColor
 
 extension UIColor {
     
+    static func subtitle() -> UIColor? {
+        UIColor(
+            named: "subtitle"
+        )
+    }
+    
     static func background() -> UIColor? {
-        return UIColor(
+        UIColor(
             named: "background"
         )
     }
     
     static func accent() -> UIColor? {
-        return UIColor(
+        UIColor(
             named: "btnBack"
         )
     }
     
     static func danger() -> UIColor? {
-        return UIColor(
+        UIColor(
             named: "danger"
         )
     }
