@@ -27,6 +27,16 @@ final class SKViewControllerTopic
     var topicType: String? = nil
     var topicName: String? = nil
     
+    private let mImagePlay = UIImage(
+        systemName: "play.fill"
+    )
+    
+    private let mImagePause = UIImage(
+        systemName: "pause.fill"
+    )
+    
+    private var mIsPlaying = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,7 +91,7 @@ final class SKViewControllerTopic
         )
         
         let sizePlay = 103.nh() * h
-        let btnPlay = UIImageView(
+        let btnPlay = UIImageButton(
             frame: CGRect(
                 x: 0,
                 y: lblTopicType.frame.bottom() +
@@ -91,13 +101,25 @@ final class SKViewControllerTopic
             )
         )
         
+        btnPlay.onClick = { [weak self] v in
+            guard let v = v as? UIImageButton else {
+                return
+            }
+            self?.onClickBtnPlay(v)
+        }
+        
         btnPlay.image = UIImage(
-            systemName: "play"
+            systemName: "play.fill"
+        )
+        btnPlay.scale = CGPoint(
+            x: 0.65,
+            y: 0.65
         )
         btnPlay.tintColor = .accent3()
         btnPlay.backgroundColor = .white
         btnPlay.layer.cornerRadius = btnPlay.height()
             * 0.5
+        btnPlay.clipsToBounds = true
         
         btnPlay.centerH(
             in: view
@@ -133,6 +155,20 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func onClickBtnPlay(
+        _ v: UIImageButton
+    ) {
+        mIsPlaying = !mIsPlaying
+        
+        if mIsPlaying {
+            v.image = mImagePlay
+        } else {
+            v.image = mImagePause
+        }
+        
+        v.setNeedsDisplay()
+    }
     
     private func onClickBtnClose(
         _ v: UIView
