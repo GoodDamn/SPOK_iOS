@@ -23,7 +23,6 @@ final class UICollectionViewCellTopic
     
     private(set) var isPremiumTopic = false
 
-    
     var cardTextSize: CardTextSize! {
         didSet {
             if cardTextSize.desc == mDesc.font.pointSize {
@@ -141,8 +140,9 @@ final class UICollectionViewCellTopic
             return
         }
         
-        let t = BaseTopicController()
+        let t = SKViewControllerTopic()
         t.topicId = mPreviewId
+        t.topicName = mTitle.text
         t.view.alpha = 0.0
         
         UIApplication.main().push(
