@@ -16,11 +16,14 @@ final class SKServiceTopicContent {
     private let mReference = Storage
         .storage()
         .reference(
-            withPath: "content/skc"
+            withPath: "content/mp3"
         )
     
-    weak var delegateProgress: SKDelegateOnProgressDownload? = nil
-    weak var delegate: SKDelegateOnGetTopicContent? = nil
+    weak var onProgressDownload: SKDelegateOnProgressDownload? = nil
+    
+    weak var onGetTopicContent: SKDelegateOnGetTopicContent? = nil
+    
+    weak var onGetTopicUrl: SKListenerOnGetContentUrl? = nil
     
     private var mCurrentTask: StorageDownloadTask? = nil
     
@@ -33,6 +36,27 @@ final class SKServiceTopicContent {
     
     private var mUpdateTime = 0
     
+    final func getContentUrlAsync(
+        id: Int
+    ) {
+        mReferenceFull = mReference.child(
+            "\(id).mp3"
+        )
+        
+        mReferenceFull?.downloadURL {
+            [weak self] url, error in
+            
+            guard let url = url, error == nil else {
+                return
+            }
+            
+            self?.onGetTopicUrl?.onGetContentUrl(
+                url: url
+            )
+            
+        }
+    }
+    
     final func getContent(
         id: Int
     ) {
@@ -44,10 +68,12 @@ final class SKServiceTopicContent {
         )
         
         if !mServiceCache.isEmpty() {
-            delegateProgress?.onProgressDownload(
+            onProgressDownload?
+                .onProgressDownload(
                 progress: 0.99
             )
-            delegate?.onGetTopicContent(
+            onGetTopicContent?
+                .onGetTopicContent(
                 model: SKModelTopicContent(
                     data: mServiceCache.getData()
                 )
@@ -123,7 +149,8 @@ final class SKServiceTopicContent {
             return
         }
         
-        delegateProgress?.onProgressDownload(
+        onProgressDownload?
+            .onProgressDownload(
             progress: CGFloat(
                 progress.fractionCompleted
             )
@@ -142,7 +169,7 @@ final class SKServiceTopicContent {
             time: mUpdateTime
         )
         
-        delegate?.onGetTopicContent(
+        onGetTopicContent?.onGetTopicContent(
             model: SKModelTopicContent(
                 data: data
             )

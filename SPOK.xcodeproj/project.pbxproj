@@ -85,6 +85,7 @@
 		25883AB32C58A8E000D46614 /* shitlocc.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 25883AB22C58A8E000D46614 /* shitlocc.xcstrings */; };
 		25883AB62C5A1D6200D46614 /* StatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AB52C5A1D6200D46614 /* StatViewController.swift */; };
 		25883AB92C5A591800D46614 /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25883AB82C5A591800D46614 /* DatabaseReference.swift */; };
+		258E0B8A2CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E0B892CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift */; };
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
@@ -274,6 +275,7 @@
 		25883AB22C58A8E000D46614 /* shitlocc.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = shitlocc.xcstrings; sourceTree = "<group>"; };
 		25883AB52C5A1D6200D46614 /* StatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewController.swift; sourceTree = "<group>"; };
 		25883AB82C5A591800D46614 /* DatabaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
+		258E0B892CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKListenerOnGetContentUrl.swift; sourceTree = "<group>"; };
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
@@ -516,7 +518,7 @@
 			path = viewModels;
 			sourceTree = "<group>";
 		};
-		252F7B172C81EB7C00851E8A /* delegates */ = {
+		252F7B172C81EB7C00851E8A /* listeners */ = {
 			isa = PBXGroup;
 			children = (
 				252F7AF22C7F217000851E8A /* SKDelegateCollection.swift */,
@@ -527,8 +529,9 @@
 				25F056E72C9E96950019822B /* SKListenerOnGetServerConfig.swift */,
 				25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */,
 				25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */,
+				258E0B892CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift */,
 			);
-			path = delegates;
+			path = listeners;
 			sourceTree = "<group>";
 		};
 		254AA1102B711FA500853B17 /* labels */ = {
@@ -1076,7 +1079,7 @@
 				25F056EE2C9FE8510019822B /* user */,
 				25F056DD2C9E903F0019822B /* firebase */,
 				25F056CA2C9D39670019822B /* network */,
-				252F7B172C81EB7C00851E8A /* delegates */,
+				252F7B172C81EB7C00851E8A /* listeners */,
 				25F94AF52B6FB8A600FC8A32 /* SKServicePremium.swift */,
 				25F3B40C2C084190007F156C /* SKServiceAppleProtect.swift */,
 				252F7AF02C7F20F800851E8A /* SKServiceCollection.swift */,
@@ -1491,6 +1494,7 @@
 				257D81282BC18BA900B5743B /* SignInAppleController.swift in Sources */,
 				252F7B0D2C80E62F00851E8A /* SKFile.swift in Sources */,
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,
+				258E0B8A2CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift in Sources */,
 				25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */,
 				25D4763A2B7C8E1100B5467D /* UIView.swift in Sources */,
 				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,

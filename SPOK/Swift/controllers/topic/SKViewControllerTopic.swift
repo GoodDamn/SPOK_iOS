@@ -36,31 +36,16 @@ final class SKViewControllerTopic
         systemName: "pause.fill"
     )
     
-    private var mIsPlaying = false
+    private var mIsPlaying = true
     
     private var mPlayer: AVPlayer? = nil
-    
-    override func onTransitionEnd() {
-        
-        guard let url = URL(
-            string: "https://firebasestorage.googleapis.com/v0/b/spok-relax-app.appspot.com/o/background_music.mp3?alt=media&token=b9b930e6-2658-4abf-8892-ddfd6d955fcb"
-        ) else {
-            return
-        }
-        
-        let item = AVPlayerItem(
-            url: url
-        )
-        
-        mPlayer = AVPlayer(
-            playerItem: item
-        )
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background()
+        
+        mServiceContent.onGetTopicUrl = self
         
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
@@ -78,7 +63,7 @@ final class SKViewControllerTopic
         lblTopicName.font = .extrabold(
             withSize: 34.nw() * w
         )
-        lblTopicName.text = topicName
+        lblTopicName.text = (topicName ?? "") + " \(topicId)"
         lblTopicName.textColor = .white
         lblTopicName.textAlignment = .center
         lblTopicName.sizeToFit()
@@ -170,6 +155,9 @@ final class SKViewControllerTopic
             btnClose
         )
         
+        mServiceContent.getContentUrlAsync(
+            id: topicId
+        )
     }
 }
 
@@ -202,6 +190,23 @@ extension SKViewControllerTopic {
             )
         }
         popBaseAnim()
+    }
+    
+}
+
+extension SKViewControllerTopic
+: SKListenerOnGetContentUrl {
+    
+    func onGetContentUrl(
+        url: URL
+    ) {
+        let item = AVPlayerItem(
+            url: url
+        )
+        
+        mPlayer = AVPlayer(
+            playerItem: item
+        )
     }
     
 }
