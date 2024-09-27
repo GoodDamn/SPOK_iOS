@@ -33,7 +33,7 @@ final class SKViewControllerTopic
         view.backgroundColor = .background()
         
         let w = view.frame.width
-        let h = view.frame.height
+        let h = view.frame.height - mInsets.top
         
         let lblTopicName = UILabel(
             frame: CGRect(
@@ -80,12 +80,33 @@ final class SKViewControllerTopic
             in: view
         )
         
+        let sizePlay = 103.nh() * h
+        let btnPlay = UIImageView(
+            frame: CGRect(
+                x: 0,
+                y: lblTopicType.frame.bottom() +
+                    160.nh() * h,
+                width: sizePlay,
+                height: sizePlay
+            )
+        )
+        
+        btnPlay.image = UIImage(
+            systemName: "play"
+        )
+        btnPlay.tintColor = .accent3()
+        btnPlay.backgroundColor = .white
+        btnPlay.layer.cornerRadius = btnPlay.height()
+            * 0.5
+        
+        btnPlay.centerH(
+            in: view
+        )
         
         let btnClose = ViewUtils.buttonClose(
             in: view,
-            sizeSquare: 59.nh() * h
+            sizeSquare: 118.nh()
         )
-        btnClose.backgroundColor = .green
         
         btnClose.onClick = { [weak self] v in
             self?.onClickBtnClose(v)
@@ -97,6 +118,10 @@ final class SKViewControllerTopic
         
         view.addSubview(
             lblTopicType
+        )
+        
+        view.addSubview(
+            btnPlay
         )
         
         view.addSubview(

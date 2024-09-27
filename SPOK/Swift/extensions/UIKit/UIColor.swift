@@ -9,6 +9,18 @@ import UIKit.UIColor
 
 extension UIColor {
     
+    static func accent3() -> UIColor? {
+        UIColor(
+            named: "accent3"
+        )
+    }
+    
+    static func accent2() -> UIColor? {
+        UIColor(
+            named: "accent2"
+        )
+    }
+    
     static func subtitle() -> UIColor? {
         UIColor(
             named: "subtitle"
