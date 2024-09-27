@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import AVKit
 import UIKit
 
 final class SKViewControllerTopic
@@ -20,7 +21,7 @@ final class SKViewControllerTopic
     
     var topicId = Int.min {
         didSet {
-            mNetworkUrl = "content/skc/\(topicId).skc"
+            mNetworkUrl = "content/skc/\(topicId).mp3"
         }
     }
     
@@ -36,6 +37,25 @@ final class SKViewControllerTopic
     )
     
     private var mIsPlaying = false
+    
+    private var mPlayer: AVPlayer? = nil
+    
+    override func onTransitionEnd() {
+        
+        guard let url = URL(
+            string: "https://firebasestorage.googleapis.com/v0/b/spok-relax-app.appspot.com/o/background_music.mp3?alt=media&token=b9b930e6-2658-4abf-8892-ddfd6d955fcb"
+        ) else {
+            return
+        }
+        
+        let item = AVPlayerItem(
+            url: url
+        )
+        
+        mPlayer = AVPlayer(
+            playerItem: item
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,8 +183,10 @@ extension SKViewControllerTopic {
         
         if mIsPlaying {
             v.image = mImagePlay
+            mPlayer?.pause()
         } else {
             v.image = mImagePause
+            mPlayer?.play()
         }
         
         v.setNeedsDisplay()
@@ -173,6 +195,12 @@ extension SKViewControllerTopic {
     private func onClickBtnClose(
         _ v: UIView
     ) {
+        if let it = mPlayer {
+            it.pause()
+            it.replaceCurrentItem(
+                with: nil
+            )
+        }
         popBaseAnim()
     }
     
