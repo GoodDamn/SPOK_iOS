@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 struct SKModelDeformQuad {
-    let from: CGPoint
-    let control: CGPoint
-    let to: CGPoint
+    var control: CGPoint
+    var to: CGPoint
 }

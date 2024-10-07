@@ -9,6 +9,12 @@ import UIKit.UIColor
 
 extension UIColor {
     
+    static func deform() -> UIColor? {
+        UIColor(
+            named: "deform"
+        )
+    }
+    
     static func accent3() -> UIColor? {
         UIColor(
             named: "accent3"

@@ -11,7 +11,26 @@ import UIKit
 final class SKViewDeform
 : UIView {
 
-    var quads: [SKModelDeformQuad]? = nil
+    var quads: [SKModelDeformQuad]? = nil {
+        didSet {
+            
+            if quads == nil {
+                return
+            }
+            
+            for i in 0..<quads!.count {
+                var it = quads![i]
+                
+                it.control.x *= frame.width
+                it.control.y *= frame.height
+                
+                it.to.x *= frame.width
+                it.to.y *= frame.height
+                
+                quads![i] = it
+            }
+        }
+    }
     
     override init(
         frame: CGRect
@@ -32,18 +51,18 @@ final class SKViewDeform
     override func draw(
         _ rect: CGRect
     ) {
-        print("draw::")
         guard let canvas = UIGraphicsGetCurrentContext() else {
-            print("canvas = nil")
             return
         }
         
-        print("draw::", quads?.count)
+        canvas.move(
+            to: CGPoint(
+                x: frame.width,
+                y: 0
+            )
+        )
         
         quads?.forEach { it in
-            canvas.move(
-                to: it.from
-            )
             
             canvas.addQuadCurve(
                 to: it.to,
@@ -52,7 +71,7 @@ final class SKViewDeform
             
         }
         canvas.setFillColor(
-            UIColor.systemBlue.cgColor
+            tintColor.cgColor
         )
         canvas.fillPath()
     }
