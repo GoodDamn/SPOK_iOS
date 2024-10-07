@@ -90,7 +90,9 @@
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25AA3DD82CB426A2008F1644 /* SKViewDeform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */; };
-		25AA3DDB2CB428EB008F1644 /* SKModelDeformQuad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDA2CB428EB008F1644 /* SKModelDeformQuad.swift */; };
+		25AA3DDB2CB428EB008F1644 /* SKShapeBezierQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */; };
+		25AA3DDE2CB44679008F1644 /* SKProtocolCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */; };
+		25AA3DE12CB447D3008F1644 /* SKShapeArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DE02CB447D3008F1644 /* SKShapeArc.swift */; };
 		25AB40322BC64BE1009E735F /* UIHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40312BC64BE1009E735F /* UIHeaderView.swift */; };
 		25AB40382BC6F46A009E735F /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40372BC6F46A009E735F /* CGSize.swift */; };
 		25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40392BC7A19A009E735F /* UITextButton.swift */; };
@@ -282,7 +284,9 @@
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewDeform.swift; sourceTree = "<group>"; };
-		25AA3DDA2CB428EB008F1644 /* SKModelDeformQuad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKModelDeformQuad.swift; sourceTree = "<group>"; };
+		25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeBezierQ.swift; sourceTree = "<group>"; };
+		25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProtocolCanvas.swift; sourceTree = "<group>"; };
+		25AA3DE02CB447D3008F1644 /* SKShapeArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeArc.swift; sourceTree = "<group>"; };
 		25AB40312BC64BE1009E735F /* UIHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeaderView.swift; sourceTree = "<group>"; };
 		25AB40372BC6F46A009E735F /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		25AB40392BC7A19A009E735F /* UITextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextButton.swift; sourceTree = "<group>"; };
@@ -675,10 +679,28 @@
 		25AA3DD92CB428CF008F1644 /* deform */ = {
 			isa = PBXGroup;
 			children = (
+				25AA3DDF2CB4470F008F1644 /* shapes */,
+				25AA3DDC2CB4465E008F1644 /* protocols */,
 				25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */,
-				25AA3DDA2CB428EB008F1644 /* SKModelDeformQuad.swift */,
 			);
 			path = deform;
+			sourceTree = "<group>";
+		};
+		25AA3DDC2CB4465E008F1644 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		25AA3DDF2CB4470F008F1644 /* shapes */ = {
+			isa = PBXGroup;
+			children = (
+				25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */,
+				25AA3DE02CB447D3008F1644 /* SKShapeArc.swift */,
+			);
+			path = shapes;
 			sourceTree = "<group>";
 		};
 		25D32DD62B68D67A00EAEA20 /* popups */ = {
@@ -1416,7 +1438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25883AA02C57657A00D46614 /* Int.swift in Sources */,
-				25AA3DDB2CB428EB008F1644 /* SKModelDeformQuad.swift in Sources */,
+				25AA3DDB2CB428EB008F1644 /* SKShapeBezierQ.swift in Sources */,
 				252F7AF52C7F25E100851E8A /* SKModelCollection.swift in Sources */,
 				2506227B2B4E6AE900FCD636 /* IntroSleepRootController.swift in Sources */,
 				25D476182B7B274F00B5467D /* Metadata.swift in Sources */,
@@ -1446,6 +1468,7 @@
 				25D75FF42C0598EE00EE1720 /* EmailConfirmationViewController.swift in Sources */,
 				25F94AE22B6E5E9F00FC8A32 /* AuthAppleController.swift in Sources */,
 				25F94AF32B6F94A300FC8A32 /* String.swift in Sources */,
+				25AA3DDE2CB44679008F1644 /* SKProtocolCanvas.swift in Sources */,
 				250622702B4D6EEB00FCD636 /* SKViewControllerProfile.swift in Sources */,
 				25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */,
 				257A7FAD2B6CE1B300BBEF5E /* SKModelPaymentSnapshot.swift in Sources */,
@@ -1512,6 +1535,7 @@
 				2501D36D2A836CF1002FC348 /* BottomNavigationBar.swift in Sources */,
 				258E0B8A2CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift in Sources */,
 				25F94AF12B6F7DD700FC8A32 /* Log.swift in Sources */,
+				25AA3DE12CB447D3008F1644 /* SKShapeArc.swift in Sources */,
 				25D4763A2B7C8E1100B5467D /* UIView.swift in Sources */,
 				255C04F72B4FE6BD006D9FD0 /* CarouselView.swift in Sources */,
 				25DB9AC22B565AC600B5359F /* SheepCounterViewController.swift in Sources */,

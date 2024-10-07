@@ -183,57 +183,75 @@ extension SKViewControllerTopic {
                 height: hh
             )
         )
+        let fillColor = (
+            UIColor.deform() ?? .systemBlue
+        ).cgColor
+        
         
         deformView.quads = [
-            SKModelDeformQuad(
-                control: CGPoint(
-                    x: 0.66,
+            SKShapeBezierQ(
+                points: [
+                    CGPoint(
+                        x: 0.66,
+                        y: 0
+                    ),
+                    CGPoint(
+                        x: 0.2838,
+                        y: 0
+                    )
+                ],
+                move: CGPoint(
+                    x: ww,
                     y: 0
                 ),
-                to: CGPoint(
-                    x: 0.2838,
-                    y: 0
-                )
+                fillColor: fillColor
             ),
-            SKModelDeformQuad(
-                control: CGPoint(
-                    x: 0.2455,
-                    y: 0.1217
-                ),
-                to: CGPoint(
-                    x: 0.1333,
-                    y: 0.2371
-                )
+            SKShapeBezierQ(
+                points: [
+                    CGPoint(
+                        x: 0.2455,
+                        y: 0.1217
+                    ),
+                    CGPoint(
+                        x: 0.1333,
+                        y: 0.2371
+                    )
+                ],
+                fillColor: fillColor
             ),
-            SKModelDeformQuad(
-                control: CGPoint(
-                    x: -0.0969,
-                    y: 0.5032
-                ),
-                to: CGPoint(
-                    x: 0.0792,
-                    y: 0.7211
-                )
+            SKShapeBezierQ(
+                points: [
+                    CGPoint(
+                        x: -0.0969,
+                        y: 0.5032
+                    ),
+                    CGPoint(
+                        x: 0.0792,
+                        y: 0.7211
+                    )
+                ],
+                fillColor: fillColor
             ),
-            SKModelDeformQuad(
-                control: CGPoint(
-                    x: 0.4581,
-                    y: 1.1057
-                ),
-                to: CGPoint(
-                    x: 1.0,
-                    y: 0.955
-                )
+            SKShapeBezierQ(
+                points: [
+                    CGPoint(
+                        x: 0.4581,
+                        y: 1.1057
+                    ),
+                    CGPoint(
+                        x: 1.0,
+                        y: 0.955
+                    )
+                ],
+                fillColor: fillColor
             )
         ]
-        
-        
-        deformView.backgroundColor = .clear
-        deformView.tintColor = .deform()
         
         view.addSubview(
             deformView
         )
+        
+        deformView.backgroundColor = .clear
         
     }
     

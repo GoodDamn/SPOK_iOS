@@ -11,23 +11,18 @@ import UIKit
 final class SKViewDeform
 : UIView {
 
-    var quads: [SKModelDeformQuad]? = nil {
+    var quads: [SKProtocolCanvas]? = nil {
         didSet {
             
             if quads == nil {
                 return
             }
             
-            for i in 0..<quads!.count {
-                var it = quads![i]
-                
-                it.control.x *= frame.width
-                it.control.y *= frame.height
-                
-                it.to.x *= frame.width
-                it.to.y *= frame.height
-                
-                quads![i] = it
+            for i in quads!.indices {
+                for j in quads![i].points.indices {
+                    quads![i].points[j].x *= frame.width
+                    quads![i].points[j].y *= frame.height
+                }
             }
         }
     }
@@ -51,29 +46,16 @@ final class SKViewDeform
     override func draw(
         _ rect: CGRect
     ) {
-        guard let canvas = UIGraphicsGetCurrentContext() else {
+        guard var canvas = UIGraphicsGetCurrentContext() else {
             return
         }
         
-        canvas.move(
-            to: CGPoint(
-                x: frame.width,
-                y: 0
-            )
-        )
-        
         quads?.forEach { it in
-            
-            canvas.addQuadCurve(
-                to: it.to,
-                control: it.control
+            it.draw(
+                canvas: &canvas
             )
-            
         }
-        canvas.setFillColor(
-            tintColor.cgColor
-        )
-        canvas.fillPath()
+        
     }
     
 }
