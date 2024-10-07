@@ -28,8 +28,6 @@ final class SKViewControllerTopic
     var topicType: String? = nil
     var topicName: String? = nil
     
-    private var mLabelDebug: UILabel? = nil
-    
     private let mImagePlay = UIImage(
         systemName: "play.fill"
     )
@@ -97,24 +95,6 @@ final class SKViewControllerTopic
             in: view
         )
         
-        mLabelDebug = UILabel(
-            frame: CGRect(
-                x: 0,
-                y: h-150,
-                width: w,
-                height: 150
-            )
-        )
-        
-        if let lblDebug = mLabelDebug {
-            lblDebug.numberOfLines = 0
-            lblDebug.textColor = .white
-            view.addSubview(
-                lblDebug
-            )
-        }
-        
-        
         let sizePlay = 103.nh() * h
         let btnPlay = UIImageButton(
             frame: CGRect(
@@ -159,6 +139,11 @@ final class SKViewControllerTopic
             self?.onClickBtnClose(v)
         }
         
+        setupDeformView(
+            w: w,
+            h: h
+        )
+        
         view.addSubview(
             lblTopicName
         )
@@ -175,7 +160,6 @@ final class SKViewControllerTopic
             btnClose
         )
         
-        mLabelDebug?.text = "Getting content url"
         mServiceContent.getContentUrlAsync(
             id: topicId
         )
@@ -185,6 +169,60 @@ final class SKViewControllerTopic
 
 extension SKViewControllerTopic {
     
+    private func setupDeformView(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        let ww = w * 0.6
+        let hh = h * 0.4
+        let deformView = SKViewDeform(
+            frame: CGRect(
+                x: w-ww,
+                y: 0,
+                width: ww,
+                height: hh
+            )
+        )
+        
+        deformView.quads = [
+            SKModelDeformQuad(
+                from: CGPoint(
+                    x: ww,
+                    y: 0
+                ),
+                control: CGPoint(
+                    x: 0,
+                    y: hh * 0.5
+                ),
+                to: CGPoint(
+                    x: 0,
+                    y: hh
+                )
+            ),
+            SKModelDeformQuad(
+                from: CGPoint(
+                    x: 0,
+                    y: hh
+                ),
+                control: CGPoint(
+                    x: ww,
+                    y: hh * 0.5
+                ),
+                to: CGPoint(
+                    x: ww,
+                    y: 0
+                )
+            )
+        ]
+        
+        view.addSubview(
+            deformView
+        )
+        
+        deformView.backgroundColor = .clear
+        
+    }
+    
     private func onClickBtnPlay(
         _ v: UIImageButton
     ) {
@@ -193,13 +231,9 @@ extension SKViewControllerTopic {
         if mIsPlaying {
             v.image = mImagePlay
             mPlayer?.pause()
-            
-            mLabelDebug?.text = "pause"
         } else {
             v.image = mImagePause
             mPlayer?.play()
-            
-            mLabelDebug?.text = "play"
         }
         
         v.setNeedsDisplay()
@@ -225,79 +259,13 @@ extension SKViewControllerTopic
     func onGetContentUrl(
         url: URL
     ) {
-        mLabelDebug?.text = "url: \(url.absoluteString)"
         let item = AVPlayerItem(
             url: url
         )
         
-        mLabelDebug?.text = "setup player item"
-        
         mPlayer = AVPlayer(
             playerItem: item
         )
-        mLabelDebug?.text = "setup player"
         
-        mPlayer?.observe(
-            \.status,
-             options: [.new, .old]
-        ) { [weak self] playerItem, change in
-            DispatchQueue.ui {
-                self?.handleStatus(
-                    playerItem: playerItem
-                )
-            }
-        }
-        
-        if let key = mPlayer?.observe(
-            \.timeControlStatus,
-             changeHandler: { [weak self] playerItem, change in
-                 DispatchQueue.ui {
-                     self?.handleTimeControlStatus(
-                         playerItem: playerItem
-                     )
-                 }
-             }
-        ) {
-            
-        }
     }
-    
-    private func handleTimeControlStatus(
-        playerItem: AVPlayer
-    ) {
-        switch (playerItem.timeControlStatus) {
-        case .paused:
-            mLabelDebug?.text = "audio paused"
-            break
-        case .playing:
-            mLabelDebug?.text = "playing audio"
-            break
-        case .waitingToPlayAtSpecifiedRate:
-            mLabelDebug?.text = "waiting to play at specific rate"
-            break
-        default:
-            mLabelDebug?.text = "default timeControlStatus"
-            break
-        }
-    }
-    
-    private func handleStatus(
-        playerItem: AVPlayer
-    ) {
-        switch (playerItem.status) {
-        case .readyToPlay:
-            mLabelDebug?.text = "ready to play"
-            break
-        case .failed :
-            mLabelDebug?.text = "failed to play"
-            break
-        case .unknown :
-            mLabelDebug?.text = "unkown to play"
-            break
-        default:
-            mLabelDebug?.text = "default state"
-            break
-        }
-    }
-    
 }
