@@ -113,31 +113,20 @@ final class SKViewControllerTopic
             self?.onClickBtnPlay(v)
         }
         
-        btnPlay.image = UIImage(
-            systemName: "play.fill"
-        )
+        btnPlay.image = mImagePlay
         btnPlay.scale = CGPoint(
             x: 0.65,
             y: 0.65
         )
         btnPlay.tintColor = .accent3()
-        btnPlay.backgroundColor = .white
-        btnPlay.layer.cornerRadius = btnPlay.height()
-            * 0.5
+        btnPlay.backgroundColor = .accent2()
+        btnPlay.layer.cornerRadius = btnPlay
+            .height() * 0.5
         btnPlay.clipsToBounds = true
         
         btnPlay.centerH(
             in: view
         )
-        
-        let btnClose = ViewUtils.buttonClose(
-            in: view,
-            sizeSquare: 118.nh()
-        )
-        
-        btnClose.onClick = { [weak self] v in
-            self?.onClickBtnClose(v)
-        }
         
         setupDeformView(
             w: w,
@@ -166,9 +155,7 @@ final class SKViewControllerTopic
             btnPlay
         )
         
-        view.addSubview(
-            btnClose
-        )
+        setupBtnClose()
         
         mServiceContent.getContentUrlAsync(
             id: topicId
@@ -178,6 +165,29 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupBtnClose() {
+        let btnClose = ViewUtils.buttonClose(
+            in: view,
+            sizeSquare: 118.nh(),
+            iconProp: 0.2
+        )
+        
+        btnClose.tintColor = .accent3()
+        btnClose.backgroundColor = .accent2()
+        btnClose.onClick = { [weak self] v in
+            self?.onClickBtnClose(v)
+        }
+        
+        btnClose.layer.cornerRadius = btnClose
+            .height() * 0.5
+        
+        btnClose.clipsToBounds = true
+        
+        view.addSubview(
+            btnClose
+        )
+    }
     
     private func setupDeformCircle2(
         w: CGFloat,
@@ -219,7 +229,7 @@ extension SKViewControllerTopic {
                 strokeColor: strokeColor,
                 strokeWidth: f * 0.2,
                 radius: f * 0.4,
-                startAngle: .pi,
+                startAngle: .pi * 1.05,
                 endAngle: .pi * 1.35
             )
         ]
