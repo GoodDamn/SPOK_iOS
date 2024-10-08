@@ -190,9 +190,19 @@ extension SKViewControllerTopic {
         slider.backgroundColor = .clear
         
         slider.strokeWidth = slider.height() * 0.1
-        slider.radius = slider.height() * 0.17
+        slider.radius = slider.height() * 0.25
         slider.trackColor = (
             UIColor.clock() ?? .black
+        ).cgColor
+        
+        slider.backgroundProgressColor = UIColor
+            .white
+            .withAlphaComponent(
+                0.3
+            ).cgColor
+        
+        slider.progressColor = (
+            UIColor.accent2() ?? .white
         ).cgColor
         
         slider.centerH(

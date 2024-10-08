@@ -56,7 +56,10 @@ final class SKViewSlider
         )
         
         canvas.addLine(
-            to: pp
+            to: CGPoint(
+                x: frame.width - radius,
+                y: y
+            )
         )
         canvas.setLineCap(
             .round
@@ -65,9 +68,30 @@ final class SKViewSlider
             strokeWidth
         )
         canvas.setStrokeColor(
+            backgroundProgressColor
+        )
+        canvas.strokePath()
+        
+        
+        
+        
+        canvas.move(
+            to: CGPoint(
+                x: x,
+                y: y
+            )
+        )
+        canvas.addLine(
+            to: pp
+        )
+        canvas.setStrokeColor(
             progressColor
         )
         canvas.strokePath()
+        
+        
+        
+        
         
         canvas.addArc(
             center: pp,
