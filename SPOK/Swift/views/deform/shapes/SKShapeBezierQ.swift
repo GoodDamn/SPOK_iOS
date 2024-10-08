@@ -26,6 +26,10 @@ struct SKShapeBezierQ
     func draw(
         canvas: inout CGContext
     ) {
+        canvas.setFillColor(
+            fillColor
+        )
+        
         if move != .zero {
             canvas.move(
                 to: move
@@ -36,12 +40,6 @@ struct SKShapeBezierQ
             to: points[1],
             control: points[0]
         )
-        
-        canvas.setFillColor(
-            fillColor
-        )
-        
-        canvas.fillPath()
     }
     
     

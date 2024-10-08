@@ -144,6 +144,11 @@ final class SKViewControllerTopic
             h: h
         )
         
+        setupDeformCircle(
+            w: w,
+            h: h
+        )
+        
         view.addSubview(
             lblTopicName
         )
@@ -169,6 +174,55 @@ final class SKViewControllerTopic
 
 extension SKViewControllerTopic {
     
+    private func setupDeformCircle(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        let ww = w * 192.nw()
+        let hh = h * 174.nh()
+        
+        let f = ww > hh ? hh : ww
+        
+        let v = SKViewDeform(
+            frame: CGRect(
+                x: 0,
+                y: h-hh*0.8,
+                width: ww,
+                height: hh
+            )
+        )
+        
+        let strokeColor = (
+            UIColor.deform() ?? .black
+        ).cgColor
+        
+        v.isFillPath = false
+        
+        v.quads = [
+            SKShapeArc(
+                points: [
+                    CGPoint(
+                        x: 0,
+                        y: 1.0
+                    )
+                ],
+                move: CGPoint(
+                    x: 0,
+                    y: hh
+                ),
+                strokeColor: strokeColor,
+                strokeWidth: f * 0.3,
+                radius: f * 0.8,
+                startAngle: .pi / -2,
+                endAngle: 0
+            )
+        ]
+        
+        view.addSubview(v)
+        
+        v.backgroundColor = .clear
+    }
+    
     private func setupDeformView(
         w: CGFloat,
         h: CGFloat
@@ -187,6 +241,7 @@ extension SKViewControllerTopic {
             UIColor.deform() ?? .systemBlue
         ).cgColor
         
+        deformView.isFillPath = true
         
         deformView.quads = [
             SKShapeBezierQ(

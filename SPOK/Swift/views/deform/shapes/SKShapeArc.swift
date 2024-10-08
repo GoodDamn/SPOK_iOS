@@ -49,10 +49,8 @@ struct SKShapeArc
             radius: radius,
             startAngle: startAngle,
             endAngle: endAngle,
-            clockwise: true
+            clockwise: false
         )
-        
-        canvas.strokePath()
     }
     
 }

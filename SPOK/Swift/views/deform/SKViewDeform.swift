@@ -27,6 +27,8 @@ final class SKViewDeform
         }
     }
     
+    var isFillPath = false
+    
     override init(
         frame: CGRect
     ) {
@@ -54,6 +56,12 @@ final class SKViewDeform
             it.draw(
                 canvas: &canvas
             )
+        }
+        
+        if isFillPath {
+            canvas.fillPath()
+        } else {
+            canvas.strokePath()
         }
         
     }
