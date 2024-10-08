@@ -44,12 +44,16 @@ struct SKShapeArc
             strokeColor
         )
         
-        canvas.addArc(
-            center: points[0],
+        let p = UIBezierPath(
+            arcCenter: points[0],
             radius: radius,
             startAngle: startAngle,
             endAngle: endAngle,
             clockwise: false
+        ).cgPath
+        
+        canvas.addPath(
+            p
         )
     }
     

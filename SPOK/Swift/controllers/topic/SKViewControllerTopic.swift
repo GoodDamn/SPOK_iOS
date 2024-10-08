@@ -149,6 +149,11 @@ final class SKViewControllerTopic
             h: h
         )
         
+        setupDeformCircle2(
+            w: w,
+            h: h
+        )
+        
         view.addSubview(
             lblTopicName
         )
@@ -173,6 +178,55 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupDeformCircle2(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        let ww = w * 243.nw()
+        let hh = h * 233.nh()
+        
+        let f = ww > hh ? hh : ww
+        
+        let strokeColor = (
+            UIColor.deform() ?? .black
+        ).cgColor
+        
+        let v = SKViewDeform(
+            frame: CGRect(
+                x: w - ww * 0.5,
+                y: h - hh * 0.75,
+                width: ww,
+                height: hh
+            )
+        )
+        
+        v.isFillPath = false
+        v.alpha = 0.5
+        
+        v.quads = [
+            SKShapeArc(
+                points: [
+                    CGPoint(
+                        x: 0.4,
+                        y: 0.25
+                    )
+                ],
+                move: CGPoint(
+                    x: 0.4 * ww,
+                    y: 0.25 * hh
+                ),
+                strokeColor: strokeColor,
+                strokeWidth: f * 0.2,
+                radius: f * 0.4,
+                startAngle: .pi,
+                endAngle: .pi * 1.35
+            )
+        ]
+        
+        view.addSubview(v)
+        v.backgroundColor = .clear
+    }
     
     private func setupDeformCircle(
         w: CGFloat,
@@ -211,10 +265,10 @@ extension SKViewControllerTopic {
                     y: hh
                 ),
                 strokeColor: strokeColor,
-                strokeWidth: f * 0.3,
+                strokeWidth: f * 0.4,
                 radius: f * 0.8,
-                startAngle: .pi / -2,
-                endAngle: 0
+                startAngle: 0,
+                endAngle: .pi / 2
             )
         ]
         
