@@ -9,6 +9,12 @@ import UIKit.UIColor
 
 extension UIColor {
     
+    static func clock() -> UIColor? {
+        UIColor(
+            named: "clock"
+        )
+    }
+    
     static func deform() -> UIColor? {
         UIColor(
             named: "deform"

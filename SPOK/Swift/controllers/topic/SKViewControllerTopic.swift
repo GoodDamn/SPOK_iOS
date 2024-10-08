@@ -155,6 +155,11 @@ final class SKViewControllerTopic
             btnPlay
         )
         
+        setupSlider(
+            w: w,
+            h: h
+        )
+        
         setupBtnClose()
         
         mServiceContent.getContentUrlAsync(
@@ -165,6 +170,40 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupSlider(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        let ww = w * 333.nw()
+        let hh = h * 50.nh()
+        
+        let slider = SKViewSlider(
+            frame: CGRect(
+                x: 0,
+                y: h * 0.75,
+                width: ww,
+                height: hh
+            )
+        )
+        
+        slider.backgroundColor = .clear
+        
+        slider.strokeWidth = slider.height() * 0.1
+        slider.radius = slider.height() * 0.17
+        slider.trackColor = (
+            UIColor.clock() ?? .black
+        ).cgColor
+        
+        slider.centerH(
+            in: view
+        )
+        
+        view.addSubview(
+            slider
+        )
+        
+    }
     
     private func setupBtnClose() {
         let btnClose = ViewUtils.buttonClose(

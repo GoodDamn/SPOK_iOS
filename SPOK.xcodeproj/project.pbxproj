@@ -93,6 +93,7 @@
 		25AA3DDB2CB428EB008F1644 /* SKShapeBezierQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */; };
 		25AA3DDE2CB44679008F1644 /* SKProtocolCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */; };
 		25AA3DE12CB447D3008F1644 /* SKShapeArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DE02CB447D3008F1644 /* SKShapeArc.swift */; };
+		25AA3DE32CB4FB20008F1644 /* SKViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DE22CB4FB20008F1644 /* SKViewSlider.swift */; };
 		25AB40322BC64BE1009E735F /* UIHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40312BC64BE1009E735F /* UIHeaderView.swift */; };
 		25AB40382BC6F46A009E735F /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40372BC6F46A009E735F /* CGSize.swift */; };
 		25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AB40392BC7A19A009E735F /* UITextButton.swift */; };
@@ -287,6 +288,7 @@
 		25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeBezierQ.swift; sourceTree = "<group>"; };
 		25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProtocolCanvas.swift; sourceTree = "<group>"; };
 		25AA3DE02CB447D3008F1644 /* SKShapeArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeArc.swift; sourceTree = "<group>"; };
+		25AA3DE22CB4FB20008F1644 /* SKViewSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewSlider.swift; sourceTree = "<group>"; };
 		25AB40312BC64BE1009E735F /* UIHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHeaderView.swift; sourceTree = "<group>"; };
 		25AB40372BC6F46A009E735F /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		25AB40392BC7A19A009E735F /* UITextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextButton.swift; sourceTree = "<group>"; };
@@ -703,6 +705,14 @@
 			path = shapes;
 			sourceTree = "<group>";
 		};
+		25AA3DE42CB4FB3F008F1644 /* slider */ = {
+			isa = PBXGroup;
+			children = (
+				25AA3DE22CB4FB20008F1644 /* SKViewSlider.swift */,
+			);
+			path = slider;
+			sourceTree = "<group>";
+		};
 		25D32DD62B68D67A00EAEA20 /* popups */ = {
 			isa = PBXGroup;
 			children = (
@@ -787,6 +797,7 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				25AA3DE42CB4FB3F008F1644 /* slider */,
 				25AA3DD92CB428CF008F1644 /* deform */,
 				252F7AED2C66097800851E8A /* editText */,
 				25883AA42C57BB5700D46614 /* scrollView */,
@@ -1451,6 +1462,7 @@
 				259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */,
 				25F056F32C9FE9670019822B /* SKListenerOnGetUserData.swift in Sources */,
 				25F056D52C9D43850019822B /* UIApplication.swift in Sources */,
+				25AA3DE32CB4FB20008F1644 /* SKViewSlider.swift in Sources */,
 				25F94AE82B6E626100FC8A32 /* SignInListener.swift in Sources */,
 				250622792B4E5E5700FCD636 /* SimplePageViewController.swift in Sources */,
 				2506227F2B4E70FA00FCD636 /* OneShotViewController.swift in Sources */,
