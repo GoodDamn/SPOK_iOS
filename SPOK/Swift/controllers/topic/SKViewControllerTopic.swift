@@ -33,7 +33,8 @@ final class SKViewControllerTopic
     private var mNetworkUrl = ""
     private var mPlayer: AVAudioPlayer? = nil
     private let mSlider = SKViewSlider()
-
+    private var mTimer: Timer? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -182,7 +183,7 @@ extension SKViewControllerTopic {
         )
         
         slider.backgroundColor = .clear
-        
+        slider.progress = 0.0
         slider.strokeWidth = slider.height() * 0.1
         slider.radius = slider.height() * 0.25
         slider.trackColor = (
@@ -439,10 +440,17 @@ extension SKViewControllerTopic {
     private func onClickBtnClose(
         _ v: UIView
     ) {
-        if let it = mPlayer {
-            it.stop()
-        }
+        mPlayer?.stop()
+        mTimer?.invalidate()
         popBaseAnim()
+    }
+    
+    @objc private func onTickPlayer() {
+        guard let player = mPlayer else {
+            return
+        }
+        mSlider.progress = player.currentTime / player.duration
+        mSlider.setNeedsDisplay()
     }
     
 }
@@ -470,7 +478,7 @@ extension SKViewControllerTopic
     func onGetTopicContent(
         model: SKModelTopicContent
     ) {
-        print("onGetTopicContent:", model.data)
+        Log.d("onGetTopicContent:", model.data)
         if model.data == nil {
             return
         }
@@ -481,19 +489,26 @@ extension SKViewControllerTopic
                 fileTypeHint: AVFileType.mp3.rawValue
             )
             mPlayer?.prepareToPlay()
+            
+            mTimer = Timer.scheduledTimer(
+                timeInterval: 0.1,
+                target: self,
+                selector: #selector(
+                    onTickPlayer
+                ),
+                userInfo: nil,
+                repeats: true
+            )
+            
         } catch {
             Log.d(
                 "onGetTopicContent: ERROR", error
             )
         }
-        DispatchQueue.ui { [weak self] in
-            guard let self = self else {
-                return
-            }
-            self.mSlider.isUserInteractionEnabled = true
-            self.mSlider.progress = 0
-            self.mSlider.setNeedsDisplay()
-        }
+        
+        mSlider.isUserInteractionEnabled = true
+        mSlider.progress = 0
+        mSlider.setNeedsDisplay()
     }
     
 }
