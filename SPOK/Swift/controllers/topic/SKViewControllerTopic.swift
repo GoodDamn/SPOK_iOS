@@ -221,16 +221,11 @@ extension SKViewControllerTopic {
             iconProp: 0.2
         )
         
-        btnClose.tintColor = .accent3()
-        btnClose.backgroundColor = .accent2()
+        btnClose.tintColor = .white
+        btnClose.backgroundColor = .clear
         btnClose.onClick = { [weak self] v in
             self?.onClickBtnClose(v)
         }
-        
-        btnClose.layer.cornerRadius = btnClose
-            .height() * 0.5
-        
-        btnClose.clipsToBounds = true
         
         view.addSubview(
             btnClose
