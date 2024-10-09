@@ -15,11 +15,10 @@ extension AVAsset {
         exten: String
     ) -> (AVAsset, URL) {
         
-        let tempUrl = FileManager
-            .temp(
-                data: &data,
-                exten: exten
-            )
+        let tempUrl = FileManager.temp(
+            data: &data,
+            exten: exten
+        )
         
         let asset = AVAsset(
             url: tempUrl
@@ -48,10 +47,9 @@ extension AVAsset {
             .commonKeyArtist
         )
         
-        FileManager
-            .delete(
-                url: url
-            )
+        FileManager.delete(
+            url: url
+        )
         
         return Metadata(
             title: title,

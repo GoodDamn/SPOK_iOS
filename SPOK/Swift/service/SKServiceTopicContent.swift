@@ -127,6 +127,7 @@ final class SKServiceTopicContent {
             guard var data = data, error == nil else {
                 return
             }
+            
             self?.onGetData(
                 data: &data
             )
@@ -160,7 +161,6 @@ final class SKServiceTopicContent {
     private final func onGetData(
         data: inout Data
     ) {
-        
         mServiceCache.writeData(
             data: &data
         )

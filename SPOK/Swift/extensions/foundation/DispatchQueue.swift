@@ -40,7 +40,7 @@ extension DispatchQueue {
     ) {
         DispatchQueue(
             label: "shitApple",
-            qos: .userInitiated
+            qos: .default
         ).async(
             execute: c
         )

@@ -33,6 +33,7 @@ final class SKViewControllerTopic
     private let mSlider = SKViewSlider()
     private let mLabelCurrentTime = UILabel()
     private let mLabelFinishTime = UILabel()
+    private let mLabelMeta = UILabela()
     
     private var mNetworkUrl = ""
     private var mPlayer: AVAudioPlayer? = nil
@@ -186,6 +187,11 @@ final class SKViewControllerTopic
             .frame
             .width - offsetXTime
         
+        setupLabelMeta(
+            w: w,
+            h: h
+        )
+        
         
         mServiceContent.getContent(
             id: topicId
@@ -195,6 +201,26 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupLabelMeta(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        mLabelMeta.frame = CGRect(
+            x: 0,
+            y: h * 839.nh(),
+            width: w,
+            height: 0
+        )
+        mLabelMeta.textColor = .white
+        mLabelMeta.font = .semibold(
+            withSize: w * 16.nw()
+        )
+        
+        view.addSubview(
+            mLabelMeta
+        )
+    }
     
     private func setupLabelTime(
         w: CGFloat,
@@ -535,8 +561,11 @@ extension SKViewControllerTopic
         }
         
         do {
+            guard var dd = model.data else {
+                return
+            }
             let player = try AVAudioPlayer(
-                data: model.data!,
+                data: dd,
                 fileTypeHint: AVFileType.mp3.rawValue
             )
             player.prepareToPlay()
@@ -551,6 +580,17 @@ extension SKViewControllerTopic
                 .toTimeString()
             
             mLabelFinishTime.sizeToFit()
+            
+            if let meta = AVAsset.mp3Meta(
+                from: &dd
+            ) {
+                mLabelMeta.text = "\(meta.artist) - \(meta.title)"
+                mLabelMeta.attribute()
+                mLabelMeta.sizeToFit()
+                mLabelMeta.centerH(
+                    in: view
+                )
+            }
             
             mPlayer = player
             
