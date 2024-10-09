@@ -25,10 +25,18 @@ final class SKViewSlider
     
     var strokeWidth: CGFloat = 3
     
-    var radius: CGFloat = 5
+    var radius: CGFloat = 5 {
+        didSet {
+            maxProgressX = frame.width - radius
+            mDtProgress = maxProgressX - radius
+        }
+    }
     var progress: CGFloat = 0.5
     
     final weak var onChangeProgress: SKIListenerOnChangeProgress? = nil
+    
+    private var maxProgressX: CGFloat = 0
+    private var mDtProgress: CGFloat = 0
     
     override func draw(
         _ rect: CGRect
@@ -43,10 +51,9 @@ final class SKViewSlider
         
         let x = radius
         let y = frame.height * 0.5
-        let maxProgress = frame.width - radius
         
         let pp = CGPoint(
-            x: x + maxProgress * progress,
+            x: x + mDtProgress * progress,
             y: y
         )
         
@@ -59,7 +66,7 @@ final class SKViewSlider
         
         canvas.addLine(
             to: CGPoint(
-                x: frame.width - radius,
+                x: maxProgressX,
                 y: y
             )
         )
@@ -114,9 +121,17 @@ final class SKViewSlider
             return
         }
         
-        progress = touch.location(
+        let x = touch.location(
             in: self
-        ).x / frame.width
+        ).x
+        
+        if x < radius {
+            progress = 0
+        } else if x > maxProgressX {
+            progress = 1.0
+        } else {
+            progress = (x-radius) / mDtProgress
+        }
         
         onChangeProgress?.onChangeProgress(
             progress: progress
