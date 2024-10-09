@@ -28,6 +28,8 @@ final class SKViewSlider
     var radius: CGFloat = 5
     var progress: CGFloat = 0.5
     
+    final weak var onChangeProgress: SKIListenerOnChangeProgress? = nil
+    
     override func draw(
         _ rect: CGRect
     ) {
@@ -115,6 +117,10 @@ final class SKViewSlider
         progress = touch.location(
             in: self
         ).x / frame.width
+        
+        onChangeProgress?.onChangeProgress(
+            progress: progress
+        )
         
         setNeedsDisplay()
     }

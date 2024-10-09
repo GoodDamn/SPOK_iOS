@@ -7,17 +7,10 @@
 
 import Foundation
 import AVFoundation
-import AVKit
 import UIKit
 
 final class SKViewControllerTopic
 : StackViewController {
-    
-    private var mCurrentPlayer: AVAudioPlayer? = nil
-    
-    private let mServiceContent = SKServiceTopicContent()
-    
-    private var mNetworkUrl = ""
     
     var topicId = Int.min {
         didSet {
@@ -36,16 +29,18 @@ final class SKViewControllerTopic
         systemName: "pause.fill"
     )
     
-    private var mIsPlaying = true
-    
-    private var mPlayer: AVPlayer? = nil
+    private let mServiceContent = SKServiceTopicContent()
+    private var mNetworkUrl = ""
+    private var mPlayer: AVAudioPlayer? = nil
+    private let mSlider = SKViewSlider()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background()
         
-        mServiceContent.onGetTopicUrl = self
+        mServiceContent.onGetTopicContent = self
+        mServiceContent.onProgressDownload = self
         
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
@@ -162,7 +157,7 @@ final class SKViewControllerTopic
         
         setupBtnClose()
         
-        mServiceContent.getContentUrlAsync(
+        mServiceContent.getContent(
             id: topicId
         )
     }
@@ -178,13 +173,12 @@ extension SKViewControllerTopic {
         let ww = w * 333.nw()
         let hh = h * 50.nh()
         
-        let slider = SKViewSlider(
-            frame: CGRect(
-                x: 0,
-                y: h * 0.75,
-                width: ww,
-                height: hh
-            )
+        let slider = mSlider
+        slider.frame = CGRect(
+            x: 0,
+            y: h * 0.75,
+            width: ww,
+            height: hh
         )
         
         slider.backgroundColor = .clear
@@ -204,6 +198,10 @@ extension SKViewControllerTopic {
         slider.progressColor = (
             UIColor.accent2() ?? .white
         ).cgColor
+        
+        slider.onChangeProgress = self
+        
+        slider.isUserInteractionEnabled = false
         
         slider.centerH(
             in: view
@@ -426,16 +424,15 @@ extension SKViewControllerTopic {
     private func onClickBtnPlay(
         _ v: UIImageButton
     ) {
-        mIsPlaying = !mIsPlaying
-        
-        if mIsPlaying {
-            v.image = mImagePlay
-            mPlayer?.pause()
-        } else {
-            v.image = mImagePause
-            mPlayer?.play()
+        if let player = mPlayer {
+            if player.isPlaying {
+                v.image = mImagePlay
+                player.pause()
+            } else {
+                v.image = mImagePause
+                player.play()
+            }
         }
-        
         v.setNeedsDisplay()
     }
     
@@ -443,10 +440,7 @@ extension SKViewControllerTopic {
         _ v: UIView
     ) {
         if let it = mPlayer {
-            it.pause()
-            it.replaceCurrentItem(
-                with: nil
-            )
+            it.stop()
         }
         popBaseAnim()
     }
@@ -454,18 +448,65 @@ extension SKViewControllerTopic {
 }
 
 extension SKViewControllerTopic
-: SKListenerOnGetContentUrl {
+: SKIListenerOnChangeProgress {
     
-    func onGetContentUrl(
-        url: URL
+    func onChangeProgress(
+        progress: CGFloat
     ) {
-        let item = AVPlayerItem(
-            url: url
-        )
+        guard let player = mPlayer else {
+            return
+        }
         
-        mPlayer = AVPlayer(
-            playerItem: item
-        )
-        
+        player.currentTime = TimeInterval(
+            progress
+        ) * player.duration
     }
+    
+}
+
+extension SKViewControllerTopic
+: SKDelegateOnGetTopicContent {
+    
+    func onGetTopicContent(
+        model: SKModelTopicContent
+    ) {
+        print("onGetTopicContent:", model.data)
+        if model.data == nil {
+            return
+        }
+        
+        do {
+            mPlayer = try AVAudioPlayer(
+                data: model.data!,
+                fileTypeHint: AVFileType.mp3.rawValue
+            )
+            mPlayer?.prepareToPlay()
+        } catch {
+            Log.d(
+                "onGetTopicContent: ERROR", error
+            )
+        }
+        DispatchQueue.ui { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.mSlider.isUserInteractionEnabled = true
+            self.mSlider.progress = 0
+            self.mSlider.setNeedsDisplay()
+        }
+    }
+    
+}
+
+extension SKViewControllerTopic
+: SKDelegateOnProgressDownload {
+    
+    func onProgressDownload(
+        progress: CGFloat
+    ) {
+        print("progress:", progress)
+        mSlider.progress = progress
+        mSlider.setNeedsDisplay()
+    }
+    
 }

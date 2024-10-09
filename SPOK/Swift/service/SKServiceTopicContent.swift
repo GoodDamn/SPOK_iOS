@@ -10,7 +10,7 @@ import FirebaseStorage
 
 final class SKServiceTopicContent {
     
-    private static let DIR = "skc"
+    private static let DIR = "mp3"
     private static let maxSize: Int64 = 50 * 1024 * 1024
     
     private let mReference = Storage
@@ -60,7 +60,7 @@ final class SKServiceTopicContent {
     final func getContent(
         id: Int
     ) {
-        let fileName = "\(id).skc"
+        let fileName = "\(id).mp3"
         mServiceCache.setFile(
             fileName: fileName,
             dirName: SKServiceTopicContent
