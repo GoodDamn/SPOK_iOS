@@ -32,6 +32,7 @@ final class SKViewControllerTopic
     private let mServiceContent = SKServiceTopicContent()
     private let mSlider = SKViewSlider()
     private let mLabelCurrentTime = UILabel()
+    private let mLabelFinishTime = UILabel()
     
     private var mNetworkUrl = ""
     private var mPlayer: AVAudioPlayer? = nil
@@ -160,10 +161,31 @@ final class SKViewControllerTopic
         
         setupBtnClose()
         
+        let offsetXTime = w * 21.nw()
         setupLabelTime(
             w: w,
-            h: h
+            h: h,
+            label: mLabelCurrentTime,
+            origin: CGPoint(
+                x: offsetXTime,
+                y: mSlider.bottomy()
+            )
         )
+        
+        setupLabelTime(
+            w: w,
+            h: h,
+            label: mLabelFinishTime,
+            origin: CGPoint(
+                x: 0,
+                y: mSlider.bottomy()
+            )
+        )
+        
+        mLabelFinishTime.frame.origin.x = w - mLabelFinishTime
+            .frame
+            .width - offsetXTime
+        
         
         mServiceContent.getContent(
             id: topicId
@@ -176,25 +198,25 @@ extension SKViewControllerTopic {
     
     private func setupLabelTime(
         w: CGFloat,
-        h: CGFloat
+        h: CGFloat,
+        label: UILabel,
+        origin: CGPoint
     ) {
-        mLabelCurrentTime.frame = CGRect(
-            x: w * 21.nw(),
-            y: h * 782.nh(),
-            width: 0,
-            height: 0
+        label.frame = CGRect(
+            origin: origin,
+            size: .zero
         )
-        mLabelCurrentTime.text = "00:00"
-        mLabelCurrentTime.numberOfLines = 1
-        mLabelCurrentTime.textColor = .white
-        mLabelCurrentTime.font = .semibold(
+        label.text = "00:00"
+        label.numberOfLines = 1
+        label.textColor = .white
+        label.font = .semibold(
             withSize: h * 18.nh()
         )
         
-        mLabelCurrentTime.sizeToFit()
+        label.sizeToFit()
         
         view.addSubview(
-            mLabelCurrentTime
+            label
         )
     }
     
@@ -508,17 +530,23 @@ extension SKViewControllerTopic
     func onGetTopicContent(
         model: SKModelTopicContent
     ) {
-        Log.d("onGetTopicContent:", model.data)
         if model.data == nil {
             return
         }
         
         do {
-            mPlayer = try AVAudioPlayer(
+            let player = try AVAudioPlayer(
                 data: model.data!,
                 fileTypeHint: AVFileType.mp3.rawValue
             )
-            mPlayer?.prepareToPlay()
+            player.prepareToPlay()
+            mLabelFinishTime.text = player
+                .duration
+                .toTimeString()
+            
+            mLabelFinishTime.sizeToFit()
+            
+            mPlayer = player
             
             mTimer = Timer.scheduledTimer(
                 timeInterval: 0.1,
