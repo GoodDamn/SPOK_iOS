@@ -540,6 +540,12 @@ extension SKViewControllerTopic
                 fileTypeHint: AVFileType.mp3.rawValue
             )
             player.prepareToPlay()
+            
+            player.setVolume(
+                1.0,
+                fadeDuration: 0.1
+            )
+            
             mLabelFinishTime.text = player
                 .duration
                 .toTimeString()
@@ -577,7 +583,6 @@ extension SKViewControllerTopic
     func onProgressDownload(
         progress: CGFloat
     ) {
-        print("progress:", progress)
         mSlider.progress = progress
         mSlider.setNeedsDisplay()
     }
