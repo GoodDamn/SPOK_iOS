@@ -13,4 +13,17 @@ extension TimeInterval {
         604_800
     }
     
+    
+    func toTimeString() -> String {
+        let sec = Int(self)
+        let mins2 = sec / 60
+        let mins1 = mins2 / 10
+        
+        let sec2 = sec % 60
+        let sec1 = sec2 / 10
+        
+        return "\(mins1)\(mins2 % 10):\(sec1)\(sec2 % 10)"
+    }
+    
+    
 }

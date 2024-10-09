@@ -30,9 +30,11 @@ final class SKViewControllerTopic
     )
     
     private let mServiceContent = SKServiceTopicContent()
+    private let mSlider = SKViewSlider()
+    private let mLabelCurrentTime = UILabel()
+    
     private var mNetworkUrl = ""
     private var mPlayer: AVAudioPlayer? = nil
-    private let mSlider = SKViewSlider()
     private var mTimer: Timer? = nil
     
     override func viewDidLoad() {
@@ -158,6 +160,11 @@ final class SKViewControllerTopic
         
         setupBtnClose()
         
+        setupLabelTime(
+            w: w,
+            h: h
+        )
+        
         mServiceContent.getContent(
             id: topicId
         )
@@ -166,6 +173,30 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupLabelTime(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        mLabelCurrentTime.frame = CGRect(
+            x: w * 21.nw(),
+            y: h * 782.nh(),
+            width: 0,
+            height: 0
+        )
+        mLabelCurrentTime.text = "00:00"
+        mLabelCurrentTime.numberOfLines = 1
+        mLabelCurrentTime.textColor = .white
+        mLabelCurrentTime.font = .semibold(
+            withSize: h * 18.nh()
+        )
+        
+        mLabelCurrentTime.sizeToFit()
+        
+        view.addSubview(
+            mLabelCurrentTime
+        )
+    }
     
     private func setupSlider(
         w: CGFloat,
@@ -446,6 +477,10 @@ extension SKViewControllerTopic {
         }
         mSlider.progress = player.currentTime / player.duration
         mSlider.setNeedsDisplay()
+        
+        mLabelCurrentTime.text = player
+            .currentTime
+            .toTimeString()
     }
     
 }
