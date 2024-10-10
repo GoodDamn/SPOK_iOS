@@ -127,6 +127,7 @@
 		25DB9AC92B57B5FB00B5359F /* LayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */; };
 		25DB9ACB2B57CC1600B5359F /* UITableViewCellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */; };
 		25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSAttributedString.swift */; };
+		25ED881B2CB789E70043E2C3 /* SKViewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED881A2CB789E70043E2C3 /* SKViewPlayer.swift */; };
 		25F056C92C9D38F60019822B /* SKServiceNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056C82C9D38F60019822B /* SKServiceNetwork.swift */; };
 		25F056CD2C9D39950019822B /* SKDelegateOnNetworkChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056CC2C9D39950019822B /* SKDelegateOnNetworkChanged.swift */; };
 		25F056D02C9D3B4D0019822B /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056CF2C9D3B4D0019822B /* Bundle.swift */; };
@@ -323,6 +324,7 @@
 		25DB9AC82B57B5FB00B5359F /* LayoutUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutUtils.swift; sourceTree = "<group>"; };
 		25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellTitle.swift; sourceTree = "<group>"; };
 		25EA75402B87B6E1003FC583 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
+		25ED881A2CB789E70043E2C3 /* SKViewPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewPlayer.swift; sourceTree = "<group>"; };
 		25F056C82C9D38F60019822B /* SKServiceNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceNetwork.swift; sourceTree = "<group>"; };
 		25F056CC2C9D39950019822B /* SKDelegateOnNetworkChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKDelegateOnNetworkChanged.swift; sourceTree = "<group>"; };
 		25F056CF2C9D3B4D0019822B /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 		25D5E4A72A69A47800A3126B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				25ED88192CB789DA0043E2C3 /* player */,
 				25AA3DE42CB4FB3F008F1644 /* slider */,
 				25AA3DD92CB428CF008F1644 /* deform */,
 				252F7AED2C66097800851E8A /* editText */,
@@ -1007,6 +1010,14 @@
 				25AB40372BC6F46A009E735F /* CGSize.swift */,
 			);
 			path = coreGraphics;
+			sourceTree = "<group>";
+		};
+		25ED88192CB789DA0043E2C3 /* player */ = {
+			isa = PBXGroup;
+			children = (
+				25ED881A2CB789E70043E2C3 /* SKViewPlayer.swift */,
+			);
+			path = player;
 			sourceTree = "<group>";
 		};
 		25F056CA2C9D39670019822B /* network */ = {
@@ -1619,6 +1630,7 @@
 				25D61E852B75F35600B5A72B /* OptionView.swift in Sources */,
 				25AB403A2BC7A19A009E735F /* UITextButton.swift in Sources */,
 				25F94AEB2B6F46E900FC8A32 /* MessageViewController.swift in Sources */,
+				25ED881B2CB789E70043E2C3 /* SKViewPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

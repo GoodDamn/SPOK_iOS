@@ -21,13 +21,6 @@ final class SKViewControllerTopic
     var topicType: String? = nil
     var topicName: String? = nil
     
-    private let mImagePlay = UIImage(
-        systemName: "play.fill"
-    )
-    
-    private let mImagePause = UIImage(
-        systemName: "pause.fill"
-    )
     
     private let mServiceContent = SKServiceTopicContent()
     private let mSlider = SKViewSlider()
@@ -94,40 +87,7 @@ final class SKViewControllerTopic
         lblTopicType.centerH(
             in: view
         )
-        
-        let sizePlay = 103.nh() * h
-        let btnPlay = UIImageButton(
-            frame: CGRect(
-                x: 0,
-                y: lblTopicType.frame.bottom() +
-                    160.nh() * h,
-                width: sizePlay,
-                height: sizePlay
-            )
-        )
-        
-        btnPlay.onClick = { [weak self] v in
-            guard let v = v as? UIImageButton else {
-                return
-            }
-            self?.onClickBtnPlay(v)
-        }
-        
-        btnPlay.image = mImagePlay
-        btnPlay.scale = CGPoint(
-            x: 0.65,
-            y: 0.65
-        )
-        btnPlay.tintColor = .accent3()
-        btnPlay.backgroundColor = .accent2()
-        btnPlay.layer.cornerRadius = btnPlay
-            .height() * 0.5
-        btnPlay.clipsToBounds = true
-        
-        btnPlay.centerH(
-            in: view
-        )
-        
+                
         setupDeformView(
             w: w,
             h: h
@@ -151,8 +111,9 @@ final class SKViewControllerTopic
             lblTopicType
         )
         
-        view.addSubview(
-            btnPlay
+        setupPlayerView(
+            w: w,
+            h: h
         )
         
         setupSlider(
@@ -201,6 +162,45 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func setupPlayerView(
+        w: CGFloat,
+        h: CGFloat
+    ) {
+        let playerView = SKViewPlayer(
+            frame: CGRect(
+                x: 0,
+                y: h * 447.nh(),
+                width: w * 313.nw(),
+                height: h * 128.nh()
+            )
+        )
+        
+        playerView.onClickPlay = {
+            [weak self] v in
+            self?.onClickBtnPlay(
+                playerView: playerView
+            )
+        }
+        
+        playerView.onClickBack = {
+            [weak self] v in
+            self?.onClickBtnBack()
+        }
+        
+        playerView.onClickNext = {
+            [weak self] v in
+            self?.onClickBtnNext()
+        }
+        
+        playerView.centerH(
+            in: view
+        )
+        
+        view.addSubview(
+            playerView
+        )
+    }
     
     private func setupLabelMeta(
         w: CGFloat,
@@ -506,19 +506,28 @@ extension SKViewControllerTopic {
         
     }
     
+    private func onClickBtnNext() {
+        
+    }
+    
+    private func onClickBtnBack() {
+        
+    }
+    
     private func onClickBtnPlay(
-        _ v: UIImageButton
+        playerView: SKViewPlayer
     ) {
-        if let player = mPlayer {
-            if player.isPlaying {
-                v.image = mImagePlay
-                player.pause()
-            } else {
-                v.image = mImagePause
-                player.play()
-            }
+        guard let player = mPlayer else {
+            return
         }
-        v.setNeedsDisplay()
+        
+        playerView.isPlaying = player.isPlaying
+        
+        if player.isPlaying {
+            player.pause()
+        } else {
+            player.play()
+        }
     }
     
     private func onClickBtnClose(

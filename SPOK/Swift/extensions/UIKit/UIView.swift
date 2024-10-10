@@ -92,8 +92,17 @@ extension UIView {
     func centerH(
         in view: UIView
     ) {
-        frame.origin.x = (view.frame.width -
-            frame.width) * 0.5
+        frame.origin.x = (
+            view.frame.width - frame.width
+        ) * 0.5
+    }
+    
+    func centerY(
+        in view: UIView
+    ) {
+        frame.origin.y = (
+            view.frame.height - frame.height
+        ) * 0.5
     }
     
     func y(
