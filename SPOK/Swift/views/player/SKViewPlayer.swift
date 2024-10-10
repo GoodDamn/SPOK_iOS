@@ -154,8 +154,8 @@ extension SKViewPlayer {
         
         btn.image = image
         btn.scale = CGPoint(
-            x: 0.75,
-            y: 0.75
+            x: 0.35,
+            y: 0.35
         )
         btn.tintColor = .accent2()
         btn.backgroundColor = .clear

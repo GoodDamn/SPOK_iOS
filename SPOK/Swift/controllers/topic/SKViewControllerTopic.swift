@@ -507,11 +507,11 @@ extension SKViewControllerTopic {
     }
     
     private func onClickBtnNext() {
-        
+        print("next")
     }
     
     private func onClickBtnBack() {
-        
+        print("back")
     }
     
     private func onClickBtnPlay(
