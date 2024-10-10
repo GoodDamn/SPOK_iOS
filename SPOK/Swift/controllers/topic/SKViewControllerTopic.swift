@@ -208,13 +208,23 @@ extension SKViewControllerTopic {
     ) {
         mLabelMeta.frame = CGRect(
             x: 0,
-            y: h * 839.nh(),
+            y: h * 810.nh(),
             width: w,
             height: 0
         )
+        
+        mLabelMeta.leftImage = UIImage(
+            systemName: "music.note"
+        )
+        
         mLabelMeta.textColor = .white
+            .withAlphaComponent(0.6)
+        
+        mLabelMeta.leftImageColor = mLabelMeta
+            .textColor
+        
         mLabelMeta.font = .semibold(
-            withSize: w * 16.nw()
+            withSize: w * 14.nw()
         )
         
         view.addSubview(
@@ -584,7 +594,7 @@ extension SKViewControllerTopic
             if let meta = AVAsset.mp3Meta(
                 from: &dd
             ) {
-                mLabelMeta.text = "\(meta.artist) - \(meta.title)"
+                mLabelMeta.text = " \(meta.artist) - \(meta.title)"
                 mLabelMeta.attribute()
                 mLabelMeta.sizeToFit()
                 mLabelMeta.centerH(
