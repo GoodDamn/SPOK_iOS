@@ -607,7 +607,7 @@ extension SKViewControllerTopic
             )
             
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.ambient)
+            try session.setCategory(.playback)
             try session.setActive(true)
             
             mLabelFinishTime.text = player
