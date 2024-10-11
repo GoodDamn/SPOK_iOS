@@ -13,6 +13,8 @@ final class SKModelViewTypeCollection
     
     private let mSize: CGSize
     
+    weak var onSelectTopic: SKIListenerOnSelectTopic? = nil
+    
     init(
         size: CGSize
     ) {
@@ -58,11 +60,10 @@ final class SKModelViewTypeCollection
         )
         
         if let it = cell.collectionView {
-            it.topics = viewModel.model.topicIds
+            it.onSelectTopic = onSelectTopic
+            it.collection = viewModel.model
             it.topicSize = viewModel.cardSize
-            it.cardType = viewModel.model.cardType
             it.cardTextSize = viewModel.cardTextSize
-            it.topicType = viewModel.model.title
             cell.calculateBoundsCollection(
                 with: mSize
             )
@@ -83,7 +84,8 @@ extension SKModelViewTypeCollection
         in collectionView: UICollectionView
     ) -> Int {
         (collectionView as? UICollectionViewTopics)?
-            .topics?
+            .collection?
+            .topicIds
             .count ?? 0
     }
     
@@ -104,7 +106,7 @@ extension SKModelViewTypeCollection
             return UICollectionViewCell()
         }
         let index = indexPath.section
-        guard let topicId = view.topics?[index] else {
+        guard let topicId = view.collection?.topicIds[index] else {
             return UICollectionViewCell()
         }
         
@@ -114,7 +116,11 @@ extension SKModelViewTypeCollection
         ) as? UICollectionViewCellTopic else {
             return UICollectionViewCell()
         }
-                
+        
+        if view.collection == nil {
+            return UICollectionViewCell()
+        }
+        
         cell.alpha = 0.0
         
         cell.stopParticles()
@@ -123,12 +129,12 @@ extension SKModelViewTypeCollection
             with: view.topicSize
         )
         
+        cell.onSelectTopic = view.onSelectTopic
         cell.cardTextSize = view.cardTextSize
-        cell.topicType = view.topicType
         
         cell.loadData(
             previewId: Int(topicId),
-            type: view.cardType
+            collection: view.collection!
         )
         
         return cell

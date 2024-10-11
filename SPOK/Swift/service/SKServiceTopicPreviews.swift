@@ -12,7 +12,7 @@ final class SKServiceTopicPreviews {
     
     static var mCachedPreviews: [
         Int : SKModelTopicPreview
-    ] = []
+    ] = [:]
     
     private static let maxSize: Int64 = 3 * 1024 * 1024
     
@@ -100,7 +100,7 @@ final class SKServiceTopicPreviews {
     private final func onGetMetadata(
         meta: StorageMetadata,
         fullName: String,
-        topicId: Int,
+        topicId: Int
     ) {
         guard let updatedTime = meta
             .updated?

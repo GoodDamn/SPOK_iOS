@@ -20,10 +20,16 @@ final class UICollectionViewCellTopic
     
     private let mServicePreview = SKServiceTopicPreviews()
     private var mPreviewId = Int.min
+    private var mPreview: SKModelTopicPreview? = nil
+    private var mCollection: SKModelCollection? = nil
     
-    private(set) var isPremiumTopic = false
-
-    var topicType: String? = nil
+    var isPremiumTopic: Bool {
+        get {
+            mPreview?.isPremium ?? false
+        }
+    }
+    
+    weak var onSelectTopic: SKIListenerOnSelectTopic? = nil
     
     var cardTextSize: CardTextSize! {
         didSet {
@@ -133,28 +139,11 @@ final class UICollectionViewCellTopic
             return
         }
         
-        if isPremiumTopic && !SKViewControllerMain
-            .mIsPremiumUser {
-            // Move to sub page
-            Toast.show(
-                text: "Доступно только с подпиской"
-            )
-            return
-        }
-        
-        let t = SKViewControllerTopic()
-        t.topicId = mPreviewId
-        t.topicType = topicType
-        t.topicName = mTitle.text
-        t.view.alpha = 0.0
-        
-        UIApplication.main().push(
-            t,
-            animDuration: 0.3
-        ) { [weak self] in
-            t.view.alpha = 1.0
-        }
-        
+        onSelectTopic?.onSelectTopic(
+            preview: mPreview,
+            collection: mCollection,
+            id: mPreviewId
+        )
     }
 }
 
@@ -184,13 +173,13 @@ extension UICollectionViewCellTopic {
     
     final func loadData(
         previewId: Int,
-        type: CardType
+        collection: SKModelCollection
     ) {
         mPreviewId = previewId
-        
+        mCollection = collection
         mServicePreview.getTopicPreview(
             id: previewId,
-            type: type
+            type: collection.cardType
         )
     }
     
@@ -233,6 +222,7 @@ extension UICollectionViewCellTopic
     func onGetTopicPreview(
         preview: SKModelTopicPreview
     ) {
+        mPreview = preview
         mTitle.text = preview.title
         mDesc.text = preview.desc
         
@@ -240,10 +230,8 @@ extension UICollectionViewCellTopic
         mDesc.textColor = preview.color
         
         calculateBoundsText()
-        
-        isPremiumTopic = preview.isPremium
-        
-        if !SKViewControllerMain.mIsPremiumUser && isPremiumTopic {
+        if !SKViewControllerMain.mIsPremiumUser
+            && preview.isPremium {
             mParticles.start()
             mParticles.isHidden = false
         }

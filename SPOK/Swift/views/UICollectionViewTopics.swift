@@ -11,10 +11,9 @@ import UIKit
 final class UICollectionViewTopics
 : UICollectionView {
     
-    var topics: [UInt16]? = nil
+    weak var onSelectTopic: SKIListenerOnSelectTopic? = nil
+    var collection: SKModelCollection? = nil
     var topicSize: CGSize = .zero
-    var topicType: String? = nil
-    var cardType: CardType = .M
     var cardTextSize: CardTextSize = CardTextSize(
         title: 18.0,
         desc: 11.0

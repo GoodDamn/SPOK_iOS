@@ -41,18 +41,21 @@ final class UIViewControllerHome
         
         let colHeight = w * 265.nw()
         
+        let typeCollection = SKModelViewTypeCollection(
+            size: CGSize(
+                width: w,
+                height: colHeight
+            )
+        )
+        typeCollection.onSelectTopic = self
+        
         mTableView = UITableViewTypeable(
             frame: CGRect(
                 origin: .zero,
                 size: view.frame.size
             ),
             viewTypes: [
-                SKModelViewTypeCollection(
-                    size: CGSize(
-                        width: w,
-                        height: colHeight
-                    )
-                ),
+                typeCollection,
                 SKModelViewTypeSheep(
                     size: CGSize(
                         width: w,
@@ -118,6 +121,39 @@ extension UIViewControllerHome {
             managePremiumTopics(i)
         }
     }
+}
+
+extension UIViewControllerHome
+: SKIListenerOnSelectTopic {
+    
+    func onSelectTopic(
+        preview: SKModelTopicPreview?,
+        collection: SKModelCollection?,
+        id: Int
+    ) {
+        if (preview?.isPremium ?? true) && !SKViewControllerMain
+            .mIsPremiumUser {
+            // Move to sub page
+            Toast.show(
+                text: "Доступно только с подпиской"
+            )
+            return
+        }
+        
+        let t = SKViewControllerTopic()
+        t.topicId = id
+        t.collection = collection
+        t.topicName = preview?.title
+        t.view.alpha = 0.0
+        
+        UIApplication.main().push(
+            t,
+            animDuration: 0.3
+        ) { [weak self] in
+            t.view.alpha = 1.0
+        }
+    }
+    
 }
 
 extension UIViewControllerHome

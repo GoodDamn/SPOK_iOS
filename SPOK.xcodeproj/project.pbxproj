@@ -128,6 +128,7 @@
 		25DB9ACB2B57CC1600B5359F /* UITableViewCellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */; };
 		25EA75412B87B6E1003FC583 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA75402B87B6E1003FC583 /* NSAttributedString.swift */; };
 		25ED881B2CB789E70043E2C3 /* SKViewPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED881A2CB789E70043E2C3 /* SKViewPlayer.swift */; };
+		25ED881E2CB9944A0043E2C3 /* SKIListenerOnSelectTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED881D2CB9944A0043E2C3 /* SKIListenerOnSelectTopic.swift */; };
 		25F056C92C9D38F60019822B /* SKServiceNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056C82C9D38F60019822B /* SKServiceNetwork.swift */; };
 		25F056CD2C9D39950019822B /* SKDelegateOnNetworkChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056CC2C9D39950019822B /* SKDelegateOnNetworkChanged.swift */; };
 		25F056D02C9D3B4D0019822B /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F056CF2C9D3B4D0019822B /* Bundle.swift */; };
@@ -325,6 +326,7 @@
 		25DB9ACA2B57CC1600B5359F /* UITableViewCellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellTitle.swift; sourceTree = "<group>"; };
 		25EA75402B87B6E1003FC583 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		25ED881A2CB789E70043E2C3 /* SKViewPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewPlayer.swift; sourceTree = "<group>"; };
+		25ED881D2CB9944A0043E2C3 /* SKIListenerOnSelectTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKIListenerOnSelectTopic.swift; sourceTree = "<group>"; };
 		25F056C82C9D38F60019822B /* SKServiceNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKServiceNetwork.swift; sourceTree = "<group>"; };
 		25F056CC2C9D39950019822B /* SKDelegateOnNetworkChanged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKDelegateOnNetworkChanged.swift; sourceTree = "<group>"; };
 		25F056CF2C9D3B4D0019822B /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -1020,6 +1022,14 @@
 			path = player;
 			sourceTree = "<group>";
 		};
+		25ED881C2CB994210043E2C3 /* listeners */ = {
+			isa = PBXGroup;
+			children = (
+				25ED881D2CB9944A0043E2C3 /* SKIListenerOnSelectTopic.swift */,
+			);
+			path = listeners;
+			sourceTree = "<group>";
+		};
 		25F056CA2C9D39670019822B /* network */ = {
 			isa = PBXGroup;
 			children = (
@@ -1289,6 +1299,7 @@
 		2BA51A9F280FF7F60035262A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				25ED881C2CB994210043E2C3 /* listeners */,
 				25DB9ABF2B55A73900B5359F /* UICollectionViewCellTopic.swift */,
 			);
 			path = Home;
@@ -1492,6 +1503,7 @@
 				2507D2E42B469CA000656C0B /* ScriptResource.swift in Sources */,
 				2507D2F02B47216000656C0B /* OnReadScript.swift in Sources */,
 				252F7AEF2C6609A000851E8A /* UITextFieldDone.swift in Sources */,
+				25ED881E2CB9944A0043E2C3 /* SKIListenerOnSelectTopic.swift in Sources */,
 				25F056ED2C9F36660019822B /* SKListenerOnGetPaymentInfo.swift in Sources */,
 				251F912B2C6085D4002B71D0 /* OnReauthSuccessListener.swift in Sources */,
 				251F91292C607F34002B71D0 /* OnAuthErrorListener.swift in Sources */,

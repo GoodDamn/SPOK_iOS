@@ -18,11 +18,14 @@ final class SKViewControllerTopic
         }
     }
     
-    var topicType: String? = nil
+    var collection: SKModelCollection? = nil
     var topicName: String? = nil
     
-    
     private let mServiceContent = SKServiceTopicContent()
+    private let mServicePreview = SKServiceTopicPreviews()
+    
+    private let mLabelTopicName = UILabela()
+    private let mLabelTopicType = UILabel()
     private let mSlider = SKViewSlider()
     private let mLabelCurrentTime = UILabel()
     private let mLabelFinishTime = UILabel()
@@ -40,59 +43,20 @@ final class SKViewControllerTopic
         mServiceContent.onGetTopicContent = self
         mServiceContent.onProgressDownload = self
         
+        mServicePreview.delegate = self
+        
         let w = view.frame.width
         let h = view.frame.height
         
-        let lblTopicName = UILabela(
-            frame: CGRect(
-                x: 0,
-                y: h * 173.nh(),
-                width: w,
-                height: 0
-            )
-        )
-        lblTopicName.numberOfLines = 0
-        lblTopicName.lineHeight = 0.87
-        lblTopicName.backgroundColor = .clear
-        lblTopicName.font = .extrabold(
-            withSize: 31.nw() * w
-        )
-        lblTopicName.text = topicName
-        lblTopicName.textColor = .white
-        lblTopicName.textAlignment = .center
-        lblTopicName.attribute()
-        lblTopicName.sizeToFit()
-        let of = lblTopicName.height() * 0.1
-        lblTopicName.frame.size.height =
-            lblTopicName.height() + of
-        lblTopicName.frame.origin.y -= of
-        lblTopicName.centerH(
-            in: view
-        )
+        mLabelTopicName.numberOfLines = 0
+        mLabelTopicName.lineHeight = 0.87
+        mLabelTopicName.backgroundColor = .clear
+        mLabelTopicName.textColor = .white
+        mLabelTopicName.textAlignment = .center
         
-        let textSizeTopicType = 0.4514 * lblTopicName.font
-            .pointSize
-        
-        let lblTopicType = UILabel(
-            frame: CGRect(
-                x: 0,
-                y: textSizeTopicType * 0.25
-                + lblTopicName.frame.bottom(),
-                width: w,
-                height: 0
-            )
-        )
-        lblTopicType.font = .semibold(
-            withSize: textSizeTopicType
-        )
-        lblTopicType.backgroundColor = .clear
-        lblTopicType.text = topicType?.uppercased()
-        lblTopicType.textColor = .subtitle()
-        lblTopicType.textAlignment = .center
-        lblTopicType.sizeToFit()
-        lblTopicType.centerH(
-            in: view
-        )
+        mLabelTopicType.backgroundColor = .clear
+        mLabelTopicType.textColor = .subtitle()
+        mLabelTopicType.textAlignment = .center
                 
         setupDeformView(
             w: w,
@@ -110,11 +74,11 @@ final class SKViewControllerTopic
         )
         
         view.addSubview(
-            lblTopicName
+            mLabelTopicName
         )
         
         view.addSubview(
-            lblTopicType
+            mLabelTopicType
         )
         
         setupPlayerView(
@@ -170,6 +134,56 @@ final class SKViewControllerTopic
 
 
 extension SKViewControllerTopic {
+    
+    private func calculateLabelName() {
+        let w = view.frame.width
+        let h = view.frame.height
+        
+        mLabelTopicName.frame = CGRect(
+            x: 0,
+            y: h * 173.nh(),
+            width: w,
+            height: 0
+        )
+        mLabelTopicName.font = .extrabold(
+            withSize: 31.nw() * w
+        )
+        let of = mLabelTopicName.height() * 0.1
+        mLabelTopicName.frame.size.height = mLabelTopicName.height() + of
+        mLabelTopicName.frame.origin.y -= of
+        
+        mLabelTopicName.text = topicName
+        mLabelTopicName.attribute()
+        mLabelTopicName.sizeToFit()
+        mLabelTopicName.centerH(
+            in: view
+        )
+    }
+    
+    private func calculateLabelType() {
+        let w = view.frame.width
+        
+        let textSizeTopicType = 0.4514 * mLabelTopicName.font
+            .pointSize
+        
+        mLabelTopicType.frame = CGRect(
+            x: 0,
+            y: textSizeTopicType * 0.25
+            + mLabelTopicName.frame.bottom(),
+            width: w,
+            height: 0
+        )
+        
+        mLabelTopicType.font = .semibold(
+            withSize: textSizeTopicType
+        )
+        
+        mLabelTopicType.text = collection?.title
+        mLabelTopicType.sizeToFit()
+        mLabelTopicType.centerH(
+            in: view
+        )
+    }
     
     private func setupPlayerView(
         w: CGFloat,
@@ -518,7 +532,14 @@ extension SKViewControllerTopic {
     }
     
     private func onClickBtnNext() {
-        print("next")
+        guard let rand = collection?.topicIds.randomElement() else {
+            return
+        }
+        topicId = Int(rand)
+        mServicePreview.getTopicPreview(
+            id: topicId,
+            type: collection?.cardType ?? .M
+        )
     }
     
     private func onClickBtnBack() {
@@ -560,6 +581,23 @@ extension SKViewControllerTopic {
         mLabelCurrentTime.text = player
             .currentTime
             .toTimeString()
+    }
+    
+}
+
+extension SKViewControllerTopic
+: SKDelegateOnGetTopicPreview {
+    
+    func onGetTopicPreview(
+        preview: SKModelTopicPreview
+    ) {
+        topicName = preview.title
+        calculateLabelName()
+        calculateLabelType()
+        
+        mServiceContent.getContent(
+            id: topicId
+        )
     }
     
 }
@@ -609,6 +647,9 @@ extension SKViewControllerTopic
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback)
             try session.setActive(true)
+            
+            calculateLabelName()
+            calculateLabelType()
             
             mLabelFinishTime.text = player
                 .duration
