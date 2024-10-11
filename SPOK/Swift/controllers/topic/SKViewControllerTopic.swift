@@ -43,15 +43,16 @@ final class SKViewControllerTopic
         let w = view.frame.width
         let h = view.frame.height - mInsets.top
         
-        let lblTopicName = UILabel(
+        let lblTopicName = UILabela(
             frame: CGRect(
                 x: 0,
-                y: mInsets.top + h * 160.nh(),
+                y: mInsets.top + (h-mInsets.top) * 0.2338,
                 width: w,
                 height: 0
             )
         )
         lblTopicName.numberOfLines = 0
+        lblTopicName.lineHeight = 0.87
         lblTopicName.backgroundColor = .clear
         lblTopicName.font = .extrabold(
             withSize: 34.nw() * w
@@ -59,7 +60,12 @@ final class SKViewControllerTopic
         lblTopicName.text = (topicName ?? "") + " \(topicId)"
         lblTopicName.textColor = .white
         lblTopicName.textAlignment = .center
+        lblTopicName.attribute()
         lblTopicName.sizeToFit()
+        let of = lblTopicName.height() * 0.1
+        lblTopicName.frame.size.height =
+            lblTopicName.height() + of
+        lblTopicName.frame.origin.y -= of
         lblTopicName.centerH(
             in: view
         )
@@ -70,8 +76,8 @@ final class SKViewControllerTopic
         let lblTopicType = UILabel(
             frame: CGRect(
                 x: 0,
-                y: textSizeTopicType +
-                lblTopicName.frame.bottom(),
+                y: textSizeTopicType * 0.65
+                + lblTopicName.frame.bottom(),
                 width: w,
                 height: 0
             )
@@ -121,7 +127,9 @@ final class SKViewControllerTopic
             h: h
         )
         
-        setupBtnClose()
+        setupBtnClose(
+            h: h
+        )
         
         let offsetXTime = w * 21.nw()
         setupLabelTime(
@@ -172,7 +180,7 @@ extension SKViewControllerTopic {
                 x: 0,
                 y: h * 447.nh(),
                 width: w * 313.nw(),
-                height: h * 128.nh()
+                height: h * 103.nh()
             )
         )
         
@@ -208,7 +216,7 @@ extension SKViewControllerTopic {
     ) {
         mLabelMeta.frame = CGRect(
             x: 0,
-            y: h * 810.nh(),
+            y: h * 841.nh(),
             width: w,
             height: 0
         )
@@ -266,7 +274,7 @@ extension SKViewControllerTopic {
         let slider = mSlider
         slider.frame = CGRect(
             x: 0,
-            y: h * 0.75,
+            y: h * 750.nh(),
             width: ww,
             height: hh
         )
@@ -274,7 +282,7 @@ extension SKViewControllerTopic {
         slider.backgroundColor = .clear
         slider.progress = 0.0
         slider.strokeWidth = slider.height() * 0.1
-        slider.radius = slider.height() * 0.25
+        slider.radius = slider.height() * 0.15
         slider.trackColor = (
             UIColor.clock() ?? .black
         ).cgColor
@@ -282,7 +290,7 @@ extension SKViewControllerTopic {
         slider.backgroundProgressColor = UIColor
             .white
             .withAlphaComponent(
-                0.3
+                0.15
             ).cgColor
         
         slider.progressColor = (
@@ -303,12 +311,16 @@ extension SKViewControllerTopic {
         
     }
     
-    private func setupBtnClose() {
+    private func setupBtnClose(
+        h: CGFloat
+    ) {
         let btnClose = ViewUtils.buttonClose(
             in: view,
             sizeSquare: 118.nh(),
             iconProp: 0.2
         )
+        
+        btnClose.frame.origin.y = h * 74.nh()
         
         btnClose.tintColor = .white
         btnClose.backgroundColor = .clear
@@ -593,6 +605,10 @@ extension SKViewControllerTopic
                 1.0,
                 fadeDuration: 0.1
             )
+            
+            var session = AVAudioSession.sharedInstance()
+            try session.setCategory(.ambient)
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
             
             mLabelFinishTime.text = player
                 .duration

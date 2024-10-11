@@ -86,8 +86,13 @@ final class SKViewPlayer
             image: mImageNext
         )
         
-        mBtnNext.frame.origin.x = frame.width
-            - mBtnNext.frame.width
+        mBtnNext.frame.origin.x = mBtnPlay.rightx() + (
+            frame.width - mBtnPlay.rightx() - mBtnNext.frame.width
+        ) * 0.5
+        
+        mBtnBack.frame.origin.x = (
+            mBtnPlay.frame.origin.x - mBtnBack.frame.width
+        ) * 0.5
     }
     
     override init(

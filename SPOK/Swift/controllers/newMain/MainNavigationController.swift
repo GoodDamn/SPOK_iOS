@@ -5,10 +5,10 @@
 //  Created by Igor Alexandrov on 06.07.2022.
 //
 
-import UIKit;
+import UIKit
 
-class MainNavigationController
-    : UINavigationController{
+final class MainNavigationController
+: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -21,6 +21,7 @@ class MainNavigationController
         )
         
         navigationBar.isTranslucent = false
+        view.insetsLayoutMarginsFromSafeArea = false
     }
     
     override var prefersStatusBarHidden: Bool {

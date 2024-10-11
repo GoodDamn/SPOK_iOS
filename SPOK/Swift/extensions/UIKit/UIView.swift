@@ -64,6 +64,10 @@ extension UIView {
         frame.origin.y + frame.height
     }
     
+    func rightx() -> CGFloat {
+        frame.origin.x + frame.width
+    }
+    
     func width() -> CGFloat {
         frame.width
     }
