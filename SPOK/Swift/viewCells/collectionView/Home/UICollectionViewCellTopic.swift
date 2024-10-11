@@ -187,6 +187,7 @@ extension UICollectionViewCellTopic {
         type: CardType
     ) {
         mPreviewId = previewId
+        
         mServicePreview.getTopicPreview(
             id: previewId,
             type: type

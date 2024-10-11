@@ -11,9 +11,9 @@ import FirebaseMessaging
 
 @main
 class AppDelegate
-    : UIResponder,
-      UIApplicationDelegate {
-    
+: UIResponder,
+UIApplicationDelegate {
+
     var window: UIWindow?;
     
     var messaging: Messaging? = nil;

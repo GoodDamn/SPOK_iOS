@@ -10,7 +10,7 @@ import UIKit
 
 final class SKViewControllerMain
 : SKViewControllerNavigation {
-        
+    
     static var mWidth: CGFloat = 0
     static var mHeight: CGFloat = 0
     

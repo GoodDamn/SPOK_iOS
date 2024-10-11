@@ -10,6 +10,10 @@ import FirebaseStorage
 
 final class SKServiceTopicPreviews {
     
+    static var mCachedPreviews: [
+        Int : SKModelTopicPreview
+    ] = []
+    
     private static let maxSize: Int64 = 3 * 1024 * 1024
     
     private let mDir = "prs"
@@ -34,6 +38,15 @@ final class SKServiceTopicPreviews {
         id: Int,
         type: CardType
     ) {
+        
+        if let cachedPreview = SKServiceTopicPreviews
+            .mCachedPreviews[id] {
+            delegate?.onGetTopicPreview(
+                preview: cachedPreview
+            )
+            return
+        }
+        
         let fileName = "\(type.rawValue).spc"
         mReferenceTopic = mReference.child(
             String(id)
@@ -74,7 +87,8 @@ final class SKServiceTopicPreviews {
             
             self?.onGetMetadata(
                 meta: meta,
-                fullName: fullName
+                fullName: fullName,
+                topicId: id
             )
         }
     }
@@ -85,7 +99,8 @@ final class SKServiceTopicPreviews {
     
     private final func onGetMetadata(
         meta: StorageMetadata,
-        fullName: String
+        fullName: String,
+        topicId: Int,
     ) {
         guard let updatedTime = meta
             .updated?
@@ -126,7 +141,8 @@ final class SKServiceTopicPreviews {
                 self?.onGetData(
                     data: &data,
                     updateTimeSec: updateTime,
-                    fullName: fullName
+                    fullName: fullName,
+                    topicId: topicId
                 )
             }
         }
@@ -135,7 +151,8 @@ final class SKServiceTopicPreviews {
     private final func onGetData(
         data: inout Data,
         updateTimeSec: Int,
-        fullName: String
+        fullName: String,
+        topicId: Int
     ) {
         guard let topic = data.spc() else {
             return
@@ -153,6 +170,10 @@ final class SKServiceTopicPreviews {
         mServiceCache.setLastModified(
             time: updateTimeSec
         )
+        
+        SKServiceTopicPreviews.mCachedPreviews[
+            topicId
+        ] = topic
         
         DispatchQueue.ui { [weak self] in
             self?.delegate?.onGetTopicPreview(
