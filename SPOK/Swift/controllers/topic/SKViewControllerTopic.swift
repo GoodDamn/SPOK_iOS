@@ -41,12 +41,12 @@ final class SKViewControllerTopic
         mServiceContent.onProgressDownload = self
         
         let w = view.frame.width
-        let h = view.frame.height - mInsets.top
+        let h = view.frame.height
         
         let lblTopicName = UILabela(
             frame: CGRect(
                 x: 0,
-                y: mInsets.top + (h-mInsets.top) * 0.2338,
+                y: h * 173.nh(),
                 width: w,
                 height: 0
             )
@@ -55,9 +55,9 @@ final class SKViewControllerTopic
         lblTopicName.lineHeight = 0.87
         lblTopicName.backgroundColor = .clear
         lblTopicName.font = .extrabold(
-            withSize: 34.nw() * w
+            withSize: 31.nw() * w
         )
-        lblTopicName.text = (topicName ?? "") + " \(topicId)"
+        lblTopicName.text = topicName
         lblTopicName.textColor = .white
         lblTopicName.textAlignment = .center
         lblTopicName.attribute()
@@ -76,7 +76,7 @@ final class SKViewControllerTopic
         let lblTopicType = UILabel(
             frame: CGRect(
                 x: 0,
-                y: textSizeTopicType * 0.65
+                y: textSizeTopicType * 0.25
                 + lblTopicName.frame.bottom(),
                 width: w,
                 height: 0
@@ -178,9 +178,9 @@ extension SKViewControllerTopic {
         let playerView = SKViewPlayer(
             frame: CGRect(
                 x: 0,
-                y: h * 447.nh(),
-                width: w * 313.nw(),
-                height: h * 103.nh()
+                y: h * 399.nh(),
+                width: w * 292.nw(),
+                height: h * 96.nh()
             )
         )
         
@@ -216,7 +216,7 @@ extension SKViewControllerTopic {
     ) {
         mLabelMeta.frame = CGRect(
             x: 0,
-            y: h * 841.nh(),
+            y: h * 799.nh(),
             width: w,
             height: 0
         )
@@ -232,7 +232,7 @@ extension SKViewControllerTopic {
             .textColor
         
         mLabelMeta.font = .semibold(
-            withSize: w * 14.nw()
+            withSize: w * 18.nw()
         )
         
         view.addSubview(
@@ -254,7 +254,7 @@ extension SKViewControllerTopic {
         label.numberOfLines = 1
         label.textColor = .white
         label.font = .semibold(
-            withSize: h * 18.nh()
+            withSize: h * 16.nh()
         )
         
         label.sizeToFit()
@@ -274,7 +274,7 @@ extension SKViewControllerTopic {
         let slider = mSlider
         slider.frame = CGRect(
             x: 0,
-            y: h * 750.nh(),
+            y: h * 688.nh(),
             width: ww,
             height: hh
         )
@@ -320,7 +320,7 @@ extension SKViewControllerTopic {
             iconProp: 0.2
         )
         
-        btnClose.frame.origin.y = h * 74.nh()
+        btnClose.frame.origin.y = h * 60.nh()
         
         btnClose.tintColor = .white
         btnClose.backgroundColor = .clear
@@ -338,9 +338,8 @@ extension SKViewControllerTopic {
         h: CGFloat
     ) {
         let ww = w * 243.nw()
-        let hh = h * 233.nh()
-        
-        let f = ww > hh ? hh : ww
+        let f = ww
+        let hh = ww
         
         let strokeColor = (
             UIColor.deform() ?? .black
@@ -348,8 +347,8 @@ extension SKViewControllerTopic {
         
         let v = SKViewDeform(
             frame: CGRect(
-                x: w - ww * 0.5,
-                y: h - hh * 0.75,
+                x: w - ww * 0.8,
+                y: h - hh,
                 width: ww,
                 height: hh
             )
@@ -362,19 +361,19 @@ extension SKViewControllerTopic {
             SKShapeArc(
                 points: [
                     CGPoint(
-                        x: 0.4,
+                        x: 0.8,
                         y: 0.25
                     )
                 ],
                 move: CGPoint(
-                    x: 0.4 * ww,
+                    x: 0.8 * ww,
                     y: 0.25 * hh
                 ),
                 strokeColor: strokeColor,
                 strokeWidth: f * 0.2,
                 radius: f * 0.4,
-                startAngle: .pi * 1.05,
-                endAngle: .pi * 1.35
+                startAngle: .pi * -1.2,
+                endAngle: .pi * -0.25
             )
         ]
         
@@ -399,6 +398,7 @@ extension SKViewControllerTopic {
                 height: hh
             )
         )
+        
         
         let strokeColor = (
             UIColor.deform() ?? .black
@@ -427,7 +427,6 @@ extension SKViewControllerTopic {
         ]
         
         view.addSubview(v)
-        
         v.backgroundColor = .clear
     }
     
@@ -533,13 +532,14 @@ extension SKViewControllerTopic {
             return
         }
         
-        playerView.isPlaying = player.isPlaying
-        
         if player.isPlaying {
             player.pause()
         } else {
             player.play()
         }
+        
+        playerView.isPlaying = player.isPlaying
+        
     }
     
     private func onClickBtnClose(
@@ -606,9 +606,9 @@ extension SKViewControllerTopic
                 fadeDuration: 0.1
             )
             
-            var session = AVAudioSession.sharedInstance()
+            let session = AVAudioSession.sharedInstance()
             try session.setCategory(.ambient)
-            try session.setActive(true, options: .notifyOthersOnDeactivation)
+            try session.setActive(true)
             
             mLabelFinishTime.text = player
                 .duration

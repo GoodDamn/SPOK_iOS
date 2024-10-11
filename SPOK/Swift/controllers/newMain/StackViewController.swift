@@ -23,8 +23,8 @@ class StackViewController
     
     private let main = UIApplication.main()
     
-    internal var height=SKViewControllerMain.mHeight
-    internal var width=SKViewControllerMain.mWidth
+    internal var height = SKViewControllerMain.mHeight
+    internal var width = SKViewControllerMain.mWidth
     
     public final func framee(
         x: CGFloat,

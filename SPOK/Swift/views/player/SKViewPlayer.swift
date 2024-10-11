@@ -31,11 +31,9 @@ final class SKViewPlayer
             mBtnPlay.image == mImagePlay
         }
         set(plays) {
-            if plays {
-                mBtnPlay.image = mImagePause
-            } else {
-                mBtnPlay.image = mImagePlay
-            }
+            mBtnPlay.image = plays ? mImagePause
+                : mImagePlay
+            mBtnPlay.setNeedsDisplay()
         }
     }
     
