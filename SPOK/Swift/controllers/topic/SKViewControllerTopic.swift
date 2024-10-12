@@ -12,7 +12,7 @@ import UIKit
 final class SKViewControllerTopic
 : StackViewController {
     
-    var topicId = Int.min {
+    var topicId = UInt16.min {
         didSet {
             mNetworkUrl = "content/skc/\(topicId).mp3"
         }
@@ -20,6 +20,8 @@ final class SKViewControllerTopic
     
     var collection: SKModelCollection? = nil
     var topicName: String? = nil
+    
+    private var mPrevTopicIds: [UInt16] = []
     
     private let mServiceContent = SKServiceTopicContent()
     private let mServicePreview = SKServiceTopicPreviews()
@@ -32,8 +34,7 @@ final class SKViewControllerTopic
     private let mLabelMeta = UILabela()
     
     private var mNetworkUrl = ""
-    private var mPlayer: AVAudioPlayer? = nil
-    private var mTimer: Timer? = nil
+    private var mPlayer: SKPlayerAudio? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ final class SKViewControllerTopic
         mLabelTopicType.backgroundColor = .clear
         mLabelTopicType.textColor = .subtitle()
         mLabelTopicType.textAlignment = .center
-                
+        
         setupDeformView(
             w: w,
             h: h
@@ -148,13 +149,14 @@ extension SKViewControllerTopic {
         mLabelTopicName.font = .extrabold(
             withSize: 31.nw() * w
         )
+        
         let of = mLabelTopicName.height() * 0.1
         mLabelTopicName.frame.size.height = mLabelTopicName.height() + of
         mLabelTopicName.frame.origin.y -= of
         
         mLabelTopicName.text = topicName
-        mLabelTopicName.attribute()
         mLabelTopicName.sizeToFit()
+        
         mLabelTopicName.centerH(
             in: view
         )
@@ -178,7 +180,10 @@ extension SKViewControllerTopic {
             withSize: textSizeTopicType
         )
         
-        mLabelTopicType.text = collection?.title
+        mLabelTopicType.text = collection?
+            .title?
+            .uppercased()
+        
         mLabelTopicType.sizeToFit()
         mLabelTopicType.centerH(
             in: view
@@ -532,10 +537,12 @@ extension SKViewControllerTopic {
     }
     
     private func onClickBtnNext() {
+        mPlayer?.stop()
         guard let rand = collection?.topicIds.randomElement() else {
             return
         }
-        topicId = Int(rand)
+        mPrevTopicIds.append(topicId)
+        topicId = rand
         mServicePreview.getTopicPreview(
             id: topicId,
             type: collection?.cardType ?? .M
@@ -543,7 +550,15 @@ extension SKViewControllerTopic {
     }
     
     private func onClickBtnBack() {
-        print("back")
+        if mPrevTopicIds.isEmpty {
+            return
+        }
+        mPlayer?.stop()
+        topicId = mPrevTopicIds.removeLast()
+        mServicePreview.getTopicPreview(
+            id: topicId,
+            type: collection?.cardType ?? .M
+        )
     }
     
     private func onClickBtnPlay(
@@ -567,14 +582,17 @@ extension SKViewControllerTopic {
         _ v: UIView
     ) {
         mPlayer?.stop()
-        mTimer?.invalidate()
         popBaseAnim()
     }
     
-    @objc private func onTickPlayer() {
-        guard let player = mPlayer else {
-            return
-        }
+}
+
+extension SKViewControllerTopic
+: SKIListenerOnTickAudio {
+    
+    func onTickAudio(
+        player: SKPlayerAudio
+    ) {
         mSlider.progress = player.currentTime / player.duration
         mSlider.setNeedsDisplay()
         
@@ -625,15 +643,17 @@ extension SKViewControllerTopic
     func onGetTopicContent(
         model: SKModelTopicContent
     ) {
-        if model.data == nil {
+        guard var dd = model.data else {
+            mLabelMeta.text = ""
+            mLabelMeta.sizeToFit()
+            mLabelMeta.centerH(
+                in: view
+            )
             return
         }
         
         do {
-            guard var dd = model.data else {
-                return
-            }
-            let player = try AVAudioPlayer(
+            let player = try SKPlayerAudio(
                 data: dd,
                 fileTypeHint: AVFileType.mp3.rawValue
             )
@@ -644,9 +664,7 @@ extension SKViewControllerTopic
                 fadeDuration: 0.1
             )
             
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playback)
-            try session.setActive(true)
+            try player.prepareSession()
             
             calculateLabelName()
             calculateLabelType()
@@ -661,7 +679,6 @@ extension SKViewControllerTopic
                 from: &dd
             ) {
                 mLabelMeta.text = " \(meta.artist) - \(meta.title)"
-                mLabelMeta.attribute()
                 mLabelMeta.sizeToFit()
                 mLabelMeta.centerH(
                     in: view
@@ -669,16 +686,6 @@ extension SKViewControllerTopic
             }
             
             mPlayer = player
-            
-            mTimer = Timer.scheduledTimer(
-                timeInterval: 0.1,
-                target: self,
-                selector: #selector(
-                    onTickPlayer
-                ),
-                userInfo: nil,
-                repeats: true
-            )
             
         } catch {
             Log.d(

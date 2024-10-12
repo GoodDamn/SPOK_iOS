@@ -22,7 +22,7 @@ extension String {
     }
     
     static func keyApiYoo() -> String {
-        "yooTest"
+        "yoo"
     }
     
     static func keyIntro() -> String {

@@ -89,6 +89,8 @@
 		259185362B5D488B001CFD7A /* SPOKContentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259185352B5D488B001CFD7A /* SPOKContentEngine.swift */; };
 		259FE6112B62325D00E237B7 /* CardTextSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6102B62325D00E237B7 /* CardTextSize.swift */; };
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
+		25A3F0542CBA442200586D8E /* SKPlayerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A3F0532CBA442200586D8E /* SKPlayerAudio.swift */; };
+		25A3F0572CBA44A700586D8E /* SKIListenerOnTickAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A3F0562CBA44A700586D8E /* SKIListenerOnTickAudio.swift */; };
 		25AA3DD82CB426A2008F1644 /* SKViewDeform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */; };
 		25AA3DDB2CB428EB008F1644 /* SKShapeBezierQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */; };
 		25AA3DDE2CB44679008F1644 /* SKProtocolCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */; };
@@ -287,6 +289,8 @@
 		259185352B5D488B001CFD7A /* SPOKContentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPOKContentEngine.swift; sourceTree = "<group>"; };
 		259FE6102B62325D00E237B7 /* CardTextSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTextSize.swift; sourceTree = "<group>"; };
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		25A3F0532CBA442200586D8E /* SKPlayerAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPlayerAudio.swift; sourceTree = "<group>"; };
+		25A3F0562CBA44A700586D8E /* SKIListenerOnTickAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKIListenerOnTickAudio.swift; sourceTree = "<group>"; };
 		25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewDeform.swift; sourceTree = "<group>"; };
 		25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeBezierQ.swift; sourceTree = "<group>"; };
 		25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProtocolCanvas.swift; sourceTree = "<group>"; };
@@ -682,6 +686,23 @@
 				259FE6132B623DC800E237B7 /* CardType.swift */,
 			);
 			path = enums;
+			sourceTree = "<group>";
+		};
+		25A3F0522CBA440600586D8E /* player */ = {
+			isa = PBXGroup;
+			children = (
+				25A3F0552CBA448E00586D8E /* listener */,
+				25A3F0532CBA442200586D8E /* SKPlayerAudio.swift */,
+			);
+			path = player;
+			sourceTree = "<group>";
+		};
+		25A3F0552CBA448E00586D8E /* listener */ = {
+			isa = PBXGroup;
+			children = (
+				25A3F0562CBA44A700586D8E /* SKIListenerOnTickAudio.swift */,
+			);
+			path = listener;
 			sourceTree = "<group>";
 		};
 		25AA3DD92CB428CF008F1644 /* deform */ = {
@@ -1253,6 +1274,7 @@
 		2BA1025B276A5FFD00EB5B8C /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				25A3F0522CBA440600586D8E /* player */,
 				252F7B0B2C80E62600851E8A /* file */,
 				25F94AF42B6FB89100FC8A32 /* service */,
 				25D32DDE2B6901E300EAEA20 /* auth */,
@@ -1535,6 +1557,7 @@
 				252F7B1D2C822E9600851E8A /* SKDelegateOnGetTopicContent.swift in Sources */,
 				25DB9ACB2B57CC1600B5359F /* UITableViewCellTitle.swift in Sources */,
 				25AB40322BC64BE1009E735F /* UIHeaderView.swift in Sources */,
+				25A3F0572CBA44A700586D8E /* SKIListenerOnTickAudio.swift in Sources */,
 				2507D2EB2B471A0E00656C0B /* ScriptReader.swift in Sources */,
 				2BA1023E276A11DE00EB5B8C /* Toast.swift in Sources */,
 				25D476132B7B1F4B00B5467D /* AVAsset.swift in Sources */,
@@ -1614,6 +1637,7 @@
 				252F7AFB2C7F6C8800851E8A /* URL.swift in Sources */,
 				25AB40382BC6F46A009E735F /* CGSize.swift in Sources */,
 				257A7FA92B6CE1B300BBEF5E /* Currency.swift in Sources */,
+				25A3F0542CBA442200586D8E /* SKPlayerAudio.swift in Sources */,
 				250622772B4E53F900FCD636 /* IntroSleep3ViewController.swift in Sources */,
 				250622752B4DB20500FCD636 /* IntroSleep2ViewController.swift in Sources */,
 				252F7AF12C7F20F800851E8A /* SKServiceCollection.swift in Sources */,

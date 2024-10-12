@@ -53,7 +53,6 @@ final class EmailConfirmationViewController
             withSize: w * 0.08
         )
         
-        labelEmail.attribute()
         labelEmail.sizeToFit()
         
         textEmail.autocapitalizationType = .none

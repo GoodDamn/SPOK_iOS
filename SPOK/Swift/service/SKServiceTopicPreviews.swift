@@ -11,7 +11,7 @@ import FirebaseStorage
 final class SKServiceTopicPreviews {
     
     static var mCachedPreviews: [
-        Int : SKModelTopicPreview
+        UInt16 : SKModelTopicPreview
     ] = [:]
     
     private static let maxSize: Int64 = 3 * 1024 * 1024
@@ -35,7 +35,7 @@ final class SKServiceTopicPreviews {
     private var mCurrentTask: StorageDownloadTask? = nil
     
     final func getTopicPreview(
-        id: Int,
+        id: UInt16,
         type: CardType
     ) {
         
@@ -100,7 +100,7 @@ final class SKServiceTopicPreviews {
     private final func onGetMetadata(
         meta: StorageMetadata,
         fullName: String,
-        topicId: Int
+        topicId: UInt16
     ) {
         guard let updatedTime = meta
             .updated?
@@ -152,7 +152,7 @@ final class SKServiceTopicPreviews {
         data: inout Data,
         updateTimeSec: Int,
         fullName: String,
-        topicId: Int
+        topicId: UInt16
     ) {
         guard let topic = data.spc() else {
             return

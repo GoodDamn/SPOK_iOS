@@ -126,7 +126,6 @@ extension IntroSleep2ViewController {
         
         t.font = mFont
         view.insertSubview(t, at: 0)
-        t.attribute()
         t.sizeToFit()
         t.centerH(
             in: view

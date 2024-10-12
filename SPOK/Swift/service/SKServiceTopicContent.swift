@@ -58,7 +58,7 @@ final class SKServiceTopicContent {
     }
     
     final func getContent(
-        id: Int
+        id: UInt16
     ) {
         let fileName = "\(id).mp3"
         mServiceCache.setFile(

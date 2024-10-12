@@ -110,13 +110,10 @@ final class SKViewControllerProfile
         lSubtitleHead.lineHeight = 0.83
         lSubtitleHead.textAlignment = .center
         lSubtitleHead.textColor = .white
-        lSubtitleHead.font = semiBold?
-            .withSize(lSubtitleHead
-                .height()
+        lSubtitleHead.font = semiBold?.withSize(
+            lSubtitleHead.height()
         )
         lSubtitleHead.numberOfLines = 0
-        lSubtitleHead.attribute()
-        
         lSubtitleHead.sizeToFit()
         lSubtitleHead.frame.center(
             targetWidth: w
@@ -178,20 +175,15 @@ final class SKViewControllerProfile
             withSize: w * 0.0479
         )
         lPrice.textColor = .white
-        lPrice.attribute()
         lPrice.sizeToFit()
-        
         
         lPriceOld.text = "249 RUB"
         lPriceOld.font = .bold(
             withSize: lPrice.font.pointSize * 0.739
         )
         lPriceOld.textColor = .white
-            .withAlphaComponent(
-                0.7
-            )
+            .withAlphaComponent(0.7)
         lPriceOld.isStrikethroughed = true
-        lPriceOld.attribute()
         lPriceOld.sizeToFit()
         
         mBtnOpenAccess = UITextButton(
@@ -305,7 +297,6 @@ final class SKViewControllerProfile
             .withSize(hshare * 0.068)
         lShare.lineHeight = 0.83
         lShare.numberOfLines = 0
-        lShare.attribute()
         lShare.sizeToFit()
         
         let btnShare = ViewUtils.textButton(

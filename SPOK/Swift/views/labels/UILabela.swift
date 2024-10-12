@@ -9,22 +9,22 @@ import Foundation
 import UIKit
 
 class UILabela
-    : UILabel {
+: UILabel {
     
     private var mParagraph = NSMutableParagraphStyle()
     
-    public final var isStrikethroughed = false
+    final var isStrikethroughed = false
     
-    public final var lineHeight: CGFloat = 1.0 {
+    final var lineHeight: CGFloat = 1.0 {
         didSet {
             mParagraph.lineHeightMultiple = lineHeight
             
         }
     }
     
-    public final var leftImage: UIImage? = nil
+    final var leftImage: UIImage? = nil
     
-    public final var leftImageColor: UIColor = .blue
+    final var leftImageColor: UIColor = .blue
     
     override init(frame: CGRect) {
         super.init(
@@ -40,9 +40,9 @@ class UILabela
         )
     }
     
-    public final func attribute() {
-        
+    override func sizeToFit() {
         guard let text = text else {
+            super.sizeToFit()
             return
         }
         
@@ -94,20 +94,20 @@ class UILabela
         
         if leftImage == nil {
             attributedText = attrText
+            super.sizeToFit()
             return
         }
               
-        attributedText = NSAttributedString
-            .withImage(
-                text: attrText,
-                pointSize: font.pointSize,
-                image: leftImage?.withTintColor(
-                    leftImageColor,
-                    renderingMode: .alwaysTemplate
-                ),
-                isRight: false
-            )
+        attributedText = NSAttributedString.withImage(
+            text: attrText,
+            pointSize: font.pointSize,
+            image: leftImage?.withTintColor(
+                leftImageColor,
+                renderingMode: .alwaysTemplate
+            ),
+            isRight: false
+        )
+        super.sizeToFit()
     }
-    
 }
 

@@ -19,7 +19,7 @@ final class UICollectionViewCellTopic
     private var mParticles: Particles!
     
     private let mServicePreview = SKServiceTopicPreviews()
-    private var mPreviewId = Int.min
+    private var mPreviewId = UInt16.min
     private var mPreview: SKModelTopicPreview? = nil
     private var mCollection: SKModelCollection? = nil
     
@@ -172,7 +172,7 @@ extension UICollectionViewCellTopic {
     }
     
     final func loadData(
-        previewId: Int,
+        previewId: UInt16,
         collection: SKModelCollection
     ) {
         mPreviewId = previewId

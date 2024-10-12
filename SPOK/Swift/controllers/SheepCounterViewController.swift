@@ -10,9 +10,7 @@ import UIKit
 import AVFoundation
 
 final class SheepCounterViewController
-    : StackViewController {
-    
-    private let TAG = "SheepCounterViewController:"
+: StackViewController {
     
     private var mCounter = 1
     
@@ -25,14 +23,9 @@ final class SheepCounterViewController
     
     private weak var mPrevc: UITextViewPhrase? = nil
     
-    deinit {
-        Log.d("SheepCounterViewController: deinit()")
-    }
-    
     override func viewDidDisappear(
         _ animated: Bool
     ) {
-        Log.d(TAG, "viewDidDisappear")
         mPlayer?.stop()
     }
     
@@ -196,7 +189,6 @@ extension SheepCounterViewController {
         
         view.addSubview(textNumber)
         
-        textNumber.attribute()
         textNumber.sizeToFit()
         
         textNumber.centerH(

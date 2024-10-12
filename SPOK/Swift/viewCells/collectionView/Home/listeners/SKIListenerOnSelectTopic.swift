@@ -13,7 +13,7 @@ protocol SKIListenerOnSelectTopic
     func onSelectTopic(
         preview: SKModelTopicPreview?,
         collection: SKModelCollection?,
-        id: Int
+        id: UInt16
     )
     
 }

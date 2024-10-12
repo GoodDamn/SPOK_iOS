@@ -62,8 +62,6 @@ final class SKViewControllerPopupNews
         lTitle.backgroundColor = .clear
         lTitle.lineHeight = 0.83
         lTitle.numberOfLines = 0
-        lTitle.attribute()
-        
         lTitle.sizeToFit()
         
         let lDesc = UITextView(

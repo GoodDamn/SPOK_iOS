@@ -80,9 +80,6 @@ final class SplashViewController
         lSubtitle.numberOfLines = 0
         lSubtitle.lineHeight = 0.83
         
-        lTitle.attribute()
-        lSubtitle.attribute()
-        
         lTitle.sizeToFit()
         lSubtitle.sizeToFit()
         

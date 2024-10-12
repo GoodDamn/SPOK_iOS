@@ -133,7 +133,7 @@ extension SKModelViewTypeCollection
         cell.cardTextSize = view.cardTextSize
         
         cell.loadData(
-            previewId: Int(topicId),
+            previewId: topicId,
             collection: view.collection!
         )
         

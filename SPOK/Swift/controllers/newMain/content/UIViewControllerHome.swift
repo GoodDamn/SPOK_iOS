@@ -129,7 +129,7 @@ extension UIViewControllerHome
     func onSelectTopic(
         preview: SKModelTopicPreview?,
         collection: SKModelCollection?,
-        id: Int
+        id: UInt16
     ) {
         if (preview?.isPremium ?? true) && !SKViewControllerMain
             .mIsPremiumUser {
