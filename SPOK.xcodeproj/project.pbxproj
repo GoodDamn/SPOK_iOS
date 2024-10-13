@@ -91,6 +91,7 @@
 		259FE6142B623DC800E237B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259FE6132B623DC800E237B7 /* CardType.swift */; };
 		25A3F0542CBA442200586D8E /* SKPlayerAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A3F0532CBA442200586D8E /* SKPlayerAudio.swift */; };
 		25A3F0572CBA44A700586D8E /* SKIListenerOnTickAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A3F0562CBA44A700586D8E /* SKIListenerOnTickAudio.swift */; };
+		25A3F0592CBBE54700586D8E /* SKIListenerOnFailDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A3F0582CBBE54700586D8E /* SKIListenerOnFailDownload.swift */; };
 		25AA3DD82CB426A2008F1644 /* SKViewDeform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */; };
 		25AA3DDB2CB428EB008F1644 /* SKShapeBezierQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */; };
 		25AA3DDE2CB44679008F1644 /* SKProtocolCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */; };
@@ -291,6 +292,7 @@
 		259FE6132B623DC800E237B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		25A3F0532CBA442200586D8E /* SKPlayerAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPlayerAudio.swift; sourceTree = "<group>"; };
 		25A3F0562CBA44A700586D8E /* SKIListenerOnTickAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKIListenerOnTickAudio.swift; sourceTree = "<group>"; };
+		25A3F0582CBBE54700586D8E /* SKIListenerOnFailDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKIListenerOnFailDownload.swift; sourceTree = "<group>"; };
 		25AA3DD72CB426A2008F1644 /* SKViewDeform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKViewDeform.swift; sourceTree = "<group>"; };
 		25AA3DDA2CB428EB008F1644 /* SKShapeBezierQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKShapeBezierQ.swift; sourceTree = "<group>"; };
 		25AA3DDD2CB44679008F1644 /* SKProtocolCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProtocolCanvas.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				25F056F82CA030510019822B /* SKListenerOnCreatePayment.swift */,
 				25874F212CA1D588003F721C /* SKListenerOnGetPiratedState.swift */,
 				258E0B892CA6DCD100FD8F9A /* SKListenerOnGetContentUrl.swift */,
+				25A3F0582CBBE54700586D8E /* SKIListenerOnFailDownload.swift */,
 			);
 			path = listeners;
 			sourceTree = "<group>";
@@ -1655,6 +1658,7 @@
 				25D61E882B75F8A500B5A72B /* Option.swift in Sources */,
 				25D4760F2B79056900B5467D /* UIImage.swift in Sources */,
 				25883AB92C5A591800D46614 /* DatabaseReference.swift in Sources */,
+				25A3F0592CBBE54700586D8E /* SKIListenerOnFailDownload.swift in Sources */,
 				252F7B1B2C822D0600851E8A /* SKDelegateOnProgressDownload.swift in Sources */,
 				25F94ADC2B6E579500FC8A32 /* SKViewControllerSettings.swift in Sources */,
 				2B93CF4E276F2E5000219690 /* UIViewControllerHome.swift in Sources */,

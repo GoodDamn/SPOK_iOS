@@ -45,6 +45,17 @@
         }
       }
     },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка.."
+          }
+        }
+      }
+    },
     "noContact" : {
       "extractionState" : "manual",
       "localizations" : {

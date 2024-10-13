@@ -20,10 +20,10 @@ final class SKServiceTopicContent {
         )
     
     weak var onProgressDownload: SKDelegateOnProgressDownload? = nil
-    
     weak var onGetTopicContent: SKDelegateOnGetTopicContent? = nil
-    
     weak var onGetTopicUrl: SKListenerOnGetContentUrl? = nil
+    
+    weak var onFail: SKIListenerOnFailDownload? = nil
     
     private var mCurrentTask: StorageDownloadTask? = nil
     
@@ -87,6 +87,9 @@ final class SKServiceTopicContent {
         mReferenceFull?.getMetadata {
             [weak self] meta, error in
             guard let meta = meta, error == nil else {
+                self?.onFail?.onFailDownload(
+                    error: error
+                )
                 return
             }
             
@@ -125,6 +128,9 @@ final class SKServiceTopicContent {
             maxSize: SKServiceTopicContent.maxSize
         ) { [weak self] data, error in
             guard var data = data, error == nil else {
+                self?.onFail?.onFailDownload(
+                    error: error
+                )
                 return
             }
             

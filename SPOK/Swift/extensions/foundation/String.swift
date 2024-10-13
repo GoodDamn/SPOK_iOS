@@ -64,7 +64,7 @@ extension String {
     static func locale(
         _ key: String
     ) -> String {
-        return NSLocalizedString(
+        NSLocalizedString(
             key,
             tableName: "shitlocc",
             bundle: Bundle.main,

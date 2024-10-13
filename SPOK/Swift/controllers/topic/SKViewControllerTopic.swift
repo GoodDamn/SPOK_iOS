@@ -43,6 +43,7 @@ final class SKViewControllerTopic
         
         mServiceContent.onGetTopicContent = self
         mServiceContent.onProgressDownload = self
+        mServiceContent.onFail = self
         
         mServicePreview.delegate = self
         
@@ -54,10 +55,12 @@ final class SKViewControllerTopic
         mLabelTopicName.backgroundColor = .clear
         mLabelTopicName.textColor = .white
         mLabelTopicName.textAlignment = .center
+        calculateLabelName()
         
         mLabelTopicType.backgroundColor = .clear
         mLabelTopicType.textColor = .subtitle()
         mLabelTopicType.textAlignment = .center
+        calculateLabelType()
         
         setupDeformView(
             w: w,
@@ -126,6 +129,9 @@ final class SKViewControllerTopic
             h: h
         )
         
+        forEachView { it in
+            it.isUserInteractionEnabled = false
+        }
         
         mServiceContent.getContent(
             id: topicId
@@ -146,6 +152,7 @@ extension SKViewControllerTopic {
             width: w,
             height: 0
         )
+        
         mLabelTopicName.font = .extrabold(
             withSize: 31.nw() * w
         )
@@ -156,7 +163,6 @@ extension SKViewControllerTopic {
         
         mLabelTopicName.text = topicName
         mLabelTopicName.sizeToFit()
-        
         mLabelTopicName.centerH(
             in: view
         )
@@ -317,8 +323,6 @@ extension SKViewControllerTopic {
         ).cgColor
         
         slider.onChangeProgress = self
-        
-        slider.isUserInteractionEnabled = false
         
         slider.centerH(
             in: view
@@ -537,10 +541,19 @@ extension SKViewControllerTopic {
     }
     
     private func onClickBtnNext() {
-        mPlayer?.stop()
-        guard let rand = collection?.topicIds.randomElement() else {
-            return
+        
+        var rand: UInt16 = 0
+        while true {
+            rand = collection?.topicIds
+                .randomElement() ?? 0
+            if rand == 0 || rand != topicId {
+                break
+            }
         }
+        
+        mPlayer?.stop()
+        mPlayer = nil
+        loadingState()
         mPrevTopicIds.append(topicId)
         topicId = rand
         mServicePreview.getTopicPreview(
@@ -554,6 +567,7 @@ extension SKViewControllerTopic {
             return
         }
         mPlayer?.stop()
+        loadingState()
         topicId = mPrevTopicIds.removeLast()
         mServicePreview.getTopicPreview(
             id: topicId,
@@ -581,8 +595,40 @@ extension SKViewControllerTopic {
     private func onClickBtnClose(
         _ v: UIView
     ) {
+        forEachView { it in
+            it.isUserInteractionEnabled = false
+        }
+        
+        mServicePreview.cancel()
+        mServiceContent.cancelTask()
+        
         mPlayer?.stop()
         popBaseAnim()
+    }
+    
+    private func loadingState() {
+        forEachView { it in
+            it.isUserInteractionEnabled = false
+        }
+        
+        mLabelMeta.text = .locale(
+            "loading"
+        )
+        mLabelMeta.sizeToFit()
+        mLabelMeta.centerH(
+            in: view
+        )
+        
+        mLabelFinishTime.text = "--:--"
+        mLabelCurrentTime.text = "00:00"
+        
+        mLabelTopicName.text = .locale(
+            "loading"
+        )
+        mLabelTopicName.sizeToFit()
+        mLabelTopicName.centerH(
+            in: view
+        )
     }
     
 }
@@ -612,6 +658,12 @@ extension SKViewControllerTopic
         topicName = preview.title
         calculateLabelName()
         calculateLabelType()
+        
+        if preview.isPremium && !SKViewControllerMain.mIsPremiumUser {
+            mPrevTopicIds.removeLast()
+            onClickBtnNext()
+            return
+        }
         
         mServiceContent.getContent(
             id: topicId
@@ -649,6 +701,9 @@ extension SKViewControllerTopic
             mLabelMeta.centerH(
                 in: view
             )
+            forEachView { it in
+                it.isUserInteractionEnabled = true
+            }
             return
         }
         
@@ -657,6 +712,7 @@ extension SKViewControllerTopic
                 data: dd,
                 fileTypeHint: AVFileType.mp3.rawValue
             )
+            player.onTickPlayer = self
             player.prepareToPlay()
             
             player.setVolume(
@@ -693,9 +749,13 @@ extension SKViewControllerTopic
             )
         }
         
-        mSlider.isUserInteractionEnabled = true
         mSlider.progress = 0
         mSlider.setNeedsDisplay()
+            
+        forEachView { it in
+            it.isUserInteractionEnabled = true
+        }
+                
     }
     
 }
@@ -708,6 +768,19 @@ extension SKViewControllerTopic
     ) {
         mSlider.progress = progress
         mSlider.setNeedsDisplay()
+    }
+    
+}
+
+extension SKViewControllerTopic
+: SKIListenerOnFailDownload {
+    
+    func onFailDownload(
+        error: (any Error)?
+    ) {
+        forEachView { it in
+            it.isUserInteractionEnabled = true
+        }
     }
     
 }
