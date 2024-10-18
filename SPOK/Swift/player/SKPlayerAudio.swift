@@ -9,36 +9,26 @@ import Foundation
 import AVFoundation
 
 final class SKPlayerAudio
-: AVAudioPlayer {
+: AVPlayer {
     
     weak var onTickPlayer: SKIListenerOnTickAudio? = nil
     private var mTimer: Timer? = nil
     
-    override func play() -> Bool {
-        timer()
-        return super.play()
-    }
+    private(set) var isPlaying = false
     
-    override func play(
-        atTime time: TimeInterval
-    ) -> Bool {
+    override func play() {
         timer()
-        return super.play(
-            atTime: time
-        )
+        super.play()
+        isPlaying = true
     }
     
     override func pause() {
         mTimer?.invalidate()
         mTimer = nil
         super.pause()
+        isPlaying = false
     }
     
-    override func stop() {
-        mTimer?.invalidate()
-        mTimer = nil
-        super.stop()
-    }
     
     @objc private func onTickPlayerAudio() {
         onTickPlayer?.onTickAudio(

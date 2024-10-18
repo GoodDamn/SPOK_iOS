@@ -37,7 +37,7 @@ final class SKServiceTopicContent {
     private var mUpdateTime = 0
     
     final func getContentUrlAsync(
-        id: Int
+        id: UInt16
     ) {
         mReferenceFull = mReference.child(
             "\(id).mp3"
@@ -47,6 +47,9 @@ final class SKServiceTopicContent {
             [weak self] url, error in
             
             guard let url = url, error == nil else {
+                self?.onFail?.onFailDownload(
+                    error: error
+                )
                 return
             }
             

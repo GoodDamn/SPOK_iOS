@@ -57,7 +57,6 @@ final class HttpUtils {
         method: String,
         completion: @escaping ([String : Any]) -> Void
     ) {
-        
         var req = URLRequest(
             url: url
         )

@@ -31,8 +31,7 @@ final class SKServiceYookassaPayment {
         
         let json = [
             "amount": amountJson,
-            "capture": payment
-                .withCapture,
+            "capture": payment.withCapture,
             "confirmation": [
                 "type": "redirect",
                 "return_url": String.keyDeepLink()
@@ -59,7 +58,6 @@ final class SKServiceYookassaPayment {
             body: json,
             method: "POST"
         ) { [weak self] json in
-            
             let confirm = json[
                 "confirmation"
             ] as? [String : String]

@@ -21,6 +21,8 @@ final class SKViewControllerTopic
     var collection: SKModelCollection? = nil
     var topicName: String? = nil
     
+    var observerStatusPlayer: NSKeyValueObservation? = nil
+    
     private var mPrevTopicIds: [UInt16] = []
     
     private let mServiceContent = SKServiceTopicContent()
@@ -41,8 +43,7 @@ final class SKViewControllerTopic
         
         view.backgroundColor = .background()
         
-        mServiceContent.onGetTopicContent = self
-        mServiceContent.onProgressDownload = self
+        mServiceContent.onGetTopicUrl = self
         mServiceContent.onFail = self
         
         mServicePreview.delegate = self
@@ -133,7 +134,7 @@ final class SKViewControllerTopic
             it.isUserInteractionEnabled = false
         }
         
-        mServiceContent.getContent(
+        mServiceContent.getContentUrlAsync(
             id: topicId
         )
     }
@@ -551,7 +552,7 @@ extension SKViewControllerTopic {
             }
         }
         
-        mPlayer?.stop()
+        mPlayer?.pause()
         mPlayer = nil
         loadingState()
         mPrevTopicIds.append(topicId)
@@ -566,7 +567,8 @@ extension SKViewControllerTopic {
         if mPrevTopicIds.isEmpty {
             return
         }
-        mPlayer?.stop()
+        mPlayer?.pause()
+        mPlayer = nil
         loadingState()
         topicId = mPrevTopicIds.removeLast()
         mServicePreview.getTopicPreview(
@@ -602,7 +604,8 @@ extension SKViewControllerTopic {
         mServicePreview.cancel()
         mServiceContent.cancelTask()
         
-        mPlayer?.stop()
+        mPlayer?.pause()
+        mPlayer = nil
         popBaseAnim()
     }
     
@@ -633,17 +636,83 @@ extension SKViewControllerTopic {
     
 }
 
+extension SKViewControllerTopic {
+    
+    private func onChangePlayerStatus(
+        _ playerItem: AVPlayerItem
+    ) {
+        
+        if playerItem.status == .readyToPlay {
+            mLabelFinishTime.text = playerItem
+                .duration
+                .seconds
+                .toTimeString()
+            
+            mLabelFinishTime.sizeToFit()
+        }
+    }
+    
+}
+
+extension SKViewControllerTopic
+: SKListenerOnGetContentUrl {
+    
+    func onGetContentUrl(
+        url: URL
+    ) {
+        mPlayer = SKPlayerAudio(
+            playerItem: AVPlayerItem(
+                url: url
+            )
+        )
+        
+        do {
+            if let it = mPlayer {
+                try it.prepareSession()
+                it.onTickPlayer = self
+                
+                observerStatusPlayer = it
+                    .currentItem?
+                    .observe(
+                        \.status,
+                        options: [.new, .old]
+                    ) { [weak self] playerItem, change in
+                        self?.onChangePlayerStatus(
+                            playerItem
+                        )
+                    }
+            }
+        } catch {
+            Log.d(
+                SKViewControllerTopic.self,
+                "onGetContentUrl: ERROR:",
+                error
+            )
+        }
+        
+        forEachView { it in
+            it.isUserInteractionEnabled = true
+        }
+    }
+    
+}
+
 extension SKViewControllerTopic
 : SKIListenerOnTickAudio {
     
     func onTickAudio(
         player: SKPlayerAudio
     ) {
-        mSlider.progress = player.currentTime / player.duration
+        guard let item = player.currentItem else {
+            return
+        }
+        mSlider.progress = CGFloat(player.currentTime().seconds / item.duration.seconds
+        )
         mSlider.setNeedsDisplay()
         
         mLabelCurrentTime.text = player
-            .currentTime
+            .currentTime()
+            .seconds
             .toTimeString()
     }
     
@@ -665,7 +734,7 @@ extension SKViewControllerTopic
             return
         }
         
-        mServiceContent.getContent(
+        mServiceContent.getContentUrlAsync(
             id: topicId
         )
     }
@@ -678,96 +747,19 @@ extension SKViewControllerTopic
     func onChangeProgress(
         progress: CGFloat
     ) {
-        guard let player = mPlayer else {
+        guard let player = mPlayer,
+            let item = player.currentItem else {
             return
         }
         
-        player.currentTime = TimeInterval(
-            progress
-        ) * player.duration
-    }
-    
-}
-
-extension SKViewControllerTopic
-: SKDelegateOnGetTopicContent {
-    
-    func onGetTopicContent(
-        model: SKModelTopicContent
-    ) {
-        guard var dd = model.data else {
-            mLabelMeta.text = ""
-            mLabelMeta.sizeToFit()
-            mLabelMeta.centerH(
-                in: view
-            )
-            forEachView { it in
-                it.isUserInteractionEnabled = true
-            }
-            return
-        }
-        
-        do {
-            let player = try SKPlayerAudio(
-                data: dd,
-                fileTypeHint: AVFileType.mp3.rawValue
-            )
-            player.onTickPlayer = self
-            player.prepareToPlay()
-            
-            player.setVolume(
-                1.0,
-                fadeDuration: 0.1
-            )
-            
-            try player.prepareSession()
-            
-            calculateLabelName()
-            calculateLabelType()
-            
-            mLabelFinishTime.text = player
-                .duration
-                .toTimeString()
-            
-            mLabelFinishTime.sizeToFit()
-            
-            if let meta = AVAsset.mp3Meta(
-                from: &dd
-            ) {
-                mLabelMeta.text = " \(meta.artist) - \(meta.title)"
-                mLabelMeta.sizeToFit()
-                mLabelMeta.centerH(
-                    in: view
-                )
-            }
-            
-            mPlayer = player
-            
-        } catch {
-            Log.d(
-                "onGetTopicContent: ERROR", error
-            )
-        }
-        
-        mSlider.progress = 0
-        mSlider.setNeedsDisplay()
-            
-        forEachView { it in
-            it.isUserInteractionEnabled = true
-        }
-                
-    }
-    
-}
-
-extension SKViewControllerTopic
-: SKDelegateOnProgressDownload {
-    
-    func onProgressDownload(
-        progress: CGFloat
-    ) {
-        mSlider.progress = progress
-        mSlider.setNeedsDisplay()
+        player.seek(
+            to: CMTime(
+                seconds: Double(progress) * item.duration.seconds,
+                preferredTimescale: 60000
+            ),
+            toleranceBefore: .zero,
+            toleranceAfter: .zero
+        )
     }
     
 }
