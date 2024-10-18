@@ -12,6 +12,7 @@ final class SKPlayerAudio
 : AVPlayer {
     
     weak var onTickPlayer: SKIListenerOnTickAudio? = nil
+    
     private var mTimer: Timer? = nil
     
     private(set) var isPlaying = false

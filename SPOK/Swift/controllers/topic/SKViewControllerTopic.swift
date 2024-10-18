@@ -21,7 +21,7 @@ final class SKViewControllerTopic
     var collection: SKModelCollection? = nil
     var topicName: String? = nil
     
-    var observerStatusPlayer: NSKeyValueObservation? = nil
+    private var observerPlayerStatus: NSKeyValueObservation? = nil
     
     private var mPrevTopicIds: [UInt16] = []
     
@@ -33,7 +33,7 @@ final class SKViewControllerTopic
     private let mSlider = SKViewSlider()
     private let mLabelCurrentTime = UILabel()
     private let mLabelFinishTime = UILabel()
-    private let mLabelMeta = UILabela()
+    private var mViewPlayer: SKViewPlayer? = nil
     
     private var mNetworkUrl = ""
     private var mPlayer: SKPlayerAudio? = nil
@@ -57,6 +57,15 @@ final class SKViewControllerTopic
         mLabelTopicName.textColor = .white
         mLabelTopicName.textAlignment = .center
         calculateLabelName()
+        
+        mLabelTopicName.text = .locale(
+            "loading"
+        )
+        
+        mLabelTopicName.sizeToFit()
+        mLabelTopicName.centerH(
+            in: view
+        )
         
         mLabelTopicType.backgroundColor = .clear
         mLabelTopicType.textColor = .subtitle()
@@ -124,11 +133,6 @@ final class SKViewControllerTopic
         mLabelFinishTime.frame.origin.x = w - mLabelFinishTime
             .frame
             .width - offsetXTime
-        
-        setupLabelMeta(
-            w: w,
-            h: h
-        )
         
         forEachView { it in
             it.isUserInteractionEnabled = false
@@ -234,36 +238,8 @@ extension SKViewControllerTopic {
         view.addSubview(
             playerView
         )
-    }
-    
-    private func setupLabelMeta(
-        w: CGFloat,
-        h: CGFloat
-    ) {
-        mLabelMeta.frame = CGRect(
-            x: 0,
-            y: h * 799.nh(),
-            width: w,
-            height: 0
-        )
         
-        mLabelMeta.leftImage = UIImage(
-            systemName: "music.note"
-        )
-        
-        mLabelMeta.textColor = .white
-            .withAlphaComponent(0.6)
-        
-        mLabelMeta.leftImageColor = mLabelMeta
-            .textColor
-        
-        mLabelMeta.font = .semibold(
-            withSize: w * 18.nw()
-        )
-        
-        view.addSubview(
-            mLabelMeta
-        )
+        mViewPlayer = playerView
     }
     
     private func setupLabelTime(
@@ -614,13 +590,10 @@ extension SKViewControllerTopic {
             it.isUserInteractionEnabled = false
         }
         
-        mLabelMeta.text = .locale(
-            "loading"
-        )
-        mLabelMeta.sizeToFit()
-        mLabelMeta.centerH(
-            in: view
-        )
+        mSlider.progress = 0
+        mSlider.setNeedsDisplay()
+        
+        mViewPlayer?.isPlaying = false
         
         mLabelFinishTime.text = "--:--"
         mLabelCurrentTime.text = "00:00"
@@ -641,7 +614,6 @@ extension SKViewControllerTopic {
     private func onChangePlayerStatus(
         _ playerItem: AVPlayerItem
     ) {
-        
         if playerItem.status == .readyToPlay {
             mLabelFinishTime.text = playerItem
                 .duration
@@ -649,6 +621,9 @@ extension SKViewControllerTopic {
                 .toTimeString()
             
             mLabelFinishTime.sizeToFit()
+            
+            calculateLabelName()
+            calculateLabelType()
         }
     }
     
@@ -660,10 +635,14 @@ extension SKViewControllerTopic
     func onGetContentUrl(
         url: URL
     ) {
+        
+        let item = AVPlayerItem(
+            url: url
+        )
+        
+        
         mPlayer = SKPlayerAudio(
-            playerItem: AVPlayerItem(
-                url: url
-            )
+            playerItem: item
         )
         
         do {
@@ -671,16 +650,14 @@ extension SKViewControllerTopic
                 try it.prepareSession()
                 it.onTickPlayer = self
                 
-                observerStatusPlayer = it
-                    .currentItem?
-                    .observe(
-                        \.status,
-                        options: [.new, .old]
-                    ) { [weak self] playerItem, change in
-                        self?.onChangePlayerStatus(
-                            playerItem
-                        )
-                    }
+                observerPlayerStatus = item.observe(
+                    \.status,
+                    options: [.new, .old]
+                ) { [weak self] playerItem, change in
+                    self?.onChangePlayerStatus(
+                        playerItem
+                    )
+                }
             }
         } catch {
             Log.d(
@@ -725,9 +702,6 @@ extension SKViewControllerTopic
         preview: SKModelTopicPreview
     ) {
         topicName = preview.title
-        calculateLabelName()
-        calculateLabelType()
-        
         if preview.isPremium && !SKViewControllerMain.mIsPremiumUser {
             mPrevTopicIds.removeLast()
             onClickBtnNext()
